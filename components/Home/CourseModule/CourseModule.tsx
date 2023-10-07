@@ -29,7 +29,8 @@ export const CourseModule = (props: ICourseModuleProps) => {
     var videoSrc: any = ""
 
     if (num === 1) {
-      videoSrc = "https://video.gonvar.io/media/Nails Master 2.0 reedición/NM 2.0 Bienvenida/master.m3u8";
+      // nails-master-revolution/landing
+      videoSrc = "https://video.gonvar.io/media/nails_master_revolution/landing/master.m3u8";
     }
     if (num === 2) {
       videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
@@ -94,8 +95,11 @@ export const CourseModule = (props: ICourseModuleProps) => {
             Curso individual <br />
             <span>por ${data.price}</span> <span className="lower">MXN</span>
           </Card.Text>
-          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }
-          } />
+          {
+            data.id &&
+            <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }
+            } />
+          }
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
         </Col>
       </Row>

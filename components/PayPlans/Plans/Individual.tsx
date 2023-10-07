@@ -89,14 +89,14 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="green m-0">3 meses de acceso a Nails Master Revolution</p>
+              <p className="green m-0">4 meses de acceso a Nails Master Revolution</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>
             {views.get(1) &&
               <div className="b-green">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  Obtén acceso al curso <b>Nail Masters Revolution durante 3 meses, </b>
+                  Obtén acceso al curso <b>Nail Masters Revolution durante 4 meses, </b>
                   con <b>más de 40 lecciones</b> para ti.
                 </p>
               </div>}
@@ -118,7 +118,7 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(3)}>
             <div className="tip-q mb-1">
-              <p className="green mb-0">Curso definitivo de Tips</p>
+              <p className="green mb-0">Curso definitivo de Tips y Escultural</p>
               {views.get(3) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>
@@ -191,14 +191,14 @@ const Individual = (props: IData) => {
 
           <div className="back tip m-2" onClick={() => verQ(8)}>
             <div className="tip-q mb-1">
-              <p className="green mb-0">Biblioteca exclusiva</p>
+              <p className="green mb-0">Manuales exclusivos</p>
               {views.get(8) ? <BsChevronUp className="tip-icon Back-green" />
                 : <BsChevronDown className="tip-icon Back-green" />}
             </div>
             {views.get(8) &&
               <div className="b-green">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  <b>Tendrás acceso a nuestra biblioteca exclusiva, </b>
+                  <b>Tendrás acceso a nuestros manuales exclusivos para avanzar en este entrenamiento, </b>
                   con todos los archivos que necesitarás para avanzar en tu carrera de aplicadora de uñas.
                 </p>
               </div>}

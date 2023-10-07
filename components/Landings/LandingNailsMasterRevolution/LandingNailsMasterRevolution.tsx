@@ -394,10 +394,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       </SecondSection>
       <ThirdSection>
         <div className="video-container">
-          <iframe src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
+          <iframe src="https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
-          <h2><b className="title-text">Durante 3 meses podrás acceder a</b><br />
+          <h2><b className="title-text">Durante 4 meses podrás acceder a</b><br />
             <b className="big-title blue-gradient">más de 40 clases</b></h2>
           <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
@@ -455,7 +455,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <div className="info-row">
             <div className="info-content">
               <img src={icon_calendar} className="icon" />
-              <h5>3 meses de acceso a <br /><b>Nails Master Revolution</b></h5>
+              <h5>4 meses de acceso a <br /><b>Nails Master Revolution</b></h5>
             </div>
             <div className="info-content info-side">
               <img src={icon_calendar} className="icon" />
@@ -569,8 +569,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <h2 className="red h2">Costo total real: {responsive850 && <br />}<del>$6,719.00 MXN</del></h2>
               <h2 className="dark-blue h1"><b>Precio de Lanzamiento {!responsive850 && "con beca"}</b></h2>
               <h2 className="green h1">Sólo $1,599.00 MXN</h2>
-              <p className="">Válido para las primeras 500 personas</p>
-              <h2><b>Quedan 123 lugares</b></h2>
+              {/* <p className="">Válido para las primeras 500 personas</p> */}
+              <h2><b>Cupos limitados a 500 lugares <br />para una mejor atención</b></h2>
               <button className="btn right-left" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
             </div>
             <img src={chica} className="right-img" />
