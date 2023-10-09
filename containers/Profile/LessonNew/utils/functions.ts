@@ -195,16 +195,15 @@ export const checkLessons = (
     return true;
   }
 
-  let lastLesson = course.seasons[season - 1].lessons.length;
-
-  if (
-    season > 0 &&
-    lesson === 0 &&
-    course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
-      user.user_id
-    )
-  ) {
-    return true;
+  if (season > 0 && lesson === 0) {
+    let lastLesson = course.seasons[season - 1].lessons.length;
+    if (
+      course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
+        user.user_id
+      )
+    ) {
+      return true;
+    }
   }
 
   if (
