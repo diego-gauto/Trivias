@@ -286,7 +286,7 @@ const Purchase = () => {
           setConfirmation(false);
           setPay(true);
           setLoader(false);
-          if (id === "30") {
+          if (id === "57") {
             window.location.href = "/pagoexitosonailsmaster";
           }
           if (id === "45") {
@@ -336,7 +336,7 @@ const Purchase = () => {
                 setConfirmation(false);
                 setPay(true);
 
-                if (id === "30") {
+                if (id === "57") {
                   window.location.href = "/pagoexitosonailsmaster";
                 }
                 if (id === "45") {
@@ -356,7 +356,7 @@ const Purchase = () => {
                 frequency: ''
               }
               await createNotification(notification);
-              if (id === "30") {
+              if (id === "57") {
                 window.location.href = `/pagofallidonailsmaster?error=${error}`;
               }
               if (id === "45") {
@@ -378,7 +378,7 @@ const Purchase = () => {
             }
             await createNotification(notification);
             let error = res.response.data.error.data.details[0].message
-            if (id === "30") {
+            if (id === "57") {
               window.location.href = `/pagofallidonailsmaster?error=${error}`;
             }
             if (id === "45") {
