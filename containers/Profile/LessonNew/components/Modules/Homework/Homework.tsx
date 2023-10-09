@@ -10,6 +10,7 @@ import { uploadImageHomework } from "../../../../../../store/actions/courseActio
 import { addHomeworkApi, getHomeworkUserApi } from "../../../../../../components/api/homeworks";
 import { ICourse } from "../../../../../../interfaces/ICourse";
 import ImagePreview from "../imagePreview/imagePreview";
+import Quiz from "./components/Quiz";
 
 interface IHomeWork {
   course: ICourse,
@@ -165,131 +166,10 @@ const HomeWork = (props: IHomeWork) => {
               </>
             }
           </div>}
+        {
+          lesson.quiz === 1 && <Quiz lesson={lesson} user={user} />
+        }
         {loader && <LoaderContainSpinner />}
-        {/* {(data.quiz === 1 && !loader) && <div className='quiz'>
-          {step == 0 && <div className='quiz-info'>
-            <div className='top'>
-              {data.lesson_quizzes?.title && <p className='title'>{data.lesson_quizzes.title}</p>}
-              {(!data.lesson_quizzes?.title && userQuizzes?.find((x: any) => x.lesson_id == data.id)) &&
-                <p>
-                  Ahorita no hay un quiz disponible, su calificación anterior fue: {userQuizzes.find((x: any) => x.lesson_id == data.id).grade}
-                </p>}
-              {(!data.lesson_quizzes?.title && !userQuizzes?.find((x: any) => x.lesson_id == data.id)) &&
-                <p> Ahorita no hay un quiz disponible!
-                </p>}
-              {data.lesson_quizzes?.title && <div className='circle'>
-                <p className='points'>{data.lesson_quizzes.questions.length}</p>
-                <p className='sub'>PREGUNTAS</p>
-              </div>}
-            </div>
-            <div className='bottom'>
-              {(data.lesson_quizzes?.title) &&
-                <div className='quiz-bar-container'>
-                  <div className='quiz-bar'>
-                    {userQuizzes?.find((x: any) => x.lesson_id == data.id)
-                      && <div className='quiz-bar-progress'
-                        style={{ width: `${userQuizzes?.find((x: any) => x.lesson_id == data.id).grade}%` }}>
-                        <div className='line'>
-                          <p className='max'>{Math.floor(userQuizzes?.find((x: any) => x.lesson_id == data.id).grade)} pts</p>
-                        </div>
-                      </div>}
-                    <div className='passing-grade' style={{ left: `calc(${data.lesson_quizzes.passing_grade}% - 58px)` }}>
-                      <p style={{
-                        color: userQuizzes?.find((x: any) => x.lesson_id == data.id) ? "#FFB800" : "#8628e2"
-                      }}
-                      >{data.lesson_quizzes?.passing_grade} pts</p>
-                      <div className='line'>
-                        <p className='minimum'>MINIMO</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='quiz-bar-points'>{data.lesson_quizzes.points} pts</div>
-                </div>}
-              {(!userQuizzes?.find((x: any) => x.lesson_id == data.id) && data.lesson_quizzes?.questions.length > 0)
-                && <button onClick={() => { setStep(1) }}>Comenzar quiz</button>}
-
-              {(userQuizzes?.find((x: any) => x.lesson_id == data.id) && data.lesson_quizzes?.questions.length > 0) &&
-                <button onClick={() => { setStep(1) }}><BsArrowRepeat /> Repetir quiz</button>}
-            </div>
-          </div>}
-          {step == 1 && <div className='question-container'>
-            <div className='question-bar'>
-              <div className='progress' style={{ width: `${progress}%` }}></div>
-            </div>
-            <div className='question-title'>
-              <p className='title' dangerouslySetInnerHTML={{ __html: data.lesson_quizzes.questions[index].question }}></p>
-              <div className='grade'>
-                <div className="circle">
-                  {Math.floor(points)}
-                </div>
-                <p>PUNTAJE</p>
-              </div>
-            </div>
-            <ol className='answers' type="a">
-              {data.lesson_quizzes.questions[index].answers.map((x: any, idx: number) => {
-                return (
-                  <Answer id={index + "answer" + idx} key={"answers" + idx} veryfy={verify} correct={x.status} onClick={() => {
-                    addAnswer(idx);
-                  }}>
-                    {idx == 0 && <div className='left'>A</div>}
-                    {idx == 1 && <div className='left'>B</div>}
-                    {idx == 2 && <div className='left'>C</div>}
-                    {idx == 3 && <div className='left'>D</div>}
-                    {idx == 4 && <div className='left'>E</div>}
-                    {idx == 5 && <div className='left'>F</div>}
-                    <p>{x.answer}</p>
-                  </Answer>
-                )
-              })}
-            </ol>
-            {!verify ? <button onClick={() => {
-              checkAnswer()
-            }}>VERIFICAR</button> :
-              index !== data.lesson_quizzes.questions.length - 1 ? <button onClick={nextQuestion}>Siguiente</button> :
-                <button onClick={() => {
-                  checkQuiz()
-                }}>Terminar Quiz</button>}
-          </div>}
-          {step == 2 &&
-            <div className='done-container'>
-              <div className='bar'>
-                <div className='progress' style={{ width: `${progress}%` }}></div>
-              </div>
-              <div className='quiz-results'>
-                <div className="left">
-                  <p className='title'>{points >= data.lesson_quizzes.passing_grade ? "FELICIDADES !!!" : "SIGUE INTENTANDO"}</p>
-                  <p>{points >= data.lesson_quizzes.passing_grade ? "Aprobaste el quiz" : "No aprobaste la evaluación"} {data.lesson_quizzes?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
-                </div>
-                <div className="right">
-                  <p className='porcent'>{Math.floor(points)}%</p>
-                  <p>{counter}/{data.lesson_quizzes?.questions.length} Correctas</p>
-                </div>
-              </div>
-              <div className='quiz-bar-container'>
-                <div className='quiz-bar'>
-                  {userQuizzes?.find((x: any) => x.lesson_id == data.id)
-                    && <div className='quiz-bar-progress'
-                      style={{ width: `${userQuizzes?.find((x: any) => x.lesson_id == data.id).grade}%` }}>
-                      <div className='line'>
-                        <p className='max'>{Math.floor(userQuizzes?.find((x: any) => x.lesson_id == data.id).grade)} pts</p>
-                      </div>
-                    </div>}
-                  <div className='passing-grade' style={{ left: `calc(${data.lesson_quizzes.passing_grade}% - 58px)` }}>
-                    <p style={{
-                      color: userQuizzes?.find((x: any) => x.lesson_id == data.id) ? "#FFB800" : "#8628e2"
-                    }}
-                    >{data.lesson_quizzes.passing_grade} pts</p>
-                    <div className='line'>
-                      <p className='minimum'>MINIMO</p>
-                    </div>
-                  </div>
-                </div>
-                <div className='quiz-bar-points'>100 pts</div>
-              </div>
-              <button onClick={() => { finish() }}>FINALIZAR</button>
-            </div>
-          }
-        </div>} */}
       </HomeWorkContain>
       <ImagePreview
         lesson={lesson.title}
@@ -307,4 +187,6 @@ const HomeWork = (props: IHomeWork) => {
 
   )
 }
+console.log(2);
+
 export default HomeWork;
