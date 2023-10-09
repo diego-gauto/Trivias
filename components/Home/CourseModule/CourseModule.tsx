@@ -87,7 +87,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
           </Row>
           <Card.Subtitle>
             Aprende desde cero a aplicar <br />
-            uñas acrílicas en técnica de Tips.
+            uñas acrílicas en técnica de Tips y Escultural.
           </Card.Subtitle>
         </Col>
         <Col sm={12} md={5} className="second-col">
