@@ -27,7 +27,7 @@ export const CourseProvider = ({ children }: any) => {
       }
       if (res.type === "Producto") {
         let user_course = context.user.user_courses.filter((x: any) => x.course_id === +id);
-        if (user_course.length > 0 && user_course[0].final_date < new Date().getTime() / 1000) {
+        if ((user_course.length > 0 && user_course[0].final_date < new Date().getTime() / 1000) || user_course.length === 0) {
           router.push({ pathname: "/preview" });
         }
       }
