@@ -118,6 +118,14 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
+      <loc>https://www.gonvar.io/nails-master-revolution</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>
+    <url>
+      <loc>https://www.gonvar.io/nails-master-revolution-fb</loc>
+      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
+    </url>
+    <url>
       <loc>https://www.gonvar.io/terms-condition</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
