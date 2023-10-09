@@ -49,8 +49,8 @@ const PayPlans = () => {
               <p className={`option ${selected === 2 ? 'link' : ''}`}
                 onClick={() => handleSelected(2)}>G+ anual</p>
               <p className="option">|</p>
-              {/* <p className={`option ${selected === 3 ? 'link' : ''}`}
-                onClick={() => handleSelected(3)}>Nails Máster</p> */}
+              <p className={`option ${selected === 3 ? 'link' : ''}`}
+                onClick={() => handleSelected(3)}>Nails Máster</p>
             </div>
           </div>
 
