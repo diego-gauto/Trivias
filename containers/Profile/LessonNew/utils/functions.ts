@@ -9,10 +9,7 @@ import router from "next/router";
 
 export const lessonGuard = (user: IUser) => {
   if (user !== null) {
-    user.level = 1;
-    if (user.level === 1 || 4 || 5 || 6) {
-      return true;
-    }
+    return true;
   } else {
     router.push({ pathname: "/preview" });
   }
@@ -179,4 +176,44 @@ export const handleProgress = async (
       }
     });
   }
+};
+
+export const checkLessons = (
+  user: any,
+  course: any,
+  season: number,
+  lesson: number
+) => {
+  if (season === 0 && lesson === 0) {
+    return true;
+  }
+
+  if (
+    season === 0 &&
+    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id)
+  ) {
+    return true;
+  }
+
+  let lastLesson = course.seasons[season - 1].lessons.length;
+
+  if (
+    season > 0 &&
+    lesson === 0 &&
+    course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
+      user.user_id
+    )
+  ) {
+    return true;
+  }
+
+  if (
+    season > 0 &&
+    lesson > 0 &&
+    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id)
+  ) {
+    return true;
+  }
+
+  return;
 };

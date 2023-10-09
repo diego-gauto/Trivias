@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCourseApi } from "../components/api/lessons";
 import { lessonGuard } from "../containers/Profile/LessonNew/utils/functions";
@@ -20,8 +20,19 @@ export const CourseProvider = ({ children }: any) => {
 
   const reload = () => {
     getCourseApi(id).then((res) => {
-      setCourse(res);
       let data = res.seasons[+season].lessons[+lesson];
+
+      if (res.type === "Mensual" && context.user.final_date < new Date().getTime() / 1000) {
+        router.push({ pathname: "/preview" });
+      }
+      if (res.type === "Producto") {
+        let user_course = context.user.user_courses.filter((x: any) => x.course_id === +id)[0];
+        if (user_course.final_date < new Date().getTime() / 1000) {
+          router.push({ pathname: "/preview" });
+        }
+      }
+
+      setCourse(res);
       setTempLesson(data);
       setIsLoading(false);
     })

@@ -117,6 +117,7 @@ const Quiz = (props: IQuiz) => {
       points: user.score + grade,
       userId: user.user_id,
     }
+
     setStep(2);
     if (userQuizzes.length === 0) {
       if (points >= lesson.lesson_quizzes.passing_grade) {
