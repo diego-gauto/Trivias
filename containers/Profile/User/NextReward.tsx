@@ -122,7 +122,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       window.location.reload()
     })
   }
-
+  console.log(user);
   return (
     <ThirdBox>
       {pop &&
@@ -261,9 +261,9 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || (user.level === 0 && user.final_date > today) || user.level === 3) ? <p >
+              {(user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || (user.level === 0 && user.final_date > today)) ? <p >
                 Gonvar+<br />
-                <span className="span">Suscripción {(user.level === 1 && getDays() > 31) ? "anual" : "mensual"}</span>
+                <span className="span">Suscripción {(user.level === 4 || user.level === 5) ? "anual" : "mensual"}</span>
               </p> :
                 <p>Sin suscripción</p>}
             </div>
