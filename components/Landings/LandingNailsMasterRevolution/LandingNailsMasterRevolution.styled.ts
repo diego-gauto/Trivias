@@ -250,7 +250,7 @@ export const FirstSection = styled.div`
         width: var(--progress);
         height: 100%;
         border-radius: 32px;
-        background: linear-gradient(to right, #00e1ff, #aaf5ff);
+        background: #00e1ff;
       }
     }
   }
@@ -331,6 +331,17 @@ export const FirstSection = styled.div`
   @media (max-width: 550px) {
     padding-block: 5px;
     padding-bottom: 30px;
+    .space {
+      margin-block: 5px;
+      .big-text {
+        font-size: 45px;
+        line-height: 45px;
+      }
+      .subtitle {
+        margin-top: 5px;
+        margin-bottom: 0px;
+      }
+    }
     .progress-container {
       .progress-bar {
         margin-bottom: 8px;
@@ -359,24 +370,23 @@ export const FirstSection = styled.div`
       }
     }
     .right-img-1 {
-      transform: translateY(-210px);
+      transform: translateY(-155px);
       min-width: 80px;
       width: 20%;
     }
     .left-img {
-      top: 600px;
+      top: 515px;
       min-width: 160px;
       left: -10px;
     }
     .right-img-2 {
-      min-width: 140px;
-      transform: translateY(190px);
-      right: -10px;
+      min-width: 125px;
+      transform: translateY(140px);
+      right: -20px;
     }
-    .space {
-      margin-block: 15px;
-      .big-text {
-        font-size: 50px;
+    .all-center {
+      .space {
+        margin-block: 5px;
       }
     }
   }
@@ -407,11 +417,8 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
-      top: 535px;
+      top: 465px;
       left: -20px;
-    }
-    .right-img-1 {
-      transform: translateY(-185px);
     }
     .right-img-2 {
       transform: translateY(140px);
