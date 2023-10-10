@@ -39,6 +39,7 @@ import {
   mujer_fondo_azul,
   TEMARIO_ARRAY_1,
   TEMARIO_ARRAY_2,
+  mujer_fondo_azul_2,
 } from "./constants";
 import { ITemario } from "./ILandingNailsMasterRevolution";
 import {
@@ -564,7 +565,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         <div className="cost-body">
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
-            <img src={chica_responsive} className="chica-resp" />
+            <img src={mujer_fondo_azul_2} className="chica-resp" />
             <div className="center">
               <h2 className="red h2">Costo total real: {responsive850 && <br />}<del>$6,719.00 MXN</del></h2>
               <h2 className="dark-blue h1"><b>Precio de Lanzamiento {!responsive850 && "con beca"}</b></h2>
