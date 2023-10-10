@@ -199,30 +199,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     // const secondDate = new Date('10/09/2023 00:00:00');
     const diffDays = Math.floor(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay));
     let returnValue = {
-      x100: 0,
-      texto: ''
+      x100: 80,
+      texto: 'CUPO CASI AGOTADO'
     }
-    if (secondDate >= firstDate) {
-      returnValue = {
-        x100: 100,
-        texto: 'INSCRIPCIONES TERMINADAS'
-      }
-      return returnValue
-    } else {
-      if (diffDays <= 4) {
-        returnValue = {
-          x100: 80,
-          texto: 'CUPO CASI AGOTADO'
-        }
-        return returnValue;
-      } else {
-        returnValue = {
-          x100: 20,
-          texto: 'CUPOS LIMITADOS'
-        }
-        return returnValue;
-      }
-    }
+    return returnValue;
   }
 
   useEffect(() => {
