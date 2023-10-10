@@ -122,7 +122,6 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       window.location.reload()
     })
   }
-  console.log(user);
   return (
     <ThirdBox>
       {pop &&

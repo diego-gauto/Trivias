@@ -80,7 +80,6 @@ const User = () => {
       }))
     })
     await getAllRewardDataApi(user.id).then((res) => {
-      console.log(res);
       completedCertificates = res.certificates;
       nextCourseCertificate = res.nextCertificates;
     });
