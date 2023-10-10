@@ -184,10 +184,12 @@ export const checkLessons = (
   season: number,
   lesson: number
 ) => {
+  if (course.sequential === 0) {
+    return true;
+  }
   if (season === 0 && lesson === 0) {
     return true;
   }
-
   if (
     season === 0 &&
     course.seasons[season].lessons[lesson - 1].users.includes(user.user_id)

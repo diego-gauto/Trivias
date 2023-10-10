@@ -50,7 +50,7 @@ const Menu = (props: IMenu) => {
       {
         course.seasons.map((x: any, indexSeason: number) => {
           return (
-            <SeasonCard>
+            <SeasonCard key={'lesson_date' + indexSeason}>
               <SeasonInfo active={selected[indexSeason]} onClick={() => { toggleHandler(indexSeason) }}>
                 <Space wrap>
                   {
@@ -69,7 +69,7 @@ const Menu = (props: IMenu) => {
               {selected[indexSeason] && <LessonContainer>
                 {x.lessons.map((l: any, indexLesson: number) => {
                   return (
-                    <LessonCard onClick={() => { handleGotTo(indexSeason, indexLesson) }} style={{ cursor: checkLessons(user, course, indexSeason, indexLesson) ? "pointer" : "not-allowed" }}>
+                    <LessonCard onClick={() => { handleGotTo(indexSeason, indexLesson) }} style={{ cursor: checkLessons(user, course, indexSeason, indexLesson) ? "pointer" : "not-allowed" }} key={"lesson_data_sub_" + indexSeason + indexLesson}>
                       <div className="left">
                         {checkLessons(user, course, indexSeason, indexLesson) ? <Circle status={returnStatus(indexSeason, indexLesson, params, course, user.id)}>
                         </Circle> :

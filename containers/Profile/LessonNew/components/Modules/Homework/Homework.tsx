@@ -187,6 +187,4 @@ const HomeWork = (props: IHomeWork) => {
 
   )
 }
-console.log(2);
-
 export default HomeWork;
