@@ -2072,22 +2072,6 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
         margin-top: 20px;
       }
     `}
-  @media (max-width: 1200px) {
-    max-width: 260px;
-    min-width: 260px;
-    padding-inline: 15px;
-  }
-  @media (max-width: 1023px) {
-    width: 100%;
-    border-radius: 0;
-    gap: 30px;
-  }
-  @media (max-width: 700px) {
-    gap: 20px;
-  }
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
   p {
     margin: 0;
   }
@@ -2194,6 +2178,24 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
         width: 10px;
       }
     }
+  }
+  @media (max-width: 1200px) {
+    max-width: 260px;
+    min-width: 260px;
+    padding-inline: 15px;
+  }
+  @media (max-width: 1023px) {
+    width: 100%;
+    border-radius: 0;
+    gap: 30px;
+    max-width: unset;
+    min-width: unset;
+  }
+  @media (max-width: 700px) {
+    gap: 20px;
+  }
+  @media (max-width: 480px) {
+    padding: 10px;
   }
 `;
 export const PaymentMethodContainer = styled.div<{ add: any }>`

@@ -145,6 +145,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       handleClick();
     })
   }
+  const stopEdit = () => {
+    setStartEdit(false);
+  }
   const parseNumber = (phone: string) => {
     if (!phone.includes("+")) {
       phone = "+" + phone;
@@ -462,12 +465,16 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                   >
                     Guardar Cambios
                   </button>
+                  {/* <button
+                    className="btn-edit"
+                    onClick={stopEdit}
+                  >
+                    cancelar
+                  </button> */}
                 </div>
               }
-
             </div>
         }
-
         <div className="user-info-down">
           <div className="data-container">
             <p className="email">
@@ -607,8 +614,11 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               Guardar Cambios
             </button>
         }
-
-        <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
+        {
+          !startEdit
+            ? <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
+            : <button className="btn-logout" onClick={stopEdit}>Cancelar</button>
+        }
       </div>
     </ProfileMainContainer>
   )
