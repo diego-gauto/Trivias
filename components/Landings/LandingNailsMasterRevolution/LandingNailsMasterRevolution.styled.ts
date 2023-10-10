@@ -250,7 +250,7 @@ export const FirstSection = styled.div`
         width: var(--progress);
         height: 100%;
         border-radius: 32px;
-        background-color: #dad3e5;
+        background: linear-gradient(to right, #00e1ff, #aaf5ff);
       }
     }
   }
