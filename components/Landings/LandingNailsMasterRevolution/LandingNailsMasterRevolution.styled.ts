@@ -356,7 +356,7 @@ export const FirstSection = styled.div`
       width: 25%;
     }
     .left-img {
-      top: 470px;
+      top: 600px;
       min-width: 160px;
       left: -10px;
     }
@@ -406,7 +406,6 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
-      top: 600px;
       left: -20px;
     }
     .right-img-1 {
