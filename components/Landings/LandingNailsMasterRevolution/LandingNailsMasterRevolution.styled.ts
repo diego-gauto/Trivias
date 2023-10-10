@@ -329,31 +329,39 @@ export const FirstSection = styled.div`
     }
   }
   @media (max-width: 550px) {
-    padding-block: 20px;
-    padding-bottom: 50px;
+    padding-block: 5px;
+    padding-bottom: 30px;
+    .progress-container {
+      .progress-bar {
+        margin-bottom: 8px;
+        width: 350px;
+        height: 40px;
+      }
+    }
     .fechas {
-      margin-top: 1rem !important;
-      margin-bottom: 40px !important;
+      margin-top: 0.5rem !important;
+      margin-bottom: 20px !important;
     }
     .countdown {
-      margin-top: 20px;
+      margin-top: 10px;
       .time {
         .countdown-block {
           .tiempo {
-            width: 75px;
-            height: 70px;
-            font-size: 2.6rem;
+            width: 65px;
+            height: 60px;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
           }
           .sub {
-            font-size: 0.7em;
+            font-size: 0.6em;
           }
         }
       }
     }
     .right-img-1 {
-      transform: translateY(-220px);
-      min-width: 100px;
-      width: 25%;
+      transform: translateY(-210px);
+      min-width: 80px;
+      width: 20%;
     }
     .left-img {
       top: 600px;
@@ -373,13 +381,6 @@ export const FirstSection = styled.div`
     }
   }
   @media (max-width: 400px) {
-    .progress-container {
-      .progress-bar {
-        margin-bottom: 8px;
-        width: 350px;
-        height: 40px;
-      }
-    }
     .space {
       margin-bottom: 5px;
       .big-text {
@@ -406,13 +407,14 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
+      top: 535px;
       left: -20px;
     }
     .right-img-1 {
-      transform: translateY(-200px);
+      transform: translateY(-185px);
     }
     .right-img-2 {
-      transform: translateY(160px);
+      transform: translateY(140px);
       right: -30px;
     }
     .btn {
