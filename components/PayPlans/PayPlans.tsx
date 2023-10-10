@@ -70,8 +70,14 @@ const PayPlans = () => {
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>
             <div className="d-inline-flex">
               <p className="no-bold mt-3">Usa el método de pago más cómodo para ti: </p>
-              <img src={tarjetas} alt="cards" className=" align-self-center" />
-              <img src={oxxo} alt="oxxo" className=" align-self-center" />
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}>
+                <img src={tarjetas} alt="cards" className=" align-self-center" />
+                <img src={oxxo} alt="oxxo" className=" align-self-center" />
+              </div>
             </div>
           </div>
           <button className="continue my-4 d-flex mx-auto" onClick={goTo}>Continuar sin suscripción</button>
