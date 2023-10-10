@@ -423,7 +423,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
               <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
                 y {responsive850 && <br />}máster en técnicas y métodos {responsive850 && <br />}de enseñanza teóricos-prácticos.</p>
-              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia{!responsive850 && <br />}
+              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia {!responsive850 && <br />}
                 de uñas {responsive850 && <br />}<b>más grande de Latinoamerica.</b></p>
             </div>
             {
