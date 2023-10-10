@@ -458,19 +458,20 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </div>
               {
                 responsive1023 &&
-                <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10, gap: 10 }}>
                   <button
                     className="btn-edit"
                     onClick={handleUpdateData}
                   >
                     Guardar Cambios
                   </button>
-                  {/* <button
+                  <button
                     className="btn-edit"
                     onClick={stopEdit}
+                    style={{ width: 80 }}
                   >
                     cancelar
-                  </button> */}
+                  </button>
                 </div>
               }
             </div>
