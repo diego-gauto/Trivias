@@ -7,9 +7,7 @@ import { useRouter } from "next/router";
 import { Body, ChildrenContain } from "../screens/Login.styled";
 import SideBar from "./admin/SideBar";
 import Footer from "./Footer/Footer";
-import HelmetMetaTags from "./HelmetMetaTags/HelmetMetaTags";
 import NavBar from "./NavBar/NavBar";
-import Head from "next/head";
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const responsive1300 = useMediaQuery({ query: "(max-width: 1300px)" });
@@ -28,24 +26,6 @@ const Layout = ({ children }: any) => {
   }, []);
   return (
     <Body >
-      {/* <HelmetMetaTags
-        title={"Academia de Belleza Online | Gonvar"}
-        image={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"}
-        description={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"}
-        hashtag={"#gonvar"}
-        quote={""}
-      /> */}
-      {
-        router.pathname !== "/blogs/[slug]" &&
-        <Head>
-          <title>Academia de Belleza Online | Gonvar</title>
-          <meta property="title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta property="og:title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta name="description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:url" content={"https://gonvar.io" + router.asPath} />
-        </Head>
-      }
       <NavBar />
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",

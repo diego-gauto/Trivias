@@ -23,6 +23,12 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta property="fb:app_id" content="804211551373021" />
+          <title>Academia de Belleza Online | Gonvar</title>
+          <meta property="title" content={"Academia de Belleza Online | Gonvar"} />
+          <meta property="og:title" content={"Academia de Belleza Online | Gonvar"} />
+          <meta name="description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
+          <meta property="og:description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
+          <meta property="og:url" content={"https://gonvar.io"} />
           <meta name="theme-color" content="#ffffff" />
           <meta name="_token" content="" />
           <meta name="robots" content="noodp" />
