@@ -20,7 +20,7 @@ import {
 } from "../../../components/api/checkout";
 import { conektaPm, getUserApi, updateMembership, updateUser } from "../../../components/api/users";
 import ErrorModal from "../../../components/Error/ErrorModal";
-import { LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
+import { LESSON_PATH, LOGIN_PATH, PREVIEW_PATH } from "../../../constants/paths";
 import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import ModalError from "./Modal1/ModalError";
 import { Container, LoaderContainSpinner } from "./Purchase.styled";
@@ -55,7 +55,7 @@ const Purchase = () => {
   const [plan, setPlan] = useState<any>({ method: 'conekta' });
   const [cards, setCards] = useState<Array<any>>(new Array());
   const router = useRouter()
-  const { type, id, trial, frequency, nailmasterplusanual, v } = router.query;
+  const { type, id, trial, frequency, nailmasterplusanual, v }: any = router.query;
   const [loader, setLoader] = useState<any>(false);
   const [terms, setTerms] = useState(false);
   const courseId = new URLSearchParams(window.location.search);
@@ -149,6 +149,15 @@ const Purchase = () => {
 
   const guardCheckout = (userData: any) => {
     let today = new Date().getTime() / 1000;
+    if (router.query.type == "course") {
+      let user_course = userData.user_courses.filter((x: any) => x.course_id === +id);
+      if ((user_course.length > 0 && user_course[0].final_date > new Date().getTime() / 1000)) {
+        router.push({
+          pathname: LESSON_PATH,
+          query: { id: id, season: 0, lesson: 0 },
+        });
+      }
+    }
     if (router.query.type == "subscription" && (userData.level === 1 || userData.final_date > today || userData.level === 3 || userData.level === 4)) {
       window.location.href = PREVIEW_PATH;
     }
