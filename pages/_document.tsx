@@ -30,6 +30,7 @@ class MyDocument extends Document {
           <meta property="type" content="website" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+          <meta property="fb:app_id" content="804211551373021" />
           <meta name="theme-color" content="#ffffff" />
           <meta name="_token" content="" />
           <meta name="robots" content="noodp" />
