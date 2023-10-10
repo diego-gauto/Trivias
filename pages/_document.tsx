@@ -17,14 +17,6 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
           <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
-          <title>Academia de Belleza Online | Gonvar</title>
-          <meta property="title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta property="og:title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta name="description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:locale" content="es_MX" />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={"https://gonvar.io"} />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="csrf_token" content="" />
           <meta property="type" content="website" />
@@ -34,6 +26,8 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <meta name="_token" content="" />
           <meta name="robots" content="noodp" />
+          <meta property="og:locale" content="es_MX" />
+          <meta property="og:type" content="website" />
           <noscript>
             <img height="1" width="1" style={{ display: "none" }}
               src="https://www.facebook.com/tr?id=804211551373021&ev=PageView&noscript=1"

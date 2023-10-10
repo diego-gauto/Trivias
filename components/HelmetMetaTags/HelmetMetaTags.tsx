@@ -1,7 +1,7 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { useRouter } from 'next/router';
 import { DataForHelmet } from "./IHelmetMetaTags";
+import Head from "next/head";
 export default function HelmetMetaTags(props: DataForHelmet) {
   const { quote, title, image, description, hashtag } = props;
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function HelmetMetaTags(props: DataForHelmet) {
   let description_tag = (description !== " ") ? description : "Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!";
   let hashtag_tag = hashtag !== "" ? hashtag : "#gonvar";
   return (
-    <Helmet>
+    <Head>
       <title>{title_tag}</title>
       <meta property="url" content={currentUrl} />
       <meta property="title" content={title_tag} />
@@ -28,6 +28,6 @@ export default function HelmetMetaTags(props: DataForHelmet) {
       <meta property="og:url" content={currentUrl} />
       <meta property="og:site_name" content="CampersTribe" />
       <meta property="og:description" content={description_tag} />
-    </Helmet>
+    </Head>
   );
 }
