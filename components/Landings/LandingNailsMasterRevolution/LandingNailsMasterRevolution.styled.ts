@@ -344,6 +344,9 @@ export const FirstSection = styled.div`
             height: 70px;
             font-size: 2.6rem;
           }
+          .sub {
+            font-size: 0.7em;
+          }
         }
       }
     }
@@ -377,21 +380,6 @@ export const FirstSection = styled.div`
         height: 40px;
       }
     }
-    .countdown {
-      .time {
-        .countdown-block {
-          .tiempo {
-            padding-top: 5px;
-            width: 80px;
-            height: 90px;
-            font-size: 3rem;
-          }
-          .sub {
-            font-size: 0.8em;
-          }
-        }
-      }
-    }
     .space {
       margin-bottom: 5px;
       .big-text {
@@ -414,18 +402,19 @@ export const FirstSection = styled.div`
       }
     }
     .extra-margin {
-      margin-top: 30px;
+      margin-top: 20px;
       font-size: 14px;
     }
     .left-img {
       top: 600px;
+      left: -20px;
     }
     .right-img-1 {
       transform: translateY(-200px);
     }
     .right-img-2 {
       transform: translateY(160px);
-      right: -20px;
+      right: -30px;
     }
     .btn {
       padding-block: 5px;
