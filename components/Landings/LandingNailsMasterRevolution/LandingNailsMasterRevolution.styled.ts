@@ -250,7 +250,7 @@ export const FirstSection = styled.div`
         width: var(--progress);
         height: 100%;
         border-radius: 32px;
-        background: linear-gradient(to right, #00e1ff, #aaf5ff);
+        background: #00e1ff;
       }
     }
   }
@@ -329,50 +329,19 @@ export const FirstSection = styled.div`
     }
   }
   @media (max-width: 550px) {
-    padding-block: 20px;
-    padding-bottom: 50px;
-    .fechas {
-      margin-top: 1rem !important;
-      margin-bottom: 40px !important;
-    }
-    .countdown {
-      margin-top: 20px;
-      .time {
-        .countdown-block {
-          .tiempo {
-            width: 75px;
-            height: 70px;
-            font-size: 2.6rem;
-          }
-          .sub {
-            font-size: 0.7em;
-          }
-        }
-      }
-    }
-    .right-img-1 {
-      transform: translateY(-220px);
-      min-width: 100px;
-      width: 25%;
-    }
-    .left-img {
-      top: 600px;
-      min-width: 160px;
-      left: -10px;
-    }
-    .right-img-2 {
-      min-width: 140px;
-      transform: translateY(190px);
-      right: -10px;
-    }
+    padding-block: 5px;
+    padding-bottom: 30px;
     .space {
-      margin-block: 15px;
+      margin-block: 5px;
       .big-text {
-        font-size: 50px;
+        font-size: 45px;
+        line-height: 45px;
+      }
+      .subtitle {
+        margin-top: 5px;
+        margin-bottom: 0px;
       }
     }
-  }
-  @media (max-width: 400px) {
     .progress-container {
       .progress-bar {
         margin-bottom: 8px;
@@ -380,6 +349,48 @@ export const FirstSection = styled.div`
         height: 40px;
       }
     }
+    .fechas {
+      margin-top: 0.5rem !important;
+      margin-bottom: 20px !important;
+    }
+    .countdown {
+      margin-top: 10px;
+      .time {
+        .countdown-block {
+          .tiempo {
+            width: 65px;
+            height: 60px;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+          }
+          .sub {
+            font-size: 0.6em;
+          }
+        }
+      }
+    }
+    .right-img-1 {
+      transform: translateY(-155px);
+      min-width: 80px;
+      width: 20%;
+    }
+    .left-img {
+      top: 515px;
+      min-width: 160px;
+      left: -10px;
+    }
+    .right-img-2 {
+      min-width: 125px;
+      transform: translateY(140px);
+      right: -20px;
+    }
+    .all-center {
+      .space {
+        margin-block: 5px;
+      }
+    }
+  }
+  @media (max-width: 400px) {
     .space {
       margin-bottom: 5px;
       .big-text {
@@ -406,13 +417,11 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
+      top: 465px;
       left: -20px;
     }
-    .right-img-1 {
-      transform: translateY(-200px);
-    }
     .right-img-2 {
-      transform: translateY(160px);
+      transform: translateY(140px);
       right: -30px;
     }
     .btn {
