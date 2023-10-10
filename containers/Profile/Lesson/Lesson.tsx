@@ -78,11 +78,9 @@ const Lesson = () => {
           let today = new Date().getTime() / 1000;
           setUserData(user);
           getCourseApi(id).then((res) => {
-            console.log(res);
             if ((res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) ||
               (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id).length === 0)) {
-              return router.push({ pathname: PLAN_PATH });
-              // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
+              router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
             }
             if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
               return router.push({
