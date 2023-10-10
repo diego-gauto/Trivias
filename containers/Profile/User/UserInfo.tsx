@@ -154,39 +154,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     return country;
   }
 
-  const getStarCoordinates = () => {
-    let tempFormula: number = 0;
-    if (0 <= starPosition && starPosition < .125) {
-      tempFormula = (starPosition * 100) / .125 / 100;
-    }
-    if (.125 <= starPosition && starPosition < .25) {
-      tempFormula = (starPosition * 100) / .25 / 100;
-    }
-    if (.25 <= starPosition && starPosition < .375) {
-      tempFormula = (starPosition * 100) / .375 / 100;
-    }
-    if (.375 <= starPosition && starPosition < .5) {
-      tempFormula = (starPosition * 100) / .5 / 100;
-    }
-    if (.5 <= starPosition && starPosition < .625) {
-      tempFormula = (starPosition * 100) / .625 / 100;
-    }
-    if (.625 <= starPosition && starPosition < .75) {
-      tempFormula = (starPosition * 100) / .75 / 100;
-    }
-    if (.75 <= starPosition && starPosition < .875) {
-      tempFormula = (starPosition * 100) / .875 / 100;
-    }
-    if (.875 <= starPosition && starPosition < 1) {
-      tempFormula = (starPosition * 100) / 1 / 100;
-    }
-    setStarCoordinates(tempFormula);
-  }
 
   useEffect(() => {
-    getStarCoordinates();
     setUser({ ...userData })
-
   }, [userData])
   const format = (start_date: any, level: any) => {
     let tempDayCount: any = today - start_date;
@@ -225,7 +195,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     {
                       nextTimeReward?.month ?
                         (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes")
-                        : <div style={{ lineHeight: "25px" }}>¡Próximamente: <br /> más beneficios para ti!</div>
+                        : <div className="reward-height">¡Próximamente: <br /> más beneficios para ti!</div>
                     }
                   </span>
                   : <></>
