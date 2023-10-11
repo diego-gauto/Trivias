@@ -25,9 +25,10 @@ export const AdminsContext = (props: Props) => {
     level: -1,
     method: "todos",
     membership: "todos",
-    course_id: -1,
     state: "todos",
     come_from: "todos",
+    courses: 0,
+    progress: 0,
     dates_login: {
       valid: 0,
       date_1: "",

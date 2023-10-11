@@ -85,11 +85,6 @@ export const getServerSideProps = async ({ res }: any) => {
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
     <url>
-      <loc>https://www.gonvar.io/end-suscription</loc>
-      <lastmod>2023-06-06T17:07:54+00:00</lastmod>
-      <meta name="robots" content="noindex" />
-    </url>
-    <url>
       <loc>https://www.gonvar.io/cancel-suscription</loc>
       <lastmod>2023-06-06T17:07:54+00:00</lastmod>
     </url>
