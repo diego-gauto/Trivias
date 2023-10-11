@@ -159,3 +159,15 @@ export const retrieveConektaCustomerInfo = async (data: any) => {
       return error
     });
 };
+
+export const customerOrders = async (data: any) => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + `profile/conekta/${data.conekta_id}/orders`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
