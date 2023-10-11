@@ -62,6 +62,16 @@ export const AdminContain = styled.div`
     border-radius: 100px;
     border: 1px solid #6717cd;
   }
+  .disable-contain {
+    pointer-events: none;
+    .disable {
+      border: 1px solid gray;
+    }
+    .disable-txt {
+      color: gray;
+      font-weight: 600;
+    }
+  }
   .courses-header {
     display: flex;
     justify-content: space-between;
