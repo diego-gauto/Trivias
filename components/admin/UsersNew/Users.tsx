@@ -254,7 +254,7 @@ const Users = () => {
                 </select>
               </DefaultFilterContain>
             </DefaultRow>
-            {/* <DefaultRow gap={20}>
+            <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Por cursos</p>
                 <select defaultValue="todos" onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
@@ -278,7 +278,7 @@ const Users = () => {
                   <option value={100}>100%</option>
                 </select>
               </DefaultFilterContain>
-            </DefaultRow> */}
+            </DefaultRow>
           </DefaultColumn>
         </div>
         <AdminTable id="Users">
