@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { BsArrowRepeat, BsFileArrowUp } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 import router from "next/router";
-import { HomeWorkContain, TaskTitle } from "./Homework.styled";
+import { HomeWorkContain, HomeWorkStatus, TaskTitle } from "./Homework.styled";
 import { LoaderContainSpinner } from "../../../../Purchase/Purchase.styled";
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { uploadImageHomework } from "../../../../../../store/actions/courseActions";
@@ -11,6 +11,9 @@ import { addHomeworkApi, getHomeworkUserApi } from "../../../../../../components
 import { ICourse } from "../../../../../../interfaces/ICourse";
 import ImagePreview from "../imagePreview/imagePreview";
 import Quiz from "./components/Quiz";
+import { BiUpload } from "react-icons/bi";
+import { hexToRgba } from "../../../../../../utils/functions";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface IHomeWork {
   course: ICourse,
@@ -142,27 +145,54 @@ const HomeWork = (props: IHomeWork) => {
               lesson.homework === 1 &&
               <>
                 <p dangerouslySetInnerHTML={{ __html: lesson.lesson_homeworks.about }} className="quill-hw" />
-                {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") && <>
-                  <p style={{ color: "#bc1515" }}>Tarea Rechazada</p>
-                  <p style={{ color: "#8e2de2" }}>{homework.comment}</p>
-                </>}
+                {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") &&
+                  <HomeWorkStatus color="#FF0000" rgb={hexToRgba("#FF0000")} text="#CE0036" icon="#EB5757">
+                    <IoIosCloseCircle className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea rechazada</p>
+                      <p className="content">
+                        {homework.comment}
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
                 {
                   status === "" &&
                   <p style={{ margin: 0 }}>Haz click en el botón “Entregar tarea” para subir tu archivo.</p>
                 }
-                {status == "" && <div className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
-                  <BsFileArrowUp></BsFileArrowUp>
-                  Entregar Tarea
-                  <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
-                </div>}
-                {status == "pending" && <div className='homework' style={{ cursor: "none" }}>
-                  Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
-                </div>}
-                {status == "approved" && <div>
-                  <p style={{ color: "#0a980a" }}>Tarea Aprobada</p>
-                  <p style={{ color: "#8e2de2" }}>{homework?.comment}</p>
-                  {/* Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección. */}
-                </div>}
+                {
+                  status === "" &&
+                  <div className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
+                    <BiUpload></BiUpload>
+                    Entregar Tarea
+                    <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
+                  </div>
+                }
+                {
+                  status == "pending" &&
+                  <HomeWorkStatus color="#942CED" rgb={hexToRgba("#942CED")} text="#3F1168" icon="#942CED">
+                    <BsCheckCircleFill className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea enviada</p>
+                      <p className="content">
+                        Tu tarea ha sido enviada y esta en espera de evaluación y retroalimentación.
+                        En 24 horas obtendrás una respuesta.
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
+                {
+                  status === "approved" &&
+                  <HomeWorkStatus color="#00CC99" rgb={hexToRgba("#00CC99")} text="#006b51" icon="#00CC99">
+                    <BsCheckCircleFill className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea aprobada</p>
+                      <p className="content">
+                        {homework.comment}
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
               </>
             }
           </div>}
