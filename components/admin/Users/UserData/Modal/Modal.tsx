@@ -47,26 +47,26 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
     else {
       let tempUserCourse = JSON.parse(JSON.stringify(user.user_courses));
       let courseForUpdate: any = []
-      courseForUpdate = tempUserCourse.filter((userCourse: any) => {
-        let tempFinalDate = 0;
-        if (userCourse.final_date < today) {
-          tempFinalDate = today + days * 86400;
-          userCourse.final_date = tempFinalDate;
-        }
-        if (userCourse.final_date > today) {
-          tempFinalDate = userCourse.final_date + days * 86400;
-          userCourse.final_date = tempFinalDate;
-        }
-        return userCourse.course_id === course.id
-      })
+      courseForUpdate = tempUserCourse.filter((userCourse: any) => userCourse.course_id === course.id)
+      let body = { ...courseForUpdate[0] };
+      let tempFinalDate = 0;
+      if (courseForUpdate[0].final_date < today) {
+        tempFinalDate = today + days * 86400;
+        body.final_date = tempFinalDate;
+      }
+      if (courseForUpdate[0].final_date > today) {
+        tempFinalDate = courseForUpdate[0].final_date + days * 86400;
+        body.final_date = tempFinalDate;
+      }
+
 
       if (courseForUpdate.length > 0) {
-        let newDate = new Date(courseForUpdate[0].final_date * 1000);
+        let newDate = new Date(body.final_date * 1000);
         let tempDay = newDate.getDate()
         let tempMonth = newDate.getMonth() + 1;
         let tempYear = newDate.getFullYear()
         let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
-        updateCourseMembershipApi(courseForUpdate[0]).then((res) => {
+        updateCourseMembershipApi(body).then((res) => {
           alert("Se agregaron: " + days + " días, para el curso: " + course.title);
           handleClose();
           openUserCardData(user);
