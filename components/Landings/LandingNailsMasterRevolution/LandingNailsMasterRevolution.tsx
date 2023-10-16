@@ -87,11 +87,8 @@ const manoCosto = "/images/landing_nails_master/mano_costo.png"
 const chica = "/images/landing_nails_master/chica.png"
 const linesL = "/images/landing_nails_master/lines-left.png"
 const linesR = "/images/landing_nails_master/lines-right.png"
-const linesU = "/images/landing_nails_master/lines-up.png"
 const stars = "/images/landing_nails_master/estrellas.png"
 const linesB2 = "/images/landing_nails_master/lines-bottom2.png"
-const arita_responsive = "/images/landing_suscription/responsive/arita_responsive.svg";
-const chica_responsive = "/images/landing_suscription/responsive/chica_fondo.svg";
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -213,9 +210,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       <FirstSection>
         <div className="mt-3 fechas">
           <h4><b>Actualización 2024</b><br />
-            Inscripciones sólo desde el<br />9 de Octubre al 13 de Octubre</h4>
+            Inscripciones sólo desde el<br />9 de Octubre al 20 de Noviembre</h4>
           <Countdown
-            date={1697263200000}
+            date={1700501613000}
             renderer={props =>
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>
