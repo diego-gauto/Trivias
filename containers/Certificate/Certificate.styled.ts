@@ -92,6 +92,7 @@ export const MainContainer = styled.div<{ color: any }>`
       font-size: 30px;
       font-weight: 700;
       text-transform: capitalize;
+      white-space: nowrap;
     }
     .course-title {
       position: absolute;
