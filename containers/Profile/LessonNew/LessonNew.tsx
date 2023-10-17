@@ -16,7 +16,6 @@ const Lesson = () => {
   const context = useAuth();
   const { course, isLoading, tempLesson, open, setOpen } = useCourse();
   const [show, setShow] = useState(false);
-
   return (
     <>
       {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>

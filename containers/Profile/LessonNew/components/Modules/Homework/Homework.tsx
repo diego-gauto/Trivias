@@ -29,7 +29,6 @@ const HomeWork = (props: IHomeWork) => {
   const [imageDisplay, setImageDisplay] = useState<any>('');
   const [imageLoader, setImageLoader] = useState<boolean>(false);
   const [typeFile, setTypeFile] = useState("");
-
   const context = useAuth();
   const user = context.user;
 
@@ -47,35 +46,39 @@ const HomeWork = (props: IHomeWork) => {
 
   const getImage = async (imageAccepted: any) => {
     setImageLoader(true);
-    let tempHomework: any = {
-      approved: false,
-      comment: "",
-      image: "",
-      lessonId: lesson.id,
-      courseId: course.id,
-      // seasonId: courseIds.seasonId,
-      season: router.query.season,
-      lesson: lesson,
-      status: false,
-      user_id: user.user_id,
-      title: lesson.lesson_homeworks.title,
+    if (router.query.season) {
+      let tempHomework: any = {
+        approved: false,
+        comment: "",
+        image: "",
+        lessonId: lesson.id,
+        courseId: course.id,
+        seasonId: course.seasons[+router.query.season].id,
+        season: router.query.season,
+        lesson: lesson,
+        status: false,
+        user_id: user.user_id,
+        title: lesson.lesson_homeworks.title,
+      }
+      let tempData = {
+        path: imageAccepted,
+        lessonId: lesson.id,
+        userId: user.user_id
+      }
+      const url = await uploadImageHomework(tempData);
+      tempHomework.image = url;
+      //Homework create notification
+      addHomeworkApi(tempHomework).then(() => {
+        setImageLoader(false);
+        alert("Tarea enviada")
+        setImageModal(false);
+        setStatus("pending");
+      })
     }
-    let tempData = {
-      path: imageAccepted,
-      lessonId: lesson.id,
-      userId: user.user_id
+    else {
+      alert('Vuelva a intentar, sino refresque el sitio, gracias!');
     }
-    const url = await uploadImageHomework(tempData);
-    tempHomework.image = url;
-    //Homework create notification
-    addHomeworkApi(tempHomework).then(() => {
-      setImageLoader(false);
-      alert("Tarea enviada")
-      setImageModal(false);
-      setStatus("pending");
-    })
   }
-
   useEffect(() => {
     let tempData = {
       lessonId: lesson.id,
@@ -93,8 +96,9 @@ const HomeWork = (props: IHomeWork) => {
           setHomework("");
         }
         if (temp.user_id === user.user_id && temp.approved === 1) {
+          console.log(temp)
           setStatus("approved");
-          setHomework("");
+          setHomework(temp);
         }
       } else {
         setStatus("");
@@ -102,7 +106,6 @@ const HomeWork = (props: IHomeWork) => {
       }
     })
   }, [lesson])
-
   return (
     <>
       <HomeWorkContain >
@@ -169,7 +172,7 @@ const HomeWork = (props: IHomeWork) => {
                   </div>
                 }
                 {
-                  status == "pending" &&
+                  status === "pending" &&
                   <HomeWorkStatus color="#942CED" rgb={hexToRgba("#942CED")} text="#3F1168" icon="#942CED">
                     <BsCheckCircleFill className="icon" />
                     <div className="right-data">
@@ -188,7 +191,7 @@ const HomeWork = (props: IHomeWork) => {
                     <div className="right-data">
                       <p className="title">Tarea aprobada</p>
                       <p className="content">
-                        {homework.comment}
+                        {homework?.comment}
                       </p>
                     </div>
                   </HomeWorkStatus>

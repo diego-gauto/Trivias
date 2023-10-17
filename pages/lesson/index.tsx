@@ -1,13 +1,15 @@
-import Lesson from "../../containers/Profile/Lesson/Lesson";
+import LessonNew from "../../containers/Profile/LessonNew/LessonNew";
+import { CourseProvider } from "../../hooks/useLesson";
 import { MainContain } from "../../screens/Styles.styled";
 
 const LessonScreen = () => {
 
   return (
-
-    <MainContain>
-      <Lesson></Lesson>
-    </MainContain>
+    <CourseProvider>
+      <MainContain>
+        <LessonNew></LessonNew>
+      </MainContain>
+    </CourseProvider>
   )
 }
 export default LessonScreen;
