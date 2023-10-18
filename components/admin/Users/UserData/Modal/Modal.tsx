@@ -50,16 +50,14 @@ const Modal1 = ({ show, setShow, user, courses, handleCourse, openUserCardData }
       courseForUpdate = tempUserCourse.filter((userCourse: any) => userCourse.course_id === course.id)
       let body = { ...courseForUpdate[0] };
       let tempFinalDate = 0;
-      if (courseForUpdate[0].final_date < today) {
+      if (courseForUpdate.length > 0 && courseForUpdate[0].final_date < today) {
         tempFinalDate = today + days * 86400;
         body.final_date = tempFinalDate;
       }
-      if (courseForUpdate[0].final_date > today) {
+      if (courseForUpdate.length > 0 && courseForUpdate[0].final_date > today) {
         tempFinalDate = courseForUpdate[0].final_date + days * 86400;
         body.final_date = tempFinalDate;
       }
-
-
       if (courseForUpdate.length > 0) {
         let newDate = new Date(body.final_date * 1000);
         let tempDay = newDate.getDate()
