@@ -202,7 +202,12 @@ export const checkLessons = (
     if (
       course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
         user.user_id
-      )
+      ) &&
+      (course.seasons[season - 1].lessons[lastLesson - 1].homework === 0 ||
+        (course.seasons[season - 1].lessons[lastLesson - 1].homework === 1 &&
+          course.seasons[season - 1].lessons[lastLesson - 1].progress.filter(
+            (x: any) => x.user_id === user.user_id && x.status
+          ).length > 0))
     ) {
       return true;
     }
@@ -211,7 +216,12 @@ export const checkLessons = (
   if (
     season > 0 &&
     lesson > 0 &&
-    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id)
+    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id) &&
+    (course.seasons[season].lessons[lesson - 1].homework === 0 ||
+      (course.seasons[season].lessons[lesson - 1].homework === 1 &&
+        course.seasons[season].lessons[lesson - 1].progress.filter(
+          (x: any) => x.user_id === user.user_id && x.status
+        ).length > 0))
   ) {
     return true;
   }
