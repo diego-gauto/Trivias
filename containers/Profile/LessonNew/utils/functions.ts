@@ -163,18 +163,21 @@ export const handleProgress = async (
     userId: user.user_id,
   };
   if (user) {
-    await updateUserProgressApi(tempProgress).then(() => {
-      if (user) {
-        let temp = {
-          courseId: course.id,
-          seasonId: course.seasons[params.query.season].id,
-          lessonId:
-            course.seasons[params.query.season].lessons[params.query.lesson].id,
-          userId: user.user_id,
-        };
-        addUserHistory(temp);
-      }
-    });
+    setTimeout(async () => {
+      await updateUserProgressApi(tempProgress).then(() => {
+        if (user) {
+          let temp = {
+            courseId: course.id,
+            seasonId: course.seasons[params.query.season].id,
+            lessonId:
+              course.seasons[params.query.season].lessons[params.query.lesson]
+                .id,
+            userId: user.user_id,
+          };
+          addUserHistory(temp);
+        }
+      });
+    }, 500);
   }
 };
 
