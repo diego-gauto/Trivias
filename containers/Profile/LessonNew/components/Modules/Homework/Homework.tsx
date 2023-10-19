@@ -114,7 +114,7 @@ const HomeWork = (props: IHomeWork) => {
             setHomework("");
           }
         } else {
-          getUserHomework()
+          window.location.reload()
         }
         setIsLoading(false);
 
