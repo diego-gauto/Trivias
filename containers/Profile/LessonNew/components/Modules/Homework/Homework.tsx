@@ -31,6 +31,7 @@ const HomeWork = (props: IHomeWork) => {
   const [typeFile, setTypeFile] = useState("");
   const context = useAuth();
   const user = context.user;
+  const [isLoading, setIsLoading] = useState(false);
 
   const approvalHomeWork = (file: any) => {
     if (file.length > 0) {
@@ -80,31 +81,35 @@ const HomeWork = (props: IHomeWork) => {
     }
   }
   useEffect(() => {
+    setIsLoading(true);
     let tempData = {
       lessonId: lesson.id,
       user_id: user.user_id
     }
-    getHomeworkUserApi(tempData).then((res) => {
-      if (res.data.data.length > 0) {
-        let temp = res.data.data[0]
-        if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
-          setHomework(temp);
+
+    setTimeout(() => {
+      getHomeworkUserApi(tempData).then((res) => {
+        if (res.data.data.length > 0) {
+          let temp = res.data.data[0]
+          if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+            setHomework(temp);
+            setStatus("");
+          }
+          if (temp.user_id === user.user_id && temp.status === 0) {
+            setStatus("pending");
+            setHomework("");
+          }
+          if (temp.user_id === user.user_id && temp.approved === 1) {
+            setStatus("approved");
+            setHomework(temp);
+          }
+        } else {
           setStatus("");
-        }
-        if (temp.user_id === user.user_id && temp.status === 0) {
-          setStatus("pending");
           setHomework("");
         }
-        if (temp.user_id === user.user_id && temp.approved === 1) {
-          console.log(temp)
-          setStatus("approved");
-          setHomework(temp);
-        }
-      } else {
-        setStatus("");
-        setHomework("");
-      }
-    })
+        setIsLoading(false);
+      })
+    }, 500);
   }, [lesson])
   return (
     <>
@@ -145,7 +150,7 @@ const HomeWork = (props: IHomeWork) => {
                 <p>Lección sin tarea...</p>}
             </div>
             {
-              lesson.homework === 1 &&
+              (lesson.homework === 1 && !isLoading) &&
               <>
                 <p dangerouslySetInnerHTML={{ __html: lesson.lesson_homeworks.about }} className="quill-hw" />
                 {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") &&
