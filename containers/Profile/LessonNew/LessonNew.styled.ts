@@ -5,6 +5,35 @@ export const MainContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: auto;
+  .right-side {
+    display: flex;
+    width: 30%;
+    order: 1;
+    .nav-course {
+      display: none;
+      padding-block: 20px;
+      justify-content: space-between;
+      padding-inline: 40px;
+      align-items: center;
+      img {
+        width: 80px;
+      }
+      svg {
+        color: #ede7f2;
+        font-size: 24px;
+      }
+      @media (max-width: 1124px) {
+        display: flex;
+      }
+    }
+  }
+  @media (max-width: 1124px) {
+    flex-direction: column;
+    .right-side {
+      width: 100%;
+      background: #411369;
+    }
+  }
 `;
 
 export const LeftSide = styled.div`
@@ -13,24 +42,7 @@ export const LeftSide = styled.div`
   width: 70%;
   @media (max-width: 1124px) {
     width: 100%;
-  }
-  .nav-course {
-    display: none;
-    background: #411369;
-    padding-block: 20px;
-    justify-content: space-between;
-    padding-inline: 40px;
-    align-items: center;
-    img {
-      width: 80px;
-    }
-    svg {
-      color: #ede7f2;
-      font-size: 24px;
-    }
-    @media (max-width: 1124px) {
-      display: flex;
-    }
+    order: 2;
   }
 `;
 
@@ -38,7 +50,7 @@ export const RightSide = styled.div<{ open: boolean }>`
   display: flex;
   flex-direction: column;
   right: 0;
-  width: 30%;
+  width: 100%;
   @media (max-width: 1124px) {
     display: none;
     transition: 1s ease all;

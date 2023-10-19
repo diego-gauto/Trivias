@@ -17,6 +17,13 @@ export const TitleContain = styled.div`
   display: flex;
   gap: 50px;
   padding-bottom: 20px;
+  .test {
+    position: absolute;
+    font-size: 30px;
+    top: 120px;
+    z-index: 30;
+    color: red;
+  }
   .tab-container {
     display: flex;
     justify-content: space-between;
