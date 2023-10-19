@@ -81,49 +81,46 @@ const HomeWork = (props: IHomeWork) => {
     }
   }
   useEffect(() => {
+
     getUserHomework()
   }, [lesson])
 
-  const getUserHomework = () => {
+  const getUserHomework = async () => {
     setIsLoading(true);
     let tempData = {
       lessonId: lesson.id,
       user_id: user.user_id
     }
 
-    setTimeout(async () => {
-      try {
-        const hwk = await getHomeworkUserApi(tempData);
-        if (hwk.data) {
-          if (hwk.data.data.length > 0) {
-            let temp = hwk.data.data[0]
-            if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
-              setHomework(temp);
-              setStatus("");
-            }
-            if (temp.user_id === user.user_id && temp.status === 0) {
-              setStatus("pending");
-              setHomework("");
-            }
-            if (temp.user_id === user.user_id && temp.approved === 1) {
-              setStatus("approved");
-              setHomework(temp);
-            }
-          } else {
+    try {
+      const hwk = await getHomeworkUserApi(tempData);
+      if (hwk.data) {
+        if (hwk.data.data.length > 0) {
+          let temp = hwk.data.data[0]
+          if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+            setHomework(temp);
             setStatus("");
+          }
+          if (temp.user_id === user.user_id && temp.status === 0) {
+            setStatus("pending");
             setHomework("");
           }
+          if (temp.user_id === user.user_id && temp.approved === 1) {
+            setStatus("approved");
+            setHomework(temp);
+          }
         } else {
-          window.location.reload()
+          setStatus("");
+          setHomework("");
         }
-        setIsLoading(false);
-
-      } catch (error) {
-        getUserHomework()
-        setIsLoading(false);
+      } else {
+        window.location.reload()
       }
+      setIsLoading(false);
 
-    }, 1000);
+    } catch (error) {
+      setIsLoading(false);
+    }
   }
 
   return (
