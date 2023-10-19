@@ -81,36 +81,51 @@ const HomeWork = (props: IHomeWork) => {
     }
   }
   useEffect(() => {
+    getUserHomework()
+  }, [lesson])
+
+  const getUserHomework = () => {
     setIsLoading(true);
     let tempData = {
       lessonId: lesson.id,
       user_id: user.user_id
     }
 
-    setTimeout(() => {
-      getHomeworkUserApi(tempData).then((res) => {
-        if (res.data.data.length > 0) {
-          let temp = res.data.data[0]
-          if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
-            setHomework(temp);
+    setTimeout(async () => {
+      try {
+        const hwk = await getHomeworkUserApi(tempData);
+        if (hwk.data) {
+          if (hwk.data.data.length > 0) {
+            let temp = hwk.data.data[0]
+            if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+              setHomework(temp);
+              setStatus("");
+            }
+            if (temp.user_id === user.user_id && temp.status === 0) {
+              setStatus("pending");
+              setHomework("");
+            }
+            if (temp.user_id === user.user_id && temp.approved === 1) {
+              setStatus("approved");
+              setHomework(temp);
+            }
+          } else {
             setStatus("");
-          }
-          if (temp.user_id === user.user_id && temp.status === 0) {
-            setStatus("pending");
             setHomework("");
           }
-          if (temp.user_id === user.user_id && temp.approved === 1) {
-            setStatus("approved");
-            setHomework(temp);
-          }
         } else {
-          setStatus("");
-          setHomework("");
+          getUserHomework()
         }
         setIsLoading(false);
-      })
-    }, 500);
-  }, [lesson])
+
+      } catch (error) {
+        getUserHomework()
+        setIsLoading(false);
+      }
+
+    }, 1000);
+  }
+
   return (
     <>
       <HomeWorkContain >
@@ -149,6 +164,7 @@ const HomeWork = (props: IHomeWork) => {
               </div> :
                 <p>Lección sin tarea...</p>}
             </div>
+            {isLoading && <LoaderContainSpinner />}
             {
               (lesson.homework === 1 && !isLoading) &&
               <>

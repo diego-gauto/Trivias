@@ -26,7 +26,7 @@ export const addHomeworkApi = async (homework: any) => {
 
 export const getHomeworkUserApi = async (homework: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "homeworks/user-homework", homework)
+    .get("https://gonvar.inowu.dev/" + `homeworks/user-homework/lesson/${homework.lessonId}/user/${homework.user_id}`)
     .then((res) => {
       return res
     })
