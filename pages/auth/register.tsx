@@ -320,6 +320,24 @@ const Register = () => {
                 </Link>
               </div>
               <div className="box">
+                <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
+                  <div className="form-input">
+                    <label>Me enteré de Gonvar en:</label>
+                    <div className="select-contain">
+                      <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
+                        <option value="" disabled>Seleccione una opción</option>
+                        {
+                          SOCIALS_ARRAY.map((val: string, index: number) => {
+                            return (
+                              <option value={val} key={"socials_" + index}>{val}</option>
+                            )
+                          })
+                        }
+                      </select>
+                      <IoChevronDown className="icon" />
+                    </div>
+                  </div>
+                </div>
                 <div className="form-row">
                   <div className="form-input">
                     <label>Nombre</label>
@@ -420,24 +438,7 @@ const Register = () => {
                     </Error>
                   }
                 </div>
-                <div className="form-row" style={errors.confirmPassword && { flexDirection: "column", gap: 5 }}>
-                  <div className="form-input">
-                    <label>Me enteré de Gonvar en:</label>
-                    <div className="select-contain">
-                      <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
-                        <option value="" disabled>Seleccione una opción</option>
-                        {
-                          SOCIALS_ARRAY.map((val: string, index: number) => {
-                            return (
-                              <option value={val} key={"socials_" + index}>{val}</option>
-                            )
-                          })
-                        }
-                      </select>
-                      <IoChevronDown className="icon" />
-                    </div>
-                  </div>
-                </div>
+
                 <div className="form-row">
                   <div className="form-input">
                     <label>WhatsApp</label>
