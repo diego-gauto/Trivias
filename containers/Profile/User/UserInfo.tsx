@@ -146,6 +146,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     })
   }
   const stopEdit = () => {
+    setEditPassword(false);
     setStartEdit(false);
   }
   const parseNumber = (phone: string) => {
@@ -470,7 +471,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     onClick={stopEdit}
                     style={{ width: 80 }}
                   >
-                    cancelar
+                    Cancelar
                   </button>
                 </div>
               }
