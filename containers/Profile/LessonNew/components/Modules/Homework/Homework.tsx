@@ -56,7 +56,6 @@ const HomeWork = (props: IHomeWork) => {
         courseId: course.id,
         seasonId: course.seasons[+router.query.season].id,
         season: router.query.season,
-        lesson: lesson,
         status: false,
         user_id: user.user_id,
         title: lesson.lesson_homeworks.title,
@@ -69,6 +68,8 @@ const HomeWork = (props: IHomeWork) => {
       const url = await uploadImageHomework(tempData);
       tempHomework.image = url;
       //Homework create notification
+      console.log(tempHomework);
+
       addHomeworkApi(tempHomework).then(() => {
         setImageLoader(false);
         alert("Tarea enviada")
