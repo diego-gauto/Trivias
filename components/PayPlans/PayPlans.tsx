@@ -9,7 +9,7 @@ import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
 
-const tarjetas = "/images/pay_plans/cards.png"
+const tarjetas = "/images/pay_plans/pm.svg"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
@@ -75,8 +75,7 @@ const PayPlans = () => {
                 alignItems: "center",
                 justifyContent: "center"
               }}>
-                <img src={tarjetas} alt="cards" className=" align-self-center" />
-                <img src={oxxo} alt="oxxo" className=" align-self-center" />
+                <img style={{ width: "100%" }} src={tarjetas} alt="cards" className=" align-self-center" />
               </div>
             </div>
           </div>
