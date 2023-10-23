@@ -12,6 +12,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   NAilS_REVOLUTION_FORM,
+  NAilS_REVOLUTION_FORM_GOOGLE,
+  NAilS_REVOLUTION_FORM_TT,
   PREVIEW_PATH,
   PURCHASE_PATH,
   SIGNUP_PATH,
@@ -101,16 +103,17 @@ views.set(7, false);
 views.set(8, false);
 
 interface ILandingNailsRevolution {
-  isFacebook?: boolean;
+  type?: string;
 }
 const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
-  const { isFacebook } = props;
+  const { type } = props;
   const [ver, setver] = useState(true)
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
   const responsive850 = useMediaQuery({ query: "(max-width: 850px)" });
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const [showModules, setShowModules] = useState<boolean>(false);
+  const button_text = "Solicitar beca";
   const toggleModules = () => {
     setShowModules(!showModules);
   }
@@ -155,8 +158,17 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   }
 
   const handleRedirection = () => {
-    if (isFacebook) {
-      router.push(NAilS_REVOLUTION_FORM)
+    if (type) {
+      if (type === "facebook") {
+        router.push(NAilS_REVOLUTION_FORM)
+      }
+      if (type === "google") {
+        router.push(NAilS_REVOLUTION_FORM_GOOGLE)
+      }
+      if (type === "tiktok") {
+        router.push(NAilS_REVOLUTION_FORM_TT)
+      }
+      return
     }
     else {
       if (localStorage.getItem('email')) {
@@ -261,7 +273,11 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         </div>
         <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="light-blue">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
           Más de 5,700 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
-        <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
+        <button className="space btn left-right" onClick={() => handleRedirection()}>
+          {
+            type ? button_text : <>Comienza ahora <br />por $1,599.00 MXN</>
+          }
+        </button>
       </FirstSection>
       <SecondSection>
         <div className="info-top">
@@ -379,7 +395,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <b className="big-title blue-gradient">más de 40 clases</b></h2>
           <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
-          <button className="btn left-right" onClick={() => handleRedirection()}>Obtener acceso</button>
+          <button className="btn left-right" onClick={() => handleRedirection()}>
+            {type ? button_text : "Obtener acceso"}
+          </button>
         </div>
       </ThirdSection>
       <FourthSection>
@@ -549,7 +567,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <h2 className="green h1">Sólo $1,599.00 MXN</h2>
               {/* <p className="">Válido para las primeras 500 personas</p> */}
               <h2><b>Cupos limitados a 500 lugares <br />para una mejor atención</b></h2>
-              <button className="btn right-left" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
+              <button className="btn right-left" onClick={() => handleRedirection()}>
+                {type ? button_text : <>¡Quiero comenzar<br /> ahora!</>}
+              </button>
             </div>
             <img src={chica} className="right-img" />
           </div>
