@@ -64,7 +64,7 @@ const ModuleTabs = (props: IModule) => {
           lessonId: data.id,
           user_id: user.user_id
         }
-        getHomeworkUserApi(tempData).then((res) => {
+        getHomeworkUserApi(tempData).then((res: any) => {
           if (res.data.data.length > 0) {
             if (res.data.data[0].approved === 1 && res.data.data[0].status === 1) {
               setApprovedHw(true)
