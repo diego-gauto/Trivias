@@ -223,7 +223,7 @@ const HomeWork = (props: IHomeWork) => {
       lessonId: data.id,
       user_id: user.user_id
     }
-    getHomeworkUserApi(tempData).then((res) => {
+    getHomeworkUserApi(tempData).then((res: any) => {
       if (res.data.data.length > 0) {
         let temp = res.data.data[0]
         if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
