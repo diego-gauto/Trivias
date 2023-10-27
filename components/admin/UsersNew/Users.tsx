@@ -23,6 +23,7 @@ const Users = () => {
   const [openloginCalendar, setOpenLoginCalendar] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState({} as IAdminUsers);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [showCourseSelect, setShowCourseSelect] = useState(false);
   let adminContext = useAdmin();
   const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses, permits } = adminContext;
   const handleUserCalendar = () => {
@@ -40,6 +41,12 @@ const Users = () => {
   const changeData = (key: string, data: string | number) => {
     let filters = userFilters;
     filters[key] = data;
+    if (key === "courses" && data !== 0) {
+      setShowCourseSelect(true);
+    }
+    if (key === "courses" && data === 0) {
+      setShowCourseSelect(false);
+    }
     setUserFilters({ ...filters, offset: 0 });
   }
   const filterDate = (key: string, date: any) => {
@@ -218,7 +225,7 @@ const Users = () => {
               </DefaultFilterContain>
             </DefaultRow>
             <DefaultRow gap={20}>
-              <DefaultFilterContain style={{ width: "33%" }}>
+              <DefaultFilterContain>
                 <p className='title-filter'>
                   Por Pais
                 </p>
@@ -233,7 +240,7 @@ const Users = () => {
                   }
                 </select>
               </DefaultFilterContain>
-              <DefaultFilterContain style={{ width: "33%" }}>
+              <DefaultFilterContain >
                 <p className='title-filter'>Procedencia</p>
                 <select defaultValue="todos" onChange={(e) => { changeData("come_from", e.target.value) }}>
                   <option value={"todos"}>Todos</option>
@@ -244,6 +251,31 @@ const Users = () => {
                       )
                     })
                   }
+                </select>
+              </DefaultFilterContain>
+            </DefaultRow>
+            <DefaultRow gap={20}>
+              <DefaultFilterContain>
+                <p className='title-filter'>Por cursos</p>
+                <select defaultValue="todos" onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
+                  <option value={0}>Todos</option>
+                  {
+                    courses.map((val: any, index: number) => {
+                      return (
+                        <option value={val.id} key={"cursos" + index}>{val.title}</option>
+                      )
+                    })
+                  }
+                </select>
+              </DefaultFilterContain>
+              <DefaultFilterContain className={!showCourseSelect ? "disable-contain" : ""}>
+                <p className={'title-filter ' + (!showCourseSelect ? "disable-txt" : "")}>Progreso</p>
+                <select defaultValue="todos" onChange={(e) => { changeData('progress', parseInt(e.target.value)) }} className={!showCourseSelect ? "disable" : ""}>
+                  <option value={0}>Todos</option>
+                  <option value={25}>25%</option>
+                  <option value={50}>50%</option>
+                  <option value={75}>75%</option>
+                  <option value={100}>100%</option>
                 </select>
               </DefaultFilterContain>
             </DefaultRow>

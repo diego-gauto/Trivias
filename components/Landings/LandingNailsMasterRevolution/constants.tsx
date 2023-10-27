@@ -1,5 +1,6 @@
 
 export const mujer_fondo_azul = '/images/landing_nails_master/revolution/chica_fondo_azul.png';
+export const mujer_fondo_azul_2 = '/images/landing_nails_master/revolution/chica_2_azul.png';
 export const icon_1 = '/images/landing_nails_master/revolution/icon-1.png'
 export const icon_2 = '/images/landing_nails_master/revolution/icon-2.png'
 export const icon_3 = '/images/landing_nails_master/revolution/icon-3.png'

@@ -33,7 +33,7 @@ const termsConditions = ({ nails }: InferGetServerSidePropsType<typeof getServer
         padding: "0",
         maxWidth: "100% !important",
       }}>
-      <LandingNailsMasterRevolution />
+      <LandingNailsMasterRevolution type={"facebook"} />
     </MainContain>
   )
 }

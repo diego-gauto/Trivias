@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-import { BsArrowRepeat, BsFileArrowUp } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 import router from "next/router";
-import { HomeWorkContain, TaskTitle } from "./Homework.styled";
+import { HomeWorkContain, HomeWorkStatus, TaskTitle } from "./Homework.styled";
 import { LoaderContainSpinner } from "../../../../Purchase/Purchase.styled";
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { uploadImageHomework } from "../../../../../../store/actions/courseActions";
 import { addHomeworkApi, getHomeworkUserApi } from "../../../../../../components/api/homeworks";
 import { ICourse } from "../../../../../../interfaces/ICourse";
 import ImagePreview from "../imagePreview/imagePreview";
+import Quiz from "./components/Quiz";
+import { BiUpload } from "react-icons/bi";
+import { hexToRgba } from "../../../../../../utils/functions";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface IHomeWork {
   course: ICourse,
@@ -25,9 +29,9 @@ const HomeWork = (props: IHomeWork) => {
   const [imageDisplay, setImageDisplay] = useState<any>('');
   const [imageLoader, setImageLoader] = useState<boolean>(false);
   const [typeFile, setTypeFile] = useState("");
-
   const context = useAuth();
   const user = context.user;
+  const [isLoading, setIsLoading] = useState(false);
 
   const approvalHomeWork = (file: any) => {
     if (file.length > 0) {
@@ -43,61 +47,82 @@ const HomeWork = (props: IHomeWork) => {
 
   const getImage = async (imageAccepted: any) => {
     setImageLoader(true);
-    let tempHomework: any = {
-      approved: false,
-      comment: "",
-      image: "",
-      lessonId: lesson.id,
-      courseId: course.id,
-      // seasonId: courseIds.seasonId,
-      season: router.query.season,
-      lesson: lesson,
-      status: false,
-      user_id: user.user_id,
-      title: lesson.lesson_homeworks.title,
-    }
-    let tempData = {
-      path: imageAccepted,
-      lessonId: lesson.id,
-      userId: user.user_id
-    }
-    const url = await uploadImageHomework(tempData);
-    tempHomework.image = url;
-    //Homework create notification
-    addHomeworkApi(tempHomework).then(() => {
-      setImageLoader(false);
-      alert("Tarea enviada")
-      setImageModal(false);
-      setStatus("pending");
-    })
-  }
+    if (router.query.season) {
+      let tempHomework: any = {
+        approved: false,
+        comment: "",
+        image: "",
+        lessonId: lesson.id,
+        courseId: course.id,
+        seasonId: course.seasons[+router.query.season].id,
+        season: router.query.season,
+        status: false,
+        user_id: user.user_id,
+        title: lesson.lesson_homeworks.title,
+      }
+      let tempData = {
+        path: imageAccepted,
+        lessonId: lesson.id,
+        userId: user.user_id
+      }
+      const url = await uploadImageHomework(tempData);
+      tempHomework.image = url;
+      //Homework create notification
+      console.log(tempHomework);
 
+      addHomeworkApi(tempHomework).then(() => {
+        setImageLoader(false);
+        alert("Tarea enviada")
+        setImageModal(false);
+        setStatus("pending");
+      })
+    }
+    else {
+      alert('Vuelva a intentar, sino refresque el sitio, gracias!');
+    }
+  }
   useEffect(() => {
+
+    getUserHomework()
+  }, [lesson])
+
+  const getUserHomework = async () => {
+    setIsLoading(true);
     let tempData = {
       lessonId: lesson.id,
       user_id: user.user_id
     }
-    getHomeworkUserApi(tempData).then((res) => {
-      if (res.data.data.length > 0) {
-        let temp = res.data.data[0]
-        if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
-          setHomework(temp);
+
+    try {
+      const hwk = await getHomeworkUserApi(tempData);
+      if (hwk.data) {
+        if (hwk.data.data.length > 0) {
+          let temp = hwk.data.data[0]
+          if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+            setHomework(temp);
+            setStatus("");
+          }
+          if (temp.user_id === user.user_id && temp.status === 0) {
+            setStatus("pending");
+            setHomework("");
+          }
+          if (temp.user_id === user.user_id && temp.approved === 1) {
+            setStatus("approved");
+            setHomework(temp);
+          }
+        } else {
           setStatus("");
-        }
-        if (temp.user_id === user.user_id && temp.status === 0) {
-          setStatus("pending");
-          setHomework("");
-        }
-        if (temp.user_id === user.user_id && temp.approved === 1) {
-          setStatus("approved");
           setHomework("");
         }
       } else {
-        setStatus("");
-        setHomework("");
+        window.location.reload()
       }
-    })
-  }, [lesson])
+      setIsLoading(false);
+
+    } catch (error) {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <>
@@ -137,159 +162,66 @@ const HomeWork = (props: IHomeWork) => {
               </div> :
                 <p>Lección sin tarea...</p>}
             </div>
+            {isLoading && <LoaderContainSpinner />}
             {
-              lesson.homework === 1 &&
+              (lesson.homework === 1 && !isLoading) &&
               <>
                 <p dangerouslySetInnerHTML={{ __html: lesson.lesson_homeworks.about }} className="quill-hw" />
-                {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") && <>
-                  <p style={{ color: "#bc1515" }}>Tarea Rechazada</p>
-                  <p style={{ color: "#8e2de2" }}>{homework.comment}</p>
-                </>}
+                {(homework && homework.status === 1 && homework.approved === 0 && status !== "pending") &&
+                  <HomeWorkStatus color="#FF0000" rgb={hexToRgba("#FF0000")} text="#CE0036" icon="#EB5757">
+                    <IoIosCloseCircle className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea rechazada</p>
+                      <p className="content">
+                        {homework.comment}
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
                 {
                   status === "" &&
                   <p style={{ margin: 0 }}>Haz click en el botón “Entregar tarea” para subir tu archivo.</p>
                 }
-                {status == "" && <div className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
-                  <BsFileArrowUp></BsFileArrowUp>
-                  Entregar Tarea
-                  <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
-                </div>}
-                {status == "pending" && <div className='homework' style={{ cursor: "none" }}>
-                  Tu tarea ha sido enviada y está en espera de evaluación y retroalimentación. En aproximadamente 24 horas obtendrás una respuesta.
-                </div>}
-                {status == "approved" && <div>
-                  <p style={{ color: "#0a980a" }}>Tarea Aprobada</p>
-                  <p style={{ color: "#8e2de2" }}>{homework?.comment}</p>
-                  {/* Felicidades. Buen trabajo!!! Has aprobado tu tarea. Te invitamos a seguir con la próxima lección. */}
-                </div>}
+                {
+                  status === "" &&
+                  <div className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
+                    <BiUpload></BiUpload>
+                    Entregar Tarea
+                    <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
+                  </div>
+                }
+                {
+                  status === "pending" &&
+                  <HomeWorkStatus color="#942CED" rgb={hexToRgba("#942CED")} text="#3F1168" icon="#942CED">
+                    <BsCheckCircleFill className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea enviada</p>
+                      <p className="content">
+                        Tu tarea ha sido enviada y esta en espera de evaluación y retroalimentación.
+                        En 24 horas obtendrás una respuesta.
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
+                {
+                  status === "approved" &&
+                  <HomeWorkStatus color="#00CC99" rgb={hexToRgba("#00CC99")} text="#006b51" icon="#00CC99">
+                    <BsCheckCircleFill className="icon" />
+                    <div className="right-data">
+                      <p className="title">Tarea aprobada</p>
+                      <p className="content">
+                        {homework?.comment}
+                      </p>
+                    </div>
+                  </HomeWorkStatus>
+                }
               </>
             }
           </div>}
+        {
+          lesson.quiz === 1 && <Quiz lesson={lesson} user={user} />
+        }
         {loader && <LoaderContainSpinner />}
-        {/* {(data.quiz === 1 && !loader) && <div className='quiz'>
-          {step == 0 && <div className='quiz-info'>
-            <div className='top'>
-              {data.lesson_quizzes?.title && <p className='title'>{data.lesson_quizzes.title}</p>}
-              {(!data.lesson_quizzes?.title && userQuizzes?.find((x: any) => x.lesson_id == data.id)) &&
-                <p>
-                  Ahorita no hay un quiz disponible, su calificación anterior fue: {userQuizzes.find((x: any) => x.lesson_id == data.id).grade}
-                </p>}
-              {(!data.lesson_quizzes?.title && !userQuizzes?.find((x: any) => x.lesson_id == data.id)) &&
-                <p> Ahorita no hay un quiz disponible!
-                </p>}
-              {data.lesson_quizzes?.title && <div className='circle'>
-                <p className='points'>{data.lesson_quizzes.questions.length}</p>
-                <p className='sub'>PREGUNTAS</p>
-              </div>}
-            </div>
-            <div className='bottom'>
-              {(data.lesson_quizzes?.title) &&
-                <div className='quiz-bar-container'>
-                  <div className='quiz-bar'>
-                    {userQuizzes?.find((x: any) => x.lesson_id == data.id)
-                      && <div className='quiz-bar-progress'
-                        style={{ width: `${userQuizzes?.find((x: any) => x.lesson_id == data.id).grade}%` }}>
-                        <div className='line'>
-                          <p className='max'>{Math.floor(userQuizzes?.find((x: any) => x.lesson_id == data.id).grade)} pts</p>
-                        </div>
-                      </div>}
-                    <div className='passing-grade' style={{ left: `calc(${data.lesson_quizzes.passing_grade}% - 58px)` }}>
-                      <p style={{
-                        color: userQuizzes?.find((x: any) => x.lesson_id == data.id) ? "#FFB800" : "#8628e2"
-                      }}
-                      >{data.lesson_quizzes?.passing_grade} pts</p>
-                      <div className='line'>
-                        <p className='minimum'>MINIMO</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='quiz-bar-points'>{data.lesson_quizzes.points} pts</div>
-                </div>}
-              {(!userQuizzes?.find((x: any) => x.lesson_id == data.id) && data.lesson_quizzes?.questions.length > 0)
-                && <button onClick={() => { setStep(1) }}>Comenzar quiz</button>}
-
-              {(userQuizzes?.find((x: any) => x.lesson_id == data.id) && data.lesson_quizzes?.questions.length > 0) &&
-                <button onClick={() => { setStep(1) }}><BsArrowRepeat /> Repetir quiz</button>}
-            </div>
-          </div>}
-          {step == 1 && <div className='question-container'>
-            <div className='question-bar'>
-              <div className='progress' style={{ width: `${progress}%` }}></div>
-            </div>
-            <div className='question-title'>
-              <p className='title' dangerouslySetInnerHTML={{ __html: data.lesson_quizzes.questions[index].question }}></p>
-              <div className='grade'>
-                <div className="circle">
-                  {Math.floor(points)}
-                </div>
-                <p>PUNTAJE</p>
-              </div>
-            </div>
-            <ol className='answers' type="a">
-              {data.lesson_quizzes.questions[index].answers.map((x: any, idx: number) => {
-                return (
-                  <Answer id={index + "answer" + idx} key={"answers" + idx} veryfy={verify} correct={x.status} onClick={() => {
-                    addAnswer(idx);
-                  }}>
-                    {idx == 0 && <div className='left'>A</div>}
-                    {idx == 1 && <div className='left'>B</div>}
-                    {idx == 2 && <div className='left'>C</div>}
-                    {idx == 3 && <div className='left'>D</div>}
-                    {idx == 4 && <div className='left'>E</div>}
-                    {idx == 5 && <div className='left'>F</div>}
-                    <p>{x.answer}</p>
-                  </Answer>
-                )
-              })}
-            </ol>
-            {!verify ? <button onClick={() => {
-              checkAnswer()
-            }}>VERIFICAR</button> :
-              index !== data.lesson_quizzes.questions.length - 1 ? <button onClick={nextQuestion}>Siguiente</button> :
-                <button onClick={() => {
-                  checkQuiz()
-                }}>Terminar Quiz</button>}
-          </div>}
-          {step == 2 &&
-            <div className='done-container'>
-              <div className='bar'>
-                <div className='progress' style={{ width: `${progress}%` }}></div>
-              </div>
-              <div className='quiz-results'>
-                <div className="left">
-                  <p className='title'>{points >= data.lesson_quizzes.passing_grade ? "FELICIDADES !!!" : "SIGUE INTENTANDO"}</p>
-                  <p>{points >= data.lesson_quizzes.passing_grade ? "Aprobaste el quiz" : "No aprobaste la evaluación"} {data.lesson_quizzes?.title} con {counter} {counter == 1 ? "respuesta correcta" : "respuestas correctas"}</p>
-                </div>
-                <div className="right">
-                  <p className='porcent'>{Math.floor(points)}%</p>
-                  <p>{counter}/{data.lesson_quizzes?.questions.length} Correctas</p>
-                </div>
-              </div>
-              <div className='quiz-bar-container'>
-                <div className='quiz-bar'>
-                  {userQuizzes?.find((x: any) => x.lesson_id == data.id)
-                    && <div className='quiz-bar-progress'
-                      style={{ width: `${userQuizzes?.find((x: any) => x.lesson_id == data.id).grade}%` }}>
-                      <div className='line'>
-                        <p className='max'>{Math.floor(userQuizzes?.find((x: any) => x.lesson_id == data.id).grade)} pts</p>
-                      </div>
-                    </div>}
-                  <div className='passing-grade' style={{ left: `calc(${data.lesson_quizzes.passing_grade}% - 58px)` }}>
-                    <p style={{
-                      color: userQuizzes?.find((x: any) => x.lesson_id == data.id) ? "#FFB800" : "#8628e2"
-                    }}
-                    >{data.lesson_quizzes.passing_grade} pts</p>
-                    <div className='line'>
-                      <p className='minimum'>MINIMO</p>
-                    </div>
-                  </div>
-                </div>
-                <div className='quiz-bar-points'>100 pts</div>
-              </div>
-              <button onClick={() => { finish() }}>FINALIZAR</button>
-            </div>
-          }
-        </div>} */}
       </HomeWorkContain>
       <ImagePreview
         lesson={lesson.title}

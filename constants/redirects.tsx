@@ -12,6 +12,9 @@ export const authRedirect = (type: string, userInfo?: any) => {
     } else if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
+    else if (localStorage.getItem("product")) {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("product")}`
+    }
     else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
     }
@@ -39,6 +42,9 @@ export const authRedirect = (type: string, userInfo?: any) => {
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
+    }
+    if (localStorage.getItem("product")) {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("product")}`
     }
     if (localStorage.getItem("month") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`

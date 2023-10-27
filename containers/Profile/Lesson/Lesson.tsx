@@ -68,36 +68,45 @@ const Lesson = () => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
-      if (router.asPath === LESSON_PATH) {
-        router.push(PREVIEW_PATH)
-        return
-      }
-      if (userDataAuth.user !== null) {
-        let user = userDataAuth.user;
-        let today = new Date().getTime() / 1000;
-        setUserData(user);
-        getCourseApi(id).then((res) => {
-          if (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) {
-            return router.push({ pathname: PLAN_PATH });
-            // router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
-          }
-          if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
-            return router.push({
-              pathname: PURCHASE_PATH,
-              query: { type: 'subscription', frequency: 'month', v: '2' }
-            });
-          }
-          setCurrentLesson(res.seasons[season].lessons[lesson]);
-          setCourse(res);
-          getDataForNextLesson(res);
-          setIsLoading(false);
+      if (id) {
+        if (router.asPath === LESSON_PATH) {
+          router.push(PREVIEW_PATH)
           return
-        })
-        setLoggedIn(true)
-      } else {
-        router.push(LOGIN_PATH)
+        }
+        if (userDataAuth.user !== null) {
+          let user = userDataAuth.user;
+          let today = new Date().getTime() / 1000;
+          setUserData(user);
+          getCourseApi(id).then((res) => {
+            if ((res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) ||
+              (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id).length === 0)) {
+              router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
+            }
+            if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
+              return router.push({
+                pathname: PURCHASE_PATH,
+                query: { type: 'subscription', frequency: 'month', v: '2' }
+              });
+            }
+            setCurrentLesson(res.seasons[season].lessons[lesson]);
+            setCourse(res);
+            getDataForNextLesson(res);
+            setIsLoading(false);
+            return
+          })
+          setLoggedIn(true)
+        } else {
+          console.log(id);
+          if (+id === 57) {
+            localStorage.setItem("product", id);
+            router.push(LOGIN_PATH)
+          }
+          else {
+            router.push(LOGIN_PATH)
+          }
+        }
       }
-    }, [])
+    }, [id])
   } catch (error) {
     setLoggedIn(false)
   }

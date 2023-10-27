@@ -5,6 +5,9 @@ export const MainContainer = styled.div`
   flex-direction: column;
   background: #ede7f2;
   height: 100%;
+  @media (max-width: 1124px) {
+    height: auto;
+  }
 `;
 
 export const SeasonCard = styled.div`

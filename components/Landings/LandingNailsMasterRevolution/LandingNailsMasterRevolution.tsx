@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
+import Countdown from "react-countdown";
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
+import { useMediaQuery } from "react-responsive";
 
 import router from "next/router";
 import { Navigation } from "swiper";
@@ -8,23 +10,59 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { NAILS_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import {
+  NAilS_REVOLUTION_FORM,
+  NAilS_REVOLUTION_FORM_GOOGLE,
+  NAilS_REVOLUTION_FORM_TT,
+  PREVIEW_PATH,
+  PURCHASE_PATH,
+  SIGNUP_PATH,
+} from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-
-import { useMediaQuery } from "react-responsive";
 import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
 import {
-  EightSection, EleventhSection, FifteenSection, FifthSection,
-  FirstSection, FourteenSection, FourthSection, NinthSection,
-  Quote,
-  SecondSection, SeventhSection, SixthSection, SuscriptionContain,
-  TenthSection, ThirdSection, ThirteenSection, TwelveSection
-} from "./LandingNailsMasterRevolution.styled";
-import { arita_fondo_azul, icon_1, icon_2, icon_3, icon_book, icon_book_blue, icon_bookmark, icon_bulb, icon_calendar, icon_checkmark, icon_clock, icon_file, icon_file_blue, icon_graph, mujer_fondo_azul, TEMARIO_ARRAY_1, TEMARIO_ARRAY_2 } from "./constants";
+  arita_fondo_azul,
+  icon_1,
+  icon_2,
+  icon_3,
+  icon_book,
+  icon_bookmark,
+  icon_book_blue,
+  icon_bulb,
+  icon_calendar,
+  icon_checkmark,
+  icon_clock,
+  icon_file,
+  icon_file_blue,
+  icon_graph,
+  mujer_fondo_azul,
+  TEMARIO_ARRAY_1,
+  TEMARIO_ARRAY_2,
+  mujer_fondo_azul_2,
+} from "./constants";
 import { ITemario } from "./ILandingNailsMasterRevolution";
+import {
+  EightSection,
+  EleventhSection,
+  FifthSection,
+  FirstSection,
+  FourteenSection,
+  FourthSection,
+  NinthSection,
+  Quote,
+  SecondSection,
+  SeventhSection,
+  SixthSection,
+  SuscriptionContain,
+  TenthSection,
+  ThirdSection,
+  ThirteenSection,
+  TwelveSection,
+} from "./LandingNailsMasterRevolution.styled";
+
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
 const arita = "/images/landing_nails_master/arita-gonvar.png"
@@ -51,11 +89,8 @@ const manoCosto = "/images/landing_nails_master/mano_costo.png"
 const chica = "/images/landing_nails_master/chica.png"
 const linesL = "/images/landing_nails_master/lines-left.png"
 const linesR = "/images/landing_nails_master/lines-right.png"
-const linesU = "/images/landing_nails_master/lines-up.png"
 const stars = "/images/landing_nails_master/estrellas.png"
 const linesB2 = "/images/landing_nails_master/lines-bottom2.png"
-const arita_responsive = "/images/landing_suscription/responsive/arita_responsive.svg";
-const chica_responsive = "/images/landing_suscription/responsive/chica_fondo.svg";
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -67,13 +102,18 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
-const LandingNailsMasterRevolution = () => {
+interface ILandingNailsRevolution {
+  type?: string;
+}
+const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
+  const { type } = props;
   const [ver, setver] = useState(true)
   const [verMat, setverMat] = useState(false)
   const [reviews, setReviews] = useState([])
   const responsive850 = useMediaQuery({ query: "(max-width: 850px)" });
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const [showModules, setShowModules] = useState<boolean>(false);
+  const button_text = "Solicitar beca";
   const toggleModules = () => {
     setShowModules(!showModules);
   }
@@ -118,24 +158,39 @@ const LandingNailsMasterRevolution = () => {
   }
 
   const handleRedirection = () => {
-    if (localStorage.getItem('email')) {
-      getUserApi(localStorage.getItem('email')).then((res) => {
-        let tempCourse = res.user_courses.filter((x: any) => x.course_id === 30)
-        if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-          router.push({
-            pathname: PREVIEW_PATH
-          });
-        }
-        // if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
-        //   router.push(
-        //     { pathname: PURCHASE_PATH, query: { type: 'course', id: 30 } }
-        //   )
-        // }
-      })
-    } else {
-      localStorage.setItem('nailMaster', 'true')
-      router.push(SIGNUP_PATH)
+    if (type) {
+      if (type === "facebook") {
+        router.push(NAilS_REVOLUTION_FORM)
+      }
+      if (type === "google") {
+        router.push(NAilS_REVOLUTION_FORM_GOOGLE)
+      }
+      if (type === "tiktok") {
+        router.push(NAilS_REVOLUTION_FORM_TT)
+      }
+      return
     }
+    else {
+      if (localStorage.getItem('email')) {
+        getUserApi(localStorage.getItem('email')).then((res) => {
+          let tempCourse = res.user_courses.filter((x: any) => x.course_id === 57)
+          if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
+            router.push({
+              pathname: PREVIEW_PATH
+            });
+          }
+          if ((tempCourse.length > 0 && tempCourse[0].final_date < today) || tempCourse.length === 0) {
+            router.push(
+              { pathname: PURCHASE_PATH, query: { type: 'course', id: 57 } }
+            )
+          }
+        })
+      } else {
+        localStorage.setItem('nailMaster', 'true')
+        router.push(SIGNUP_PATH)
+      }
+    }
+
   }
 
   const redirectToWhatsAppChat = () => {
@@ -144,17 +199,62 @@ const LandingNailsMasterRevolution = () => {
     const url = `https://wa.me/${formattedPhoneNumber}`;
     window.open(url, '_blank');
   };
+  const checkProgress = () => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const firstDate = new Date('13/04/2023 23:00:00'); //final
+    const secondDate = new Date(); //today
+    //Fechas pa calar
+    // const firstDate = new Date('10/13/2023 23:59:00');
+    // const secondDate = new Date('10/09/2023 00:00:00');
+    const diffDays = Math.floor(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay));
+    let returnValue = {
+      x100: 80,
+      texto: 'CUPO CASI AGOTADO'
+    }
+    return returnValue;
+  }
 
   useEffect(() => {
-
   }, [setver])
 
   return (
     <SuscriptionContain>
       <FirstSection>
         <div className="mt-3 fechas">
-          <h4><b>Actualización 2023</b><br />
-            Inicio: 28 de Agosto del 2023</h4>
+          <h4><b>Actualización 2024</b><br />
+            Inscripciones sólo desde el<br />9 de Octubre al 20 de Noviembre</h4>
+          <Countdown
+            date={1700501613000}
+            renderer={props =>
+              <div className="countdown">
+                <h2>TIEMPO RESTANTE</h2>
+                <div className="time">
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.days < 10 && 0}{props.days}</p>
+                    <p className="sub">DIAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.hours < 10 && 0}{props.hours}</p>
+                    <p className="sub">HORAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.minutes < 10 && 0}{props.minutes}</p>
+                    <p className="sub">MINUTOS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.seconds < 10 && 0}{props.seconds}</p>
+                    <p className="sub">SEGUNDOS</p>
+                  </div>
+                </div>
+              </div>}
+          />
+          <div className="progress-container" >
+            <div
+              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'}`}
+              style={{ "--progress": checkProgress().x100 + '%' } as React.CSSProperties}
+              progress-text={checkProgress().texto}
+            />
+          </div>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
@@ -173,7 +273,11 @@ const LandingNailsMasterRevolution = () => {
         </div>
         <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="light-blue">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
           Más de 5,700 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
-        <button className="space btn left-right" onClick={() => handleRedirection()}>Comienza ahora <br />por $1,599.00 MXN</button>
+        <button className="space btn left-right" onClick={() => handleRedirection()}>
+          {
+            type ? button_text : <>Comienza ahora <br />por $1,599.00 MXN</>
+          }
+        </button>
       </FirstSection>
       <SecondSection>
         <div className="info-top">
@@ -284,14 +388,16 @@ const LandingNailsMasterRevolution = () => {
       </SecondSection>
       <ThirdSection>
         <div className="video-container">
-          <iframe src="https://www.youtube.com/embed/2QlI9_CTkqk?autoplay=1&mute=1" />
+          <iframe src="https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
-          <h2><b className="title-text">Durante 3 meses podrás acceder a</b><br />
+          <h2><b className="title-text">Durante 4 meses podrás acceder a</b><br />
             <b className="big-title blue-gradient">más de 40 clases</b></h2>
           <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
           <p><b>Sin limites.</b></p>
-          <button className="btn left-right" onClick={() => handleRedirection()}>Obtener acceso</button>
+          <button className="btn left-right" onClick={() => handleRedirection()}>
+            {type ? button_text : "Obtener acceso"}
+          </button>
         </div>
       </ThirdSection>
       <FourthSection>
@@ -313,7 +419,7 @@ const LandingNailsMasterRevolution = () => {
               <p><b>Instructora certificada</b> bajo {responsive850 && <br />}estándares de aplicación de {responsive850 && <br />}uñas artificiales por {responsive850 && <br />}competencia.</p>
               <p><b>Especialista en capacitación{responsive850 && <br />} para principiantes,</b> estructura {responsive850 && <br />}profesional en escultural {!responsive850 && <br />}
                 y {responsive850 && <br />}máster en técnicas y métodos {responsive850 && <br />}de enseñanza teóricos-prácticos.</p>
-              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia{!responsive850 && <br />}
+              <p>Creadora de la técnica {responsive850 && <br />}<b>"Cero Desprendimiento en 4 Pasos"</b>{responsive850 && <br />} y co-fundadora de la academia {!responsive850 && <br />}
                 de uñas {responsive850 && <br />}<b>más grande de Latinoamerica.</b></p>
             </div>
             {
@@ -345,7 +451,7 @@ const LandingNailsMasterRevolution = () => {
           <div className="info-row">
             <div className="info-content">
               <img src={icon_calendar} className="icon" />
-              <h5>3 meses de acceso a <br /><b>Nails Master Revolution</b></h5>
+              <h5>4 meses de acceso a <br /><b>Nails Master Revolution</b></h5>
             </div>
             <div className="info-content info-side">
               <img src={icon_calendar} className="icon" />
@@ -454,14 +560,16 @@ const LandingNailsMasterRevolution = () => {
         <div className="cost-body">
           <div className="cost-info">
             <img src={manoCosto} className="left-img" />
-            <img src={chica_responsive} className="chica-resp" />
+            <img src={mujer_fondo_azul_2} className="chica-resp" />
             <div className="center">
               <h2 className="red h2">Costo total real: {responsive850 && <br />}<del>$6,719.00 MXN</del></h2>
               <h2 className="dark-blue h1"><b>Precio de Lanzamiento {!responsive850 && "con beca"}</b></h2>
               <h2 className="green h1">Sólo $1,599.00 MXN</h2>
-              <p className="">Válido para las primeras 500 personas</p>
-              <h2><b>Quedan 123 lugares</b></h2>
-              <button className="btn right-left" onClick={() => handleRedirection()}>¡Quiero comenzar<br /> ahora!</button>
+              {/* <p className="">Válido para las primeras 500 personas</p> */}
+              <h2><b>Cupos limitados a 500 lugares <br />para una mejor atención</b></h2>
+              <button className="btn right-left" onClick={() => handleRedirection()}>
+                {type ? button_text : <>¡Quiero comenzar<br /> ahora!</>}
+              </button>
             </div>
             <img src={chica} className="right-img" />
           </div>
@@ -751,7 +859,7 @@ const LandingNailsMasterRevolution = () => {
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
                   <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $149 MXN u 8 dls.)</i><br />
+                    de $249 MXN u 14 dls.)</i><br />
                   Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
                   $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>

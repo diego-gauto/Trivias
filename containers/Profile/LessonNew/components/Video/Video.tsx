@@ -19,7 +19,7 @@ const Video = ({ user, actualLesson, course, openModal }: any) => {
         points: parseInt(actualLesson.points)
       }
       await addUserToLessonApi(tempLesson)
-      reload()
+      reload(true)
       if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
         goToNextLesson(course, +season, +lesson)
       } else {

@@ -160,9 +160,12 @@ export const retrieveConektaCustomerInfo = async (data: any) => {
     });
 };
 
-export const updateConektaCustomerInfo = async (data: any) => {
+// export const updateConektaCustomerInfo = async (data: any) => {
+//   return axios
+//     .put("https://gonvar.inowu.dev/" + `subscriptions/conekta/subscription/update`, data)
+export const customerOrders = async (data: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + `subscriptions/conekta/subscription/update`, data)
+    .get("https://gonvar.inowu.dev/" + `profile/conekta/${data.conekta_id}/orders`)
     .then((res) => {
       return res;
     })

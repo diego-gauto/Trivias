@@ -236,3 +236,11 @@ export const formatDate = (value: any) => {
   let tempDate = new Date(value).getTime() + 50400000;
   return new Date(tempDate).toLocaleDateString("es-MX");
 };
+export function hexToRgba(hex: any) {
+  const cleanedHex = hex.replaceAll("#", "");
+  const alpha = 0.1;
+  const red = parseInt(cleanedHex.substring(0, 2), 16);
+  const green = parseInt(cleanedHex.substring(2, 4), 16);
+  const blue = parseInt(cleanedHex.substring(4, 6), 16);
+  return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+}

@@ -26,6 +26,8 @@ export const Container = styled.div`
       margin: 0;
       color: #3f1168;
       font-weight: 500;
+      text-align: center;
+      padding-inline: 20px;
     }
     margin-bottom: 20px;
     .btn-buy {

@@ -25,9 +25,10 @@ export const AdminsContext = (props: Props) => {
     level: -1,
     method: "todos",
     membership: "todos",
-    course_id: -1,
     state: "todos",
     come_from: "todos",
+    courses: 0,
+    progress: 0,
     dates_login: {
       valid: 0,
       date_1: "",
@@ -61,11 +62,14 @@ export const AdminsContext = (props: Props) => {
   }
   const loadData = async () => {
     const countries = await getCountriesApi();
-    setCountries(countries)
+    let tempCountries = countries.filter((val: any) => { return val.country !== "" && val.country !== null });
+    setCountries(tempCountries)
     const methods = await getMethodsApi();
-    setMethods(methods);
+    let tempMethods = methods.filter((val: any) => { return val.method !== "" && val.method !== null });
+    setMethods(tempMethods);
     const comeFrom = await getComeFromApi();
-    setComeFrom(comeFrom);
+    let tempComeFrom = comeFrom.filter((val: any) => { return val.come_from !== "undefined" && val.come_from !== null });
+    setComeFrom(tempComeFrom);
     const courses = await getCoursesApi();
     setCourses(courses.courses);
     setPayCourses(courses.product_course);

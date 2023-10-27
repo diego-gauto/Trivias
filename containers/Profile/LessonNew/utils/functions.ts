@@ -9,10 +9,7 @@ import router from "next/router";
 
 export const lessonGuard = (user: IUser) => {
   if (user !== null) {
-    user.level = 1;
-    if (user.level === 1 || 4 || 5 || 6) {
-      return true;
-    }
+    return true;
   } else {
     router.push({ pathname: "/preview" });
   }
@@ -166,17 +163,71 @@ export const handleProgress = async (
     userId: user.user_id,
   };
   if (user) {
-    await updateUserProgressApi(tempProgress).then(() => {
-      if (user) {
-        let temp = {
-          courseId: course.id,
-          seasonId: course.seasons[params.query.season].id,
-          lessonId:
-            course.seasons[params.query.season].lessons[params.query.lesson].id,
-          userId: user.user_id,
-        };
-        addUserHistory(temp);
-      }
-    });
+    setTimeout(async () => {
+      await updateUserProgressApi(tempProgress).then(() => {
+        if (user) {
+          let temp = {
+            courseId: course.id,
+            seasonId: course.seasons[params.query.season].id,
+            lessonId:
+              course.seasons[params.query.season].lessons[params.query.lesson]
+                .id,
+            userId: user.user_id,
+          };
+          addUserHistory(temp);
+        }
+      });
+    }, 500);
   }
+};
+
+export const checkLessons = (
+  user: any,
+  course: any,
+  season: number,
+  lesson: number
+) => {
+  if (course.sequential === 0) {
+    return true;
+  }
+  if (season === 0 && lesson === 0) {
+    return true;
+  }
+  if (
+    season === 0 &&
+    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id)
+  ) {
+    return true;
+  }
+
+  if (season > 0 && lesson === 0) {
+    let lastLesson = course.seasons[season - 1].lessons.length;
+    if (
+      course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
+        user.user_id
+      ) &&
+      (course.seasons[season - 1].lessons[lastLesson - 1].homework === 0 ||
+        (course.seasons[season - 1].lessons[lastLesson - 1].homework === 1 &&
+          course.seasons[season - 1].lessons[lastLesson - 1].progress.filter(
+            (x: any) => x.user_id === user.user_id && x.status
+          ).length > 0))
+    ) {
+      return true;
+    }
+  }
+
+  if (
+    season > 0 &&
+    lesson > 0 &&
+    course.seasons[season].lessons[lesson - 1].users.includes(user.user_id) &&
+    (course.seasons[season].lessons[lesson - 1].homework === 0 ||
+      (course.seasons[season].lessons[lesson - 1].homework === 1 &&
+        course.seasons[season].lessons[lesson - 1].progress.filter(
+          (x: any) => x.user_id === user.user_id && x.status
+        ).length > 0))
+  ) {
+    return true;
+  }
+
+  return;
 };

@@ -4,9 +4,9 @@ import router, { useRouter } from "next/router";
 import { ArrowUpIcon, Circle, CourseLength, DetailContain, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
 import { IUser } from "../../../../../interfaces/IUserData";
 import { Progress, Space } from "antd";
-import { goTo, hms, returnProgress, returnStatus } from "../../utils/functions";
+import { checkLessons, goTo, hms, returnProgress, returnStatus } from "../../utils/functions";
 import { AiOutlineClockCircle } from "react-icons/ai";
-import { DOWNLOAD_MATERIAL, HW_ICON } from "../../../../../utils/Constants";
+import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from "../../../../../utils/Constants";
 
 
 interface IMenu {
@@ -32,12 +32,16 @@ const Menu = (props: IMenu) => {
   }
 
   const handleGotTo = (season: number, lesson: number) => {
-    if (course.type === "Mensual" && course.sequential === 0) {
+    if ((course.type === "Mensual" && course.sequential === 0) || course.type === "Gratis") {
       goTo(course.id, season, lesson)
     }
     if (course.type === "Mensual" && course.sequential === 1) {
-      console.log(1);
-
+    }
+    if (course.type === "Producto" && course.sequential === 1) {
+      if (checkLessons(user, course, season, lesson)) {
+        console.log(course);
+        goTo(course.id, season, lesson)
+      }
     }
   }
 
@@ -46,7 +50,7 @@ const Menu = (props: IMenu) => {
       {
         course.seasons.map((x: any, indexSeason: number) => {
           return (
-            <SeasonCard>
+            <SeasonCard key={'lesson_date' + indexSeason}>
               <SeasonInfo active={selected[indexSeason]} onClick={() => { toggleHandler(indexSeason) }}>
                 <Space wrap>
                   {
@@ -65,10 +69,11 @@ const Menu = (props: IMenu) => {
               {selected[indexSeason] && <LessonContainer>
                 {x.lessons.map((l: any, indexLesson: number) => {
                   return (
-                    <LessonCard onClick={() => { handleGotTo(indexSeason, indexLesson) }}>
+                    <LessonCard onClick={() => { handleGotTo(indexSeason, indexLesson) }} style={{ cursor: checkLessons(user, course, indexSeason, indexLesson) ? "pointer" : "not-allowed" }} key={"lesson_data_sub_" + indexSeason + indexLesson}>
                       <div className="left">
-                        <Circle status={returnStatus(indexSeason, indexLesson, params, course, user.id)}>
-                        </Circle>
+                        {checkLessons(user, course, indexSeason, indexLesson) ? <Circle status={returnStatus(indexSeason, indexLesson, params, course, user.id)}>
+                        </Circle> :
+                          <img style={{ width: "10px" }} src={LOCK_ICON} />}
                         {(x.lessons.length - 1) !== indexLesson && <Line status={returnStatus(indexSeason, indexLesson, params, course, user.id)} />}
                       </div>
                       <div className="right">

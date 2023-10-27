@@ -24,17 +24,62 @@ export const addHomeworkApi = async (homework: any) => {
     });
 };
 
-export const getHomeworkUserApi = async (homework: any) => {
-  return axios
-    .post("https://gonvar.inowu.dev/" + "homeworks/user-homework", homework)
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
+// export const getHomeworkUserApi = async (homework: any) => {
+
+//   const CancelToken = axios.CancelToken;
+//   const source = CancelToken.source();
+//   source.cancel('Cancelling the previous request');
+//   return axios
+//     .get("https://gonvar.inowu.dev/" + `homeworks/user-homework/lesson/${homework.lessonId}/user/${homework.user_id}`, {
+//       cancelToken: source.token,
+//     })
+//     .then((res) => {
+//       console.log(res);
+
+//       return res
+//     })
+//     .catch((error) => {
+//       if (axios.isCancel(error)) {
+//         // Request was canceled
+//         console.log(error);
+//         // return error
+//       } else {
+//         console.log(error);
+
+//         return error;
+//       }
+//     });
+// };
+
+let cancelTokenSource = axios.CancelToken.source();
+
+export const getHomeworkUserApi: any = async (homework: any) => {
+  // If there's an ongoing request, cancel it
+  if (cancelTokenSource) {
+    cancelTokenSource.cancel('Cancelling the previous request');
+  }
+
+  // Create a new cancel token source for the current request
+  cancelTokenSource = axios.CancelToken.source();
+
+  try {
+    const response: any = await axios.get("https://gonvar.inowu.dev/" + `homeworks/user-homework/lesson/${homework.lessonId}/user/${homework.user_id}`, {
+      cancelToken: cancelTokenSource.token,
     });
+
+    return response; // Return the data from the API response
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      // Request was canceled
+      console.log("Request was canceled");
+    } else {
+      // Handle other errors
+      console.error("Error:", error);
+    }
+  }
 };
+
+
 
 export const reviewHomeworkApi = async (homework: any) => {
   return axios

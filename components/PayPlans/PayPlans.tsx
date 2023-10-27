@@ -9,7 +9,7 @@ import { FAQ } from "./FAQ/FAQ";
 import { PayStyles } from "./PayPlans.styled";
 import { Plans } from "./Plans/Plans";
 
-const tarjetas = "/images/pay_plans/cards.png"
+const tarjetas = "/images/pay_plans/pm.svg"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
@@ -49,8 +49,8 @@ const PayPlans = () => {
               <p className={`option ${selected === 2 ? 'link' : ''}`}
                 onClick={() => handleSelected(2)}>G+ anual</p>
               <p className="option">|</p>
-              {/* <p className={`option ${selected === 3 ? 'link' : ''}`}
-                onClick={() => handleSelected(3)}>Nails Máster</p> */}
+              <p className={`option ${selected === 3 ? 'link' : ''}`}
+                onClick={() => handleSelected(3)}>Nails Máster</p>
             </div>
           </div>
 
@@ -70,8 +70,13 @@ const PayPlans = () => {
             <h3 className="h4"><b>Nunca subiremos el precio</b> si mantienes tu suscripción activa.</h3>
             <div className="d-inline-flex">
               <p className="no-bold mt-3">Usa el método de pago más cómodo para ti: </p>
-              <img src={tarjetas} alt="cards" className=" align-self-center" />
-              <img src={oxxo} alt="oxxo" className=" align-self-center" />
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}>
+                <img style={{ width: "100%" }} src={tarjetas} alt="cards" className=" align-self-center" />
+              </div>
             </div>
           </div>
           <button className="continue my-4 d-flex mx-auto" onClick={goTo}>Continuar sin suscripción</button>

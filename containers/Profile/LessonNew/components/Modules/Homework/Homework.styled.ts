@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { hexToRgba } from "../../../../../../utils/functions";
 
 export const HomeWorkContain = styled.div`
   display: flex;
@@ -20,7 +21,8 @@ export const HomeWorkContain = styled.div`
       gap: 10px;
       justify-content: flex-start;
       font-weight: 500;
-      color: #8e2de2;
+      background-color: #8e2de2;
+      color: white;
       width: fit-content;
       padding-inline: 30px;
       padding-block: 8px;
@@ -620,4 +622,60 @@ export const UploadIcon = styled.i`
   width: 25px;
   background-position: center;
   background-repeat: no-repeat;
+`;
+
+export const HomeWorkStatus = styled.div<{
+  color: string;
+  rgb: string;
+  text: string;
+  icon: string;
+}>`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-left: 5px solid ${(props) => props.color};
+  background: ${(props) => props.rgb};
+  padding-inline: 30px;
+  padding-block: 20px;
+  width: 550px;
+  border-radius: 0px 20px 20px 0px;
+  .icon {
+    font-size: 80px;
+    color: ${(props) => props.icon};
+  }
+  p {
+    margin: 0;
+    color: ${(props) => props.text};
+  }
+  .right-data {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .content {
+      font-size: 12px;
+      font-weight: 400;
+      text-align: justify;
+      width: 300px;
+    }
+  }
+  @media (max-width: 600px) {
+    width: 100%;
+    gap: 15px;
+    padding-inline: unset;
+    padding-left: 10px;
+    padding-right: 20px;
+    .icon {
+      font-size: 50px;
+      min-width: 50px;
+    }
+    .right-data {
+      .content {
+        width: unset;
+      }
+    }
+  }
 `;

@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -20,7 +20,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const [show, setShow] = useState(false);
   const handleShow = () => {
     // setShow(true);
-    router.push({ pathname: NAILS_LANDING_REDIRECT })
+    router.push({ pathname: NAILS_REVOLUTION_REDIRECT })
   }
 
   const doVideoStuff = () => {
@@ -29,7 +29,8 @@ export const CourseModule = (props: ICourseModuleProps) => {
     var videoSrc: any = ""
 
     if (num === 1) {
-      videoSrc = "https://video.gonvar.io/media/Nails Master 2.0 reedición/NM 2.0 Bienvenida/master.m3u8";
+      // nails-master-revolution/landing
+      videoSrc = "https://video.gonvar.io/media/nails_master_revolution/landing/master.m3u8";
     }
     if (num === 2) {
       videoSrc = "https://video.gonvar.io/media/alineacion_sep/1/master.m3u8";
@@ -86,7 +87,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
           </Row>
           <Card.Subtitle>
             Aprende desde cero a aplicar <br />
-            uñas acrílicas en técnica de Tips.
+            uñas acrílicas en técnica de Tips y Escultural.
           </Card.Subtitle>
         </Col>
         <Col sm={12} md={5} className="second-col">
@@ -94,8 +95,11 @@ export const CourseModule = (props: ICourseModuleProps) => {
             Curso individual <br />
             <span>por ${data.price}</span> <span className="lower">MXN</span>
           </Card.Text>
-          <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }
-          } />
+          {
+            data.id &&
+            <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }
+            } />
+          }
           <WhiteButton text={responsive768 ? "Información" : "Más información"} onClick={() => { handleShow() }} />
         </Col>
       </Row>

@@ -145,6 +145,10 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
       handleClick();
     })
   }
+  const stopEdit = () => {
+    setEditPassword(false);
+    setStartEdit(false);
+  }
   const parseNumber = (phone: string) => {
     if (!phone.includes("+")) {
       phone = "+" + phone;
@@ -154,39 +158,9 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
     return country;
   }
 
-  const getStarCoordinates = () => {
-    let tempFormula: number = 0;
-    if (0 <= starPosition && starPosition < .125) {
-      tempFormula = (starPosition * 100) / .125 / 100;
-    }
-    if (.125 <= starPosition && starPosition < .25) {
-      tempFormula = (starPosition * 100) / .25 / 100;
-    }
-    if (.25 <= starPosition && starPosition < .375) {
-      tempFormula = (starPosition * 100) / .375 / 100;
-    }
-    if (.375 <= starPosition && starPosition < .5) {
-      tempFormula = (starPosition * 100) / .5 / 100;
-    }
-    if (.5 <= starPosition && starPosition < .625) {
-      tempFormula = (starPosition * 100) / .625 / 100;
-    }
-    if (.625 <= starPosition && starPosition < .75) {
-      tempFormula = (starPosition * 100) / .75 / 100;
-    }
-    if (.75 <= starPosition && starPosition < .875) {
-      tempFormula = (starPosition * 100) / .875 / 100;
-    }
-    if (.875 <= starPosition && starPosition < 1) {
-      tempFormula = (starPosition * 100) / 1 / 100;
-    }
-    setStarCoordinates(tempFormula);
-  }
 
   useEffect(() => {
-    getStarCoordinates();
     setUser({ ...userData })
-
   }, [userData])
   const format = (start_date: any, level: any) => {
     let tempDayCount: any = today - start_date;
@@ -225,7 +199,7 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
                     {
                       nextTimeReward?.month ?
                         (nextTimeReward.month > 1 ? nextTimeReward.month + " meses" : nextTimeReward.month + " mes")
-                        : <>¡Próximamente: <br /> más beneficios para ti!</>
+                        : <div className="reward-height">¡Próximamente: <br /> más beneficios para ti!</div>
                     }
                   </span>
                   : <></>
@@ -485,25 +459,24 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               </div>
               {
                 responsive1023 &&
-                <div style={{ display: "flex", alignItems: "center", marginTop: 10, flexDirection: "column", gap: "10px" }}>
-                  <button
-                    className="btn-edit"
-                    onClick={() => { setStartEdit(false) }}
-                  >
-                    Cancelar Cambios
-                  </button>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: 10, gap: 10 }}>
                   <button
                     className="btn-edit"
                     onClick={handleUpdateData}
                   >
                     Guardar Cambios
                   </button>
+                  <button
+                    className="btn-edit"
+                    onClick={stopEdit}
+                    style={{ width: 80 }}
+                  >
+                    Cancelar
+                  </button>
                 </div>
               }
-
             </div>
         }
-
         <div className="user-info-down">
           <div className="data-container">
             <p className="email">
@@ -636,23 +609,18 @@ const UserInfo = ({ userData, nextReward, handleClick, nextTimeReward, timeProgr
               Editar Perfil
             </button>
             :
-            <div className="options">
-              <button
-                className="btn-edit"
-                onClick={() => { setStartEdit(false) }}
-              >
-                Cancelar Cambios
-              </button>
-              <button
-                className="btn-edit"
-                onClick={handleUpdateData}
-              >
-                Guardar Cambios
-              </button>
-            </div>
+            <button
+              className="btn-edit"
+              onClick={handleUpdateData}
+            >
+              Guardar Cambios
+            </button>
         }
-
-        <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
+        {
+          !startEdit
+            ? <button className="btn-logout" onClick={logoutFunc}>Cerrar sesión</button>
+            : <button className="btn-logout" onClick={stopEdit}>Cancelar</button>
+        }
       </div>
     </ProfileMainContainer>
   )

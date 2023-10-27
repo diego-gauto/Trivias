@@ -27,16 +27,16 @@ const ThankYouNailsMaster = () => {
   }, [userDataAuth])
 
   const goTo = () => {
-    window.location.href = "/lesson?id=30&season=0&lesson=0";
+    window.location.href = "/lesson?id=57&season=0&lesson=0";
   }
 
   return (
     <ThankYouContainer>
       <div className='left'>
         <h1>Felicidades tu compra ha <br /> sido exitosa, <span>{userData?.name}!</span></h1>
-        <p>Ahora puedes acceder a nuestros cursos de manera <br />
-          directa, aprende de las mejores maquilladoras en <br />
-          diferentes especialidades.</p>
+        <p>Ahora puedes acceder a nuestro curso <span style={{ fontWeight: "bold" }}>Nails Master Revolution</span>, <br />
+          en donde aprenderás desde cero a aplicar uñas acrílicas en técnica de Tips y Escultural.
+        </p>
         <div className='buttons'>
           <button className='top' onClick={goTo}>Iniciar curso</button>
           {/* <button className='bottom'>Descargar factura</button> */}

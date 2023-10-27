@@ -651,11 +651,6 @@ export const ProfileMainContainer = styled.div<{
   padding-top: 50px;
   gap: 50px;
   width: 30%;
-  @media (max-width: 1023px) {
-    padding-top: 20px;
-    width: 100%;
-    flex-direction: column-reverse;
-  }
   .crown {
     position: absolute;
     font-size: 40px;
@@ -663,81 +658,8 @@ export const ProfileMainContainer = styled.div<{
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    @media (max-width: 1023px) {
-      top: -60px;
-    }
     img {
       width: 50px;
-    }
-  }
-  .stars {
-    z-index: 3;
-    position: absolute;
-    transform: rotate(-170deg);
-    width: 40px;
-    height: 40px;
-    ${(props) =>
-      0 <= props.star &&
-      props.star < 0.125 &&
-      css`
-        top: ${50 * props.coordinates - 30}px;
-        left: ${120 + 50 * props.coordinates}px;
-      `}
-    ${(props) =>
-      0.125 <= props.star &&
-      props.star < 0.25 &&
-      css`
-        top: ${20 + 60 * props.coordinates}px;
-        left: ${170 + 30 * props.coordinates}px;
-      `}
-    ${(props) =>
-      0.25 <= props.star &&
-      props.star < 0.375 &&
-      css`
-        top: ${80 + 70 * props.coordinates}px;
-        left: ${200 - 30 * props.coordinates}px;
-      `}
-      ${(props) =>
-      0.375 <= props.star &&
-      props.star < 0.5 &&
-      css`
-        top: ${150 + 50 * props.coordinates}px;
-        left: ${170 - 90 * props.coordinates}px;
-      `}
-    ${(props) =>
-      0.5 <= props.star &&
-      props.star < 0.625 &&
-      css`
-        top: ${200 - 50 * props.coordinates}px;
-        left: ${80 - 90 * props.coordinates}px;
-      `}
-      ${(props) =>
-      0.625 <= props.star &&
-      props.star < 0.75 &&
-      css`
-        top: ${150 - 70 * props.coordinates}px;
-        left: ${-30 * props.coordinates - 10}px;
-      `}
-        ${(props) =>
-      0.75 <= props.star &&
-      props.star <= 0.875 &&
-      css`
-        top: ${80 - 70 * props.coordinates}px;
-        left: ${-30 * props.coordinates - 40}px;
-      `}
-      ${(props) =>
-      0.875 <= props.star &&
-      props.star <= 1 &&
-      css`
-        top: ${10 - 40 * props.coordinates}px;
-        left: ${130 * props.coordinates - 10}px;
-      `}
-    img {
-      transform: rotate(${(props) => props.star * 360}deg);
-      width: 40px;
-      @media (max-width: 480px) {
-        width: 30px;
-      }
     }
   }
   button {
@@ -753,61 +675,26 @@ export const ProfileMainContainer = styled.div<{
   }
   .first-text {
     text-align: center;
-    @media (max-width: 1023px) {
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      display: flex;
-      width: 80%;
-      order: 2;
-      justify-content: space-between;
-      padding-inline: 50px;
-    }
-
-    @media (max-width: 750px) {
-      padding-inline: 0;
-    }
-    @media (max-width: 600px) {
-      width: 90%;
-    }
     p {
       color: #451d71;
       font-size: 14px;
       font-weight: bold;
       line-height: 15px;
-      @media (max-width: 1023px) {
-        font-size: 20px;
-        line-height: 20px;
-      }
-      @media (max-width: 750px) {
-        font-size: 16px;
-        line-height: 16px;
-      }
     }
     span {
       font-size: 16px;
       color: #fc8c07;
-      @media (max-width: 1023px) {
-        font-size: 30px;
-        line-height: 50px;
-      }
-      @media (max-width: 750px) {
-        font-size: 24px;
-        line-height: 40px;
-      }
     }
     .main-text {
       display: flex;
       align-items: center;
+      height: 76px;
       .time-reward {
         color: #1bb87f;
       }
     }
     .responsive-picture {
       display: none;
-      @media (max-width: 1023px) {
-        display: flex;
-      }
     }
   }
   .profile-container {
@@ -815,14 +702,6 @@ export const ProfileMainContainer = styled.div<{
     margin-top: 80px;
     display: flex;
     flex-direction: column;
-    @media (max-width: 1023px) {
-      flex-direction: row;
-      margin-top: 0;
-      width: 100%;
-      justify-content: center;
-    }
-    .picture-container {
-    }
     p {
       margin: 0;
     }
@@ -836,24 +715,6 @@ export const ProfileMainContainer = styled.div<{
       padding-inline: 40px;
       padding-bottom: 40px;
       border-radius: 20px 20px 0 0;
-
-      @media (max-width: 1280px) {
-        padding-inline: 30px;
-      }
-      @media (max-width: 1200px) {
-        padding-inline: 20px;
-      }
-      @media (max-width: 1023px) {
-        min-width: 40%;
-        padding-top: 40px;
-        border-radius: 20px 0 0 20px;
-      }
-      @media (max-width: 600px) {
-        padding-block: 30px;
-        padding-inline: 10px;
-        justify-content: space-around;
-        min-width: 45%;
-      }
       .btn-edit {
         display: flex;
         align-items: center;
@@ -863,12 +724,6 @@ export const ProfileMainContainer = styled.div<{
         color: #441a6f;
         font-weight: 600;
         border: 1px solid #441a6f;
-        @media (max-width: 600px) {
-          font-size: 14px;
-        }
-        @media (max-width: 450px) {
-          font-size: 12px;
-        }
       }
       .input-contain {
         display: flex;
@@ -880,9 +735,6 @@ export const ProfileMainContainer = styled.div<{
           font-weight: 600;
           font-family: "Montserrat", sans-serif;
           color: #441a6f;
-          @media (max-width: 450px) {
-            font-size: 14px;
-          }
         }
         input {
           padding-inline: 20px;
@@ -895,16 +747,6 @@ export const ProfileMainContainer = styled.div<{
           :focus {
             outline: 1px solid #8e2de2;
           }
-          @media (max-width: 600px) {
-            width: 180px;
-          }
-          @media (max-width: 450px) {
-            width: 150px;
-            font-size: 12px;
-          }
-          @media (max-width: 400px) {
-            width: 120px;
-          }
         }
       }
       .name-text {
@@ -916,21 +758,6 @@ export const ProfileMainContainer = styled.div<{
         span {
           color: #933edc;
         }
-        @media (max-width: 1023px) {
-          text-align: start;
-        }
-        @media (max-width: 700px) {
-          font-size: 30px;
-          line-height: 25px;
-        }
-        @media (max-width: 550px) {
-          font-size: 26px;
-          line-height: 23px;
-        }
-        @media (max-width: 450px) {
-          font-size: 22px;
-          line-height: 20px;
-        }
       }
       .data-contain {
         display: flex;
@@ -941,15 +768,6 @@ export const ProfileMainContainer = styled.div<{
           font-size: 16px;
           font-weight: 800;
           width: fit-content;
-          @media (max-width: 700px) {
-            font-size: 14px;
-          }
-          @media (max-width: 550px) {
-            font-size: 12px;
-          }
-          @media (max-width: 450px) {
-            font-size: 10px;
-          }
         }
         .points {
           background: linear-gradient(to right, #f9801b, #a834e4);
@@ -1240,6 +1058,145 @@ export const ProfileMainContainer = styled.div<{
       gap: 20px;
     }
   }
+  @media (max-width: 1280px) {
+    .profile-container {
+      .user-info-up {
+        padding-inline: 30px;
+      }
+    }
+  }
+  @media (max-width: 1200px) {
+    .profile-container {
+      .user-info-up {
+        padding-inline: 20px;
+      }
+    }
+  }
+  @media (max-width: 1023px) {
+    padding-top: 20px;
+    width: 100%;
+    flex-direction: column-reverse;
+    .crown {
+      top: -60px;
+    }
+    .first-text {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      display: flex;
+      width: 80%;
+      order: 2;
+      justify-content: space-between;
+      padding-inline: 50px;
+      .responsive-picture {
+        display: flex;
+      }
+      p {
+        font-size: 20px;
+        line-height: 20px;
+      }
+      span {
+        font-size: 30px;
+        line-height: 50px;
+      }
+      .main-text {
+        height: unset;
+        .time-reward {
+          .reward-height {
+            line-height: 25px;
+          }
+        }
+      }
+    }
+    .profile-container {
+      flex-direction: row;
+      margin-top: 0;
+      width: 100%;
+      justify-content: center;
+      .user-info-up {
+        min-width: 40%;
+        padding-top: 40px;
+        border-radius: 20px 0 0 20px;
+        .name-text {
+          text-align: start;
+          font-size: 30px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+  @media (max-width: 750px) {
+    .first-text {
+      padding-inline: 0;
+      width: 90%;
+      p {
+        font-size: 16px;
+        line-height: 16px;
+      }
+      span {
+        font-size: 24px;
+        line-height: 50px;
+      }
+    }
+    .profile-container {
+      .user-info-up {
+        padding-block: 30px;
+        padding-inline: 10px;
+        justify-content: space-around;
+        min-width: 45%;
+        .btn-edit {
+          font-size: 14px;
+        }
+        .input-contain {
+          input {
+            width: 180px;
+          }
+        }
+        .data-contain{
+          p {
+              font-size: 14px;
+        }
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    .profile-container {
+      .user-info-up {
+        .btn-edit {
+          font-size: 12px;
+        }
+        .input-contain {
+          input {
+            width: 150px;
+            font-size: 12px;
+          }
+          label {
+            font-size: 14px;
+          }
+        }
+        .name-text {
+          font-size: 22px;
+          line-height: 20px;
+        }
+        .data-contain{
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    .profile-container {
+      .user-info-up {
+        .input-contain {
+          input {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
 `;
 export const PictureContain = styled.div<{
   progress: number;
@@ -1399,17 +1356,6 @@ export const RewardContainer = styled.div<{ reward: any }>`
   justify-content: space-between;
   min-width: 60%;
   gap: 15px;
-  @media (max-width: 1200px) {
-    min-width: 420px;
-  }
-  @media (max-width: 1023px) {
-    width: 80%;
-    gap: 20px;
-    min-width: 300px;
-  }
-  @media (max-width: 600px) {
-    width: 90%;
-  }
   .main-container {
     display: flex;
     flex-direction: column;
@@ -1465,22 +1411,15 @@ export const RewardContainer = styled.div<{ reward: any }>`
         padding-inline: 10px;
         display: flex;
         justify-content: center;
+        height: 84px;
+        align-items: center;
         p {
           margin: 0;
           color: white;
           font-weight: 600;
-          @media (max-width: 1200px) {
-            font-size: 14px;
-          }
-          @media (max-width: 1023px) {
-            font-size: 18px;
-          }
-          @media (max-width: 600px) {
-            font-size: 15px;
-          }
-          @media (max-width: 480px) {
-            font-size: 12px;
-          }
+          font-size: 15px;
+          width: 450px;
+          text-align: center;
           span {
             color: #fedd67;
           }
@@ -1864,10 +1803,6 @@ export const RewardContainer = styled.div<{ reward: any }>`
       transform: scale(1.03);
       transition: 1s ease all;
     }
-    @media (max-width: 480px) {
-      padding-block: 10px;
-      font-size: 14px;
-    }
   }
   .help-btn {
     background: #942ced;
@@ -1877,6 +1812,66 @@ export const RewardContainer = styled.div<{ reward: any }>`
       margin-left: 50px;
     }
     svg {
+    }
+  }
+  @media (max-width: 1200px) {
+    min-width: 420px;
+  }
+  @media (max-width: 1023px) {
+    width: 80%;
+    gap: 20px;
+    min-width: 300px;
+    .main-container {
+      .reward-container {
+        .extra-info {
+          p {
+            font-size: 18px;
+          }
+        }
+      }
+      .reward-title-contain {
+        padding-block: 15px;
+        p {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    width: 90%;
+    .main-container {
+      .reward-title-contain {
+        p {
+          font-size: 24px;
+        }
+      }
+      .reward-container {
+        .extra-info {
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .main-container {
+      .reward-title-contain {
+        p {
+          font-size: 20px;
+        }
+      }
+      .reward-container {
+        .extra-info {
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    button {
+      padding-block: 10px;
+      font-size: 14px;
     }
   }
 `;
@@ -2077,22 +2072,6 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
         margin-top: 20px;
       }
     `}
-  @media (max-width: 1200px) {
-    max-width: 260px;
-    min-width: 260px;
-    padding-inline: 15px;
-  }
-  @media (max-width: 1023px) {
-    width: 100%;
-    border-radius: 0;
-    gap: 30px;
-  }
-  @media (max-width: 700px) {
-    gap: 20px;
-  }
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
   p {
     margin: 0;
   }
@@ -2199,6 +2178,24 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
         width: 10px;
       }
     }
+  }
+  @media (max-width: 1200px) {
+    max-width: 260px;
+    min-width: 260px;
+    padding-inline: 15px;
+  }
+  @media (max-width: 1023px) {
+    width: 100%;
+    border-radius: 0;
+    gap: 30px;
+    max-width: unset;
+    min-width: unset;
+  }
+  @media (max-width: 700px) {
+    gap: 20px;
+  }
+  @media (max-width: 480px) {
+    padding: 10px;
   }
 `;
 export const PaymentMethodContainer = styled.div<{ add: any }>`

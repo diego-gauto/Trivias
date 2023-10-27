@@ -25,7 +25,6 @@ const handImage = "/images/profile/hand.png"
 
 const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any) => {
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
-  const [formatDate, setFormatDate] = useState("")
   const [loader, setLoader] = useState<any>(false);
   const [points, setPoints] = useState<any>();
   const [time, setTime] = useState<any>();
@@ -87,19 +86,18 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       setCertificates(countArray);
     })
   }
-
-  useEffect(() => {
+  const formatDateUser = () => {
     let tempDate = new Date((user.final_date) * 1000);
     let tempDay = tempDate.getDate();
     let tempMonth = tempDate.getMonth() + 1;
     let tempYear = tempDate.getFullYear();
-    setFormatDate(`${tempDay}/${tempMonth}/${tempYear}`);
+    return `${tempDay}/${tempMonth}/${tempYear}`
+  }
+  useEffect(() => {
     getUsersStripe().then((res) => {
       setConketaUsers(res.data)
     })
-
   }, [])
-
   useEffect(() => {
     getRewards()
   }, [])
@@ -124,7 +122,6 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       window.location.reload()
     })
   }
-
   return (
     <ThirdBox>
       <ChangePlanModal show={open} onHide={() => { setOpen(false) }} user={user} />
@@ -264,9 +261,9 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || (user.level === 0 && user.final_date > today) || user.level === 3) ? <p >
+              {(user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || (user.level === 0 && user.final_date > today)) ? <p >
                 Gonvar+<br />
-                <span className="span">Suscripción {(user.level === 1 && getDays() > 31) ? "anual" : "mensual"}</span>
+                <span className="span">Suscripción {(user.level === 4 || user.level === 5) ? "anual" : "mensual"}</span>
               </p> :
                 <p>Sin suscripción</p>}
             </div>
@@ -281,10 +278,14 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
                 </div>
                 :
                 <div className="subscription-info">
-                  {((user.level === 1 && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
-                    <span className="span">{formatDate}</span>
+                  {(((user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6) && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
+                    <span className="span">{formatDateUser()}</span>
                   </p> :
-                    <p><span className="span">{(user.subscription === 1 && user.final_date > today) ? `Haz cancelado tu suscripción, te quedan ${getDays()} días` : "s/f"}</span></p>}
+                    <p><span className="span">
+                      {(user.subscription === 1 && user.final_date > today)
+                        ? `Haz cancelado tu suscripción, te quedan ${getDays()} días`
+                        : "s/f"}
+                    </span></p>}
                 </div>
             }
             {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0 && today < user.final_date))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
