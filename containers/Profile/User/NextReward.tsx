@@ -16,6 +16,7 @@ import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled"
 import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
 import { conektaResumeSubscription } from "../../../components/api/profile";
 import { getUsersStripe } from "../../../components/api/conekta/test";
+import ChangePlanModal from "../../../components/Modals/ChangePlanModal/ChangePlanModal";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
@@ -32,6 +33,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
   const [pop, setPop] = useState<any>(false);
   const today = new Date().getTime() / 1000;
   const [conektaUsers, setConketaUsers] = useState<any>([]);
+  const [open, setOpen] = useState(false);
 
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
@@ -125,6 +127,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
 
   return (
     <ThirdBox>
+      <ChangePlanModal show={open} onHide={() => { setOpen(false) }} user={user} />
       {pop &&
         <div className="dimScreen animate__animated animate__slideInUp" >
           <div id="confirmBox" className="dialog">
@@ -267,6 +270,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
               </p> :
                 <p>Sin suscripción</p>}
             </div>
+            {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
             <p className="text-1">
               Próximo cargo
             </p>

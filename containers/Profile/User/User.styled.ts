@@ -1884,7 +1884,7 @@ export const SubscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 352px;
+  // height: 352px;
   button {
     margin-bottom: 20px;
     background: #3f1168;
