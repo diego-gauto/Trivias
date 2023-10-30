@@ -43,6 +43,15 @@ export const DefaultContainer = styled.div`
     padding-inline: 30px;
     padding-block: 20px;
   }
+  @media (max-width: 800px) {
+    min-width: unset;
+    .top-data {
+      width: 100%;
+      .header {
+        flex-direction: column;
+      }
+    }
+  }
 `;
 export const DefaultSearchContainer = styled.div`
   display: flex;
@@ -88,6 +97,9 @@ export const DefaultRow = styled.div<{ gap?: number }>`
     css`
       gap: ${props.gap}px;
     `}
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 export const DefaultFilterContain = styled.div`
   display: flex;
