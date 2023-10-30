@@ -13,6 +13,10 @@ export const DefaultContainer = styled.div`
   h2 {
     margin: 0;
   }
+  .table-contain {
+    max-width: 1000px;
+    overflow-x: auto;
+  }
   .header {
     display: flex;
     justify-content: space-between;
@@ -45,6 +49,8 @@ export const DefaultContainer = styled.div`
   }
   @media (max-width: 800px) {
     min-width: unset;
+    margin: unset;
+    margin-block: 15px;
     .top-data {
       width: 100%;
       .header {
@@ -147,6 +153,7 @@ export const DefaultFilterContain = styled.div`
   }
 `;
 export const AdminTable = styled.table`
+  width: 100%;
   td {
     font-size: 14px;
     font-family: "Raleway", sans-serif;
@@ -184,6 +191,11 @@ export const AdminTable = styled.table`
     }
     &:last-child {
       border-bottom: none;
+    }
+  }
+  @media (max-width: 800px) {
+    i {
+      display: none;
     }
   }
 `;
