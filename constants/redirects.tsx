@@ -76,9 +76,11 @@ export const goToCertificate = (course: any) => {
   });
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
+  let diff = Math.round((today - user.final_date) / 86400);
+
   if (user) {
     //New condition subscription flow
-    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
+    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin' || diff <= 6) {
       router.push({
         pathname: LESSON_PATH,
         query: { id: course.id, season: 0, lesson: 0 },
