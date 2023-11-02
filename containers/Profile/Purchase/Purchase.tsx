@@ -30,6 +30,7 @@ import { createNotification } from "../../../components/api/notifications";
 import { getUsersStripe } from "../../../components/api/conekta/test";
 import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
 import { SOCIALS_ARRAY } from "../../../constants/arrays";
+import { returnPrice, returnPriceTag } from "../../../utils/functions";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -804,13 +805,9 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${(trial === "true" && v === '1') &&
-                    "149  MXN/mes."}{(frequency === "month" && v === '1') &&
-                      "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
-                    {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
-                        "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
-                    {(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>
+                    ${returnPrice(trial, v, frequency, type, coupon, product.price)}
+                  </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -828,7 +825,8 @@ const Purchase = () => {
                 </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
+                  <p dangerouslySetInnerHTML={{ __html: returnPriceTag(trial, v, frequency, type, coupon, product.price, nailmasterplusanual) }}></p>
+                  {/* {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
@@ -837,7 +835,7 @@ const Purchase = () => {
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                     (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
-                  {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
+                  {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>} */}
                 </div>
                 <div className="bg"></div>
                 <img className="image" src="../images/purchase/neworange.png" alt="" />
@@ -897,7 +895,8 @@ const Purchase = () => {
                 {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
                 {(type == "course") && <p className="title"><span>{product.title}</span></p>}
                 <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
-                {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
+                <p dangerouslySetInnerHTML={{ __html: returnPriceTag(trial, v, frequency, type, coupon, product.price, nailmasterplusanual) }}></p>
+                {/* {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
@@ -906,7 +905,7 @@ const Purchase = () => {
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                   (product.price - (coupon.discount / 100) * product.price)} <span>MXN</span></p>}
-                {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
+                {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>} */}
               </div>
             </div>
             <div className="slider-container">
@@ -1130,13 +1129,8 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${(trial === "true" && v === '1') &&
-                    "149  MXN/mes."}{(frequency === "month" && v === '1') &&
-                      "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
-                    {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
-                        "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
-                    {(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>
+                    ${returnPrice(trial, v, frequency, type, coupon, product.price)} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

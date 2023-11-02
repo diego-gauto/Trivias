@@ -244,3 +244,89 @@ export function hexToRgba(hex: any) {
   const blue = parseInt(cleanedHex.substring(4, 6), 16);
   return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 }
+
+export function returnPrice(
+  trial: string,
+  v: string,
+  frequency: string,
+  type: string,
+  coupon: boolean,
+  price: number
+) {
+  if (trial === "true" && v === "1") {
+    return "149  MXN/mes.";
+  } else if (trial === "true" && v === "2") {
+    return "249  MXN/mes.";
+  } else if (trial === "true" && v === "3") {
+    return "459  MXN/mes.";
+  } else if (frequency === "month" && v === "1") {
+    return "149  MXN/mes.";
+  } else if (frequency === "month" && v === "2" && !trial) {
+    return "249  MXN/mes.";
+  } else if (frequency === "month" && v === "3") {
+    return "459  MXN/mes.";
+  } else if (frequency === "anual" && v === "1") {
+    return "1,599  MXN/año.";
+  } else if (frequency === "anual" && v === "2") {
+    return "1,599  MXN/año.";
+  } else if (frequency === "anual" && v === "3") {
+    return "3,349  MXN/año.";
+  } else if (type == "course" && !coupon) {
+    return `${price} único pago`;
+  } else {
+    return "";
+  }
+}
+
+export function returnPriceTag(
+  trial: string,
+  v: string,
+  frequency: string,
+  type: string,
+  coupon: any,
+  price: number,
+  nailmasterplusanual: string
+) {
+  let priceTag = "";
+  if (trial === "true" && v === "1") {
+    priceTag = `<p class="total">$ 149 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "month" && v === "1") {
+    priceTag = `<p class="total">$ 149 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "anual" && v === "1") {
+    priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
+  }
+  if (trial === "true" && v === "2") {
+    priceTag = `<p class="total">$ 249 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "month" && v === "2" && !trial) {
+    priceTag = `<p class="total">$ 249 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "anual" && v === "2") {
+    priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
+  }
+  if (trial === "true" && v === "3") {
+    priceTag = `<p class="total">$ 459 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "month" && v === "3") {
+    priceTag = `<p class="total">$ 459 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "anual" && v === "3") {
+    priceTag = `<p class="total">$ 3,349 <span>MXN</span></p>`;
+  }
+  if (type == "course" && !coupon) {
+    priceTag = `<p class="total">$ ${price}<span>MXN</span></p>`;
+  }
+  if (type == "course" && coupon) {
+    priceTag = `<p class="total">$ ${
+      coupon.type == "amount"
+        ? price - coupon.discount
+        : price - (coupon.discount / 100) * price
+    }<span>MXN</span></p>`;
+  }
+  if (nailmasterplusanual === "true") {
+    priceTag = `<p class="total">$ 2,599 <span>MXN</span></p>`;
+  }
+  return priceTag;
+}
