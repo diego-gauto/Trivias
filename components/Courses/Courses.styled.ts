@@ -19,10 +19,20 @@ export const CoursesContain = styled.div`
   }
   @keyframes rotateUpsideDown {
     0% {
-      top: 45px;
+      top: 20px;
     }
     100% {
-      top: 55px;
+      top: 30px;
+    }
+  }
+  @media (max-width: 800px) {
+    @keyframes rotateUpsideDown {
+      0% {
+        top: 45px;
+      }
+      100% {
+        top: 55px;
+      }
     }
   }
   .slide-down {
