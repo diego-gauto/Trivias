@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { BsTriangle } from "react-icons/bs";
+import { BsChevronDoubleDown, BsTriangle } from "react-icons/bs";
 import ReactPlayer from "react-player";
 
 import { useRouter } from "next/router";
@@ -20,6 +20,7 @@ import {
 } from "./Courses.styled";
 import { ICourses, ILessons, ISeasons } from "./ICourses";
 import Sliders from "./Modules/Sliders";
+import { useMediaQuery } from "react-responsive";
 
 const Courses = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,6 +31,7 @@ const Courses = () => {
   const [courseForModal, setCourseForModal] = useState<any>({});
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
+  const responsive800 = useMediaQuery({ query: "(max-width: 800px)" });
   const [seasonIndex, setSeasonIndex] = useState<number>(0);
   const [lessonIndex, setLessonIndex] = useState<number>(0);
 
@@ -165,7 +167,14 @@ const Courses = () => {
           <Gradient></Gradient>
         </div>
       </Container>
-      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
+      {
+        !loading &&
+        <div className="slide-down">
+          <p>Desliza hacia abajo {responsive800 && <br />}para ver todos los cursos disponibles</p>
+          <BsChevronDoubleDown />
+        </div>
+      }
+
       {/* SLIDERS */}
       <div className="module-contain">
         {
@@ -184,6 +193,7 @@ const Courses = () => {
           })
         }
       </div>
+      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
     </CoursesContain>
   )
 }

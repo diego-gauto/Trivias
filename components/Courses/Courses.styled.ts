@@ -17,6 +17,36 @@ export const CoursesContain = styled.div`
   @media (max-width: 1023px) {
     gap: 20px;
   }
+  @keyframes rotateUpsideDown {
+    0% {
+      top: 45px;
+    }
+    100% {
+      top: 55px;
+    }
+  }
+  .slide-down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    p {
+      margin: 0;
+      color: #a733e4;
+      font-weight: 600;
+      font-style: italic;
+      text-align: center;
+    }
+    svg {
+      font-size: 20px;
+      color: #a733e4;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      animation: rotateUpsideDown 1s linear infinite;
+    }
+  }
   .module-contain {
     display: flex;
     flex-direction: Column;
