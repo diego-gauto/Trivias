@@ -18,6 +18,7 @@ export const CourseProvider = ({ children }: any) => {
   const [tempLesson, setTempLesson] = useState(null);
   const context = useAuth();
   const [open, setOpen] = useState(false)
+  let today = new Date().getTime() / 1000;
 
   const reload = (changeLesson?: boolean) => {
     getCourseApi(id).then((res) => {
@@ -27,12 +28,13 @@ export const CourseProvider = ({ children }: any) => {
         router.push({ pathname: 'lessonTemp', query: { id: id, season: 0, lesson: 0 } })
       }
       if (context.user.role !== "superAdmin") {
-        if (res.type === "Mensual" && context.user.final_date < new Date().getTime() / 1000) {
+        let diff = Math.round((today - context.user.final_date) / 86400);
+        if (res.type === "Mensual" && context.user.final_date < today && diff > 6) {
           router.push({ pathname: "/preview" });
         }
         if (res.type === "Producto") {
           let user_course = context.user.user_courses.filter((x: any) => x.course_id === +id);
-          if ((user_course.length > 0 && user_course[0].final_date < new Date().getTime() / 1000) || user_course.length === 0) {
+          if ((user_course.length > 0 && user_course[0].final_date < today) || user_course.length === 0) {
             router.push({ pathname: "/preview" });
           }
         }
