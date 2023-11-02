@@ -38,10 +38,10 @@ const Courses = () => {
   let courseSections = [
     "continue-watching",
     "free-courses",
+    "product-courses",
     "art-courses",
     "structure-courses",
     "makeup-courses",
-    "product-courses",
   ]
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
