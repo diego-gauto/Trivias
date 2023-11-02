@@ -173,7 +173,7 @@ const Login = () => {
           setShow(true);
         }
         if (res[0].provider !== 'web') {
-          setErrorMsg('El correo existe con otra cuenta!');
+          setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
           setError(true);
           setAuthLoader(false);
           setShow(true);
@@ -254,7 +254,7 @@ const Login = () => {
               return
             }
             if (res[0].provider !== 'google') {
-              setErrorMsg('El correo existe con otra cuenta!');
+              setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
               setError(true);
               setAuthLoader(false);
               setShow(true);
@@ -331,7 +331,7 @@ const Login = () => {
               return
             }
             if (res[0].provider !== 'facebook') {
-              setErrorMsg('El correo existe con otra cuenta!');
+              setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
               setError(true);
               setAuthLoader(false);
               setShow(true);
