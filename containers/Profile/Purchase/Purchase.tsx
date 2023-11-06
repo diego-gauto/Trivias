@@ -68,10 +68,18 @@ const Purchase = () => {
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
-  let idC = courseId.get('id')
-
+  let idC = courseId.get('id');
+  let tempPrice = 0;
+  if (frequency === "month" && v === "1") tempPrice = 149;
+  if (frequency === "month" && v === "2") tempPrice = 249;
+  if (frequency === "month" && v === "3") tempPrice = 459;
+  if (frequency === "anual" && v === "1") tempPrice = 1599;
+  if (frequency === "anual" && v === "2") tempPrice = 1599;
+  if (frequency === "anual" && v === "3") tempPrice = 3497;
+  if (frequency === "anual" && v === "3") tempPrice = 3497;
+  if (type === "course") tempPrice = 1599;
   const subscription = {
-    price: frequency === "month" ? 249.00 : 1599.00,
+    price: tempPrice,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
@@ -402,9 +410,13 @@ const Purchase = () => {
         let price = "";
         if (trial === "true" && v === "1") price = "mes_gratis";
         if (trial === "true" && v === "2") price = "mes_gratis";
+        if (trial === "true" && v === "3") price = "mes_gratis";
         if (frequency === "month" && v === "1") price = "mensual";
         if (frequency === "month" && v === "2") price = "mensual_v1_1";
+        if (frequency === "month" && v === "3") price = "mensual_v1_2";
         if (frequency === "anual") price = "anual";
+        if (frequency === "anual" && v === "3") price = "anual_v1_1";
+        if (frequency === "cuatri") price = "cuatrimestre";
 
         let data = {
           id: card.id ? card.id : defaultCard.paymentMethod,
@@ -544,6 +556,8 @@ const Purchase = () => {
     if (frequency === "anual" && v === "1") return sub = 'P-1VN62329L4770474AMSHBSZY';
     if (frequency === "month" && v === "2") return sub = 'P-2UH60720VG8742017MTYPHOQ';
     if (frequency === "anual" && v === "2") return sub = 'P-1VN62329L4770474AMSHBSZY';
+    if (frequency === "month" && v === "3") return sub = 'P-1EG90467MN295414UMVEUKHI';
+    if (frequency === "anual" && v === "3") return sub = 'P-0ND16663SN6195536MVEUMXI';
     return sub;
   }
 
@@ -746,7 +760,7 @@ const Purchase = () => {
                       onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
-                        finalDate = today + 2629800;
+                        finalDate = today + frequency === "month" ? 2629800 : 31536000;
                         await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
                         setConfirmation(false);
                         setPay(true);
@@ -1071,7 +1085,7 @@ const Purchase = () => {
                         onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
-                          finalDate = today + 2629800;
+                          finalDate = today + frequency === "month" ? 2629800 : 31536000;
                           await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
                           setConfirmation(false);
                           setPay(true);

@@ -270,7 +270,7 @@ export function returnPrice(
   } else if (frequency === "anual" && v === "2") {
     return "1,599  MXN/año.";
   } else if (frequency === "anual" && v === "3") {
-    return "3,349  MXN/año.";
+    return "3,497  MXN/año.";
   } else if (type == "course" && !coupon) {
     return `${price} único pago`;
   } else {
@@ -313,7 +313,7 @@ export function returnPriceTag(
     priceTag = `<p class="total">$ 459 <span>MXN</span></p>`;
   }
   if (type == "subscription" && frequency === "anual" && v === "3") {
-    priceTag = `<p class="total">$ 3,349 <span>MXN</span></p>`;
+    priceTag = `<p class="total">$ 3,497 <span>MXN</span></p>`;
   }
   if (type == "course" && !coupon) {
     priceTag = `<p class="total">$ ${price}<span>MXN</span></p>`;
