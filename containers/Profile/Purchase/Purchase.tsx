@@ -133,7 +133,10 @@ const Purchase = () => {
       if (searchParams.get('trial') == "true") {
         localStorage.setItem("trial", "true");
       }
-      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month") {
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month" && searchParams.get('v') === "1") {
+        localStorage.setItem("month_1", "true");
+      }
+      if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "month" && searchParams.get('v') === "2") {
         localStorage.setItem("month", "true");
       }
       if (searchParams.get('type') === "subscription" && searchParams.get('frequency') === "anual") {
@@ -146,7 +149,6 @@ const Purchase = () => {
       setLoggedIn(false)
     }
   }, [])
-
   const guardCheckout = (userData: any) => {
     let today = new Date().getTime() / 1000;
     if (router.query.type == "course") {
