@@ -13,7 +13,7 @@ const Notifications = (props: any) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
   const { notification, openNotifications, unReadNotification, setUnReadNotification, user } = props;
-  const [newStatus, setNewStatus] = useState<boolean>(notification.status === 0 ? false : true);
+  const [newStatus, setNewStatus] = useState<boolean>(notification?.status === 0 ? false : true);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
 

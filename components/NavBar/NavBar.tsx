@@ -87,20 +87,6 @@ const NavBar = () => {
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
-  // const socket = io("ws://94.74.77.165:4003");
-
-  // useEffect(() => {
-  //   socket.on("receiveMessage", (msg) => {
-  //     if (userData) {
-  //       if (userData.user_id === msg.userId) {
-  //         userNotifications(msg.userId);
-  //       }
-  //       if (msg.type === "global") {
-  //         userNotifications(userData.user_id);
-  //       }
-  //     }
-  //   });
-  // }, [userData]);
 
   const userNotifications = (userId: any) => {
     let data = {
@@ -108,63 +94,61 @@ const NavBar = () => {
       conekta_id: userDataAuth.user.conekta_id
     }
     retrieveConektaCustomerInfo(data)
-    // getNotifications(data).then((res) => {
-    //   let tempCounter = 0;
-    //   res.forEach((not: any) => {
-    //     if (!not.status) {
-    //       tempCounter++;
-    //     }
-    //   })
-    //   let tempDayCount: any = today - userDataAuth.user.start_date;
-    //   let getMonth = tempDayCount / (3600 * 24 * 30);
-    //   getRewardsApi().then(async (response) => {
-    //     if (response.filter((x: any) => x.month <= getMonth).length > 0) {
-    //       let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
-    //       tempRewards.forEach(async (element: any) => {
-    //         let notification = {
-    //           userId: userDataAuth.user.user_id,
-    //           type: "12",
-    //           notificationId: '',
-    //           rewardId: element.id
-    //         }
+    getNotifications(data).then((res) => {
+      let tempCounter = 0;
+      res.forEach((not: any) => {
+        if (!not.status) {
+          tempCounter++;
+        }
+      })
+      let tempDayCount: any = today - userDataAuth.user.start_date;
+      let getMonth = tempDayCount / (3600 * 24 * 30);
+      getRewardsApi().then(async (response) => {
+        if (response.filter((x: any) => x.month <= getMonth).length > 0) {
+          let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
+          tempRewards.forEach(async (element: any) => {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "12",
+              notificationId: '',
+              rewardId: element.id
+            }
 
-    //         if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
-    //           createNotification(notification);
-    //         }
-    //       });
-    //     }
-    //   })
-    //   let courses = userDataAuth.user.user_history;
-    //   courses.forEach((element: any) => {
-    //     getCourseApi(element.course_id).then((response) => {
-    //       let count = 0
-    //       response.lessons.forEach((lesson: any) => {
-    //         if (lesson.users.includes(userDataAuth.user.user_id)) {
-    //           count++
-    //         }
-    //       });
-    //       if (count !== response.lessons.length) {
-    //         let notification = {
-    //           userId: userDataAuth.user.user_id,
-    //           type: "7",
-    //           notificationId: '',
-    //           courseId: element.course_id,
-    //           season: element.season_id,
-    //           lesson: element.lesson_id,
-    //           title: response.title,
-    //         }
-    //         if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
-    //           createNotification(notification);
-    //         }
-    //       }
-    //     })
-    //   });
-
-    //   setUnReadNotification(tempCounter);
-    //   setNotifications(res);
-    // })
+            if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
+              createNotification(notification);
+            }
+          });
+        }
+      })
+      let courses = userDataAuth.user.user_history;
+      courses.forEach((element: any) => {
+        getCourseApi(element.course_id).then((response) => {
+          let count = 0
+          response.lessons.forEach((lesson: any) => {
+            if (lesson.users.includes(userDataAuth.user.user_id)) {
+              count++
+            }
+          });
+          if (count !== response.lessons.length) {
+            let notification = {
+              userId: userDataAuth.user.user_id,
+              type: "7",
+              notificationId: '',
+              courseId: element.course_id,
+              season: element.season_id,
+              lesson: element.lesson_id,
+              title: response.title,
+            }
+            if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
+              createNotification(notification);
+            }
+          }
+        })
+      });
+      setUnReadNotification(tempCounter);
+      setNotifications(res);
+    })
   }
-
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 900) {
       setColor(1)
@@ -542,7 +526,7 @@ const NavBar = () => {
                   </div>
                 </div>
               </Link>
-              {/* <div className="bell-contain">
+              <div className="bell-contain">
                 <SlBell className="bell" onClick={openNotifications} />
                 {
                   unReadNotification > 0 &&
@@ -550,7 +534,7 @@ const NavBar = () => {
                     {unReadNotification}
                   </p>
                 }
-                <NotificationContainer not={openNotification}>
+                {/* <NotificationContainer not={openNotification}>
                   <div className='title-container'>
                     <h1 className='title'>
                       Notificaciones
@@ -585,13 +569,13 @@ const NavBar = () => {
                         <div className="empty-notifications">Sin Notificaciones!</div>
                     }
                   </div>
-                </NotificationContainer>
+                </NotificationContainer> */}
 
                 {
                   !openNotification &&
                   <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
                 }
-              </div> */}
+              </div>
               <div className="hamburguer-contain">
                 <p className="title">Menu</p>
                 < UserImage onClick={() => { setHamburger(!hamburger) }}>
