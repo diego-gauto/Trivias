@@ -5,15 +5,15 @@ import { SendSingleEmail } from "../../../../store/actions/EmailActions";
 import { reviewHomeworkApi } from '../../../api/homeworks';
 import { createNotification } from '../../../api/notifications';
 
-interface props {
+interface IAssignmentModal {
   show: boolean,
   setShow: any,
   data: any,
-  user: any,
   handleClick: any
 }
 
-const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
+const HomeWorkModal = (props: IAssignmentModal) => {
+  const { show, setShow, data, handleClick } = props;
   const [value, setValue] = useState<number>(0)
   const [review, setReview] = useState<any>({ score: 0 })
   const [loader, setLoader] = useState<any>(false);
@@ -92,7 +92,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
             Revisión de tarea
           </Title>
           {
-            data.status == false &&
+            data && data.status == false &&
             <DataContain>
               <ItemContain>
                 <Text>
@@ -175,7 +175,7 @@ const HomeWorkModal = ({ show, setShow, data, user, handleClick }: props) => {
             </DataContain>
           }
           {
-            data.status === 1 &&
+            data && data.status === 1 &&
             <DataContain>
               <SafeContained>
                 <p> Tarea Revisada</p>

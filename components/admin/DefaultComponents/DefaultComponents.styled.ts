@@ -3,15 +3,20 @@ import styled, { css } from "styled-components";
 export const DefaultContainer = styled.div`
   display: flex;
   width: 100%;
-  min-width: 1000px;
   height: fit-content;
   border-radius: 10px;
   flex-direction: column;
-  margin: 30px;
+  margin: 20px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   p,
   h2 {
     margin: 0;
+  }
+  media(max-width: 1023) {
+    .table-contain {
+      max-width: 1000px;
+      overflow-x: auto;
+    }
   }
   .header {
     display: flex;
@@ -42,6 +47,17 @@ export const DefaultContainer = styled.div`
     gap: 10px;
     padding-inline: 30px;
     padding-block: 20px;
+  }
+  @media (max-width: 800px) {
+    min-width: unset;
+    margin: unset;
+    margin-block: 15px;
+    .top-data {
+      width: 100%;
+      .header {
+        flex-direction: column;
+      }
+    }
   }
 `;
 export const DefaultSearchContainer = styled.div`
@@ -88,6 +104,9 @@ export const DefaultRow = styled.div<{ gap?: number }>`
     css`
       gap: ${props.gap}px;
     `}
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 export const DefaultFilterContain = styled.div`
   display: flex;
@@ -135,6 +154,7 @@ export const DefaultFilterContain = styled.div`
   }
 `;
 export const AdminTable = styled.table`
+  width: 100%;
   td {
     font-size: 14px;
     font-family: "Raleway", sans-serif;
@@ -172,6 +192,21 @@ export const AdminTable = styled.table`
     }
     &:last-child {
       border-bottom: none;
+    }
+  }
+  @media (max-width: 800px) {
+    i {
+      display: none;
+    }
+    th,
+    td {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 450px) {
+    th,
+    td {
+      font-size: 10px;
     }
   }
 `;

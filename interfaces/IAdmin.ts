@@ -22,3 +22,15 @@ export interface IAdminUsers {
   id: number;
   user_courses: any;
 }
+
+export interface IAdminAssignments {
+  user_name: string;
+  user_email: string;
+  course_title: string;
+  season_title: string;
+  lesson_title: string;
+  created_at: number;
+  image: string;
+  status: number;
+  approved: number;
+}

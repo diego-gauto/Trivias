@@ -281,46 +281,48 @@ const Users = () => {
             </DefaultRow>
           </DefaultColumn>
         </div>
-        <AdminTable id="Users">
-          <tbody>
-            <tr>
-              <th>Usuario</th>
-              <th>Correo Electrónico</th>
-              <th>Fecha de Creación</th>
-              <th>Amount spent</th>
-              <th>Visualizar</th>
-            </tr>
-            {/* TABLAS */}
-            {
-              <>
-                {
-                  !userLoader &&
-                  <>
-                    {
-                      users.length > 0 && (
-                        users.map((user: IAdminUsers, index: number) => {
-                          return (
-                            <tr key={index}>
-                              <td style={{ fontWeight: 600 }}>
-                                <ProfileContain>
-                                  <Profile />
-                                  {user.name}
-                                </ProfileContain>
-                              </td>
-                              <td >{user.email}</td>
-                              <td>{formatDate(user.created_at)}</td>
-                              <td>MXN${user.spent}</td>
-                              <td onClick={() => openUserCard(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                            </tr>
-                          )
-                        }))
-                    }
-                  </>
-                }
-              </>
-            }
-          </tbody>
-        </AdminTable>
+        <div className='table-contain'>
+          <AdminTable id="Users">
+            <tbody>
+              <tr>
+                <th>Usuario</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Creación</th>
+                <th>Amount spent</th>
+                <th>Visualizar</th>
+              </tr>
+              {/* TABLAS */}
+              {
+                <>
+                  {
+                    !userLoader &&
+                    <>
+                      {
+                        users.length > 0 && (
+                          users.map((user: IAdminUsers, index: number) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ fontWeight: 600 }}>
+                                  <ProfileContain>
+                                    <Profile />
+                                    {user.name}
+                                  </ProfileContain>
+                                </td>
+                                <td >{user.email}</td>
+                                <td>{formatDate(user.created_at)}</td>
+                                <td>MXN${user.spent}</td>
+                                <td onClick={() => openUserCard(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                              </tr>
+                            )
+                          }))
+                      }
+                    </>
+                  }
+                </>
+              }
+            </tbody>
+          </AdminTable>
+        </div>
         {
           userLoader &&
           <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
