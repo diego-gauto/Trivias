@@ -80,8 +80,8 @@ const Mensual = (props: IData) => {
             </div>
 
           </div>
-          <div className="text-center my-4">
-            <h2 className="h3 mb-0">$249.00 MXN/mes</h2>
+          <div className="text-center" style={{ marginTop: 32, marginBottom: '1.5rem' }}>
+            <h2 className="h3 mb-0">$459.00 MXN/mes</h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
@@ -91,15 +91,34 @@ const Mensual = (props: IData) => {
         <div className="main-body">
           <div className="back tip m-2" onClick={() => verQ(1)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink m-0">Más de 60 cursos y 400 clases de uñas y belleza en linea</p>
+              <p className="purple-pink m-0">Más de 65 cursos y 400 clases de uñas y belleza en linea</p>
               {views.get(1) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
             {views.get(1) &&
               <div className="b-p-pink">
-                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>¡Curso de uñas y belleza en
-                  línea,</b> con Instructores profesionales, niveles básicos y avanzados, incluye reconocimientos
+                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
+                  <b>¡Cursos de uñas y belleza en
+                    línea,</b> con Instructores profesionales, niveles básicos y avanzados, incluye reconocimientos
                   y certificados.<br /><i>Precio Real: $70,000 MXN</i></p>
+              </div>}
+          </div>
+          <div className="back tip m-2" onClick={() => verQ(10)}>
+            <div className="back new-item">
+              <p className="text">Nuevo </p>
+            </div>
+            <div className="tip-q mb-1">
+              <p className="purple-pink mb-0">Programa Nails Master con Certificación</p>
+              {views.get(10) ?
+                <BsChevronUp className="tip-icon Back-p-pink" /> :
+                <BsChevronDown className="tip-icon Back-p-pink" />}
+            </div>
+            {views.get(10) &&
+              <div className="b-p-pink">
+                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
+                  <b>Certificación</b> en aplicación de uñas acrílicas desde 0 a Profesional. Técnicas de Tips y Escultural incluídas.
+                  <b> Precio Real: $6,719.00 MXN</b>
+                </p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(2)}>
@@ -149,13 +168,13 @@ const Mensual = (props: IData) => {
             {views.get(5) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">Recibe <b>20% de descuento </b>
-                  en productos Gonvar a partir del 3° mes suscrita.<br />
-                  Recibe <b>40% de descuento</b> en productos Gonvar a partir del 6° mes suscrita.</p>
+                  en productos Gonvar a partir del 2do mes suscrita.<br />
+                  Recibe <b>40% de descuento</b> en productos Gonvar a partir del 4to mes suscrita.</p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(6)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Kit de producto Gratis</p>
+              <p className="purple-pink mb-0">Kits de producto Gratis</p>
               {views.get(6) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -164,12 +183,12 @@ const Mensual = (props: IData) => {
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just"><b>Recibe un kit gratis con
                   diferentes productos cada mes,</b> como acrílicos, geles, monómeros, adherentes,
                   decoración y otros productos.
-                  <br /><i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo. Solo debes pagar el envío de $245 MXN.</b></i></p>
+                  <br /><i><b>El kit de producto tiene valor de $700-$800 MXN, pero es un regalo sin costo. Sólo debes pagar el envío de $245 MXN.</b></i></p>
               </div>}
           </div>
           <div className="back tip m-2" onClick={() => verQ(7)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Certificado oficial</p>
+              <p className="purple-pink mb-0">Certificados oficiales</p>
               {views.get(7) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
@@ -177,7 +196,7 @@ const Mensual = (props: IData) => {
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
                   Obtén un certificado con folio único verificado (fuv) por cada curso que completes al
-                  100% dentro de nuestra plataforma.</p>
+                  100% dentro de nuestra plataforma. Puedes obtener hasta 70 certificaciones.</p>
               </div>}
 
           </div>
@@ -196,15 +215,15 @@ const Mensual = (props: IData) => {
           <div className="back tip 
           m-2" onClick={() => verQ(9)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Rifa trimestral</p>
+              <p className="purple-pink mb-0">Rifa Cuatrimestal</p>
               {views.get(9) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
             {views.get(9) &&
               <div className="b-p-pink">
-                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">Rifa trimestral donde
+                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">Rifa Cuatrimestal donde
                   <b> puedes ganar hasta 20,000 pesos</b> en premios.
-                  <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto adicional) </i></p>
+                  <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}
           </div>
           <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>

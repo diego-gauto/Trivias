@@ -24,6 +24,9 @@ export const authRedirect = (type: string, userInfo?: any) => {
     else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
     }
+    else if (localStorage.getItem("cuatri") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=1`
+    }
     else if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
     }
@@ -57,6 +60,9 @@ export const authRedirect = (type: string, userInfo?: any) => {
     }
     if (localStorage.getItem("anual") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
+    }
+    if (localStorage.getItem("cuatri") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=1`
     }
     if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
