@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { useAuth } from "./useAuth";
-import { IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
+import { IAdminAssignments, IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
 import { getAdminUsersApi, getComeFromApi, getCountriesApi, getCoursesApi, getMethodsApi } from "../components/api/admin";
 
 
@@ -44,8 +44,11 @@ export const AdminsContext = (props: Props) => {
   const [methods, setMethods] = useState([]);
   const [comeFrom, setComeFrom] = useState([]);
   const [users, setUsers] = useState<IAdminUsers[]>([]);
+  const [assignments, setAssignments] = useState<IAdminAssignments[]>([])
   const [userLoader, setUserLoader] = useState<boolean>(true);
+  const [assignLoader, setAssignLoader] = useState<boolean>(true);
   const [totalUsers, setTotalUsers] = useState<number>(0);
+  const [totalAssignments, setTotalAssignments] = useState<number>(0)
   const [courses, setCourses] = useState<any>([]);
   const [payCourses, setPayCourses] = useState<any>([]);
   const [permits, setPermits] = useState(false);
@@ -103,6 +106,9 @@ export const AdminsContext = (props: Props) => {
     courses,
     payCourses,
     permits,
+    assignLoader,
+    assignments,
+    totalAssignments,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;
