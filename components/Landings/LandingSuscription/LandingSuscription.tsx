@@ -17,6 +17,7 @@ import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
+import { RewardComponent } from "../Components/Reward";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -37,15 +38,7 @@ const star = "/images/landing_suscription/puntos.png"
 const envioMujer = "/images/landing_suscription/mujer002 1.png"
 const chica = "/images/landing_suscription/chica.png"
 const manosPrecio = "/images/landing_suscription/manos precio.png"
-const rewards = "/images/landing_suscription/rewardCircle.png"
-const timeReward = "/images/landing_suscription/time.png"
-const timeRewardOut = "/images/landing_suscription/time_outline.png"
-const pointReward = "/images/landing_suscription/star.png"
-const pointRewardOut = "/images/landing_suscription/star_outline.png"
-const awardReward = "/images/landing_suscription/award.png"
-const awardRewardOut = "/images/landing_suscription/award_outline.png"
-const testimonios = "/images/landing_suscription/Testimonios.png"
-const inspo = "/images/landing_suscription/inspo.png"
+
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
 const lineaMaq = "/images/landing_suscription/maquillaje.png"
@@ -57,8 +50,7 @@ const facil = "/images/landing_suscription/facil.png"
 const intermedio = "/images/landing_suscription/intermedio.png"
 const avanzado = "/images/landing_suscription/avanzado.png"
 const master = "/images/landing_suscription/master.png"
-const rewardBack = "/images/landing_suscription/recompensas_back.png"
-const news = "/images/landing_suscription/newsletter.png"
+
 const ubiG1 = "/images/landing_suscription/ubicacion_ghost_1.png"
 const ubiG2 = "/images/landing_suscription/ubicacion_ghost_2.png"
 const ubiG3 = "/images/landing_suscription/ubicacion_ghost_3.png"
@@ -68,9 +60,6 @@ const certifB3 = "/images/landing_suscription/back_certif_3.png"
 const certifB4 = "/images/landing_suscription/back_certif_4.png"
 const goldStar = "/images/landing_suscription/StarBenefits.png"
 const envioG = "/images/landing_suscription/ghost_envio.png"
-const cursoR = "/images/landing_suscription/cursos_recompensa.png"
-const tiempoR = "/images/landing_suscription/tiempo_recompensa.png"
-const puntoR = "/images/landing_suscription/puntos_recompensa.png"
 const backCell = "/images/landing_suscription/lineBCell.png"
 const backCell2 = "/images/landing_suscription/lineBCell2.png"
 const backCell3 = "/images/landing_suscription/lineBCell3.png"
@@ -670,81 +659,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <img src={manosPrecio} className="manos" />
       </div>
-
-
-      <div className="rewards-section">
-        <div className="side-images">
-          <img src={rewardBack} />
-          <img src={rewardBack} className="rotate-img" />
-        </div>
-        <div className="mx-3 all-center">
-          <img src={rewards} className="me-3" />
-          <h2 className="text-title">CENTRO DE {responsive650 && <br />}<b>RECOMPENSAS</b></h2>
-        </div>
-
-        <div className="card-container">
-          <div className="reward-card points">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={pointReward} className="title-img" />
-                <img src={pointRewardOut} className="title-img" />
-              </div>
-              <h4><b className="p-pink"><i>Por puntaje</i></b><br /></h4>
-              <p className="bold m-5">Cada tarea aprobada, clase o curso terminado,
-                te dará puntos que puedes canjear por productos Gonvar.</p>
-            </div>
-            <div className="hover-card">
-              <img src={puntoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Siguiente recompensa <br /> <b className="yellow">2 monómetros Gonvar</b></p>
-              <h3 className="yellow bold">al reunir <br /> 3,000 puntos</h3>
-            </div>
-          </div>
-
-          <div className="reward-card time">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={timeReward} className="title-img" />
-                <img src={timeRewardOut} className="title-img" />
-              </div>
-              <h4><b className="teal"><i>Por tiempo </i></b><br /></h4>
-              <p className="bold m-5">Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
-                mejores descuentos en nuestros productos.</p>
-            </div>
-            <div className="hover-card">
-              <img src={tiempoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
-              <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
-            </div>
-          </div>
-
-          <div className="reward-card awards">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={awardReward} className="title-img" />
-                <img src={awardRewardOut} className="title-img" />
-              </div>
-              <h4><b className="blue"><i>Certificados </i></b><br /></h4>
-              <p className="bold m-5">Recibe un certificado oficial de la marca con un Folio Único Verificado (FUV)
-                por cada curso completo que termines.</p>
-            </div>
-            <div className="hover-card">
-              <img src={cursoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Tu siguiente curso a terminar es <br /> <b className="yellow">MANICURE CON BALANCE</b></p>
-              <h3 className="yellow bold">Has conseguido 15 <br /> Certificados FUV</h3>
-            </div>
-
-          </div>
-        </div>
-
-        <h5>Gracias a nuestro sistema de puntos,{responsive650 && <br />} beneficios y certificados acumulables, <br />
-          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> <br />
-          sólo por <b>permanecer suscrita, concluir tus {responsive650 && <br />}cursos y hacer tus tareas.</b></h5>
-      </div>
-
-
+      <RewardComponent />
       <div className="testimonio-section">
         <h2 className="h1 bold big-title">Más de 45,000{responsive650 && <br />} alumnas</h2>
         <div className="experiences-container">

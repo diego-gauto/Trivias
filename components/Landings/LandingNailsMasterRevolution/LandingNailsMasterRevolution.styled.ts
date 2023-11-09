@@ -438,6 +438,22 @@ export const SecondSection = styled.div`
   width: 100%;
   position: relative;
   padding-block: 75px;
+  .data {
+    position: absolute;
+    background-color: #dad3e5;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 10px;
+    padding: 20px;
+    top: -58px;
+    left: 50%;
+    transform: translateX(-50%);
+    .text {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+  }
   .bottom-l {
     width: 100%;
     z-index: -1;
