@@ -1,0 +1,84 @@
+.phoneInputGroup {
+  max-width: 300px;
+}
+
+.formControl {
+  background-color: #ffffff !important;
+  height: 32px !important;
+  margin-bottom: 50px !important;
+  max-width: 330px !important;
+  border-radius: 40px !important;
+  border: none !important;
+
+  font-family: "Montserrat" !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+
+  text-align: start !important;
+  letter-spacing: 0.5px !important;
+
+  color: #3f1168 !important;
+}
+
+.formControl::before {
+
+  color: grey !important;
+}
+
+.flagDropdown {
+  background-color: #ffffff !important;
+  height: 130px !important;
+  border-radius: 20px !important;
+  border: none !important;
+}
+
+.flagButton {
+  background-color: #ffffff !important;
+  height: 32px !important;
+  border-radius: 40px !important;
+  border: none !important;
+  padding-left: 8px !important;
+}
+
+.flagButton:hover {
+  background-color: #ffffff !important;
+  height: 32px !important;
+  border-radius: 40px !important;
+  border: none !important;
+}
+
+.label {
+  width: 200px;
+  height: 16px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+
+  text-align: start;
+  letter-spacing: 0.5px;
+
+  color: #3f1168;
+
+  margin: 0 0 5px 5px;
+}
+
+@media screen and (max-width: 1127px) {
+
+  .phoneInputGroup{
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .formControl {
+
+  max-width: 600px !important;
+  width: 100% !important;
+  
+  }
+
+}
