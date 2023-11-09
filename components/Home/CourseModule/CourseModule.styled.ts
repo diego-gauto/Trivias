@@ -14,6 +14,11 @@ export const CardContainer = styled(Card)`
     display: block;
     z-index: 1;
   }
+  .text-logo {
+    margin: 0;
+    margin-top: 10px;
+    font-weight: 500;
+  }
   video {
     object-fit: cover;
   }

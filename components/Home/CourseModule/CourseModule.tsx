@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
 import CourseModal from "../../Modals/CourseModal/CourseModal";
 declare let Hls: any
-
+const gPlus = "/images/purchase/logo.png"
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
@@ -75,7 +75,8 @@ export const CourseModule = (props: ICourseModuleProps) => {
       </div>
       <Row>
         <Col sm={12} md={5} className="first-col">
-          <Button className="new-btn">NAILS <span>ACADEMY</span></Button>
+          <img src={gPlus} className="logo" />
+          <p className="text-logo">Incluído en tu suscripción Gonvar+</p>
           <Card.Title>{data.title}</Card.Title>
           <Row className="level">
             {(data.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
@@ -91,10 +92,6 @@ export const CourseModule = (props: ICourseModuleProps) => {
           </Card.Subtitle>
         </Col>
         <Col sm={12} md={5} className="second-col">
-          <Card.Text className="price">
-            Curso individual <br />
-            <span>por ${data.price}</span> <span className="lower">MXN</span>
-          </Card.Text>
           {
             data.id &&
             <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }

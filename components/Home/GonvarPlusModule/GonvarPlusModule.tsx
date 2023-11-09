@@ -73,7 +73,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           <div className="top">
             <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
             <p>Gonvar+</p>
-            <button style={{ cursor: "initial" }}>Suscripción anual</button>
+            <button style={{ cursor: "initial" }}>Suscripción Cuatrimestral</button>
           </div>
           <div className="middle">
             <h3>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h3>
@@ -81,7 +81,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
               e instructores internacionales.
             </p>
           </div>
-          <h3 className="price">Sólo $1599 <span>MXN/año</span></h3>
+          <h3 className="price">Sólo $1599 <span>MXN el cuatrimestre</span></h3>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
               <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={goTo} />

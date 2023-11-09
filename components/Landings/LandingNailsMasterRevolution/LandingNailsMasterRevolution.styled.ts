@@ -375,7 +375,7 @@ export const FirstSection = styled.div`
       width: 20%;
     }
     .left-img {
-      top: 515px;
+      top: 370px;
       min-width: 160px;
       left: -10px;
     }
@@ -417,7 +417,7 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
-      top: 465px;
+      top: 350px;
       left: -20px;
     }
     .right-img-2 {
@@ -561,6 +561,11 @@ export const SecondSection = styled.div`
     }
   }
   @media (max-width: 850px) {
+    .data {
+      .text {
+        font-size: 1rem;
+      }
+    }
     padding-block: 50px;
     .h1 {
       margin-top: 30px;
@@ -601,6 +606,15 @@ export const SecondSection = styled.div`
     }
     .info-cards {
       flex-direction: column;
+    }
+  }
+  @media (max-width: 450px) {
+    .data {
+      padding: 10px;
+      top: -56px;
+      .text {
+        font-size: 0.7rem;
+      }
     }
   }
   @media (max-width: 400px) {
