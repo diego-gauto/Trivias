@@ -18,6 +18,7 @@ import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
 import { RewardComponent } from "../Components/Reward";
+import { ICourse } from "../../Courses/Modules/ISliders";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -98,6 +99,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
   const [courseArt, setCourseArt] = useState([])
   const [courseEst, setCourseEst] = useState([])
   const [courseMake, setCourseMake] = useState([])
+  const [specialCourse, setSpecialCourse] = useState({} as ICourse);
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -128,6 +130,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
     })
     // coursesAll(null);
     getAllCourseDataApi(null).then((data) => {
+      setSpecialCourse(data.product_courses[0]);
       setCourseArt(data.art_courses)
       setCourseEst(data.structure_courses)
       setCourseMake(data.makeup_courses)
@@ -227,6 +230,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h2 className="bold">En esta plataforma encontrarás</h2>
           <h2 className="h1"><b className="p-pink">MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
+        </div>
+        <div className="special-course">
+          <img src={specialCourse.image} />
+          <p className="title">Nails Master Revolution</p>
+          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+          <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
+          <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
         </div>
         <div className="all-center space">
           <div className="group-buttons">

@@ -125,6 +125,25 @@ export const SuscriptionContain = styled.div`
   .courses-section {
     width: 100%;
     margin-block: 50px;
+    .special-course {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      img {
+        width: 50%;
+        border-radius: 30px;
+      }
+      p {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .title {
+        font-size: 1.6rem;
+      }
+    }
     .group-buttons {
       width: 1200px;
       margin-top: 25px;
@@ -954,6 +973,11 @@ export const SuscriptionContain = styled.div`
       }
     }
     .courses-section {
+      .special-course {
+        img {
+          width: 80%;
+        }
+      }
       .thumbnail {
         width: 270px;
         height: 150px;

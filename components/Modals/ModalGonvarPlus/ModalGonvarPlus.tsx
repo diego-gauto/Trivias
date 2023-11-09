@@ -243,7 +243,7 @@ export const ModalGonvarPlus = (props: ICourse) => {
                 return (
                   <CoursesContainer key={"Course data " + index}>
                     <div className="image-contain">
-                      <button className="btn-info" onClick={() => { setShowModal(true), setCourseModal(val) }}>Mas informacion</button>
+                      <button className="btn-info" onClick={() => { setShowModal(true), setCourseModal(val) }}>Más información</button>
                       <img src={val.image} className="img-course" />
                     </div>
                     <div className="course-info">

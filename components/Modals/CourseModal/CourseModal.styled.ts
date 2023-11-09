@@ -621,7 +621,7 @@ export const TextContainer = styled.div`
   width: 100%;
   bottom: 40px;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
   align-items: center;
   text-align: center;
   padding-block-end: 15px;
@@ -681,6 +681,9 @@ export const TextContainer = styled.div`
       padding-block: 4px;
       font-size: 10px;
     }
+  }
+  .type-2 {
+    background: #3f1168;
   }
 `;
 export const VideoContain = styled.div`

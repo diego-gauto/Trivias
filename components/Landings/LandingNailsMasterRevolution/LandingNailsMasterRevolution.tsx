@@ -759,7 +759,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           </div>
         </div>
         <div className="line" />
-        <p className="h6" onClick={toggleModules}>{!showModules ? 'Ver todos los módulos' : 'Cerrar módulos'}</p>
+        <p className="h6" onClick={toggleModules}>{responsive850 && (!showModules ? 'Ver todos los módulos' : 'Cerrar módulos')}</p>
         <button className="btn right-left" onClick={() => setverMat(true)}>Consulta tu lista de materiales a utilizar</button>
         {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
         <img src={linesB2} className="down-l" />

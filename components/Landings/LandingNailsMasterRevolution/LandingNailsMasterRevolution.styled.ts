@@ -1753,7 +1753,7 @@ export const EleventhSection = styled.div`
     display: flex;
     margin-block: 15px;
     justify-content: center;
-    gap: 120px;
+    gap: 100px;
     padding-left: 50px;
     .side {
       width: 450px;
