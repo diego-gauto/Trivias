@@ -93,7 +93,7 @@ const NavBar = () => {
       userId: userId,
       conekta_id: userDataAuth.user.conekta_id
     }
-    retrieveConektaCustomerInfo(data)
+    // retrieveConektaCustomerInfo(data)
     getNotifications(data).then((res) => {
       let tempCounter = 0;
       res.forEach((not: any) => {
@@ -101,8 +101,10 @@ const NavBar = () => {
           tempCounter++;
         }
       })
-      let tempDayCount: any = today - userDataAuth.user.start_date;
+      let tempDayCount: any = today - userDataAuth.user.start_date === 0 ? today : userDataAuth.user.start_date;
       let getMonth = tempDayCount / (3600 * 24 * 30);
+      console.log(getMonth);
+
       getRewardsApi().then(async (response) => {
         if (response.filter((x: any) => x.month <= getMonth).length > 0) {
           let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
@@ -385,19 +387,20 @@ const NavBar = () => {
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 &&
-                    notifications.map((not: any, index: number) => {
-                      return (
-                        <Notifications
-                          notification={not}
-                          user={userData}
-                          openNotifications={openNotifications}
-                          unReadNotification={unReadNotification}
-                          setUnReadNotification={setUnReadNotification}
-                          key={"Notifications_" + index}
-                        />
-                      )
-                    })
+                    notifications.length > 0 ?
+                      notifications.map((not: any, index: number) => {
+                        return (
+                          <Notifications
+                            notification={not}
+                            user={userData}
+                            openNotifications={openNotifications}
+                            unReadNotification={unReadNotification}
+                            setUnReadNotification={setUnReadNotification}
+                            key={"Notifications_" + index}
+                          />
+                        )
+                      }) :
+                      <div className="px-4 empty-notifications">Sin Notificaciones!</div>
                   }
                 </div>
                 {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
