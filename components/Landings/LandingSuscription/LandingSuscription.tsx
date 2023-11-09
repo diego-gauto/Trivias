@@ -96,12 +96,12 @@ views.set(4, false);
 
 interface ILandingSuscription {
   price: string;
-  isMonth: boolean;
+  type: string;
   isFacebook?: boolean;
 }
 
 const LandingSuscription = (props: ILandingSuscription) => {
-  const { price, isMonth, isFacebook } = props;
+  const { price, type, isFacebook } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
   const [cursos, setCursos] = useState(1)
@@ -169,19 +169,27 @@ const LandingSuscription = (props: ILandingSuscription) => {
         if (user.level !== 0) {
           router.push(PREVIEW_PATH)
         } else {
-          if (isMonth) {
+          if (type === "mensual") {
             router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
-          } else {
+          }
+          if (type === "anual") {
             router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+          }
+          if (type === "cuatrimestral") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '1' } })
           }
         }
       } else {
         console.log(2);
 
-        if (isMonth) {
+        if (type === "mensual") {
           localStorage.setItem('month', 'true')
-        } else {
+        }
+        if (type === "anual") {
           localStorage.setItem('anual', 'true')
+        }
+        if (type === "cuatrimstral") {
+          localStorage.setItem('cuatri', 'true')
         }
         router.push(SIGNUP_PATH)
       }
@@ -214,10 +222,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">cientos {!responsive650 && <br />} de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
+        <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 65 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
           {responsive650 && <br />}
           <h4 className="bold">Sólo {price}</h4>
         </div>
@@ -228,7 +236,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="all-center space">
@@ -656,7 +664,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
           <h2 className="red bolder red-font">Costo total real: <del>{responsive650 && <br />}$74,719.00 MXN</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 60{responsive650 && <br />} cursos completos</h2>
+          <h2 className="p-pink bolder big-font">Más de 65{responsive650 && <br />} cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
@@ -843,7 +851,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </Swiper>
           </div>
           <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
-            en nuestros más de 60 cursos.</h4>
+            en nuestros más de 65 cursos.</h4>
 
           {/*     Catalogo?????????????????????????????????????         
             <div className="all-center">
