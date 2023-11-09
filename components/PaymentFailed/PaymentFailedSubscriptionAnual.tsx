@@ -11,15 +11,6 @@ const PaymentFailedSubscriptionAnual = () => {
   const router = useRouter()
   const { error } = router.query;
   const [msg, setMsg] = useState<any>("Puede que tu tarjeta no este activada para enviar pagos de manera online, intenta de nuevo o usa otro método de pago.")
-  const redirecTo = () => {
-    window.location.href = "/preview";
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      redirecTo();
-    }, 5000)
-  }, [])
 
   var userDataAuth = useAuth();
   useEffect(() => {

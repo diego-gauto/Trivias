@@ -45,6 +45,9 @@ export const FailedContainer = styled.div`
       .top {
         background: linear-gradient(135deg, #952ced 22%, #ca41d4 80%);
         color: #fff;
+        &:hover {
+          opacity: 0.67;
+        }
       }
       .bottom {
         background: #fff;
