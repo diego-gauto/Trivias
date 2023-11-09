@@ -103,51 +103,52 @@ const NavBar = () => {
       })
       let tempDayCount: any = today - userDataAuth.user.start_date === 0 ? today : userDataAuth.user.start_date;
       let getMonth = tempDayCount / (3600 * 24 * 30);
-      console.log(getMonth);
 
-      getRewardsApi().then(async (response) => {
-        if (response.filter((x: any) => x.month <= getMonth).length > 0) {
-          let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
-          tempRewards.forEach(async (element: any) => {
-            let notification = {
-              userId: userDataAuth.user.user_id,
-              type: "12",
-              notificationId: '',
-              rewardId: element.id
-            }
+      // getRewardsApi().then(async (response) => {
+      //   if (response.filter((x: any) => x.month <= getMonth).length > 0) {
+      //     let tempRewards = response.filter((x: any) => x.month <= getMonth && x.type === "months");
+      //     tempRewards.forEach(async (element: any) => {
+      //       let notification = {
+      //         userId: userDataAuth.user.user_id,
+      //         type: "12",
+      //         notificationId: '',
+      //         rewardId: element.id
+      //       }
 
-            if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
-              createNotification(notification);
-            }
-          });
-        }
-      })
-      let courses = userDataAuth.user.user_history;
-      courses.forEach((element: any) => {
-        getCourseApi(element.course_id).then((response) => {
-          let count = 0
-          response.lessons.forEach((lesson: any) => {
-            if (lesson.users.includes(userDataAuth.user.user_id)) {
-              count++
-            }
-          });
-          if (count !== response.lessons.length) {
-            let notification = {
-              userId: userDataAuth.user.user_id,
-              type: "7",
-              notificationId: '',
-              courseId: element.course_id,
-              season: element.season_id,
-              lesson: element.lesson_id,
-              title: response.title,
-            }
-            if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
-              createNotification(notification);
-            }
-          }
-        })
-      });
+      //       if (res.filter((x: any) => x.reward_id !== null && x.reward_id === element.id).length === 0) {
+      //         createNotification(notification);
+      //       }
+      //     });
+      //   }
+      // })
+      // let courses = userDataAuth.user.user_history;
+      // courses.forEach((element: any) => {
+      //   getCourseApi(element.course_id).then((response) => {
+      //     let count = 0
+      //     response.lessons.forEach((lesson: any) => {
+      //       if (lesson.users.includes(userDataAuth.user.user_id)) {
+      //         count++
+      //       }
+      //     });
+      //     if (count !== response.lessons.length) {
+      //       let notification = {
+      //         userId: userDataAuth.user.user_id,
+      //         type: "7",
+      //         notificationId: '',
+      //         courseId: element.course_id,
+      //         season: element.season_id,
+      //         lesson: element.lesson_id,
+      //         title: response.title,
+      //       }
+      //       if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
+      //         createNotification(notification);
+      //       }
+      //     }
+      //   })
+      // });
       setUnReadNotification(tempCounter);
+      console.log(res);
+
       setNotifications(res);
     })
   }

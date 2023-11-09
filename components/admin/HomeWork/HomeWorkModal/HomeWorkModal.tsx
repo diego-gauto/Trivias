@@ -41,8 +41,10 @@ const HomeWorkModal = (props: IAssignmentModal) => {
         season: data.seasonNumber - 1,
         lesson: data.lessonNumber - 1,
         title: data.courseTitle,
-        score: review.approved === 1 ? data.lessonPoints : 0
+        score: review.approved === 1 ? data.lessonPoints : 0,
+        retroalimentacion: review.comment
       }
+
       createNotification(notification);
       reviewHomeworkApi(temp).then(() => {
         handleClick(review.approved);
