@@ -2,10 +2,51 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #ece7f2;
+
+  .title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    max-width: 60%;
+    position: relative;
+    top: -250px;
+  }
+
+  .paragraph{
+    display: flex;
+    justify-content: center;
+    max-width: 60%;
+    position: relative;
+    top: -200px;
+    color: #3f1168;
+  }
 
   .logo{
     width: 30rem;
     position: relative;
     top:-150px
+  }
+
+  .inputContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top:-150px;
+    max-width: 700px;
+
+    .names{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .mail{
+      margin-top: 30px;
+    }
+
+    .phone{
+      margin-top: 30px;
+    }
   }
 }

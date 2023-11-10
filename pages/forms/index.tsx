@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 import { useFormik } from "formik";
 // import Link from "next/link";
 import { useRouter } from "next/router";
+import { title } from "process";
 import * as Yup from "yup";
 
 // import { getUserApi } from "../../../../components/api/users";
@@ -11,9 +14,6 @@ import InputMail from "../../components/Trivias/inputMail/inputMail";
 import InputNombre from "../../components/Trivias/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Trivias/inputWhatsapp/inputWhatsapp";
 import styles from "./formulario.module.css";
-import result from "antd/es/result";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import { userTrivia, emailTrivia } from "../../components/api/usertrivia";
 
 const Formularios = () => {
   const {
@@ -28,7 +28,7 @@ const Formularios = () => {
   const [isFormValid, setIsFormValid] = useState(false);
 
 
-  const { formContainer, logo, inputContainer, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA } = styles;
+  const { formContainer, title, paragraph, logo, inputContainer, names, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA } = styles;
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
@@ -114,38 +114,36 @@ const Formularios = () => {
       numeroWhatsapp: values.numeroWhatsApp,
       pais: values.nombrePais,
       isUser: false,
-      numeroTrivia: triviaId,
-      resultadoTrivia: result,
     };
 
     console.log(createUserDto)
 
     let createUserSuccess = false;
 
-    try {
-      const res = await userTrivia(createUserDto);
-      const createUserResult = res.data.result;
+    // try {
+    //   const res = await userTrivia(createUserDto);
+    //   const createUserResult = res.data.result;
 
-      if (createUserResult) {
-        createUserSuccess = true;
-        const sendEmailDto = {
-          to: lowerCaseMail,
-          username: values.nombre + " " + values.apellido,
-          subject: "Prueba 2",
-          idTemplateBrevo: Number(br),
-        };
+    //   if (createUserResult) {
+    //     createUserSuccess = true;
+    //     const sendEmailDto = {
+    //       to: lowerCaseMail,
+    //       username: values.nombre + " " + values.apellido,
+    //       subject: "Prueba 2",
+    //       idTemplateBrevo: Number(br),
+    //     };
 
-        const sendEmailResponse = await emailTrivia(sendEmailDto);
+    //     const sendEmailResponse = await emailTrivia(sendEmailDto);
 
-        console.log(sendEmailResponse);
-      } else {
-        console.log("El usuario ya jugó a esta trivia");
-      }
-    } catch (error) {
-      console.error("Error al crear el usuario", error);
-    }
+    //     console.log(sendEmailResponse);
+    //   } else {
+    //     console.log("El usuario ya jugó a esta trivia");
+    //   }
+    // } catch (error) {
+    //   console.error("Error al crear el usuario", error);
+    // }
 
-    handleRedirect(createUserSuccess);
+    // handleRedirect(createUserSuccess);
   };
 
   // const handleButtonClick = () => {
@@ -192,9 +190,10 @@ const Formularios = () => {
   return (
     <div className={formContainer}>
       <img className={logo} src="/images/trivias/logoGonvar+.png" alt="logo Gonvar" />
-      <h2>esto es un formulario: ${formId}</h2>
+      <h2 className={title}>𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝘂𝗱 de Beca de 75% y 𝗣𝗹𝗮𝗻 𝗱𝗲 𝟰 𝗽𝗮𝗴𝗼𝘀</h2>
+      <p className={paragraph}>𝗠á𝘀 𝗱𝗲 𝟲𝟬 𝗰𝗹𝗮𝘀𝗲𝘀 𝗶𝗻𝗰𝗹𝘂𝗶𝗱𝗮𝘀. Un curso online 𝗗𝗲𝘀𝗱𝗲 𝗖𝗲𝗿𝗼 con 𝗿𝗲𝘃𝗶𝘀𝗶ó𝗻 𝗱𝗲 𝗽𝗿á𝗰𝘁𝗶𝗰𝗮𝘀, asesorías ilimitadas y 𝗖𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝗱𝗼 𝗼𝗳𝗶𝗰𝗶𝗮𝗹 de la marca. Un precio real de $̶6̶7̶1̶9̶ MXN reducido a un costo total de 1,599 MXN (99 USD) que podrás pagar en 4 pagos de 399 MXN (25 USD).💞 𝗟𝗨𝗚𝗔𝗥𝗘𝗦 𝗠𝗨𝗬 𝗟𝗜𝗠𝗜𝗧𝗔𝗗𝗢𝗦. 𝗔𝗽𝗿𝗲𝘀ú𝗿𝗮𝘁𝗲 𝗮 𝗮𝗽𝗮𝗿𝘁𝗮𝗿 𝘁𝘂 𝗹𝘂𝗴𝗮𝗿 𝗮𝗻𝘁𝗲𝘀 𝗱𝗲 𝗾𝘂𝗲 𝘀𝗲 𝗮𝗴𝗼𝘁𝗲𝗻.  𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝗮 tu inscripción con beca al 75% y plan de 𝟰 𝗽𝗮𝗴𝗼𝘀 𝗱𝗲 𝟯𝟵𝟵 𝗠𝗫𝗡 (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳 </p>
       <form onSubmit={formik.handleSubmit} className={inputContainer}>
-        <div>
+        <div className={names}>
           <InputNombre
             label={"Nombre"}
             placeholder={"Carla"}
@@ -205,8 +204,6 @@ const Formularios = () => {
           {formik.touched.nombre && formik.errors.nombre && (
             <div className={errorMessageNombre}>{formik.errors.nombre}</div>
           )}
-        </div>
-        <div>
 
           <InputNombre
             label={"Apellido"}
@@ -218,9 +215,9 @@ const Formularios = () => {
           {formik.touched.apellido && formik.errors.apellido && (
             <div className={errorMessageApellido}>{formik.errors.apellido}</div>
           )}
-        </div>
-        <div>
 
+        </div>
+        <div className={mail}>
           <InputMail
             label={"Correo Electrónico"}
             placeholder={"carlaflores@gmail.com"}
@@ -232,8 +229,7 @@ const Formularios = () => {
             <div className={errorMessageMail}>{formik.errors.correo}</div>
           )}
         </div>
-        <div>
-
+        <div className={phone}>
           <InputWatsapp
             label={"Número de WhatsApp"}
             placeholder={"1153137872"}
