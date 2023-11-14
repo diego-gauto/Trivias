@@ -31,7 +31,7 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
           <input
             type="radio"
             id={option}
-            name="options"
+            name={`${label}-options`}
             value={option}
             checked={selectedOption === option}
             onChange={handleRadioChange}
