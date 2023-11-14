@@ -52,6 +52,7 @@ export const AdminsContext = (props: Props) => {
   const [courses, setCourses] = useState<any>([]);
   const [payCourses, setPayCourses] = useState<any>([]);
   const [permits, setPermits] = useState(false);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   const { children } = props;
   let userContext = useAuth();
@@ -109,6 +110,8 @@ export const AdminsContext = (props: Props) => {
     assignLoader,
     assignments,
     totalAssignments,
+    openNotification,
+    setOpenNotification
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

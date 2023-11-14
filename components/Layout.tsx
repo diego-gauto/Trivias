@@ -8,6 +8,7 @@ import { Body, ChildrenContain } from "../screens/Login.styled";
 import SideBar from "./admin/SideBar";
 import Footer from "./Footer/Footer";
 import NavBar from "./NavBar/NavBar";
+import { useAdmin } from "../hooks/AdminContext";
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const responsive1300 = useMediaQuery({ query: "(max-width: 1300px)" });
@@ -15,6 +16,8 @@ const Layout = ({ children }: any) => {
   const { pathname, query, asPath } = router;
   const [path, setPath] = useState(pathname.split('/')[1]);
   const [show, setShow] = useState(false)
+  let adminContext = useAdmin();
+  const { setOpenNotification } = adminContext;
   useEffect(() => {
     setPath(pathname.split('/')[1]);
     if (pathname === "/_error" && asPath.slice(0, 6) === "/Blogs") {
@@ -24,8 +27,10 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
+
+
   return (
-    <Body >
+    <Body onClick={() => { setOpenNotification(false); }}>
       <NavBar />
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
