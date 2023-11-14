@@ -10,9 +10,10 @@ import * as Yup from "yup";
 
 // import { getUserApi } from "../../../../components/api/users";
 // import { emailTrivia, userTrivia } from "../../../../components/api/usertrivia";
-import InputMail from "../../components/Trivias/inputMail/inputMail";
-import InputNombre from "../../components/Trivias/inputNombre/inputNombre";
-import InputWatsapp from "../../components/Trivias/inputWhatsapp/inputWhatsapp";
+import InputMail from "../../components/Forms/inputMail/inputMail";
+import InputNombre from "../../components/Forms/inputNombre/inputNombre";
+import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
+import OptionComponent from "../../components/Forms/option/option";
 import styles from "./formulario.module.css";
 
 const Formularios = () => {
@@ -27,8 +28,19 @@ const Formularios = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
+  const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
 
-  const { formContainer, title, paragraph, logo, inputContainer, names, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA } = styles;
+  const handleOptionChange1 = (value: string) => {
+    setSelectedOption1(value);
+  };
+
+  const handleOptionChange2 = (value: string) => {
+    setSelectedOption2(value);
+  };
+
+
+  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA, image, options, buttonContainer, submitButton } = styles;
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
@@ -116,7 +128,6 @@ const Formularios = () => {
       isUser: false,
     };
 
-    console.log(createUserDto)
 
     let createUserSuccess = false;
 
@@ -187,61 +198,86 @@ const Formularios = () => {
   //   }
   // }, []);
 
+
+  const optionLabel1 = "Recuerda que el 𝗰𝗼𝘀𝘁𝗼 𝘁𝗼𝘁𝗮𝗹 𝗱𝗲𝗹 𝗽𝗿𝗼𝗴𝗿𝗮𝗺𝗮 𝗲𝘀 𝗱𝗲 𝟭,𝟱𝟵𝟵 𝗠𝗫𝗡 y podrás pagarlo en 4 partes. 𝗦𝗲 𝗱𝗮𝗿á 𝗮𝗰𝗰𝗲𝘀𝗼 una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para 𝗴𝗮𝗻𝗮𝗿 𝘂𝗻 𝗶𝗣𝗵𝗼𝗻𝗲 𝟭𝟱 𝗣𝗿𝗼 NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y 𝗠Á𝗫𝗜𝗠𝗢 𝗲𝘀𝘁𝗲 𝗩𝗜𝗘𝗥𝗡𝗘𝗦 3 de Noviembre. Elige tu plan de Pagos:"
+  const optionLabel2 = "𝗘𝗻 𝗰𝗮𝘀𝗼 𝗱𝗲 𝘀𝗲𝗿 𝘀𝗲𝗹𝗲𝗰𝗰𝗶𝗼𝗻𝗮𝗱𝗮, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso 𝗽𝗼𝗿 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗼? Recuerda que al ser seleccionada 𝘁𝗼𝗺𝗮𝗿á𝘀 𝘂𝗻𝗼 𝗱𝗲 𝗹𝗼𝘀 𝗹𝘂𝗴𝗮𝗿𝗲𝘀 y otras aspirantes quedarán fuera."
+  const options1 = ["Pagaré en 4 partes de $399,00 MXN ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día Viernes"]
+  const options2 = ["Si, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"]
+
   return (
-    <div className={formContainer}>
-      <img className={logo} src="/images/trivias/logoGonvar+.png" alt="logo Gonvar" />
-      <h2 className={title}>𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝘂𝗱 de Beca de 75% y 𝗣𝗹𝗮𝗻 𝗱𝗲 𝟰 𝗽𝗮𝗴𝗼𝘀</h2>
-      <p className={paragraph}>𝗠á𝘀 𝗱𝗲 𝟲𝟬 𝗰𝗹𝗮𝘀𝗲𝘀 𝗶𝗻𝗰𝗹𝘂𝗶𝗱𝗮𝘀. Un curso online 𝗗𝗲𝘀𝗱𝗲 𝗖𝗲𝗿𝗼 con 𝗿𝗲𝘃𝗶𝘀𝗶ó𝗻 𝗱𝗲 𝗽𝗿á𝗰𝘁𝗶𝗰𝗮𝘀, asesorías ilimitadas y 𝗖𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝗱𝗼 𝗼𝗳𝗶𝗰𝗶𝗮𝗹 de la marca. Un precio real de $̶6̶7̶1̶9̶ MXN reducido a un costo total de 1,599 MXN (99 USD) que podrás pagar en 4 pagos de 399 MXN (25 USD).💞 𝗟𝗨𝗚𝗔𝗥𝗘𝗦 𝗠𝗨𝗬 𝗟𝗜𝗠𝗜𝗧𝗔𝗗𝗢𝗦. 𝗔𝗽𝗿𝗲𝘀ú𝗿𝗮𝘁𝗲 𝗮 𝗮𝗽𝗮𝗿𝘁𝗮𝗿 𝘁𝘂 𝗹𝘂𝗴𝗮𝗿 𝗮𝗻𝘁𝗲𝘀 𝗱𝗲 𝗾𝘂𝗲 𝘀𝗲 𝗮𝗴𝗼𝘁𝗲𝗻.  𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝗮 tu inscripción con beca al 75% y plan de 𝟰 𝗽𝗮𝗴𝗼𝘀 𝗱𝗲 𝟯𝟵𝟵 𝗠𝗫𝗡 (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳 </p>
-      <form onSubmit={formik.handleSubmit} className={inputContainer}>
-        <div className={names}>
-          <InputNombre
-            label={"Nombre"}
-            placeholder={"Carla"}
-            onChange={handleNombreChange}
-            onBlur={handleNombreBlur}
-            value={formik.values.nombre}
-          />
-          {formik.touched.nombre && formik.errors.nombre && (
-            <div className={errorMessageNombre}>{formik.errors.nombre}</div>
-          )}
+    <div className={container}>
 
-          <InputNombre
-            label={"Apellido"}
-            placeholder={"Flores"}
-            onChange={handleApellidoChange}
-            onBlur={handleApellidoBlur}
-            value={formik.values.apellido}
-          />
-          {formik.touched.apellido && formik.errors.apellido && (
-            <div className={errorMessageApellido}>{formik.errors.apellido}</div>
-          )}
+      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
+      <div className={formContainer}>
+        <h2 className={title}>𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝘂𝗱 de Beca de 75% y 𝗣𝗹𝗮𝗻 𝗱𝗲 𝟰 𝗽𝗮𝗴𝗼𝘀</h2>
+        <p className={paragraph}>𝗠á𝘀 𝗱𝗲 𝟲𝟬 𝗰𝗹𝗮𝘀𝗲𝘀 𝗶𝗻𝗰𝗹𝘂𝗶𝗱𝗮𝘀. Un curso online 𝗗𝗲𝘀𝗱𝗲 𝗖𝗲𝗿𝗼 con 𝗿𝗲𝘃𝗶𝘀𝗶ó𝗻 𝗱𝗲 𝗽𝗿á𝗰𝘁𝗶𝗰𝗮𝘀, asesorías ilimitadas y 𝗖𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝗱𝗼 𝗼𝗳𝗶𝗰𝗶𝗮𝗹 de la marca. Un precio real de $̶6̶7̶1̶9̶ MXN reducido a un costo total de 1,599 MXN (99 USD) que podrás pagar en 4 pagos de 399 MXN (25 USD).💞 𝗟𝗨𝗚𝗔𝗥𝗘𝗦 𝗠𝗨𝗬 𝗟𝗜𝗠𝗜𝗧𝗔𝗗𝗢𝗦. 𝗔𝗽𝗿𝗲𝘀ú𝗿𝗮𝘁𝗲 𝗮 𝗮𝗽𝗮𝗿𝘁𝗮𝗿 𝘁𝘂 𝗹𝘂𝗴𝗮𝗿 𝗮𝗻𝘁𝗲𝘀 𝗱𝗲 𝗾𝘂𝗲 𝘀𝗲 𝗮𝗴𝗼𝘁𝗲𝗻.  𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝗮 tu inscripción con beca al 75% y plan de 𝟰 𝗽𝗮𝗴𝗼𝘀 𝗱𝗲 𝟯𝟵𝟵 𝗠𝗫𝗡 (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳 </p>
+        <div className={lineaAtravesada}></div>
 
-        </div>
-        <div className={mail}>
-          <InputMail
-            label={"Correo Electrónico"}
-            placeholder={"carlaflores@gmail.com"}
-            onChange={handleMailChange}
-            onBlur={handleMailBlur}
-            value={formik.values.correo}
-          />
-          {formik.touched.correo && formik.errors.correo && (
-            <div className={errorMessageMail}>{formik.errors.correo}</div>
-          )}
-        </div>
-        <div className={phone}>
-          <InputWatsapp
-            label={"Número de WhatsApp"}
-            placeholder={"1153137872"}
-            onChange={handlePaisChange}
-            onBlur={handlePaisBlur}
-            value={formik.values.numeroWhatsApp}
-          />
-          {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
-            <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
-          )}
-        </div>
-      </form>
+        <form onSubmit={formik.handleSubmit} className={inputContainer}>
+          <div className={names}>
+            <InputNombre
+              label={"Nombre"}
+              placeholder={"Carla"}
+              onChange={handleNombreChange}
+              onBlur={handleNombreBlur}
+              value={formik.values.nombre}
+            />
+            {formik.touched.nombre && formik.errors.nombre && (
+              <div className={errorMessageNombre}>{formik.errors.nombre}</div>
+            )}
+
+            <InputNombre
+              label={"Apellido"}
+              placeholder={"Flores"}
+              onChange={handleApellidoChange}
+              onBlur={handleApellidoBlur}
+              value={formik.values.apellido}
+            />
+            {formik.touched.apellido && formik.errors.apellido && (
+              <div className={errorMessageApellido}>{formik.errors.apellido}</div>
+            )}
+
+          </div>
+          <div className={mail}>
+            <InputMail
+              label={"Correo Electrónico"}
+              placeholder={"carlaflores@gmail.com"}
+              onChange={handleMailChange}
+              onBlur={handleMailBlur}
+              value={formik.values.correo}
+            />
+            {formik.touched.correo && formik.errors.correo && (
+              <div className={errorMessageMail}>{formik.errors.correo}</div>
+            )}
+          </div>
+          <div className={phone}>
+            <InputWatsapp
+              label={"Número de WhatsApp"}
+              placeholder={"1153137872"}
+              onChange={handlePaisChange}
+              onBlur={handlePaisBlur}
+              value={formik.values.numeroWhatsApp}
+            />
+            {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
+              <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
+            )}
+          </div>
+          <img className={image} src="./images/forms/iPhone-14-removebg.png" alt="iphone" />
+          <div className={options}>
+            <OptionComponent label={optionLabel1} options={options1} onOptionChange={handleOptionChange1} />
+            <OptionComponent label={optionLabel2} options={options2} onOptionChange={handleOptionChange2} />
+          </div>
+          <div className={lineaAtravesada}></div>
+
+          <div className={buttonContainer}>
+            <button type="submit" className={submitButton}>
+              Enviar Solicitud
+            </button>
+          </div>
+
+
+        </form>
+      </div>
     </div>
     //   <style jsx global>{`
     //     body {

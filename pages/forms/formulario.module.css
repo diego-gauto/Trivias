@@ -1,52 +1,100 @@
-.formContainer{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.container{
   background-color: #ece7f2;
-
-  .title{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    max-width: 60%;
-    position: relative;
-    top: -250px;
-  }
-
-  .paragraph{
-    display: flex;
-    justify-content: center;
-    max-width: 60%;
-    position: relative;
-    top: -200px;
-    color: #3f1168;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .logo{
-    width: 30rem;
-    position: relative;
-    top:-150px
+    width: 23rem;
+    margin:40px 0;
   }
 
-  .inputContainer{
+  .formContainer{
     display: flex;
+    align-items: center;
     flex-direction: column;
-    position: relative;
-    top:-150px;
-    max-width: 700px;
-
-    .names{
+    background-color: #c9c0d3;
+    width: 60%;
+    padding: 30px 20px 20px 20px;
+    
+    .title{
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      width: 90%;
     }
 
-    .mail{
-      margin-top: 30px;
+    .paragraph{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      color: #3f1168;
+      width: 90%;
     }
 
-    .phone{
-      margin-top: 30px;
+    .lineaAtravesada {
+      width: 100%;
+      height: 1px;
+      background-color: #000; /* Cambia este color según tus preferencias */
+      margin: 20px 0; /* Ajusta el margen según sea necesario */
+    }
+  
+    .inputContainer{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 90%;
+    
+      .names{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    
+      .mail{
+        margin-top: 30px;
+      }
+    
+      .phone{
+        margin-top: 30px;
+      }
+    
+      .image{
+        margin-top: 60px;
+      }
+    
+      .options{
+        margin-top: 60px;
+      }
+    
+      .buttonContainer{
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+      }
+    
+      .submitButton {
+        font-family: "Montserrat";
+        border-radius: 100px;
+        background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+        color: #ede7f2;
+        border: 0;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;    
+        width: 305px;
+        height: 45px;
+      }
+    
+      .submitButton:hover {
+        transform: scale(1.03);
+        -webkit-transition: 0.5s ease all;
+        transition: 0.5s ease all;
+        background-color: #5000b5;
+      }
     }
   }
 }

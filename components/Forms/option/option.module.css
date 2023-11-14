@@ -1,0 +1,18 @@
+.optionContainer{
+  margin-top: 30px;
+
+  .optionsLabel{
+    margin-bottom: 10px;
+  }
+}
+
+.optionButton{
+  cursor: pointer;
+}
+
+.optionButton:checked{
+  background-color: #90859d;
+}
+.optionLabel{
+  margin-left: 10px;
+}
