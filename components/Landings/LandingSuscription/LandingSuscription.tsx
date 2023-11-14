@@ -162,13 +162,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
           router.push(PREVIEW_PATH)
         } else {
           if (type === "mensual") {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '3' } })
           }
           if (type === "anual") {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '3' } })
           }
           if (type === "cuatrimestral") {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '1' } })
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } })
           }
         }
       } else {
@@ -621,14 +621,20 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
             <div className="list">
               <img src={boleto} className="me-3" />
-              <h5>Por cada mes dentro, recibes un boleto acumulable más para el <b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h5>
+              <h5>Por cada mes dentro, recibes un boleto acumulable más para el <b className="p-pink">sorteo cuatrimestral donde podrás ganas hasta $20,000.00</b></h5>
             </div>
 
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                <h5><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h5>
-                <h5><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h5>
+                {
+                  type === "mensual" ?
+                    <>
+                      <h5><b className="p-pink">20% de descuento</b> en productos a partir del 2° mes</h5>
+                      <h5><b className="p-pink">40% de descuento</b> en productos a partir del 4° mes</h5>
+                    </> :
+                    <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
+                }
               </div>
             </div>
 

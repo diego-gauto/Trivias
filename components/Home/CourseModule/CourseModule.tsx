@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -16,6 +16,7 @@ export const CourseModule = (props: ICourseModuleProps) => {
   const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
+  let today = new Date().getTime() / 1000;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -48,20 +49,17 @@ export const CourseModule = (props: ICourseModuleProps) => {
 
   }
   const goTo = () => {
-    if (loggedIn && data.pay) {
-      router.push({
-        pathname: LESSON_PATH,
-        query: { id: data.id, season: 0, lesson: 0 },
-      });
+    if (user.level > 0 || user.final_date > today) {
+      router.push(PREVIEW_PATH)
     }
-    if (loggedIn && !data.pay) {
-      router.push(
-        { pathname: PURCHASE_PATH, query: { type: 'course', id: data.id } }
-      )
-    }
-    if (!loggedIn) {
-      localStorage.setItem("course", `${data.id}`);
-      router.push(SIGNUP_PATH)
+    else {
+      if (loggedIn) {
+        router.push(PLAN_PATH)
+      }
+      if (!loggedIn) {
+        localStorage.setItem("plan", 'true');
+        router.push(SIGNUP_PATH)
+      }
     }
   }
   useEffect(() => {

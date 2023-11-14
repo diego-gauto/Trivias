@@ -54,7 +54,7 @@ export const RewardComponent = (props: IReward) => {
               <img src={tiempoR} className="my-3" />
               <h2 className="h1">¡HOLA MARÍA!</h2>
               <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
-              <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
+              <h3 className="yellow bold" style={{ fontSize: '1.5rem' }}>20% de descuento <br /> en productos Gonvar</h3>
             </div>
           </div>
           <div className="reward-card awards">
@@ -114,14 +114,14 @@ export const RewardComponent = (props: IReward) => {
                 <img src={timeRewardOut} className="title-img" />
               </div>
               <h4><b className="teal"><i>Por tiempo </i></b><br /></h4>
-              <p className="bold m-5">Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
+              <p className="bold m-5" >Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
                 mejores descuentos en nuestros productos.</p>
             </div>
             <div className="hover-card">
               <img src={tiempoR} className="my-3" />
               <h2 className="h1">¡HOLA MARÍA!</h2>
               <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
-              <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
+              <h3 className="yellow bold" style={{ fontSize: '1.5rem' }}>20% de descuento <br /> en productos Gonvar</h3>
             </div>
           </div>
           <div className="reward-card awards">

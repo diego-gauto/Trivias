@@ -23,7 +23,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
   }
 }
 const termsConditions = ({ anual }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const price = "$1,599 MXN/anual"
+  const price = "$1,599 MXN/cuatrimestre"
   const type = "cuatrimestral"
   return (
     <MainContain

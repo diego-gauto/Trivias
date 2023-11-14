@@ -55,7 +55,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } })
       }
     }
     else {
