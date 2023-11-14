@@ -271,6 +271,8 @@ export function returnPrice(
     return "1,599  MXN/año.";
   } else if (frequency === "anual" && v === "3") {
     return "3,497  MXN/año.";
+  } else if (frequency === "cuatrimestral" && v === "3") {
+    return "1,599  MXN/cuatrimestre.";
   } else if (type == "course" && !coupon) {
     return `${price} único pago`;
   } else {
@@ -314,6 +316,9 @@ export function returnPriceTag(
   }
   if (type == "subscription" && frequency === "anual" && v === "3") {
     priceTag = `<p class="total">$ 3,497 <span>MXN</span></p>`;
+  }
+  if (type == "subscription" && frequency === "cuatrimestral" && v === "3") {
+    priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
   }
   if (type == "course" && !coupon) {
     priceTag = `<p class="total">$ ${price}<span>MXN</span></p>`;

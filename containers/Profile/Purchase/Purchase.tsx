@@ -418,7 +418,7 @@ const Purchase = () => {
         if (frequency === "month" && v === "3") price = "mensual_v1_2";
         if (frequency === "anual") price = "anual";
         if (frequency === "anual" && v === "3") price = "anual_v1_1";
-        if (frequency === "cuatri") price = "cuatrimestre";
+        if (frequency === "cuatri" && v === "3") price = "cuatrimestre";
 
         let data = {
           id: card.id ? card.id : defaultCard.paymentMethod,
@@ -430,7 +430,7 @@ const Purchase = () => {
           if (res?.data.data.status === 'active') {
 
             let sub = res.data.data;
-            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
+            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           } else {
             let notification = {
@@ -560,6 +560,7 @@ const Purchase = () => {
     if (frequency === "anual" && v === "2") return sub = 'P-1VN62329L4770474AMSHBSZY';
     if (frequency === "month" && v === "3") return sub = 'P-1EG90467MN295414UMVEUKHI';
     if (frequency === "anual" && v === "3") return sub = 'P-0ND16663SN6195536MVEUMXI';
+    if (frequency === "cuatrimestral" && v === "3") return sub = 'P-6RT70377G6729623WMVJLPYQ';
     return sub;
   }
 
