@@ -94,7 +94,8 @@ export const PlanStyles = styled.div`
         padding-block: 10px;
         padding-inline: 25px;
         border: none;
-        border-radius: 24px;
+        border-radius: 100px;
+        line-height: 18px;
         color: #8825e1;
         font-weight: 500;
         background-color: #fff;
@@ -112,6 +113,9 @@ export const PlanStyles = styled.div`
         align-self: center;
         border-radius: 100%;
       }
+    }
+    .size-sm {
+      font-size: 20px;
     }
     .plan-container {
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -156,8 +160,9 @@ export const PlanStyles = styled.div`
         .purple-button {
           padding-block: 10px;
           padding-inline: 25px;
+          line-height: 18px;
           border: none;
-          border-radius: 24px;
+          border-radius: 100px;
           color: #ffffff;
           background-color: #3f1168;
         }
@@ -184,14 +189,14 @@ export const PlanStyles = styled.div`
           position: relative;
           .new-item {
             position: absolute;
-            border: 2px solid #00b610;
+            border: 2px solid #3f1168;
             padding-inline: 5px;
             padding-block: 2px;
             border-radius: 8px;
             top: -10px;
             max-height: 25px;
             .text {
-              color: #00b610;
+              color: #3f1168;
               margin: 0;
               font-size: 12px;
             }

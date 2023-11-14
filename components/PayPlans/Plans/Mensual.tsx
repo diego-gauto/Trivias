@@ -81,11 +81,11 @@ const Mensual = (props: IData) => {
 
           </div>
           <div className="text-center" style={{ marginTop: 32, marginBottom: '1.5rem' }}>
-            <h2 className="h3 mb-0">$459.00 MXN/mes</h2>
+            <h2 className="h3 mb-0 size-sm">$459.00 MXN/mes</h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button " onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button " onClick={goTo}>Comenzar plan <br /> Mensual</button>
           </div>
         </div>
         <div className="main-body">
@@ -221,7 +221,8 @@ const Mensual = (props: IData) => {
             </div>
             {views.get(9) &&
               <div className="b-p-pink">
-                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">Rifa Cuatrimestal donde
+                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
+                  Rifa Cuatrimestal donde
                   <b> puedes ganar hasta 20,000 pesos</b> en premios.
                   <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}

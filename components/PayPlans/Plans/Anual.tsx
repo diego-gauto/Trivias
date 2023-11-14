@@ -83,11 +83,11 @@ const Anual = (props: IData) => {
           </div>
           <div className="text-center my-4 tit-contain">
             <i className="save">Ahorras $2,011 MXN por año</i>
-            <h2 className="h3 mb-0">$3,497.00 MXN/año</h2>
+            <h2 className="h3 mb-0 size-sm">$3,497.00 MXN/año</h2>
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="purple-button" onClick={goTo}>Comenzar ahora</button>
+            <button className="purple-button" onClick={goTo}>Comenzar plan<br /> Anual</button>
           </div>
         </div>
         <div className="main-body">
@@ -260,7 +260,7 @@ const Anual = (props: IData) => {
 
           <div className="break tip m-2" onClick={() => verQ(9)}>
             <div className="tip-q mb-1">
-              <p className="blue mb-0">Rifa trimestral</p>
+              <p className="blue mb-0">Rifa cuatrimestral</p>
               {views.get(9) ?
                 <BsChevronUp className="tip-icon Back-blue" /> :
                 <BsChevronDown className="tip-icon Back-blue" />}
@@ -268,10 +268,9 @@ const Anual = (props: IData) => {
             {views.get(9) &&
               <div className="b-blue">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  <b>Puedes ganar hasta $20,000.00 en premios. </b>
-                  Solo por suscribirte, <b>recibe 12 boletos por año más un boleto adicional </b>
-                  por cada mes que permanezcas en la plataforma.
-                </p>
+                  Rifa Cuatrimestal donde
+                  <b> puedes ganar hasta 20,000 pesos</b> en premios.
+                  <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}
           </div>
           <span className="text-center my-2"><i onClick={goToRoute}>Más información</i></span>

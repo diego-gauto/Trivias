@@ -88,7 +88,7 @@ const PayPlans = () => {
                   <p>que se han inscrito a nuestra plataforma.</p>
                 </div>
                 <div className="col-sm-4 text-center">
-                  <h2>+60 cursos</h2>
+                  <h2>+65 cursos</h2>
                   <p>donde aprenderás desde cero y paso a paso técnicas actualizadas.</p>
                 </div>
                 <div className="col-sm-4 text-center">

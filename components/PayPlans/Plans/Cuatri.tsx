@@ -86,12 +86,12 @@ const Cuatri = (props: IData) => {
 
           </div>
           <div className="text-center my-4 tit-contain">
-            <i className="save white">Ahorras $711.00 MXN por año</i>
-            <h2 className="h3 mb-0 white">$1,599.00 MXN/año</h2>
+            <i className="save white">Ahorras $711.00 MXN por cuatrimestre</i>
+            <h2 className="h3 mb-0 white size-sm">$1,599.00 MXN/cuatrimestre</h2>
             <span><i className="white">Cargo automático cada 4 meses</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="white-button" onClick={goTo}>Comenzar ahora</button>
+            <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>
           </div>
         </div>
         <div className="main-body">
@@ -213,22 +213,6 @@ const Cuatri = (props: IData) => {
                 </p>
               </div>}
           </div>
-
-          <div className="black-background tip m-2" onClick={() => verQ(7)}>
-            <div className="tip-q mb-1">
-              <p className="white mb-0">Envíos de producto Gratis</p>
-              {views.get(7) ?
-                <BsChevronUp className="tip-icon-special back-white" /> :
-                <BsChevronDown className="tip-icon-special back-white" />}
-            </div>
-            {views.get(7) &&
-              <div className="b-white-2">
-                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just white">
-                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 MXN.
-                </p>
-              </div>}
-          </div>
-
           <div className="black-background tip m-2" onClick={() => verQ(8)}>
             <div className="tip-q mb-1">
               <p className="white mb-0">Certificados oficiales</p>
@@ -244,6 +228,20 @@ const Cuatri = (props: IData) => {
                 </p>
               </div>}
           </div>
+          <div className="black-background tip m-2" onClick={() => verQ(7)}>
+            <div className="tip-q mb-1">
+              <p className="white mb-0">Envíos de producto Gratis</p>
+              {views.get(7) ?
+                <BsChevronUp className="tip-icon-special back-white" /> :
+                <BsChevronDown className="tip-icon-special back-white" />}
+            </div>
+            {views.get(7) &&
+              <div className="b-white-2">
+                <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just white">
+                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00 MXN.
+                </p>
+              </div>}
+          </div>
 
           <div className="black-background tip m-2" onClick={() => verQ(9)}>
             <div className="tip-q mb-1">
@@ -255,10 +253,9 @@ const Cuatri = (props: IData) => {
             {views.get(9) &&
               <div className="b-white-2">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just white">
-                  <b>Puedes ganar hasta $20,000.00 en premios. </b>
-                  Solo por suscribirte, <b>recibe 1 boleto por mes. </b>
-                  <br />(Cada mes inscrita en Gonvar+ recibes un boleto)
-                </p>
+                  Rifa Cuatrimestal donde
+                  <b> puedes ganar hasta 20,000 pesos</b> en premios.
+                  <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}
           </div>
           <span className="text-center my-2 white"><i onClick={goToRoute}>Más información</i></span>
