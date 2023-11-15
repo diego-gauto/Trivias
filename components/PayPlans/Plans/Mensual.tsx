@@ -215,14 +215,14 @@ const Mensual = (props: IData) => {
           <div className="back tip 
           m-2" onClick={() => verQ(9)}>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Rifa Cuatrimestal</p>
+              <p className="purple-pink mb-0">Rifa Cuatrimestral</p>
               {views.get(9) ? <BsChevronUp className="tip-icon Back-p-pink" />
                 : <BsChevronDown className="tip-icon Back-p-pink" />}
             </div>
             {views.get(9) &&
               <div className="b-p-pink">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just">
-                  Rifa Cuatrimestal donde
+                  Rifa Cuatrimestral donde
                   <b> puedes ganar hasta 20,000 pesos</b> en premios.
                   <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}

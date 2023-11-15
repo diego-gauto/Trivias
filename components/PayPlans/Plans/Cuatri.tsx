@@ -253,7 +253,7 @@ const Cuatri = (props: IData) => {
             {views.get(9) &&
               <div className="b-white-2">
                 <p className="mb-0 pt-2 animate__animated animate__fadeIn no-bold just white">
-                  Rifa Cuatrimestal donde
+                  Rifa Cuatrimestral donde
                   <b> puedes ganar hasta 20,000 pesos</b> en premios.
                   <br /><i>(Cada mes inscrita en Gonvar+ recibes un boleto) </i></p>
               </div>}
