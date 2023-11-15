@@ -1,7 +1,7 @@
 import { Card, Col, Image, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { CUATRIMESTRAL_SUSCRIPTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
@@ -19,7 +19,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   let today = new Date().getTime() / 1000;
   const handleShow = () => {
     // setOpenModal(true);
-    router.push({ pathname: ANUAL_SUSCRIPTION_REDIRECT })
+    router.push({ pathname: CUATRIMESTRAL_SUSCRIPTION_REDIRECT })
   }
   const router = useRouter();
 

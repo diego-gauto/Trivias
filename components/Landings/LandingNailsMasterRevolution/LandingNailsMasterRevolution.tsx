@@ -92,7 +92,7 @@ const linesL = "/images/landing_nails_master/lines-left.png"
 const linesR = "/images/landing_nails_master/lines-right.png"
 const stars = "/images/landing_nails_master/estrellas.png"
 const linesB2 = "/images/landing_nails_master/lines-bottom2.png"
-
+const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
 views.set(1, false);
 views.set(2, false);
@@ -222,7 +222,41 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     <SuscriptionContain>
       <FirstSection>
         <div className="mt-3 fechas">
-          <h4><b>Actualización 2024</b><br /></h4>
+          <h4><b>Actualización 2024</b><br />
+            Inscripciones sólo desde el<br />9 de Octubre al 20 de Noviembre</h4>
+          <Countdown
+            date={1700501613000}
+            renderer={props =>
+              <div className="countdown">
+                <h2>TIEMPO RESTANTE</h2>
+                <div className="time">
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.days < 10 && 0}{props.days}</p>
+                    <p className="sub">DIAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.hours < 10 && 0}{props.hours}</p>
+                    <p className="sub">HORAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.minutes < 10 && 0}{props.minutes}</p>
+                    <p className="sub">MINUTOS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">{props.seconds < 10 && 0}{props.seconds}</p>
+                    <p className="sub">SEGUNDOS</p>
+                  </div>
+                </div>
+              </div>}
+          />
+          <div className="progress-container" >
+            <div
+              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'}`}
+              style={{ "--progress": checkProgress().x100 + '%' } as React.CSSProperties}
+              progress-text={checkProgress().texto}
+            />
+          </div>
+          <p className="include-gonvar"><img src={gPlus} alt="Gonvar logo" />Inluido en Gonvar+</p>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">

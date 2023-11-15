@@ -45,6 +45,18 @@ export const SuscriptionContain = styled.div`
   }
   .fechas {
     margin-bottom: 100px;
+    .include-gonvar {
+      margin-bottom: 0px;
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        margin-right: 15px;
+      }
+    }
   }
   .bolder {
     font-weight: 800 !important;
@@ -284,7 +296,7 @@ export const FirstSection = styled.div`
     }
     margin-bottom: 25px;
     .left-img {
-      top: 550px;
+      top: 700px;
       min-width: 200px;
     }
     .right-img-1 {
@@ -375,7 +387,7 @@ export const FirstSection = styled.div`
       width: 20%;
     }
     .left-img {
-      top: 370px;
+      top: 480px;
       min-width: 160px;
       left: -10px;
     }
@@ -417,7 +429,7 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
-      top: 350px;
+      top: 560px;
       left: -20px;
     }
     .right-img-2 {

@@ -14,6 +14,7 @@ export const SIGNUP_PAST_USER_PATH = "/auth/RegisterPastUser";
 export const NAILS_LANDING_REDIRECT = "/nails-master";
 export const NAILS_REVOLUTION_REDIRECT = "/nails-master-revolution";
 export const ANUAL_SUSCRIPTION_REDIRECT = "/suscripcion-anual";
+export const CUATRIMESTRAL_SUSCRIPTION_REDIRECT = "/suscripcion-cuatrimestral";
 export const SUPPORT_PATH = "/centro-de-ayuda";
 //images
 export const DEFAULT_USER_IMG = "/images/profile/default_img.png";
