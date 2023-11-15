@@ -256,10 +256,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               progress-text={checkProgress().texto}
             />
           </div>
-          <p className="include-gonvar"><img src={gPlus} alt="Gonvar logo" />Inluido en Gonvar+</p>
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
+          <p className="include-gonvar"><img src={gPlus} alt="Gonvar logo" />Inluido en Gonvar+</p>
           <h2 className="big-text"><b>Nail's Master </b>
             <br />
             <b className="blue-gradient">Revolution</b></h2>

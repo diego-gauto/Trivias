@@ -114,8 +114,14 @@ export const PlanStyles = styled.div`
         border-radius: 100%;
       }
     }
+    .card-price-fs {
+      font-size: 24px;
+    }
     .size-sm {
-      font-size: 20px;
+      font-size: 14px;
+    }
+    .fw-bold {
+      font-weight: bolder;
     }
     .plan-container {
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);

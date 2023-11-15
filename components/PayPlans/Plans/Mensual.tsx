@@ -81,7 +81,7 @@ const Mensual = (props: IData) => {
 
           </div>
           <div className="text-center" style={{ marginTop: 32, marginBottom: '1.5rem' }}>
-            <h2 className="h3 mb-0 size-sm">$459.00 MXN/mes</h2>
+            <h2 className="h3 mb-0">$459.00 <span className="size-sm fw-bold">MXN/mes</span></h2>
             <span><i>Cargo automático mensual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">

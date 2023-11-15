@@ -83,7 +83,7 @@ const Anual = (props: IData) => {
           </div>
           <div className="text-center my-4 tit-contain">
             <i className="save">Ahorras $2,011 MXN por año</i>
-            <h2 className="h3 mb-0 size-sm">$3,497.00 MXN/año</h2>
+            <h2 className="h3 mb-0">$3,497.00 <span className="h3 mb-0 size-sm fw-bold">MXN/año</span></h2>
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
