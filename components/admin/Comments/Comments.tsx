@@ -20,6 +20,7 @@ const Comments = () => {
   const [course, setCourse] = useState<any>([]);
   const [coursesId, setCoursesId] = useState<any>([])
   const [level, setLevel] = useState<any>(1)
+  const [loader, setLoader] = useState<number>(-1);
 
   useEffect(() => {
     retrievComments()
@@ -98,7 +99,9 @@ const Comments = () => {
       setComments(tempComments);
     })
   }
-  const deleteComment = (value: any) => {
+  const deleteComment = (value: any, index: number) => {
+    setLoader(index);
+    console.log(value)
     if (userData.role === "admin" && userData.roles[8].delete === 0) {
       alert("No tienes permisos para esta acción");
       return;
@@ -107,8 +110,10 @@ const Comments = () => {
       comment: value
     }
     deleteThisComment(body).then(() => {
+      alert('Comentario eliminado')
       retrievComments()
     })
+    setLoader(-1);
   }
 
   const deleteAnswer = (value: any) => {
@@ -233,7 +238,10 @@ const Comments = () => {
                 <div className="buttons">
                   <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
                   <button className="add" onClick={() => { setComment(x); setPopUp(true); setLevel(1) }}>Responder Comentario</button>
-                  <button className="delete" onClick={() => { deleteComment(x) }}>Eliminar</button>
+                  {
+                    loader === index ? <p>Cargando...</p>
+                      : <button className="delete" onClick={() => { deleteComment(x, index) }}>Eliminar</button>
+                  }
                 </div>
               </div>
               {x.answers.length > 0 ? <p className="title">Respuestas</p> : <p className="title">Sin Respuestas</p>}
