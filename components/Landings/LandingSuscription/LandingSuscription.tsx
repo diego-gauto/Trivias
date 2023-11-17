@@ -130,7 +130,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
     })
     // coursesAll(null);
     getAllCourseDataApi(null).then((data) => {
-      setSpecialCourse(data.product_courses[0]);
+      setSpecialCourse(data.special_courses[0]);
       setCourseArt(data.art_courses)
       setCourseEst(data.structure_courses)
       setCourseMake(data.makeup_courses)
@@ -232,7 +232,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
-          <img src={specialCourse.image} />
+          <img src={specialCourse?.image} />
           <p className="title">Nails Master Revolution</p>
           <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
           <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
