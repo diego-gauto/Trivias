@@ -6,22 +6,28 @@ interface OptionComponentProps {
   label: string;
   options: string[];
   onOptionChange: (value: string) => void;
+  isVisible: boolean; // Nueva prop para controlar la visibilidad
+
 }
 
 interface OptionComponentState {
   selectedOption: string | null;
 }
 
-const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOptionChange }) => {
+const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOptionChange, isVisible }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const { optionContainer, optionsLabel, optionButton, optionLabel } = styles
+  const { optionContainer, optionsLabel, optionButton, optionLabel, customRadioButton } = styles
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const optionValue = event.target.value
     setSelectedOption(optionValue);
     onOptionChange(optionValue)
   };
+
+  if (!isVisible) {
+    return null; // Si no es visible, no renderizar nada
+  }
 
   return (
     <div className={optionContainer}>
@@ -36,6 +42,7 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             checked={selectedOption === option}
             onChange={handleRadioChange}
           />
+          <span className={customRadioButton}></span>
           <label className={optionLabel} htmlFor={option}>{option}</label>
         </div>
       ))}

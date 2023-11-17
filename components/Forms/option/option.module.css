@@ -5,14 +5,34 @@
     margin-bottom: 10px;
   }
 }
-
-.optionButton{
+.optionButton {
+  position: relative;
+  padding-left: 30px; /* Ajusta según sea necesario */
   cursor: pointer;
 }
 
-.optionButton:checked{
-  background-color: #90859d;
+.optionButton input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
+
+.customRadioButton {
+  width: 20px; /* Ajusta según sea necesario */
+  height: 20px; /* Ajusta según sea necesario */
+  border-radius: 50%;
+  border: 2px solid #3f1168;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.optionButton input[type="radio"]:checked + .customRadioButton {
+  background-color: #3f1168; /* Cambia este color al que desees */
+  border-color: #3f1168; /* Cambia este color al que desees */
+}
+
 .optionLabel{
   margin-left: 10px;
 }

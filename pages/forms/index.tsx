@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 
-import { isValidPhoneNumber } from "react-phone-number-input";
-
+// import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
 // import Link from "next/link";
 import { useRouter } from "next/router";
-import { title } from "process";
 import * as Yup from "yup";
 
-// import { getUserApi } from "../../../../components/api/users";
-// import { emailTrivia, userTrivia } from "../../../../components/api/usertrivia";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
+import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
 import OptionComponent from "../../components/Forms/option/option";
 import styles from "./formulario.module.css";
 
@@ -21,23 +18,18 @@ const Formularios = () => {
     query: { formId },
   } = useRouter();
 
-  // const router = useRouter();
-
-  // const [userData, setUserData] = useState<any>(null);
-  // const [userDataLoaded, setUserDataLoaded] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
   const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
+  const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
 
-  const handleOptionChange1 = (value: string) => {
-    setSelectedOption1(value);
-  };
 
-  const handleOptionChange2 = (value: string) => {
-    setSelectedOption2(value);
-  };
+  const [isImageVisible, setIsImageVisible] = useState(true);
+  const [isOption1Visible, setIsOption1Visible] = useState(true);
+  const [isOption2Visible, setIsOption2Visible] = useState(true);
+  const [isOption3Visible, setIsOption3Visible] = useState(true);
+
 
 
   const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA, image, options, buttonContainer, submitButton } = styles;
@@ -56,7 +48,10 @@ const Formularios = () => {
       correo: "",
       numeroWhatsApp: "",
       codigoPais: "",
-      nombrePais: ""
+      nombrePais: "",
+      option1: "",
+      option2: "",
+      option3: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -83,15 +78,11 @@ const Formularios = () => {
     formik.setFieldValue("nombrePais", selectedCountry);
     formik.setFieldValue("codigoPais", selectedCode)
 
-    const isValid = isValidPhoneNumber(value, selectedCode)
-    console.log(value)
-    console.log(selectedCode)
-    console.log(isValid)
+    // const isValid = isValidPhoneNumber(value, selectedCode)
+    // console.log(value)
+    // console.log(selectedCode)
+    // console.log(isValid)
 
-  };
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
   };
 
   const handleNombreBlur = () => {
@@ -120,71 +111,65 @@ const Formularios = () => {
     const lowerCaseMail = values.correo.toLowerCase();
 
     const createUserDto = {
+      formId: formId,
       nombre: values.nombre,
       apellido: values.apellido,
       mail: lowerCaseMail,
       numeroWhatsapp: values.numeroWhatsApp,
       pais: values.nombrePais,
-      isUser: false,
+      option1: values.option1,
+      option2: values.option2,
+      option3: values.option3,
     };
 
+    console.log(createUserDto)
 
-    let createUserSuccess = false;
+    try {
+      // const res = await createUserFormApi(createUserDto);
+      // const createUserResult = res.data.result;
+      const createUserResult = true;
 
-    // try {
-    //   const res = await userTrivia(createUserDto);
-    //   const createUserResult = res.data.result;
+      if (createUserResult) {
+        //popup registro exitos
+        console.log("usuario registrado exitosamente")
+      } else {
+        //popup el usuario ya esta registrado
+        console.log("usuario ya registrado")
+      }
+    } catch (error) {
+      //popup hubo un error, intentelo otra vez
+      console.error("Error al crear el usuario", error);
+    }
 
-    //   if (createUserResult) {
-    //     createUserSuccess = true;
-    //     const sendEmailDto = {
-    //       to: lowerCaseMail,
-    //       username: values.nombre + " " + values.apellido,
-    //       subject: "Prueba 2",
-    //       idTemplateBrevo: Number(br),
-    //     };
-
-    //     const sendEmailResponse = await emailTrivia(sendEmailDto);
-
-    //     console.log(sendEmailResponse);
-    //   } else {
-    //     console.log("El usuario ya jugó a esta trivia");
-    //   }
-    // } catch (error) {
-    //   console.error("Error al crear el usuario", error);
-    // }
-
-    // handleRedirect(createUserSuccess);
   };
 
-  // const handleButtonClick = () => {
-  //   console.log("button clicked")
-  //   // Marcar todos los campos como "touched"
-  //   formik.setTouched({
-  //     nombre: true,
-  //     apellido: true,
-  //     correo: true,
-  //     numeroWhatsApp: true,
-  //   });
+  const handleButtonClick = () => {
+    // Marcar todos los campos como "touched"
+    formik.setTouched({
+      nombre: true,
+      apellido: true,
+      correo: true,
+      numeroWhatsApp: true,
+    });
 
-  //   // Realizar la validación del formulario
-  //   formik.validateForm().then((errors) => {
-  //     // Verificar si hay errores en los campos
-  //     const formIsValid = Object.keys(errors).length === 0;
+    // Realizar la validación del formulario
+    formik.validateForm().then((errors) => {
+      // Verificar si hay errores en los campos
+      const formIsValid = Object.keys(errors).length === 0;
 
-  //     // Actualizar el estado de validez del formulario
-  //     setIsFormValid(formIsValid);
+      // Actualizar el estado de validez del formulario
+      setIsFormValid(formIsValid);
 
-  //     // Si el checkbox está marcado y el formulario es válido, enviar el formulario
-  //     if (isChecked && formIsValid) {
-  //       try {
-  //         formik.handleSubmit();
-  //       } catch (error) {
-  //         console.error("Error al enviar el formulario", error);
-  //       }
-  //     }
-  //   });
-  // };
+      // Si el checkbox está marcado y el formulario es válido, enviar el formulario
+      if (formIsValid) {
+        try {
+          formik.handleSubmit();
+        } catch (error) {
+          console.error("Error al enviar el formulario", error);
+        }
+      }
+    });
+  };
 
   // useEffect(() => {
   //   if (localStorage.getItem("email")) {
@@ -197,12 +182,19 @@ const Formularios = () => {
   //     });
   //   }
   // }, []);
-
+  const handleOptionChange = (componentIndex: number, value: string) => {
+    const fieldName = `option${componentIndex}`;
+    formik.setFieldValue(fieldName, value);
+  };
 
   const optionLabel1 = "Recuerda que el 𝗰𝗼𝘀𝘁𝗼 𝘁𝗼𝘁𝗮𝗹 𝗱𝗲𝗹 𝗽𝗿𝗼𝗴𝗿𝗮𝗺𝗮 𝗲𝘀 𝗱𝗲 𝟭,𝟱𝟵𝟵 𝗠𝗫𝗡 y podrás pagarlo en 4 partes. 𝗦𝗲 𝗱𝗮𝗿á 𝗮𝗰𝗰𝗲𝘀𝗼 una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para 𝗴𝗮𝗻𝗮𝗿 𝘂𝗻 𝗶𝗣𝗵𝗼𝗻𝗲 𝟭𝟱 𝗣𝗿𝗼 NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y 𝗠Á𝗫𝗜𝗠𝗢 𝗲𝘀𝘁𝗲 𝗩𝗜𝗘𝗥𝗡𝗘𝗦 3 de Noviembre. Elige tu plan de Pagos:"
   const optionLabel2 = "𝗘𝗻 𝗰𝗮𝘀𝗼 𝗱𝗲 𝘀𝗲𝗿 𝘀𝗲𝗹𝗲𝗰𝗰𝗶𝗼𝗻𝗮𝗱𝗮, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso 𝗽𝗼𝗿 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗼? Recuerda que al ser seleccionada 𝘁𝗼𝗺𝗮𝗿á𝘀 𝘂𝗻𝗼 𝗱𝗲 𝗹𝗼𝘀 𝗹𝘂𝗴𝗮𝗿𝗲𝘀 y otras aspirantes quedarán fuera."
+  const optionLabel3 = "𝗘𝗻 𝗰𝗮𝘀𝗼 𝗱𝗲 𝘀𝗲𝗿 𝘀𝗲𝗹𝗲𝗰𝗰𝗶𝗼𝗻𝗮𝗱𝗮, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso 𝗽𝗼𝗿 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗼?"
+
   const options1 = ["Pagaré en 4 partes de $399,00 MXN ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día Viernes"]
   const options2 = ["Si, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"]
+  const options3 = ["Si, me comprometo", "No, gracias"]
+
 
   return (
     <div className={container}>
@@ -262,15 +254,16 @@ const Formularios = () => {
               <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
             )}
           </div>
-          <img className={image} src="./images/forms/iPhone-14-removebg.png" alt="iphone" />
+          {isImageVisible && <img className={image} src="./images/forms/iPhone-14-removebg.png" alt="iphone" />}
           <div className={options}>
-            <OptionComponent label={optionLabel1} options={options1} onOptionChange={handleOptionChange1} />
-            <OptionComponent label={optionLabel2} options={options2} onOptionChange={handleOptionChange2} />
+            <OptionComponent label={optionLabel1} options={options1} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={isOption1Visible} />
+            <OptionComponent label={optionLabel2} options={options2} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={isOption2Visible} />
+            <OptionComponent label={optionLabel3} options={options3} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={isOption3Visible} />
           </div>
           <div className={lineaAtravesada}></div>
 
           <div className={buttonContainer}>
-            <button type="submit" className={submitButton}>
+            <button type="submit" className={submitButton} onClick={handleButtonClick}>
               Enviar Solicitud
             </button>
           </div>
@@ -278,109 +271,8 @@ const Formularios = () => {
 
         </form>
       </div>
+      <ModalSuccessUserCreate />
     </div>
-    //   <style jsx global>{`
-    //     body {
-    //       margin: 0px;
-    //       padding: 0px;
-    //     }
-    //   `}</style>
-    //   <div className={formContainer}>
-    //     <div className={form}>
-    //       <Link href={"/trivias"}>
-    //         <a className={link}>
-    //           <div className={volver}>
-    //             <img src="/images/trivias/icono . retroceder.svg" alt="" />
-    //             <div> Volver</div>
-    //           </div>
-    //         </a>
-    //       </Link>
-    //       <div className={textos}>
-    //         <h1>¡Completa el formulario!</h1>
-    //         <h3>Una vez que envíes el formulario, <span>te llegará un correo</span> con tus resultados completos y además te daremos acceso a <span>más de 63 cursos en línea por un precio especial.</span></h3>
-    //         <p>Podrás reclamar tu acceso haciendo click en el botón de abajo.</p>
-    //       </div>
-    //       <form onSubmit={formik.handleSubmit} className={inputContainer}>
-    //         <div>
-    //           <InputNombre
-    //             label={"Nombre"}
-    //             placeholder={userDataLoaded ? userData.name : "Carla"}
-    //             onChange={handleNombreChange}
-    //             onBlur={handleNombreBlur}
-    //             value={formik.values.nombre}
-    //             disabled={userDataLoaded}
-    //           />
-    //           {formik.touched.nombre && formik.errors.nombre && (
-    //             <div className={errorMessageNombre}>{formik.errors.nombre}</div>
-    //           )}
-    //         </div>
-    //         <div>
-
-    //           <InputNombre
-    //             label={"Apellido"}
-    //             placeholder={userDataLoaded ? userData.last_name : "Flores"}
-    //             onChange={handleApellidoChange}
-    //             onBlur={handleApellidoBlur}
-    //             value={formik.values.apellido}
-    //             disabled={userDataLoaded}
-    //           />
-    //           {formik.touched.apellido && formik.errors.apellido && (
-    //             <div className={errorMessageApellido}>{formik.errors.apellido}</div>
-    //           )}
-    //         </div>
-    //         <div>
-
-    //           <InputMail
-    //             label={"Correo Electrónico"}
-    //             placeholder={userDataLoaded ? userData.email : "carlaflores@gmail.com"}
-    //             onChange={handleMailChange}
-    //             onBlur={handleMailBlur}
-    //             value={formik.values.correo}
-    //             disabled={userDataLoaded}
-    //           />
-    //           {formik.touched.correo && formik.errors.correo && (
-    //             <div className={errorMessageMail}>{formik.errors.correo}</div>
-    //           )}
-    //         </div>
-    //         <div>
-
-    //           <InputWatsapp
-    //             label={"Número de WhatsApp"}
-    //             placeholder={"1153137872"}
-    //             onChange={handlePaisChange}
-    //             onBlur={handlePaisBlur}
-    //             value={formik.values.numeroWhatsApp}
-    //           />
-    //           {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
-    //             <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
-    //           )}
-    //         </div>
-    //       </form>
-    //       <div className={checkboxContainer}>
-    //         <input
-    //           type="checkbox"
-    //           name="checkbox"
-    //           checked={isChecked}
-    //           onChange={handleCheckboxChange}
-    //         />
-    //         <label htmlFor="checkbox">
-    //           He leído y acepto los{" "}
-    //           <span><Link href={"https://www.gonvar.io/terms-condition"}><a className={terminos} target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></Link> y <Link href={"https://www.gonvar.io/politica-privacidad"}><a className={terminos} target="_blank" rel="noopener noreferrer">Políticas de privacidad</a></Link></span>
-    //         </label>
-    //       </div>
-    //       <button
-    //         className={btnRecibir}
-    //         disabled={!isChecked}
-    //         onClick={() => handleButtonClick()}
-    //       >
-    //         Reclamar suscripción
-    //       </button>
-    //     </div>
-    //     <div className={formImg}>
-    //       <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
-    //     </div>
-    //   </div >
-    // </>
   );
 };
 
