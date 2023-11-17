@@ -51,7 +51,8 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   }
   const goTo = () => {
     if (user) {
-      if (user.level > 0 || user.final_date > today) {
+      let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
+      if (user.final_date > today || complete_nails.length > 0) {
         router.push(PREVIEW_PATH)
       }
       else {
