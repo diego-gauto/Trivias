@@ -2,6 +2,7 @@
 
 import { IUser } from "../../../interfaces/IUserData";
 import Anual from "./Anual";
+import Cuatri from "./Cuatri";
 import Ind_Anual from "./Ind_Anual";
 import Individual from "./Individual";
 import Mensual from "./Mensual";
@@ -27,13 +28,16 @@ export const Plans = (props: IData) => {
             <Mensual user={user} />
           </div>}
           {/* Blue */}
+          {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+            <Cuatri user={user} />
+          </div>}
           {(selected === 2 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             <Anual user={user} />
           </div>}
           {/* Green */}
-          {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
+          {/* {(selected === 3 || selected === 0) && <div className="col-sm-6 col-lg-3 my-3">
             <Individual user={user} />
-          </div>}
+          </div>} */}
           {/* Ultimo */}
           {/* <div className="col-sm-6 col-lg-3 my-3">
             <Ind_Anual user={user} />

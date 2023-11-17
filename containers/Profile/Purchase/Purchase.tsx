@@ -30,6 +30,7 @@ import { createNotification } from "../../../components/api/notifications";
 import { getUsersStripe } from "../../../components/api/conekta/test";
 import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
 import { SOCIALS_ARRAY } from "../../../constants/arrays";
+import { returnPrice, returnPriceTag } from "../../../utils/functions";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -67,10 +68,18 @@ const Purchase = () => {
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
-  let idC = courseId.get('id')
-
+  let idC = courseId.get('id');
+  let tempPrice = 0;
+  if (frequency === "month" && v === "1") tempPrice = 149;
+  if (frequency === "month" && v === "2") tempPrice = 249;
+  if (frequency === "month" && v === "3") tempPrice = 459;
+  if (frequency === "anual" && v === "1") tempPrice = 1599;
+  if (frequency === "anual" && v === "2") tempPrice = 1599;
+  if (frequency === "anual" && v === "3") tempPrice = 3497;
+  if (frequency === "anual" && v === "3") tempPrice = 3497;
+  if (type === "course") tempPrice = 1599;
   const subscription = {
-    price: frequency === "month" ? 249.00 : 1599.00,
+    price: tempPrice,
     title: 'Gonvar Plus',
     duration: 'Mensual'
   }
@@ -403,9 +412,13 @@ const Purchase = () => {
         let price = "";
         if (trial === "true" && v === "1") price = "mes_gratis";
         if (trial === "true" && v === "2") price = "mes_gratis";
+        if (trial === "true" && v === "3") price = "mes_gratis";
         if (frequency === "month" && v === "1") price = "mensual";
         if (frequency === "month" && v === "2") price = "mensual_v1_1";
+        if (frequency === "month" && v === "3") price = "mensual_v1_2";
         if (frequency === "anual") price = "anual";
+        if (frequency === "anual" && v === "3") price = "anual_v1_1";
+        if (frequency === "cuatri" && v === "3") price = "cuatrimestre";
 
         let data = {
           id: card.id ? card.id : defaultCard.paymentMethod,
@@ -417,7 +430,7 @@ const Purchase = () => {
           if (res?.data.data.status === 'active') {
 
             let sub = res.data.data;
-            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
+            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
             window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
           } else {
             let notification = {
@@ -545,6 +558,9 @@ const Purchase = () => {
     if (frequency === "anual" && v === "1") return sub = 'P-1VN62329L4770474AMSHBSZY';
     if (frequency === "month" && v === "2") return sub = 'P-2UH60720VG8742017MTYPHOQ';
     if (frequency === "anual" && v === "2") return sub = 'P-1VN62329L4770474AMSHBSZY';
+    if (frequency === "month" && v === "3") return sub = 'P-1EG90467MN295414UMVEUKHI';
+    if (frequency === "anual" && v === "3") return sub = 'P-0ND16663SN6195536MVEUMXI';
+    if (frequency === "cuatrimestral" && v === "3") return sub = 'P-6RT70377G6729623WMVJLPYQ';
     return sub;
   }
 
@@ -747,8 +763,8 @@ const Purchase = () => {
                       onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
-                        finalDate = today + 2629800;
-                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
+                        finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
                         setConfirmation(false);
                         setPay(true);
                         window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -806,13 +822,9 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${(trial === "true" && v === '1') &&
-                    "149  MXN/mes."}{(frequency === "month" && v === '1') &&
-                      "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
-                    {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
-                        "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
-                    {(type == "course" && !coupon) && `${product.price} único pago`}</span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>
+                    ${returnPrice(trial, v, frequency, type, coupon, product.price)}
+                  </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />
@@ -830,7 +842,8 @@ const Purchase = () => {
                 </div>}
                 <div className="price-container">
                   <p className="title" style={{ lineHeight: "25px", textAlign: "end" }}>Total <br /><span>a pagar</span></p>
-                  {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
+                  <p dangerouslySetInnerHTML={{ __html: returnPriceTag(trial, v, frequency, type, coupon, product.price, nailmasterplusanual) }}></p>
+                  {/* {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
                   {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
@@ -839,7 +852,7 @@ const Purchase = () => {
                   {(type == "course" && !coupon) && <p className="total">$ {product.price}<span>MXN</span></p>}
                   {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                     (product.price - (coupon.discount / 100) * product.price)}<span>MXN</span></p>}
-                  {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
+                  {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>} */}
                 </div>
                 <div className="bg"></div>
                 <img className="image" src="../images/purchase/neworange.png" alt="" />
@@ -899,7 +912,8 @@ const Purchase = () => {
                 {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
                 {(type == "course") && <p className="title"><span>{product.title}</span></p>}
                 <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
-                {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
+                <p dangerouslySetInnerHTML={{ __html: returnPriceTag(trial, v, frequency, type, coupon, product.price, nailmasterplusanual) }}></p>
+                {/* {(type == "subscription" && frequency === "month" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(trial === "true" && v === "1") && <p className="total">$ 149 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "anual" && v === "1") && <p className="total">$ 1,599 <span>MXN</span></p>}
                 {(type == "subscription" && frequency === "month" && v === "2" && !trial) && <p className="total">$ 249 <span>MXN</span></p>}
@@ -908,7 +922,7 @@ const Purchase = () => {
                 {(type == "course" && !coupon) && <p className="total">$ {product.price} <span>MXN</span></p>}
                 {(type == "course" && coupon) && <p className="total">$ {coupon.type == 'amount' ? (product.price - coupon.discount) :
                   (product.price - (coupon.discount / 100) * product.price)} <span>MXN</span></p>}
-                {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>}
+                {(nailmasterplusanual === "true") && <p className="total">$ 2,599 <span>MXN</span></p>} */}
               </div>
             </div>
             <div className="slider-container">
@@ -1074,8 +1088,8 @@ const Purchase = () => {
                         onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
-                          finalDate = today + 2629800;
-                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : 4 })
+                          finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
                           setConfirmation(false);
                           setPay(true);
                           window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
@@ -1132,13 +1146,8 @@ const Purchase = () => {
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
-                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>${(trial === "true" && v === '1') &&
-                    "149  MXN/mes."}{(frequency === "month" && v === '1') &&
-                      "149  MXN/mes."}{(frequency === "anual" && v === '1') && "1,599  MXN/año."}
-                    {(trial === "true" && v === '2') &&
-                      "249  MXN/mes."}{(frequency === "month" && v === '2' && !trial) &&
-                        "249  MXN/mes."}{(frequency === "anual" && v === '2') && "1,599  MXN/año."}
-                    {(type == "course" && !coupon) && `${product.price} único pago`} </span><br /><br />
+                  <p>Obtén decenas de cursos y clases de decoración y aplicación de uñas por <span>
+                    ${returnPrice(trial, v, frequency, type, coupon, product.price)} </span><br /><br />
                     Aprende desde diseños de uñas, hasta cursos específicos desde cero en técnicas como: mano alzada,
                     stamping, uñas exprés, 3D <span>y muchos más.</span></p>
                   <img src="../images/purchase/chica_banner.png" alt="" />

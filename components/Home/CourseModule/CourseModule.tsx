@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { LESSON_PATH, NAILS_FORM, NAILS_LANDING_REDIRECT, NAILS_REVOLUTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { CardContainer } from "./CourseModule.styled";
@@ -11,11 +11,12 @@ import { useEffect, useState } from "react";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
 import CourseModal from "../../Modals/CourseModal/CourseModal";
 declare let Hls: any
-
+const gPlus = "/images/purchase/logo.png"
 export const CourseModule = (props: ICourseModuleProps) => {
   const { data, num, user, loggedIn } = props;
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
+  let today = new Date().getTime() / 1000;
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -48,20 +49,17 @@ export const CourseModule = (props: ICourseModuleProps) => {
 
   }
   const goTo = () => {
-    if (loggedIn && data.pay) {
-      router.push({
-        pathname: LESSON_PATH,
-        query: { id: data.id, season: 0, lesson: 0 },
-      });
+    if (user.level > 0 || user.final_date > today) {
+      router.push(PREVIEW_PATH)
     }
-    if (loggedIn && !data.pay) {
-      router.push(
-        { pathname: PURCHASE_PATH, query: { type: 'course', id: data.id } }
-      )
-    }
-    if (!loggedIn) {
-      localStorage.setItem("course", `${data.id}`);
-      router.push(SIGNUP_PATH)
+    else {
+      if (loggedIn) {
+        router.push(PLAN_PATH)
+      }
+      if (!loggedIn) {
+        localStorage.setItem("plan", 'true');
+        router.push(SIGNUP_PATH)
+      }
     }
   }
   useEffect(() => {
@@ -75,7 +73,8 @@ export const CourseModule = (props: ICourseModuleProps) => {
       </div>
       <Row>
         <Col sm={12} md={5} className="first-col">
-          <Button className="new-btn">NAILS <span>ACADEMY</span></Button>
+          <img src={gPlus} className="logo" />
+          <p className="text-logo">Incluído en tu suscripción Gonvar+</p>
           <Card.Title>{data.title}</Card.Title>
           <Row className="level">
             {(data.difficulty == "Muy Fácil") && <img style={{ width: "auto" }} src="../images/iconoAzul.png" alt="" />}
@@ -91,10 +90,6 @@ export const CourseModule = (props: ICourseModuleProps) => {
           </Card.Subtitle>
         </Col>
         <Col sm={12} md={5} className="second-col">
-          <Card.Text className="price">
-            Curso individual <br />
-            <span>por ${data.price}</span> <span className="lower">MXN</span>
-          </Card.Text>
           {
             data.id &&
             <PurpleButton text={responsive768 ? "Comprar" : "Comenzar ahora"} onClick={() => { goTo() }

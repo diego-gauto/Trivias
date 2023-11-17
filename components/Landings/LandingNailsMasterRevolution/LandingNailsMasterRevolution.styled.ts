@@ -45,6 +45,18 @@ export const SuscriptionContain = styled.div`
   }
   .fechas {
     margin-bottom: 100px;
+    .include-gonvar {
+      margin-bottom: 0px;
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        margin-right: 15px;
+      }
+    }
   }
   .bolder {
     font-weight: 800 !important;
@@ -284,7 +296,7 @@ export const FirstSection = styled.div`
     }
     margin-bottom: 25px;
     .left-img {
-      top: 550px;
+      top: 700px;
       min-width: 200px;
     }
     .right-img-1 {
@@ -375,7 +387,7 @@ export const FirstSection = styled.div`
       width: 20%;
     }
     .left-img {
-      top: 515px;
+      top: 480px;
       min-width: 160px;
       left: -10px;
     }
@@ -417,7 +429,7 @@ export const FirstSection = styled.div`
       font-size: 14px;
     }
     .left-img {
-      top: 465px;
+      top: 560px;
       left: -20px;
     }
     .right-img-2 {
@@ -438,6 +450,22 @@ export const SecondSection = styled.div`
   width: 100%;
   position: relative;
   padding-block: 75px;
+  .data {
+    position: absolute;
+    background-color: #dad3e5;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 10px;
+    padding: 20px;
+    top: -58px;
+    left: 50%;
+    transform: translateX(-50%);
+    .text {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.6rem;
+      white-space: nowrap;
+    }
+  }
   .bottom-l {
     width: 100%;
     z-index: -1;
@@ -545,6 +573,11 @@ export const SecondSection = styled.div`
     }
   }
   @media (max-width: 850px) {
+    .data {
+      .text {
+        font-size: 1rem;
+      }
+    }
     padding-block: 50px;
     .h1 {
       margin-top: 30px;
@@ -585,6 +618,15 @@ export const SecondSection = styled.div`
     }
     .info-cards {
       flex-direction: column;
+    }
+  }
+  @media (max-width: 450px) {
+    .data {
+      padding: 10px;
+      top: -56px;
+      .text {
+        font-size: 0.7rem;
+      }
     }
   }
   @media (max-width: 400px) {
@@ -1723,7 +1765,7 @@ export const EleventhSection = styled.div`
     display: flex;
     margin-block: 15px;
     justify-content: center;
-    gap: 120px;
+    gap: 100px;
     padding-left: 50px;
     .side {
       width: 450px;

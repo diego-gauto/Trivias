@@ -41,6 +41,7 @@ const Courses = () => {
     "continue-watching",
     "free-courses",
     "product-courses",
+    "special-courses",
     "art-courses",
     "structure-courses",
     "makeup-courses",
