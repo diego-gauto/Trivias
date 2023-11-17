@@ -42,9 +42,9 @@ const Anual = (props: IData) => {
   useEffect(() => {
 
   }, [setver])
-
   const goTo = () => {
     if (user.id) {
+      let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
       if (user.level === 0 && user.final_date < today) {
         router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: "3" } })
         // router.push({ pathname: ANUAL_FORM })
@@ -52,7 +52,7 @@ const Anual = (props: IData) => {
       if (user.level === 0 && user.final_date > today) {
         router.push(PREVIEW_PATH)
       }
-      if (user.level > 0 && user.final_date > today) {
+      if ((user.level > 0 && user.final_date > today) || complete_nails.length > 0) {
         router.push(PREVIEW_PATH)
       }
       if (user.level > 0 && user.final_date < today) {

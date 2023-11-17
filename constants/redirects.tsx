@@ -89,10 +89,10 @@ export const goToCertificate = (course: any) => {
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
   let diff = Math.round((today - user.final_date) / 86400);
-
   if (user) {
+    let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
     //New condition subscription flow
-    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin' || diff <= 6) {
+    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin' || diff <= 6 || complete_nails.length > 0) {
       router.push({
         pathname: LESSON_PATH,
         query: { id: course.id, season: 0, lesson: 0 },
@@ -101,7 +101,7 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
     if (course.type === "Mensual" && user.level === 0 && user.final_date < today) {
       router.push(`${PLAN_PATH}`)
     }
-    if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && (user.level === 1 || user.level > 2))) {
+    if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && user.level === 3)) {
       router.push(`${PROFILE_PATH}`)
     }
     if (course.type === "Producto" && course.pay) {
