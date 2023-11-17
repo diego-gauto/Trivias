@@ -92,7 +92,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === "special-courses") {
       tempTexts.title = "Certificaciones ";
       tempTexts.spanTitle = "";
-      // setCourses(tempCourses.special_courses);
+      setCourses(tempCourses.special_courses);
       setTexts(tempTexts);
     }
   }
