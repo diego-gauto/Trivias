@@ -215,3 +215,14 @@ export const updateUser = async (user: any) => {
       return error
     });
 };
+
+export const updateNails = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "users/update/nailsmaster")
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error
+    });
+};

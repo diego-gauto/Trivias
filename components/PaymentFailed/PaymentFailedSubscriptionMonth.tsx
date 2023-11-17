@@ -15,12 +15,6 @@ const PaymentFailedSubscriptionMonth = () => {
     window.location.href = "/preview";
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      redirecTo();
-    }, 5000)
-  }, [])
-
   var userDataAuth = useAuth();
   useEffect(() => {
     if (userDataAuth.user !== null) {
