@@ -76,7 +76,7 @@ const Purchase = () => {
   if (frequency === "anual" && v === "1") tempPrice = 1599;
   if (frequency === "anual" && v === "2") tempPrice = 1599;
   if (frequency === "anual" && v === "3") tempPrice = 3497;
-  if (frequency === "anual" && v === "3") tempPrice = 3497;
+  if (frequency === "cuatrimestral" && v === "3") tempPrice = 1599;
   if (type === "course") tempPrice = 1599;
   const subscription = {
     price: tempPrice,
@@ -517,7 +517,6 @@ const Purchase = () => {
         duration: type === "subscription" ? 0 : (new Date().getTime() / 1000) + product.duration * 86400
       }
     }
-
     conektaOxxoApi(data).then((res) => {
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
@@ -808,8 +807,8 @@ const Purchase = () => {
                   </PayPalScriptProvider>}
                   <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                 </div>}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
-                {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
+                {((type === "subscription" && (frequency === "anual" || frequency === "cuatrimestral")) || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
+                {((type === "subscription" && (frequency === "anual" || frequency === "cuatrimestral")) || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
               </div>
             </div>
             <div className="right-section">
@@ -818,7 +817,7 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true") && "Mensual"} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true") && "Mensual"} {frequency === "anual" && "Anual"} {frequency === "cuatrimestral" && "Cuatrimestral"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
@@ -910,6 +909,7 @@ const Purchase = () => {
               <div className="price-container">
                 {(type == "subscription" && frequency === "month") && <p className="title"><span>Suscripción Gonvar+ Mensual</span></p>}
                 {(type == "subscription" && frequency === "anual") && <p className="title"><span>Suscripción Gonvar+ Anual</span></p>}
+                {(type == "subscription" && frequency === "cuatrimestral") && <p className="title"><span>Suscripción Gonvar+ Cuatrimestral</span></p>}
                 {(type == "course") && <p className="title"><span>{product.title}</span></p>}
                 <p className="title" style={{ lineHeight: "25px", textAlign: "center" }}>Total <span>a pagar</span></p>
                 <p dangerouslySetInnerHTML={{ __html: returnPriceTag(trial, v, frequency, type, coupon, product.price, nailmasterplusanual) }}></p>
@@ -1133,8 +1133,8 @@ const Purchase = () => {
                     </PayPalScriptProvider>}
                     <i>Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.</i>
                   </div>}
-                  {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
-                  {((type === "subscription" && frequency === "anual") || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
+                  {((type === "subscription" && (frequency === "anual" || frequency === "cuatrimestral")) || type === "course") && <img src="/images/purchase/oxxo.svg" onClick={payWithOxxo} />}
+                  {((type === "subscription" && (frequency === "anual" || frequency === "cuatrimestral")) || type === "course") && <img src="/images/purchase/spei.svg" onClick={payWitSpei} />}
                 </div>
               </div>
               <div className="box">
@@ -1142,7 +1142,7 @@ const Purchase = () => {
                 <p className="subtitle">PRODUCTOS</p>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                   <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
-                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true")} {frequency === "anual" && "Anual"}</span> <sub>(Gonvar Plus)</sub></p> :
+                  {type == "subscription" ? <p className="title">Suscripción <span>Gonvar+ {(frequency === "month" || trial === "true")} {frequency === "anual" && "Anual"} {frequency === "cuatrimestral" && "Cuatrimestral"}</span> <sub>(Gonvar Plus)</sub></p> :
                     <p className="title" style={{ textAlign: "initial" }}>Curso <span>{product.title}</span></p>}
                 </div>
                 <div className="info">
