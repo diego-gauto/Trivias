@@ -221,7 +221,7 @@ const Sliders = (props: ICourseData) => {
                           if (slideType === "continue-watching" || slideType === "free-courses") {
                             goTo(course)
                           }
-                          if (slideType === "art-courses" || slideType === "product-courses" || slideType === "structure-courses" || slideType === "makeup-courses") {
+                          if (slideType === "art-courses" || slideType === "product-courses" || slideType === "structure-courses" || slideType === "makeup-courses" || slideType === "special-courses") {
                             openModal(course)
                           }
                         }}
