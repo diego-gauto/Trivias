@@ -109,7 +109,7 @@ const Mensual = (props: IData) => {
               <p className="text">Nuevo </p>
             </div>
             <div className="tip-q mb-1">
-              <p className="purple-pink mb-0">Programa Nails Master con Certificación</p>
+              <p className="purple-pink mb-0">Programa Nails Master Revolution con Certificación</p>
               {views.get(10) ?
                 <BsChevronUp className="tip-icon Back-p-pink" /> :
                 <BsChevronDown className="tip-icon Back-p-pink" />}
