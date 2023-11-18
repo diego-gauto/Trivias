@@ -49,7 +49,6 @@ const Courses = () => {
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
-  console.log(userData);
   const goTo = () => {
     if (userData) {
       let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
@@ -96,7 +95,9 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         // coursesAll(res);
+        console.log(res);
         getAllCourseDataApi(res.id).then((data) => {
+          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);
