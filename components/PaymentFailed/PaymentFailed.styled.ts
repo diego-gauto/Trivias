@@ -8,6 +8,32 @@ export const FailedContainer = styled.div`
   justify-content: center;
   width: 100%;
   padding: 60px;
+  .form-input {
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+    label {
+      color: #3f1168;
+    }
+
+    .select-contain {
+      position: relative;
+      select {
+        border-radius: 100px;
+        border: 1px solid rgb(148, 44, 237);
+        color: rgb(63, 17, 104);
+        background: rgba(218, 211, 229, 0.4);
+      }
+      svg {
+        position: absolute;
+        top: 52%;
+        transform: translateY(-50%);
+        right: 15px;
+        pointer-events: none;
+      }
+    }
+  }
+
   img {
     width: 100%;
     max-width: 500px;
