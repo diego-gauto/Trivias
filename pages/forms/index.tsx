@@ -10,6 +10,7 @@ import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
+import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
 import styles from "./formulario.module.css";
 
@@ -29,6 +30,12 @@ const Formularios = () => {
   const [isOption1Visible, setIsOption1Visible] = useState(true);
   const [isOption2Visible, setIsOption2Visible] = useState(true);
   const [isOption3Visible, setIsOption3Visible] = useState(true);
+
+  const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
+  const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
+  // const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
+
+
 
 
 
@@ -130,10 +137,11 @@ const Formularios = () => {
       const createUserResult = true;
 
       if (createUserResult) {
-        //popup registro exitos
+        setIsUserCreateModalVisible(true)
         console.log("usuario registrado exitosamente")
       } else {
         //popup el usuario ya esta registrado
+        setIsUserExistModalVisible(true)
         console.log("usuario ya registrado")
       }
     } catch (error) {
@@ -271,7 +279,9 @@ const Formularios = () => {
 
         </form>
       </div>
-      <ModalSuccessUserCreate />
+      {isUserCreateModalVisible && <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />}
+      {isUserExistModalVisible && <ModalUserExist closeModal={setIsUserExistModalVisible} />}
+
     </div>
   );
 };

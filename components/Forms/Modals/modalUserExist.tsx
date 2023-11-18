@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-const ModalSuccessUserCreate = ({ closeModal }: { closeModal: (value: boolean) => void }) => {
+const ModalUserExist = ({ closeModal }: { closeModal: (value: boolean) => void }) => {
 
   const router = useRouter();
 
@@ -14,7 +14,7 @@ const ModalSuccessUserCreate = ({ closeModal }: { closeModal: (value: boolean) =
       <Overlay>
         <ModalContainer>
           <ModalHead>
-            <h3>Solicitud procesada con éxito</h3>
+            <h3>Solicitud procesada con anterioridad</h3>
           </ModalHead>
           <CloseButton onClick={() => closeModal(false)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
@@ -22,13 +22,14 @@ const ModalSuccessUserCreate = ({ closeModal }: { closeModal: (value: boolean) =
             </svg>
           </CloseButton>
           <ContentContainer>
-            <h4>¡Felicidades!</h4>
-            <h5>Has solicitado tu beca con éxito</h5>
-            <h6>En los próximos días nos comunicaremos contigo para indicarte los pasos a seguir</h6>
-            <p>Te invitamos a navegar nuestra plataforma y tomar alguno de nuestros cursos gratuitos</p>
+            <h4>Correo ya existente</h4>
+            <h5>El correo que ingresaste ya había solicitado la beca con anterioridad</h5>
+            <h6>Si el correo es correcto, te invitamos a navegar nuestra plataforma y tomar alguno de nuestros cursos gratuitos</h6>
+            <p>Si escribiste mal el correo, vuelve al formulario y corrigelo</p>
           </ContentContainer>
           <ButtonContainer>
-            <RedirectButton onClick={handleRedirect}>Ir a Cursos</RedirectButton>
+            <RedirectButton onClick={handleRedirect}>ir a cursos</RedirectButton>
+            <RedirectButton onClick={() => closeModal(false)}>Volver al Formulario</RedirectButton>
           </ButtonContainer>
         </ModalContainer>
       </Overlay>
@@ -36,7 +37,7 @@ const ModalSuccessUserCreate = ({ closeModal }: { closeModal: (value: boolean) =
   )
 }
 
-export default ModalSuccessUserCreate
+export default ModalUserExist
 
 const Overlay = styled.div`
   width: 100vw;
