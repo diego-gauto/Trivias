@@ -57,7 +57,7 @@ export const FAQ = () => {
             <div className="border-top mx-3">
               <p className="py-2 animate__animated animate__fadeIn">Nuestros métodos de pago son súper cómodos.<br />
                 Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
-                <i>(El cobro se realiza de manera automática mes con mes)</i><br />
+                <i>(El cobro se realiza de manera automática mes con mes).</i><br />
                 Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad o el plan
                 cuatrimestral, <i>(Pagando anualidad no se realiza
                   ningún cobro adicional por un año).</i></p>
