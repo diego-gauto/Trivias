@@ -842,10 +842,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <div className="border-top">
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
-                  <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $249 MXN u 14 dls.)</i><br />
-                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
-                  $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
+                  <i>(El cobro se realiza de manera automática mes con mes).</i><br />
+                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad o el plan
+                  cuatrimestral, <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
               </div>
             </div>

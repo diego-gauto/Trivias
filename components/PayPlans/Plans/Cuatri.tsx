@@ -118,7 +118,7 @@ const Cuatri = (props: IData) => {
               <p className="text">Nuevo </p>
             </div>
             <div className="tip-q mb-1">
-              <p className="white mb-0">Programa Nails Master con Certificación</p>
+              <p className="white mb-0">Programa Nails Master Revolution con Certificación</p>
               {views.get(10) ?
                 <BsChevronUp className="tip-icon-special back-white" /> :
                 <BsChevronDown className="tip-icon-special back-white" />}
