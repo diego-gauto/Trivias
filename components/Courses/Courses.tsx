@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { BsTriangle } from "react-icons/bs";
+import { BsChevronDoubleDown, BsTriangle } from "react-icons/bs";
 import ReactPlayer from "react-player";
 
 import { useRouter } from "next/router";
@@ -20,6 +20,7 @@ import {
 } from "./Courses.styled";
 import { ICourses, ILessons, ISeasons } from "./ICourses";
 import Sliders from "./Modules/Sliders";
+import { useMediaQuery } from "react-responsive";
 
 const Courses = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,6 +31,7 @@ const Courses = () => {
   const [courseForModal, setCourseForModal] = useState<any>({});
   const [loggedIn, setLoggedIn] = useState(false);
   let today = new Date().getTime() / 1000;
+  const responsive800 = useMediaQuery({ query: "(max-width: 800px)" });
   const [seasonIndex, setSeasonIndex] = useState<number>(0);
   const [lessonIndex, setLessonIndex] = useState<number>(0);
 
@@ -38,16 +40,18 @@ const Courses = () => {
   let courseSections = [
     "continue-watching",
     "free-courses",
+    "product-courses",
+    "special-courses",
     "art-courses",
     "structure-courses",
     "makeup-courses",
-    "product-courses",
   ]
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
   const goTo = () => {
     if (userData) {
+      let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {
         router.push({
           pathname: LESSON_PATH,
@@ -65,7 +69,7 @@ const Courses = () => {
         }
 
       }
-      if (videoCourse.type === "Mensual" && userData.final_date > today || userData.role === 'superAdmin') {
+      if ((videoCourse.type === "Mensual" && userData.final_date > today) || complete_nails.length > 0 || userData.role === 'superAdmin') {
         router.push({
           pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
@@ -91,7 +95,9 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         // coursesAll(res);
+        console.log(res);
         getAllCourseDataApi(res.id).then((data) => {
+          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);
@@ -165,7 +171,14 @@ const Courses = () => {
           <Gradient></Gradient>
         </div>
       </Container>
-      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
+      {
+        !loading &&
+        <div className="slide-down">
+          <p>Desliza hacia abajo {responsive800 && <br />}para ver todos los cursos disponibles</p>
+          <BsChevronDoubleDown />
+        </div>
+      }
+
       {/* SLIDERS */}
       <div className="module-contain">
         {
@@ -184,6 +197,7 @@ const Courses = () => {
           })
         }
       </div>
+      <CourseModal show={show} setShow={setShow} course={videoCourse} user={userData} />
     </CoursesContain>
   )
 }

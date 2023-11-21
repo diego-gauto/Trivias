@@ -418,7 +418,7 @@ const HomeWork = () => {
                 )}
             </tbody>
           </Table>
-          <HomeWorkModal setShow={setShow} show={show} data={data} user={homeWorks.userId} handleClick={handleClick} />
+          <HomeWorkModal setShow={setShow} show={show} data={data} handleClick={handleClick} />
         </Container>
       </HWContainer>
     </AdminContain>

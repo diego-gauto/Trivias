@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const PlanStyles = styled.div`
   height: 100%;
+  h3 {
+    font-size: calc(1.1rem + 1.5vw);
+  }
   .planes {
     --purple-pink: #cb5cc0;
     --blue: #6b77f5;
@@ -55,6 +58,71 @@ export const PlanStyles = styled.div`
       color: #3f1168;
       font-size: small;
     }
+    .special-plan {
+      background: linear-gradient(to right, #8825e1 0%, #af39cd 100%);
+      position: relative;
+      .more-popular {
+        background-color: white;
+        padding-block: 8px;
+        padding-inline: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        position: absolute;
+        border-radius: 100px;
+        right: 20px;
+        top: -20px;
+        svg {
+          color: #8825e1;
+        }
+        .text {
+          color: #8825e1;
+          font-weight: 600;
+          margin: 0;
+        }
+      }
+      .b-white {
+        border-bottom: 1px solid #e6e6e6;
+      }
+      .b-white-2 {
+        border-top: 1px solid #e6e6e6;
+      }
+      .white {
+        color: #fff !important;
+      }
+      .white-button {
+        padding-block: 10px;
+        padding-inline: 25px;
+        border: none;
+        border-radius: 100px;
+        line-height: 18px;
+        color: #8825e1;
+        font-weight: 500;
+        background-color: #fff;
+      }
+      .black-background {
+        background-color: #00000047;
+      }
+      .back-white {
+        background-color: #fff;
+      }
+      .tip-icon-special {
+        color: #8825e1;
+        min-width: 20px;
+        min-height: 20px;
+        align-self: center;
+        border-radius: 100%;
+      }
+    }
+    .card-price-fs {
+      font-size: 24px;
+    }
+    .size-sm {
+      font-size: 14px;
+    }
+    .fw-bold {
+      font-weight: bolder;
+    }
     .plan-container {
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
       border-radius: 14px;
@@ -98,8 +166,9 @@ export const PlanStyles = styled.div`
         .purple-button {
           padding-block: 10px;
           padding-inline: 25px;
+          line-height: 18px;
           border: none;
-          border-radius: 24px;
+          border-radius: 100px;
           color: #ffffff;
           background-color: #3f1168;
         }
@@ -123,6 +192,30 @@ export const PlanStyles = styled.div`
           font-size: small;
           padding: 15px;
           border-radius: 14px;
+          position: relative;
+          .new-item {
+            position: absolute;
+            border: 2px solid #3f1168;
+            padding-inline: 5px;
+            padding-block: 2px;
+            border-radius: 8px;
+            top: -10px;
+            max-height: 25px;
+            .text {
+              color: #3f1168;
+              margin: 0;
+              font-size: 12px;
+            }
+          }
+          .special {
+            border: 2px solid #fff;
+            .text {
+              color: #fff;
+            }
+          }
+          .special-back {
+            background: #671ca6;
+          }
           .just {
             text-align: justify;
           }
@@ -161,7 +254,7 @@ export const PlanStyles = styled.div`
       }
     }
   }
-  @media (max-width: 576px) {
+  @media (max-width: 600px) {
     .planes {
       .col-lg-3 {
         width: 100% !important;

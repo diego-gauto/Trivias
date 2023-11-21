@@ -177,7 +177,7 @@ const UserCardData = (props: CardData) => {
                   Sin cursos...
                 </CourseContain>
             }
-            <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton>
+            {/* <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton> */}
           </Courses>
           {/* <PayContain>
           <TitleBox>

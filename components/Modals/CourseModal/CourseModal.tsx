@@ -29,7 +29,8 @@ import { ICourseModal } from "./ICourseModal";
 import ModalMaterials from "./Materials/ModalMaterials";
 import SelectModule4 from "./Select/SelectModule";
 import { goToSuscription } from "../../../constants/redirects";
-
+import { useRouter } from "next/router";
+const gPlus = "/images/purchase/logo.png"
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
   const [material, setMaterial] = useState(false);
@@ -39,14 +40,16 @@ const CourseModal = (props: ICourseModal) => {
   const [seasons, setSeasons] = useState<any>([]);
   const responsive990 = useMediaQuery({ query: "(max-width: 990px)" });
   const DEFAULT_PROFESSOR_IMAGE = "/images/teachers/iker.jpg";
-  let today = new Date().getTime() / 1000;
+  const router = useRouter();
   const handleClick = (value: any) => {
     setLessons(course.seasons[value].lessons);
   };
   const handleShow = () => {
     setMaterial(true);
   }
-
+  const goToNails = () => {
+    router.push("/nails-master-revolution");
+  }
   useEffect(() => {
     if (Object.values(course).length > 0) {
       setLessons(course?.seasons[0]?.lessons);
@@ -111,16 +114,21 @@ const CourseModal = (props: ICourseModal) => {
             />
             <Container>
               <div className="top">
-                <div className="tag">NAILS <span>ACADEMY</span></div>
+                <img src={gPlus} />
                 <Cross onClick={handleClose}>
                   x
                 </Cross>
               </div>
               <TextContainer>
-                {course.type == "Producto" && <p className="price">por ${course.price?.toLocaleString('en-US')} <span>MXN</span></p>}
                 <button onClick={() => goToSuscription(user, course)}>
                   Comenzar ahora
                 </button>
+                {
+                  course.id === 57 &&
+                  <button onClick={goToNails} className="type-2">
+                    Más información
+                  </button>
+                }
               </TextContainer>
             </Container>
           </ModalBackground>

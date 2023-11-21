@@ -856,6 +856,7 @@ const AllCourses = (props: IAllCourses) => {
                     <option value="estructura">Estructura</option>
                     <option value="arte">Arte</option>
                     <option value="maquillaje">Maquillaje</option>
+                    <option value="especial">Especial</option>
                   </select>
               }
             </div>

@@ -8,7 +8,6 @@ export const ThankYouContainer = styled.div`
   justify-content: center;
   width: 100%;
   padding: 60px;
-
   .form-input {
     width: 100%;
     flex-grow: 1;

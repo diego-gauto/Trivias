@@ -17,6 +17,8 @@ import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
+import { RewardComponent } from "../Components/Reward";
+import { ICourse } from "../../Courses/Modules/ISliders";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -37,15 +39,7 @@ const star = "/images/landing_suscription/puntos.png"
 const envioMujer = "/images/landing_suscription/mujer002 1.png"
 const chica = "/images/landing_suscription/chica.png"
 const manosPrecio = "/images/landing_suscription/manos precio.png"
-const rewards = "/images/landing_suscription/rewardCircle.png"
-const timeReward = "/images/landing_suscription/time.png"
-const timeRewardOut = "/images/landing_suscription/time_outline.png"
-const pointReward = "/images/landing_suscription/star.png"
-const pointRewardOut = "/images/landing_suscription/star_outline.png"
-const awardReward = "/images/landing_suscription/award.png"
-const awardRewardOut = "/images/landing_suscription/award_outline.png"
-const testimonios = "/images/landing_suscription/Testimonios.png"
-const inspo = "/images/landing_suscription/inspo.png"
+
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
 const lineaMaq = "/images/landing_suscription/maquillaje.png"
@@ -57,8 +51,7 @@ const facil = "/images/landing_suscription/facil.png"
 const intermedio = "/images/landing_suscription/intermedio.png"
 const avanzado = "/images/landing_suscription/avanzado.png"
 const master = "/images/landing_suscription/master.png"
-const rewardBack = "/images/landing_suscription/recompensas_back.png"
-const news = "/images/landing_suscription/newsletter.png"
+
 const ubiG1 = "/images/landing_suscription/ubicacion_ghost_1.png"
 const ubiG2 = "/images/landing_suscription/ubicacion_ghost_2.png"
 const ubiG3 = "/images/landing_suscription/ubicacion_ghost_3.png"
@@ -68,9 +61,6 @@ const certifB3 = "/images/landing_suscription/back_certif_3.png"
 const certifB4 = "/images/landing_suscription/back_certif_4.png"
 const goldStar = "/images/landing_suscription/StarBenefits.png"
 const envioG = "/images/landing_suscription/ghost_envio.png"
-const cursoR = "/images/landing_suscription/cursos_recompensa.png"
-const tiempoR = "/images/landing_suscription/tiempo_recompensa.png"
-const puntoR = "/images/landing_suscription/puntos_recompensa.png"
 const backCell = "/images/landing_suscription/lineBCell.png"
 const backCell2 = "/images/landing_suscription/lineBCell2.png"
 const backCell3 = "/images/landing_suscription/lineBCell3.png"
@@ -96,12 +86,12 @@ views.set(4, false);
 
 interface ILandingSuscription {
   price: string;
-  isMonth: boolean;
+  type: string;
   isFacebook?: boolean;
 }
 
 const LandingSuscription = (props: ILandingSuscription) => {
-  const { price, isMonth, isFacebook } = props;
+  const { price, type, isFacebook } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
   const [cursos, setCursos] = useState(1)
@@ -109,6 +99,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
   const [courseArt, setCourseArt] = useState([])
   const [courseEst, setCourseEst] = useState([])
   const [courseMake, setCourseMake] = useState([])
+  const [specialCourse, setSpecialCourse] = useState({} as ICourse);
 
   const verQ = (q: any) => {
     setver(!ver)
@@ -139,6 +130,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
     })
     // coursesAll(null);
     getAllCourseDataApi(null).then((data) => {
+      setSpecialCourse(data.special_courses[0]);
       setCourseArt(data.art_courses)
       setCourseEst(data.structure_courses)
       setCourseMake(data.makeup_courses)
@@ -169,19 +161,27 @@ const LandingSuscription = (props: ILandingSuscription) => {
         if (user.level !== 0) {
           router.push(PREVIEW_PATH)
         } else {
-          if (isMonth) {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '2' } })
-          } else {
-            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+          if (type === "mensual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '3' } })
+          }
+          if (type === "anual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '3' } })
+          }
+          if (type === "cuatrimestral") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } })
           }
         }
       } else {
         console.log(2);
 
-        if (isMonth) {
+        if (type === "mensual") {
           localStorage.setItem('month', 'true')
-        } else {
+        }
+        if (type === "anual") {
           localStorage.setItem('anual', 'true')
+        }
+        if (type === "cuatrimstral") {
+          localStorage.setItem('cuatri', 'true')
         }
         router.push(SIGNUP_PATH)
       }
@@ -214,10 +214,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción {isMonth ? 'mensual' : 'anual'}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">cientos {!responsive650 && <br />} de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
+        <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 60 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 65 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
           {responsive650 && <br />}
           <h4 className="bold">Sólo {price}</h4>
         </div>
@@ -228,8 +228,15 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 60 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
+        </div>
+        <div className="special-course">
+          <img src={specialCourse?.image} />
+          <p className="title">Nails Master Revolution</p>
+          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+          <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
+          <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
         </div>
         <div className="all-center space">
           <div className="group-buttons">
@@ -614,14 +621,20 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
             <div className="list">
               <img src={boleto} className="me-3" />
-              <h5>Por cada mes dentro, recibes un boleto acumulable más para el <b className="p-pink">sorteo trimestral donde podrás ganas hasta $20,000.00</b></h5>
+              <h5>Por cada mes dentro, recibes un boleto acumulable más para el <b className="p-pink">sorteo cuatrimestral donde podrás ganas hasta $20,000.00</b></h5>
             </div>
 
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                <h5><b className="p-pink">20% de descuento</b> en productos a partir del 3° mes</h5>
-                <h5><b className="p-pink">40% de descuento</b> en productos a partir del 6° mes</h5>
+                {
+                  type === "mensual" ?
+                    <>
+                      <h5><b className="p-pink">20% de descuento</b> en productos a partir del 2° mes</h5>
+                      <h5><b className="p-pink">40% de descuento</b> en productos a partir del 4° mes</h5>
+                    </> :
+                    <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
+                }
               </div>
             </div>
 
@@ -656,87 +669,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
           <h2 className="red bolder red-font">Costo total real: <del>{responsive650 && <br />}$74,719.00 MXN</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 60{responsive650 && <br />} cursos completos</h2>
+          <h2 className="p-pink bolder big-font">Más de 65{responsive650 && <br />} cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
           <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
       </div>
-
-
-      <div className="rewards-section">
-        <div className="side-images">
-          <img src={rewardBack} />
-          <img src={rewardBack} className="rotate-img" />
-        </div>
-        <div className="mx-3 all-center">
-          <img src={rewards} className="me-3" />
-          <h2 className="text-title">CENTRO DE {responsive650 && <br />}<b>RECOMPENSAS</b></h2>
-        </div>
-
-        <div className="card-container">
-          <div className="reward-card points">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={pointReward} className="title-img" />
-                <img src={pointRewardOut} className="title-img" />
-              </div>
-              <h4><b className="p-pink"><i>Por puntaje</i></b><br /></h4>
-              <p className="bold m-5">Cada tarea aprobada, clase o curso terminado,
-                te dará puntos que puedes canjear por productos Gonvar.</p>
-            </div>
-            <div className="hover-card">
-              <img src={puntoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Siguiente recompensa <br /> <b className="yellow">2 monómetros Gonvar</b></p>
-              <h3 className="yellow bold">al reunir <br /> 3,000 puntos</h3>
-            </div>
-          </div>
-
-          <div className="reward-card time">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={timeReward} className="title-img" />
-                <img src={timeRewardOut} className="title-img" />
-              </div>
-              <h4><b className="teal"><i>Por tiempo </i></b><br /></h4>
-              <p className="bold m-5">Por cada mes que permanezcas suscrita, obtendrás nuevos beneficios y
-                mejores descuentos en nuestros productos.</p>
-            </div>
-            <div className="hover-card">
-              <img src={tiempoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Tu siguiente recompensa <br /> estará disponible <b className="yellow">en Junio</b></p>
-              <h3 className="yellow bold">20% de descuento <br /> en productos Gonvar</h3>
-            </div>
-          </div>
-
-          <div className="reward-card awards">
-            <div className="normal-card">
-              <div className="all-center icons">
-                <img src={awardReward} className="title-img" />
-                <img src={awardRewardOut} className="title-img" />
-              </div>
-              <h4><b className="blue"><i>Certificados </i></b><br /></h4>
-              <p className="bold m-5">Recibe un certificado oficial de la marca con un Folio Único Verificado (FUV)
-                por cada curso completo que termines.</p>
-            </div>
-            <div className="hover-card">
-              <img src={cursoR} className="my-3" />
-              <h2 className="h1">¡HOLA MARÍA!</h2>
-              <p>Tu siguiente curso a terminar es <br /> <b className="yellow">MANICURE CON BALANCE</b></p>
-              <h3 className="yellow bold">Has conseguido 15 <br /> Certificados FUV</h3>
-            </div>
-
-          </div>
-        </div>
-
-        <h5>Gracias a nuestro sistema de puntos,{responsive650 && <br />} beneficios y certificados acumulables, <br />
-          <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> <br />
-          sólo por <b>permanecer suscrita, concluir tus {responsive650 && <br />}cursos y hacer tus tareas.</b></h5>
-      </div>
-
-
+      <RewardComponent />
       <div className="testimonio-section">
         <h2 className="h1 bold big-title">Más de 45,000{responsive650 && <br />} alumnas</h2>
         <div className="experiences-container">
@@ -843,7 +782,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </Swiper>
           </div>
           <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
-            en nuestros más de 60 cursos.</h4>
+            en nuestros más de 65 cursos.</h4>
 
           {/*     Catalogo?????????????????????????????????????         
             <div className="all-center">
@@ -903,10 +842,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <div className="border-top">
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
-                  <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $249 MXN u 14 dls.)</i><br />
-                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
-                  $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
+                  <i>(El cobro se realiza de manera automática mes con mes).</i><br />
+                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad o el plan
+                  cuatrimestral, <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
               </div>
             </div>

@@ -100,6 +100,24 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
           }
         });
       }
+      if (type === 3) {
+        //cuatrimestral
+        let body = {
+          user_final_date: user.final_date,
+          start_date: user.start_date,
+          level: 8,
+          id: user.id,
+          days: 120,
+        }
+        await updateMembershipPlanApi(body).then((res) => {
+          if (res.response) {
+            alert(res.response.data.data)
+          }
+          else {
+            alert("Plan Cuatrimestral Actualizado con exito!")
+          }
+        });
+      }
     }
   }
   const deleteDays = () => {
@@ -136,12 +154,13 @@ const ModalAddDays = ({ show, setShow, user }: any) => {
           />
         </InputContain>
         <ButtonContain>
-          <PurpleButton onClick={addDays} style={{ background: "green" }} >Agregar Dias</PurpleButton>
-          <PurpleButton style={{ background: "blue" }} onClick={() => addMembership(2)}>
+          <PurpleButton onClick={addDays} style={{ background: "#17cd46" }} >Agregar Dias</PurpleButton>
+          <PurpleButton onClick={() => addMembership(1)}>Agregar Mensualidad</PurpleButton>
+          <PurpleButton onClick={() => addMembership(2)} style={{ background: "#1740cd" }}>
             Agregar Anualidad</PurpleButton>
-          <PurpleButton onClick={() => {
-            addMembership(1);
-          }}>Agregar Mensualidad</PurpleButton>
+          <PurpleButton onClick={() => addMembership(3)} style={{ background: "#a317cd" }}>
+            Agregar Plan Cuatrimestral
+          </PurpleButton>
         </ButtonContain>
         {(user.final_date > today && user.level === 0) && <ButtonContain>
           <PurpleButton onClick={() => {

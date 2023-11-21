@@ -8,7 +8,7 @@ export const authRedirect = (type: string, userInfo?: any) => {
   let today = new Date().getTime() / 1000;
   if (type === "login") {
     if (localStorage.getItem("trial") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=3`
     } else if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
     }
@@ -16,10 +16,16 @@ export const authRedirect = (type: string, userInfo?: any) => {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("product")}`
     }
     else if (localStorage.getItem("month") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=3`
+    }
+    else if (localStorage.getItem("month_1") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`
     }
     else if (localStorage.getItem("anual") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`
+    }
+    else if (localStorage.getItem("cuatri") === "true" && userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`
     }
     else if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
@@ -38,7 +44,7 @@ export const authRedirect = (type: string, userInfo?: any) => {
   }
   if (type === "register") {
     if (localStorage.getItem("trial") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=2`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=3`
     }
     if (localStorage.getItem("course")) {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("course")}`
@@ -47,10 +53,16 @@ export const authRedirect = (type: string, userInfo?: any) => {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${localStorage.getItem("product")}`
     }
     if (localStorage.getItem("month") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=3`
+    }
+    if (localStorage.getItem("month_1") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`
     }
     if (localStorage.getItem("anual") === "true") {
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`
+    }
+    if (localStorage.getItem("cuatri") === "true") {
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`
     }
     if (localStorage.getItem("nailMaster") === "true") {
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`
@@ -76,9 +88,11 @@ export const goToCertificate = (course: any) => {
   });
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
+  let diff = Math.round((today - user.final_date) / 86400);
   if (user) {
+    let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
     //New condition subscription flow
-    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin') {
+    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin' || diff <= 6 || complete_nails.length > 0) {
       router.push({
         pathname: LESSON_PATH,
         query: { id: course.id, season: 0, lesson: 0 },
@@ -87,7 +101,7 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
     if (course.type === "Mensual" && user.level === 0 && user.final_date < today) {
       router.push(`${PLAN_PATH}`)
     }
-    if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && (user.level === 1 || user.level > 2))) {
+    if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && user.level === 3)) {
       router.push(`${PROFILE_PATH}`)
     }
     if (course.type === "Producto" && course.pay) {

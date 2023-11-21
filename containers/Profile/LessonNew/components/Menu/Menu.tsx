@@ -36,6 +36,9 @@ const Menu = (props: IMenu) => {
       goTo(course.id, season, lesson)
     }
     if (course.type === "Mensual" && course.sequential === 1) {
+      if (checkLessons(user, course, season, lesson)) {
+        goTo(course.id, season, lesson)
+      }
     }
     if (course.type === "Producto" && course.sequential === 1) {
       if (checkLessons(user, course, season, lesson)) {

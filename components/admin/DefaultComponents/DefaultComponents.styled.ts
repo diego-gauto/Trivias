@@ -3,19 +3,20 @@ import styled, { css } from "styled-components";
 export const DefaultContainer = styled.div`
   display: flex;
   width: 100%;
-  min-width: 1000px;
   height: fit-content;
   border-radius: 10px;
   flex-direction: column;
-  margin: 30px;
+  margin: 20px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   p,
   h2 {
     margin: 0;
   }
-  .table-contain {
-    max-width: 1000px;
-    overflow-x: auto;
+  media(max-width: 1023) {
+    .table-contain {
+      max-width: 1000px;
+      overflow-x: auto;
+    }
   }
   .header {
     display: flex;
@@ -196,6 +197,16 @@ export const AdminTable = styled.table`
   @media (max-width: 800px) {
     i {
       display: none;
+    }
+    th,
+    td {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 450px) {
+    th,
+    td {
+      font-size: 10px;
     }
   }
 `;
