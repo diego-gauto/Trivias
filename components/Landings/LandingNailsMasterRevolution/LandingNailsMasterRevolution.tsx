@@ -223,9 +223,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       <FirstSection>
         <div className="mt-3 fechas">
           <h4><b>Actualización 2024</b><br />
-            Inscripciones sólo desde el<br />9 de Octubre al 20 de Noviembre</h4>
+            Inscripciones sólo desde el<br />9 de Octubre al 24 de Noviembre</h4>
           <Countdown
-            date={1700501613000}
+            date={1700851294000}
             renderer={props =>
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>

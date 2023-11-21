@@ -49,7 +49,6 @@ const Courses = () => {
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
-  console.log(userData);
   const goTo = () => {
     if (userData) {
       let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
