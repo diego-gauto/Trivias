@@ -25,7 +25,7 @@ const ModalUserExist = ({ closeModal }: { closeModal: (value: boolean) => void }
             <h4>Correo ya existente</h4>
             <h5>El correo que ingresaste ya había solicitado la beca con anterioridad</h5>
             <h6>Si el correo es correcto, te invitamos a navegar nuestra plataforma y tomar alguno de nuestros cursos gratuitos</h6>
-            <p>Si escribiste mal el correo, vuelve al formulario y corrigelo</p>
+            <p>Si desear cambiar el correo, vuelve al formulario y corrígelo</p>
           </ContentContainer>
           <ButtonContainer>
             <RedirectButton onClick={handleRedirect}>ir a cursos</RedirectButton>
@@ -127,9 +127,10 @@ const CloseButton = styled.button`
   `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto; /* Centra el contenedor de botones */
+  margin-right: auto; /* Centra el contenedor de botones */
 `;
 
 const RedirectButton = styled.button`
@@ -143,11 +144,16 @@ const RedirectButton = styled.button`
     cursor: pointer;    
     width: 200px;
     height: 45px;
+    margin-right: 10px;
 
-  &:hover {
-    transform: scale(1.03);
-    -webkit-transition: 0.5s ease all;
-    transition: 0.5s ease all;
-    background-color: #5000b5;
-  }
+    &:last-child {
+      margin-right: 0; /* Elimina el margen derecho del último botón */
+    }
+
+    &:hover {
+      transform: scale(1.03);
+      -webkit-transition: 0.5s ease all;
+      transition: 0.5s ease all;
+      background-color: #5000b5;
+    }
   `;
