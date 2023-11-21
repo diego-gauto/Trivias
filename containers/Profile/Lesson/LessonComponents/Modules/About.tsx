@@ -38,7 +38,7 @@ const About = (props: IAbout) => {
                   {
                     data.lesson_material.map((extra: any, index: number) => {
                       return (
-                        <a key={"extra_material_" + index} className='pdf' target="_blank" download={extra.material} href={extra.material}>{index + 1}. {extra.title}</a>
+                        <span key={"extra_material_" + index} className='pdf'>{extra.title}<a className="btn-material-apoyo-pdf" target="_blank" download={extra.material} href={extra.material}>Ir al pdf</a></span>
                       )
                     })
                   }

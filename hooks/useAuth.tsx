@@ -6,13 +6,14 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "../firebase/firebaseConfig";
 import { getUserApi } from "../components/api/users";
+import { IAuthContext } from "../interfaces/IAuthContext";
 
 interface Props {
   children?: ReactNode
   // any props that come into the component
 }
 
-const AuthContext = createContext<any>(null);
+const AuthContext = createContext<IAuthContext>({ user: null, isAuthenticating: false });
 
 export const useAuth = () => {
   //console.log(db)

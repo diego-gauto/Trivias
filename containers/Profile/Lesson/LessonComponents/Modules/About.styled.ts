@@ -163,6 +163,18 @@ export const LessonContent = styled.div`
       opacity: 0.7;
     }
   }
+  .btn-material-apoyo-pdf {
+    margin-left: 10px;
+    padding: 4px 10px;
+    color: #8e2de2;
+    border-radius: 20px;
+    border: 1px solid #8e2de2;
+    background: transparent;
+    text-decoration: none;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
   @media (max-width: 1023px) {
     font-size: 12px;
   }
