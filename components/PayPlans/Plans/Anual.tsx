@@ -66,7 +66,11 @@ const Anual = (props: IData) => {
 
   return (
     <PlanStyles>
-      <ChangePlanModal show={open} onHide={() => { setOpen(false) }} user={user} />
+      <ChangePlanModal
+        show={open}
+        onHide={() => { setOpen(false) }}
+        user={user}
+        planOption="anual_v1_1" />
       <div className="back plan-container">
         <div className="header">
           <div className="top-tab border Back-blue">
@@ -88,7 +92,7 @@ const Anual = (props: IData) => {
           </div>
           <div className="d-flex justify-content-center mb-3">
             {(!user.level || user.level === 0) && <button className="purple-button" onClick={goTo}>Comenzar ahora</button>}
-            {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
+            {(user.level === 1 || user.level === 7) && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
           </div>
         </div>
         <div className="main-body">

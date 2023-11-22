@@ -9,14 +9,16 @@ import { useState } from "react";
 import { LoaderContainSpinner } from "../../../containers/Profile/Purchase/Purchase.styled";
 import { textAlign } from "html2canvas/dist/types/css/property-descriptors/text-align";
 
+type PlanOption = "anual_v1_1" | "cuatrimestre"
 
 interface IModal {
   user: IUser;
   show: boolean;
   onHide: () => void;
+  planOption: PlanOption;
 }
 const ChangePlanModal = (props: IModal) => {
-  const { show, onHide, user } = props;
+  const { show, onHide, user, planOption } = props;
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +27,7 @@ const ChangePlanModal = (props: IModal) => {
     if (user.method === "conekta") {
       let body = {
         conekta_id: user.conekta_id,
-        plan_id: "anual"
+        plan_id: planOption
       }
       updateConektaCustomerInfo(body).then((res) => {
         window.location.href = "/preview"
@@ -50,16 +52,30 @@ const ChangePlanModal = (props: IModal) => {
     }
   }
 
+  const renderTextAnual = () => {
+    return (<>Ahorra $2011 𝗠𝗫𝗡 al adquirir nuestra suscripción anual. <br></br>
+      ¡No pierdas esta oportunidad!</>)
+  }
+
+  const renderTextQuarterly = () => {
+    return (<>Ahorra $711 𝗠𝗫𝗡 al adquirir nuestra suscripción cuatrimestral. <br></br>
+      ¡No pierdas esta oportunidad!</>)
+  }
+
   return (
     <Modal show={show} onHide={() => { onHide(); setLink(""); }} centered >
       <ChangePlanModalContain>
         <p style={{ textAlign: "center" }}>
-          Ahorra $𝟭𝟯𝟴𝟵 𝗠𝗫𝗡 al adquirir nuestra suscripción anual. <br></br>
-          ¡No pierdas esta oportunidad!
+          {
+            planOption === "anual_v1_1" ? renderTextAnual() : renderTextQuarterly()
+          }
         </p>
         <IoClose className='close-icon' onClick={onHide} />
         <div className="buttons-container">
-          {!loading ? <button className="left" onClick={update}>Comprar a Anualidad</button> :
+          {!loading ?
+            <button className="left" onClick={update}>
+              {planOption === "anual_v1_1" ? "Comprar a Anualidad" : "Comprar a Cuatrimestralidad"}
+            </button> :
             <LoaderContainSpinner />}
           {/* <button className="right" onClick={onHide}>Mantener membresia actual</button> */}
         </div>

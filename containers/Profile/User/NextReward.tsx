@@ -124,7 +124,11 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
   }
   return (
     <ThirdBox>
-      <ChangePlanModal show={open} onHide={() => { setOpen(false) }} user={user} />
+      <ChangePlanModal
+        show={open}
+        onHide={() => { setOpen(false) }}
+        user={user}
+        planOption="cuatrimestre" />
       {pop &&
         <div className="dimScreen animate__animated animate__slideInUp" >
           <div id="confirmBox" className="dialog">
