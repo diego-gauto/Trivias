@@ -28,7 +28,7 @@ export const createUserFormApi = async (userForm: any) => {
   return axios
     .post("https://gonvar.inowu.dev/userForm", userForm)
     .then((res) => {
-      return res.data.data
+      return res
     })
     .catch((error) => {
       console.log(error);

@@ -7,7 +7,7 @@
   align-items: center;
 
   .logo{
-    width: 23rem;
+    width: 20rem;
     margin:40px 0;
   }
 
@@ -16,15 +16,20 @@
     align-items: center;
     flex-direction: column;
     background-color: #c9c0d3;
-    width: 60%;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
     padding: 30px 20px 20px 20px;
+    box-sizing: border-box;
     
     .title{
       display: flex;
       justify-content: center;
       text-align: center;
       position: relative;
-      width: 90%;
+      max-width: 90%;
+      margin: 0 auto;
+      font-size: 36px;
     }
 
     .paragraph{
@@ -53,41 +58,59 @@
         flex-direction: row;
         justify-content: space-between;
 
-        .errorMessageNombre{
-          color: red;
-          position: relative;
-          top:-8px;
-          width: 245px;
+        @media (max-width: 720px) {
+          flex-direction: column;
         }
-        
-        .errorMessageApellido{
-          color: red;
+
+        .name, .last_name {
+          display: flex;
+          flex-direction: column;
           position: relative;
-          top:-8px;
-          width: 245px;
+
+          .errorMessageNombre, .errorMessageApellido{
+            color: red;
+            position: absolute;
+            top:55px;
+            width: 245px;
+            padding-left: 15px;
+          }
+        }
+
+        .last_name {
+          @media (max-width: 720px) {
+            margin-top: 30px;
+          }
         }
         
       }
     
       .mail{
         margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
 
         .errorMessageMail{
           color: red;
-          position: relative;
-          top:-8px;
+          position: absolute;
+          top:55px;
           width: 300px;
+          padding-left: 15px;
         }
       }
     
       .phone{
         margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
 
         .errorMessageWA{
           color: red;
-          position: relative;
-          top:-3px;
+          position: absolute;
+          top:55px;
           width: 300px;
+          padding-left: 15px;
         }
       }
     
@@ -96,7 +119,22 @@
       }
     
       .options{
-        margin-top: 60px;
+        margin: 60px 0 30px 0;
+        position: relative;
+
+        .optionContainer{
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          
+          .errorOption{
+            color: red;
+            position: absolute;
+            top:100%;
+            width: 350px;
+            padding-left: 40px;
+          }
+        }
       }
     
       .buttonContainer{

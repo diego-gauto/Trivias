@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
+import { createUserFormApi } from "../../components/api/userform";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
@@ -39,13 +40,17 @@ const Formularios = () => {
 
 
 
-  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA, image, options, buttonContainer, submitButton } = styles;
+  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
     apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
     correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
-    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio')
+    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
+    option1: Yup.string().required('Debes seleccionar alguna de las opciones'),
+    option2: Yup.string().required('Debes seleccionar alguna de las opciones'),
+    option3: Yup.string().required('Debes seleccionar alguna de las opciones')
+
   });
 
   const formik = useFormik({
@@ -132,9 +137,10 @@ const Formularios = () => {
     console.log(createUserDto)
 
     try {
-      // const res = await createUserFormApi(createUserDto);
-      // const createUserResult = res.data.result;
-      const createUserResult = false;
+      const res = await createUserFormApi(createUserDto);
+      const createUserResult = res.data.result;
+      console.log(createUserResult)
+      // const createUserResult = false;
 
       if (createUserResult) {
         setIsUserCreateModalVisible(true)
@@ -151,6 +157,30 @@ const Formularios = () => {
 
   };
 
+  const validarOpciones = () => {
+    let opcionesValidas = true;
+
+    // Validar option1
+    if (!formik.values.option1) {
+      formik.setFieldError('option1', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    // Validar option2
+    if (!formik.values.option2) {
+      formik.setFieldError('option2', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    // Validar option3
+    if (!formik.values.option3) {
+      formik.setFieldError('option3', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    return opcionesValidas;
+  };
+
   const handleButtonClick = () => {
     // Marcar todos los campos como "touched"
     formik.setTouched({
@@ -158,6 +188,9 @@ const Formularios = () => {
       apellido: true,
       correo: true,
       numeroWhatsApp: true,
+      option1: true,
+      option2: true,
+      option3: true,
     });
 
     // Realizar la validación del formulario
@@ -165,11 +198,14 @@ const Formularios = () => {
       // Verificar si hay errores en los campos
       const formIsValid = Object.keys(errors).length === 0;
 
+      // Validar opciones
+      const optionsAreValid = validarOpciones();
+
       // Actualizar el estado de validez del formulario
-      setIsFormValid(formIsValid);
+      setIsFormValid(formIsValid && optionsAreValid);
 
       // Si el checkbox está marcado y el formulario es válido, enviar el formulario
-      if (formIsValid) {
+      if (formIsValid && optionsAreValid) {
         try {
           formik.handleSubmit();
         } catch (error) {
@@ -215,28 +251,35 @@ const Formularios = () => {
 
         <form onSubmit={formik.handleSubmit} className={inputContainer}>
           <div className={names}>
-            <InputNombre
-              label={"Nombre"}
-              placeholder={"Carla"}
-              onChange={handleNombreChange}
-              onBlur={handleNombreBlur}
-              value={formik.values.nombre}
-            />
-            {formik.touched.nombre && formik.errors.nombre && (
-              <div className={errorMessageNombre}>{formik.errors.nombre}</div>
-            )}
+            <div className={name}>
 
-            <InputNombre
-              label={"Apellido"}
-              placeholder={"Flores"}
-              onChange={handleApellidoChange}
-              onBlur={handleApellidoBlur}
-              value={formik.values.apellido}
-            />
-            {formik.touched.apellido && formik.errors.apellido && (
-              <div className={errorMessageApellido}>{formik.errors.apellido}</div>
-            )}
+              <InputNombre
+                label={"Nombre"}
+                placeholder={"Carla"}
+                onChange={handleNombreChange}
+                onBlur={handleNombreBlur}
+                value={formik.values.nombre}
+              />
+              {formik.touched.nombre && formik.errors.nombre && (
+                <div className={errorMessageNombre}>{formik.errors.nombre}</div>
+              )}
+            </div>
 
+            <div className={last_name}>
+
+
+              <InputNombre
+                label={"Apellido"}
+                placeholder={"Flores"}
+                onChange={handleApellidoChange}
+                onBlur={handleApellidoBlur}
+                value={formik.values.apellido}
+              />
+              {formik.touched.apellido && formik.errors.apellido && (
+                <div className={errorMessageApellido}>{formik.errors.apellido}</div>
+              )}
+
+            </div>
           </div>
           <div className={mail}>
             <InputMail
@@ -263,15 +306,34 @@ const Formularios = () => {
             )}
           </div>
           {isImageVisible && <img className={image} src="./images/forms/iPhone-14-removebg.png" alt="iphone" />}
+
           <div className={options}>
-            <OptionComponent label={optionLabel1} options={options1} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={isOption1Visible} />
-            <OptionComponent label={optionLabel2} options={options2} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={isOption2Visible} />
-            <OptionComponent label={optionLabel3} options={options3} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={isOption3Visible} />
+            <div className={optionContainer}>
+              <OptionComponent label={optionLabel1} options={options1} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={isOption1Visible} />
+              {formik.touched.option1 && formik.errors.option1 && (
+                <div className={errorOption}>{formik.errors.option1}</div>
+              )}
+            </div>
+
+            <div className={optionContainer}>
+              <OptionComponent label={optionLabel2} options={options2} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={isOption2Visible} />
+              {formik.touched.option2 && formik.errors.option2 && (
+                <div className={errorOption}>{formik.errors.option2}</div>
+              )}
+            </div>
+
+            <div className={optionContainer}>
+              <OptionComponent label={optionLabel3} options={options3} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={isOption3Visible} />
+              {formik.touched.option3 && formik.errors.option3 && (
+                <div className={errorOption}>{formik.errors.option3}</div>
+              )}
+            </div>
+
           </div>
           <div className={lineaAtravesada}></div>
 
           <div className={buttonContainer}>
-            <button type="submit" className={submitButton} onClick={handleButtonClick}>
+            <button type="button" className={submitButton} onClick={handleButtonClick}>
               Enviar Solicitud
             </button>
           </div>

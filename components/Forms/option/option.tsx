@@ -25,6 +25,11 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
     onOptionChange(optionValue)
   };
 
+  const handleCustomButtonClick = (option: string) => {
+    setSelectedOption(option);
+    onOptionChange(option);
+  };
+
   if (!isVisible) {
     return null; // Si no es visible, no renderizar nada
   }
@@ -42,8 +47,13 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             checked={selectedOption === option}
             onChange={handleRadioChange}
           />
-          <span className={customRadioButton}></span>
-          <label className={optionLabel} htmlFor={option}>{option}</label>
+          <span
+            className={customRadioButton}
+            onClick={() => handleCustomButtonClick(option)}
+            role="button"
+            tabIndex={0}>
+          </span>
+          <label className={optionLabel} htmlFor={option} onClick={() => handleCustomButtonClick(option)}>{option}</label>
         </div>
       ))}
     </div>

@@ -53,7 +53,7 @@
   font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
 }
 
-@media screen and (max-width: 1127px) {
+@media screen and (max-width: 600px) {
 
   .inputs{
     width: 100%;
