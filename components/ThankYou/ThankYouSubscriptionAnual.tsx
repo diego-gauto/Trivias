@@ -56,7 +56,7 @@ const ThankYouSubscriptionAnual = () => {
         <h1>Felicidades tu compra ha <br /> sido exitosa, <span>{userData?.name}!</span></h1>
         <p>¡Felicidades ya estás dentro! <br />
           Para continuar, ¿dónde viste nuestra oferta única?</p>
-        <div className="form-input">
+        <div className="form-input" style={{ flexGrow: 'unset' }}>
           <label>Me enteré de Gonvar en:</label>
           <div className="select-contain">
             <select className={`form-control ${errors.option ? 'is-invalid' : ''}`} defaultValue={""} {...register("option")} onChange={(e) => setOption(e.target.value)}>
@@ -76,7 +76,7 @@ const ThankYouSubscriptionAnual = () => {
           <button className='top' disabled={!option} type='submit'>Ir a tus cursos</button>
         </div>
       </form>
-      <img src="/images/purchase/payment.png" alt="" />
+      <img src="/images/purchase/payment.png" alt="" style={{ maxHeight: 'unset' }} />
     </ThankYouContainer>
   )
 }

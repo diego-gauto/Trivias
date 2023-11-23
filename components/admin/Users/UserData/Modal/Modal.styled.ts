@@ -73,7 +73,7 @@ export const ButtonContain = styled.div`
   justify-content: center;
   gap: 10px;
   button {
-    width: 225px;
+    width: 270px;
   }
 `;
 export const PurpleButton = styled.button`
@@ -86,6 +86,8 @@ export const PurpleButton = styled.button`
   color: white;
   border: none;
   width: fit-content;
+  white-space: nowrap;
+  font-weight: 600;
   &:hover {
     background-color: #5000b5;
     transform: scale(1.03);

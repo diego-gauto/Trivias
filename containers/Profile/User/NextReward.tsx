@@ -265,9 +265,13 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || (user.level === 0 && user.final_date > today)) ? <p >
+              {(user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || user.level === 7 || user.level === 8 || (user.level === 0 && user.final_date > today)) ? <p >
                 Gonvar+<br />
-                <span className="span">Suscripción {(user.level === 4 || user.level === 5) ? "anual" : "mensual"}</span>
+                <span className="span">Suscripción
+                  {(user.level === 4 || user.level === 5) && " anual"}
+                  {(user.level === 1 || user.level === 6) && " mensual"}
+                  {(user.level === 7 || user.level === 8) && " cuatrimestral"}
+                </span>
               </p> :
                 <p>Sin suscripción</p>}
             </div>
@@ -282,7 +286,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
                 </div>
                 :
                 <div className="subscription-info">
-                  {(((user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6) && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
+                  {(((user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || user.level === 7 || user.level === 8) && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
                     <span className="span">{formatDateUser()}</span>
                   </p> :
                     <p><span className="span">

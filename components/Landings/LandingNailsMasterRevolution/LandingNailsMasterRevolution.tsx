@@ -62,6 +62,7 @@ import {
   ThirteenSection,
   TwelveSection,
 } from "./LandingNailsMasterRevolution.styled";
+import { RewardComponent } from "../Components/Reward";
 
 const pointWatsap = "/images/landing_suscription/point_at_button.png"
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png"
@@ -91,7 +92,7 @@ const linesL = "/images/landing_nails_master/lines-left.png"
 const linesR = "/images/landing_nails_master/lines-right.png"
 const stars = "/images/landing_nails_master/estrellas.png"
 const linesB2 = "/images/landing_nails_master/lines-bottom2.png"
-
+const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
 views.set(1, false);
 views.set(2, false);
@@ -222,9 +223,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       <FirstSection>
         <div className="mt-3 fechas">
           <h4><b>Actualización 2024</b><br />
-            Inscripciones sólo desde el<br />9 de Octubre al 20 de Noviembre</h4>
+            Inscripciones sólo desde el<br />9 de Octubre al 24 de Noviembre</h4>
           <Countdown
-            date={1700501613000}
+            date={1700851294000}
             renderer={props =>
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>
@@ -258,6 +259,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         </div>
         <img src={nailPintura} className="left-img" />
         <div className="space">
+          <p className="include-gonvar"><img src={gPlus} alt="Gonvar logo" /><span style={{ fontWeight: "bold", marginLeft: "16px" }} >Incluido en Gonvar+</span></p>
           <h2 className="big-text"><b>Nail's Master </b>
             <br />
             <b className="blue-gradient">Revolution</b></h2>
@@ -269,17 +271,23 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
 
         <div className="all-center">
           <img src={stars} className="stars" />
-          <h3 className="space"><b>(5) 7,378 opiniones</b></h3>
+          <h3 className="space"><b>(5) 23,738 opiniones</b></h3>
         </div>
         <h4 className="extra-margin"><b>El curso de aplicación de uñas </b><b className="light-blue">{responsive850 && <br />}más exitoso de Latinoámerica.<br />{responsive850 && <br />}
-          Más de 5,700 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
-        <button className="space btn left-right" onClick={() => handleRedirection()}>
+          Más de 70,000 alumnas{responsive850 && <br />}</b> <b>han aprendido con nosotros.</b></h4>
+        <button className="space btn left-right" onClick={() => handleRedirection()} style={{ marginBottom: 75 }}>
           {
-            type ? button_text : <>Comienza ahora <br />por $1,599.00 MXN</>
+            type ? button_text : <>Comienza ahora</>
           }
         </button>
       </FirstSection>
       <SecondSection>
+        <div className="data">
+          <p className="text">
+            Ahora disponible en tu suscripción Gonvar+ <br />
+            Más de 65 cursos de uñas y belleza incluídos.
+          </p>
+        </div>
         <div className="info-top">
           <div className="text">
             <h2 className="title bold dark-blue"><b>Conviértete en profesional <br /> con nuestro programa,</b><br />
@@ -391,10 +399,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <iframe src="https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1" />
         </div>
         <div className="info-video">
-          <h2><b className="title-text">Durante 4 meses podrás acceder a</b><br />
+          <h2><b className="title-text">Podrás acceder a</b><br />
             <b className="big-title blue-gradient">más de 40 clases</b></h2>
           <p className="reg-text">Además nuestro equipo estará disponible para ayudarte y resolver todas las dudas que tengas.</p>
-          <p><b>Sin limites.</b></p>
+          <p><b>Sin limites mientras mantengas tu suscripción Gonvar+ activa.</b></p>
           <button className="btn left-right" onClick={() => handleRedirection()}>
             {type ? button_text : "Obtener acceso"}
           </button>
@@ -451,7 +459,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <div className="info-row">
             <div className="info-content">
               <img src={icon_calendar} className="icon" />
-              <h5>4 meses de acceso a <br /><b>Nails Master Revolution</b></h5>
+              <h5>Acceso a 65 cursos adicionales <br /><b>y beneficios incluídos en Gonvar+</b></h5>
             </div>
             <div className="info-content info-side">
               <img src={icon_calendar} className="icon" />
@@ -604,29 +612,6 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <h2 className="h1">CENTRO DE {responsive500 && <br />}<b>RECOMPENSAS</b></h2>
         </div>
         <div className="rewards-container all-center">
-          <div className="reward-card card-style">
-            <div className="normal-card">
-              <div className="all-center img">
-                <img src={pointReward} className="title-img" />
-                <img src={pointRewardOut} className="title-img" />
-              </div>
-              <h4 className="light-p">Recompensas {responsive500 && <br />}por puntaje</h4>
-              <h5>Cada tarea aprobada, clase o curso terminado, te dará <b className="p-pink">puntos </b>
-                que puedes canjear por productos Gonvar.</h5>
-            </div>
-            <div className="hover-card">
-              <div className="all-center img">
-                <img src={whitePoint} className="title-img" />
-                <img src={whiteOut} className="title-img" />
-              </div>
-              <h4>Recompensas {responsive500 && <br />}por puntaje</h4>
-              <h5>Obtén puntos por:</h5>
-              <p>Tarea aprobada: +50 pts<br />
-                Clase terminada: +100 pts<br />
-                Curso terminado: +150 pts</p>
-            </div>
-
-          </div>
           {
             !responsive850
               ?
@@ -695,6 +680,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </div>
           }
         </div>
+        <RewardComponent nails_master={true} />
       </NinthSection>
       <TenthSection>
         {
@@ -807,7 +793,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           </div>
         </div>
         <div className="line" />
-        <p className="h6" onClick={toggleModules}>{!showModules ? 'Ver todos los módulos' : 'Cerrar módulos'}</p>
+        <p className="h6" onClick={toggleModules}>{responsive850 && (!showModules ? 'Ver todos los módulos' : 'Cerrar módulos')}</p>
         <button className="btn right-left" onClick={() => setverMat(true)}>Consulta tu lista de materiales a utilizar</button>
         {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
         <img src={linesB2} className="down-l" />
@@ -858,10 +844,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <div className="border-top">
                 <p className="a">Nuestros métodos de pago son súper cómodos.<br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta de crédito o débito.
-                  <i>(El cobro se realiza de manera automática mes con mes por la cantidad
-                    de $249 MXN u 14 dls.)</i><br />
-                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad,
-                  $1599 por todo un año de aprendizaje y aventura. <i>(Pagando anualidad no se realiza
+                  <i>(El cobro se realiza de manera automática mes con mes).</i><br />
+                  Si prefieres pagar en transferencia, depósito en Oxxo o Paypal, está disponible la anualidad o el plan
+                  cuatrimestral, <i>(Pagando anualidad no se realiza
                     ningún cobro adicional por un año).</i></p>
               </div>
             </div>

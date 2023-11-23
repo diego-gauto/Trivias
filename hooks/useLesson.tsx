@@ -21,6 +21,7 @@ export const CourseProvider = ({ children }: any) => {
   let today = new Date().getTime() / 1000;
 
   const reload = (changeLesson?: boolean) => {
+    let complete_nails = context.user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
     getCourseApi(id).then((res) => {
       let data = res.seasons[+season].lessons[+lesson];
       if (data === undefined) {
@@ -29,7 +30,7 @@ export const CourseProvider = ({ children }: any) => {
       }
       if (context.user.role !== "superAdmin") {
         let diff = Math.round((today - context.user.final_date) / 86400);
-        if (res.type === "Mensual" && context.user.final_date < today && diff > 6) {
+        if (res.type === "Mensual" && context.user.final_date < today && diff > 6 && complete_nails.length === 0) {
           router.push({ pathname: "/preview" });
         }
         if (res.type === "Producto") {

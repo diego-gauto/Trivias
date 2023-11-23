@@ -14,7 +14,7 @@ const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [selected, setSelected] = useState(2)
+  const [selected, setSelected] = useState(3)
 
   var userData = useAuth();
   useEffect(() => {
@@ -44,16 +44,13 @@ const PayPlans = () => {
           <div className="select-plan">
             <div className="options">
               <p className={`option ${selected === 1 ? 'link' : ''}`}
-                onClick={() => handleSelected(1)}>G+ mensual</p>
-              <p className="option">|</p>
-              <p className={`option ${selected === 2 ? 'link' : ''}`}
-                onClick={() => handleSelected(2)}>G+ anual</p>
-              <p className="option">|</p>
+                onClick={() => handleSelected(1)}>Mensual</p>
               <p className={`option ${selected === 3 ? 'link' : ''}`}
-                onClick={() => handleSelected(3)}>Nails Máster</p>
+                onClick={() => handleSelected(3)}>Cuatrimestral</p>
+              <p className={`option ${selected === 2 ? 'link' : ''}`}
+                onClick={() => handleSelected(2)}>Anual</p>
             </div>
           </div>
-
           <div className="plans justify-content-center">
             <div className="middle">
               <Plans user={user} selected={0} />
@@ -91,7 +88,7 @@ const PayPlans = () => {
                   <p>que se han inscrito a nuestra plataforma.</p>
                 </div>
                 <div className="col-sm-4 text-center">
-                  <h2>+60 cursos</h2>
+                  <h2>+65 cursos</h2>
                   <p>donde aprenderás desde cero y paso a paso técnicas actualizadas.</p>
                 </div>
                 <div className="col-sm-4 text-center">

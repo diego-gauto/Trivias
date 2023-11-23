@@ -89,6 +89,12 @@ const Sliders = (props: ICourseData) => {
       setCourses(tempCourses.product_courses);
       setTexts(tempTexts);
     }
+    if (slideType === "special-courses") {
+      tempTexts.title = "Certificaciones ";
+      tempTexts.spanTitle = "";
+      setCourses(tempCourses.special_courses);
+      setTexts(tempTexts);
+    }
   }
   let pos = { top: 0, left: 0, x: 0, y: 0 };
   let slider: any = document.querySelector(`.scroll-container${slideNumber}`) as HTMLElement;
@@ -215,7 +221,7 @@ const Sliders = (props: ICourseData) => {
                           if (slideType === "continue-watching" || slideType === "free-courses") {
                             goTo(course)
                           }
-                          if (slideType === "art-courses" || slideType === "product-courses" || slideType === "structure-courses" || slideType === "makeup-courses") {
+                          if (slideType === "art-courses" || slideType === "product-courses" || slideType === "structure-courses" || slideType === "makeup-courses" || slideType === "special-courses") {
                             openModal(course)
                           }
                         }}

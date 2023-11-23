@@ -41,6 +41,7 @@ const Courses = () => {
     "continue-watching",
     "free-courses",
     "product-courses",
+    "special-courses",
     "art-courses",
     "structure-courses",
     "makeup-courses",
@@ -50,6 +51,7 @@ const Courses = () => {
   });
   const goTo = () => {
     if (userData) {
+      let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {
         router.push({
           pathname: LESSON_PATH,
@@ -67,7 +69,7 @@ const Courses = () => {
         }
 
       }
-      if (videoCourse.type === "Mensual" && userData.final_date > today || userData.role === 'superAdmin') {
+      if ((videoCourse.type === "Mensual" && userData.final_date > today) || complete_nails.length > 0 || userData.role === 'superAdmin') {
         router.push({
           pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
@@ -93,7 +95,9 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         // coursesAll(res);
+        console.log(res);
         getAllCourseDataApi(res.id).then((data) => {
+          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);

@@ -1,7 +1,7 @@
 import { Card, Col, Image, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/router";
-import { ANUAL_FORM, ANUAL_SUSCRIPTION_REDIRECT, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import { CUATRIMESTRAL_SUSCRIPTION_REDIRECT, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { PurpleButton } from "../../common/PurpleButton/PurpleButton";
 import { CardContainer } from "./GonvarPlusModule.styled";
 import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
@@ -19,7 +19,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   let today = new Date().getTime() / 1000;
   const handleShow = () => {
     // setOpenModal(true);
-    router.push({ pathname: ANUAL_SUSCRIPTION_REDIRECT })
+    router.push({ pathname: CUATRIMESTRAL_SUSCRIPTION_REDIRECT })
   }
   const router = useRouter();
 
@@ -51,11 +51,12 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   }
   const goTo = () => {
     if (user) {
-      if (user.level > 0 || user.final_date > today) {
+      let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
+      if (user.final_date > today || complete_nails.length > 0) {
         router.push(PREVIEW_PATH)
       }
       else {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '1' } })
+        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } })
       }
     }
     else {
@@ -73,7 +74,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
           <div className="top">
             <img style={{ margin: 0 }} src="../images/purchase/logo.png" alt="" />
             <p>Gonvar+</p>
-            <button style={{ cursor: "initial" }}>Suscripción anual</button>
+            <button style={{ cursor: "initial" }}>Suscripción Cuatrimestral</button>
           </div>
           <div className="middle">
             <h3>Empieza a cursar <br /> cientos de clases <br /> sobre uñas y belleza <br /> <span>en línea</span> </h3>
@@ -81,7 +82,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
               e instructores internacionales.
             </p>
           </div>
-          <h3 className="price">Sólo $1599 <span>MXN/año</span></h3>
+          <h3 className="price">Sólo $1599 <span>MXN el cuatrimestre</span></h3>
           {responsive1140 && <Row>
             <Col sm={12} md={5} className="second-col">
               <PurpleButton text={responsive768 ? "Comenzar" : "Comenzar ahora"} onClick={goTo} />
