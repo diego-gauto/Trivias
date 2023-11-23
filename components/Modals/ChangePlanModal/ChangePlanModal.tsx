@@ -38,7 +38,7 @@ const ChangePlanModal = (props: IModal) => {
         let body = {
           token: paypaltoken,
           subscription_id: user.plan_id,
-          plan_id: "P-1BW82491E7555383CMUK6TKY",
+          plan_id: planOption === "anual_v1_1" ? "P-0ND16663SN6195536MVEUMXI" : "P-6RT70377G6729623WMVJLPYQ",
           user_id: user.id,
           final_date: user.final_date
         }

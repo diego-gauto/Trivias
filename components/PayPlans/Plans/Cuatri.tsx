@@ -8,6 +8,7 @@ import router from "next/router";
 import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
+import ChangePlanModal from "../../Modals/ChangePlanModal/ChangePlanModal";
 
 const gPlus = "/images/pay_plans/gplus.svg"
 let views = new Map<number, boolean>();
@@ -27,6 +28,8 @@ interface IData {
 const Cuatri = (props: IData) => {
   const [ver, setver] = useState(true)
   const { user } = props;
+  const [open, setOpen] = useState(false);
+
   const goToRoute = () => {
     router.push('/suscripcion-cuatrimestral');
   }
@@ -69,6 +72,11 @@ const Cuatri = (props: IData) => {
 
   return (
     <PlanStyles>
+      <ChangePlanModal
+        show={open}
+        onHide={() => { setOpen(false) }}
+        user={user}
+        planOption="cuatrimestre" />
       <div className="back plan-container special-plan">
         <div className="more-popular">
           <FaFireAlt />
@@ -92,7 +100,8 @@ const Cuatri = (props: IData) => {
             <span><i className="white">Cargo automático cada 4 meses</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>
+            {(!user.level || user.level === 0) && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>}
+            {(user.level === 1 || user.level === 7) && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a Cuatrimestre</button>}
           </div>
         </div>
         <div className="main-body">
