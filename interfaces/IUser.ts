@@ -65,4 +65,5 @@ export interface IUserInfoResult extends IUserInfo {
   user_history: IHistory[];
   user_certificates: any[];
   roles: any[];
+  photoURL: string;
 }
