@@ -173,7 +173,6 @@ export const DetailContain = styled.div`
   .activity {
     font-size: 14px;
     font-family: "Raleway", sans-serif;
-    color: #d244d1;
     margin: 0;
     display: flex;
     align-items: center;
@@ -181,5 +180,22 @@ export const DetailContain = styled.div`
     img {
       width: 16px;
     }
+  }
+  /*
+  - Tarea aprobada -> activity--approve
+  - Tarea rechazada -> activity--not-approve
+  - Tarea en revision -> in-review
+  */
+  .activity--default {
+    color: #d244d1;
+  }
+  .activity--approve {
+    color: #43a30e;
+  }
+  .activity--not-approve {
+    color: #a52a2a;
+  }
+  .activity--in-review {
+    color: #daa520;
   }
 `;

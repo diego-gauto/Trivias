@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IUserHomeworkResponse } from "../../interfaces/IUserHomeworks";
+import { IHomeworksByUserResponse } from "../../interfaces/IHomeworkByUser";
 
 export const getHomeworksApi = async () => {
   return axios
@@ -88,7 +89,34 @@ export const getHomeworkUserApi = async (homework: IHomeworkParams) => {
   }
 };
 
+interface IHomeworksByUserParams {
+  course_id: number;
+  user_id: number;
+}
 
+export const getCourseHomeworksOfUser = async (homeworkByUserParamas: IHomeworksByUserParams) => {
+  const { user_id, course_id } = homeworkByUserParamas;
+  console.log({ homeworkByUserParamas });
+  try {
+    // user-homeworks/course/:course_id/user/:user_id
+    const response = await axios.get<IHomeworksByUserResponse>("https://gonvar.inowu.dev/" + `homeworks/user-homeworks/course/${course_id}/user/${user_id}`, {
+      cancelToken: cancelTokenSource.token,
+    });
+
+    return response.data; // Return the data from the API response
+  } catch (error) {
+    if (error instanceof Error) {
+      if (axios.isCancel(error)) {
+        // Request was canceled
+        console.log("Request was canceled");
+      } else {
+        // Handle other errors
+        console.error("Error:", error);
+      }
+    }
+    throw error;
+  }
+}
 
 export const reviewHomeworkApi = async (homework: any) => {
   return axios

@@ -10,7 +10,8 @@ import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from "../../../../../utils/Cons
 import { ILesson, ICourseResponse, ISeason } from "../../../../../interfaces/ICourseNew";
 import { IUserHomework } from "../../../../../interfaces/IUserHomeworks";
 import { IUserInfoResult } from "../../../../../interfaces/IUser";
-import { getHomeworkUserApi } from "../../../../../components/api/homeworks";
+import { getCourseHomeworksOfUser, getHomeworkUserApi } from "../../../../../components/api/homeworks";
+import { IReducedHomework } from "../../../../../interfaces/IHomeworkByUser";
 
 interface IMenu {
   course: ICourseResponse,
@@ -19,25 +20,22 @@ interface IMenu {
 const Menu = (props: IMenu) => {
   const { course, user } = props;
   const [selected, setSelected] = useState<any>([]);
-  const [homeworks, setHomeworks] = useState<IUserHomework[]>([]);
+  const [homeworks, setHomeworks] = useState<IReducedHomework[]>([]);
   const params = useRouter();
 
-  console.log(course);
-
   useEffect(() => {
-    getUserHomework()
+    getUserHomework();
   }, []);
 
   const getUserHomework = async () => {
-    // where user_id = 49089 and lesson_id = 787
     let tempData = {
-      lessonId: 787,
-      user_id: 49089,
+      course_id: course.id,
+      user_id: user.id,
     }
+
     try {
-      const userHomeworksResponse = await getHomeworkUserApi(tempData);
-      const userHomeworks = userHomeworksResponse.data.data;
-      console.log({ userHomeworks });
+      const userHomeworksResponse = await getCourseHomeworksOfUser(tempData);
+      const userHomeworks: IReducedHomework[] = userHomeworksResponse.data;
       setHomeworks(userHomeworks);
     } catch (error) {
       if (error instanceof Error) {
@@ -78,37 +76,42 @@ const Menu = (props: IMenu) => {
     }
   }
 
+  interface ITextAux {
+    classname: string;
+    text: string;
+  }
+
+  const getClassNameByStatus = (status: number, approve: number): ITextAux => {
+    if (status === 0) {
+      return { classname: 'activity--in-review', text: 'Tarea en revisión' }
+    }
+    if (status === 1 && approve === 1) {
+      return { classname: 'activity--approve', text: 'Tarea aprobada' }
+    }
+    if (status === 1 && approve === 0) {
+
+      return { classname: 'activity--not-approve', text: 'Tarea rechazada' }
+    }
+    return { classname: 'activity--default', text: 'Esta lección tiene una tarea' }
+  }
+
   const getHomeworkText = (lesson: ILesson) => {
     if (lesson.homework !== 1) {
       return undefined;
     }
     const { id: lessonId } = lesson;
+    console.log({ lesson });
     const homeworkWithLessonId = homeworks.find((homework) => homework.lesson_id == lessonId);
+    let values: ITextAux = { classname: 'activity--default', text: 'Esta lección tiene una tarea' };
     if (homeworkWithLessonId !== undefined) {
-      // Si la tarea existe, y esta aprobada...
-      if (homeworkWithLessonId.approved === 1) {
-        return (
-          <div className='activity'>
-            <img src={HW_ICON} />
-            Tarea aprobada
-          </div>
-        )
-      }
-      // Si la tarea existe, y no esta aprobada...
-      if (homeworkWithLessonId.approved === 0) {
-        return (
-          <div className='activity'>
-            <img src={HW_ICON} />
-            Tarea rechazada
-          </div>
-        )
-      }
+      const { status, approved } = homeworkWithLessonId;
+      values = getClassNameByStatus(status, approved);
     }
-    // Si la tarea es 'undefined', es que no se ha enviado aún
+    const { classname, text } = values;
     return (
-      <div className='activity'>
+      <div className={`activity ${classname}`}>
         <img src={HW_ICON} />
-        Esta lección tiene una tarea
+        <strong>{text}</strong>
       </div>
     )
   }
