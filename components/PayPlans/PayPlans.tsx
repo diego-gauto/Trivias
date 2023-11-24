@@ -16,7 +16,7 @@ const PayPlans = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [selected, setSelected] = useState(3)
 
-  var userData = useAuth();
+  var userData: any = useAuth();
   useEffect(() => {
     if (userData.user !== null) {
       setUser(userData.user)
