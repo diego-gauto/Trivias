@@ -84,7 +84,7 @@ const Lesson = () => {
                 router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
               }
               if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
-                return router.push({
+                router.push({
                   pathname: PURCHASE_PATH,
                   query: { type: 'subscription', frequency: 'month', v: '2' }
                 });
@@ -95,7 +95,7 @@ const Lesson = () => {
               console.log({ res });
               getDataForNextLesson(res);
               setIsLoading(false);
-              return
+
             }
           }).catch((reason) => {
             if (reason instanceof Error) {
