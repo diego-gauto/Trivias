@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 
 import router, { useRouter } from "next/router";
 import { ArrowUpIcon, Circle, CourseLength, DetailContain, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
-import { IUser } from "../../../../../interfaces/IUserData";
 import { Progress, Space } from "antd";
 import { checkLessons, goTo, hms, returnProgress, returnStatus } from "../../utils/functions";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from "../../../../../utils/Constants";
 import { ILesson, ICourseResponse, ISeason } from "../../../../../interfaces/ICourseNew";
-import { IUserHomework } from "../../../../../interfaces/IUserHomeworks";
 import { IUserInfoResult } from "../../../../../interfaces/IUser";
 import { getCourseHomeworksOfUser, getHomeworkUserApi } from "../../../../../components/api/homeworks";
 import { IReducedHomework } from "../../../../../interfaces/IHomeworkByUser";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { HiPencil } from "react-icons/hi2";
 
 interface IMenu {
   course: ICourseResponse,
@@ -76,23 +77,32 @@ const Menu = (props: IMenu) => {
     }
   }
 
-  interface ITextAux {
-    classname: string;
+  type Classname = 'activity--in-review' | 'activity--approve' | 'activity--not-approve' | 'activity--default';
+
+  interface IHomeworkLessonParams {
+    classname: Classname;
+    color: string;
     text: string;
   }
 
-  const getClassNameByStatus = (status: number, approve: number): ITextAux => {
-    if (status === 0) {
-      return { classname: 'activity--in-review', text: 'Tarea en revisión' }
+  const getIconByClassname = (classname: Classname, color: string, url = HW_ICON) => {
+    switch (classname) {
+      case "activity--approve":
+        return <FaRegCheckCircle style={{ color }} />
+      case "activity--in-review":
+        return <HiPencil style={{ color }} />
+      case "activity--not-approve":
+        return <IoMdCloseCircleOutline style={{ color }} />
+      default:
+        return <img src={url} />
     }
-    if (status === 1 && approve === 1) {
-      return { classname: 'activity--approve', text: 'Tarea aprobada' }
-    }
-    if (status === 1 && approve === 0) {
+  }
 
-      return { classname: 'activity--not-approve', text: 'Tarea rechazada' }
-    }
-    return { classname: 'activity--default', text: 'Esta lección tiene una tarea' }
+  const getPropertiesByStatus = (status: number, approve: number): IHomeworkLessonParams => {
+    if (status === 0) { return { classname: 'activity--in-review', text: 'Tarea en revisión', color: '#942ced' } }
+    if (status === 1 && approve === 1) { return { classname: 'activity--approve', text: 'Tarea aprobada', color: '#00cc99' } }
+    if (status === 1 && approve === 0) { return { classname: 'activity--not-approve', text: 'Tarea rechazada', color: '#eb5757' } }
+    return { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' }
   }
 
   const getHomeworkText = (lesson: ILesson) => {
@@ -102,16 +112,16 @@ const Menu = (props: IMenu) => {
     const { id: lessonId } = lesson;
     console.log({ lesson });
     const homeworkWithLessonId = homeworks.find((homework) => homework.lesson_id == lessonId);
-    let values: ITextAux = { classname: 'activity--default', text: 'Esta lección tiene una tarea' };
+    let properties: IHomeworkLessonParams = { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' };
     if (homeworkWithLessonId !== undefined) {
       const { status, approved } = homeworkWithLessonId;
-      values = getClassNameByStatus(status, approved);
+      properties = getPropertiesByStatus(status, approved);
     }
-    const { classname, text } = values;
+    const { classname, text, color } = properties;
     return (
       <div className={`activity ${classname}`}>
-        <img src={HW_ICON} />
-        <strong>{text}</strong>
+        {getIconByClassname(classname, color)}
+        {text}
       </div>
     )
   }

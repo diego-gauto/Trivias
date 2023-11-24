@@ -190,12 +190,12 @@ export const DetailContain = styled.div`
     color: #d244d1;
   }
   .activity--approve {
-    color: #43a30e;
+    color: #00cc99;
   }
   .activity--not-approve {
-    color: #a52a2a;
+    color: #eb5757;
   }
   .activity--in-review {
-    color: #daa520;
+    color: #942ced;
   }
 `;
