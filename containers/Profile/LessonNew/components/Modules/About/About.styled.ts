@@ -153,10 +153,10 @@ export const LessonContent = styled.div`
   .btn-material-apoyo-pdf {
     margin-left: 10px;
     padding: 4px 10px;
-    color: #8e2de2;
+    color: white;
     border-radius: 20px;
     border: 1px solid #8e2de2;
-    background: transparent;
+    background: #8e2de2;
     text-decoration: none;
     &:hover {
       opacity: 0.7;

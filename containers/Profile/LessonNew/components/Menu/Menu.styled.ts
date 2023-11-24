@@ -177,6 +177,7 @@ export const DetailContain = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
+    color: #d244d1;
     img {
       width: 16px;
     }
