@@ -1,26 +1,33 @@
 import axios from "axios";
+import { IUserInfoResponse, IUserInfoResult } from "../../interfaces/IUser";
 
 export const getUserApi = async (email: any) => {
   let user = {
     email
   }
-  return axios
-    .post("https://gonvar.inowu.dev/" + "users/user-info", user)
-    .then((res) => {
-      return {
-        ...res.data.user[0],
-        payment_methods: res.data.payment_methods.data,
-        user_courses: res.data.courses,
-        user_progress: res.data.progress,
-        user_history: res.data.history,
-        user_certificates: res.data.certificates_filter,
-        roles: res.data.roles
-      };
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
+  try {
+    const res = await axios.post<IUserInfoResponse>("https://gonvar.inowu.dev/" + "users/user-info", user);
+    console.log({
+      payment_methods: res.data.payment_methods,
+      data: 'users.tsx => getUserApi'
     });
+    const result: IUserInfoResult = {
+      ...res.data.user[0]!,
+      payment_methods: res.data.payment_methods,
+      user_courses: res.data.courses,
+      user_progress: res.data.progress,
+      user_history: res.data.history,
+      user_certificates: res.data.certificates_filter,
+      roles: res.data.roles,
+    }
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      console.error(error.stack);
+    }
+    throw error;
+  }
 };
 
 export const updateUserInfo = async (user: any) => {

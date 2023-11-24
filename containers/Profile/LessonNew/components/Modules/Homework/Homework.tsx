@@ -14,6 +14,7 @@ import Quiz from "./components/Quiz";
 import { BiUpload } from "react-icons/bi";
 import { hexToRgba } from "../../../../../../utils/functions";
 import { IoIosCloseCircle } from "react-icons/io";
+import { IUserHomework } from "../../../../../../interfaces/IUserHomeworks";
 
 interface IHomeWork {
   course: ICourse,
@@ -24,7 +25,7 @@ const HomeWork = (props: IHomeWork) => {
   const { lesson, course } = props;
   const [status, setStatus] = useState("");
   const [loader, setLoader] = useState(false);
-  const [homework, setHomework] = useState<any>();
+  const [homework, setHomework] = useState<IUserHomework | null>();
   const [imageModal, setImageModal] = useState<boolean>(false);
   const [imageDisplay, setImageDisplay] = useState<any>('');
   const [imageLoader, setImageLoader] = useState<boolean>(false);
@@ -33,14 +34,20 @@ const HomeWork = (props: IHomeWork) => {
   const user = context.user;
   const [isLoading, setIsLoading] = useState(false);
 
-  const approvalHomeWork = (file: any) => {
+  const approvalHomeWork = (file: FileList | null) => {
+    if (file === null) {
+      return;
+    }
     if (file.length > 0) {
       var reader = new FileReader();
+      if (file[0] === undefined) {
+        return;
+      }
       reader.readAsDataURL(file[0]);
       reader.onload = async (_event) => {
         setImageDisplay(reader.result);
         setImageModal(true);
-        setTypeFile(file[0].type)
+        setTypeFile(file[0]!.type)
       }
     }
   }
@@ -98,21 +105,23 @@ const HomeWork = (props: IHomeWork) => {
       if (hwk.data) {
         if (hwk.data.data.length > 0) {
           let temp = hwk.data.data[0]
-          if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
-            setHomework(temp);
-            setStatus("");
-          }
-          if (temp.user_id === user.user_id && temp.status === 0) {
-            setStatus("pending");
-            setHomework("");
-          }
-          if (temp.user_id === user.user_id && temp.approved === 1) {
-            setStatus("approved");
-            setHomework(temp);
+          if (temp !== undefined) {
+            if (temp.user_id === user.user_id && temp.status === 1 && temp.approved === 0) {
+              setHomework(temp);
+              setStatus("");
+            }
+            if (temp.user_id === user.user_id && temp.status === 0) {
+              setStatus("pending");
+              setHomework(null);
+            }
+            if (temp.user_id === user.user_id && temp.approved === 1) {
+              setStatus("approved");
+              setHomework(temp);
+            }
           }
         } else {
           setStatus("");
-          setHomework("");
+          setHomework(null);
         }
       } else {
         window.location.reload()

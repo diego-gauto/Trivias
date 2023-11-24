@@ -60,17 +60,19 @@ export const History = ({ user, addPayment }: any) => {
           }
         }
         else {
-          let tempFinalDate = (new Date(element.paid_at).getTime() / 1000) + course.duration * 86400
-          tempDate = new Date((tempFinalDate) * 1000);
-          tempDay = tempDate.getDate();
-          tempMonth = tempDate.getMonth() + 1;
-          tempYear = tempDate.getFullYear();
-          element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
-          let date = new Date().getTime() / 1000;
-          if ((tempFinalDate) > date) {
-            element.status = "Activo"
-          } else {
-            element.status = "Inactivo"
+          if (course !== undefined) {
+            let tempFinalDate = (new Date(element.paid_at).getTime() / 1000) + course.duration * 86400
+            tempDate = new Date((tempFinalDate) * 1000);
+            tempDay = tempDate.getDate();
+            tempMonth = tempDate.getMonth() + 1;
+            tempYear = tempDate.getFullYear();
+            element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
+            let date = new Date().getTime() / 1000;
+            if ((tempFinalDate) > date) {
+              element.status = "Activo"
+            } else {
+              element.status = "Inactivo"
+            }
           }
         }
         tempInvoice.push(element);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IUserHomeworkResponse } from "../../interfaces/IUserHomeworks";
 
 export const getHomeworksApi = async () => {
   return axios
@@ -53,7 +54,12 @@ export const addHomeworkApi = async (homework: any) => {
 
 let cancelTokenSource = axios.CancelToken.source();
 
-export const getHomeworkUserApi: any = async (homework: any) => {
+interface IHomeworkParams {
+  lessonId: number;
+  user_id: number;
+}
+
+export const getHomeworkUserApi = async (homework: IHomeworkParams) => {
   // If there's an ongoing request, cancel it
   if (cancelTokenSource) {
     cancelTokenSource.cancel('Cancelling the previous request');
@@ -63,19 +69,22 @@ export const getHomeworkUserApi: any = async (homework: any) => {
   cancelTokenSource = axios.CancelToken.source();
 
   try {
-    const response: any = await axios.get("https://gonvar.inowu.dev/" + `homeworks/user-homework/lesson/${homework.lessonId}/user/${homework.user_id}`, {
+    const response = await axios.get<IUserHomeworkResponse>("https://gonvar.inowu.dev/" + `homeworks/user-homework/lesson/${homework.lessonId}/user/${homework.user_id}`, {
       cancelToken: cancelTokenSource.token,
     });
 
     return response; // Return the data from the API response
   } catch (error) {
-    if (axios.isCancel(error)) {
-      // Request was canceled
-      console.log("Request was canceled");
-    } else {
-      // Handle other errors
-      console.error("Error:", error);
+    if (error instanceof Error) {
+      if (axios.isCancel(error)) {
+        // Request was canceled
+        console.log("Request was canceled");
+      } else {
+        // Handle other errors
+        console.error("Error:", error);
+      }
     }
+    throw error;
   }
 };
 

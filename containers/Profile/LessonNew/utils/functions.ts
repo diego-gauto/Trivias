@@ -3,17 +3,17 @@ import {
   updateUserProgressApi,
 } from "../../../../components/api/lessons";
 import { LESSON_PATH } from "../../../../constants/paths";
-import { ISeasons } from "../../../../interfaces/ICourse";
-import { IUser } from "../../../../interfaces/IUserData";
+import { ISeason } from "../../../../interfaces/ICourseNew";
+import { IUserInfoResult } from "../../../../interfaces/IUser";
 import router from "next/router";
 
-export const lessonGuard = (user: IUser) => {
+export const lessonGuard = (user: IUserInfoResult | null) => {
   if (user !== null) {
     return true;
   } else {
     router.push({ pathname: "/preview" });
   }
-  return;
+  return false;
 };
 
 export const returnLevel = (level: string) => {
@@ -35,9 +35,9 @@ export const returnLevel = (level: string) => {
   return;
 };
 
-export const returnProgress = (season: ISeasons, userId: number) => {
+export const returnProgress = (season: ISeason, userId: number) => {
   let tempViewd = 0;
-  season.lessons.forEach((element: any) => {
+  season.lessons.forEach((element) => {
     if (element.users.includes(userId)) {
       tempViewd++;
     }

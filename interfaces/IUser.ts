@@ -1,4 +1,15 @@
-export interface IUser {
+export interface IUserInfoResponse {
+  user: IUserInfo[];
+  payment_methods: any[];
+  courses: any[];
+  progress: IProgress[];
+  history: IHistory[];
+  certificates: any[];
+  certificates_filter: any[];
+  roles: any[];
+}
+
+export interface IUserInfo {
   id: number;
   name: string;
   last_name: string;
@@ -15,33 +26,21 @@ export interface IUser {
   subscription: number;
   last_sign_in: string;
   country: string;
-  conekta_id: string;
+  conekta_id: any;
   terms: number;
   come_from: string;
   user_id: number;
   final_date: number;
   level: number;
-  method: string | null;
-  payment_method: string | null;
+  method: any;
+  payment_method: any;
   plan_id: any;
-  plan_name: string;
+  plan_name: any;
   start_date: number;
-  type: number;
-  user_courses: IUserCourse[];
-  user_progress: IUserProgress[];
-  user_history: IUserHistory[];
-  user_certificates: IUserCertificate[];
-  roles: any[];
+  type: any;
 }
 
-export interface IUserCourse {
-  id: number;
-  user_id: number;
-  course_id: number;
-  final_date: number;
-}
-
-export interface IUserProgress {
+export interface IProgress {
   id: number;
   user_id: number;
   seconds: number;
@@ -50,7 +49,7 @@ export interface IUserProgress {
   status: number;
 }
 
-export interface IUserHistory {
+export interface IHistory {
   id: number;
   user_id: number;
   course_id: number;
@@ -59,10 +58,11 @@ export interface IUserHistory {
   last_seen: string;
 }
 
-export interface IUserCertificate {
-  id: number;
-  user_id: number;
-  course_id: number;
-  folio: string;
-  created_at: string;
+export interface IUserInfoResult extends IUserInfo {
+  payment_methods: any[];
+  user_courses: any[];
+  user_progress: IProgress[];
+  user_history: IHistory[];
+  user_certificates: any[];
+  roles: any[];
 }
