@@ -235,7 +235,7 @@ const Rewards = () => {
       })
     } else {
       localStorage.setItem("rewards", "true")
-      router.push({ pathname: "/auth/Login" });
+      router.push({ pathname: "/auth/login" });
     }
   }, [])
   useEffect(() => {

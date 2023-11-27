@@ -83,7 +83,20 @@ const Login = () => {
   const [alertMsg2, setalertMsg2] = useState()
   const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
   const { login } = useLogin();
-  const [user, setUser] = useState({} as IUser);
+  const [user, setUser] = useState<IUser>({
+    name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    stripeId: "",
+    id: 0,
+    user_courses: [],
+    level: 0,
+    final_date: null,
+    plan_name: "",
+    method: "",
+    role: ""
+  });
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);

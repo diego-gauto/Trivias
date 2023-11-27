@@ -14,11 +14,11 @@ interface Props {
 }
 
 interface IUseAuthProps {
-  user: IUserInfoResult;
+  user: IUserInfoResult | null;
   isAuthenticating: boolean;
   logout: () => Promise<void>;
   reloadUser: () => void;
-  setUser: React.Dispatch<React.SetStateAction<IUserInfoResult>>
+  setUser: React.Dispatch<React.SetStateAction<IUserInfoResult | null>>
 }
 
 const AuthContext = createContext<IUseAuthProps>({} as IUseAuthProps);
@@ -39,19 +39,18 @@ export const getSingleUser = async (id: string) => {
 }
 
 export const AuthProvider = ({ children, ...props }: Props) => {
-  const [user, setUser] = useState<IUserInfoResult>({} as IUserInfoResult);
+  const [user, setUser] = useState<IUserInfoResult | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
   const auth = getAuth();
 
   const logout = () => {
 
     return signOut(auth).then(() => {
-      setUser({} as IUserInfoResult);
+      setUser(null);
     }).catch((error) => {
       console.log(error)
     })
   };
-
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
