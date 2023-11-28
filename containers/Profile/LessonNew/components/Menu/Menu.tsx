@@ -71,7 +71,6 @@ const Menu = (props: IMenu) => {
     }
     if (course.type === "Producto" && course.sequential === 1) {
       if (checkLessons(user, course, season, lesson)) {
-        console.log(course);
         goTo(course.id, season, lesson)
       }
     }
@@ -110,7 +109,6 @@ const Menu = (props: IMenu) => {
       return undefined;
     }
     const { id: lessonId } = lesson;
-    console.log({ lesson });
     const homeworkWithLessonId = homeworks.find((homework) => homework.lesson_id == lessonId);
     let properties: IHomeworkLessonParams = { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' };
     if (homeworkWithLessonId !== undefined) {

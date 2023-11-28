@@ -35,8 +35,11 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
     try {
       const userHomeworksResponse = await getHomeworkUserApi(homeworkUserParams);
       const userHomeworks = userHomeworksResponse.data.data[0];
+      console.log({ userHomeworks });
       if (userHomeworks !== undefined) {
         setHomework(userHomeworks);
+      } else {
+        setHomework(null);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -48,13 +51,22 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
 
   const takeNextLessonOrShowModal = () => {
     if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
+      // Si no hay tarea o quiz, siguiente lección
       goToNextLesson(course, +season, +lesson);
-    } else if (homework === null) {
+    } else if (actualLesson.homework === 1) {
+      if (homework === null) {
+        // Si la lección tiene tarea, pero no se ha entregado, mostrar modal
+        openModal();
+      } else if (homework.status === 1 && homework.approved === 1) {
+        // Si la lección tiene tarea, se ha entregado y esta aprobada, siguiente lección
+        goToNextLesson(course, +season, +lesson);
+      } else {
+        // Si la lección tiene tarea, se ha entregado pero esta pendiente o rechazada, mostrar modal
+        openModal();
+      }
+    } else if (actualLesson.quiz === 1) {
+      // Si la lección tiene quiz, mostrar modal
       openModal();
-    } else if (homework.status === 1 && homework.approved === 0) {
-      openModal();
-    } else {
-      goToNextLesson(course, +season, +lesson);
     }
   }
 

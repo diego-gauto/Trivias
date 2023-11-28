@@ -7,10 +7,6 @@ export const getUserApi = async (email: any) => {
   }
   try {
     const res = await axios.post<IUserInfoResponse>("https://gonvar.inowu.dev/" + "users/user-info", user);
-    console.log({
-      payment_methods: res.data.payment_methods,
-      data: 'users.tsx => getUserApi'
-    });
     const result: IUserInfoResult = {
       ...res.data.user[0]!,
       payment_methods: res.data.payment_methods,

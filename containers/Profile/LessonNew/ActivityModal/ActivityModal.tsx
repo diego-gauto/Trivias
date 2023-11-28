@@ -15,7 +15,7 @@ const ActivityModal = (props: IActivityModal) => {
       <ModalContainer>
         <div className='title-container'>
           <p className='title'>
-            !Esta lección cuenta con {lesson.homework === 1 && "tarea"}{lesson.quiz === 1 && "quiz"}!
+            ¡Esta lección cuenta con {lesson.homework === 1 && "tarea"}{lesson.quiz === 1 && "quiz"}!
           </p>
           <IoMdClose className='close-icon' onClick={setShow} />
         </div>
