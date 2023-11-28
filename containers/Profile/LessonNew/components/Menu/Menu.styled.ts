@@ -191,12 +191,12 @@ export const DetailContain = styled.div`
     color: #d244d1;
   }
   .activity--approve {
-    color: #00cc99;
+    color: #197569;
   }
   .activity--not-approve {
-    color: #eb5757;
+    color: #d72424;
   }
   .activity--in-review {
-    color: #942ced;
+    color: #7f21cf;
   }
 `;

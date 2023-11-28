@@ -99,9 +99,9 @@ const Menu = (props: IMenu) => {
   }
 
   const getPropertiesByStatus = (status: number, approve: number): IHomeworkLessonParams => {
-    if (status === 0) { return { classname: 'activity--in-review', text: 'Tarea en revisión', color: '#942ced' } }
-    if (status === 1 && approve === 1) { return { classname: 'activity--approve', text: 'Tarea aprobada', color: '#00cc99' } }
-    if (status === 1 && approve === 0) { return { classname: 'activity--not-approve', text: 'Tarea rechazada', color: '#eb5757' } }
+    if (status === 0) { return { classname: 'activity--in-review', text: 'Tarea en revisión', color: '#7f21cf' } }
+    if (status === 1 && approve === 1) { return { classname: 'activity--approve', text: 'Tarea aprobada', color: '#197569' } }
+    if (status === 1 && approve === 0) { return { classname: 'activity--not-approve', text: 'Tarea rechazada', color: '#d72424' } }
     return { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' }
   }
 
