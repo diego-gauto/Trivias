@@ -21,7 +21,7 @@ interface IUseAuthProps {
   setUser: React.Dispatch<React.SetStateAction<IUserInfoResult | null>>
 }
 
-const AuthContext = createContext<IUseAuthProps>({} as IUseAuthProps);
+const AuthContext = createContext<any>(null); // <IUseAuthProps>({} as IUseAuthProps);
 
 export const useAuth = () => {
   //console.log(db)
@@ -39,7 +39,7 @@ export const getSingleUser = async (id: string) => {
 }
 
 export const AuthProvider = ({ children, ...props }: Props) => {
-  const [user, setUser] = useState<IUserInfoResult | null>(null);
+  const [user, setUser] = useState<any>(null);// useState<IUserInfoResult | null>(null);
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
   const auth = getAuth();
 
