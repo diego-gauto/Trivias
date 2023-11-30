@@ -25,7 +25,7 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
 
   useEffect(() => {
     getUserHomework();
-  }, []);
+  }, [actualLesson]);
 
   const getUserHomework = async () => {
     let homeworkUserParams = {
@@ -34,12 +34,9 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
     }
     try {
       const userHomeworksResponse = await getHomeworkUserApi(homeworkUserParams);
-      const userHomeworks = userHomeworksResponse.data.data[0];
-      console.log({ userHomeworks });
-      if (userHomeworks !== undefined) {
-        setHomework(userHomeworks);
-      } else {
-        setHomework(null);
+      const userHomework = userHomeworksResponse.data.data[0];
+      if (userHomework !== undefined) {
+        setHomework(userHomework);
       }
     } catch (error) {
       if (error instanceof Error) {

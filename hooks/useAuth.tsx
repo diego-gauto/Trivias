@@ -21,7 +21,7 @@ interface IUseAuthProps {
   setUser: React.Dispatch<React.SetStateAction<IUserInfoResult | null>>
 }
 
-const AuthContext = createContext<any>(null); // <IUseAuthProps>({} as IUseAuthProps);
+const AuthContext = createContext<any>(null);//<any>(null); // <IUseAuthProps>({} as IUseAuthProps);
 
 export const useAuth = () => {
   //console.log(db)

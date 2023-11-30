@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import router, { useRouter } from "next/router";
 import { ArrowUpIcon, Circle, CourseLength, DetailContain, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
@@ -13,38 +13,18 @@ import { IReducedHomework } from "../../../../../interfaces/IHomeworkByUser";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { HiPencil } from "react-icons/hi2";
+import { IUserHomework } from "../../../../../interfaces/IUserHomeworks";
+import { HomeworksContext } from "../../../../../hooks/useHomeworks";
 
 interface IMenu {
-  course: ICourseResponse,
-  user: IUserInfoResult
+  course: ICourseResponse;
+  user: IUserInfoResult;
 }
 const Menu = (props: IMenu) => {
   const { course, user } = props;
+  const { homeworks } = useContext(HomeworksContext);
   const [selected, setSelected] = useState<any>([]);
-  const [homeworks, setHomeworks] = useState<IReducedHomework[]>([]);
   const params = useRouter();
-
-  useEffect(() => {
-    getUserHomework();
-  }, []);
-
-  const getUserHomework = async () => {
-    let tempData = {
-      course_id: course.id,
-      user_id: user.id,
-    }
-
-    try {
-      const userHomeworksResponse = await getCourseHomeworksOfUser(tempData);
-      const userHomeworks: IReducedHomework[] = userHomeworksResponse.data;
-      setHomeworks(userHomeworks);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.stack);
-        console.error(error.message);
-      }
-    }
-  }
 
   useEffect(() => {
     let temp_selected: boolean[] = [];
@@ -105,6 +85,9 @@ const Menu = (props: IMenu) => {
   }
 
   const getHomeworkText = (lesson: ILesson) => {
+    if (homeworks == null) {
+      return undefined;
+    }
     if (lesson.homework !== 1) {
       return undefined;
     }
@@ -165,7 +148,9 @@ const Menu = (props: IMenu) => {
                       <div className="right">
                         <p>{lesson.title}</p>
                         <DetailContain>
-                          {getHomeworkText(lesson)}
+                          {
+                            getHomeworkText(lesson)
+                          }
                           {
                             lesson.quiz === 1 &&
                             <div className='activity'>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { BsCheckCircleFill } from "react-icons/bs";
 
@@ -15,6 +15,7 @@ import { BiUpload } from "react-icons/bi";
 import { hexToRgba } from "../../../../../../utils/functions";
 import { IoIosCloseCircle } from "react-icons/io";
 import { IUserHomework } from "../../../../../../interfaces/IUserHomeworks";
+import { HomeworksContext } from "../../../../../../hooks/useHomeworks";
 
 interface IHomeWork {
   course: ICourse,
@@ -33,6 +34,7 @@ const HomeWork = (props: IHomeWork) => {
   const context = useAuth();
   const user = context.user;
   const [isLoading, setIsLoading] = useState(false);
+  const { loadHomeworks } = useContext(HomeworksContext);
 
   const approvalHomeWork = (file: FileList | null) => {
     if (file === null) {
@@ -82,6 +84,7 @@ const HomeWork = (props: IHomeWork) => {
         alert("Tarea enviada")
         setImageModal(false);
         setStatus("pending");
+        loadHomeworks({ user_id: context.user!.id, course_id: course.id });
       })
     }
     else {
