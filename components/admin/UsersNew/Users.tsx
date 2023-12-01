@@ -135,6 +135,7 @@ const Users = () => {
                   <option value="todos">Todos</option>
                   <option value="mensual">Mensual</option>
                   <option value="anual">Anual</option>
+                  <option value="cuatri">Cuatrimestral</option>
                 </select>
               </DefaultFilterContain>
               <DefaultFilterContain>
