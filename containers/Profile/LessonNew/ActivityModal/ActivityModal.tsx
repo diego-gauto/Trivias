@@ -61,11 +61,11 @@ const ActivityModal = (props: IActivityModal) => {
 
   const getCardTextElement = (): JSX.Element => {
     if (homework === null) {
-      return (<p className='card-p'>Dirígete a la solapa de <strong>Evaluación</strong>. En ella encontraras las indicaciones para entregar correctamente tu tarea.</p>);
+      return (<p className='card-p'>Dirígete a la solapa de <strong>Evaluación</strong>. En ella encontrarás las indicaciones para entregar correctamente tu tarea.</p>);
     }
     // Si la tarea fue rechazada
     if (homework.status === 1 && homework.approved === 0) {
-      return (<p className='card-p'>Vuelve al apartado de <strong>Evaluación</strong> y has otro intento.</p>);
+      return (<p className='card-p'>Vuelve al apartado de <strong>Evaluación</strong> y haz otro intento.</p>);
     }
     // El otro caso es que la tarea se encuentra en revisión
     return (<p className='card-p'>En las próximas 24 horas un instructor corregirá tu tarea y obtendrás una retroalimentación.</p>);
