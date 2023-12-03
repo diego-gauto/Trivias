@@ -11,13 +11,12 @@ interface IActivityModal {
   show: boolean;
   setShow: any;
   lesson: ILesson;
+  changeValue: (val: number) => void;
 }
 const ActivityModal = (props: IActivityModal) => {
-  const { show, setShow, lesson } = props;
+  const { show, setShow, lesson, changeValue } = props;
   const { homeworks } = useContext(HomeworksContext);
   const [homework, setHomework] = useState<IReducedHomework | null>(null);
-
-  console.log({ homeworks, root: 'ActivityModal' });
 
   useEffect(() => {
     setHomework(findTheCurrentHomework());
@@ -46,16 +45,13 @@ const ActivityModal = (props: IActivityModal) => {
         .title--in-review {color: #7f21cf;}   */
     // Si no se ha entregado una tarea
     if (homework === null) {
-      console.log('La tarea no se ha entregado aún');
       return (<p className='title title--default'>¡Esta lección cuenta con tarea!</p>);
     }
     // Si la tarea fue rechazada
     if (homework.status === 1 && homework.approved === 0) {
-      console.log('La tarea ha sido rechazada!');
       return (<p className='title title--not-approve'>¡Tú tarea ha sido rechazada!</p>);
     }
     // El otro caso es que la tarea se encuentra en revisión
-    console.log('La tarea se encuentra en revisión');
     return (<p className='title title--in-review'>¡Se ha entregado tu tarea!</p>);
   }
 
@@ -71,6 +67,13 @@ const ActivityModal = (props: IActivityModal) => {
     return (<p className='card-p'>En las próximas 24 horas un instructor corregirá tu tarea y obtendrás una retroalimentación.</p>);
   }
 
+  const focusToUploadButton = () => {
+    changeValue(3);
+    setTimeout(() => {
+      document.getElementById('btn-homework-upload')?.scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+  }
+
   return (
     <Modal show={show} onHide={setShow} centered>
       <ModalContainer>
@@ -79,9 +82,14 @@ const ActivityModal = (props: IActivityModal) => {
             {lesson.quiz === 1 && lesson.homework === 0 && <p className='title'>¡Esta lección cuenta con quiz!</p>}
             {lesson.quiz === 0 && lesson.homework === 1 && getTitleByHomework()}
             {lesson.quiz === 0 && lesson.homework === 1 && getCardTextElement()}
-            <button className='btn btn-aceppt' type="button" onClick={() => {
+            <a className='btn btn-aceppt' type="button" onClick={() => {
               setShow();
-            }}>Aceptar</button>
+              if (homework === null) {
+                focusToUploadButton();
+              } else if (homework.status === 1 && homework.approved === 0) {
+                focusToUploadButton();
+              }
+            }}>Aceptar</a>
           </div>
           <IoMdClose className='close-icon' onClick={setShow} />
         </div>

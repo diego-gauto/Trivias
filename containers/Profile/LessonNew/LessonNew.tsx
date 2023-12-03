@@ -18,8 +18,8 @@ const Lesson = () => {
   const context = useAuth();
   const { course, isLoading, tempLesson } = useCourse();
   const [show, setShow] = useState(false);
-  // const [homeworks, setHomeworks] = useState<IReducedHomework[] | null>(null);
-  const { homeworks, isLoading: isHomeworkLoading, loadHomeworks, setHomeworks } = useContext(HomeworksContext);
+  const [position, setPosition] = useState(1);
+  const { loadHomeworks } = useContext(HomeworksContext);
 
   useEffect(() => {
     if ((!context) || (!course)) {
@@ -32,8 +32,6 @@ const Lesson = () => {
     if (!isLoading) loadHomeworks(params);
   }, [isLoading]);
 
-  console.log({ homeworks, root: 'LessonNew' });
-
   return (
     <>
       {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>
@@ -44,10 +42,10 @@ const Lesson = () => {
         <MainContainer>
           <LeftSide>
             <Video actualLesson={tempLesson} user={context.user as IUserInfoResult} course={course} openModal={() => { setShow(true) }} />
-            <Modules lesson={tempLesson} course={course} />
+            <Modules lesson={tempLesson} course={course} position={position} setPosition={setPosition} />
           </LeftSide>
           <RightComponent context={context as IUseAuthProps} course={course} />
-          <ActivityModal show={show} setShow={() => { setShow(false) }} lesson={tempLesson} />
+          <ActivityModal show={show} setShow={() => { setShow(false) }} lesson={tempLesson} changeValue={setPosition} />
         </MainContainer>}
     </>
   )

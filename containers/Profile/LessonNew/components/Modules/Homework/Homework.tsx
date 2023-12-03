@@ -196,7 +196,7 @@ const HomeWork = (props: IHomeWork) => {
                 }
                 {
                   status === "" &&
-                  <div className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
+                  <div id="btn-homework-upload" className='homework' onClick={() => { document.getElementById('hide')?.click() }} >
                     <BiUpload></BiUpload>
                     Entregar Tarea
                     <input id="hide" type="file" onChange={(e) => { approvalHomeWork(e.target.files) }} onClick={(e: any) => { e.target.value = '' }} hidden />
