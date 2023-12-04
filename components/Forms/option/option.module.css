@@ -13,8 +13,13 @@
 
 .optionButton input[type="radio"] {
   position: absolute;
-  opacity: 0;
+  /* opacity: 0; */
   cursor: pointer;
+  accent-color: #3f1168;
+  width: 15px;
+  height: 15px;
+  top: 4px;
+  left: 10px;
 }
 
 .customRadioButton {

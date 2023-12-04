@@ -14,6 +14,10 @@ interface OptionComponentState {
   selectedOption: string | null;
 }
 
+interface DisplayContentProps {
+  content: string;
+}
+
 const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOptionChange, isVisible }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -30,13 +34,24 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
     onOptionChange(option);
   };
 
+  const displayContent = ({ content }: DisplayContentProps) => {
+    // Función para sanitizar la cadena HTML
+    const sanitizeHTML = (html: string): { __html: string } => {
+      return { __html: html };
+    };
+
+    return (
+      <div dangerouslySetInnerHTML={sanitizeHTML(content)} />
+    );
+  };
+
   if (!isVisible) {
     return null; // Si no es visible, no renderizar nada
   }
 
   return (
     <div className={optionContainer}>
-      <label className={optionsLabel}>{label}</label>
+      <label className={optionsLabel}>{displayContent({ content: label })}</label>
       {options.map((option, index) => (
         <div className={optionButton} key={index}>
           <input
@@ -47,12 +62,12 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             checked={selectedOption === option}
             onChange={handleRadioChange}
           />
-          <span
+          {/* <span
             className={customRadioButton}
             onClick={() => handleCustomButtonClick(option)}
             role="button"
             tabIndex={0}>
-          </span>
+          </span> */}
           <label className={optionLabel} htmlFor={option} onClick={() => handleCustomButtonClick(option)}>{option}</label>
         </div>
       ))}

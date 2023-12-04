@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css";
 
 import Link from "next/link";
 
+import { createFormApi } from "../../../../components/api/form";
 import styles from "./create.module.css";
 
 interface Option {
@@ -32,7 +33,7 @@ interface Form {
 }
 
 const CreateForm = () => {
-  const { container, inputGroup, button, buttonContainer } = styles;
+  const { container, inputGroup, editor, imgGroup, imgInput, buttonContainer, button } = styles;
 
   const data: Form = {
     name: "",
@@ -212,7 +213,7 @@ const CreateForm = () => {
       redirect: {
         ...prevForm!.redirect,
         type: value as "thankYouPage" | "customLink",  // Asegurarse de que el valor sea del tipo correcto
-        link: value === "customLink" ? "" : prevForm!.redirect.link,  // Restablecer el valor del enlace si se cambia a otra opción
+        link: value === "thankYouPage" ? "" : prevForm!.redirect.link,  // Restablecer el valor del enlace si se cambia a otra opción
       },
     }));
   };
@@ -232,13 +233,52 @@ const CreateForm = () => {
     const newTextButton = e.target.value;
     setUpdatedForm((prevForm) => ({
       ...(prevForm as Form),
-      textButton: newTextButton,
+      redirect: {
+        ...prevForm!.redirect,
+        textButton: newTextButton,
+      },
     }));
   };
 
   const handleCreate = () => {
     console.log(updatedForm);
+
+    const formatDate = (date: Date): string => {
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const seconds = date.getSeconds().toString().padStart(2, "0");
+
+      return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    };
+
+    const updatedFormCopy = { ...updatedForm };
+
+    const currentDate = new Date();
+    updatedFormCopy.createdAt = formatDate(currentDate);
+    updatedFormCopy.editedAt = formatDate(currentDate);
+    updatedFormCopy.title = "titulo de prueba";
+    updatedFormCopy.subtitle = "subtitulo de prueba"
+
+    console.log(updatedFormCopy)
     // Lógica para crear el formulario
+    createFormApi(updatedFormCopy)
+      .then((result) => {
+        console.log(result)
+        if (result === true) {
+          // Formulario creado exitosamente
+          alert("Formulario creada exitosamente.");
+        } else {
+          // Trivia no fue creada
+          alert("Erro al crear al crear el formulario.");
+        }
+      })
+      .catch((error) => {
+        // Error en la llamada
+        console.log("Error en la llamada a la API:", error);
+      });
   };
 
   return (
@@ -254,7 +294,7 @@ const CreateForm = () => {
         />
       </div>
 
-      <div>
+      <div className={editor}>
         <label htmlFor="title">Título:</label>
         <ReactQuill
           id="title"
@@ -265,7 +305,7 @@ const CreateForm = () => {
         />
       </div>
 
-      <div>
+      <div className={editor}>
         <label htmlFor="subtitle">Párrafo:</label>
         <ReactQuill
           id="subtitle"
@@ -286,15 +326,13 @@ const CreateForm = () => {
           onChange={handleImgChange}
         />
 
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={updatedForm?.img.isVisible || false}
-              onChange={handleImgVisibilityChange}
-            />
-            Mostrar Imagen
-          </label>
+        <div className={imgGroup}>
+          <input
+            type="checkbox"
+            checked={updatedForm?.img.isVisible || false}
+            onChange={handleImgVisibilityChange}
+          />
+          <label>Mostrar Imagen</label>
         </div>
         {updatedForm?.img.source && (
           <img
@@ -344,7 +382,7 @@ const CreateForm = () => {
             )
           )}
 
-          <button onClick={() => handleAddOption(questionIndex)}>+</button>
+          <button onClick={() => handleAddOption(questionIndex)}>Agregar nueva opción</button>
           <div>
             <label>
               <input

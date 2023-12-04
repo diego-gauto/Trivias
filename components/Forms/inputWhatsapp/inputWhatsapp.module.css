@@ -3,7 +3,7 @@
 }
 
 .formControl {
-  background-color: #ffffff !important;
+  background-color: #ece7f2 !important;
   height: 32px !important;
   margin-bottom: 50px !important;
   max-width: 330px !important;
@@ -28,14 +28,18 @@
 }
 
 .flagDropdown {
-  background-color: #ffffff !important;
+  background-color: #ece7f2 !important;
   height: 130px !important;
   border-radius: 20px !important;
   border: none !important;
 }
 
+.flagDropdown:hover{
+  background-color: #ece7f2 !important;
+}
+
 .flagButton {
-  background-color: #ffffff !important;
+  background-color: #ece7f2 !important;
   height: 32px !important;
   border-radius: 40px !important;
   border: none !important;
@@ -43,14 +47,15 @@
 }
 
 .flagButton:hover {
-  background-color: #ffffff !important;
+  background-color: #ece7f2 !important;
+
   height: 32px !important;
   border-radius: 40px !important;
   border: none !important;
 }
 
 .label {
-  width: 200px;
+  width: 500px;
   height: 16px;
 
   font-family: "Montserrat";
@@ -65,6 +70,11 @@
   color: #3f1168;
 
   margin: 0 0 5px 5px;
+
+  @media screen and (max-width: 550px) {
+    width: 250px;
+    height: 32px;
+  }
 }
 
 @media screen and (max-width: 600px) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
+import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
@@ -13,24 +14,62 @@ import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
 import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
+
+interface Option {
+  isVisible: boolean | null;
+  label: string;
+  options: string[];
+}
+
+interface Form {
+  name: string;
+  title: string;
+  subtitle: string;
+  createdAt: string;
+  editedAt: string;
+  img: {
+    source: string;
+    isVisible: boolean | null;
+  };
+  optionsArray: Option[];
+  redirect: {
+    type: "thankYouPage" | "customLink";
+    link: string;
+    textButton: string;
+  };
+}
+
+interface DisplayContentProps {
+  content: string;
+}
 
 const Formularios = () => {
   const {
     query: { formId },
   } = useRouter();
 
+  const router = useRouter();
+
+  const [form, setForm] = useState<Form | null>()
+
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
-  const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
-  const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [originalEmail, setOriginalEmail] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  // const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
+  // const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
+  // const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
 
 
-  const [isImageVisible, setIsImageVisible] = useState(true);
-  const [isOption1Visible, setIsOption1Visible] = useState(true);
-  const [isOption2Visible, setIsOption2Visible] = useState(true);
-  const [isOption3Visible, setIsOption3Visible] = useState(true);
+  // const [isImageVisible, setIsImageVisible] = useState(true);
+  // const [isOption1Visible, setIsOption1Visible] = useState(true);
+  // const [isOption2Visible, setIsOption2Visible] = useState(true);
+  // const [isOption3Visible, setIsOption3Visible] = useState(true);
 
   const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
   const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
@@ -40,16 +79,28 @@ const Formularios = () => {
 
 
 
-  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
+  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageMailExist, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
     apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
     correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
     numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
-    option1: Yup.string().required('Debes seleccionar alguna de las opciones'),
-    option2: Yup.string().required('Debes seleccionar alguna de las opciones'),
-    option3: Yup.string().required('Debes seleccionar alguna de las opciones')
+    option1: Yup.lazy(() => {
+      return form?.optionsArray[0]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
+    option2: Yup.lazy(() => {
+      return form?.optionsArray[1]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
+    option3: Yup.lazy(() => {
+      return form?.optionsArray[2]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
 
   });
 
@@ -71,6 +122,59 @@ const Formularios = () => {
     },
   });
 
+  useEffect(() => {
+    // const form: Form = {
+    //   name: "Campaña 11 de Diciembre",
+    //   title: "<p><strong>Solicitud</strong> de Beca al 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad! </p>",
+    //   subtitle: "<p><strong>Más de 65 cursos</strong> de uñas, maquillaje y pestañas <strong>incluidos</strong>. Además, recibe acceso a Nails Master Revolution (un curso de uñas en técnica de Tips y Escultural). Aprende en línea, <strong>Desde Cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de $6.397,00 MXN reducido a un costo total de $1.599,00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de 399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. </p>",
+    //   createdAt: "",
+    //   editedAt: "",
+    //   img: { source: "/images/forms/iPhone-14-removebg.png", isVisible: true },
+    //   optionsArray: [
+    //     { isVisible: true, label: "<p>Recuerda que el <strong>costo total del programa es de 1,599 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para <strong>ganar un iPhone 15 Pro</strong> NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y <strong>MÁXIMO este</strong> SÁBADO 25 de Noviembre. Elige tu plan de Pagos:</p>", options: ["Pagaré en 4 partes de 399 pesos ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día sábado"] },
+    //     { isVisible: true, label: "<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>", options: ["Sí, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"] },
+    //     { isVisible: false, label: "", options: ["", ""] },
+    //   ],
+    //   redirect: {
+    //     type: "thankYouPage",
+    //     link: "",
+    //     textButton: "",
+    //   },
+    // }
+    // setForm(form)
+    // setLoading(false)
+
+    const fetchData = async () => {
+      try {
+
+        const formIdNumber: number = (Number(formId))
+
+        const res = await getFormApi(formIdNumber);
+
+        const formTemp = res[0]
+
+        if (formTemp) {
+
+          // Parsear la cadena JSON en la propiedad "questions"
+          formTemp.img = JSON.parse(formTemp.img);
+
+          // Parsear la cadena JSON en la propiedad "result"
+          formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
+
+          formTemp.redirect = JSON.parse(formTemp.redirect);
+
+          setForm(formTemp);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener los datos del formulario:', error);
+      }
+
+    };
+
+    fetchData();
+  }, []);
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
@@ -81,7 +185,16 @@ const Formularios = () => {
   };
 
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    formik.setFieldValue('correo', event.target.value);
+    const newEmail = event.target.value.toLowerCase();
+    formik.setFieldValue('correo', newEmail);
+
+    // Restablecer el mensaje de error si el correo electrónico cambia
+    if (errorMessage && newEmail !== originalEmail) {
+      setErrorMessage(null);
+    }
+
+    if (newEmail == originalEmail) setErrorMessage("Este correo ya se encuentra inscrito");
+
   };
 
 
@@ -143,11 +256,16 @@ const Formularios = () => {
       // const createUserResult = false;
 
       if (createUserResult) {
-        setIsUserCreateModalVisible(true)
+        const link = form?.redirect?.type === 'thankYouPage' ? '/forms/thankyoupage' : form?.redirect?.link || '';
+        router.push(link);
+
+        // setIsUserCreateModalVisible(true)
         console.log("usuario registrado exitosamente")
       } else {
         //popup el usuario ya esta registrado
-        setIsUserExistModalVisible(true)
+        // setIsUserExistModalVisible(true)
+        setOriginalEmail(formik.values.correo)
+        setErrorMessage("Este correo ya se encuentra inscrito");
         console.log("usuario ya registrado")
       }
     } catch (error) {
@@ -161,19 +279,19 @@ const Formularios = () => {
     let opcionesValidas = true;
 
     // Validar option1
-    if (!formik.values.option1) {
+    if (!formik.values.option1 && form?.optionsArray[0]?.isVisible) {
       formik.setFieldError('option1', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
 
     // Validar option2
-    if (!formik.values.option2) {
+    if (!formik.values.option2 && form?.optionsArray[1]?.isVisible) {
       formik.setFieldError('option2', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
 
     // Validar option3
-    if (!formik.values.option3) {
+    if (!formik.values.option3 && form?.optionsArray[2]?.isVisible) {
       formik.setFieldError('option3', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
@@ -208,45 +326,51 @@ const Formularios = () => {
       if (formIsValid && optionsAreValid) {
         try {
           formik.handleSubmit();
+
         } catch (error) {
           console.error("Error al enviar el formulario", error);
         }
+      } else {
+        console.error("Campos no validos")
+        console.log("form valid", formIsValid)
+        console.log("options valid", optionsAreValid)
       }
     });
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("email")) {
-  //     getUserApi(localStorage.getItem("email")).then((res) => {
-  //       setUserData(res);
-  //       formik.setFieldValue("nombre", res.name);
-  //       formik.setFieldValue("apellido", res.last_name);
-  //       formik.setFieldValue("correo", res.email);
-  //       setUserDataLoaded(true);
-  //     });
-  //   }
-  // }, []);
   const handleOptionChange = (componentIndex: number, value: string) => {
     const fieldName = `option${componentIndex}`;
     formik.setFieldValue(fieldName, value);
   };
 
-  const optionLabel1 = "Recuerda que el 𝗰𝗼𝘀𝘁𝗼 𝘁𝗼𝘁𝗮𝗹 𝗱𝗲𝗹 𝗽𝗿𝗼𝗴𝗿𝗮𝗺𝗮 𝗲𝘀 𝗱𝗲 𝟭,𝟱𝟵𝟵 𝗠𝗫𝗡 y podrás pagarlo en 4 partes. 𝗦𝗲 𝗱𝗮𝗿á 𝗮𝗰𝗰𝗲𝘀𝗼 una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para 𝗴𝗮𝗻𝗮𝗿 𝘂𝗻 𝗶𝗣𝗵𝗼𝗻𝗲 𝟭𝟱 𝗣𝗿𝗼 NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y 𝗠Á𝗫𝗜𝗠𝗢 𝗲𝘀𝘁𝗲 𝗩𝗜𝗘𝗥𝗡𝗘𝗦 3 de Noviembre. Elige tu plan de Pagos:"
-  const optionLabel2 = "𝗘𝗻 𝗰𝗮𝘀𝗼 𝗱𝗲 𝘀𝗲𝗿 𝘀𝗲𝗹𝗲𝗰𝗰𝗶𝗼𝗻𝗮𝗱𝗮, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso 𝗽𝗼𝗿 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗼? Recuerda que al ser seleccionada 𝘁𝗼𝗺𝗮𝗿á𝘀 𝘂𝗻𝗼 𝗱𝗲 𝗹𝗼𝘀 𝗹𝘂𝗴𝗮𝗿𝗲𝘀 y otras aspirantes quedarán fuera."
-  const optionLabel3 = "𝗘𝗻 𝗰𝗮𝘀𝗼 𝗱𝗲 𝘀𝗲𝗿 𝘀𝗲𝗹𝗲𝗰𝗰𝗶𝗼𝗻𝗮𝗱𝗮, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso 𝗽𝗼𝗿 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗼?"
+  const displayContent = ({ content }: DisplayContentProps) => {
+    // Función para sanitizar la cadena HTML
+    const sanitizeHTML = (html: string): { __html: string } => {
+      return { __html: html };
+    };
 
-  const options1 = ["Pagaré en 4 partes de $399,00 MXN ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día Viernes"]
-  const options2 = ["Si, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"]
-  const options3 = ["Si, me comprometo", "No, gracias"]
+    return (
+      <div dangerouslySetInnerHTML={sanitizeHTML(content)} />
+    );
+  };
 
+  if (loading) {
+    return (
+      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    )
+  }
 
   return (
     <div className={container}>
 
       <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
       <div className={formContainer}>
-        <h2 className={title}>𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝘂𝗱 de Beca de 75% y 𝗣𝗹𝗮𝗻 𝗱𝗲 𝟰 𝗽𝗮𝗴𝗼𝘀</h2>
-        <p className={paragraph}>𝗠á𝘀 𝗱𝗲 𝟲𝟬 𝗰𝗹𝗮𝘀𝗲𝘀 𝗶𝗻𝗰𝗹𝘂𝗶𝗱𝗮𝘀. Un curso online 𝗗𝗲𝘀𝗱𝗲 𝗖𝗲𝗿𝗼 con 𝗿𝗲𝘃𝗶𝘀𝗶ó𝗻 𝗱𝗲 𝗽𝗿á𝗰𝘁𝗶𝗰𝗮𝘀, asesorías ilimitadas y 𝗖𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝗱𝗼 𝗼𝗳𝗶𝗰𝗶𝗮𝗹 de la marca. Un precio real de $̶6̶7̶1̶9̶ MXN reducido a un costo total de 1,599 MXN (99 USD) que podrás pagar en 4 pagos de 399 MXN (25 USD).💞 𝗟𝗨𝗚𝗔𝗥𝗘𝗦 𝗠𝗨𝗬 𝗟𝗜𝗠𝗜𝗧𝗔𝗗𝗢𝗦. 𝗔𝗽𝗿𝗲𝘀ú𝗿𝗮𝘁𝗲 𝗮 𝗮𝗽𝗮𝗿𝘁𝗮𝗿 𝘁𝘂 𝗹𝘂𝗴𝗮𝗿 𝗮𝗻𝘁𝗲𝘀 𝗱𝗲 𝗾𝘂𝗲 𝘀𝗲 𝗮𝗴𝗼𝘁𝗲𝗻.  𝗦𝗼𝗹𝗶𝗰𝗶𝘁𝗮 tu inscripción con beca al 75% y plan de 𝟰 𝗽𝗮𝗴𝗼𝘀 𝗱𝗲 𝟯𝟵𝟵 𝗠𝗫𝗡 (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳 </p>
+        <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
+        <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
         <div className={lineaAtravesada}></div>
 
         <form onSubmit={formik.handleSubmit} className={inputContainer}>
@@ -254,7 +378,7 @@ const Formularios = () => {
             <div className={name}>
 
               <InputNombre
-                label={"Nombre"}
+                label={"Escribe tu nombre"}
                 placeholder={"Carla"}
                 onChange={handleNombreChange}
                 onBlur={handleNombreBlur}
@@ -269,7 +393,7 @@ const Formularios = () => {
 
 
               <InputNombre
-                label={"Apellido"}
+                label={"Escribe tu apellido"}
                 placeholder={"Flores"}
                 onChange={handleApellidoChange}
                 onBlur={handleApellidoBlur}
@@ -283,7 +407,7 @@ const Formularios = () => {
           </div>
           <div className={mail}>
             <InputMail
-              label={"Correo Electrónico"}
+              label={"Escribe tu correo electrónico"}
               placeholder={"carlaflores@gmail.com"}
               onChange={handleMailChange}
               onBlur={handleMailBlur}
@@ -292,10 +416,13 @@ const Formularios = () => {
             {formik.touched.correo && formik.errors.correo && (
               <div className={errorMessageMail}>{formik.errors.correo}</div>
             )}
+            {errorMessage && (
+              <div className={errorMessageMail}>{errorMessage}</div>
+            )}
           </div>
           <div className={phone}>
             <InputWatsapp
-              label={"Número de WhatsApp"}
+              label={"Escribe tu WhatsApp (Selecciona tu país primero)"}
               placeholder={"1153137872"}
               onChange={handlePaisChange}
               onBlur={handlePaisBlur}
@@ -305,28 +432,29 @@ const Formularios = () => {
               <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
             )}
           </div>
-          {isImageVisible && <img className={image} src="./images/forms/iPhone-14-removebg.png" alt="iphone" />}
+          {form?.img.isVisible && <img className={image} src={form.img.source} alt="iphone" />}
 
           <div className={options}>
             <div className={optionContainer}>
-              <OptionComponent label={optionLabel1} options={options1} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={isOption1Visible} />
+              <OptionComponent label={form?.optionsArray[0]?.label || ''} options={form?.optionsArray[0]?.options || []} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={!!form?.optionsArray[0]?.isVisible} />
               {formik.touched.option1 && formik.errors.option1 && (
                 <div className={errorOption}>{formik.errors.option1}</div>
               )}
             </div>
 
             <div className={optionContainer}>
-              <OptionComponent label={optionLabel2} options={options2} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={isOption2Visible} />
+              <OptionComponent label={form?.optionsArray[1]?.label || ''} options={form?.optionsArray[1]?.options || []} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={!!form?.optionsArray[1]?.isVisible} />
               {formik.touched.option2 && formik.errors.option2 && (
                 <div className={errorOption}>{formik.errors.option2}</div>
               )}
             </div>
 
             <div className={optionContainer}>
-              <OptionComponent label={optionLabel3} options={options3} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={isOption3Visible} />
-              {formik.touched.option3 && formik.errors.option3 && (
+              <OptionComponent label={form?.optionsArray[2]?.label || ''} options={form?.optionsArray[2]?.options || []} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={!!form?.optionsArray[2]?.isVisible} />
+              {form?.optionsArray[2]?.isVisible ? (
+                formik.touched.option3 && formik.errors.option3 &&
                 <div className={errorOption}>{formik.errors.option3}</div>
-              )}
+              ) : null}
             </div>
 
           </div>
@@ -334,7 +462,7 @@ const Formularios = () => {
 
           <div className={buttonContainer}>
             <button type="button" className={submitButton} onClick={handleButtonClick}>
-              Enviar Solicitud
+              {form?.redirect.textButton === "" ? "Enviar Solicitud" : form?.redirect.textButton}
             </button>
           </div>
 
