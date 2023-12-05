@@ -192,7 +192,7 @@ const User = () => {
       })
     } else {
       localStorage.setItem("login", "true")
-      router.push({ pathname: "/auth/Login" });
+      router.push({ pathname: "/auth/login" });
     }
   }, [])
   useEffect(() => {

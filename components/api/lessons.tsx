@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IAxiosCourseResponse } from "../../interfaces/ICourseNew";
 
 export const addCourse = async (course: any) => {
   return axios
@@ -24,15 +25,15 @@ export const getCoursesApi = async () => {
     });
 };
 
-export const getCourseApi = async (courseId: any) => {
+export const getCourseApi = async (courseId: number) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "lessons/" + courseId)
+    .get<IAxiosCourseResponse>("https://gonvar.inowu.dev/" + "lessons/" + courseId)
     .then((res) => {
       return res.data.data[0]
     })
     .catch((error) => {
       console.log(error);
-      return error
+      throw error
     });
 };
 

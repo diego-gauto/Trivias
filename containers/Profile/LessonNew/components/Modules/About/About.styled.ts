@@ -143,14 +143,23 @@ export const LessonContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 20px;
   }
   .pdf {
     color: #74549c;
     font-size: 14px;
     text-decoration: none;
-    cursor: pointer;
+  }
+  .btn-material-apoyo-pdf {
+    margin-left: 10px;
+    padding: 4px 10px;
+    color: white;
+    border-radius: 20px;
+    border: 1px solid #8e2de2;
+    background: #8e2de2;
+    text-decoration: none;
     &:hover {
-      font-weight: 700;
+      opacity: 0.7;
     }
   }
   .btn-material {

@@ -29,6 +29,9 @@ const Users = () => {
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
+  const array_prices = [
+    459, 1599, 3497
+  ]
   const handleLoginCalendar = () => {
     setLoginCalendar(!loginCalendar);
   }
@@ -135,6 +138,7 @@ const Users = () => {
                   <option value="todos">Todos</option>
                   <option value="mensual">Mensual</option>
                   <option value="anual">Anual</option>
+                  <option value="cuatri">Cuatrimestral</option>
                 </select>
               </DefaultFilterContain>
               <DefaultFilterContain>
@@ -145,13 +149,20 @@ const Users = () => {
                   <option value="not-active">No Activa</option>
                 </select>
               </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Cantidad Gastada</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }}>
+              {
+                userFilters.membershi
+              }
+              <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
+                <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
+                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
                   <option value={-1}>Todos</option>
-                  <option value={149}> +149</option>
-                  <option value={1000}>+1000</option>
-                  <option value={5000}> +5000</option>
+                  {
+                    array_prices.map((price: number, index: number) => {
+                      return (
+                        <option value={price} key={"precio_" + index}> +{price}</option>
+                      )
+                    })
+                  }
                 </select>
               </DefaultFilterContain>
             </DefaultRow>

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { returnLevel } from "../../utils/functions";
 import { CertificateContainer, CertificateOn, MainContainer } from "./Progress.styled";
-import { IUser } from "../../../../../interfaces/IUserData";
 import { useMediaQuery } from "react-responsive";
 import { addUserCertificateApi, getUserCertificateApi } from "../../../../../components/api/lessons";
 import { createNotification } from "../../../../../components/api/notifications";
 import { updateMembership } from "../../../../../components/api/users";
 import router, { useRouter } from "next/router";
 import { CERTIFICATES_PATH } from "../../../../../constants/paths";
+import { IUserInfoResult } from "../../../../../interfaces/IUser";
+import { ICourseResponse } from "../../../../../interfaces/ICourseNew";
 
 interface IProgress {
-  course: any,
-  user: IUser
+  course: ICourseResponse,
+  user: IUserInfoResult
 }
 
 const Progress = (props: IProgress) => {

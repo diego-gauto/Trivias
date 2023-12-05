@@ -10,19 +10,24 @@ import { createBlogsApi, getBlogsApi, updateBlogImageApi, updateBlogsApi, update
 import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/FireBaseImages';
 import { getUserApi } from '../../api/users';
 import { formatBlogDate } from '../../../utils/functions';
+import { IUserInfoResult } from '../../../interfaces/IUser';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [oldBlogs, setoldBlogs] = useState<any>([]);
   const [loader, setLoader] = useState(false);
+  const [userData, setUserData] = useState<IUserInfoResult | null>(null);
+
   const goToCreateBlog = () => {
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[2].create === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
     router.push({ pathname: "/admin/CreateBlog" })
   }
-  const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
@@ -34,6 +39,9 @@ const Blog = () => {
 
   const goToEditBlog = (blog: any) => {
     // let blogText: any = blog.title.replaceAll(" ", "-");
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[2].edit === 0) {
       alert("No tienes permisos para esta acción");
       return;

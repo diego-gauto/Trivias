@@ -6,13 +6,22 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "../firebase/firebaseConfig";
 import { getUserApi } from "../components/api/users";
+import { IUserInfoResult } from "../interfaces/IUser";
 
 interface Props {
   children?: ReactNode
   // any props that come into the component
 }
 
-const AuthContext = createContext<any>(null);
+interface IUseAuthProps {
+  user: IUserInfoResult | null;
+  isAuthenticating: boolean;
+  logout: () => Promise<void>;
+  reloadUser: () => void;
+  setUser: React.Dispatch<React.SetStateAction<IUserInfoResult | null>>
+}
+
+const AuthContext = createContext<any>(null);//<any>(null); // <IUseAuthProps>({} as IUseAuthProps);
 
 export const useAuth = () => {
   //console.log(db)
@@ -30,8 +39,8 @@ export const getSingleUser = async (id: string) => {
 }
 
 export const AuthProvider = ({ children, ...props }: Props) => {
-  const [user, setUser] = useState<any>(null);
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [user, setUser] = useState<any>(null);// useState<IUserInfoResult | null>(null);
+  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
   const auth = getAuth();
 
   const logout = () => {
@@ -42,7 +51,6 @@ export const AuthProvider = ({ children, ...props }: Props) => {
       console.log(error)
     })
   };
-
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
