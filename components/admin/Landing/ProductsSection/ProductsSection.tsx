@@ -13,14 +13,19 @@ import {
   Inputs,
   ProfileData,
   SaveButton,
+  GridContainer,
+  GridItem,
+  EditInputResponsive,
+  InputsResponsive,
+  ImageInGrid,
+  FolderInputResponsive,
 } from "../Landing.styled";
 import { IProductsSectionProps, Product } from './IProductsSection';
+import { title } from 'process';
 
 const ProductsSection = (props: IProductsSectionProps) => {
   const { productsSectionData } = props;
   const [productsData, setProductsData] = useState(productsSectionData)
-
-
 
   const chunk1 = productsData.slice(0, 3)
   const chunk2 = productsData.slice(3, 6)
@@ -54,31 +59,30 @@ const ProductsSection = (props: IProductsSectionProps) => {
       setProductsData(tempProduct)
     };
   }
-  console.log(productsData);
   const gerProductElement = ({ clickURL, imgURL, title, subtitle, price, url, image, img_display, available }: Product, i: number) => {
     return (
-      <ColumnsContainer2 key={"product_landing_" + i}>
-        <Inputs>
+      <GridItem key={"product_landing_" + i}>
+        <InputsResponsive>
           <EditText>
             Producto {i + 1}
           </EditText>
-          <EditInput
+          <EditInputResponsive
             onChange={(e) => updateProductState(e, "title", i)}
             value={title}
             placeholder="Gonvar Nails Leonardo Da Vinci"
           />
-        </Inputs>
-        <Inputs>
+        </InputsResponsive>
+        <InputsResponsive>
           <EditText>
             Precio
           </EditText>
-          <EditInput
+          <EditInputResponsive
             onChange={(e) => updateProductState(e, "price", i)}
             value={price}
             placeholder="Desde $ 12.00"
           />
-        </Inputs>
-        <Inputs>
+        </InputsResponsive>
+        <InputsResponsive>
           <EditText>
             Producto Disponible
           </EditText>
@@ -86,39 +90,37 @@ const ProductsSection = (props: IProductsSectionProps) => {
             <option value="disponible">Disponible</option>
             <option value="agotado">Agotado</option>
           </select>
-        </Inputs>
-        <Inputs>
+        </InputsResponsive>
+        <InputsResponsive>
           <EditText>
             Página del Producto
           </EditText>
-          <EditInput
+          <EditInputResponsive
             onChange={(e) => updateProductState(e, "url", i)}
             value={url}
             placeholder="https://google.com"
           />
-        </Inputs>
-        <Inputs>
+        </InputsResponsive>
+        <InputsResponsive>
           <EditText>
             Imagen del Producto
           </EditText>
-          <FolderInput
+          <FolderInputResponsive
             onChange={(e) => { updateProductState(e, "file", i); getImage(e.target.files, i) }}
             type="file"
             placeholder="Seleccionar archivo"
           />
-        </Inputs>
-        <img src={img_display} alt="" />
-      </ColumnsContainer2>
+        </InputsResponsive>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <img style={{ width: '250px', padding: '20px' }} src={img_display} alt={title} />
+        </div>
+      </GridItem>
     )
   }
-  const row1 = chunk1.map((product: Product, i: number) => {
+
+  const elementsToShow = [...chunk1, ...chunk2].map((product: Product, i: number) => {
     return (
       gerProductElement(product, i)
-    )
-  })
-  const row2 = chunk2.map((product: Product, i: number) => {
-    return (
-      gerProductElement(product, i + 3)
     )
   })
   const onSave = async () => {
@@ -149,12 +151,9 @@ const ProductsSection = (props: IProductsSectionProps) => {
   }
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>
-      <ColumnsContainer>
-        {row1}
-      </ColumnsContainer>
-      <ColumnsContainer>
-        {row2}
-      </ColumnsContainer>
+      <GridContainer>
+        {elementsToShow}
+      </GridContainer>
       <EditButtons>
         <SaveButton onClick={onSave}>
           Guardar

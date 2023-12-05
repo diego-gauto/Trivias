@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes, css } from 'styled-components';
 
 export const Container = styled.div<{ show: boolean }>`
   display: flex;
@@ -13,7 +13,7 @@ export const Container = styled.div<{ show: boolean }>`
     z-index: 10;
     left: -270px;
     transition: 0.5s ease all;
-    ${(props) =>
+    ${props =>
       props.show &&
       css`
         left: 0;
@@ -36,8 +36,9 @@ export const Container = styled.div<{ show: boolean }>`
   }
 `;
 export const Text = styled.p`
-  font-size: 20px;
-  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+  padding: 8px;
+  font-family: 'Nunito', sans-serif;
   cursor: pointer;
   color: white;
   margin: 0;
@@ -139,7 +140,7 @@ export const Table = styled.table`
   overflow-x: scroll;
   td {
     font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding-left: 10px;
     padding-block: 15px;
     text-align: left;
@@ -158,7 +159,7 @@ export const Table = styled.table`
     background-color: #6717cd;
     color: white;
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
   }
   tr {
