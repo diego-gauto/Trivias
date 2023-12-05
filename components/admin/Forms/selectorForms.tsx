@@ -37,15 +37,17 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-// import { getAllTriviasApi } from "../../../../components/api/trivias";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+// import { getAllTriviasApi } from "../../../../components/api/trivias";
+import { getAllFormsApi } from "../../api/form";
 import FormList from "./formList/formList";
 import styles from "./selectorForms.module.css";
 
 interface Form {
   id: number;
-  title: string;
-  date: Date;
+  name: string;
+  createdAt: string;
+  editedAt: string;
 }
 
 const formsMock = [
@@ -66,8 +68,8 @@ const SelectorForms = () => {
   useEffect(() => {
     const fetchForms = async () => {
       try {
-        // const triviasData = await getAllTriviasApi();
-        setForms(formsMock);
+        const formsData = await getAllFormsApi();
+        setForms(formsData);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener las trivias:', error);

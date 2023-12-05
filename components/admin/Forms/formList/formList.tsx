@@ -4,8 +4,9 @@ import FormRow from "../formRow/formRow";
 
 interface Form {
   id: number;
-  title: string;
-  date: Date;
+  name: string;
+  createdAt: string;
+  editedAt: string;
 }
 
 interface FormListProps {
@@ -21,6 +22,7 @@ const FormList = ({ forms }: FormListProps) => {
             <th>Nº de Formulario</th>
             <th>Título</th>
             <th>Fecha de Creación</th>
+            <th>Fecha de Edición</th>
           </tr>
         </thead>
         <tbody>

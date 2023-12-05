@@ -33,7 +33,7 @@ interface Form {
 }
 
 const CreateForm = () => {
-  const { container, inputGroup, editor, imgGroup, imgInput, buttonContainer, button } = styles;
+  const { container, lineaAtravesada, inputGroup, titleGroup, editor, imgGroup, questionGroup, options, newOptionButton, checkGroup, redirectGroup, buttonContainer, button, textButtonGroup } = styles;
 
   const data: Form = {
     name: "",
@@ -194,19 +194,6 @@ const CreateForm = () => {
     });
   };
 
-  const handleLinkTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const redirectType = e.target.value as "thankYouPage" | "customLink";
-
-    setUpdatedForm((prevForm) => ({
-      ...(prevForm as Form),
-      redirect: {
-        ...prevForm!.redirect,
-        type: redirectType,
-        link: redirectType === "customLink" ? "" : prevForm!.redirect.link,
-      },
-    }));
-  };
-
   const handleRedirectChange = (value: string) => {
     setUpdatedForm((prevForm) => ({
       ...(prevForm as Form),
@@ -294,9 +281,12 @@ const CreateForm = () => {
         />
       </div>
 
-      <div className={editor}>
+      <div className={lineaAtravesada}></div>
+
+      <div className={titleGroup}>
         <label htmlFor="title">Título:</label>
         <ReactQuill
+          className={editor}
           id="title"
           value={updatedForm?.title}
           onChange={handleTitleChange}
@@ -305,9 +295,10 @@ const CreateForm = () => {
         />
       </div>
 
-      <div className={editor}>
+      <div className={titleGroup}>
         <label htmlFor="subtitle">Párrafo:</label>
         <ReactQuill
+          className={editor}
           id="subtitle"
           value={updatedForm?.subtitle}
           onChange={handleSubtitleChange}
@@ -315,6 +306,8 @@ const CreateForm = () => {
           formats={editorOptions.formats}
         />
       </div>
+
+      <div className={lineaAtravesada}></div>
 
       <div className={inputGroup}>
         <label htmlFor="imgPath">Imagen:</label>
@@ -332,7 +325,7 @@ const CreateForm = () => {
             checked={updatedForm?.img.isVisible || false}
             onChange={handleImgVisibilityChange}
           />
-          <label>Mostrar Imagen</label>
+          <label>Hacer visible la imágen</label>
         </div>
         {updatedForm?.img.source && (
           <img
@@ -344,9 +337,13 @@ const CreateForm = () => {
       </div>
 
       {[0, 1, 2].map((questionIndex) => (
-        <div key={questionIndex}>
+        <div className={questionGroup} key={questionIndex}>
+
+          <div className={lineaAtravesada}></div>
+
           <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${questionIndex + 1}:`}</label>
           <ReactQuill
+            className={editor}
             id={`option${questionIndex + 1}`}
             value={updatedForm?.optionsArray[questionIndex]?.label}
             onChange={(content) => handleLabelOptionAChange(content, questionIndex)}
@@ -356,7 +353,7 @@ const CreateForm = () => {
 
           {[...Array.from({ length: updatedForm?.optionsArray[questionIndex]?.options.length || 0 }).keys()].map(
             (optionIndex) => (
-              <div key={optionIndex}>
+              <div className={options} key={optionIndex}>
                 <label htmlFor={`option${questionIndex + 1}_${optionIndex + 1}`}>
                   {`Opción ${optionIndex + 1}:`}
                 </label>
@@ -375,28 +372,30 @@ const CreateForm = () => {
                       value={updatedForm?.optionsArray[questionIndex]?.options[optionIndex]}
                       onChange={(e) => handleLabelOptionChange(questionIndex, optionIndex, e.target.value)}
                     />
-                    <button onClick={() => handleRemoveOption(questionIndex, optionIndex)}>-</button>
+                    <button onClick={() => handleRemoveOption(questionIndex, optionIndex)}>Eliminar</button>
                   </>
                 )}
               </div>
             )
           )}
 
-          <button onClick={() => handleAddOption(questionIndex)}>Agregar nueva opción</button>
-          <div>
+          <button className={newOptionButton} onClick={() => handleAddOption(questionIndex)}>Agregar nueva opción</button>
+          <div className={checkGroup}>
             <label>
               <input
                 type="checkbox"
                 checked={updatedForm?.optionsArray[questionIndex]?.isVisible || false}
                 onChange={() => handleOptionVisibilityChange(questionIndex)}
               />
-              Es visible
+              Hacer visible la pregunta {questionIndex + 1}
             </label>
           </div>
         </div>
       ))}
 
-      <div>
+      <div className={lineaAtravesada}></div>
+
+      <div className={redirectGroup}>
         <label>Redirección del botón "Enviar solicitud":</label>
         <div>
           <input
@@ -425,8 +424,8 @@ const CreateForm = () => {
         </div>
       </div>
 
-      <div>
-        <label htmlFor="textButton">Texto del botón:</label>
+      <div className={textButtonGroup}>
+        <label htmlFor="textButton">Cambiar texto del botón:</label>
         <input
           type="text"
           id="textButton"

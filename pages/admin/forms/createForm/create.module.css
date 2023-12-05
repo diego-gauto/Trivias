@@ -4,6 +4,13 @@
   width: 100%;
   padding: 2%;
 
+  .lineaAtravesada {
+    width: 100%;
+    height: 1px;
+    background-color: #000; /* Cambia este color según tus preferencias */
+    margin: 20px 0; /* Ajusta el margen según sea necesario */
+  }
+
   .inputGroup{
     display: flex;
     flex-direction: column;
@@ -16,13 +23,96 @@
     border-color: #952ced;
   }
 
+  .titleGroup{
+    .editor{
+      min-height: 100px;
+    }
+  }
+
   .imgGroup{
     display: flex;
+    margin-top: 10px;
+
   }
 
   .imgGroup input {
     width: 20px;
-    margin: 0 5px;
+  }
+
+  .imgGroup label {
+    margin-left: 10px;
+  }
+
+  .questionGroup{
+    margin-top: 20px;
+
+    .editor{
+      min-height: 110px;
+    }
+
+    .options{
+      margin-left: 50px;
+    }
+  
+    .options input {
+      width: 60%;
+      border-radius: 8px;
+      border-color: #952ced;
+      margin: 0 0 10px 5px;
+    }
+
+    .options button {
+      width: 100px;
+      height: 25px;
+      border: 0;
+      cursor: pointer;
+      font-family: "Montserrat";
+      border-radius: 100px;
+      background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      /* identical to box height */
+      color: #ffffff;
+      margin-left:10px;
+    }
+
+    .newOptionButton {
+      width: 150px;
+      height: 25px;
+      border: 0;
+      cursor: pointer;
+      font-family: "Montserrat";
+      border-radius: 100px;
+      background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      /* identical to box height */
+      color: #ffffff;
+      margin: 10px 50px 0;
+    }
+
+    .checkGroup{
+      margin-top:20px;
+    }
+  }
+
+  .redirectGroup input{
+    margin: 10px 0 10px 20px;
+  }
+
+  .textButtonGroup{
+    margin-top:20px;
+
+  }
+
+  .textButtonGroup input{
+    border-radius: 8px;
+    border-color: #952ced;
+    margin-left: 10px;
   }
   
   .buttonContainer{
