@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { Container, ButtonContainer, OptionText, SelectorTriviasButton } from "./selectorTrivias.styled";
+
 import styles from "./selectorTrivias.module.css";
 
 const SelectorTrivias = () => {
@@ -7,28 +9,24 @@ const SelectorTrivias = () => {
   const { container, buttonContainer, button } = styles
 
   return (
-    <div className={container}>
-      <div className={buttonContainer}>
-
+    <Container>
+      <ButtonContainer>
         <Link href="/admin/trivias/trivias">
-          <a>
-            <button className={button}>Admin Trivias</button>
-          </a>
+          <SelectorTriviasButton>
+            Admin Trivias
+          </SelectorTriviasButton>
         </Link>
-
-        <p>Creación y edición de trivias</p>
-      </div>
-      <div className={buttonContainer}>
-
+        <OptionText>Creación y edición de trivias</OptionText>
+      </ButtonContainer>
+      <ButtonContainer>
         <Link href="/admin/trivias/users">
-          <a>
-            <button className={button}>Listados de usuarios</button>
-          </a>
+          <SelectorTriviasButton>
+            Listados de usuarios
+          </SelectorTriviasButton>
         </Link>
-
-        <p>Listados de usuarios que hayan jugado a las trivias</p>
-      </div>
-    </div>
+        <OptionText>Listados de usuarios que hayan jugado a las trivias</OptionText>
+      </ButtonContainer>
+    </Container>
   );
 }
 export default SelectorTrivias;

@@ -9,14 +9,12 @@ export const PayContain = styled.div`
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  min-width: 1000px;
   height: fit-content;
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   .right-data {
-    position: relative;
-    width: 350px;
+    width: 180px;
   }
   .input-contain {
     display: flex;
@@ -102,12 +100,36 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media screen and (min-width: 420px) {
+    .right-data {
+      width: 200px;
+    }
+  }
+
+  @media screen and (min-width: 540px) {
+    .right-data {
+      width: 280px;
+    }
+  }
+
+  @media screen and (min-width: 634px) {
+    .right-data {
+      width: 360px;
+    }
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 15px;
+
+  @media screen and (min-width: 420px) {
+    .right-data {
+      padding: 20px;
+    }
+  }
 `;
 export const Title = styled.h1`
   font-family: "Montserrat";

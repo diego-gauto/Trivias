@@ -138,8 +138,8 @@ const Cancel = () => {
                 wrapColumnChar=""
                 datas={() => Gonvar(changeDate)}
               >
-                <DownloadUserData style={{ marginTop: 30 }}>
-                  <p>Descargar lista de usuarios</p>
+                <DownloadUserData>
+                  Descargar lista de usuarios
                 </DownloadUserData>
               </CsvDownloader>
             </div>

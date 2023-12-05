@@ -18,6 +18,7 @@ import {
   TitleContain,
   TransparentButton,
   UserContain,
+  UserInfo,
 } from "./UsersCardData.styled";
 import ErrorModal from "../../../Error/ErrorModal";
 import { AdminLoader } from "../../SideBar.styled";
@@ -100,50 +101,46 @@ const UserCardData = (props: CardData) => {
           <ProfileContain>
             <img src={user.photo ? user.photo : "/images/admin/ProfileIcon.png"} />
           </ProfileContain>
-          <Columns>
-            <ColumnContain>
-              <Info>
-                Usuario
-                <Label>
-                  {user.name}
-                </Label>
-              </Info>
-              <Info>
-                Puntos
-                <Label>
-                  {user.score}
-                </Label>
-              </Info>
-              <Info>
-                Suscripción Actual
-                <Label>
-                  {
-                    (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripción"
-                  }
-                </Label>
-              </Info>
-            </ColumnContain>
-            <ColumnContain>
-              <Info>
-                Correo electrónico
-                <Label style={{ overflowWrap: "break-word" }}>
-                  {user.email}
-                </Label>
-              </Info>
-              <Info>
-                Fecha de Creación
-                <Label>
-                  {formatDate(user.created_at)}
-                </Label>
-              </Info>
-              <Info>
-                Teléfono
-                <Label>
-                  {user.phone_number ? user.phone_number : "N/A"}
-                </Label>
-              </Info>
-            </ColumnContain>
-          </Columns>
+          <UserInfo>
+            <Info>
+              Usuario
+              <Label>
+                {user.name}
+              </Label>
+            </Info>
+            <Info>
+              Puntos
+              <Label>
+                {user.score}
+              </Label>
+            </Info>
+            <Info>
+              Suscripción Actual
+              <Label>
+                {
+                  (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripción"
+                }
+              </Label>
+            </Info>
+            <Info>
+              Correo electrónico
+              <Label style={{ overflowWrap: "break-word" }}>
+                {user.email}
+              </Label>
+            </Info>
+            <Info>
+              Fecha de Creación
+              <Label>
+                {formatDate(user.created_at)}
+              </Label>
+            </Info>
+            <Info>
+              Teléfono
+              <Label>
+                {user.phone_number ? user.phone_number : "N/A"}
+              </Label>
+            </Info>
+          </UserInfo>
           <Courses>
             <TitleBox>
               Cursos Activos

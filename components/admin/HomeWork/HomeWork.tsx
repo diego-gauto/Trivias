@@ -283,7 +283,7 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: 'wrap', justifyContent: 'end' }}>
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect}>
                   {

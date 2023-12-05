@@ -4,7 +4,7 @@ export const Container = styled.div<{ show: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: #26264a;
-  padding: 20px;
+  padding: 0;
   min-height: 100vh;
   transition: 0.5s ease all;
   @media (max-width: 1300px) {
@@ -135,6 +135,8 @@ export const AdminContain = styled.div`
   }
 `;
 export const Table = styled.table`
+  display: block;
+  overflow-x: scroll;
   td {
     font-size: 14px;
     font-family: "Raleway", sans-serif;
