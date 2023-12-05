@@ -2,11 +2,7 @@ import Link from "next/link";
 
 import { Container, ButtonContainer, OptionText, SelectorTriviasButton } from "./selectorTrivias.styled";
 
-import styles from "./selectorTrivias.module.css";
-
 const SelectorTrivias = () => {
-
-  const { container, buttonContainer, button } = styles
 
   return (
     <Container>
