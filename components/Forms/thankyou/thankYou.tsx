@@ -1,21 +1,28 @@
 
-import option from "../option/option";
+
+import styles from "./thankYou.module.css";
 
 const ThankYouForm = () => {
 
+  const { container, textContainer, title, subtitle, paragraph, imgContainer } = styles
+
   return (
-    <div>
+    <div className={container}>
 
-      <form className='left'>
-        <h1>Felicidades!</h1>
-        <p> Te has inscrito con éxito. En breve nos comunicaremos contigo</p>
+      <div className={textContainer}>
+        <p className={title}>¡Felicidades!</p>
+        <p className={subtitle}>Has llenado el formulario con éxito.</p>
+        <p className={paragraph}>En los próximos dias nos comunicaremos contigo para <br />indicarte los pasos a seguir.</p>
+      </div>
 
-        <div className='buttons'>
-          <button className='top' disabled={!option} type='submit'>Ir a tus cursos</button>
-        </div>
-      </form>
-      <img src="/images/purchase/payment.png" alt="" />
+      <div className={imgContainer}>
+        <img
+          alt="Mujer celebrando ser"
+          src="/images/forms/mujerCelebrando.png"
+        />
+      </div>
     </div>
-  )
+
+  );
 }
 export default ThankYouForm;

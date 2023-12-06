@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
@@ -60,6 +60,9 @@ const Formularios = () => {
   const [originalEmail, setOriginalEmail] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(true);
+
+  const errorRef = useRef<HTMLDivElement>(null);
+
 
   // const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
   // const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
@@ -175,6 +178,13 @@ const Formularios = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      // Hacer desplazamiento al mensaje de error
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [errorMessage]);
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
@@ -405,7 +415,7 @@ const Formularios = () => {
 
             </div>
           </div>
-          <div className={mail}>
+          <div ref={errorRef} className={mail}>
             <InputMail
               label={"Escribe tu correo electrónico"}
               placeholder={"carlaflores@gmail.com"}
