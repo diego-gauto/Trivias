@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BlogContainer = styled.div`
   p {
@@ -39,11 +39,17 @@ export const BlogContainer = styled.div`
   .blogs {
     display: grid;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     margin-bottom: 50px;
-    grid-template-columns: repeat(2, 300px);
-    @media (max-width: 750px) {
-      grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width: 992px) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 `;
@@ -51,13 +57,17 @@ export const BlogCard = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
-  max-width: 300px;
+  max-width: 450px;
   border: 1px solid black;
   .img-contain {
     position: relative;
     cursor: pointer;
     .blog-image {
+      /*
       width: 298px;
+      height: 200px;
+      */
+      width: 100%;
       height: 200px;
     }
     .edit-icon {

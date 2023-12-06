@@ -359,7 +359,7 @@ const HomeWork = () => {
             </div>
           </div>
           <Table id="Pay">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>

@@ -130,20 +130,19 @@ const Sections = () => {
               </tr>
               {/* TABLAS */}
               {users.length > 0 ? (
-                [...users].filter((user, index) => index < 6)
-                  .map((user, index): any => {
-                    return (
-                      <tr key={index} onClick={() => editRole(user)}>
-                        <td >
-                          {user.name}
-                        </td>
-                        <td >{user.email}</td>
-                        <td>{formatDate(user.created_at)}</td>
-                        {user.role === 'superAdmin' ? (<td>superAdmin</td>) : (<td>admin</td>)}
-                        {user.role === 'superAdmin' ? (<td >Visualizar</td>) : (<td >Editar</td>)}
-                      </tr>
-                    )
-                  })
+                users.map((user, index): any => {
+                  return (
+                    <tr key={index} onClick={() => editRole(user)}>
+                      <td >
+                        {user.name}
+                      </td>
+                      <td >{user.email}</td>
+                      <td>{formatDate(user.created_at)}</td>
+                      {user.role === 'superAdmin' ? (<td>superAdmin</td>) : (<td>admin</td>)}
+                      {user.role === 'superAdmin' ? (<td >Visualizar</td>) : (<td >Editar</td>)}
+                    </tr>
+                  )
+                })
               ) : (
                 <td>Sin administradores</td>
               )}
