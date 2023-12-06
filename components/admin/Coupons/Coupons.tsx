@@ -177,7 +177,7 @@ const Coupons = () => {
           </TitleContain>
 
           <Table id="Coupons">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Cupón</th>
                 <th>Código</th>

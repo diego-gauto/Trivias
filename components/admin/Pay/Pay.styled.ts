@@ -1,10 +1,26 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const PayContain = styled.div`
   display: flex;
   width: 100%;
-  padding: 40px;
+  padding: 30px 10px;
   overflow: auto;
+
+  @media screen and (min-width: 576px) {
+    padding: 30px 15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 30px 20px;
+  }
+
+  @media screen and (min-width: 992px) {
+    padding: 30px 30px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 30px 40px;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -132,7 +148,7 @@ export const TitleContain = styled.div`
   }
 `;
 export const Title = styled.h1`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-size: 24px;
   margin: 0;
 `;
@@ -175,28 +191,28 @@ export const Imagecontain = styled.div`
   width: 32px;
   height: 32px;
 `;
-export const Method = styled("i")<{ brand: any }>`
-  background-image: url(../images/admin/${(props) => props.brand}.png);
+export const Method = styled('i')<{ brand: any }>`
+  background-image: url(../images/admin/${props => props.brand}.png);
   background-repeat: no-repeat;
   width: 35px;
   margin: 5px;
   height: 12px;
-  ${(props) =>
-    props.brand == "mastercard" &&
+  ${props =>
+    props.brand == 'mastercard' &&
     css`
       margin: 2px;
       width: 31px;
       height: 20px;
     `}
-  ${(props) =>
-    props.brand == "paypal" &&
+  ${props =>
+    props.brand == 'paypal' &&
     css`
       margin: 2px;
       width: 16px;
       height: 20px;
     `}
-  ${(props) =>
-    props.brand == "stripe" &&
+  ${props =>
+    props.brand == 'stripe' &&
     css`
       background-position: center;
       margin: 2px;

@@ -22,10 +22,12 @@ import {
 } from "../Landing.styled";
 import { IProductsSectionProps, Product } from './IProductsSection';
 import { title } from 'process';
+import { LoaderContain } from '../../../Loader.styled';
 
 const ProductsSection = (props: IProductsSectionProps) => {
   const { productsSectionData } = props;
   const [productsData, setProductsData] = useState(productsSectionData)
+  const [isLoading, setLoader] = useState(true);
 
   const chunk1 = productsData.slice(0, 3)
   const chunk2 = productsData.slice(3, 6)
@@ -47,6 +49,9 @@ const ProductsSection = (props: IProductsSectionProps) => {
       })
     })
     setProductsData(productsData);
+    setTimeout(() => {
+      setLoader(false);
+    }, 500);
   }, [])
 
   const getImage = (file: any, i: number) => {
@@ -111,11 +116,20 @@ const ProductsSection = (props: IProductsSectionProps) => {
             placeholder="Seleccionar archivo"
           />
         </InputsResponsive>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <img style={{ width: '250px', padding: '20px' }} src={img_display} alt={title} />
-        </div>
+        {
+          getImageJSXElement(isLoading, img_display, title)
+        }
       </GridItem>
     )
+  }
+
+  const getImageJSXElement = (isLoading: boolean, img_display: any, title: any) => {
+    if (!isLoading) {
+      return (<div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <img style={{ width: '250px', padding: '20px' }} src={img_display} alt={title} />
+      </div>);
+    }
+    return (<LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />);
   }
 
   const elementsToShow = [...chunk1, ...chunk2].map((product: Product, i: number) => {

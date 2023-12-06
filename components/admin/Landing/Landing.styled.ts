@@ -106,6 +106,20 @@ export const EditInputResponsive = styled.input`
   }
 `;
 
+export const EditInputTextAreaResponsive = styled.textarea`
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 10px;
+  padding-inline: 15px;
+  border: 1px solid #6717cd;
+  border-radius: 2px;
+  outline: none;
+  resize: none;
+  :focus {
+    border: 2px solid #8e2de2;
+  }
+`;
+
 export const EditInput = styled.input`
   font-size: 14px;
   width: 330px;

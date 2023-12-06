@@ -184,7 +184,7 @@ const Cancel = () => {
             </thead>
             {
               loader &&
-              <tbody>
+              <tbody style={{ display: 'inline-table', width: '100%' }}>
                 {
                   reviews.map((review: ICancelReview, index: number) => {
                     return (

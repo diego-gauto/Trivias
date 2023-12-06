@@ -43,7 +43,7 @@ const Pay = () => {
             <Title>Ventas</Title>
           </TitleContain>
           <Table id="Pay">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>

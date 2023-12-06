@@ -42,12 +42,6 @@ const Rewards = () => {
       setRewards(res);
     })
     getAllRequests();
-    // getRewards().then((res) => {
-    //   setRewards(res);
-    // })
-    // getRequest().then((res) => {
-    //   setRequests(res);
-    // })
   }, []);
 
   const handleEvent = () => {
@@ -57,11 +51,6 @@ const Rewards = () => {
   }
 
   const formatDate = (date: any) => {
-    // let tempDate = new Date(date.seconds * 1000);
-    // let tempDay = tempDate.getDate()
-    // let tempMonth = tempDate.getUTCMonth() + 1;
-    // let tempYear = tempDate.getFullYear()
-    // let formatDate = `${tempDay}/${tempMonth}/${tempYear}`
     return date.slice(0, 10)
   }
 
@@ -79,7 +68,6 @@ const Rewards = () => {
       score: 0,
       title: data.title,
     }
-    // createNotification(notification);
     if (!data.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
       if (result === true) {
@@ -88,13 +76,6 @@ const Rewards = () => {
         updateRequestStatusApi(data).then((res) => {
           getAllRequests();
         })
-        // updateRequest(data.id).then(() => {
-        //   getRequest().then((res) => {
-        //     setRequests(res);
-        //   })
-        // })
-        // updateUserRewards(data.userId, data.rewardId).then(() => {
-        // })
       }
     }
   }

@@ -1,14 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const GeneralContain = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding-inline: 40px;
+  padding-inline: 10px;
   padding-top: 20px;
+  padding-bottom: 30px;
   gap: 40px;
   background-color: #f3f3f5;
-  overflow: auto;
+
+  @media screen and (min-width: 768px) {
+    padding-inline: 20px;
+  }
+
+  @media screen and (min-width: 992px) {
+    padding-inline: 30px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding-inline: 40px;
+  }
 `;
 export const TitleBox = styled.div`
   display: flex;
@@ -23,7 +35,7 @@ export const Title = styled.h1`
 `;
 export const CourseButton = styled.button`
   font-size: 18px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 600;
   color: #41417e;
   background-color: white;
@@ -41,7 +53,6 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 25%);
-  min-width: 700px;
 `;
 export const BackGround = styled.div`
   display: flex;
@@ -67,8 +78,17 @@ export const AdminRoleChange = styled.div`
 `;
 export const TitleContain = styled.div`
   display: flex;
-  padding: 20px;
+  padding: 15px;
   justify-content: space-between;
+  flex-wrap: no-wrap;
+
+  @media screen and (max-width: 460px) {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 export const BodyContain = styled.div`
   display: flex;
@@ -76,7 +96,7 @@ export const BodyContain = styled.div`
 `;
 export const GonvarTitle = styled.p`
   font-size: 24px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 600;
   color: #41417e;
   margin: 0;
@@ -84,7 +104,7 @@ export const GonvarTitle = styled.p`
 export const ShareButton = styled.button`
   font-size: 14px;
   border-radius: 24px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 600;
   color: #41417e;
   background-color: white;
@@ -105,19 +125,19 @@ export const BoxContain = styled.div`
 `;
 export const BoxTitle = styled.p`
   font-size: 30px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #41417e;
   margin: 0;
 `;
 export const BoxSubTitle = styled.p`
   font-size: 14px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #41417e;
   margin: 0;
 `;
 export const SubText = styled.p`
   font-size: 24px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 600;
   color: #41417e;
   margin: 0;
@@ -152,12 +172,12 @@ export const FirstData = styled.div`
 `;
 export const CourseTitle = styled.p`
   font-size: 14px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   margin: 0;
 `;
 export const CourseLink = styled.p`
   font-size: 12px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: #41417e;
   font-weight: 600;
   cursor: pointer;
@@ -167,7 +187,7 @@ export const Announcement = styled.div`
   font-size: 12px;
   background-color: #5d945a;
   border-radius: 5px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   color: white;
   padding: 2px;
 `;

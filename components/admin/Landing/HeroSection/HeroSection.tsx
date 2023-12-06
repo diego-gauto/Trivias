@@ -16,6 +16,11 @@ import {
   Inputs,
   ProfileData,
   SaveButton,
+  GridContainer,
+  GridItem,
+  InputsResponsive,
+  EditInputResponsive,
+  FolderInputResponsive,
 } from "../Landing.styled";
 import { IHeroSectionProps } from "./IHeroSection";
 
@@ -89,102 +94,100 @@ const HeroSection = (props: IHeroSectionProps) => {
 
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>
-      <ColumnsContainer2 style={{ width: "100%" }}>
-        <ColumnsContainer>
-          <AllEditInputs>
-            <Inputs>
-              <EditText>
-                Título Inicial
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "tituloInicial")}
-                value={!!heroData ? heroData.tituloInicial : ''}
-                placeholder="Aprende a aplicar uñas desde Cero"
-              />
-            </Inputs>
-            <Inputs>
-              <EditText>
-                Párrafo inicial
-              </EditText>
-              <ReactQuill
-                placeholder="Descubre tu verdadero potencial a través de nuestros 
+      <GridContainer>
+        <GridItem style={{ height: '325px' }}>
+          <InputsResponsive>
+            <EditText>
+              Título Inicial
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "tituloInicial")}
+              value={!!heroData ? heroData.tituloInicial : ''}
+              placeholder="Aprende a aplicar uñas desde Cero"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Párrafo inicial
+            </EditText>
+            <ReactQuill
+              placeholder="Descubre tu verdadero potencial a través de nuestros 
                 entrenamientos personalizados. En Gonvar descubrirás la manera más fácil, 
                 rápida y divertida de convertirte en un aplicador profesional. Entrenamientos de 
                 primer nivel para lograr resultados extraordinarios." theme="snow"
-                formats={formats} modules={modules}
-                value={!!heroData ? heroData.parrafoInicial : ''}
-                onChange={(e) => {
-                  updateState(e, "parrafoInicial")
-                }}
-              />
-            </Inputs>
-          </AllEditInputs>
-          <AllEditInputs>
-            <Inputs>
-              <EditText>
-                Botón Primario
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "botonPrimario")}
-                value={!!heroData ? heroData.botonPrimario : ''}
-                placeholder="Comienza desde $49"
-              />
-            </Inputs>
-            <Inputs>
-              <EditText>
-                Botón Secundario
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "botonSecundario")}
-                value={!!heroData ? heroData.botonSecundario : ''}
-                placeholder="Ve más cursos"
-              />
-            </Inputs>
-            <Inputs>
-              <EditText>
-                Hero Image
-              </EditText>
-              <FolderInput
-                onChange={(e) => updateState(e, "image")}
-                type="file"
-                placeholder="Seleccionar archivo"
-              />
-            </Inputs>
-          </AllEditInputs>
-          <AllEditInputs>
-            <Inputs>
-              <EditText>
-                Característica 1
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "caracteristica1")}
-                value={!!heroData ? heroData.caracteristica1 : ''}
-                placeholder="+4700 Alumnos"
-              />
-            </Inputs>
-            <Inputs>
-              <EditText>
-                Característica 2
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "caracteristica2")}
-                value={!!heroData ? heroData.caracteristica2 : ''}
-                placeholder="+250 Cursos"
-              />
-            </Inputs>
-            <Inputs>
-              <EditText>
-                Característica 3
-              </EditText>
-              <EditInput
-                onChange={(e) => updateState(e, "caracteristica3")}
-                value={!!heroData ? heroData.caracteristica3 : ''}
-                placeholder="+50 Presenciales"
-              />
-            </Inputs>
-          </AllEditInputs>
-        </ColumnsContainer>
-      </ColumnsContainer2>
+              formats={formats} modules={modules}
+              value={!!heroData ? heroData.parrafoInicial : ''}
+              onChange={(e) => {
+                updateState(e, "parrafoInicial")
+              }}
+            />
+          </InputsResponsive>
+        </GridItem>
+        <GridItem>
+          <InputsResponsive>
+            <EditText>
+              Botón Primario
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "botonPrimario")}
+              value={!!heroData ? heroData.botonPrimario : ''}
+              placeholder="Comienza desde $49"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Botón Secundario
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "botonSecundario")}
+              value={!!heroData ? heroData.botonSecundario : ''}
+              placeholder="Ve más cursos"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Hero Image
+            </EditText>
+            <FolderInputResponsive
+              onChange={(e) => updateState(e, "image")}
+              type="file"
+              placeholder="Seleccionar archivo"
+            />
+          </InputsResponsive>
+        </GridItem>
+        <GridItem>
+          <InputsResponsive>
+            <EditText>
+              Característica 1
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "caracteristica1")}
+              value={!!heroData ? heroData.caracteristica1 : ''}
+              placeholder="+4700 Alumnos"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Característica 2
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "caracteristica2")}
+              value={!!heroData ? heroData.caracteristica2 : ''}
+              placeholder="+250 Cursos"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Característica 3
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "caracteristica3")}
+              value={!!heroData ? heroData.caracteristica3 : ''}
+              placeholder="+50 Presenciales"
+            />
+          </InputsResponsive>
+        </GridItem>
+      </GridContainer>
       <EditButtons>
         <SaveButton onClick={onSave}>
           Guardar

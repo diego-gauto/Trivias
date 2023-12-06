@@ -120,7 +120,7 @@ const Sections = () => {
             <Button onClick={() => { setNewMember(true); }}>Nuevo miembro</Button>
           </TitleContain>
           <Table id="Users">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Administrador</th>
                 <th>Correo Electrónico</th>
@@ -130,19 +130,20 @@ const Sections = () => {
               </tr>
               {/* TABLAS */}
               {users.length > 0 ? (
-                users.map((user, index): any => {
-                  return (
-                    <tr key={index} onClick={() => editRole(user)}>
-                      <td >
-                        {user.name}
-                      </td>
-                      <td >{user.email}</td>
-                      <td>{formatDate(user.created_at)}</td>
-                      {user.role === 'superAdmin' ? (<td>superAdmin</td>) : (<td>admin</td>)}
-                      {user.role === 'superAdmin' ? (<td >Visualizar</td>) : (<td >Editar</td>)}
-                    </tr>
-                  )
-                })
+                [...users].filter((user, index) => index < 6)
+                  .map((user, index): any => {
+                    return (
+                      <tr key={index} onClick={() => editRole(user)}>
+                        <td >
+                          {user.name}
+                        </td>
+                        <td >{user.email}</td>
+                        <td>{formatDate(user.created_at)}</td>
+                        {user.role === 'superAdmin' ? (<td>superAdmin</td>) : (<td>admin</td>)}
+                        {user.role === 'superAdmin' ? (<td >Visualizar</td>) : (<td >Editar</td>)}
+                      </tr>
+                    )
+                  })
               ) : (
                 <td>Sin administradores</td>
               )}

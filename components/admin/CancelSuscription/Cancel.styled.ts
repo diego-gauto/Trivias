@@ -4,6 +4,7 @@ export const CancelReview = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 30px;
   padding: 0;
   width: 100%;
   font-family: "Montserrat", sans-serif;
@@ -51,7 +52,19 @@ export const CancelReview = styled.div`
     }
   }
 
+  @media screen and (min-width: 576px) {
+    padding: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 10px;
+  }
+
   @media screen and (min-width: 992px) {
     padding: 20px;
+  }
+
+  @media screen and (min-width: 1300px) {
+    margin-top: 10px;
   }
 `;
