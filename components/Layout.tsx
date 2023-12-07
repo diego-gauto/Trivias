@@ -26,11 +26,9 @@ const Layout = ({ children }: any) => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
 
-  const isFormsRoute = pathname.startsWith("/forms");
-
   return (
     <Body >
-      {!isFormsRoute && <NavBar />}
+      <NavBar />
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
         flexDirection: (path === "admin" && responsive1300) ? "column" : "row"
