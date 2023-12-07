@@ -29,12 +29,13 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 80px;
-	max-width: 100px;
+	height: 100px;
+	width: 100px;
+  margin-top: 10px;
 }
 
 .countdown .valor {
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: 600;
 	background-color: #520795;
 	color: white;
@@ -42,29 +43,33 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 8px;
-	width: 70px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 	position: relative;
 	box-shadow: -2px 0px 5px 1px #232423ad;
 }
 
 .countdown .etiqueta {
-	font-size: 10px;
+	font-size: 13px;
 	letter-spacing: 2px;
 	margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 550px) {
 	/* .countdown .content {
 		gap: 30px;
-	}
+	} */
 	.countdown .valor {
-		font-size: 50px;
-		width: 120px;
-		height: 120px;
+		font-size: 30px;
+		width: 70px;
+		height: 50px;
 	}
 	.countdown .box {
-		height: 200px;
-		max-width: 200px;
-	} */
+		margin-top: 5px;
+	}
+
+  .countdown .etiqueta {
+    font-size: 11px;
+  }
 }
