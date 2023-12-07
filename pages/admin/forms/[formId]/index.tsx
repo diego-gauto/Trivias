@@ -83,13 +83,15 @@ const UsersForms = () => {
           return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
         };
 
-        const mappedUsers = usersData.map((user: UserForm) => ({
+        const mappedUsers = usersData.map((user: UserForm, index: number) => ({
           ...user,
+          user_id: index + 1,
           fecha: formatDate(new Date(user.fecha)),
           isUser: user.isUser ? "Si" : "No"
         }));
 
         setUsersForms(mappedUsers);
+        console.log(mappedUsers)
         setLoading(false)
       } catch (error) {
         console.error('Error al obtener las trivias:', error);
@@ -134,7 +136,7 @@ const UsersForms = () => {
     <div className={main}>
       <div className={titles}>
         <div className={buttonContainer}>
-          <Link href={"/admin/Trivias"}>
+          <Link href={"/admin/Forms"}>
             <a className={link}>
               <div className={volver}>
                 <img src="/images/trivias/icono . retroceder.svg" alt="" />

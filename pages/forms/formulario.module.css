@@ -21,22 +21,30 @@
     align-items: center;
     flex-direction: column;
     background-color: white;
-    width: 90%;
+    width: 95%;
     max-width: 800px;
-    margin: 0 auto;
     padding: 30px 20px 20px 20px;
     box-sizing: border-box;
     border-top-left-radius: 20px; /* Ajusta según el radio de redondeo deseado */
     border-top-right-radius: 20px; /* Ajusta según el radio de redondeo deseado */
+
+    @media (max-width: 839px) {
+      padding: 30px 10px 10px 10px;
+    }    
     
     .title{
       display: flex;
       justify-content: center;
       text-align: center;
       position: relative;
-      max-width: 90%;
+      max-width: 95%;
       margin: 0 auto;
       font-size: 38px;
+
+      @media (max-width: 839px) {
+        max-width: 100%;
+        font-size: 30px;
+      }      
     }
 
     .paragraph{
@@ -44,38 +52,46 @@
       justify-content: center;
       position: relative;
       color: #3f1168;
-      width: 90%;
+      width: 95%;
       margin-top: 10px;
       font-size: 18px;
       line-height: 28px;
+
+      @media (max-width: 839px) {
+        width: 100%;
+        font-size: 15px;
+        line-height: 20px;
+        margin: 0;
+      }
     }
 
     .lineaAtravesada {
       width: 100%;
       height: 1px;
       background-color: #000; /* Cambia este color según tus preferencias */
-      margin: 20px 0; /* Ajusta el margen según sea necesario */
+      margin-bottom: 10px; /* Ajusta el margen según sea necesario */
     }
   
     .inputContainer{
       display: flex;
       flex-direction: column;
       position: relative;
-      width: 90%;
+      width: 100%;
     
       .names{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
-        @media (max-width: 720px) {
-          flex-direction: column;
-        }
-
         .name, .last_name {
           display: flex;
           flex-direction: column;
           position: relative;
+
+          @media screen and (max-width: 670px) {
+            max-width: 48%;;
+          
+          }
 
           @media (max-width: 420px) {
             margin-bottom: 20px;
@@ -89,14 +105,9 @@
             padding-left: 15px;
 
             @media (max-width: 420px) {
-              width: 250px; /* Cambia el ancho a 250px cuando el ancho de la pantalla es menor a 420px */
+              width: 150px;
+              padding-left: 5px;
             }
-          }
-        }
-
-        .last_name {
-          @media (max-width: 720px) {
-            margin-top: 30px;
           }
         }
         
@@ -109,7 +120,7 @@
         position: relative;
 
         @media (max-width: 420px) {
-          margin-bottom: 20px;
+          top:-30px;
         }
 
         .errorMessageMail{
@@ -120,7 +131,8 @@
           padding-left: 15px;
 
           @media (max-width: 420px) {
-            width: 250px; /* Cambia el ancho a 250px cuando el ancho de la pantalla es menor a 420px */
+            width: 250px;
+            padding-left: 5px;
           }
         }
       }
@@ -131,6 +143,10 @@
         flex-direction: column;
         position: relative;
 
+        @media (max-width: 420px) {
+          top:-40px;
+        }
+
         .errorMessageWA{
           color: red;
           position: absolute;
@@ -138,19 +154,27 @@
           width: 300px;
           padding-left: 15px;
 
-          @media (max-width: 420px) {
-            width: 250px; /* Cambia el ancho a 250px cuando el ancho de la pantalla es menor a 420px */
+          @media (max-width: 550px) {
+            top:70px;
           }
         }
       }
     
       .image{
         margin-top: 60px;
+
+        @media (max-width: 420px) {
+          margin-top: 0;
+        }
       }
     
       .options{
         margin: 60px 0 30px 0;
         position: relative;
+
+        @media (max-width: 420px) {
+          margin-top: 0;
+        }
 
         .optionContainer{
           display: flex;
@@ -170,7 +194,7 @@
       .buttonContainer{
         display: flex;
         justify-content: center;
-        margin-top: 60px;
+        margin-top: 10px;
       }
     
       .submitButton {

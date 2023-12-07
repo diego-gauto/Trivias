@@ -8,6 +8,7 @@ import * as Yup from "yup";
 
 import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
+import InputApellido from "../../components/Forms/inputApellido/inputApellido";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
@@ -85,10 +86,10 @@ const Formularios = () => {
   const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageMailExist, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
 
   const validationSchema = Yup.object().shape({
-    nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
-    apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
-    correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
-    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
+    nombre: Yup.string().required('Nombre obligatorio').min(3, 'Al menos 3 letras'),
+    apellido: Yup.string().required('Apellido obligatorio').min(3, 'Al menos 3 letras'),
+    correo: Yup.string().required('El correo es obligatorio').email('El correo no es válido'),
+    numeroWhatsApp: Yup.string().required('Número de WhatsApp obligatorio'),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
@@ -203,7 +204,7 @@ const Formularios = () => {
       setErrorMessage(null);
     }
 
-    if (newEmail == originalEmail) setErrorMessage("Este correo ya se encuentra inscrito");
+    if (newEmail == originalEmail) setErrorMessage("Correo ya inscrito");
 
   };
 
@@ -275,7 +276,7 @@ const Formularios = () => {
         //popup el usuario ya esta registrado
         // setIsUserExistModalVisible(true)
         setOriginalEmail(formik.values.correo)
-        setErrorMessage("Este correo ya se encuentra inscrito");
+        setErrorMessage("Correo ya inscrito");
         console.log("usuario ya registrado")
       }
     } catch (error) {
@@ -402,7 +403,7 @@ const Formularios = () => {
             <div className={last_name}>
 
 
-              <InputNombre
+              <InputApellido
                 label={"Escribe tu apellido"}
                 placeholder={"Flores"}
                 onChange={handleApellidoChange}

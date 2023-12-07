@@ -22,7 +22,6 @@ const UserFormRow = ({ userForm }: UserRowProps) => {
 
 
   return (
-
     <tr>
       <td>{userForm.user_id}</td>
       <td>{userForm.nombre}</td>

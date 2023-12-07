@@ -1,6 +1,6 @@
-import styles from "./inputNombre.module.css";
+import styles from "./inputApellido.module.css";
 
-const InputNombre = (props: any) => {
+const InputApellido = (props: any) => {
   const { inputs } = styles;
   const { label, disabled, placeholder, value, onChange, onBlur } = props;
 
@@ -20,7 +20,7 @@ const InputNombre = (props: any) => {
   );
 };
 
-export default InputNombre;
+export default InputApellido;
 
 
 
