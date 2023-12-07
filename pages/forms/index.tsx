@@ -205,7 +205,7 @@ const Formularios = () => {
       setErrorMessage(null);
     }
 
-    if (newEmail == originalEmail) setErrorMessage("Correo ya inscrito");
+    if (newEmail == originalEmail) setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
 
   };
 
@@ -277,7 +277,7 @@ const Formularios = () => {
         //popup el usuario ya esta registrado
         // setIsUserExistModalVisible(true)
         setOriginalEmail(formik.values.correo)
-        setErrorMessage("Correo ya inscrito");
+        setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
         console.log("usuario ya registrado")
       }
     } catch (error) {
