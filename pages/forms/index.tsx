@@ -8,6 +8,7 @@ import * as Yup from "yup";
 
 import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
+import Countdown from "../../components/Forms/countdown/countdown";
 import InputApellido from "../../components/Forms/inputApellido/inputApellido";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
@@ -86,10 +87,10 @@ const Formularios = () => {
   const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageMailExist, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
 
   const validationSchema = Yup.object().shape({
-    nombre: Yup.string().required('Nombre obligatorio').min(3, 'Al menos 3 letras'),
-    apellido: Yup.string().required('Apellido obligatorio').min(3, 'Al menos 3 letras'),
+    nombre: Yup.string().required('El nombre es obligatorio').min(3, 'Al menos 3 letras'),
+    apellido: Yup.string().required('El apellido es obligatorio').min(3, 'Al menos 3 letras'),
     correo: Yup.string().required('El correo es obligatorio').email('El correo no es válido'),
-    numeroWhatsApp: Yup.string().required('Número de WhatsApp obligatorio'),
+    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
@@ -383,6 +384,8 @@ const Formularios = () => {
         <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
         <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
         <div className={lineaAtravesada}></div>
+
+        <Countdown />
 
         <form onSubmit={formik.handleSubmit} className={inputContainer}>
           <div className={names}>

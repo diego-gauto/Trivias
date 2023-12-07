@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+.countdown {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.countdown .content {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+.countdown h2 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  align-self: flex-start;
+  flex-shrink: 0;
+  width: auto;
+  text-align: left; /* Alinea el texto del h2 a la izquierda */
+}
+
+.countdown .box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80px;
+	max-width: 100px;
+}
+
+.countdown .valor {
+	font-size: 30px;
+	font-weight: 600;
+	background-color: #520795;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	width: 70px;
+	height: 50px;
+	position: relative;
+	box-shadow: -2px 0px 5px 1px #232423ad;
+}
+
+.countdown .etiqueta {
+	font-size: 10px;
+	letter-spacing: 2px;
+	margin-top: 5px;
+}
+
+@media screen and (max-width: 550px) {
+	/* .countdown .content {
+		gap: 30px;
+	}
+	.countdown .valor {
+		font-size: 50px;
+		width: 120px;
+		height: 120px;
+	}
+	.countdown .box {
+		height: 200px;
+		max-width: 200px;
+	} */
+}
