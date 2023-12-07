@@ -8,6 +8,7 @@ import { Body, ChildrenContain } from "../screens/Login.styled";
 import SideBar from "./admin/SideBar";
 import Footer from "./Footer/Footer";
 import NavBar from "./NavBar/NavBar";
+
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const responsive1300 = useMediaQuery({ query: "(max-width: 1300px)" });
@@ -24,9 +25,12 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
+
+  const isFormsRoute = pathname.startsWith("/forms");
+
   return (
     <Body >
-      <NavBar />
+      {!isFormsRoute && <NavBar />}
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
         flexDirection: (path === "admin" && responsive1300) ? "column" : "row"
