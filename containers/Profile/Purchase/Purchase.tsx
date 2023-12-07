@@ -272,10 +272,10 @@ const Purchase = () => {
     if (plan.method == 'paypal') {
       setLoader(false);
       if (type == 'subscription') {
-
         setConfirmation(false);
         setPay(true);
-        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+        window.location.href = getRouteByFrequency(frequency, true);
       } else {
         let price = product.price
         if (coupon) {
@@ -428,10 +428,10 @@ const Purchase = () => {
         }
         conektaSubscriptionApi(data).then(async (res) => {
           if (res?.data.data.status === 'active') {
-
             let sub = res.data.data;
             await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
-            window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+            // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+            window.location.href = getRouteByFrequency(frequency, true);
           } else {
             let notification = {
               userId: userData.user_id,
@@ -442,12 +442,33 @@ const Purchase = () => {
               frecuency: frequency
             }
             await createNotification(notification);
-            const msg = "Pago Rechazado"
-            window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+            const msg = "pago-rechazado"
+            // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+            window.location.href = getRouteByFrequency(frequency, true, true, msg);
           }
         })
       }
     }
+  }
+
+  const getRouteByFrequency = (frequency: "month" | "anual" | "cuatri", success: boolean, error: boolean = false, errorMessage?: string) => {
+    // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+    let membership = '';
+    const errorText = error ? `?error=${errorMessage}` : '';
+    let successText = success ? 'exitoso' : 'fallido';
+    switch (frequency) {
+      case "month":
+        membership = 'mensualidad';
+        break;
+      case "cuatri":
+        membership = 'cuatrimestre';
+        break;
+      case "anual":
+        membership = 'anualidad';
+        break;
+    }
+    const route = `/pago${successText}${membership}${errorText}`;
+    return route;
   }
 
   const getAllCoupons = () => {
@@ -763,10 +784,18 @@ const Purchase = () => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
                         finalDate = today + frequency === "month" ? 2629800 : 31536000;
-                        await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
+                        await updateMembership({
+                          method: "paypal",
+                          final_date: finalDate,
+                          plan_id: data.subscriptionID,
+                          plan_name: product.title,
+                          start_date: new Date().getTime() / 1000, userId: userData.user_id,
+                          level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                        })
                         setConfirmation(false);
                         setPay(true);
-                        window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+                        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+                        window.location.href = getRouteByFrequency(frequency, true);
                         return data
                       }}
                     />}
@@ -1089,10 +1118,18 @@ const Purchase = () => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
                           finalDate = today + frequency === "month" ? 2629800 : 31536000;
-                          await updateMembership({ method: "paypal", final_date: finalDate, plan_id: data.subscriptionID, plan_name: product.title, start_date: new Date().getTime() / 1000, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
+                          await updateMembership({
+                            method: "paypal",
+                            final_date: finalDate,
+                            plan_id: data.subscriptionID,
+                            plan_name: product.title,
+                            start_date: new Date().getTime() / 1000, userId: userData.user_id,
+                            level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                          })
                           setConfirmation(false);
                           setPay(true);
-                          window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+                          // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+                          window.location.href = getRouteByFrequency(frequency, true);
                           return data
                         }}
                       />}
