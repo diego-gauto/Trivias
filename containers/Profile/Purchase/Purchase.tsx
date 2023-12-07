@@ -444,7 +444,7 @@ const Purchase = () => {
             await createNotification(notification);
             const msg = "pago-rechazado"
             // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-            window.location.href = getRouteByFrequency(frequency, true, true, msg);
+            window.location.href = getRouteByFrequency(frequency, false, true, msg);
           }
         })
       }
