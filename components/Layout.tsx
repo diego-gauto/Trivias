@@ -28,7 +28,10 @@ const Layout = ({ children }: any) => {
 
   return (
     <Body >
-      <NavBar />
+      {
+        router.pathname.slice(1, 6) !== "forms" && <NavBar />
+      }
+
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
         flexDirection: (path === "admin" && responsive1300) ? "column" : "row"
