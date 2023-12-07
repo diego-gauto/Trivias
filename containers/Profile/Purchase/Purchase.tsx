@@ -418,7 +418,7 @@ const Purchase = () => {
         if (frequency === "month" && v === "3") price = "mensual_v1_2";
         if (frequency === "anual") price = "anual";
         if (frequency === "anual" && v === "3") price = "anual_v1_1";
-        if (frequency === "cuatri" && v === "3") price = "cuatrimestre";
+        if (frequency === "cuatrimestral" && v === "3") price = "cuatrimestre";
 
         let data = {
           id: card.id ? card.id : defaultCard.paymentMethod,
@@ -451,7 +451,7 @@ const Purchase = () => {
     }
   }
 
-  const getRouteByFrequency = (frequency: "month" | "anual" | "cuatri", success: boolean, error: boolean = false, errorMessage?: string) => {
+  const getRouteByFrequency = (frequency: "month" | "anual" | "cuatrimestral", success: boolean, error: boolean = false, errorMessage?: string) => {
     // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
     let membership = '';
     const errorText = error ? `?error=${errorMessage}` : '';
@@ -460,7 +460,7 @@ const Purchase = () => {
       case "month":
         membership = 'mensualidad';
         break;
-      case "cuatri":
+      case "cuatrimestral":
         membership = 'cuatrimestre';
         break;
       case "anual":
