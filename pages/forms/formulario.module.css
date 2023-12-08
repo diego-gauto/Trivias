@@ -17,6 +17,10 @@
     margin:40px 0;
     max-width: 100%; /* Ajustar según sea necesario */
     height: auto;
+
+    @media (max-width: 839px) {
+      max-width: 320px;
+    }    
   }
 
   .formContainer{
