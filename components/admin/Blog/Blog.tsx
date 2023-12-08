@@ -10,19 +10,24 @@ import { createBlogsApi, getBlogsApi, updateBlogImageApi, updateBlogsApi, update
 import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/FireBaseImages';
 import { getUserApi } from '../../api/users';
 import { formatBlogDate } from '../../../utils/functions';
+import { IUserInfoResult } from '../../../interfaces/IUser';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
   const [oldBlogs, setoldBlogs] = useState<any>([]);
   const [loader, setLoader] = useState(false);
+  const [userData, setUserData] = useState<IUserInfoResult | null>(null);
+
   const goToCreateBlog = () => {
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[2].create === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
     router.push({ pathname: "/admin/CreateBlog" })
   }
-  const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     if (localStorage.getItem("email")) {
@@ -34,51 +39,16 @@ const Blog = () => {
 
   const goToEditBlog = (blog: any) => {
     // let blogText: any = blog.title.replaceAll(" ", "-");
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[2].edit === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
     router.push({ pathname: "/admin/CreateBlog/", query: { blogId: blog.id } })
   }
-  // const addimages = () => {
-  //   oldBlogs[7].subTopic.forEach((blog: any, index: any) => {
-  //     if (blog.topicPath !== '') {
-  //       updateSubTopicImage(blog.topicPath, 8, 31 + index).then((url_subtopic: any) => {
-  //         let tempBlog = {
-  //           image: url_subtopic,
-  //           id: 31 + index,
-  //         }
-  //         console.log(tempBlog);
-  //         updateSubTopicImageApi(tempBlog).then(() => {
-  //           console.log('exito')
-  //         })
-  //       })
-  //     }
-  //   });
-  // }
-  // const creatNewBlog = () => {
-  //   oldBlogs.forEach((old: any) => {
-  //     let blogToAdd = {
-  //       title: old.title,
-  //       subtitle: old.subTitle,
-  //       summary: old.summary,
-  //       link: old.link,
-  //       image: old.path,
-  //       subTopic: old.subTopic.map((sbt: any) => {
-  //         let newsbt = {
-  //           title: sbt.topicTitle,
-  //           text: sbt.topicText,
-  //           image: '',
-  //         }
-  //         return newsbt
-  //       })
-  //     }
-  //     console.log(blogToAdd);
-  //     createBlogsApi(blogToAdd).then((res) => {
-  //       console.log('exit')
-  //     })
-  //   })
-  // }
+
   const getMonth = (month: any) => {
     if (month === 1) {
       return "ene"
@@ -136,8 +106,6 @@ const Blog = () => {
           <p className="title">
             Blog
           </p>
-          {/* <button onClick={creatNewBlog}>add blog sql</button> */}
-          {/* <button onClick={addimages}>crear imagenes</button> */}
           <button className="add-course" onClick={goToCreateBlog}>
             <p className="add-text">
               Agregar Blog

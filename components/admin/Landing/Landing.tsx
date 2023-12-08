@@ -30,42 +30,7 @@ const Landing = () => {
     setData(landingData.data.data[0]);
     setLoading(false);
   };
-  // console.log(data.productosDestacadosData);
-  // const addProducts = () => {
-  //   data.productosDestacadosData.forEach((product: any) => {
-  //     let addData = {
-  //       url: product.clickURL,
-  //       purchase: product.compraRapida,
-  //       currency: product.currency,
-  //       available: product.disponible,
-  //       image: product.imgURL,
-  //       title: product.title,
-  //       price: 100,
-  //       is_new: product.isNew,
-  //     }
-  //     console.log(addData);
-  //     createLandingProductApi(addData).then((res) => {
-  //       console.log(res);
-  //     })
-  //   })
-  // }
-  // const addReviews = () => {
-  //   data.experienciasSectionData.forEach((review: any) => {
-  //     let addData = {
-  //       date: review.convertedDate,
-  //       about: review.descripcion,
-  //       image: review.imgURL,
-  //       new: review.isNew,
-  //       user_name: review.username,
-  //       facebook_url: review.usrFacebookURL,
-  //       user_image: review.usrImgURL,
-  //       temp_user_image: ''
-  //     }
-  //     createLandingReviewApi(addData).then((res) => {
-  //       console.log(res);
-  //     })
-  //   })
-  // }
+
   useEffect(() => {
     getLandingReviewApi().then((res) => {
       setReviews(res);

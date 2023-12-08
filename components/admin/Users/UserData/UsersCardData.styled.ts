@@ -6,14 +6,28 @@ export const UserContain = styled.div`
   flex-direction: column;
   padding: 15px;
   gap: 10px;
-  width: 500px;
+  width: 100%;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   position: absolute;
 `;
+export const UserInfo = styled.div`
+  display: grid;
+  padding-left: 15px;
+  grid-template-columns: 1fr;
+
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
 export const TitleContain = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
@@ -76,8 +90,6 @@ export const Info = styled.p`
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   margin: 0;
-  min-width: 150px;
-  max-width: 200px;
   height: 60px;
 `;
 export const Label = styled.label`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { LeftSide, MainContainer } from "./LessonNew.styled";
@@ -10,6 +10,12 @@ import RightComponent from "./components/RightComponent/RightComponent";
 import { getNotifications, createNotification } from "../../../components/api/notifications";
 import lesson from "../../../pages/lesson";
 import { useRouter } from "next/router";
+import { IUserInfoResult } from "../../../interfaces/IUser";
+import { ICourseResponse, ILesson } from "../../../interfaces/ICourseNew";
+import { IUseAuthProps } from "../../../interfaces/IUseAuthProps";
+import { IReducedHomework } from "../../../interfaces/IHomeworkByUser";
+import { getCourseHomeworksOfUser } from "../../../components/api/homeworks";
+import { HomeworksContext, HomeworksProvider } from "../../../hooks/useHomeworks";
 
 const Lesson = () => {
   const context = useAuth();
@@ -36,6 +42,19 @@ const Lesson = () => {
     })
     setShow(true)
   }
+  const [position, setPosition] = useState(1);
+  const { loadHomeworks } = useContext(HomeworksContext);
+
+  useEffect(() => {
+    if ((!context) || (!course)) {
+      return;
+    }
+    const params = {
+      user_id: context.user!.id,
+      course_id: course.id
+    }
+    if (!isLoading) loadHomeworks(params);
+  }, [isLoading]);
 
   return (
     <>
@@ -46,13 +65,22 @@ const Lesson = () => {
       </Background> :
         <MainContainer>
           <LeftSide>
-            <Video actualLesson={tempLesson} user={context.user} course={course} openModal={() => { openActivityModal(); }} />
-            <Modules lesson={tempLesson} course={course} />
+            <Video actualLesson={tempLesson} user={context.user as IUserInfoResult} course={course} openModal={() => { setShow(true) }} />
+            <Modules lesson={tempLesson} course={course} position={position} setPosition={setPosition} />
           </LeftSide>
-          <RightComponent />
-          <ActivityModal show={show} setShow={() => { setShow(false) }} lesson={tempLesson} />
+          <RightComponent context={context as IUseAuthProps} course={course} />
+          <ActivityModal show={show} setShow={() => { setShow(false) }} lesson={tempLesson} changeValue={setPosition} />
         </MainContainer>}
     </>
   )
 }
-export default Lesson;
+
+const LessonWrapper = () => {
+  return (
+    <HomeworksProvider>
+      <Lesson />
+    </HomeworksProvider>
+  )
+}
+
+export default LessonWrapper;

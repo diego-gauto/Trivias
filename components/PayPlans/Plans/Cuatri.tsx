@@ -65,7 +65,7 @@ const Cuatri = (props: IData) => {
       }
     }
     else {
-      localStorage.setItem("cuatri", "true");
+      localStorage.setItem("cuatrimestral", "true");
       router.push(SIGNUP_PATH)
     }
   }

@@ -16,6 +16,12 @@ import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.s
 import { getLessonFromUserApi, usersForExcelApi } from '../../api/admin';
 import UserCardData from '../Users/UserData/UserCardData';
 import { BsFileEarmarkExcelFill } from 'react-icons/bs';
+
+type SuscriptionOption = "todos" | "mensual" | "anual" | "cuatri";
+interface MethodData {
+  method: string
+}
+
 const Users = () => {
   const [userCalendar, setUserCalendar] = useState<boolean>(true);
   const [loginCalendar, setLoginCalendar] = useState<boolean>(true);
@@ -24,11 +30,15 @@ const Users = () => {
   const [currentUser, setCurrentUser] = useState({} as IAdminUsers);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [showCourseSelect, setShowCourseSelect] = useState(false);
+  const [methodSelected, setMethodSelected] = useState<SuscriptionOption>("todos");
   let adminContext = useAdmin();
   const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses, permits } = adminContext;
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
+  const array_prices = [
+    459, 1599, 3497
+  ]
   const handleLoginCalendar = () => {
     setLoginCalendar(!loginCalendar);
   }
@@ -46,6 +56,11 @@ const Users = () => {
     }
     if (key === "courses" && data === 0) {
       setShowCourseSelect(false);
+    }
+    if (key === "membership") {
+      if (["todos", "mensual", "anual", "cuatri"].includes(`${data}`)) {
+        setMethodSelected(data as SuscriptionOption);
+      }
     }
     setUserFilters({ ...filters, offset: 0 });
   }
@@ -88,6 +103,21 @@ const Users = () => {
     setCurrentUser(user);
     setIsVisible(true);
   };
+
+  const getMethodsBySuscription = (option: SuscriptionOption) => {
+    const methodsArray = methods as MethodData[];
+    const allMethods = methodsArray.map(element => element.method);
+    switch (option) {
+      case 'mensual':
+        return ["conekta", "paypal", "admin"];
+      case 'anual':
+        return allMethods;
+      case 'cuatri':
+        return allMethods.filter(method => method !== 'stripe');
+    }
+    return allMethods;
+  }
+
   return (
     <AdminContain>
       <DefaultContainer>
@@ -135,6 +165,7 @@ const Users = () => {
                   <option value="todos">Todos</option>
                   <option value="mensual">Mensual</option>
                   <option value="anual">Anual</option>
+                  <option value="cuatri">Cuatrimestral</option>
                 </select>
               </DefaultFilterContain>
               <DefaultFilterContain>
@@ -145,13 +176,20 @@ const Users = () => {
                   <option value="not-active">No Activa</option>
                 </select>
               </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Cantidad Gastada</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }}>
+              {
+                userFilters.membershi
+              }
+              <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
+                <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
+                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
                   <option value={-1}>Todos</option>
-                  <option value={149}> +149</option>
-                  <option value={1000}>+1000</option>
-                  <option value={5000}> +5000</option>
+                  {
+                    array_prices.map((price: number, index: number) => {
+                      return (
+                        <option value={price} key={"precio_" + index}> +{price}</option>
+                      )
+                    })
+                  }
                 </select>
               </DefaultFilterContain>
             </DefaultRow>
@@ -161,9 +199,9 @@ const Users = () => {
                 <select defaultValue="todos" onChange={(e) => { changeData('method', e.target.value) }}>
                   <option value="todos">Todos</option>
                   {
-                    methods.map((val: any, index: number) => {
+                    getMethodsBySuscription(methodSelected).map((method: string, index: number) => {
                       return (
-                        <option value={val.method} key={"metodos_" + index}>{val.method}</option>
+                        <option value={method} key={"metodos_" + index}>{method}</option>
                       )
                     })
                   }
@@ -283,7 +321,7 @@ const Users = () => {
         </div>
         <div className='table-contain'>
           <AdminTable id="Users">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>

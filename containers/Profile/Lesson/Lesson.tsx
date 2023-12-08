@@ -78,22 +78,31 @@ const Lesson = () => {
           let today = new Date().getTime() / 1000;
           setUserData(user);
           getCourseApi(id).then((res) => {
-            if ((res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) ||
-              (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id).length === 0)) {
-              router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
+            if (res !== undefined) {
+              if ((res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) ||
+                (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id).length === 0)) {
+                router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
+              }
+              if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
+                router.push({
+                  pathname: PURCHASE_PATH,
+                  query: { type: 'subscription', frequency: 'month', v: '2' }
+                });
+              }
+              setCurrentLesson(res.seasons[season]!.lessons[lesson]);
+              setCourse(res);
+              console.log('Value of courseData');
+              console.log({ res });
+              getDataForNextLesson(res);
+              setIsLoading(false);
+
             }
-            if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
-              return router.push({
-                pathname: PURCHASE_PATH,
-                query: { type: 'subscription', frequency: 'month', v: '2' }
-              });
+          }).catch((reason) => {
+            if (reason instanceof Error) {
+              console.error(reason.message);
+              console.error(reason.stack);
             }
-            setCurrentLesson(res.seasons[season].lessons[lesson]);
-            setCourse(res);
-            getDataForNextLesson(res);
-            setIsLoading(false);
-            return
-          })
+          });
           setLoggedIn(true)
         } else {
           console.log(id);
@@ -112,10 +121,12 @@ const Lesson = () => {
   }
   const getCourse = () => {
     getCourseApi(id).then((res) => {
-      setCurrentLesson(res.seasons[season].lessons[lesson]);
-      setCourse(res);
-      getDataForNextLesson(res);
-      setIsLoading(false);
+      if (res !== undefined) {
+        setCurrentLesson(res.seasons[season]!.lessons[lesson]);
+        setCourse(res);
+        getDataForNextLesson(res);
+        setIsLoading(false);
+      }
     })
   }
   const getDataForNextLesson = (courseData: any) => {

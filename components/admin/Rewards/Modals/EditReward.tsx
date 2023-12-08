@@ -20,6 +20,7 @@ import {
   Title,
   TitleContain,
 } from "./AddReward.styled";
+import { IUserInfoResult } from "../../../../interfaces/IUser";
 
 const EditReward = ({ show, setShow, handleEvent, data }: any) => {
   const handleClose = () => setShow(false);
@@ -42,7 +43,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     month: false,
     points: false
   });
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<IUserInfoResult | null>(null);
   useEffect(() => {
     if (localStorage.getItem("email")) {
       getUserApi(localStorage.getItem("email")).then((res) => {
@@ -59,6 +60,9 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     };
   }
   const editReward = async () => {
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[3].edit === 0) {
       alert("No tienes permisos para esta acción");
       return;
@@ -94,6 +98,9 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     }
   }
   const deleteReward = (reward: any) => {
+    if (userData === null) {
+      return;
+    }
     if (userData.role === "admin" && userData.roles[3].delete === 0) {
       alert("No tienes permisos para esta acción");
       return;

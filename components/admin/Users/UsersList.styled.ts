@@ -63,7 +63,8 @@ export const SearchInput = styled.input`
 `;
 export const DownloadUserData = styled.div`
   display: flex;
-  height: 43px;
+  line-height: normal;
+  text-align: center;
   font-size: 16px;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
@@ -74,6 +75,7 @@ export const DownloadUserData = styled.div`
   border: 1px solid #6717cd;
   width: fit-content;
   border-radius: 100px;
+  margin-top: 15px;
   img {
     height: auto;
     width: 15px;
