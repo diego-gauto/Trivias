@@ -1,13 +1,35 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const UserContain = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 342;
   padding: 15px;
-  gap: 30px;
+  gap: 5px;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  z-index: 0;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 8px);
+
+  @media screen and (min-width: 420px) {
+    width: 385px;
+  }
+
+  @media screen and (min-width: 512px) {
+    width: 430px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 540px;
+  }
+
+  @media screen and (min-width: 920px) {
+    width: 750px;
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -21,7 +43,7 @@ export const OptionRole = styled.div`
     border-radius: 10px 10px 8px 8px;
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -37,6 +59,7 @@ export const UpdateButton = styled.button`
   padding-inline: 25px;
   border-radius: 30px;
   border: none;
+  width: 100%;
   &:hover {
     background-color: #5000b5;
     transform: scale(1.03);
@@ -59,17 +82,17 @@ export const OptionRoleContain = styled.div`
 export const IconRoleContain = styled.div`
   display: flex;
   position: relative;
-  width: 150px;
-  top: -40px;
+  /* width: 100%; */
+  top: -20px;
 `;
 export const SelectedRoleContain = styled.div`
   display: flex;
   cursor: pointer;
   font-size: 15px;
   padding-left: 15px;
-  width: 150px;
+  width: 100%;
   height: 44px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 10px;
   border-radius: 30px;
   border: 1px solid #6717cd;
@@ -81,7 +104,7 @@ export const FirstBox = styled.div`
   align-items: center;
 `;
 export const Title = styled.h1`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 16px;
   margin: 0;
@@ -123,17 +146,37 @@ export const ColumnContain = styled.div`
   gap: 20px;
   min-width: 180px;
 `;
+
+export const GridInfoContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 15px;
+
+  @media screen and (min-width: 920px) {
+    grid-template-columns: 3fr 2fr;
+  }
+`;
+
+export const InfoResponsive = styled.p`
+  display: flex;
+  flex-direction: column;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  margin: 0;
+  height: 40px;
+`;
+
 export const Info = styled.p`
   display: flex;
   flex-direction: column;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 0;
   width: 180px;
   height: 60px;
 `;
 export const Label = styled.label`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: #6717cd;
@@ -145,7 +188,7 @@ export const Courses = styled.div`
   gap: 15px;
 `;
 export const TitleBox = styled.p`
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 0;
 `;
@@ -157,7 +200,7 @@ export const CourseContain = styled.div`
 export const TransparentButton = styled.button`
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 10px;
@@ -177,7 +220,7 @@ export const TransparentButton2 = styled.button`
   height: 43px;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 9px;

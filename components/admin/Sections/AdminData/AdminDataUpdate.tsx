@@ -23,6 +23,8 @@ import {
   TitleContain,
   UpdateButton,
   UserContain,
+  InfoResponsive,
+  GridInfoContainer,
 } from "./AdminDataUpdate.styled";
 import RoleEdit from "./RoleEdit";
 
@@ -32,7 +34,7 @@ type Props = {
   adminID: any;
   role: any;
   handleClick: any;
-  courses: any
+  courses: any;
 };
 
 const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, courses }: Props) => {
@@ -41,7 +43,6 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const today = new Date().getTime() / 1000;
-
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
     return new Date(tempDate).toLocaleDateString("es-MX")
@@ -61,13 +62,11 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
     setOpen(false);
   }
 
-
-
   return (
     <UserContain>
       <TitleContain>
         <FirstBox>
-          <Title>Administrador Activo</Title>
+          <Title style={{ paddingLeft: '20px' }}>Administrador Activo</Title>
         </FirstBox>
         <CloseIcon onClick={() => setIsVisible(false)} />
       </TitleContain>
@@ -75,87 +74,83 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
         <ProfileContain>
           <ProfilePic />
         </ProfileContain>
-        <Columns>
-          <ColumnContain>
-            <Info>
-              Administrador
+        <GridInfoContainer>
+          <InfoResponsive>
+            Administrador
+            <Label>
+              {admin.name}
+            </Label>
+          </InfoResponsive>
+          <InfoResponsive>
+            Puntos
+            <Label>
+              {admin.score}
+            </Label>
+          </InfoResponsive>
+          <InfoResponsive>
+            Correo electrónico
+            <Label style={{ overflowWrap: "break-word" }}>
+              {admin.email}
+            </Label>
+          </InfoResponsive>
+          <InfoResponsive>
+            Fecha de Creación
+            {admin.created_at &&
               <Label>
-                {admin.name}
+                {formatDate(admin.created_at)}
               </Label>
-            </Info>
-            <Info>
-              Puntos
-              <Label>
-                {admin.score}
-              </Label>
-            </Info>
-            <Info>
-              Suscripción Actual
-              {(admin.level > 0 || admin.final_date > today) && <Label>
-                Gonvar Plus
-              </Label>}
-              {(admin.level === 0) && <Label>
-                Sin Suscripción
-              </Label>}
-            </Info>
-            {admin.role === 'admin' &&
-              <InputContain>
-                <Info>Cambiar rol</Info>
-                {admin.role === 'admin' &&
-                  <IconRoleContain>
-                    <SelectContain key={1}>
-                      <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
-                        {!updatedRole && <>{admin.role === 'superAdmin' ? ("superAdmin") : ("admin")}</>}
-                        {updatedRole && value}
-                        <CaretD2 />
-                      </SelectedRoleContain>
-                      {
-                        open &&
-                        <OptionRoleContain>
-                          <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) updateRole(); }}>
-                            <input
-                              type="radio"
-                              id="Temporada2"
-                              name="category"
-                              value="Rol superAdmin"
-                            />
-                            <Label2>superAdmin</Label2>
-                          </OptionRole>
-                        </OptionRoleContain>
-                      }
-                    </SelectContain>
-                  </IconRoleContain>}
-              </InputContain>
             }
-          </ColumnContain>
-          <ColumnContain>
-            <Info>
-              Correo electrónico
-              <Label style={{ overflowWrap: "break-word" }}>
-                {admin.email}
-              </Label>
-            </Info>
-            <Info>
-              Fecha de Creación
-              {admin.created_at &&
-                <Label>
-                  {formatDate(admin.created_at)}
-                </Label>
-              }
-            </Info>
-            <Info>
-              Teléfono
-              <Label>
-                {admin.phone_number === "undefined" ? "N/A" : admin.phone_number}
-              </Label>
-            </Info>
-            {admin.role === 'admin' &&
-              <ButtonRoleContain style={{ marginTop: "22px" }}>
-                <UpdateButton onClick={() => { setShow(true); }}>Editar acceso</UpdateButton>
-              </ButtonRoleContain>
-            }
-          </ColumnContain>
-        </Columns>
+          </InfoResponsive>
+          <InfoResponsive>
+            Suscripción Actual
+            {(admin.level > 0 || admin.final_date > today) && <Label>
+              Gonvar Plus
+            </Label>}
+            {(admin.level === 0) && <Label>
+              Sin Suscripción
+            </Label>}
+          </InfoResponsive>
+          <InfoResponsive>
+            Teléfono
+            <Label>
+              {admin.phone_number === "undefined" ? "N/A" : admin.phone_number}
+            </Label>
+          </InfoResponsive>
+          {admin.role === 'admin' &&
+            <InputContain>
+              <InfoResponsive>Cambiar rol</InfoResponsive>
+              {admin.role === 'admin' &&
+                <IconRoleContain>
+                  <SelectContain key={1}>
+                    <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
+                      {!updatedRole && <>{admin.role === 'superAdmin' ? ("superAdmin") : ("admin")}</>}
+                      {updatedRole && value}
+                      <CaretD2 />
+                    </SelectedRoleContain>
+                    {
+                      open &&
+                      <OptionRoleContain>
+                        <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) updateRole(); }}>
+                          <input
+                            type="radio"
+                            id="Temporada2"
+                            name="category"
+                            value="Rol superAdmin"
+                          />
+                          <Label2>superAdmin</Label2>
+                        </OptionRole>
+                      </OptionRoleContain>
+                    }
+                  </SelectContain>
+                </IconRoleContain>}
+            </InputContain>
+          }
+        </GridInfoContainer>
+        {admin.role === 'admin' &&
+          <ButtonRoleContain>
+            <UpdateButton onClick={() => { setShow(true); }}>Editar acceso</UpdateButton>
+          </ButtonRoleContain>
+        }
         {show &&
           <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} refresh={refresh} courses={courses} />
         }

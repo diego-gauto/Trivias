@@ -9,6 +9,7 @@ import {
   Title,
   TitleBox,
   TitleContain,
+  ModalContain,
 } from "./Sections.styled";
 import { getAdmins, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
 import { Button } from "../Courses/CourseMain.styled";
@@ -51,6 +52,8 @@ const Sections = () => {
   const [find, setFind] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});
   const [courses, setCourses] = useState<any>([]);
+  const [displayValue, setDisplayValue] = useState<string>('none');
+  const [topValue, setTopValue] = useState<string>('-100%');
 
   const getAllCourses = () => {
     getCoursesApi().then((res) => {
@@ -59,7 +62,8 @@ const Sections = () => {
   }
 
   const editRole = async (user: any): Promise<void> => {
-    setIsVisible(true);
+    // setIsVisible(true);
+    setModalVisible(true);
     setSelectedAdmin(user);
   };
 
@@ -108,6 +112,18 @@ const Sections = () => {
     })
   }
 
+  const setModalVisible = (show: boolean) => {
+    if (show) {
+      setDisplayValue('block');
+      setTopValue('0');
+      setIsVisible(true);
+    } else {
+      setDisplayValue('none');
+      setTopValue('-100%');
+      setIsVisible(false);
+    }
+  }
+
   return (
     <AdminContain>
       <GeneralContain>
@@ -150,12 +166,13 @@ const Sections = () => {
             </tbody>
           </Table>
         </Container>
-
+        <ModalContain className="modal" style={{ display: `${displayValue}`, top: `${topValue}` }}>
+          {
+            isVisible &&
+            <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setModalVisible} role={role} handleClick={handleClick} courses={courses} />
+          }
+        </ModalContain>
       </GeneralContain>
-      {
-        isVisible &&
-        <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setIsVisible} role={role} handleClick={handleClick} courses={courses} />
-      }
       {newMember && <NewUser>
         <IoClose onClick={() => { setNewMember(false); setMember(""); setFind(false); setUser({}) }} />
         <div className="filter">
