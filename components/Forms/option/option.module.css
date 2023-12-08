@@ -10,6 +10,7 @@
 
     @media (max-width: 839px) {
       font-size: 15px;
+      margin-bottom: 5px;
     }
 
     @media (max-width: 420px) {
