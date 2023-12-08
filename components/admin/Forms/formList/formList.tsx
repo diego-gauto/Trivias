@@ -23,6 +23,7 @@ const FormList = ({ forms }: FormListProps) => {
             <th>Título</th>
             <th>Fecha de Creación</th>
             <th>Fecha de Edición</th>
+            <th>Inscritos</th>
           </tr>
         </thead>
         <tbody>

@@ -10,10 +10,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 
   .logo{
     width: 20rem;
     margin:40px 0;
+    max-width: 100%; /* Ajustar según sea necesario */
+    height: auto;
   }
 
   .formContainer{
@@ -30,6 +33,7 @@
 
     @media (max-width: 839px) {
       padding: 30px 10px 10px 10px;
+      max-width: 100%;
     }    
     
     .title{

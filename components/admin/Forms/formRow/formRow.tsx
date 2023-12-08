@@ -36,12 +36,17 @@ const FormRow = ({ form, idForm }: FormRowProps) => {
 
       <td>{form.id}</td>
       <td>
-        <Link href={`/admin/forms/${idForm}`}>
+        <Link href={`/admin/forms/updateForm?formId=${idForm}`}>
           <a className={link}>{form.name}</a>
         </Link>
       </td>
       <td>{form.createdAt}</td>
       <td>{form.editedAt}</td>
+      <td>
+        <Link href={`/admin/forms/${idForm}`}>
+          <a className={link}> ver inscritos</a>
+        </Link>
+      </td>
     </tr>
 
   );
