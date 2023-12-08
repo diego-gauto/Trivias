@@ -114,6 +114,8 @@ export const returnNotificationImage = (notification: any) => {
     return REWARD_ICON;
   } else if (notification.type === "14") {
     return PENDING_HOMEWORK_ICON;
+  } else if (notification.type === "15") {
+    return PAYMENT_REMINDER_ANUALY;
   } else {
     return "";
   }
@@ -148,6 +150,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return `¡Nueva recompensa disponible!`;
   } else if (notification.type === "14") {
     return `Tienes una tarea pendiente`;
+  } else if (notification.type === "15") {
+    return "Tu suscripción cuatrimestral está por renovarse.";
   } else {
     return "";
   }
@@ -186,6 +190,10 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `Hasta ahora has acumulado ${notification.score} puntos. Ahora puedes solicitar una nueva recompensa.`;
   } else if (notification.type === "14") {
     return `Tienes tarea pendiente de tu curso ${notification.title}.`;
+  } else if (notification.type === "15") {
+    return `Tu suscripción cuatrimestral se renovará el ${new Date(
+      notification.due_date * 1000
+    ).toLocaleDateString()} de manera automática.`;
   } else {
     return "";
   }
