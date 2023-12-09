@@ -11,225 +11,225 @@
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
+}
 
-  .logo{
-    width: 20rem;
-    margin:40px 0;
-    max-width: 100%; /* Ajustar según sea necesario */
-    height: auto;
+.logo{
+  width: 20rem;
+  margin:40px 0;
+  max-width: 100%; /* Ajustar según sea necesario */
+  height: auto;
 
-    @media (max-width: 839px) {
-      max-width: 320px;
-    }    
-  }
+  @media (max-width: 839px) {
+    max-width: 320px;
+  }    
+}
 
-  .formContainer{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-    width: 95%;
-    max-width: 800px;
-    padding: 30px 20px 20px 20px;
-    box-sizing: border-box;
-    border-top-left-radius: 20px; /* Ajusta según el radio de redondeo deseado */
-    border-top-right-radius: 20px; /* Ajusta según el radio de redondeo deseado */
+.formContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  width: 95%;
+  max-width: 800px;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  border-top-left-radius: 20px; /* Ajusta según el radio de redondeo deseado */
+  border-top-right-radius: 20px; /* Ajusta según el radio de redondeo deseado */
 
-    @media (max-width: 839px) {
-      padding: 30px 10px 10px 10px;
-      max-width: 100%;
-    }    
-    
-    .title{
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      max-width: 95%;
-      margin: 0 auto;
-      font-size: 38px;
-
-      @media (max-width: 839px) {
-        max-width: 100%;
-        font-size: 30px;
-      }      
-    }
-
-    .paragraph{
-      display: flex;
-      justify-content: center;
-      position: relative;
-      color: #3f1168;
-      width: 95%;
-      margin-top: 10px;
-      font-size: 18px;
-      line-height: 28px;
-
-      @media (max-width: 839px) {
-        width: 100%;
-        font-size: 15px;
-        line-height: 20px;
-        margin: 0;
-      }
-    }
-
-    .lineaAtravesada {
-      width: 100%;
-      height: 1px;
-      background-color: #000; /* Cambia este color según tus preferencias */
-      margin-bottom: 10px; /* Ajusta el margen según sea necesario */
-    }
+  @media (max-width: 839px) {
+    padding: 30px 10px 10px 10px;
+    max-width: 100%;
+  }    
   
-    .inputContainer{
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      width: 100%;
-    
-      .names{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+}
 
-        .name, .last_name {
-          display: flex;
-          flex-direction: column;
-          position: relative;
+.title{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  max-width: 95%;
+  margin: 0 auto;
+  font-size: 38px;
 
-          @media screen and (max-width: 670px) {
-            max-width: 48%;;
-          
-          }
+  @media (max-width: 839px) {
+    max-width: 100%;
+    font-size: 30px;
+  }      
+}
 
-          @media (max-width: 420px) {
-            margin-bottom: 20px;
-          }
+.paragraph{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  color: #3f1168;
+  width: 95%;
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 28px;
 
-          .errorMessageNombre, .errorMessageApellido{
-            color: red;
-            position: absolute;
-            top:55px;
-            width: 310px;
-            padding-left: 15px;
-
-            @media (max-width: 420px) {
-              width: 180px;
-              padding-left: 5px;
-              font-size: 13px;
-            }
-          }
-        }
-        
-      }
-    
-      .mail{
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-
-        @media (max-width: 420px) {
-          top:-30px;
-        }
-
-        .errorMessageMail{
-          color: red;
-          position: absolute;
-          top:55px;
-          width: 300px;
-          padding-left: 15px;
-
-          @media (max-width: 420px) {
-            padding-left: 5px;
-            font-size: 13px;
-          }
-        }
-      }
-    
-      .phone{
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-
-        @media (max-width: 420px) {
-          top:-40px;
-        }
-
-        .errorMessageWA{
-          color: red;
-          position: absolute;
-          top:55px;
-          width: 300px;
-          padding-left: 15px;
-
-          @media (max-width: 550px) {
-            top:70px;
-            font-size: 13px;
-          }
-        }
-      }
-    
-      .image{
-        margin-top: 60px;
-
-        @media (max-width: 420px) {
-          margin-top: 0;
-        }
-      }
-    
-      .options{
-        margin: 60px 0 30px 0;
-        position: relative;
-
-        @media (max-width: 420px) {
-          margin-top: 10px;
-        }
-
-        .optionContainer{
-          display: flex;
-          flex-direction: column;
-          position: relative;
-
-          @media (max-width: 420px) {
-            margin-top: 10px;
-          }
-          
-          .errorOption{
-            color: red;
-            position: absolute;
-            width: 350px;
-            padding-left: 40px;
-            top:100%;
-          }
-        }
-      }
-    
-      .buttonContainer{
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-      }
-    
-      .submitButton {
-        font-family: "Montserrat";
-        border-radius: 100px;
-        background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
-        color: #ede7f2;
-        border: 0;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;    
-        width: 305px;
-        height: 45px;
-      }
-    
-      .submitButton:hover {
-        transform: scale(1.03);
-        -webkit-transition: 0.5s ease all;
-        transition: 0.5s ease all;
-        background-color: #5000b5;
-      }
-    }
+  @media (max-width: 839px) {
+    width: 100%;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 0;
   }
+}
+
+.lineaAtravesada {
+  width: 100%;
+  height: 1px;
+  background-color: #000; /* Cambia este color según tus preferencias */
+  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+}
+
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.names{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.name, .last_name {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media screen and (max-width: 670px) {
+    max-width: 48%;;
+  
+  }
+
+  @media (max-width: 420px) {
+    margin-bottom: 20px;
+  }
+}
+
+.errorMessageNombre, .errorMessageApellido{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 310px;
+  padding-left: 15px;
+
+  @media (max-width: 420px) {
+    width: 180px;
+    padding-left: 5px;
+    font-size: 13px;
+  }
+}
+.mail{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media (max-width: 420px) {
+    top:-30px;
+  }
+}
+
+.errorMessageMail{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 300px;
+  padding-left: 15px;
+
+  @media (max-width: 420px) {
+    padding-left: 5px;
+    font-size: 13px;
+  }
+}
+.phone{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media (max-width: 420px) {
+    top:-40px;
+  }
+
+}
+
+.errorMessageWA{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 300px;
+  padding-left: 15px;
+
+  @media (max-width: 550px) {
+    top:70px;
+    font-size: 13px;
+  }
+}
+
+.image{
+  margin-top: 60px;
+
+  @media (max-width: 420px) {
+    margin-top: 0;
+  }
+}
+
+.options{
+  margin: 60px 0 30px 0;
+  position: relative;
+
+  @media (max-width: 420px) {
+    margin-top: 10px;
+  }
+}
+
+.optionContainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @media (max-width: 420px) {
+    margin-top: 10px;
+  }
+}
+
+.errorOption{
+  color: red;
+  position: absolute;
+  width: 350px;
+  padding-left: 40px;
+  top:100%;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.submitButton {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;    
+  width: 305px;
+  height: 45px;
+}
+
+.submitButton:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
 }
