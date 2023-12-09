@@ -18,6 +18,7 @@ import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
+import { useMediaQuery } from "react-responsive";
 
 interface Option {
   isVisible: boolean | null;
@@ -51,7 +52,7 @@ const Formularios = () => {
   const {
     query: { formId },
   } = useRouter();
-
+  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const router = useRouter();
 
   const [form, setForm] = useState<Form | null>()
@@ -379,7 +380,7 @@ const Formularios = () => {
   return (
     <div className={container}>
 
-      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
+      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" style={responsive500 ? { maxWidth: 320 } : {}} />
       <div className={formContainer}>
         <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
         <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
