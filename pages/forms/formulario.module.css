@@ -101,15 +101,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-
-  @media screen and (max-width: 670px) {
-    max-width: 48%;;
-  
-  }
-
-  @media (max-width: 420px) {
-    margin-bottom: 20px;
-  }
 }
 
 .errorMessageNombre, .errorMessageApellido{
@@ -232,4 +223,16 @@
   -webkit-transition: 0.5s ease all;
   transition: 0.5s ease all;
   background-color: #5000b5;
+}
+
+@media screen and (max-width: 670px) {
+  .name, .last_name {
+    max-width: 48%;
+  }
+}
+
+@media (max-width: 420px) {
+  .name, .last_name {
+    margin-bottom: 20px;
+  }
 }
