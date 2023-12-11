@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
 export const BlogBackground = styled.div`
+  .blog-third-part-responsive {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
   p {
-    margin: 0;
+    margin: 0px;
   }
   display: flex;
-  padding: 40px;
+  padding: 20px;
   width: 100%;
   .blog-container {
     display: flex;
@@ -94,11 +100,7 @@ export const BlogBackground = styled.div`
       .blog-row {
         display: flex;
         justify-content: space-between;
-        width: 100%;
         gap: 20px;
-        @media (max-width: 850px) {
-          flex-wrap: wrap;
-        }
       }
       .blog-column {
         display: flex;
@@ -112,6 +114,17 @@ export const BlogBackground = styled.div`
           cursor: pointer;
         }
       }
+    }
+  }
+
+  @media (min-width: 576px) {
+    padding: 30px;
+  }
+
+  @media (max-width: 962px) {
+    padding: 20px 5px;
+    .blog-third-part-responsive {
+      grid-template-columns: 1fr;
     }
   }
 `;
@@ -146,9 +159,6 @@ export const BlogInputs = styled.div`
     outline: none;
     :focus {
       border: 2px solid #6717cd;
-    }
-    @media (max-width: 850px) {
-      width: 100% !important;
     }
   }
 `;

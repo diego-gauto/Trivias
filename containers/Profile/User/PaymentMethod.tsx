@@ -81,11 +81,30 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
     })
   }
 
+  /**
+   * Retorna verdadero en caso de que el usuario se encuentre suscrito por las siguientes membresias:
+   * level 1 Mensual,
+   * level 4 Anualidad,
+   * level 7 Cuadrimestral
+   * @param user la data del usuario
+   * @returns boolean
+   */
+  const isSuscribedUser = (level: number) => {
+    const suscribedLevels = [1, 4, 7];
+    return suscribedLevels.includes(level);
+  }
+
+  /**
+   * Remueve un metodo de pago del usuario
+   * @param card datos del fomulario de usuario de su tarjeta de pago
+   * @returns void
+   */
   const detachPayment = async (card: any) => {
-    if (card.default && user.level === 1 || paymentMethods.length === 1 && user.level === 1) {
+    if ((card.default && isSuscribedUser(user.data.level)) || (paymentMethods.length === 1 && isSuscribedUser(user.data.level))) {
       setShow(true);
       return;
     }
+
     setDeleteLoad(!loader);
     let body = {
       payment_method: card.id,

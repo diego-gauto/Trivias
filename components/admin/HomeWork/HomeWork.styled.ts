@@ -3,8 +3,12 @@ import styled, { css } from "styled-components";
 export const HWContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 40px;
+  padding: 0;
   overflow: auto;
+
+  @media screen and (min-width: 992px) {
+    padding: 40px;
+  }
 `;
 export const TitleContain = styled.div`
   display: flex;
@@ -33,7 +37,6 @@ export const Container = styled.div`
   width: 100%;
   height: fit-content;
   border-radius: 10px;
-  min-width: 1000px;
   flex-direction: column;
   box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
   .pages {
@@ -72,6 +75,8 @@ export const Container = styled.div`
   }
 `;
 export const Table = styled.table`
+  display: block;
+  overflow-x: scroll;
   td {
     font-size: 14px;
     font-family: "Raleway", sans-serif;

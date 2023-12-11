@@ -138,8 +138,8 @@ const Cancel = () => {
                 wrapColumnChar=""
                 datas={() => Gonvar(changeDate)}
               >
-                <DownloadUserData style={{ marginTop: 30 }}>
-                  <p>Descargar lista de usuarios</p>
+                <DownloadUserData>
+                  Descargar lista de usuarios
                 </DownloadUserData>
               </CsvDownloader>
             </div>
@@ -184,7 +184,7 @@ const Cancel = () => {
             </thead>
             {
               loader &&
-              <tbody>
+              <tbody style={{ display: 'inline-table', width: '100%' }}>
                 {
                   reviews.map((review: ICancelReview, index: number) => {
                     return (

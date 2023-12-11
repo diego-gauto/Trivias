@@ -12,9 +12,9 @@ export const DefaultContainer = styled.div`
   h2 {
     margin: 0;
   }
-  media(max-width: 1023) {
+  media(max-width: 1023px) {
     .table-contain {
-      max-width: 1000px;
+      max-width: 100%;
       overflow-x: auto;
     }
   }
@@ -155,6 +155,8 @@ export const DefaultFilterContain = styled.div`
 `;
 export const AdminTable = styled.table`
   width: 100%;
+  display: block;
+  overflow-x: auto;
   td {
     font-size: 14px;
     font-family: "Raleway", sans-serif;

@@ -10,6 +10,12 @@ import {
   Inputs,
   ProfileData,
   SaveButton,
+  GridContainer,
+  GridItem,
+  EditInputResponsive,
+  FolderInputResponsive,
+  InputsResponsive,
+  EditInputTextAreaResponsive,
 } from "../Landing.styled";
 import { IReviewsSectionProps } from './IReviewsSection';
 import { LoaderContain } from "../../../../screens/Login.styled";
@@ -99,95 +105,88 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
   }
   const getReviewElement = (review: any, num: number) => {
     return (
-      <div className='content' key={"Review_Data_" + num}>
-        {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempUserImg} alt="" /> :
-          <LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />}
-        <Inputs>
-          <EditText>
-            Imagen de usuario
-          </EditText>
-          <FolderInput
-            onChange={(e) => { updateState(e, "userfile", num); getImage(e.target.files, num) }}
-            type="file"
-            placeholder="Seleccionar archivo"
-          />
-        </Inputs>
-        <Inputs>
-          <EditText>
-            Reseñador {num + 1}
-          </EditText>
-          <EditInput
-            onChange={(e) => updateState(e, "user_name", num)}
-            value={review.user_name}
-            placeholder="Luke Skywalker"
-          />
-        </Inputs>
-        <Inputs>
-          <EditText>
-            Facebook link:
-          </EditText>
-          <EditInput
-            onChange={(e) => updateState(e, "facebook_url", num)}
-            value={review.facebook_url}
-            placeholder="facebook.com/gonvar"
-          />
-        </Inputs>
-        <Inputs>
-          <EditText>
-            Fecha: (respetar formato "2021-08-10")
-          </EditText>
-          <EditInput
-            onChange={(e) => updateState(e, "date", num)}
-            value={review.date}
-            placeholder="2021-08-10"
-          />
-        </Inputs>
-        <Inputs>
-          <EditText>
-            Reseña:
-          </EditText>
-          <textarea onChange={(e) => updateState(e, "about", num)}
-            defaultValue={review.about}
-            placeholder="Reseña"></textarea>
-        </Inputs>
-        {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempImg} alt="" /> :
-          <LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />}
-        <Inputs>
-          <EditText>
-            Imagen fondo
-          </EditText>
-          <FolderInput
-            onChange={(e) => { updateState(e, "file", num); getImageBg(e.target.files, num) }}
-            type="file"
-            placeholder="Seleccionar archivo"
-          />
-        </Inputs>
-      </div>
+      <GridItem>
+        <div className='content' key={"Review_Data_" + num}>
+          {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempUserImg} alt="" /> :
+            <LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />}
+          <InputsResponsive>
+            <EditText>
+              Imagen de usuario
+            </EditText>
+            <FolderInputResponsive
+              onChange={(e) => { updateState(e, "userfile", num); getImage(e.target.files, num) }}
+              type="file"
+              placeholder="Seleccionar archivo"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Reseñador {num + 1}
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "user_name", num)}
+              value={review.user_name}
+              placeholder="Luke Skywalker"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Facebook link:
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "facebook_url", num)}
+              value={review.facebook_url}
+              placeholder="facebook.com/gonvar"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Fecha: (respetar formato "2021-08-10")
+            </EditText>
+            <EditInputResponsive
+              onChange={(e) => updateState(e, "date", num)}
+              value={review.date}
+              placeholder="2021-08-10"
+            />
+          </InputsResponsive>
+          <InputsResponsive>
+            <EditText>
+              Reseña:
+            </EditText>
+            <EditInputTextAreaResponsive
+              style={{}}
+              onChange={(e) => updateState(e, "about", num)}
+              defaultValue={review.about}
+              placeholder="Reseña"
+              rows={10}
+            />
+          </InputsResponsive>
+          {!loader ? <img style={{ width: "100px", marginInline: "auto" }} src={review.tempImg} alt="" /> :
+            <LoaderContain style={{ position: "relative", width: "60px", height: "60px", alignSelf: "center" }} />}
+          <InputsResponsive>
+            <EditText>
+              Imagen fondo
+            </EditText>
+            <FolderInputResponsive
+              onChange={(e) => { updateState(e, "file", num); getImageBg(e.target.files, num) }}
+              type="file"
+              placeholder="Seleccionar archivo"
+            />
+          </InputsResponsive>
+        </div>
+      </GridItem>
     )
   }
-  const col1 = chunk1.map((review: any, i: number) => {
+
+  const allReviews = [...chunk1, ...chunk2, ...chunk3].map((review: any, i: number) => {
     return (getReviewElement(review, i))
-  });
-  const col2 = chunk2.map((review: any, i: number) => {
-    return getReviewElement(review, i + 3)
-  });
-  const col3 = chunk3.map((review: any, i: number) => {
-    return getReviewElement(review, i + 7)
   });
 
   return (
     <ProfileData style={{ boxShadow: "none", background: "none" }}>
-      <ColumnsContainer>
-        <ColumnsContainer2>
-          {col1}
-        </ColumnsContainer2>
-        <ColumnsContainer2>
-          {col2}
-        </ColumnsContainer2>
-        <ColumnsContainer2>
-          {col3}
-        </ColumnsContainer2>
-      </ColumnsContainer>
+      <GridContainer>
+        {allReviews}
+      </GridContainer>
       <EditButtons>
         <SaveButton onClick={onSave}>
           Guardar

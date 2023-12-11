@@ -1,16 +1,26 @@
-.container {
+import styled, { css } from "styled-components";
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 3% 5% 3% 5%;
-}
+`;
 
-.buttonContainer {
-  display: flex;
-  align-items: center;
+export const ButtonContainer = styled.div`
+  display: grid;
+  place-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr;
   padding-bottom: 30px;
-}
+  width: 100%;
 
-.buttonContainer p {
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+export const OptionText = styled.div`
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
@@ -23,9 +33,12 @@
   flex-direction: column;
   justify-content: center;
   margin: 0;
-}
+`;
 
-.button {
+export const SelectorTriviasButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 344.72px;
   height: 74px;
   border: 0;
@@ -37,6 +50,5 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 29px;
-  /* identical to box height */
   color: #ffffff;
-}
+`;

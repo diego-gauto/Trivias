@@ -283,7 +283,7 @@ const HomeWork = () => {
             <p>
               Tareas
             </p>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: 'wrap', justifyContent: 'end' }}>
               <SelectContain key={2}>
                 <Selected onClick={openCourseSelect}>
                   {
@@ -359,7 +359,7 @@ const HomeWork = () => {
             </div>
           </div>
           <Table id="Pay">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>

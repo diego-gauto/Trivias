@@ -12,11 +12,13 @@ import Help from "./Help/Help";
 interface IModules {
   lesson: any,
   course: any,
+  position: number,
+  setPosition: (position: number) => void;
 }
 const Modules = (props: IModules) => {
-  const { lesson, course } = props;
+  const { lesson, course, position, setPosition } = props;
   const { admin }: any = router.query;
-  const [position, setPosition] = useState(1)
+  // const [position, setPosition] = useState(1)
   const changePosition = (value: number) => {
     setPosition(value);
   }

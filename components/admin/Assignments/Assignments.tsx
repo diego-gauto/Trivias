@@ -83,7 +83,7 @@ const Assignments = () => {
         </div>
         <div className='table-contain'>
           <AdminTable id="Users">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>

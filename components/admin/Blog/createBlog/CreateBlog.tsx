@@ -367,7 +367,7 @@ const CreateBlog = () => {
           loader
             ?
             <div className="blog-form">
-              <div className="blog-row">
+              <div className="blog-third-part-responsive">
                 <BlogInputs>
                   <label className="blog-label">
                     Título
@@ -405,7 +405,7 @@ const CreateBlog = () => {
                   <input
                     className="blog-input"
                     type="file"
-                    style={{ width: "90%" }}
+                    style={{ minWidth: '0', width: '100%' }}
                     onChange={(e) => { getImage(e.target.files) }}
                   />
                 </BlogInputs>

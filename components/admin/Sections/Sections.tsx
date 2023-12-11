@@ -120,7 +120,7 @@ const Sections = () => {
             <Button onClick={() => { setNewMember(true); }}>Nuevo miembro</Button>
           </TitleContain>
           <Table id="Users">
-            <tbody>
+            <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Administrador</th>
                 <th>Correo Electrónico</th>
