@@ -117,20 +117,12 @@
   padding-left: 15px;
 }
 
-.image {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image img {
-  max-height: 300px;
-  width: auto;
+.image{
+  margin-top: 60px;
 }
 
 .options{
-  margin: 20px 0 30px 0;
+  margin: 60px 0 30px 0;
   position: relative;
 }
 

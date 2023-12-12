@@ -1,25 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useMediaQuery } from "react-responsive";
-
 // import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
 // import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
-import { getFormApi } from "../../components/api/form";
-import { createUserFormApi } from "../../components/api/userform";
-import Countdown from "../../components/Forms/countdown/countdown";
-import InputApellido from "../../components/Forms/inputApellido/inputApellido";
-import InputMail from "../../components/Forms/inputMail/inputMail";
-import InputNombre from "../../components/Forms/inputNombre/inputNombre";
-import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
-import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
-import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
-import OptionComponent from "../../components/Forms/option/option";
-import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
-import styles from "./formulario.module.css";
+import { createUserFormApi } from "../../../components/api/userform";
+import Countdown from "../../../components/Forms/countdown/countdown";
+import InputApellido from "../../../components/Forms/inputApellido/inputApellido";
+import InputMail from "../../../components/Forms/inputMail/inputMail";
+import InputNombre from "../../../components/Forms/inputNombre/inputNombre";
+import InputWatsapp from "../../../components/Forms/inputWhatsapp/inputWhatsapp";
+import ModalSuccessUserCreate from "../../../components/Forms/Modals/modalSuccesUserCreate";
+import ModalUserExist from "../../../components/Forms/Modals/modalUserExist";
+import OptionComponent from "../../../components/Forms/option/option";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import styles from "./preview.module.css";
 
 interface Option {
   isVisible: boolean | null;
@@ -53,7 +50,7 @@ const Formularios = () => {
   const {
     query: { formId },
   } = useRouter();
-  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
+
   const router = useRouter();
 
   const [form, setForm] = useState<Form | null>()
@@ -66,17 +63,6 @@ const Formularios = () => {
   const [loading, setLoading] = useState(true);
 
   const errorRef = useRef<HTMLDivElement>(null);
-
-
-  // const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
-  // const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
-  // const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
-
-
-  // const [isImageVisible, setIsImageVisible] = useState(true);
-  // const [isOption1Visible, setIsOption1Visible] = useState(true);
-  // const [isOption2Visible, setIsOption2Visible] = useState(true);
-  // const [isOption3Visible, setIsOption3Visible] = useState(true);
 
   const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
   const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
@@ -130,47 +116,13 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    // const form: Form = {
-    //   name: "Campaña 11 de Diciembre",
-    //   title: "<p><strong>Solicitud</strong> de Beca al 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad! </p>",
-    //   subtitle: "<p><strong>Más de 65 cursos</strong> de uñas, maquillaje y pestañas <strong>incluidos</strong>. Además, recibe acceso a Nails Master Revolution (un curso de uñas en técnica de Tips y Escultural). Aprende en línea, <strong>Desde Cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de $6.397,00 MXN reducido a un costo total de $1.599,00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de 399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. </p>",
-    //   createdAt: "",
-    //   editedAt: "",
-    //   img: { source: "/images/forms/iPhone-14-removebg.png", isVisible: true },
-    //   optionsArray: [
-    //     { isVisible: true, label: "<p>Recuerda que el <strong>costo total del programa es de 1,599 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para <strong>ganar un iPhone 15 Pro</strong> NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y <strong>MÁXIMO este</strong> SÁBADO 25 de Noviembre. Elige tu plan de Pagos:</p>", options: ["Pagaré en 4 partes de 399 pesos ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día sábado"] },
-    //     { isVisible: true, label: "<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>", options: ["Sí, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"] },
-    //     { isVisible: false, label: "", options: ["", ""] },
-    //   ],
-    //   redirect: {
-    //     type: "thankYouPage",
-    //     link: "",
-    //     textButton: "",
-    //   },
-    // }
-    // setForm(form)
-    // setLoading(false)
 
     const fetchData = async () => {
       try {
 
-        const formIdNumber: number = (Number(formId))
-
-        const res = await getFormApi(formIdNumber);
-
-        const formTemp = res[0]
-
-        if (formTemp) {
-
-          // Parsear la cadena JSON en la propiedad "questions"
-          formTemp.img = JSON.parse(formTemp.img);
-
-          // Parsear la cadena JSON en la propiedad "result"
-          formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
-
-          formTemp.redirect = JSON.parse(formTemp.redirect);
-
-          setForm(formTemp);
+        const storedFormData = localStorage.getItem('formData');
+        if (storedFormData) {
+          setForm(JSON.parse(storedFormData));
         }
 
         setLoading(false);
@@ -339,15 +291,13 @@ const Formularios = () => {
       // Si el checkbox está marcado y el formulario es válido, enviar el formulario
       if (formIsValid && optionsAreValid) {
         try {
-          formik.handleSubmit();
+          console.log("Formulario con estructura correcta")
 
         } catch (error) {
           console.error("Error al enviar el formulario", error);
         }
       } else {
         console.error("Campos no validos")
-        console.log("form valid", formIsValid)
-        console.log("options valid", optionsAreValid)
       }
     });
   };
@@ -381,7 +331,7 @@ const Formularios = () => {
   return (
     <div className={container}>
 
-      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" style={responsive500 ? { maxWidth: 320 } : {}} />
+      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
       <div className={formContainer}>
         <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
         <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
@@ -448,9 +398,7 @@ const Formularios = () => {
               <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
             )}
           </div>
-          <div className={image}>
-            {form?.img.isVisible && <img src={form.img.source} alt="iphone" />}
-          </div>
+          {form?.img.isVisible && <img className={image} src={form.img.source} alt="iphone" />}
 
           <div className={options}>
             <div className={optionContainer}>

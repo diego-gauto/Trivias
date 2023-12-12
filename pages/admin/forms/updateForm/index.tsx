@@ -65,6 +65,9 @@ const UpdateForm = () => {
     query: { formId },
   } = useRouter();
 
+  const router = useRouter();
+
+
   const editorOptions = {
     modules: {
       toolbar: [
@@ -266,6 +269,28 @@ const UpdateForm = () => {
         textButton: newTextButton,
       },
     }));
+  };
+
+  const handleCopy = () => {
+    // Guardar datos temporalmente (por ejemplo, en localStorage)
+    localStorage.setItem('formData', JSON.stringify(updatedForm));
+
+    // Obtener la URL completa para la nueva ruta
+    const copyUrl = `${window.location.origin}/admin/forms/createForm?copy=${true}`;
+
+    // Abrir una nueva pestaña con window.open y redirigir usando router.push solo en la pestaña actual
+    const newTab = window.open(copyUrl, '_blank');
+    if (newTab) {
+      newTab.focus();
+
+      // Verificar si la pestaña actual es la pestaña principal antes de redirigir con router.push
+      if (window.opener) {
+        router.push(`/admin/forms/createForm?copy=${true}`);
+      }
+    } else {
+      // Manejar el caso en el que la apertura de ventana falla (puede deberse a bloqueadores de ventanas emergentes)
+      console.error('No se pudo abrir la nueva pestaña');
+    }
   };
 
   const handleUpdate = () => {
@@ -489,6 +514,7 @@ const UpdateForm = () => {
             <button className={button}>Cancelar</button>
           </a>
         </Link>
+        <button className={button} onClick={handleCopy}>Copiar Formulario</button>
         <button className={button} onClick={handleUpdate}>
           Editar Formulario
         </button>

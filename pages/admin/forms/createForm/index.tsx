@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { createFormApi } from "../../../../components/api/form";
 import styles from "./create.module.css";
 
+const ReactQuill = dynamic(import('react-quill'), { ssr: false })
 interface Option {
   isVisible: boolean | null;
   label: string;
@@ -57,6 +58,8 @@ const CreateForm = () => {
 
   const [updatedForm, setUpdatedForm] = useState<Form | null>(null);
 
+  const router = useRouter();
+
   const editorOptions = {
     modules: {
       toolbar: [
@@ -68,13 +71,22 @@ const CreateForm = () => {
     },
     formats: ["bold", "italic", "underline", "strike", "color", "background", "size"],
   };
-
   useEffect(() => {
-    if (data) {
-      let prevForm = data;
-      setUpdatedForm(prevForm);
+    // Check if formId is present in the query parameters
+    const { copy } = router.query;
+
+    if (copy) {
+      // Load data from localStorage if formId is present
+      const storedFormData = localStorage.getItem('formData');
+      if (storedFormData) {
+        const parsedFormData = JSON.parse(storedFormData);
+        setUpdatedForm(parsedFormData);
+      }
+    } else {
+      // If formId is not present, use the default data
+      setUpdatedForm(data);
     }
-  }, []);
+  }, [router.query]);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newName = e.target.value;
@@ -226,6 +238,28 @@ const CreateForm = () => {
         textButton: newTextButton,
       },
     }));
+  };
+
+  const handlePreview = () => {
+    // Guardar datos temporalmente (por ejemplo, en localStorage)
+    localStorage.setItem('formData', JSON.stringify(updatedForm));
+
+    // Obtener la URL completa para la nueva ruta
+    const previewUrl = `${window.location.origin}/forms/preview`;
+
+    // Abrir una nueva pestaña con window.open y redirigir usando router.push solo en la pestaña actual
+    const newTab = window.open(previewUrl, '_blank');
+    if (newTab) {
+      newTab.focus();
+
+      // Verificar si la pestaña actual es la pestaña principal antes de redirigir con router.push
+      if (window.opener) {
+        router.push('/forms/preview');
+      }
+    } else {
+      // Manejar el caso en el que la apertura de ventana falla (puede deberse a bloqueadores de ventanas emergentes)
+      console.error('No se pudo abrir la nueva pestaña');
+    }
   };
 
   const handleCreate = () => {
@@ -442,6 +476,7 @@ const CreateForm = () => {
             <button className={button}>Cancelar</button>
           </a>
         </Link>
+        <button className={button} onClick={handlePreview}>Vista previa</button>
         <button className={button} onClick={handleCreate}>
           Crear Formulario
         </button>
