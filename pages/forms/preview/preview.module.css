@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+.container{
+  /* background-color: #ece7f2; */
+  background-image: url("/images/forms/fondoForm.webp");
+  background-size: cover;
+  background-position: center top; /* Centra la imagen */
+  background-attachment: fixed; /* Esta propiedad mantiene el fondo fijo */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.logo{
+  width: 20rem;
+  margin:40px 0;
+  max-width: 100%; /* Ajustar según sea necesario */
+  height: auto;
+}
+
+.formContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  width: 95%;
+  max-width: 800px;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  border-top-left-radius: 20px; /* Ajusta según el radio de redondeo deseado */
+  border-top-right-radius: 20px; /* Ajusta según el radio de redondeo deseado */  
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  max-width: 95%;
+  margin: 0 auto;
+  font-size: 38px;   
+}
+
+.paragraph{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  color: #3f1168;
+  width: 95%;
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.lineaAtravesada {
+  width: 100%;
+  height: 1px;
+  background-color: #000; /* Cambia este color según tus preferencias */
+  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+}
+
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.names{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.name, .last_name {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.errorMessageNombre, .errorMessageApellido{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 310px;
+  padding-left: 15px;
+}
+.mail{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.errorMessageMail{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 300px;
+  padding-left: 15px;
+}
+.phone{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.errorMessageWA{
+  color: red;
+  position: absolute;
+  top:55px;
+  width: 300px;
+  padding-left: 15px;
+}
+
+.image{
+  margin-top: 60px;
+}
+
+.options{
+  margin: 60px 0 30px 0;
+  position: relative;
+}
+
+.optionContainer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.errorOption{
+  color: red;
+  position: absolute;
+  width: 350px;
+  padding-left: 40px;
+  top:100%;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.submitButton {
+  font-family: "Montserrat";
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;    
+  width: 305px;
+  height: 45px;
+}
+
+.submitButton:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
+@media screen and (max-width: 839px) {
+  .logo{
+    max-width: 100%;
+  }
+
+  .formContainer{
+      padding: 30px 10px 10px 10px;
+      max-width: 100%;  
+  }
+
+  .title{
+      max-width: 100%;
+      font-size: 30px;
+  }
+
+  .paragraph{
+      width: 100%;
+      font-size: 15px;
+      line-height: 20px;
+      margin: 0;
+  }
+}   
+
+@media screen and (max-width: 670px) {
+  .name, .last_name {
+    max-width: 48%;
+  }
+}
+
+  @media screen and (max-width: 550px) {
+    .errorMessageWA{
+      top:70px;
+      font-size: 13px;
+    }
+  }
+
+
+@media (max-width: 420px) {
+  .name, .last_name {
+    margin-bottom: 20px;
+  }
+
+  .errorMessageNombre, .errorMessageApellido{
+      width: 180px;
+      padding-left: 5px;
+      font-size: 13px;
+  }
+
+  .mail{
+      top:-30px;
+  }
+
+  .errorMessageMail{
+      padding-left: 5px;
+      font-size: 13px;
+  }
+
+  .phone{
+      top:-40px;
+  }
+
+  .image{
+      margin-top: 0;
+  }
+
+  .options{
+      margin-top: 10px;
+  }
+
+  .optionContainer{
+      margin-top: 10px;
+  }
+}
