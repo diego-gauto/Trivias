@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { useMediaQuery } from "react-responsive";
+
 // import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
 // import Link from "next/link";
@@ -18,7 +20,6 @@ import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
-import { useMediaQuery } from "react-responsive";
 
 interface Option {
   isVisible: boolean | null;
@@ -447,7 +448,9 @@ const Formularios = () => {
               <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
             )}
           </div>
-          {form?.img.isVisible && <img className={image} src={form.img.source} alt="iphone" />}
+          <div className={image}>
+            {form?.img.isVisible && <img src={form.img.source} alt="iphone" />}
+          </div>
 
           <div className={options}>
             <div className={optionContainer}>
