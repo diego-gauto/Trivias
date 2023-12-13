@@ -23,6 +23,7 @@ export const AdminsContext = (props: Props) => {
     offset: 0,
     spent: 0,
     level: -1,
+    price: 0,
     method: "todos",
     membership: "todos",
     state: "todos",
