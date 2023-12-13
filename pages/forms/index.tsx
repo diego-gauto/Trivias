@@ -8,7 +8,6 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
-import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
 import Countdown from "../../components/Forms/countdown/countdown";
 import InputApellido from "../../components/Forms/inputApellido/inputApellido";
@@ -130,57 +129,58 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    // const form: Form = {
-    //   name: "Campaña 11 de Diciembre",
-    //   title: "<p><strong>Solicitud</strong> de Beca al 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad! </p>",
-    //   subtitle: "<p><strong>Más de 65 cursos</strong> de uñas, maquillaje y pestañas <strong>incluidos</strong>. Además, recibe acceso a Nails Master Revolution (un curso de uñas en técnica de Tips y Escultural). Aprende en línea, <strong>Desde Cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de $6.397,00 MXN reducido a un costo total de $1.599,00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de 399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. </p>",
-    //   createdAt: "",
-    //   editedAt: "",
-    //   img: { source: "/images/forms/iPhone-14-removebg.png", isVisible: true },
-    //   optionsArray: [
-    //     { isVisible: true, label: "<p>Recuerda que el <strong>costo total del programa es de 1,599 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este curso participan para <strong>ganar un iPhone 15 Pro</strong> NUEVO, remodelación de su salón y miles de pesos más! 😍El primer pago de cuatro, deberás darlo hoy y <strong>MÁXIMO este</strong> SÁBADO 25 de Noviembre. Elige tu plan de Pagos:</p>", options: ["Pagaré en 4 partes de 399 pesos ( un pago a la semana )", "Pagaré en una sola exhibición máximo el día sábado"] },
-    //     { isVisible: true, label: "<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>", options: ["Sí, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"] },
-    //     { isVisible: false, label: "", options: ["", ""] },
-    //   ],
-    //   redirect: {
-    //     type: "thankYouPage",
-    //     link: "",
-    //     textButton: "",
-    //   },
-    // }
-    // setForm(form)
-    // setLoading(false)
+    const form: Form = {
+      name: "Campaña 11 de Diciembre",
+      title: "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
+      subtitle: "<p><strong>Más de 65 cursos</strong> de uñas, maquillaje y pestañas <strong>incluídos</strong>. Además, recibe acceso a cursos de Drill profesional, Dry Manicure Y Nails Master Revolution (un curso de uñas en técnicas de Tips y Escultural). Aprende en línea, <strong>Desde cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de <s>$6.307,00 MXN</s> reducido a un costo total de $1.599,00 MXN (99 USD) que podrás pagar en 4 pagos de $399,00 MXN (25 USD). 💞 <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de $399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳</p>",
+      createdAt: "04-12-2023 14:12:37",
+      editedAt: "12-12-2023 19:42:00",
+      img: { source: "/images/forms/IPHONE-removebg-preview.png", isVisible: true },
+      optionsArray: [
+        { isVisible: true, label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar un iPhone 15 Pro</strong> Nuevo, remodelación de su salón y miles de pesos más! <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Diciembre. Elige tu plan de Pagos:</p>`, options: ["Pagaré en 4 partes de 399 pesos (un pago a la semana)", "Pagaré en una sola exhibición máximo el día sábado"] },
+        { isVisible: true, label: `<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>`, options: ["Si, me comprometo a realizar el programa", "No, gracias. Quiero perder mi lugar"] },
+        { isVisible: false, label: "", options: ["", ""] },
+      ],
+      redirect: {
+        type: "thankYouPage",
+        link: "",
+        textButton: "",
+      },
+    }
+    setForm(form)
+    setLoading(false)
 
-    const fetchData = async () => {
-      try {
+    // const fetchData = async () => {
+    //   try {
 
-        const formIdNumber: number = (Number(formId))
+    //     const formIdNumber: number = (Number(formId))
 
-        const res = await getFormApi(formIdNumber);
+    //     const res = await getFormApi(formIdNumber);
 
-        const formTemp = res[0]
+    //     const formTemp = res[0]
+    //     console.log(formTemp)
 
-        if (formTemp) {
+    //     if (formTemp) {
 
-          // Parsear la cadena JSON en la propiedad "questions"
-          formTemp.img = JSON.parse(formTemp.img);
+    //       // Parsear la cadena JSON en la propiedad "questions"
+    //       formTemp.img = JSON.parse(formTemp.img);
 
-          // Parsear la cadena JSON en la propiedad "result"
-          formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
+    //       // Parsear la cadena JSON en la propiedad "result"
+    //       formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
 
-          formTemp.redirect = JSON.parse(formTemp.redirect);
+    //       formTemp.redirect = JSON.parse(formTemp.redirect);
 
-          setForm(formTemp);
-        }
+    //       setForm(formTemp);
+    //     }
 
-        setLoading(false);
-      } catch (error) {
-        console.error('Error al obtener los datos del formulario:', error);
-      }
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.error('Error al obtener los datos del formulario:', error);
+    //   }
 
-    };
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   useEffect(() => {
@@ -199,7 +199,7 @@ const Formularios = () => {
   };
 
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = event.target.value.toLowerCase();
+    const newEmail = event.target.value.trim().toLowerCase();
     formik.setFieldValue('correo', newEmail);
 
     // Restablecer el mensaje de error si el correo electrónico cambia

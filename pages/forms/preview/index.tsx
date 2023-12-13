@@ -398,8 +398,9 @@ const Formularios = () => {
               <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
             )}
           </div>
-          {form?.img.isVisible && <img className={image} src={form.img.source} alt="iphone" />}
-
+          <div className={image}>
+            {form?.img.isVisible && <img src={form.img.source} alt="iphone" />}
+          </div>
           <div className={options}>
             <div className={optionContainer}>
               <OptionComponent label={form?.optionsArray[0]?.label || ''} options={form?.optionsArray[0]?.options || []} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={!!form?.optionsArray[0]?.isVisible} />
