@@ -168,20 +168,23 @@ const UserCardData = (props: CardData) => {
       );
     }
 
-    return (
-      [<Info>
+    const arrayOfInfoElements = [<Info>
+      Final de suscripción:
+      <Label>
+        {convertToFormalDate(user.final_date)}
+      </Label>
+    </Info>]
+
+    if (user.start_date !== 0) {
+      arrayOfInfoElements.unshift(<Info>
         Inicio de suscripción:
         <Label>
           {convertToFormalDate(user.start_date)}
         </Label>
-      </Info>,
-      <Info>
-        Final de suscripción:
-        <Label>
-          {convertToFormalDate(user.final_date)}
-        </Label>
-      </Info>]
-    );
+      </Info>)
+    }
+
+    return arrayOfInfoElements;
   }
 
   return (

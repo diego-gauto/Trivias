@@ -47,7 +47,7 @@ const ModalRemoveSubscription = ({ show, setShow, user }: Props) => {
 
   const removeMembership = async (id: number) => {
     try {
-      const result = await removeMembershipApi({ user_id: 1 });
+      const result = await removeMembershipApi({ user_id: user.id });
       alert(`Se ha removido la suscripción al usuario '${user.name}'`);
       console.log(result);
     } catch (error) {
