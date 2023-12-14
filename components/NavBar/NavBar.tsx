@@ -409,7 +409,6 @@ const NavBar = () => {
           </NavText>
         </Link>
         {
-          /*
           loggedIn &&
           <UserContain color={color}>
             <Link href={REWARDS_PATH}>
@@ -418,7 +417,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {<div className="bell-contain">
+            {/* {<div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -470,7 +469,7 @@ const NavBar = () => {
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
             </div>
-            }
+            } */}
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {
@@ -484,7 +483,6 @@ const NavBar = () => {
               </UserImage>
             </Link>
           </UserContain>
-          */
         }
         {!loggedIn &&
           <>
