@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+
+import { IoClose } from "react-icons/io5";
+
 import Link from "next/link";
 import router from "next/router";
+
 import { useAuth } from "../../hooks/useAuth";
 import { Container, Text } from "./SideBar.styled";
-import { IoClose } from "react-icons/io5";
 
 const SideBar = ({ show, onHide }: any) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
@@ -16,6 +19,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isCoupons, setIsCoupons] = useState<boolean>();
   const [isUsers, setIsUsers] = useState<boolean>();
   const [isTrivias, setIsTrivias] = useState<boolean>();
+  const [isForms, setIsForms] = useState<boolean>();
   const [isComments, setIsComments] = useState<boolean>();
   const [index, setIndex] = useState(0)
   const [section, setSection] = useState(0)
@@ -84,6 +88,9 @@ const SideBar = ({ show, onHide }: any) => {
       }
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Pause") {
         setIndex(12)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Forms") {
+        setIndex(13)
       }
     }, [])
   } catch (error) {
@@ -209,6 +216,12 @@ const SideBar = ({ show, onHide }: any) => {
               setIndex(11)
               onHide()
             }}>Trivias</li>
+          </Link>}
+          {(isSuperAdmin || isForms) && <Link href="/admin/Forms">
+            <li style={{ color: index == 13 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(13)
+              onHide()
+            }}>Forms</li>
           </Link>}
         </ul>
         <Text>Organization</Text>

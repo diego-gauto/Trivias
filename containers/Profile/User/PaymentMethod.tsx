@@ -89,9 +89,9 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
    * @param user la data del usuario
    * @returns boolean
    */
-  const isSuscribedUser = (user: { level: number }) => {
+  const isSuscribedUser = (level: number) => {
     const suscribedLevels = [1, 4, 7];
-    return suscribedLevels.includes(user.level);
+    return suscribedLevels.includes(level);
   }
 
   /**
@@ -100,10 +100,11 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
    * @returns void
    */
   const detachPayment = async (card: any) => {
-    if (card.default && isSuscribedUser(user) || paymentMethods.length === 1 && isSuscribedUser(user)) {
+    if ((card.default && isSuscribedUser(user.data.level)) || (paymentMethods.length === 1 && isSuscribedUser(user.data.level))) {
       setShow(true);
       return;
     }
+
     setDeleteLoad(!loader);
     let body = {
       payment_method: card.id,
