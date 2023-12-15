@@ -17,6 +17,7 @@ import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
 import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
+import forms from "../../constants/forms";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
 
@@ -147,7 +148,9 @@ const Formularios = () => {
         textButton: "",
       },
     }
-    setForm(form)
+
+    const selectedForm = forms[Number(formId) - 1]
+    setForm(selectedForm)
     setLoading(false)
 
     // const fetchData = async () => {
@@ -181,7 +184,7 @@ const Formularios = () => {
     // };
 
     // fetchData();
-  }, []);
+  }, [formId]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -384,7 +387,7 @@ const Formularios = () => {
       <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" style={responsive500 ? { maxWidth: 320 } : {}} />
       <div className={formContainer}>
         <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
-        <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
+        <h4 className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</h4>
         <div className={lineaAtravesada}></div>
 
         <Countdown />
