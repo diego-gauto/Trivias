@@ -36,8 +36,14 @@ const Users = () => {
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
-  const array_prices = [
-    459, 1599, 3497
+  const price_month = [
+    149, 249, 459
+  ]
+  const price_anual = [
+    1599, 3497
+  ]
+  const price_cuatri = [
+    1599
   ]
   const handleLoginCalendar = () => {
     setLoginCalendar(!loginCalendar);
@@ -56,6 +62,9 @@ const Users = () => {
     }
     if (key === "courses" && data === 0) {
       setShowCourseSelect(false);
+    }
+    if (key === "membership") {
+      filters.price = 0;
     }
     if (key === "membership") {
       if (["todos", "mensual", "anual", "cuatri"].includes(`${data}`)) {
@@ -177,16 +186,33 @@ const Users = () => {
                 </select>
               </DefaultFilterContain>
               {
-                userFilters.membershi
+                userFilters.membership === "mensual"
               }
               <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
                 <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('spent', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
+                <select defaultValue="todos" onChange={(e) => { changeData('price', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
                   <option value={-1}>Todos</option>
                   {
-                    array_prices.map((price: number, index: number) => {
+                    userFilters.membership === "mensual" &&
+                    price_month.map((price: number, index: number) => {
                       return (
-                        <option value={price} key={"precio_" + index}> +{price}</option>
+                        <option value={price} key={"precio_mensual" + index}> +{price}</option>
+                      )
+                    })
+                  }
+                  {
+                    userFilters.membership === "anual" &&
+                    price_anual.map((price: number, index: number) => {
+                      return (
+                        <option value={price} key={"precio_anual" + index}> +{price}</option>
+                      )
+                    })
+                  }
+                  {
+                    userFilters.membership === "cuatri" &&
+                    price_cuatri.map((price: number, index: number) => {
+                      return (
+                        <option value={price} key={"precio_cuatri" + index}> +{price}</option>
                       )
                     })
                   }
