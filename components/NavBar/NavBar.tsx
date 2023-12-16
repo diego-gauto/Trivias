@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useFacebook } from "react-facebook";
 import { useMediaQuery } from "react-responsive";
@@ -67,6 +67,29 @@ const NavBar = () => {
   let today = new Date().getTime() / 1000;
   const closeNotif = 'images/Navbar/CloseIcon.png'
 
+  const modalNotificationsRef = useRef<any>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (event === null) {
+      return;
+    }
+    const { target } = event;
+    const targetElement = target as HTMLElement;
+    if (targetElement.classList.contains('bell-contain') || targetElement.classList.contains('bell')) {
+      return;
+    }
+    const parent = (target as HTMLElement).parentElement;
+    if (parent && parent.classList.contains('bell')) {
+      return;
+    }
+
+    if (modalNotificationsRef.current && !modalNotificationsRef.current.contains(event.target)) {
+      if (!openNotification) {
+        setOpenNotification(openNotification);
+      }
+    }
+  }
+
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
     setNewHamburgerMenuIsOpen(false);
@@ -76,9 +99,18 @@ const NavBar = () => {
     setNewHamburgerMenuIsOpen(!newHamburgerMenuIsOpen);
     setIngresarOpetionsMenuIsOpen(false);
   }
+
   const openNotifications = () => {
     setOpenNotification(!openNotification);
   }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   function closeHamburgerMenu() {
     setHamburger(false)
   }
@@ -385,7 +417,7 @@ const NavBar = () => {
                 <HoverText className="hover-text">Recompensas</HoverText>
               </div>
             </Link>
-            {/* <div className="bell-contain">
+            {/* {<div className="bell-contain">
               <SlBell className="bell" onClick={openNotifications} />
               {
                 unReadNotification > 0 &&
@@ -393,7 +425,15 @@ const NavBar = () => {
                   {unReadNotification}
                 </p>
               }
-              <NotificationContainer not={openNotification}>
+              <NotificationContainer
+                ref={modalNotificationsRef}
+                style={
+                  {
+                    height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
+                  }
+                }
+                not={openNotification}
+              >
                 <div className='title-container'>
                   <h1 className='title'>
                     Notificaciones
@@ -401,19 +441,23 @@ const NavBar = () => {
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 &&
-                    notifications.map((not: any, index: number) => {
-                      return (
-                        <Notifications
-                          notification={not}
-                          user={userData}
-                          openNotifications={openNotifications}
-                          unReadNotification={unReadNotification}
-                          setUnReadNotification={setUnReadNotification}
-                          key={"Notifications_" + index}
-                        />
-                      )
-                    })
+                    notifications.length === 0 ?
+                      <div style={{ paddingLeft: '20px' }}>
+                        <p>Actualmente no hay notificaciones</p>
+                      </div>
+                      :
+                      notifications.map((not: any, index: number) => {
+                        return (
+                          <Notifications
+                            notification={not}
+                            user={userData}
+                            openNotifications={openNotifications}
+                            unReadNotification={unReadNotification}
+                            setUnReadNotification={setUnReadNotification}
+                            key={"Notifications_" + index}
+                          />
+                        )
+                      })
                   }
                 </div>
                 {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
@@ -424,7 +468,8 @@ const NavBar = () => {
                 !openNotification &&
                 <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
               }
-            </div> */}
+            </div>
+            } */}
             <Link href={PROFILE_PATH}>
               < UserImage>
                 {

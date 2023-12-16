@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CouponContain = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Container = styled.div`
 `;
 export const Title = styled.div`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const InputContain = styled.div`
@@ -37,11 +37,11 @@ export const InputContain = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   border: 1px solid #6717cd;
@@ -57,7 +57,7 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #6717cd;
   color: white;
   padding-block: 10px;
@@ -74,6 +74,7 @@ export const SelectContain = styled.div`
   display: flex;
   margin-top: 5px;
   gap: 40px;
+  width: 100%;
 `;
 export const RadioContain = styled.div`
   display: flex;
@@ -82,12 +83,12 @@ export const RadioContain = styled.div`
   gap: 5px;
   div {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 `;
 export const TagLabel = styled.label`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   display: block;
   position: relative;
@@ -130,7 +131,7 @@ export const TagLabel = styled.label`
       border-radius: 50%;
       background: transparent;
       border: 2px solid white;
-      content: "";
+      content: '';
       position: absolute;
       display: none;
     }
@@ -146,7 +147,7 @@ export const TableContain = styled.div`
 `;
 export const TableTitle = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const TitleContain = styled.div`
@@ -155,7 +156,7 @@ export const TitleContain = styled.div`
 `;
 export const ActiveLbl = styled.label`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
 `;
@@ -176,7 +177,7 @@ export const ActiveC = styled.div`
 `;
 export const UnActiveLbl = styled.label`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   opactiy: 0.8;
   margin: 0;
 `;

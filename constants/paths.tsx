@@ -23,6 +23,6 @@ export const ANUAL_FORM = 'https://forms.gle/kjGgEEMEvYzmq7118';
 export const NAILS_FORM = 'https://forms.gle/LN27h3QKtYq1v29s9';
 // FACEBOOK FORM
 export const Landing_Facebook = "https://bit.ly/inscripcionesgonvar";
-export const NAilS_REVOLUTION_FORM = "https://form.jotform.com/232625596981065";
-export const NAilS_REVOLUTION_FORM_GOOGLE = "https://form.jotform.com/232925324475863";
-export const NAilS_REVOLUTION_FORM_TT = "https://form.jotform.com/232904495289872";
+export const NAilS_REVOLUTION_FORM = "https://www.gonvar.io/forms?formId=1";
+export const NAilS_REVOLUTION_FORM_GOOGLE = "https://www.gonvar.io/forms?formId=2";
+export const NAilS_REVOLUTION_FORM_TT = "https://www.gonvar.io/forms?formId=3";
