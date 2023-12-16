@@ -79,8 +79,8 @@ const forms: Form[] = [
   },
   {
     name: "Venta nocturna 15 Diciembre",
-    title: "<p>¡Gran Venta Nocturna Gonvar! 🎁 🎄<br>Hasta el 40% de descuento</p>",
-    subtitle: "<p><strong>Válido Sólo desde Hoy y máximo este domingo 17 de diciembre</strong> los mejores precios en <strong>producto de uñas</strong> nunca antes vistos. 🔥<br>🎄¡Navidad está cerca! Y Gonvar te quiere consentir.<br><br>Recuerda que al ser un Kit LIMITADO y con descuento tienes máximo hasta el Domingo para poder realizar tu pago. Este es un regalo que les damos a todas ustedes con todo el cariño para que puedan darle el mejor uso a todos los productos y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu kit y darte indicaciones de pago y envíos.<br><br><strong>Completa el formulario</strong> para apartar uno de nuestros 3 kits con diferentes productos y precios.</p>",
+    title: "<p>¡Gran Venta Nocturna Gonvar! 🎁🎄<br>Hasta el 40% de descuento</p>",
+    subtitle: "<p><strong>Válido Sólo desde Hoy y máximo este domingo 17 de diciembre</strong> los mejores precios en <strong>producto de uñas</strong> nunca antes vistos. 🔥<br><br>🎄¡Navidad está cerca! Y Gonvar te quiere consentir.<br><br>Recuerda que al ser un Kit LIMITADO y con descuento tienes máximo hasta el Domingo para poder realizar tu pago. Este es un regalo que les damos a todas ustedes con todo el cariño para que puedan darle el mejor uso a todos los productos y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu kit y darte indicaciones de pago y envíos.<br><br><strong>Completa el formulario</strong> para apartar uno de nuestros 3 kits con diferentes productos y precios.</p>",
     createdAt: "15-12-2023 16:28:23",
     editedAt: "15-12-2023 16:36:42",
     img: { source: "/images/forms/mistery box gonvar.png", isVisible: true },
