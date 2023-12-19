@@ -9,7 +9,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   top: 60px;
   right: -515px;
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 20px 5px;
   border-radius: 8px;
   width: 400px;
   z-indez: 10;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useFacebook } from "react-facebook";
 import { useMediaQuery } from "react-responsive";
@@ -67,6 +67,29 @@ const NavBar = () => {
   let today = new Date().getTime() / 1000;
   const closeNotif = 'images/Navbar/CloseIcon.png'
 
+  const modalNotificationsRef = useRef<any>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (event === null) {
+      return;
+    }
+    const { target } = event;
+    const targetElement = target as HTMLElement;
+    if (targetElement.classList.contains('bell-contain') || targetElement.classList.contains('bell')) {
+      return;
+    }
+    const parent = (target as HTMLElement).parentElement;
+    if (parent && parent.classList.contains('bell')) {
+      return;
+    }
+
+    if (modalNotificationsRef.current && !modalNotificationsRef.current.contains(event.target)) {
+      if (!openNotification) {
+        setOpenNotification(openNotification);
+      }
+    }
+  }
+
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
     setNewHamburgerMenuIsOpen(false);
@@ -82,6 +105,14 @@ const NavBar = () => {
   function closeHamburgerMenu() {
     setHamburger(false)
   }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   // COLOR NAVBAR
   const [color, setColor] = useState<any>(0)
   const router = useRouter();
@@ -359,7 +390,15 @@ const NavBar = () => {
                   {unReadNotification}
                 </p>
               }
-              <NotificationContainer not={openNotification}>
+              <NotificationContainer
+                ref={modalNotificationsRef}
+                style={
+                  {
+                    height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
+                  }
+                }
+                not={openNotification}
+              >
                 <div className='title-container'>
                   <h1 className='title'>
                     Notificaciones
@@ -367,7 +406,11 @@ const NavBar = () => {
                 </div>
                 <div className="all-notifications">
                   {
-                    notifications.length > 0 ?
+                    notifications.length === 0 ?
+                      <div style={{ paddingLeft: '20px' }}>
+                        <p>Actualmente no hay notificaciones</p>
+                      </div>
+                      :
                       notifications.map((not: any, index: number) => {
                         return (
                           <Notifications
@@ -379,8 +422,7 @@ const NavBar = () => {
                             key={"Notifications_" + index}
                           />
                         )
-                      }) :
-                      <div className="px-4 empty-notifications">Sin Notificaciones!</div>
+                      })
                   }
                 </div>
                 {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
