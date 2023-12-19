@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const ModalContain = styled.div`
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+  transition: top 0.5s ease-in-out;
+`;
+
 export const GeneralContain = styled.div`
   display: flex;
   width: 100%;
@@ -20,6 +30,18 @@ export const GeneralContain = styled.div`
 
   @media screen and (min-width: 1200px) {
     padding-inline: 40px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.25);
+    transition: top 0.25s ease-in-out;
   }
 `;
 export const TitleBox = styled.div`

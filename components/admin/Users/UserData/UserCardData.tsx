@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
+import ModalRemoveSubscription from './Modal/ModalRemoveSubscription';
+import ModalAddSubscriptionPlan from './Modal/ModalAddSubscriptionPlan';
 import {
   CloseIcon,
   Columns,
@@ -34,13 +36,36 @@ interface CardData {
   openUserCardData: any;
 };
 
+export interface IUserWithMembership {
+  id: number
+  level: number
+  name: string
+  country: string
+  come_from: string
+  last_name: string
+  last_sign_in: string
+  photo: string
+  final_date: number
+  start_date: number
+  email: string
+  score: number
+  created_at: string
+  phone_number: string
+  plan_name: string
+  spent: number
+  method: string
+  user_courses: any[]
+}
+
 const UserCardData = (props: CardData) => {
   const { currentUser, setIsVisible, courses, openUserCardData, isVisible } = props;
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
+  const [showAddSubscriptionPlan, setShowAddSubscriptionPlan] = useState(false);
+  const [showRemoveSuscription, setShowRemoveSuscription] = useState(false);
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState<boolean>(false);
-  const [user, setUser] = useState(currentUser);
+  const [user, setUser] = useState<IUserWithMembership>(currentUser);
   const GonvarImg = "/images/purchase/logo.png";
   let today = new Date().getTime() / 1000;
   const handleCourse = () => {
@@ -88,6 +113,80 @@ const UserCardData = (props: CardData) => {
       </AdminLoader>
     )
   }
+
+  const haveASubscription = (level: number, method: string) => {
+    return [1, 4, 5, 6, 7, 8].includes(level) || 'admin' === method;
+  }
+
+  const getMembershipTextByLevel = (level: number) => {
+    let text = '';
+    if (level === 1 || level === 6) {
+      text = 'Mensual';
+    } else if (level === 7 || level === 8) {
+      text = 'Cuatrimestral';
+    } else if (level === 4 || level === 5) {
+      text = 'Anual';
+    }
+
+    if (text.length !== 0) {
+      return text;
+    }
+
+    return `Caso especial, nivel ${level}`;
+  }
+
+  const convertToFormalDate = (miliseconds: number) => {
+    const date = new Date(miliseconds * 1000);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    const monthsOfYear = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+
+    return `${day} de ${monthsOfYear[month]} de ${year}`;
+  }
+
+  console.log(user);
+
+  const getSubscriptionJSXElementByUserValues = (): JSX.Element[] => {
+    if (!(haveASubscription(user.level, user.method) || user.final_date >= today)) {
+      return (
+        []
+      );
+    }
+
+    const arrayOfInfoElements = [<Info>
+      Final de suscripción:
+      <Label>
+        {convertToFormalDate(user.final_date)}
+      </Label>
+    </Info>]
+
+    if (user.start_date !== 0) {
+      arrayOfInfoElements.unshift(<Info>
+        Inicio de suscripción:
+        <Label>
+          {convertToFormalDate(user.start_date)}
+        </Label>
+      </Info>)
+    }
+
+    return arrayOfInfoElements;
+  }
+
   return (
     <Modal show={isVisible} onHide={() => setIsVisible(false)} size="lg">
       <UserContain>
@@ -115,17 +214,15 @@ const UserCardData = (props: CardData) => {
               </Label>
             </Info>
             <Info>
-              Suscripción Actual
-              <Label>
-                {
-                  (user.level === 1 || user.final_date >= today) ? "Gonvar Plus" : "Sin suscripción"
-                }
-              </Label>
-            </Info>
-            <Info>
               Correo electrónico
               <Label style={{ overflowWrap: "break-word" }}>
                 {user.email}
+              </Label>
+            </Info>
+            <Info>
+              Teléfono
+              <Label>
+                {user.phone_number ? user.phone_number : "N/A"}
               </Label>
             </Info>
             <Info>
@@ -135,67 +232,38 @@ const UserCardData = (props: CardData) => {
               </Label>
             </Info>
             <Info>
-              Teléfono
+              Suscripción Actual
               <Label>
-                {user.phone_number ? user.phone_number : "N/A"}
+                {
+                  (haveASubscription(user.level, user.method) || user.final_date >= today) ? getMembershipTextByLevel(user.level) : "Sin suscripción"
+                }
               </Label>
             </Info>
-          </UserInfo>
-          <Courses>
-            <TitleBox>
-              Cursos Activos
-            </TitleBox>
             {
-              (user.level === 1 || user.final_date >= today) &&
+              getSubscriptionJSXElementByUserValues()
+            }
+            {
+              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
               <img src={GonvarImg} className="img-gonvar" />
             }
+          </UserInfo>
+          {/* Para agrupar los botones */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+            <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddDays(true); }}>Editar días de suscripción</TransparentButton>
             {
-              user.user_courses.length > 0 ?
-                <CourseContain>
-                  {
-                    user.user_courses.map((x: any, index: number) => {
-                      return (
-                        <div key={"paid-courses," + index} className="contain-course">
-                          {
-                            x.final_date > today &&
-                            <>
-                              <p className="date"> {secondsToDate(x.final_date)}</p>
-                              <img
-                                src={x.image}
-                              />
-                            </>
-                          }
-                        </div>
-                      )
-                    })
-                  }
-                </CourseContain> :
-                <CourseContain>
-                  Sin cursos...
-                </CourseContain>
+              !((haveASubscription(user.level, user.method) || user.final_date >= today)) &&
+              <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddSubscriptionPlan(true); }}>Activar plan de suscripción</TransparentButton>
             }
-            {/* <TransparentButton onClick={() => { setShow(true); }}>Agregar Curso</TransparentButton> */}
-          </Courses>
-          {/* <PayContain>
-          <TitleBox>
-            Métodos de pago asociados
-          </TitleBox>
-          {paymentMethod.length > 0 ? <LastContainer>
-            {paymentMethod.map((x) => {
-              return (
-                <CardIconResp brand={x.brand} />
-              )
-            })}
-          </LastContainer> :
-            <LastContainer>
-              Sin métodos de pago...
-            </LastContainer>}
-        </PayContain> */}
-          <TransparentButton onClick={() => { setShowAddDays(true); }}>Editar días de suscripción</TransparentButton>
-          {/* <TransparentButton onClick={() => { deleteUser() }}>Eliminar usuario</TransparentButton> */}
+            {
+              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
+              <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowRemoveSuscription(true); }}>Eliminar suscripción</TransparentButton>
+            }
+          </div>
         </>
         <Modal1 show={show} setShow={setShow} user={user} courses={courses} handleCourse={handleCourse} openUserCardData={openUserCardData} />
         <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
+        <ModalAddSubscriptionPlan show={showAddSubscriptionPlan} setShow={setShowAddSubscriptionPlan} user={user} />
+        <ModalRemoveSubscription show={showRemoveSuscription} setShow={setShowRemoveSuscription} user={user} />
         <ErrorModal show={error} setShow={setError} error={"Lo sentimos, esta acción solo se puede realizar manualmente desde Firebase, gracias!"}></ErrorModal>
       </UserContain>
 

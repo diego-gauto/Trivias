@@ -9,6 +9,7 @@ import SideBar from "./admin/SideBar";
 import Footer from "./Footer/Footer";
 import NavBar from "./NavBar/NavBar";
 import { useAdmin } from "../hooks/AdminContext";
+
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const responsive1300 = useMediaQuery({ query: "(max-width: 1300px)" });
@@ -28,10 +29,12 @@ const Layout = ({ children }: any) => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
 
-
   return (
-    <Body onClick={() => { setOpenNotification(false); }}>
-      <NavBar />
+    <Body >
+      {
+        router.pathname.slice(1, 6) !== "forms" && <NavBar />
+      }
+
       <ChildrenContain style={{
         display: router.pathname.slice(1, 6) === "admin" ? "flex" : "initial",
         flexDirection: (path === "admin" && responsive1300) ? "column" : "row"

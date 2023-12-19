@@ -1,0 +1,68 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  width: 300px;
+}
+
+.inputs label {
+  width: 300px;
+  height: 16px;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+
+  text-align: start;
+  letter-spacing: 0.5px;
+
+  color: #3f1168;
+
+  margin: 0 0 5px 5px;
+}
+
+.inputs input {
+  max-width: 330px;
+  height: 32px;
+
+  background: #ece7f2;
+  border-radius: 40px;
+  border: none;
+
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+
+  text-align: start;
+  letter-spacing: 0.5px;
+
+  color: #3f1168;
+
+  padding-left: 15px;
+}
+
+.inputs input::placeholder {
+  font-weight: 500;
+}
+
+.inputs input:disabled::placeholder {
+  font-weight: 600; /* Estilo personalizado para el placeholder cuando está deshabilitado */
+}
+
+@media screen and (max-width: 600px) {
+
+  .inputs{
+    width: 100%;
+  }
+
+  .inputs input {
+
+  max-width: 600px;
+  
+  }
+
+}

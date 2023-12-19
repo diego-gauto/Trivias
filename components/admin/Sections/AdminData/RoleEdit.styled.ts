@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalContain = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ export const OptionsContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const SelectedRoleContain = styled.div`
@@ -68,12 +68,13 @@ export const SelectedRoleContain = styled.div`
   flex-direction: column;
   font-size: 15px;
   padding: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 5px;
   border-radius: 15px;
   gap: 10px;
   border: 1px solid #6717cd;
   z-index: 5;
+  width: 100%;
   li {
     list-style-type: none;
   }
@@ -86,7 +87,7 @@ export const SelectedRoleContain = styled.div`
     .tasks {
       padding-left: 10px;
       display: flex;
-      justify-content: space-between;
+      gap: 10px;
     }
   }
   .open-courses {

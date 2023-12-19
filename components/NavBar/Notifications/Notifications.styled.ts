@@ -1,28 +1,24 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const NotificationContainer = styled.div<{ not: boolean }>`
   position: absolute;
   cursor: auto;
   transition: 0.4s ease-in-out;
   background-color: #dad3e5;
-  height: 0;
   opacity: 0;
   top: 60px;
-  right: -545px;
+  right: -515px;
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
-  padding-top: 20px;
+  padding: 20px;
   border-radius: 8px;
   width: 400px;
   z-indez: 10;
   gap: 20px;
   display: flex;
   flex-direction: column;
-  max-height: 0;
-  ${(props) =>
+  ${props =>
     props.not &&
     css`
-      max-height: 350px;
-      height: 255px;
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
@@ -96,7 +92,7 @@ export const NotificationData = styled.div<{
         margin: auto;
       }
     }
-    ${(props) =>
+    ${props =>
       (props.status === 1 || props.newStatus) &&
       css`
         background-color: white;
