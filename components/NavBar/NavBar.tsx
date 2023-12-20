@@ -536,7 +536,7 @@ const NavBar = () => {
               display: "flex",
               width: "auto",
               height: "100%",
-              marginLeft: !responsive400 ? "35px" : "20px"
+              marginLeft: !responsive400 ? "35px" : "0px"
             }}>
               <Link href="/">
                 <LogoS_2 />
