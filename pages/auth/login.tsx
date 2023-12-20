@@ -96,7 +96,7 @@ const Login = () => {
     plan_name: "",
     method: "",
     role: ""
-  });
+  } as any);
 
   const togglePassword_1 = () => {
     setPasswordShown_1(!passwordShown_1);
