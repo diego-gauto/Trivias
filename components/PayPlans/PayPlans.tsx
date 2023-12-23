@@ -13,7 +13,7 @@ const tarjetas = "/images/pay_plans/pm.svg"
 const oxxo = "/images/pay_plans/oxxo.png"
 
 const PayPlans = () => {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [user, setUser] = useState<any>(null);
   const [selected, setSelected] = useState(3)
 
   var userData: any = useAuth();
