@@ -78,7 +78,7 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
         })
         setCourseGonvarPlus(data.gonvar_courses);
         let nails_revolution = data.gonvar_courses.filter((val: any) => val.id === 57);
-        nails_revolution[0].totalDuration = hms(data.nails_master.totalDuration);
+        // nails_revolution[0].totalDuration = hms(data.nails_master.totalDuration);
         setCourseNailsData(nails_revolution[0]);
         // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
         // setCourseSEPData(data.alineacion_cert);
