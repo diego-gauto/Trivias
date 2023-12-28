@@ -117,7 +117,6 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     setReward({ ...data });
 
   }, [data])
-  console.log(reward);
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
@@ -166,7 +165,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
         </InputContain>
         <InputContain>
           <Label>Publicado</Label>
-          <select onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
+          <select value={reward.published} onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
             <option value="publicado">Publicado</option>
             <option value="no-publicado">No Publicado</option>
           </select>
