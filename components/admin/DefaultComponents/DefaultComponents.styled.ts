@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const DefaultContainer = styled.div`
   display: flex;
@@ -90,7 +90,7 @@ export const DefaultColumn = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${(props) =>
+  ${props =>
     props.gap &&
     css`
       gap: ${props.gap}px;
@@ -99,7 +99,7 @@ export const DefaultColumn = styled.div<{ gap?: number }>`
 export const DefaultRow = styled.div<{ gap?: number }>`
   display: flex;
   justify-content: space-between;
-  ${(props) =>
+  ${props =>
     props.gap &&
     css`
       gap: ${props.gap}px;
@@ -159,7 +159,7 @@ export const AdminTable = styled.table`
   overflow-x: auto;
   td {
     font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
     padding-left: 10px;
     padding-block: 15px;
     text-align: left;
@@ -177,8 +177,8 @@ export const AdminTable = styled.table`
     text-align: left;
     background-color: #6717cd;
     color: white;
-    font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
   }
   tr {
@@ -202,13 +202,13 @@ export const AdminTable = styled.table`
     }
     th,
     td {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
   @media (max-width: 450px) {
     th,
     td {
-      font-size: 10px;
+      font-size: 16px;
     }
   }
 `;
