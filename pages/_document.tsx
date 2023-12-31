@@ -17,13 +17,12 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
           <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="csrf_token" content="" />
           <meta property="type" content="website" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta property="fb:app_id" content="804211551373021" />
-          <title>Academia de Belleza Online | Gonvar</title>
           <meta property="title" content={"Academia de Belleza Online | Gonvar"} />
           <meta property="og:title" content={"Academia de Belleza Online | Gonvar"} />
           <meta name="description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />

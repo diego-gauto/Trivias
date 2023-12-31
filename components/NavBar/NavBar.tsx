@@ -21,8 +21,8 @@ import {
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
-import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { retrieveConektaCustomerInfo, updateMembership } from "../api/profile";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -49,8 +49,6 @@ import {
 import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
-import { getRewardsApi } from "../api/rewards";
-import { getCourseApi } from "../api/lessons";
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -64,8 +62,6 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<any>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-  let today = new Date().getTime() / 1000;
-  const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const modalNotificationsRef = useRef<any>(null);
 
@@ -119,13 +115,13 @@ const NavBar = () => {
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
 
-  const userNotifications = (userId: any) => {
+  const userNotifications = async (userId: any) => {
     let data = {
       userId: userId,
       conekta_id: userDataAuth.user.conekta_id
     }
-    // retrieveConektaCustomerInfo(data)
-    getNotifications(data).then((res) => {
+    try {
+      const res = await getNotifications(data);
       let tempCounter = 0;
       res.forEach((not: any) => {
         if (!not.status) {
@@ -133,34 +129,13 @@ const NavBar = () => {
         }
       })
 
-      // let courses = userDataAuth.user.user_history;
-      // courses.forEach((element: any) => {
-      //   getCourseApi(element.course_id).then((response) => {
-      //     let count = 0
-      //     response.lessons.forEach((lesson: any) => {
-      //       if (lesson.users.includes(userDataAuth.user.user_id)) {
-      //         count++
-      //       }
-      //     });
-      //     if (count !== response.lessons.length) {
-      //       let notification = {
-      //         userId: userDataAuth.user.user_id,
-      //         type: "7",
-      //         notificationId: '',
-      //         courseId: element.course_id,
-      //         season: element.season_id,
-      //         lesson: element.lesson_id,
-      //         title: response.title,
-      //       }
-      //       if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
-      //         createNotification(notification);
-      //       }
-      //     }
-      //   })
-      // });
       setUnReadNotification(tempCounter);
       setNotifications(res);
-    })
+    } catch (error) {
+      if (error instanceof Error) {
+        console.table(error);
+      }
+    }
   }
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 900) {
@@ -172,8 +147,6 @@ const NavBar = () => {
   }
   useEffect(() => {
     window.addEventListener('scroll', ChangeNav);
-    // localStorage.clear();
-    // logoutFunc();
   },
     [pathname],
   );
@@ -594,8 +567,47 @@ const NavBar = () => {
                         <div className="empty-notifications">Sin Notificaciones!</div>
                     }
                   </div>
-                </NotificationContainer> */}
-
+                </NotificationContainer> */
+                }
+                <NotificationContainer
+                  ref={modalNotificationsRef}
+                  style={
+                    {
+                      height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
+                    }
+                  }
+                  not={openNotification}
+                >
+                  <div className='title-container'>
+                    <h1 className='title'>
+                      Notificaciones
+                    </h1>
+                  </div>
+                  <div className="all-notifications">
+                    {
+                      notifications.length === 0 ?
+                        <div style={{ paddingLeft: '20px' }}>
+                          <p>Actualmente no hay notificaciones</p>
+                        </div>
+                        :
+                        notifications.map((not: any, index: number) => {
+                          return (
+                            <Notifications
+                              notification={not}
+                              user={userData}
+                              openNotifications={openNotifications}
+                              unReadNotification={unReadNotification}
+                              setUnReadNotification={setUnReadNotification}
+                              key={"Notifications_" + index}
+                            />
+                          )
+                        })
+                    }
+                  </div>
+                  {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
+                    Marcar todas como leído
+                  </p>}
+                </NotificationContainer>
                 {
                   !openNotification &&
                   <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
