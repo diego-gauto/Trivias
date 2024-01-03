@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const HWContainer = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const TitleContain = styled.div`
   justify-content: space-between;
   padding: 20px;
   p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: 600;
     margin: 0;
@@ -78,8 +78,8 @@ export const Table = styled.table`
   display: block;
   overflow-x: scroll;
   td {
-    font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
     padding-left: 10px;
     padding-block: 15px;
     text-align: left;
@@ -90,8 +90,8 @@ export const Table = styled.table`
     text-align: left;
     background-color: #6717cd;
     color: white;
-    font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
   }
   tr {
@@ -120,18 +120,18 @@ export const Button = styled.div<{ status: any; approved: any }>`
   padding: 10px;
   color: white;
   border-radius: 100px;
-  ${(props) =>
+  ${props =>
     props.status === 0 &&
     css`
       background: #9534eb;
     `}
-  ${(props) =>
+  ${props =>
     props.status === 1 &&
     props.approved === 1 &&
     css`
       background: #33c600;
     `}
-      ${(props) =>
+      ${props =>
     props.status === 1 &&
     props.approved === 0 &&
     css`

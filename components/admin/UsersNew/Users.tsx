@@ -13,7 +13,7 @@ import { UserShow } from '../Users/UsersList.styled';
 import { IAdminUsers } from '../../../interfaces/IAdmin';
 import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLessonFromUserApi, usersForExcelApi } from '../../api/admin';
+import { usersForExcelApi } from '../../api/admin';
 import UserCardData from '../Users/UserData/UserCardData';
 import { BsFileEarmarkExcelFill } from 'react-icons/bs';
 

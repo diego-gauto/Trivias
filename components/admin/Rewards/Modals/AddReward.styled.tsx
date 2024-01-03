@@ -33,6 +33,12 @@ export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
   font-family: "Montserrat", sans-serif;
+  position: relative;
+  &:hover{
+    div{
+      opacity: 1;
+    }
+  }
 `;
 export const Input = styled.input`
   font-size: 14px;

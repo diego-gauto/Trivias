@@ -11,7 +11,7 @@ import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
 import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
 import RewardSlider from "./Sliders/RewardSlider";
 import { useRouter } from "next/router";
-import { getAllRewardDataApi, getClaimedReward, getRewardsApi } from "../../../components/api/rewards";
+import { getAllRewardDataApi, getPublishedRewardsApi } from "../../../components/api/rewards";
 import { getUserApi } from "../../../components/api/users";
 
 const Rewards = () => {
@@ -94,14 +94,13 @@ const Rewards = () => {
     setMonthProgress(getMonth);
     setTimeLevel(Math.floor(getMonth))
     let tempTimeLevel: any = Math.floor(getMonth);
-    await getRewardsApi().then(async (res) => {
+    await getPublishedRewardsApi().then(async (res) => {
       await Promise.all(res.map((reward: any) => {
         tempRewards.push(reward);
       }))
       setRewards(res);
     })
     await getAllRewardDataApi(user.id).then((res) => {
-      console.log(res);
       completedCertificates = res.certificates;
       nextCourseCertificate = res.nextCertificates;
       requests = res.requests;

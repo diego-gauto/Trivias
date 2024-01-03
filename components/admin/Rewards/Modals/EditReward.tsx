@@ -21,6 +21,8 @@ import {
   TitleContain,
 } from "./AddReward.styled";
 import { IUserInfoResult } from "../../../../interfaces/IUser";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { Instructions } from "../functions";
 
 const EditReward = ({ show, setShow, handleEvent, data }: any) => {
   const handleClose = () => setShow(false);
@@ -117,7 +119,6 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     setReward({ ...data });
 
   }, [data])
-  console.log(reward);
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
@@ -166,7 +167,7 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
         </InputContain>
         <InputContain>
           <Label>Publicado</Label>
-          <select onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
+          <select value={reward.published} onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
             <option value="publicado">Publicado</option>
             <option value="no-publicado">No Publicado</option>
           </select>
@@ -185,7 +186,9 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
         {
           reward.type == "months" &&
           <InputContain>
-            <Label>Meses</Label>
+            <Label>Meses <IoInformationCircleOutline />
+              <Instructions />
+            </Label>
             <Input placeholder="7"
               defaultValue={data.month}
               style={errors.month ? { border: "1px solid red" } : {}}

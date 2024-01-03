@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export const getNotifications = async (user: any) => {
   return axios
@@ -44,4 +44,17 @@ export const updateAllNotificationStatusApi = async (user: any) => {
       console.log(error);
       return error
     });
+};
+
+interface AdminMasiveLoterryRow {
+  name: string,
+  last_name: string,
+  email: string,
+  phone_number: string,
+  ticket_value: number,
+}
+
+export const getAdminMassiveLotteryApi = async () => {
+  return axios
+    .post<{ data: AdminMasiveLoterryRow[], user_count: number }>("https://gonvar.inowu.dev/" + "notifications/adminMassiveLottery");
 };

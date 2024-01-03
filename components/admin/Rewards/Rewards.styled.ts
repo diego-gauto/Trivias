@@ -22,6 +22,9 @@ export const RewardContain = styled.div`
     background: #6717cd;
     font-weight: 600;
     color: #fff;
+    &:hover {
+      opacity: 0.7;
+    }
   }
   .rewards {
     display: grid;
@@ -117,5 +120,27 @@ export const Reward = styled.div<{ type: any }>`
     padding-inline: 10px;
     font-weight: 600;
     text-align: center;
+  }
+`;
+
+export const InstructionsComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  // opacity: 0;
+  transition: 0.2s ease all;
+  position: absolute;
+  background-color: #fff;
+  bottom: 20px;
+  pointer-events: none;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.25);
+  padding: 15px;
+  border-radius: 20px;
+  opacity: 0;
+  p {
+    margin: 0;
+    font-size: 12px;
+  }
+  li {
+    font-size: 10px;
   }
 `;

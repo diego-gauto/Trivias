@@ -4,6 +4,8 @@ import { addReward, updRewardImage } from "../../../../store/actions/RewardActio
 import { createRewardApi, updateRewardApi } from "../../../api/rewards";
 import { getUserApi } from "../../../api/users";
 import { CloseIcon } from "../../Category/Category.styled";
+import { IoInformationCircleOutline } from "react-icons/io5";
+
 
 import {
   Button,
@@ -19,6 +21,7 @@ import {
   Title,
   TitleContain,
 } from "./AddReward.styled";
+import { Instructions } from "../functions";
 
 const AddReward = ({ show, setShow, handleEvent }: any) => {
   const handleClose = () => setShow(false);
@@ -171,7 +174,9 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
         {
           reward.type == "months" &&
           <InputContain>
-            <Label>Meses</Label>
+            <Label>Meses <IoInformationCircleOutline />
+              <Instructions />
+            </Label>
             <Input placeholder="7"
               style={errors.month ? { border: "1px solid red" } : {}}
               onChange={(e: any) => {
