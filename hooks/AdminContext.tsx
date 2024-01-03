@@ -15,17 +15,16 @@ const AdminContext = createContext<any>(null);
 export const useAdmin = () => {
   return useContext(AdminContext);
 };
-
 export const AdminsContext = (props: Props) => {
-  const [userFilters, setUserFilters] = useState<IUserFilters>({
+  let initial_filters: IUserFilters = {
     country: "todos",
     name: "all_users",
     offset: 0,
     spent: 0,
-    spent_max: 0,
-    spent_min: 0,
+    spent_max: '',
+    spent_min: '',
     level: -1,
-    price: 0,
+    price: -1,
     method: "todos",
     membership: "todos",
     state: "todos",
@@ -42,7 +41,8 @@ export const AdminsContext = (props: Props) => {
       date_1: "",
       date_2: "",
     }
-  });
+  }
+  const [userFilters, setUserFilters] = useState<IUserFilters>(initial_filters);
   const [countries, setCountries] = useState([]);
   const [methods, setMethods] = useState([]);
   const [comeFrom, setComeFrom] = useState([]);
@@ -127,7 +127,7 @@ export const AdminsContext = (props: Props) => {
     assignments,
     totalAssignments,
     openNotification,
-    setOpenNotification
+    setOpenNotification,
   };
 
   return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AdminContain } from '../SideBar.styled';
 import { AdminTable, DefaultColumn, DefaultContainer, DefaultFilterContain, DefaultRow, DefaultSearchContainer } from '../DefaultComponents/DefaultComponents.styled';
 import { useAdmin } from '../../../hooks/AdminContext';
@@ -170,7 +170,7 @@ const Users = () => {
             <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Por Suscripción</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('membership', e.target.value) }}>
+                <select defaultValue={userFilters.membership} onChange={(e) => { changeData('membership', e.target.value) }}>
                   <option value="todos">Todos</option>
                   <option value="mensual">Mensual</option>
                   <option value="anual">Anual</option>
@@ -179,7 +179,7 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain>
                 <p className='title-filter'>Estado de Suscripción</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('state', e.target.value) }}>
+                <select defaultValue={userFilters.state} onChange={(e) => { changeData('state', e.target.value) }}>
                   <option value="todos">Todos</option>
                   <option value="active">Activa</option>
                   <option value="not-active">No Activa</option>
@@ -190,7 +190,7 @@ const Users = () => {
               }
               <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
                 <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('price', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
+                <select defaultValue={userFilters.price} onChange={(e) => { changeData('price', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
                   <option value={-1}>Todos</option>
                   {
                     userFilters.membership === "mensual" &&
@@ -222,7 +222,7 @@ const Users = () => {
             <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Método de pago</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('method', e.target.value) }}>
+                <select defaultValue={userFilters.method} onChange={(e) => { changeData('method', e.target.value) }}>
                   <option value="todos">Todos</option>
                   {
                     getMethodsBySuscription(methodSelected).map((method: string, index: number) => {
@@ -306,7 +306,7 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain >
                 <p className='title-filter'>Procedencia</p>
-                <select defaultValue="todos" onChange={(e) => { changeData("come_from", e.target.value) }}>
+                <select defaultValue={userFilters.come_from} onChange={(e) => { changeData("come_from", e.target.value) }}>
                   <option value={"todos"}>Todos</option>
                   {
                     comeFrom.map((val: any, index: number) => {
@@ -317,11 +317,20 @@ const Users = () => {
                   }
                 </select>
               </DefaultFilterContain>
+              <DefaultFilterContain>
+                <p className='title-filter'>Min. Gastado</p>
+                <input
+                  onChange={(e) => changeData('spent_min', e.target.value)}
+                  placeholder='0'
+                  type='number'
+                  defaultValue={userFilters.spent_min}
+                />
+              </DefaultFilterContain>
             </DefaultRow>
             <DefaultRow gap={20}>
               <DefaultFilterContain>
                 <p className='title-filter'>Por cursos</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
+                <select defaultValue={userFilters.courses} onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
                   <option value={0}>Todos</option>
                   {
                     courses.map((val: any, index: number) => {
@@ -334,13 +343,22 @@ const Users = () => {
               </DefaultFilterContain>
               <DefaultFilterContain className={!showCourseSelect ? "disable-contain" : ""}>
                 <p className={'title-filter ' + (!showCourseSelect ? "disable-txt" : "")}>Progreso</p>
-                <select defaultValue="todos" onChange={(e) => { changeData('progress', parseInt(e.target.value)) }} className={!showCourseSelect ? "disable" : ""}>
+                <select defaultValue={userFilters.progress} onChange={(e) => { changeData('progress', parseInt(e.target.value)) }} className={!showCourseSelect ? "disable" : ""}>
                   <option value={0}>Todos</option>
                   <option value={25}>25%</option>
                   <option value={50}>50%</option>
                   <option value={75}>75%</option>
                   <option value={100}>100%</option>
                 </select>
+              </DefaultFilterContain>
+              <DefaultFilterContain>
+                <p className='title-filter'>Max Gastado.</p>
+                <input
+                  onChange={(e) => changeData('spent_max', e.target.value)}
+                  placeholder='0'
+                  type='number'
+                  defaultValue={userFilters.spent_max}
+                />
               </DefaultFilterContain>
             </DefaultRow>
           </DefaultColumn>

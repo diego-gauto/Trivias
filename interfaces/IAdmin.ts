@@ -12,7 +12,32 @@ export interface ICancelReview {
   phone_number: string;
 }
 
-export interface IUserFilters {}
+export interface IUserFilters {
+  country: string;
+  name: string;
+  offset: number;
+  spent: number;
+  spent_max: string;
+  spent_min: string;
+  level: number;
+  price: number;
+  method: string;
+  membership: string;
+  state: string;
+  come_from: string;
+  courses: number;
+  progress: number;
+  dates_login: {
+    valid: number;
+    date_1: string;
+    date_2: string;
+  };
+  dates_created: {
+    valid: number;
+    date_1: string;
+    date_2: string;
+  };
+}
 
 export interface IAdminUsers {
   name: string;
