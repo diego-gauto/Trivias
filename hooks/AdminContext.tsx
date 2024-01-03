@@ -22,6 +22,8 @@ export const AdminsContext = (props: Props) => {
     name: "all_users",
     offset: 0,
     spent: 0,
+    spent_max: 0,
+    spent_min: 0,
     level: -1,
     price: 0,
     method: "todos",
@@ -59,25 +61,38 @@ export const AdminsContext = (props: Props) => {
   let userContext = useAuth();
   const { user } = userContext;
   const loadUsers = async () => {
-    setUserLoader(true)
-    const adminUsers = await getAdminUsersApi(userFilters);
-    setTotalUsers(adminUsers.data.totalUsers);
-    setUsers(adminUsers.data.users)
-    setUserLoader(false)
+    try {
+      setUserLoader(true)
+      const adminUsers = await getAdminUsersApi(userFilters);
+      if (adminUsers.data.error) {
+        return
+      }
+      setTotalUsers(adminUsers.data.totalUsers);
+      setUsers(adminUsers.data.users)
+      setUserLoader(false)
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
   const loadData = async () => {
-    const countries = await getCountriesApi();
-    let tempCountries = countries.filter((val: any) => { return val.country !== "" && val.country !== null });
-    setCountries(tempCountries)
-    const methods = await getMethodsApi();
-    let tempMethods = methods.filter((val: any) => { return val.method !== "" && val.method !== null });
-    setMethods(tempMethods);
-    const comeFrom = await getComeFromApi();
-    let tempComeFrom = comeFrom.filter((val: any) => { return val.come_from !== "undefined" && val.come_from !== null });
-    setComeFrom(tempComeFrom);
-    const courses = await getCoursesApi();
-    setCourses(courses.courses);
-    setPayCourses(courses.product_course);
+    try {
+      const countries = await getCountriesApi();
+      let tempCountries = countries.filter((val: any) => { return val.country !== "" && val.country !== null });
+      setCountries(tempCountries)
+      const methods = await getMethodsApi();
+      let tempMethods = methods.filter((val: any) => { return val.method !== "" && val.method !== null });
+      setMethods(tempMethods);
+      const comeFrom = await getComeFromApi();
+      let tempComeFrom = comeFrom.filter((val: any) => { return val.come_from !== "undefined" && val.come_from !== null });
+      setComeFrom(tempComeFrom);
+      const courses = await getCoursesApi();
+      setCourses(courses.courses);
+      setPayCourses(courses.product_course);
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
   useEffect(() => {
     loadData();
