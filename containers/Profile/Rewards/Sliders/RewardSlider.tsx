@@ -176,7 +176,6 @@ const RewardSlider = (props: reward_slider) => {
   useEffect(() => {
     getSliders();
   }, [rewards, type])
-  console.log(user);
   return (
     <BackgroundSlide type={type}>
       <h2>
