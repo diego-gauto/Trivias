@@ -11,6 +11,17 @@ export const getRewardsApi = async () => {
       return error
     });
 };
+export const getPublishedRewardsApi = async () => {
+  return axios
+    .get("https://gonvar.inowu.dev/" + "rewards/getPublishedRewards")
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
 export const createRewardApi = async (reward: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "rewards/createReward", reward)
@@ -81,7 +92,7 @@ export const createRequestApi = async (request: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "rewards/createRequest", request)
     .then((res) => {
-      return res.data.data
+      return res
     })
     .catch((error) => {
       console.log(error);

@@ -54,6 +54,7 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
           level: 6,
           id: user.id,
           days: 30,
+          type: 459,
         }
         await updateMembershipPlanApi(body).then((res) => {
           if (res.response) {
@@ -72,6 +73,7 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
           level: 5,
           id: user.id,
           days: 365,
+          type: 3497,
         }
         await updateMembershipPlanApi(body).then((res) => {
           if (res.response) {
@@ -90,6 +92,7 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
           level: 8,
           id: user.id,
           days: 120,
+          type: 1599,
         }
         await updateMembershipPlanApi(body).then((res) => {
           if (res.response) {
