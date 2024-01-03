@@ -13,16 +13,25 @@ export interface reward_slider {
   completeCertificates: courses[];
   getRewardData: any;
 }
-interface SlideObj {
-  id: string;
+export interface SlideObj {
+  id: string | number;
   title: string;
   about: string;
-  points?: number;
+  points: number;
   months: number;
+  month: number;
   path?: string;
+  price: number;
+  totalLessons: number;
   reference: string;
   productType: string;
   type: string;
+  lessonsLeft: number;
+  image: string;
+  // month: number;
+  // price: number;
+  product_type: string;
+  published: string;
 }
 interface course {
   lessonsLeft: number;
@@ -31,3 +40,9 @@ interface course {
   name: string;
 }
 interface courses {}
+
+export interface IUserReward {
+  reward_id: string | number;
+  status: boolean;
+  created_at: any;
+}
