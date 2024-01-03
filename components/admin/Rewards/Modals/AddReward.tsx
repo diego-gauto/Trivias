@@ -78,7 +78,6 @@ const AddReward = ({ show, setShow, handleEvent }: any) => {
       title: reward.title === "" ? true : false,
       about: reward.about === "" ? true : false,
       image: reward.image === "" ? true : false,
-      month: reward.type === "months" ? (reward.month === 0 ? true : false) : false,
       points: reward.type === "points" ? (reward.points === 0 ? true : false) : false,
     }
     setErrors(tempErrors)

@@ -42,7 +42,6 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     title: false,
     about: false,
     image: false,
-    month: false,
     points: false
   });
   const [userData, setUserData] = useState<IUserInfoResult | null>(null);
@@ -82,7 +81,6 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
       title: reward.title === "" ? true : false,
       about: reward.about === "" ? true : false,
       image: reward.image === "" ? true : false,
-      month: reward.type === "months" ? (reward.month === 0 ? true : false) : false,
       points: reward.type === "points" ? (reward.points === 0 ? true : false) : false,
     }
     if (image !== "") {

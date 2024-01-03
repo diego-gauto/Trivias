@@ -1,5 +1,8 @@
 import axios from "axios";
 
+interface IPrint {
+  reward_id: number;
+}
 export const getRewardsApi = async () => {
   return axios
     .get("https://gonvar.inowu.dev/" + "rewards/getRewards")
@@ -22,6 +25,17 @@ export const getPublishedRewardsApi = async () => {
       return error
     });
 };
+export const printRequestsType = async (body: IPrint) => {
+  return axios
+    .post("https://gonvar.inowu.dev/" + "rewards/printRequestsType", body)
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+}
 export const createRewardApi = async (reward: any) => {
   return axios
     .post("https://gonvar.inowu.dev/" + "rewards/createReward", reward)

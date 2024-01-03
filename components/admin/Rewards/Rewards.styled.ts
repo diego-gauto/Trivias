@@ -7,6 +7,10 @@ export const RewardContain = styled.div`
   position: relative;
   padding: 20px;
   gap: 20px;
+  .top-buttons {
+    display: flex;
+    gap: 20px;
+  }
   @media (max-width: 1000px) {
     overflow: auto;
   }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
-
+import CsvDownloader from "react-csv-downloader";
 import { getBanner, getRequest, getRewards, updateBanner, updateRequest, updateUserRewards } from "../../../store/actions/RewardActions";
 import { createNotification } from "../../api/notifications";
-import { getRequestsApi, getRewardsApi, updateRequestStatusApi } from "../../api/rewards";
+import { getRequestsApi, getRewardsApi, printRequestsType, updateRequestStatusApi } from "../../api/rewards";
 import { getUserApi } from "../../api/users";
 import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
@@ -13,41 +13,59 @@ import {
   Reward,
   RewardContain,
 } from "./Rewards.styled";
+import rewards from "../../../pages/rewards";
 
 const Rewards = () => {
+  let today = (new Date().getMonth()) + 1;
   const [show, setShow] = useState(false);
   const [rewards, setRewards] = useState([]);
   const [requests, setRequests] = useState([]);
   const [reward, setReward] = useState<any>({});
   const [edit, setEdit] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setUserData(res);
-      })
+  const [checkRewardType3, setCheckRewardType3] = useState<boolean>(true);
+
+  const RequestsRewardDownload: any = async () => {
+    let body = {
+      reward_id: 32,
     }
-  }, [])
+    let sendUsers: any = [];
+    const requests = await printRequestsType(body);
+    await Promise.all(requests.map(async (req: any) => {
+      sendUsers.push({
+        nombre: req.name,
+        email: req.email,
+        telefono: req.phone_number,
+        fecha_solicitud: req.creaed_at,
+      })
+    }))
 
-
-
-  const getAllRequests = () => {
-    getRequestsApi().then((res) => {
-      setRequests(res);
-    })
+    return sendUsers
   }
 
-  useEffect(() => {
-    getRewardsApi().then((res) => {
-      setRewards(res);
-    })
-    getAllRequests();
-  }, []);
 
-  const handleEvent = () => {
-    getRewardsApi().then((res) => {
-      setRewards(res);
-    })
+  const getAllRequests = async () => {
+    try {
+      const requests = await getRequestsApi();
+      console.log(requests);
+      setRequests(requests);
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+  const handleRewards = async () => {
+    try {
+      const rewards = await getRewardsApi();
+      let findMonthReward: [] = rewards.filter((val: any) => val.month === -1 && val.type === "months");
+      if (findMonthReward.length > 0) {
+        setCheckRewardType3(true);
+      }
+      setRewards(rewards)
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
 
   const formatDate = (date: any) => {
@@ -79,11 +97,39 @@ const Rewards = () => {
       }
     }
   }
+
+  useEffect(() => {
+    handleRewards();
+    getAllRequests();
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("email")) {
+      getUserApi(localStorage.getItem("email")).then((res) => {
+        setUserData(res);
+      })
+    }
+  }, [])
+
   return (
     <AdminContain>
       <RewardContain>
         <p className="title">Recompensas Gonvar</p>
-        <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>
+        <div className="top-buttons">
+          <button className="add" onClick={() => { setShow(true) }}>Agregar Recompensa</button>
+          {
+            checkRewardType3 &&
+            <CsvDownloader
+              filename={"lista_mes_" + today}
+              extension=".csv"
+              separator=","
+              wrapColumnChar=""
+              datas={RequestsRewardDownload}
+            >
+              <button className="add">Usuario mes {today}</button>
+            </CsvDownloader>
+          }
+        </div>
         <div className="rewards">
           {rewards.map((reward: any, index: any) => {
             return (
@@ -128,8 +174,8 @@ const Rewards = () => {
           })}
         </div>
       </RewardContain>
-      <AddReward show={show} setShow={setShow} handleEvent={handleEvent}></AddReward>
-      <EditReward show={edit} setShow={setEdit} handleEvent={handleEvent} data={reward}></EditReward>
+      <AddReward show={show} setShow={setShow} handleEvent={handleRewards}></AddReward>
+      <EditReward show={edit} setShow={setEdit} handleEvent={handleRewards} data={reward}></EditReward>
     </AdminContain>
   )
 }
