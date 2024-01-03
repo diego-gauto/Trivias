@@ -21,6 +21,8 @@ import {
   TitleContain,
 } from "./AddReward.styled";
 import { IUserInfoResult } from "../../../../interfaces/IUser";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { Instructions } from "../functions";
 
 const EditReward = ({ show, setShow, handleEvent, data }: any) => {
   const handleClose = () => setShow(false);
@@ -184,7 +186,9 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
         {
           reward.type == "months" &&
           <InputContain>
-            <Label>Meses</Label>
+            <Label>Meses <IoInformationCircleOutline />
+              <Instructions />
+            </Label>
             <Input placeholder="7"
               defaultValue={data.month}
               style={errors.month ? { border: "1px solid red" } : {}}
