@@ -293,7 +293,7 @@ const Users = () => {
                 <p className='title-filter'>
                   Por Pais
                 </p>
-                <select defaultValue="todos" onChange={(e) => { changeData("country", e.target.value) }}>
+                <select defaultValue={userFilters.country} onChange={(e) => { changeData("country", e.target.value) }}>
                   <option value="todos" >Todos</option>
                   {
                     countries.map((val: any, index: number) => {
