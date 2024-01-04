@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
+import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
 import Countdown from "../../components/Forms/countdown/countdown";
 import InputApellido from "../../components/Forms/inputApellido/inputApellido";
@@ -153,37 +154,47 @@ const Formularios = () => {
     setForm(selectedForm)
     setLoading(false)
 
-    // const fetchData = async () => {
-    //   try {
+    const fetchData = async () => {
+      try {
 
-    //     const formIdNumber: number = (Number(formId))
+        const formIdNumber: number = (Number(formId))
 
-    //     const res = await getFormApi(formIdNumber);
+        const startTimestamp = performance.now();
 
-    //     const formTemp = res[0]
-    //     console.log(formTemp)
+        const res = await getFormApi(formIdNumber);
 
-    //     if (formTemp) {
+        const endTimestamp = performance.now();
 
-    //       // Parsear la cadena JSON en la propiedad "questions"
-    //       formTemp.img = JSON.parse(formTemp.img);
+        const tiempoTotal = endTimestamp - startTimestamp;
+        console.log(`La llamada a la API tomó ${tiempoTotal} milisegundos`);
 
-    //       // Parsear la cadena JSON en la propiedad "result"
-    //       formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
 
-    //       formTemp.redirect = JSON.parse(formTemp.redirect);
+        const formTemp = res[0]
 
-    //       setForm(formTemp);
-    //     }
+        if (formTemp) {
 
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.error('Error al obtener los datos del formulario:', error);
-    //   }
+          // Parsear la cadena JSON en la propiedad "questions"
+          formTemp.img = JSON.parse(formTemp.img);
 
-    // };
+          // Parsear la cadena JSON en la propiedad "result"
+          formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
 
-    // fetchData();
+          formTemp.redirect = JSON.parse(formTemp.redirect);
+
+          console.log(formTemp)
+
+
+          // setForm(formTemp);
+        }
+
+        // setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener los datos del formulario:', error);
+      }
+
+    };
+
+    fetchData();
   }, [formId]);
 
   useEffect(() => {
