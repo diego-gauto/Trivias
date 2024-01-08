@@ -790,7 +790,8 @@ const Purchase = () => {
                           plan_id: data.subscriptionID,
                           plan_name: product.title,
                           start_date: new Date().getTime() / 1000, userId: userData.user_id,
-                          level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                          level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7,
+                          type: product.price
                         })
                         setConfirmation(false);
                         setPay(true);
@@ -1124,7 +1125,8 @@ const Purchase = () => {
                             plan_id: data.subscriptionID,
                             plan_name: product.title,
                             start_date: new Date().getTime() / 1000, userId: userData.user_id,
-                            level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                            level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7,
+                            type: product.price
                           })
                           setConfirmation(false);
                           setPay(true);
