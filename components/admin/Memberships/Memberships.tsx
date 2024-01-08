@@ -43,10 +43,12 @@ const generateCSVFilename = (name: string) => {
   return `${name}-${year}-${month + 1}-${day} ${hour}-${minutes}-${seconds}`;
 }
 
-const getDateWithFormat = (date: Date) => {
+const getDateWithNewFormat = (date: Date) => {
   const date1 = [...date.toJSON()].slice(0, 10).join('');
+  const date1Parts = date1.split('-');
+  const date2 = `${date1Parts[2]}-${date1Parts[1]}-${date1Parts[0]}`
   const time1 = [...date.toJSON()].slice(11, 19).join('');
-  return `${date1} ${time1}`;
+  return `${date2} ${time1}`;
 }
 
 type LevelFilter = "TODOS" | "MENSUAL" | "CUATRIMESTRAL" | "ANUAL";
@@ -70,7 +72,7 @@ const getTextSusctiptionByLevel = (level: number) => {
 }
 
 const Memberships = () => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = getDateWithNewFormat(new Date()).slice(0, 10);
   const [hasFiltered, setHasFiltered] = useState<boolean>(false);
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [data, setData] = useState<Memberships[]>([]);
@@ -93,15 +95,14 @@ const Memberships = () => {
     membresias.set(6, "Mensual");
     membresias.set(8, "Cuatrimestre");
     membresias.set(5, "Anual");
-    const data3 = data.map(({ id, name, last_name, email, phone_number, method, level, final_date, datediff }) => {
+    const data3 = data.map(({ name, last_name, email, phone_number, method, level, final_date, datediff }) => {
       return {
-        id,
         nombre_completo: `${name} ${last_name}`,
         correo: email,
         numero: phone_number,
         membresia: getTextSusctiptionByLevel(level),
         metodo: method,
-        fecha_termino: getDateWithFormat(new Date(final_date)),
+        fecha_termino: getDateWithNewFormat(new Date(final_date)),
         dias_faltantes: datediff,
       }
     });
@@ -302,7 +303,7 @@ const Memberships = () => {
                           <td>{membership.phone_number}</td>
                           <td>{getTextSusctiptionByLevel(membership.level)}</td>
                           <td>{membership.method}</td>
-                          <td>{[...final_date.toString()].slice(0, 10).join('')}</td>
+                          <td>{getDateWithNewFormat(new Date(final_date))}</td>
                           <td>{membership.datediff}</td>
                         </tr>
                       )
