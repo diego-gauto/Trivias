@@ -783,7 +783,7 @@ const Purchase = () => {
                       onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
-                        finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                        finalDate = today + frequency === "month" ? 2629800 : frequency === "anual" ? 31536000 : 10368000;
                         await updateMembership({
                           method: "paypal",
                           final_date: finalDate,
@@ -1117,7 +1117,7 @@ const Purchase = () => {
                         onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
-                          finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                          finalDate = today + frequency === "month" ? 2629800 : frequency === "anual" ? 31536000 : 10368000;
                           await updateMembership({
                             method: "paypal",
                             final_date: finalDate,
