@@ -49,8 +49,26 @@ import {
 import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
-import { getRewardsApi } from "../api/rewards";
-import { getCourseApi } from "../api/lessons";
+
+interface NotificationByUser {
+  notification_id: number
+  user_id: number
+  type: string
+  status: number
+  created_at: string
+  source_table: string
+  course_id?: number
+  season?: number
+  lesson?: number
+  title?: string
+  score?: number
+  user_comment_id?: number
+  user_like_id?: number
+  amount?: number
+  product_name?: string
+  reward_id?: number
+  due_date?: number
+}
 
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
@@ -61,7 +79,7 @@ const NavBar = () => {
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
-  const [notifications, setNotifications] = useState<any>([]);
+  const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
   let today = new Date().getTime() / 1000;
@@ -119,48 +137,26 @@ const NavBar = () => {
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
 
-  const userNotifications = (userId: any) => {
-    let data = {
-      userId: userId,
-      conekta_id: userDataAuth.user.conekta_id
-    }
-    // retrieveConektaCustomerInfo(data)
-    getNotifications(data).then((res) => {
+  const userNotifications = async (userId: any) => {
+    try {
+      let data = {
+        userId: userId,
+        conekta_id: userDataAuth.user.conekta_id
+      }
+      const res = await getNotifications(data);
       let tempCounter = 0;
-      res.forEach((not: any) => {
-        if (!not.status) {
+      res.data.forEach((notification) => {
+        if (!notification.status) {
           tempCounter++;
         }
-      })
-
-      // let courses = userDataAuth.user.user_history;
-      // courses.forEach((element: any) => {
-      //   getCourseApi(element.course_id).then((response) => {
-      //     let count = 0
-      //     response.lessons.forEach((lesson: any) => {
-      //       if (lesson.users.includes(userDataAuth.user.user_id)) {
-      //         count++
-      //       }
-      //     });
-      //     if (count !== response.lessons.length) {
-      //       let notification = {
-      //         userId: userDataAuth.user.user_id,
-      //         type: "7",
-      //         notificationId: '',
-      //         courseId: element.course_id,
-      //         season: element.season_id,
-      //         lesson: element.lesson_id,
-      //         title: response.title,
-      //       }
-      //       if (res.filter((x: any) => x.course_id !== null && x.type === "7" && x.course_id === element.course_id).length === 0) {
-      //         createNotification(notification);
-      //       }
-      //     }
-      //   })
-      // });
+      });
       setUnReadNotification(tempCounter);
-      setNotifications(res);
-    })
+      setNotifications(res.data);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.table(error);
+      }
+    }
   }
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 900) {
@@ -172,8 +168,6 @@ const NavBar = () => {
   }
   useEffect(() => {
     window.addEventListener('scroll', ChangeNav);
-    // localStorage.clear();
-    // logoutFunc();
   },
     [pathname],
   );
@@ -411,10 +405,10 @@ const NavBar = () => {
                         <p>Actualmente no hay notificaciones</p>
                       </div>
                       :
-                      notifications.map((not: any, index: number) => {
+                      notifications.map((notification, index: number) => {
                         return (
                           <Notifications
-                            notification={not}
+                            notification={notification}
                             user={userData}
                             openNotifications={openNotifications}
                             unReadNotification={unReadNotification}

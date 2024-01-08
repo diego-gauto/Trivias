@@ -1,15 +1,28 @@
 import axios, { AxiosResponse } from "axios";
 
+interface NotificationByUser {
+  notification_id: number
+  user_id: number
+  type: string
+  status: number
+  created_at: string
+  source_table: string
+  course_id?: number
+  season?: number
+  lesson?: number
+  title?: string
+  score?: number
+  user_comment_id?: number
+  user_like_id?: number
+  amount?: number
+  product_name?: string
+  reward_id?: number
+  due_date?: number
+}
+
 export const getNotifications = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "notifications/by-user", user)
-    .then((res) => {
-      return res.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .post<NotificationByUser[]>("https://gonvar.inowu.dev/" + "notifications/by-user", user);
 };
 
 export const createNotification = async (data: any) => {

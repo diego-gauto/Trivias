@@ -229,6 +229,12 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Tickets</li>
           </Link>}
+          {(isSuperAdmin || isForms) && <Link href="/admin/Memberships">
+            <li style={{ color: index == 15 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(15)
+              onHide()
+            }}>Memberships</li>
+          </Link>}
         </ul>
         <Text>Organization</Text>
         {isSuperAdmin && <ul>

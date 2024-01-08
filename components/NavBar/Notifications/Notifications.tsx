@@ -76,14 +76,14 @@ const Notifications = (props: any) => {
           </div>
         </div>}
         <div className="notification-texts">
-          <p className='notification-info'>
+          <div className='notification-info'>
             <p className='title'>{returnNotificationTitles(notification, user.name)}</p>
             <p className='message'>{returnNotificationMessage(notification, !name ? user.name : name)}</p>
             {(notification.type === "1" || notification.type === "2") && <p className='score'>{notification.type === "1" ? `Aprobada` : `Rechazada`}
               {notification.type === "1" ? <span className='approved'> +{notification.score} puntos.</span> :
                 <span className='failed'> +0 puntos.</span>}
             </p>}
-          </p>
+          </div>
           <p className='date-text'>
             {formatDateNotification(notification.created_at)}
           </p>
