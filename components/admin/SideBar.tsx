@@ -92,6 +92,12 @@ const SideBar = ({ show, onHide }: any) => {
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Forms") {
         setIndex(13)
       }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Tickets") {
+        setIndex(14)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Memberships") {
+        setIndex(15)
+      }
     }, [])
   } catch (error) {
   }

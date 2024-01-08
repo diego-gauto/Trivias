@@ -515,6 +515,7 @@ interface MembershipCloseToEnding {
   email: string;
   phone_number: string;
   final_date: string;
+  method: string;
   level: number;
   datediff: number;
 }

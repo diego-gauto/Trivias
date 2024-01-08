@@ -12,6 +12,7 @@ interface Memberships {
   last_name: string,
   email: string,
   phone_number: string,
+  method: string,
   final_date: string,
   level: number,
   datediff: number,
@@ -50,6 +51,24 @@ const getDateWithFormat = (date: Date) => {
 
 type LevelFilter = "TODOS" | "MENSUAL" | "CUATRIMESTRAL" | "ANUAL";
 
+/* 1 serian las mensuales, 4 las anuales y 7 las cuatrimestrales.  */
+
+const levels = {
+  "MENSUAL": [1, 6],
+  "CUATRIMESTRAL": [7, 8],
+  "ANUAL": [4, 5],
+  "TODOS": [1, 4, 5, 6, 7, 8]
+}
+
+const getTextSusctiptionByLevel = (level: number) => {
+  if ([1, 6].includes(level)) {
+    return "Mensual";
+  } else if ([7, 8].includes(level)) {
+    return "Cuatrimestral";
+  }
+  return "Anual"
+}
+
 const Memberships = () => {
   const today = new Date().toISOString().split('T')[0];
   const [hasFiltered, setHasFiltered] = useState<boolean>(false);
@@ -58,8 +77,6 @@ const Memberships = () => {
   const [offset, setOffset] = useState(0);
   const [filteredData, setFilteredData] = useState<Memberships[]>([]);
   const memberFilterHTMLSelect = useRef<HTMLSelectElement>(null);
-  const startDateRef = useRef<HTMLInputElement>(null);
-  const finalDateRef = useRef<HTMLInputElement>(null);
 
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [finalDate, setFinalDate] = useState<Date>(new Date());
@@ -76,13 +93,14 @@ const Memberships = () => {
     membresias.set(6, "Mensual");
     membresias.set(8, "Cuatrimestre");
     membresias.set(5, "Anual");
-    const data3 = data.map(({ id, name, last_name, email, phone_number, level, final_date, datediff }) => {
+    const data3 = data.map(({ id, name, last_name, email, phone_number, method, level, final_date, datediff }) => {
       return {
         id,
         nombre_completo: `${name} ${last_name}`,
         correo: email,
         numero: phone_number,
-        membresia: membresias.get(level),
+        membresia: getTextSusctiptionByLevel(level),
+        metodo: method,
         fecha_termino: getDateWithFormat(new Date(final_date)),
         dias_faltantes: datediff,
       }
@@ -107,16 +125,8 @@ const Memberships = () => {
   const filterMembershipsHandler = async () => {
     const membershipValue = memberFilterHTMLSelect.current?.value as LevelFilter;
 
-    const levels = {
-      "MENSUAL": [6],
-      "CUATRIMESTRAL": [8],
-      "ANUAL": [5],
-      "TODOS": [5, 6, 8]
-    }
 
     const selectedMembership = levels[membershipValue ?? "TODOS"];
-    const startDate = startDateRef.current?.value ? new Date(startDateRef.current?.value) : undefined;
-    const finalDate = finalDateRef.current?.value ? new Date(finalDateRef.current?.value) : undefined;
 
     if (startDate === undefined || finalDate === undefined) {
       alert('Las fechas tienen que ser diferentes y no puede continuar sin ser especificadas.');
@@ -126,6 +136,7 @@ const Memberships = () => {
 
     try {
       setIsLoadingData(false);
+      console.log({ startDate });
       const response = await getCloseToEndingMembershipUsers(selectedMembership, startDate, finalDate);
       setData(response.data.data);
       setFilteredData(response.data.data);
@@ -194,7 +205,6 @@ const Memberships = () => {
                     padding: '15px',
                     border: 'solid 1px #6717cd',
                   }}
-                  ref={startDateRef}
                   type="date"
                   name="start-date"
                   id="start-date-input"
@@ -217,7 +227,6 @@ const Memberships = () => {
                     padding: '15px',
                     border: 'solid 1px #6717cd',
                   }}
-                  ref={finalDateRef}
                   type="date"
                   name="final-date"
                   id="final-date-input"
@@ -271,6 +280,8 @@ const Memberships = () => {
                   <th>Nombre</th>
                   <th>Email</th>
                   <th>Telefono</th>
+                  <th>Suscripción</th>
+                  <th>Método</th>
                   <th>Fecha de terminación</th>
                   <th>Dias faltantes</th>
                 </tr>
@@ -289,6 +300,8 @@ const Memberships = () => {
                           </td>
                           <td>{membership.email}</td>
                           <td>{membership.phone_number}</td>
+                          <td>{getTextSusctiptionByLevel(membership.level)}</td>
+                          <td>{membership.method}</td>
                           <td>{[...final_date.toString()].slice(0, 10).join('')}</td>
                           <td>{membership.datediff}</td>
                         </tr>
