@@ -899,7 +899,7 @@ const AllCourses = (props: IAllCourses) => {
                 </div>
                 <div className="course-data">
                   <label className="course-data-title">Curso con certificado</label>
-                  <select onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
+                  <select defaultValue={with_certificate ? 1 : 0} onChange={(e) => { setCourse({ ...course, with_certificate: parseInt(e.target.value) }) }}>
                     <option value={1}>Con Certificado</option>
                     <option value={0}>Sin Certificado</option>
                   </select>
