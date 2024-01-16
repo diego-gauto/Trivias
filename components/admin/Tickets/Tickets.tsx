@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { AdminContain } from '../SideBar.styled';
-import { AdminTable, DefaultColumn, DefaultContainer, DefaultFilterContain, DefaultRow, DefaultSearchContainer } from '../DefaultComponents/DefaultComponents.styled';
-import { useAdmin } from '../../../hooks/AdminContext';
-import CsvDownloader from "react-csv-downloader";
-import Calendar from 'react-calendar';
-import { IoClose } from 'react-icons/io5';
-import { AiFillPlusCircle } from 'react-icons/ai';
-import Pagination from '../../Pagination/Pagination'
-import { EditIcon } from '../Category/Category.styled';
+import { AdminTable, DefaultColumn, DefaultContainer } from '../DefaultComponents/DefaultComponents.styled';
+import Pagination from '../../Pagination/Pagination';
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
-import { UserShow } from '../Users/UsersList.styled';
-import { IAdminUsers } from '../../../interfaces/IAdmin';
-import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLessonFromUserApi, usersForExcelApi } from '../../api/admin';
 import { getAdminMassiveLotteryApi } from '../../api/notifications';
-// getAdminMassiveLotteryApi
-import UserCardData from '../Users/UserData/UserCardData';
-import { BsFileEarmarkExcelFill } from 'react-icons/bs';
-import users from '../../../pages/admin/trivias/users';
-import { user } from 'firebase-functions/v1/auth';
 
 interface TicketRowData {
   name: string;

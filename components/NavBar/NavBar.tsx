@@ -21,8 +21,8 @@ import {
 } from "../../constants/paths";
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
-import { createNotification, getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { retrieveConektaCustomerInfo, updateMembership } from "../api/profile";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -82,8 +82,6 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-  let today = new Date().getTime() / 1000;
-  const closeNotif = 'images/Navbar/CloseIcon.png'
 
   const modalNotificationsRef = useRef<any>(null);
 
@@ -405,7 +403,7 @@ const NavBar = () => {
                         <p>Actualmente no hay notificaciones</p>
                       </div>
                       :
-                      notifications.map((notification, index: number) => {
+                      notifications.map((notification, index) => {
                         return (
                           <Notifications
                             notification={notification}

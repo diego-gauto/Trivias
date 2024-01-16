@@ -533,3 +533,26 @@ export const getCloseToEndingMembershipUsers = async (levels: number[], startDat
   return axios
     .post<{ data: MembershipCloseToEnding[] }>("https://gonvar.inowu.dev/" + "admin/get-close-to-ending-membership-users", body)
 }
+
+export const getGenericQueryResponse = async (query: string) => {
+  const body = {
+    query
+  }
+  return axios.post<{ data: any[] }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
+}
+
+interface InsertSQLResult {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  info: string;
+  serverStatus: number;
+  warningStatus: number;
+}
+
+export const postGenericQueryResponse = async (query: string) => {
+  const body = {
+    query
+  }
+  return axios.post<{ data: InsertSQLResult }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
+}
