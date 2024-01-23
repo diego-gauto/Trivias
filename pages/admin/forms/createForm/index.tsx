@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 
+import { collection, doc, query, setDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { createFormApi } from "../../../../components/api/form";
+import { db } from "../../../../firebase/firebaseConfig";
 import styles from "./create.module.css";
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false })
@@ -281,17 +283,26 @@ const CreateForm = () => {
     const currentDate = new Date();
     updatedFormCopy.createdAt = formatDate(currentDate);
     updatedFormCopy.editedAt = formatDate(currentDate);
-    updatedFormCopy.title = "titulo de prueba";
-    updatedFormCopy.subtitle = "subtitulo de prueba"
 
     console.log(updatedFormCopy)
     // Lógica para crear el formulario
     createFormApi(updatedFormCopy)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result)
         if (result === true) {
+          const formId = '5'
+          const customId = `form_${formId}`
+
+          try {
+            const formDocRef = doc(collection(db, 'forms'), customId);
+            await setDoc(formDocRef, updatedFormCopy);
+            console.log("Formulario creado exitosamente en Firebase con ID:", customId);
+            alert("Formulario creado exitosamente en Firebase.");
+          } catch (error) {
+            console.error('Error al guardar en Firebase:', error);
+          }
           // Formulario creado exitosamente
-          alert("Formulario creada exitosamente.");
+          alert("Formulario creada exitosamente en MySQL.");
         } else {
           // Trivia no fue creada
           alert("Erro al crear al crear el formulario.");
