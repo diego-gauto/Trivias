@@ -213,3 +213,35 @@ export const AdminTable = styled.table`
     }
   }
 `;
+
+export const AdminTable2 = styled.table`
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  td {
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 10px;
+    padding-block: 15px;
+    text-align: left;
+  }
+  th {
+    padding-left: 10px;
+    padding-block: 15px;
+    text-align: left;
+    background-color: #6717cd;
+    color: white;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+  }
+  tr {
+    &:hover {
+      background: #d3d3d3;
+    }
+    border-bottom: 1px solid gray;
+    &:first-child {
+      border-bottom: none;
+    }
+  }
+`;

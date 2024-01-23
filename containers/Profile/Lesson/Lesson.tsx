@@ -56,7 +56,7 @@ const Lesson = () => {
       title: course.title,
     }
     getNotifications({ userId: userDataAuth.user.user_id }).then((res) => {
-      if (res.filter((x: any) => x.course_id !== null &&
+      if (res.data.filter((x) => x.course_id !== null &&
         x.type === "14" &&
         x.course_id === id).length === 0) {
         createNotification(notification);

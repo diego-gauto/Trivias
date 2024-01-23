@@ -50,6 +50,26 @@ import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
 
+interface NotificationByUser {
+  notification_id: number
+  user_id: number
+  type: string
+  status: number
+  created_at: string
+  source_table: string
+  course_id?: number
+  season?: number
+  lesson?: number
+  title?: string
+  score?: number
+  user_comment_id?: number
+  user_like_id?: number
+  amount?: number
+  product_name?: string
+  reward_id?: number
+  due_date?: number
+}
+
 const NavBar = () => {
   const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
   const [loggedIn, setLoggedIn] = useState(false);
@@ -59,7 +79,7 @@ const NavBar = () => {
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
-  const [notifications, setNotifications] = useState<any>([]);
+  const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
 
@@ -116,21 +136,20 @@ const NavBar = () => {
   var position = pathname.substring(0, 6);
 
   const userNotifications = async (userId: any) => {
-    let data = {
-      userId: userId,
-      conekta_id: userDataAuth.user.conekta_id
-    }
     try {
+      let data = {
+        userId: userId,
+        conekta_id: userDataAuth.user.conekta_id
+      }
       const res = await getNotifications(data);
       let tempCounter = 0;
-      res.forEach((not: any) => {
-        if (!not.status) {
+      res.data.forEach((notification) => {
+        if (!notification.status) {
           tempCounter++;
         }
-      })
-
+      });
       setUnReadNotification(tempCounter);
-      setNotifications(res);
+      setNotifications(res.data);
     } catch (error) {
       if (error instanceof Error) {
         console.table(error);
@@ -384,10 +403,10 @@ const NavBar = () => {
                         <p>Actualmente no hay notificaciones</p>
                       </div>
                       :
-                      notifications.map((not: any, index: number) => {
+                      notifications.map((notification, index) => {
                         return (
                           <Notifications
-                            notification={not}
+                            notification={notification}
                             user={userData}
                             openNotifications={openNotifications}
                             unReadNotification={unReadNotification}

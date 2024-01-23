@@ -92,6 +92,12 @@ const SideBar = ({ show, onHide }: any) => {
       if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Forms") {
         setIndex(13)
       }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Tickets") {
+        setIndex(14)
+      }
+      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Memberships") {
+        setIndex(15)
+      }
     }, [])
   } catch (error) {
   }
@@ -228,6 +234,12 @@ const SideBar = ({ show, onHide }: any) => {
               setIndex(14)
               onHide()
             }}>Tickets</li>
+          </Link>}
+          {(isSuperAdmin || isForms) && <Link href="/admin/Memberships">
+            <li style={{ color: index == 15 ? "#ffa500" : "#fff" }} onClick={() => {
+              setIndex(15)
+              onHide()
+            }}>Memberships</li>
           </Link>}
         </ul>
         <Text>Organization</Text>

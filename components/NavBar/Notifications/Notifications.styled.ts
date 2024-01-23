@@ -101,6 +101,7 @@ export const NotificationData = styled.div<{
       background-color: #c4aade;
     }
     .notification-image {
+      display: block;
       align-self: center;
       width: 40px;
       height: 40px;
