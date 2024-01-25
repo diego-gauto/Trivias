@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 
-import { collection, doc, query, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -290,11 +290,12 @@ const CreateForm = () => {
       .then(async (result) => {
         console.log(result)
         if (result === true) {
-          const formId = '5'
-          const customId = `form_${formId}`
+          const nextformId = localStorage.getItem("nextFormId")
+          const customId = `form_${nextformId}`
 
           try {
             const formDocRef = doc(collection(db, 'forms'), customId);
+            console.log(formDocRef)
             await setDoc(formDocRef, updatedFormCopy);
             console.log("Formulario creado exitosamente en Firebase con ID:", customId);
             alert("Formulario creado exitosamente en Firebase.");

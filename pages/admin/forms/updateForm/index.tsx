@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 
+import { collection, doc, setDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { getFormApi, updateFormApi } from "../../../../components/api/form";
+import { db } from "../../../../firebase/firebaseConfig";
 import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import styles from "./update.module.css";
 
@@ -315,14 +317,25 @@ const UpdateForm = () => {
     // Lógica para crear el formulario
     const formIdNumber: number = (Number(formId))
     updateFormApi(formIdNumber, updatedFormCopy)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result)
         if (result === true) {
+
+          const customId = `form_${formId}`
+
+          try {
+            const formDocRef = doc(collection(db, 'forms'), customId);
+            await setDoc(formDocRef, updatedFormCopy);
+            console.log("Formulario actualizado exitosamente en Firebase con ID:", customId);
+            alert("Formulario actualizado exitosamente en Firebase.");
+          } catch (error) {
+            console.error('Error al guardar en Firebase:', error);
+          }
           // Formulario creado exitosamente
-          alert("Formulario actualizado exitosamente.");
+          alert("Formulario actualizado exitosamente en MySQL.");
         } else {
           // Trivia no fue creada
-          alert("Erro al crear al actualizar el formulario.");
+          alert("Erro al actualizar al actualizar el formulario.");
         }
       })
       .catch((error) => {
