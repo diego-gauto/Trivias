@@ -22,7 +22,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
 import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { updateMembership } from "../api/profile";
+import { customerOrders, updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -165,6 +165,7 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
+    localStorage.setItem("email", "ronoelsomar@hotmail.com")
     window.addEventListener('scroll', ChangeNav);
   },
     [pathname],
@@ -190,10 +191,10 @@ const NavBar = () => {
           conektaCustomer(body)
         };
 
+        let today = new Date().getTime() / 1000;
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
-          let today = new Date().getTime() / 1000;
           if (today > course[0].final_date) {
             var day = new Date();
             var nextYear = new Date();
@@ -207,6 +208,16 @@ const NavBar = () => {
               alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
             })
           }
+        }
+
+        if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 1 || userDataAuth.user.level === 4)) {
+          customerOrders({ conekta_id: userDataAuth.user.conekta_id }).then((res) => {
+            console.log(res.data.data);
+            const response = res.data.data;
+            if (response.length > 0 && response[0].payment_status === "pending_payment") {
+              // let order = response[0];
+            }
+          })
         }
 
         setUserData(userDataAuth.user);
@@ -295,6 +306,7 @@ const NavBar = () => {
       window.location.href = "/";
     }
   };
+
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
