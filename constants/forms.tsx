@@ -177,7 +177,7 @@ const forms: Form[] = [
     optionsArray: [
       {
         isVisible: true,
-        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Diciembre. Elige tu plan de Pagos:</p>`,
+        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 03 de Diciembre. Elige tu plan de Pagos:</p>`,
         options: [
           "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
           "Pagaré en una sola exhibición máximo el día sábado",
@@ -211,7 +211,7 @@ const forms: Form[] = [
     optionsArray: [
       {
         isVisible: true,
-        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Diciembre. Elige tu plan de Pagos:</p>`,
+        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 03 de Diciembre. Elige tu plan de Pagos:</p>`,
         options: [
           "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
           "Pagaré en una sola exhibición máximo el día sábado",
@@ -245,7 +245,7 @@ const forms: Form[] = [
     optionsArray: [
       {
         isVisible: true,
-        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Diciembre. Elige tu plan de Pagos:</p>`,
+        label: `<p>Recuerda que el <strong>costo del programa es de $1.599,00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa ·"Gonvar+ cuatrimestral" participan para <strong>ganar $10.000 MXN en productos.</strong> <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 03 de Diciembre. Elige tu plan de Pagos:</p>`,
         options: [
           "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
           "Pagaré en una sola exhibición máximo el día sábado",
