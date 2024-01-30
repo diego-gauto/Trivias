@@ -137,7 +137,6 @@ const Memberships = () => {
 
     try {
       setIsLoadingData(false);
-      console.log({ startDate });
       const response = await getCloseToEndingMembershipUsers(selectedMembership, startDate, finalDate);
       setData(response.data.data);
       setFilteredData(response.data.data);
@@ -162,6 +161,9 @@ const Memberships = () => {
             <DefaultColumn gap={5}>
               <div className='top-title'>
                 <h2 className='title'>Membresias por finalizar</h2>
+                <span style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'right' }}>
+                  Cantidad de usuarios: {data.length}
+                </span>
               </div>
             </DefaultColumn>
             <Pagination
