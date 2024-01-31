@@ -411,7 +411,7 @@ const CreateForm = () => {
       <div className={lineaAtravesada}></div>
 
       <div className={inputGroup}>
-        <FileUpload route={routeStorageForm} />
+        <FileUpload route={routeStorageForm} updateFormImg={setUpdatedForm} />
         <label htmlFor="imgPath">Imagen:</label>
         <input
           type="text"

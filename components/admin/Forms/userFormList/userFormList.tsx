@@ -33,6 +33,7 @@ const UserTriviaList = ({ usersForm }: UserFormListProps) => {
             <th>WhatsApp</th>
             <th>Pais</th>
             <th>Usuaria</th>
+            <th>Membresía</th>
             <th>fecha</th>
             <th>Respuesta 1</th>
             <th>Respuesta 2</th>

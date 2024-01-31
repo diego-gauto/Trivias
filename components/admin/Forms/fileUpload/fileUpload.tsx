@@ -1,32 +1,61 @@
-import React, { useState } from "react";
-import { ref, uploadBytes } from "firebase/storage";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../firebase/firebaseConfig";
+
+interface Option {
+  isVisible: boolean | null;
+  label: string;
+  options: string[];
+}
+
+interface Form {
+  name: string;
+  title: string;
+  subtitle: string;
+  createdAt: string;
+  editedAt: string;
+  img: {
+    source: string;
+    isVisible: boolean | null;
+  };
+  optionsArray: Option[];
+  redirect: {
+    type: "thankYouPage" | "customLink";
+    link: string;
+    textButton: string;
+  };
+}
 
 interface FileUploadProps {
   route: string;
+  updateFormImg: Dispatch<SetStateAction<Form | null>>;
 }
-const FileUpload = ({ route }: FileUploadProps) => {
-  // const FileUpload = ({route}) => {
-  const [value, setValue] = useState(0);
-  const [picture, setPicture] = useState();
 
-  const uploadFile = (route: string, file: any) => {
+const FileUpload = ({ route, updateFormImg }: FileUploadProps) => {
+  const uploadFile = async (route: string, file: any) => {
     const storageRef = ref(storage, route);
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Archivo subido a firabase storage");
-    });
+    await uploadBytes(storageRef, file);
+    return await getDownloadURL(storageRef);
+  };
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    try {
+      const fileUrl = await uploadFile(route, e.target.files?.[0]);
+      console.log(fileUrl);
+      updateFormImg((prevForm) => ({
+        ...(prevForm as Form),
+        img: { ...prevForm!.img, source: fileUrl },
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+    const fileRef = await uploadFile(route, e.target.files?.[0]);
   };
 
   return (
     <div>
-      <progress value={value} max="100"></progress>
-      <br />
-      <input
-        type="file"
-        onChange={(e) => uploadFile(route, e.target.files?.[0])}
-      />
-      <br />
-      <img width="320" src={picture} alt="image" />
+      <input type="file" onChange={handleChange} />
     </div>
   );
 };
