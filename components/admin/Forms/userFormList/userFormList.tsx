@@ -10,6 +10,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
+  membresia: string;
   fecha: string;
   option1: string;
   option2: string;

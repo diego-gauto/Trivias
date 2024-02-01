@@ -1,5 +1,3 @@
-
-
 interface UserForm {
   user_id: number;
   nombre: string;
@@ -8,6 +6,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
+  membresia: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -19,8 +18,6 @@ interface UserRowProps {
 }
 
 const UserFormRow = ({ userForm }: UserRowProps) => {
-
-
   return (
     <tr>
       <td>{userForm.user_id}</td>
@@ -29,13 +26,13 @@ const UserFormRow = ({ userForm }: UserRowProps) => {
       <td>{userForm.mail}</td>
       <td>{userForm.numeroWhatsapp}</td>
       <td>{userForm.pais}</td>
-      <td>{userForm.isUser ? "Si" : "No"}</td>
+      <td>{userForm.isUser}</td>
+      <td>{userForm.membresia}</td>
       <td>{userForm.fecha}</td>
       <td>{userForm.option1}</td>
       <td>{userForm.option2}</td>
       <td>{userForm.option3}</td>
     </tr>
-
   );
 };
 

@@ -23,6 +23,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
+  membresia: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -104,14 +105,23 @@ const UsersForms = () => {
           return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
         };
 
-        const mappedUsers = usersData.map((user: UserForm, index: number) => ({
-          ...user,
-          user_id: index + 1,
-          fecha: formatDate(new Date(user.fecha)),
-          isUser: user.isUser ? "Si" : "No",
-        }));
-        console.log(
-          await getUserMembership({ email: "maricarmenalvarez116@gmail.com" })
+        const mappedUsers = await Promise.all(
+          usersData.map(async (user: UserForm, index: number) => {
+            let membership = "Inexistente";
+            if (user.isUser) {
+              // Llamada a getUserMembership para obtener la membresía
+              membership = await getUserMembership({ email: user.mail });
+              membership = "mensual";
+            }
+
+            return {
+              ...user,
+              user_id: index + 1,
+              fecha: formatDate(new Date(user.fecha)),
+              isUser: user.isUser ? "Si" : "No",
+              membresia: membership, // Asigna la membresía al usuario
+            };
+          })
         );
         setUsersForms(mappedUsers);
         console.log(mappedUsers);
