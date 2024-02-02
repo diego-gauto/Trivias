@@ -2,25 +2,33 @@ import React, { useState } from 'react'
 import { RetryPaymentContainer } from './RetryPayment.styled'
 import { VscChevronDown } from "react-icons/vsc";
 import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
-const master_card = "/images/RetryPayment/mastercard.png";
+import { IPm } from './IRetryPayment';
+import { PaymentMethods } from './PaymentMethods/PaymentMethods';
 let dummyArray: IPm[] = [
   { last4: '4444', default: true },
   { last4: '3424', default: false },
 ]
-interface IPm {
-  last4: string;
-  default: boolean;
-}
+
 export const RetryPayment = () => {
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
-  const changePaymentMethod = (index: number) => {
+  const changePaymentMethod = (index: number, deflt: boolean) => {
     let tempPaymentsMethods: IPm[] = [...paymentMethods];
-    if (tempPaymentsMethods[index]) {
-      console.log('hola')
-      tempPaymentsMethods[index]!.default = false;
+    if (tempPaymentsMethods.length > 1) {
+      if (deflt) {
+        tempPaymentsMethods[index]!.default = false;
+        if (index === 0) {
+          tempPaymentsMethods[1]!.default = true;
+        } else {
+          tempPaymentsMethods[0]!.default = true;
+        }
+      }
+      else {
+        let idx = tempPaymentsMethods.findIndex((val) => val.default === true);
+        tempPaymentsMethods[idx]!.default = false;
+        tempPaymentsMethods[index]!.default = true;
+      }
       setPaymentMethods(tempPaymentsMethods)
     }
-
   }
   return (
     <RetryPaymentContainer>
@@ -33,26 +41,12 @@ export const RetryPayment = () => {
             {
               paymentMethods.map((pm: IPm, index: number) => {
                 return (
-                  <div className='payment-container' key={"pm-" + index}>
-                    <div className='payment-method'>
-                      <img src={master_card} />
-                      <p className='dots'>**** **** ****</p>
-                      <p className='text'>{pm.last4}</p>
-                    </div>
-                    <p className='description-2'>Para quitarla, agrega otra forma de pago </p>
-                    <div className='edit'>
-                      <div className='default'>
-                        <div className={'input-radio ' + (pm.default ? "selected-radio" : "")} onClick={() => changePaymentMethod(index)}>
-                          <div className='dot' />
-                        </div>
-                        <p>Predeterminada</p>
-                      </div>
-                      <div className='right'>
-                        <p className='actives'>Editar</p>
-                        <p className='actives'>Eliminar</p>
-                      </div>
-                    </div>
-                  </div>
+                  <PaymentMethods
+                    pm={pm}
+                    index={index}
+                    changePaymentMethod={changePaymentMethod}
+                    key={"pm-" + index}
+                  />
                 )
               })
             }
