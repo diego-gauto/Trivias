@@ -10,8 +10,17 @@ export const RetryPaymentContainer = styled.div`
   min-height: 82vh;
   .actives {
     cursor: pointer;
+    transition: 0.3s ease all;
     &:hover {
       opacity: 0.67;
+    }
+  }
+  .fade {
+    opacity: 0;
+    pointer-events: none;
+    cursor: unset;
+    &:hover {
+      opacity: 0;
     }
   }
   a {
@@ -79,6 +88,58 @@ export const RetryPaymentContainer = styled.div`
     .description-2 {
       font-weight: 600;
       font-size: 1.2rem;
+    }
+    .add-payment-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      transition: 0.4s ease all;
+      max-height: 0px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        .box-container {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          padding-block: 20px;
+          height: 84px;
+          border: 1px solid black;
+          justify-content: center;
+          opacity: 0.77;
+          width: 180px;
+          cursor: pointer;
+          p {
+            width: 100px;
+            text-align: start;
+            font-size: 14px;
+            color: black;
+          }
+          &:hover {
+            background-color: #fcebff;
+          }
+        }
+        .selected-box {
+          background-color: #fcebff;
+          border: 1px solid #9a1aff;
+          opacity: 1;
+          p {
+            color: #9a1aff;
+          }
+        }
+      }
+    }
+    .show-contain {
+      max-height: 1000px;
+      overflow: unset;
+      opacity: 1;
+      pointer-events: unset;
     }
   }
 `;

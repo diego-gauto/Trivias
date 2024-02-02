@@ -1,7 +1,7 @@
 import React from 'react'
 import { PaymentMethodsContainer } from './PaymentMethods.styled'
-const master_card = "/images/RetryPayment/mastercard.png";
 import { IPaymentMethods } from './IPaymentMethods';
+const master_card = "/images/RetryPayment/mastercard.png";
 
 export const PaymentMethods = (props: IPaymentMethods) => {
   const { pm, index, pm_size, changePaymentMethod } = props;

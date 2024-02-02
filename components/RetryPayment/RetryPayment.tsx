@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { RetryPaymentContainer } from './RetryPayment.styled'
 import { VscChevronDown } from "react-icons/vsc";
-import { IPm } from './IRetryPayment';
+import { IPayOption, IPm } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
+import { PayOptions } from './constants';
 let dummyArray: IPm[] = [
   { last4: '4444', default: true },
   { last4: '3424', default: false },
@@ -11,6 +12,7 @@ let dummyArray: IPm[] = [
 export const RetryPayment = () => {
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
   const [addPayment, setAddPayment] = useState<boolean>(false);
+  const [selectedButton, setSelectedButton] = useState<number>(0);
 
   const handleAddpayment = () => {
     setAddPayment(!addPayment);
@@ -64,7 +66,25 @@ export const RetryPayment = () => {
           Agregar método de pago
           <VscChevronDown className={(addPayment ? "rotate" : "")} />
         </button>
-        <a href='/preview' className='actives'>Ir a mis cursos</a>
+        <a href='/preview' className={'actives ' + (addPayment ? "fade" : "")}>Ir a mis cursos</a>
+        <div className={'add-payment-container ' + (addPayment ? "show-contain" : "")}>
+          <div className='button-container'>
+            {
+              PayOptions.map((pay: IPayOption, index: number) => {
+                return (
+                  <div className={'box-container ' + (selectedButton === index ? "selected-box" : "")} key={"pay-button" + index} onClick={() => setSelectedButton(index)}>
+                    {selectedButton === index
+                      ? <img src={pay.img_select} />
+                      : <img src={pay.img_unselect} />
+                    }
+                    {pay.title !== "" && <p>{pay.title}</p>}
+                  </div>
+                )
+              })
+            }
+
+          </div>
+        </div>
       </div>
     </RetryPaymentContainer>
   )
