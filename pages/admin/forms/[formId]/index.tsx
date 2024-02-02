@@ -16,6 +16,7 @@ import styles from "./listUser.module.css";
 import { getUserMembership } from "../../../../components/api/users";
 
 interface UserForm {
+  id: number;
   user_id: number;
   nombre: string;
   apellido: string;
@@ -23,7 +24,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
-  membresia: string;
+  suscription_status: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -93,6 +94,7 @@ const UsersForms = () => {
       try {
         // Realiza la llamada a la API para obtener los usuarios del formulario
         const usersData = await getUsersByFormApi(Number(formId));
+        console.log(usersData);
 
         const formatDate = (date: Date): string => {
           const day = date.getDate().toString().padStart(2, "0");
@@ -105,24 +107,14 @@ const UsersForms = () => {
           return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
         };
 
-        const mappedUsers = await Promise.all(
-          usersData.map(async (user: UserForm, index: number) => {
-            let membership = "Inexistente";
-            if (user.isUser) {
-              // Llamada a getUserMembership para obtener la membresía
-              membership = await getUserMembership({ email: user.mail });
-              membership = "mensual";
-            }
-
-            return {
-              ...user,
-              user_id: index + 1,
-              fecha: formatDate(new Date(user.fecha)),
-              isUser: user.isUser ? "Si" : "No",
-              membresia: membership, // Asigna la membresía al usuario
-            };
-          })
-        );
+        const mappedUsers = usersData.map((user: UserForm, index: number) => {
+          return {
+            ...user,
+            id: index + 1,
+            fecha: formatDate(new Date(user.fecha)),
+            isUser: user.user_id ? "Si" : "No",
+          };
+        });
         setUsersForms(mappedUsers);
         console.log(mappedUsers);
         setLoading(false);

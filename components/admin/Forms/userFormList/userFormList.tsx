@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import UserFormRow from "../userFormRow/userFormRow";
 
 interface UserForm {
+  id: number;
   user_id: number;
   nombre: string;
   apellido: string;
@@ -10,7 +11,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
-  membresia: string;
+  suscription_status: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -43,7 +44,7 @@ const UserTriviaList = ({ usersForm }: UserFormListProps) => {
         </thead>
         <tbody>
           {usersForm.map((user) => (
-            <UserFormRow key={user.user_id} userForm={user} />
+            <UserFormRow key={user.id} userForm={user} />
           ))}
         </tbody>
       </Table>
