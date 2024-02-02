@@ -33,9 +33,11 @@ export const RetryPaymentContainer = styled.div`
     border: none;
     border-radius: 100px;
     color: #fff;
-    padding-block: 12px;
+    padding-block: 14px;
     padding-inline: 50px;
     font-weight: 600;
+    font-size: 18px;
+    transition: 0.3s ease all;
     &:hover {
       opacity: 0.67;
     }
@@ -43,7 +45,8 @@ export const RetryPaymentContainer = styled.div`
   button.type2 {
     border: 2px solid #9a1aff;
     background-color: transparent;
-    padding-inline: 200px;
+    justify-content: center;
+    width: 100%;
     color: #9a1aff;
     display: flex;
     gap: 10px;
@@ -56,90 +59,155 @@ export const RetryPaymentContainer = styled.div`
       transform: rotate(-180deg);
     }
   }
-  .main-container {
+  button.type3 {
+    width: 100%;
+  }
+  .input-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    padding-block: 60px;
+    gap: 5px;
+    label {
+      font-size: 16px;
+      color: #3f1168;
+      font-weight: 300;
+      text-align: start;
+    }
+  }
+  input {
+    padding-inline: 20px;
+    border-radius: 100px;
+    padding-block: 8px;
+    border: 1px solid black;
+    opacity: 0.77;
+  }
+  select {
+    padding-inline: 20px;
+    border-radius: 4px;
+    padding-block: 8px;
+  }
+  .complete-contain {
+    display: flex;
+    justify-content: center;
     width: 85%;
     background-color: #fff;
+    padding-block: 60px;
     border-radius: 40px;
-    text-align: center;
-    .payment-container {
-      display: flex;
-      flex-direction: column;
-      gap: 50px;
-    }
-    h2 {
-      color: #9a1aff;
-      margin: 0;
-      font-size: 1.6rem;
-      font-weight: 600;
-    }
-    p {
-      color: #3f1168;
-      margin: 0;
-    }
-    .description {
-      font-weight: 500;
-      font-size: 1.4rem;
-    }
-    .description-2 {
-      font-weight: 600;
-      font-size: 1.2rem;
-    }
-    .add-payment-container {
+    .main-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
-      transition: 0.4s ease all;
-      max-height: 0px;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-      .button-container {
+      gap: 25px;
+      width: 780px;
+      text-align: center;
+      .payment-container {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        .box-container {
+        flex-direction: column;
+        gap: 50px;
+      }
+      h2 {
+        color: #9a1aff;
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+      p {
+        margin: 0;
+      }
+      .description {
+        font-weight: 500;
+        font-size: 1.4rem;
+      }
+      .description-2 {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+      .add-payment-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        transition: 0.4s ease all;
+        max-height: 0px;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        width: 100%;
+        .description-text {
+          color: #3f1168;
+          text-align: start;
+          font-weight: 500;
+          font-size: 26px;
+        }
+        .button-container {
           display: flex;
-          gap: 10px;
-          align-items: center;
-          padding-block: 20px;
-          height: 84px;
-          border: 1px solid black;
+          flex-wrap: wrap;
           justify-content: center;
-          opacity: 0.77;
-          width: 180px;
-          cursor: pointer;
-          p {
-            width: 100px;
-            text-align: start;
-            font-size: 14px;
-            color: black;
+          gap: 20px;
+          .box-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-block: 20px;
+            height: 84px;
+            border: 1px solid black;
+            justify-content: center;
+            opacity: 0.77;
+            width: 180px;
+            cursor: pointer;
+            p {
+              width: 100px;
+              text-align: start;
+              font-size: 14px;
+              color: black;
+            }
+            &:hover {
+              background-color: #fcebff;
+            }
           }
-          &:hover {
+          .selected-box {
             background-color: #fcebff;
+            border: 1px solid #9a1aff;
+            opacity: 1;
+            p {
+              color: #9a1aff;
+            }
           }
         }
-        .selected-box {
-          background-color: #fcebff;
-          border: 1px solid #9a1aff;
-          opacity: 1;
-          p {
-            color: #9a1aff;
+        .card-container {
+          display: flex;
+          gap: 30px;
+          width: 100%;
+          .left-side {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .inputs-column {
+              display: flex;
+              gap: 20px;
+              input {
+                border-radius: 4px;
+              }
+            }
+          }
+          .right-side {
+            display: flex;
+            margin-top: 20px;
+            width: 50%;
+            .card-img {
+              width: 300px;
+              height: 200px;
+              border-radius: 10px;
+              background: linear-gradient(to bottom, #393d44 0%, #5b636b 100%);
+            }
           }
         }
       }
-    }
-    .show-contain {
-      max-height: 1000px;
-      overflow: unset;
-      opacity: 1;
-      pointer-events: unset;
+      .show-contain {
+        max-height: 1000px;
+        overflow: unset;
+        opacity: 1;
+        pointer-events: unset;
+      }
     }
   }
 `;

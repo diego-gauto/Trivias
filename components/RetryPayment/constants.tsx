@@ -14,20 +14,25 @@ export const PayOptions: IPayOption[] = [
     title: "Tarjeta de crédito/debito",
     img_select: card_select,
     img_unselect: card_unselect,
+    id: "card",
   },
-  {
-    title: "",
-    img_select: paypal_s,
-    img_unselect: paypal_uns,
-  },
+  // {
+  //   title: "",
+  //   img_select: paypal_s,
+  //   img_unselect: paypal_uns,
+  //   id: "paypal",
+  // },
   {
     title: "",
     img_select: oxxo_select,
     img_unselect: oxxo_unselect,
+    id: "oxxo",
   },
   {
     title: "Transferencia",
     img_select: moneda_select,
     img_unselect: moneda_unselect,
+    id: "transfer",
   }
 ]
+export const Year = []
