@@ -15,7 +15,12 @@ export const RetryPayment = () => {
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
   const changePaymentMethod = (index: number) => {
     let tempPaymentsMethods: IPm[] = [...paymentMethods];
-    // tempPaymentsMethods[index]?.default = false;
+    if (tempPaymentsMethods[index]) {
+      console.log('hola')
+      tempPaymentsMethods[index]!.default = false;
+      setPaymentMethods(tempPaymentsMethods)
+    }
+
   }
   return (
     <RetryPaymentContainer>

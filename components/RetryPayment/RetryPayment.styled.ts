@@ -96,26 +96,26 @@ export const RetryPaymentContainer = styled.div`
           .input-radio {
             display: flex;
             width: 30px;
-            height: 20px;
+            height: 21px;
             border-radius: 100px;
             background-color: gray;
             position: relative;
             transition: 0.4s ease all;
             .dot {
               position: absolute;
-              width: 18px;
-              height: 18px;
+              width: 17px;
+              height: 17px;
               border-radius: 50%;
               background-color: white;
-              top: 1px;
-              left: 1px;
+              top: 2px;
+              left: 2px;
             }
             cursor: pointer;
           }
           .selected-radio {
             background-color: #9a1aff;
             .dot {
-              left: 11px;
+              left: 10px;
             }
           }
           p {
