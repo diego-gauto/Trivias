@@ -163,9 +163,9 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    // const selectedForm = forms[Number(formId) - 1];
-    // setForm(selectedForm);
-    // setLoading(false);
+    const selectedForm = forms[Number(formId) - 1];
+    setForm(selectedForm);
+    setLoading(false);
 
     const fetchData = async () => {
       try {
@@ -234,7 +234,7 @@ const Formularios = () => {
       }
     };
 
-    fetchData();
+    // fetchData();
   }, [formId]);
 
   useEffect(() => {
