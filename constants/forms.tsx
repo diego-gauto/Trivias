@@ -24,7 +24,7 @@ interface Form {
 
 const forms: Form[] = [
   {
-    name: "Campaña 11 de Diciembre",
+    name: "Campaña 11 de Diciembre Facebook",
     title:
       "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
     subtitle:
@@ -61,7 +61,7 @@ const forms: Form[] = [
     },
   },
   {
-    name: "Campaña 11 de Diciembre",
+    name: "Campaña 11 de Diciembre Google",
     title:
       "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
     subtitle:
@@ -98,7 +98,7 @@ const forms: Form[] = [
     },
   },
   {
-    name: "Campaña 11 de Diciembre",
+    name: "Campaña 11 de Diciembre Tik Tok",
     title:
       "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
     subtitle:

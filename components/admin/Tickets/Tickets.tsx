@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { AdminContain } from '../SideBar.styled';
-import { AdminTable, DefaultColumn, DefaultContainer, DefaultFilterContain, DefaultRow, DefaultSearchContainer } from '../DefaultComponents/DefaultComponents.styled';
-import { useAdmin } from '../../../hooks/AdminContext';
-import CsvDownloader from "react-csv-downloader";
-import Calendar from 'react-calendar';
-import { IoClose } from 'react-icons/io5';
-import { AiFillPlusCircle } from 'react-icons/ai';
-import Pagination from '../../Pagination/Pagination'
-import { EditIcon } from '../Category/Category.styled';
+import { AdminTable, DefaultColumn, DefaultContainer } from '../DefaultComponents/DefaultComponents.styled';
+import Pagination from '../../Pagination/Pagination';
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
-import { UserShow } from '../Users/UsersList.styled';
-import { IAdminUsers } from '../../../interfaces/IAdmin';
-import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLessonFromUserApi, usersForExcelApi } from '../../api/admin';
 import { getAdminMassiveLotteryApi } from '../../api/notifications';
-// getAdminMassiveLotteryApi
-import UserCardData from '../Users/UserData/UserCardData';
-import { BsFileEarmarkExcelFill } from 'react-icons/bs';
-import users from '../../../pages/admin/trivias/users';
-import { user } from 'firebase-functions/v1/auth';
 
 interface TicketRowData {
   name: string;
@@ -61,10 +46,10 @@ const Tickets = () => {
   const [data, setData] = useState<TicketRowData[]>([]);
   const [totalTickets, setTotalTickets] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [filter, setFilter] = useState<FilterValue>('NAME');
   const [textFilter, setTextFilter] = useState('');
   const [offset, setOffset] = useState(0);
   const [filteredData, setFilteredData] = useState<TicketRowData[]>([]);
+  const [selectedOption, setSelectedOption] = useState<FilterValue>('NAME');
 
   useEffect(() => {
     getData();
@@ -111,11 +96,11 @@ const Tickets = () => {
     setTextFilter(e.target.value);
     const newFilterValue = e.target.value;
     changePage(0);
-    if (filter === 'NAME') {
+    if (selectedOption === 'NAME') {
       const result = data.filter(row => `${row.email}`.toLowerCase()
         .includes(newFilterValue.toLowerCase()));
       setFilteredData(result);
-    } else if (filter === 'TICKET_NUMBER') {
+    } else if (selectedOption === 'TICKET_NUMBER') {
       const result = data.filter(row => row.ticket_value === parseInt(newFilterValue));
       if (newFilterValue === '') {
         setFilteredData(data);
@@ -162,16 +147,16 @@ const Tickets = () => {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
                 <div className="option" style={{ fontSize: '18px' }}>
-                  <input id='radio-name' type="radio" checked={filter === 'NAME'} onClick={() => {
-                    setFilter('NAME');
+                  <input id='radio-name' type="radio" checked={selectedOption === 'NAME'} value={'NAME'} onChange={() => {
+                    setSelectedOption('NAME');
                     setTextFilter('');
                   }}
                   />
                   <label htmlFor='radio-name'>Por correo eléctronico</label>
                 </div>
                 <div className="option" style={{ fontSize: '18px' }}>
-                  <input id='radio-ticket-number' type="radio" checked={filter === 'TICKET_NUMBER'} onClick={() => {
-                    setFilter('TICKET_NUMBER');
+                  <input id='radio-ticket-number' type="radio" checked={selectedOption === 'TICKET_NUMBER'} value={'TICKET_NUMBER'} onChange={() => {
+                    setSelectedOption('TICKET_NUMBER');
                     setTextFilter('');
                   }} />
                   <label htmlFor='radio-ticket-number'>Por número de boleto</label>

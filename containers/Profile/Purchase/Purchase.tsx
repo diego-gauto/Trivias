@@ -783,14 +783,15 @@ const Purchase = () => {
                       onApprove={async (data: any, actions) => {
                         let today = new Date().getTime() / 1000;
                         let finalDate = 0;
-                        finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                        finalDate = today + frequency === "month" ? 2629800 : frequency === "anual" ? 31536000 : 10368000;
                         await updateMembership({
                           method: "paypal",
                           final_date: finalDate,
                           plan_id: data.subscriptionID,
                           plan_name: product.title,
                           start_date: new Date().getTime() / 1000, userId: userData.user_id,
-                          level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                          level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7,
+                          type: product.price
                         })
                         setConfirmation(false);
                         setPay(true);
@@ -1117,14 +1118,15 @@ const Purchase = () => {
                         onApprove={async (data: any, actions) => {
                           let today = new Date().getTime() / 1000;
                           let finalDate = 0;
-                          finalDate = today + frequency === "month" ? 2629800 : 31536000;
+                          finalDate = today + frequency === "month" ? 2629800 : frequency === "anual" ? 31536000 : 10368000;
                           await updateMembership({
                             method: "paypal",
                             final_date: finalDate,
                             plan_id: data.subscriptionID,
                             plan_name: product.title,
                             start_date: new Date().getTime() / 1000, userId: userData.user_id,
-                            level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+                            level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7,
+                            type: product.price
                           })
                           setConfirmation(false);
                           setPay(true);

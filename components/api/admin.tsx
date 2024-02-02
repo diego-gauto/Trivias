@@ -507,3 +507,52 @@ export const cancelReviewExcel = async (date: string, date_1: string, date_2: st
       return error
     });
 };
+
+interface MembershipCloseToEnding {
+  id: number;
+  name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  final_date: string;
+  method: string;
+  level: number;
+  datediff: number;
+}
+
+export const getCloseToEndingMembershipUsers = async (levels: number[], startDate: Date, finalDate: Date) => {
+  /*Niveles
+  Cuatrimestre -> 8
+  Mensual -> 6
+  Anual -> 5*/
+  const body = {
+    "levels": levels,
+    "start_date": `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`,
+    "final_date": `${finalDate.getFullYear()}-${finalDate.getMonth() + 1}-${finalDate.getDate()}`
+  }
+  return axios
+    .post<{ data: MembershipCloseToEnding[] }>("https://gonvar.inowu.dev/" + "admin/get-close-to-ending-membership-users", body)
+}
+
+export const getGenericQueryResponse = async (query: string) => {
+  const body = {
+    query
+  }
+  return axios.post<{ data: any[] }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
+}
+
+interface InsertSQLResult {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  info: string;
+  serverStatus: number;
+  warningStatus: number;
+}
+
+export const postGenericQueryResponse = async (query: string) => {
+  const body = {
+    query
+  }
+  return axios.post<{ data: InsertSQLResult }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
+}
