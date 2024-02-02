@@ -282,7 +282,7 @@ const forms: Form[] = [
         label:
           "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️<strong>Hazlo</strong> sólo sí estás comprometida a completar tu pago <strong>máximo el lunes</strong>, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera. Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.<br><br>Recomendación: La Mystery Box contiene <strong>GRANDES SORPRESAS Y PRODUCTOS SECRETOS de la Marca</strong> donde ahorras $1,899 pesos y obtienes hasta 70% de descuento.<br><br>Perfecto, hermosa. Estas apunto de apartar tu kit con DESCUENTO, solo debes elegir cuál de las 4 opciones de kit vas a querer:</p>",
         options: [
-          `Apartar Kit Nails Máster(Precio real: $.3,654MXN) NO pagarás eso. Precio para ti: $1,949MXN`,
+          `Apartar Kit Nails Máster (Precio real: $3,654MXN) NO pagarás eso. Precio para ti: $1,949MXN`,
           "Apartar Mystery Box Love Edition + Drill (Precio real: $3,699MXN) NO pagarás eso. Precio para ti: $1,999MXN",
           "Apartar Mystery Box Love Edition + Pincel (Precio real: $3,699MXN) NO pagarás eso. Precio para ti: $1,999MXN",
           "Hacer pedido personalizado (a partir de 3,000 pesos MXN)",
