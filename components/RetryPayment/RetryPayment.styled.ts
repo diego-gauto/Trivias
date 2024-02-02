@@ -41,6 +41,10 @@ export const RetryPaymentContainer = styled.div`
     align-items: center;
     svg {
       font-size: 1.2rem;
+      transition: 0.4s ease all;
+    }
+    .rotate {
+      transform: rotate(-180deg);
     }
   }
   .main-container {

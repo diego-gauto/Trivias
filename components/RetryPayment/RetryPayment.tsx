@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { RetryPaymentContainer } from './RetryPayment.styled'
 import { VscChevronDown } from "react-icons/vsc";
-import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
 import { IPm } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
 let dummyArray: IPm[] = [
@@ -11,6 +10,11 @@ let dummyArray: IPm[] = [
 
 export const RetryPayment = () => {
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
+  const [addPayment, setAddPayment] = useState<boolean>(false);
+
+  const handleAddpayment = () => {
+    setAddPayment(!addPayment);
+  }
   const changePaymentMethod = (index: number, deflt: boolean) => {
     let tempPaymentsMethods: IPm[] = [...paymentMethods];
     if (tempPaymentsMethods.length > 1) {
@@ -54,14 +58,14 @@ export const RetryPayment = () => {
           </div>
         }
         <button>Reintentar pago</button>
-        <button className='type2'>Agregar método de pago <VscChevronDown /> </button>
+        <button
+          className='type2'
+          onClick={handleAddpayment}>
+          Agregar método de pago
+          <VscChevronDown className={(addPayment ? "rotate" : "")} />
+        </button>
         <a href='/preview' className='actives'>Ir a mis cursos</a>
       </div>
-      {/* <RetryPayModal
-        show={true}
-        onHide={() => { }}
-        withSubscription={true}
-      /> */}
     </RetryPaymentContainer>
   )
 }
