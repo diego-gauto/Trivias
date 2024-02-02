@@ -53,6 +53,11 @@ export const RetryPaymentContainer = styled.div`
     background-color: #fff;
     border-radius: 40px;
     text-align: center;
+    .payment-container {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
     h2 {
       color: #9a1aff;
       margin: 0;

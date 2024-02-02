@@ -44,6 +44,7 @@ export const RetryPayment = () => {
                   <PaymentMethods
                     pm={pm}
                     index={index}
+                    pm_size={paymentMethods.length}
                     changePaymentMethod={changePaymentMethod}
                     key={"pm-" + index}
                   />
