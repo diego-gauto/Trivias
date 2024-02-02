@@ -165,7 +165,6 @@ const NavBar = () => {
     }
   }
   useEffect(() => {
-    localStorage.setItem("email", "ronoelsomar@hotmail.com")
     window.addEventListener('scroll', ChangeNav);
   },
     [pathname],
