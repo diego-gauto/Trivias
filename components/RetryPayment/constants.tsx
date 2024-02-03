@@ -35,4 +35,10 @@ export const PayOptions: IPayOption[] = [
     id: "transfer",
   }
 ]
-export const Year = []
+const fullYear = new Date().getFullYear();
+const twoDigitYear = parseInt(fullYear.toString().slice(-2));
+export const Year = [
+  twoDigitYear, twoDigitYear + 1, twoDigitYear + 2, twoDigitYear + 3, twoDigitYear + 4, twoDigitYear + 5,
+  twoDigitYear + 6, twoDigitYear + 7, twoDigitYear + 8, twoDigitYear + 9
+];
+export const Month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]

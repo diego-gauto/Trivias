@@ -3,9 +3,10 @@ import { RetryPaymentContainer } from './RetryPayment.styled'
 import { VscChevronDown } from "react-icons/vsc";
 import { ICard, IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { PayOptions } from './constants';
+import { Month, PayOptions, Year } from './constants';
 import InputMask from "react-input-mask";
 import { FaChevronDown } from "react-icons/fa";
+import { checkEmpty } from './functions';
 
 let dummyArray: IPm[] = [
   { last4: '4444', default: true },
@@ -16,7 +17,13 @@ export const RetryPayment = () => {
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>("card");
-  const [card, setCard] = useState<ICard>({} as ICard);
+  const [card, setCard] = useState<ICard>({
+    cvc: '',
+    exp_month: '',
+    exp_year: '',
+    number: '',
+    holder: '',
+  });
 
   const changeElement = (key: TKey, value: string) => {
     let tempCard = { ...card };
@@ -119,12 +126,30 @@ export const RetryPayment = () => {
                         <label>Mes</label>
                         <select defaultValue={"MM"} onChange={(e) => changeElement("exp_month", e.target.value)}>
                           <option disabled value={"MM"}>MM</option>
+                          {
+                            Month.map((month: number, index: number) => {
+                              return (
+                                <option key={"mes-" + index} value={month}>
+                                  {month}
+                                </option>
+                              )
+                            })
+                          }
                         </select>
                       </div>
                       <div className='input-container'>
                         <label>Año</label>
                         <select defaultValue={"AA"} onChange={(e) => changeElement("exp_year", e.target.value)}>
                           <option disabled value={"AA"}>AA</option>
+                          {
+                            Year.map((year: number, index: number) => {
+                              return (
+                                <option key={"year-" + index} value={year}>
+                                  {year}
+                                </option>
+                              )
+                            })
+                          }
                         </select>
                       </div>
                       <div className='input-container'>
@@ -138,8 +163,19 @@ export const RetryPayment = () => {
                     </div>
                   </div>
                   <div className='right-side'>
-                    <div className='card-img'>
-                      {/* <p></p> */}
+                    <div className={'card-img ' + (checkEmpty(card) ? "background-checked " : "")}>
+                      <div className='square' />
+                      <p className='number'>{card.number}</p>
+                      <div className='last-data'>
+                        <p>{card.holder}</p>
+                        {
+                          (card.exp_month !== "" || card.exp_year !== "") &&
+                          <div className='date'>
+                            <p>mes/año</p>
+                            <p>{card.exp_month}/{card.exp_year}</p>
+                          </div>
+                        }
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -154,6 +190,14 @@ export const RetryPayment = () => {
                 </p>
                 <button className='type3'>Guardar</button>
               </>
+            }
+            {
+              selectedButton === "oxxo" &&
+              <button className='type3 oxxo'>Pagar con oxxo</button>
+            }
+            {
+              selectedButton === "transfer" &&
+              <button className='type3 spei'>Pagar con spei</button>
             }
           </div>
         </div>

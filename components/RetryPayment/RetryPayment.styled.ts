@@ -62,6 +62,12 @@ export const RetryPaymentContainer = styled.div`
   button.type3 {
     width: 100%;
   }
+  button.oxxo {
+    background-color: #d8363e;
+  }
+  button.spei {
+    background-color: #36d86d;
+  }
   .input-container {
     display: flex;
     flex-direction: column;
@@ -194,10 +200,47 @@ export const RetryPaymentContainer = styled.div`
             margin-top: 20px;
             width: 50%;
             .card-img {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              align-items: start;
+              padding: 40px;
               width: 300px;
               height: 200px;
               border-radius: 10px;
               background: linear-gradient(to bottom, #393d44 0%, #5b636b 100%);
+              transition: 1s ease all;
+              .square {
+                background-color: #d9d9d9;
+                border-radius: 6px;
+                width: 50px;
+                height: 33px;
+              }
+              .number {
+                height: 21px;
+              }
+              .last-data {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                gap: 5px;
+                .date {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                }
+              }
+              p {
+                color: #a5a9ae;
+                font-size: 14px;
+              }
+            }
+            .background-checked {
+              background: linear-gradient(to bottom, #ae47ff 0%, #9a1aff 100%);
+              p {
+                color: #fff;
+              }
             }
           }
         }
