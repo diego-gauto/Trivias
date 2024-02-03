@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RetryPaymentContainer } from './RetryPayment.styled'
 import { VscChevronDown } from "react-icons/vsc";
 import { ICard, IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
@@ -7,6 +7,8 @@ import { Month, PayOptions, Year } from './constants';
 import InputMask from "react-input-mask";
 import { FaChevronDown } from "react-icons/fa";
 import { checkEmpty } from './functions';
+import { conektaPm, getUserApi } from '../api/users';
+import { useAuth } from '../../hooks/useAuth';
 
 let dummyArray: IPm[] = [
   { last4: '4444', default: true },
@@ -14,7 +16,8 @@ let dummyArray: IPm[] = [
 ]
 
 export const RetryPayment = () => {
-  const [paymentMethods, setPaymentMethods] = useState<IPm[]>(dummyArray)
+  let userDataAuth: any = useAuth();
+  const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>("card");
   const [card, setCard] = useState<ICard>({
@@ -52,6 +55,18 @@ export const RetryPayment = () => {
       setPaymentMethods(tempPaymentsMethods)
     }
   }
+  useEffect(() => {
+    let user = userDataAuth.user;
+    let body = {
+      stripe_id: user.stripe_id,
+      conekta_id: user.conekta_id
+    }
+    conektaPm(body).then((res) => {
+      const conektaPaymentMethods = res.data.payment_methods.data
+      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+      setPaymentMethods(extractedProperties);
+    })
+  }, [userDataAuth])
   return (
     <RetryPaymentContainer>
       <div className='complete-contain'>
@@ -76,7 +91,10 @@ export const RetryPayment = () => {
               }
             </div>
           }
-          <button className={(addPayment ? "fade" : "")}>Reintentar pago</button>
+          {
+            paymentMethods.length > 0 &&
+            <button className={(addPayment ? "fade" : "")}>Reintentar pago</button>
+          }
           <button
             className='type2'
             onClick={handleAddpayment}>
@@ -126,7 +144,7 @@ export const RetryPayment = () => {
                     <div className='inputs-column'>
                       <div className='input-container'>
                         <label>Mes</label>
-                        <select value={card.exp_month} defaultValue={"MM"} onChange={(e) => changeElement("exp_month", e.target.value)}>
+                        <select value={card.exp_month} onChange={(e) => changeElement("exp_month", e.target.value)}>
                           <option disabled value={"MM"}>MM</option>
                           {
                             Month.map((month: number, index: number) => {
@@ -141,7 +159,7 @@ export const RetryPayment = () => {
                       </div>
                       <div className='input-container'>
                         <label>Año</label>
-                        <select value={card.exp_year} defaultValue={"AA"} onChange={(e) => changeElement("exp_year", e.target.value)}>
+                        <select value={card.exp_year} onChange={(e) => changeElement("exp_year", e.target.value)}>
                           <option disabled value={"AA"}>AA</option>
                           {
                             Year.map((year: number, index: number) => {
