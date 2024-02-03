@@ -1,6 +1,8 @@
 export interface IPm {
   last4: string;
+  brand: string;
   default: boolean;
+  id: string;
 }
 export type TPayOptionId = "card" | "transfer" | "oxxo" | "paypal";
 export interface IPayOption {

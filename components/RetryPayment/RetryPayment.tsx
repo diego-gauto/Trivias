@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { RetryPaymentContainer } from './RetryPayment.styled'
-import { VscChevronDown } from "react-icons/vsc";
 import { ICard, IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
 import { Month, PayOptions, Year } from './constants';
 import InputMask from "react-input-mask";
 import { FaChevronDown } from "react-icons/fa";
 import { checkEmpty } from './functions';
-import { conektaPm, getUserApi } from '../api/users';
+import { conektaPm } from '../api/users';
 import { useAuth } from '../../hooks/useAuth';
-
-let dummyArray: IPm[] = [
-  { last4: '4444', default: true },
-  { last4: '3424', default: false },
-]
+import { attachPaymentMethodConekta } from '../api/profile';
+import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
+declare let window: any
 
 export const RetryPayment = () => {
   let userDataAuth: any = useAuth();
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>("card");
+  const [loaderAdd, setLoaderAdd] = useState<boolean>(false)
   const [card, setCard] = useState<ICard>({
     cvc: '',
     exp_month: '',
@@ -27,7 +25,46 @@ export const RetryPayment = () => {
     number: '',
     holder: '',
   });
-
+  const addNewCard = async () => {
+    setLoaderAdd(!loaderAdd);
+    let c: any = card;
+    if (Object.keys(card).some((key: any) => c[key] === '')) {
+      alert('Por favor acomplete todos los campos!');
+      setLoaderAdd(false);
+    } else {
+      let tempCard = {
+        card: {
+          number: card.number.replaceAll(" ", ""),
+          name: card.holder,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
+        }
+      }
+      window.Conekta.Token.create(
+        tempCard,
+        conektaSuccessResponseHandler,
+        conektaErrorResponseHandler, 'web'
+      );
+    }
+  }
+  const conektaSuccessResponseHandler = (token: any) => {
+    let user = userDataAuth.user;
+    let tokenId = token.id
+    const body = {
+      token_id: tokenId,
+      conekta_id: user.conekta_id
+    }
+    attachPaymentMethodConekta(body).then((res) => {
+      getPaymentMethods();
+      setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+      setLoaderAdd(false);
+    })
+  }
+  const conektaErrorResponseHandler = (response: any) => {
+    alert("Hay un error en los datos de la tarjeta!")
+    setLoaderAdd(false)
+  };
   const changeElement = (key: TKey, value: string) => {
     let tempCard = { ...card };
     tempCard[key] = value;
@@ -55,7 +92,7 @@ export const RetryPayment = () => {
       setPaymentMethods(tempPaymentsMethods)
     }
   }
-  useEffect(() => {
+  const getPaymentMethods = () => {
     let user = userDataAuth.user;
     let body = {
       stripe_id: user.stripe_id,
@@ -63,9 +100,12 @@ export const RetryPayment = () => {
     }
     conektaPm(body).then((res) => {
       const conektaPaymentMethods = res.data.payment_methods.data
-      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: any) => ({ id, brand, last4, default: boolean }));
+      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
       setPaymentMethods(extractedProperties);
     })
+  }
+  useEffect(() => {
+    getPaymentMethods();
   }, [userDataAuth])
   return (
     <RetryPaymentContainer>
@@ -209,7 +249,12 @@ export const RetryPayment = () => {
                   Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a
                   tu perfil y presiona en el botón "Cancelar suscripción"
                 </p>
-                <button className='type3'>Guardar</button>
+                {
+                  loaderAdd
+                    ? <LoaderContainSpinner />
+                    : <button className='type3' onClick={addNewCard}>Guardar</button>
+                }
+
               </>
             }
             {
