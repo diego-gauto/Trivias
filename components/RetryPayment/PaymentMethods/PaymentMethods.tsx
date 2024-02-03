@@ -28,7 +28,6 @@ export const PaymentMethods = (props: IPaymentMethods) => {
         }
 
         <div className='right'>
-          <p className='actives'>Editar</p>
           {
             !pm.default ?
               <p className='actives'>Eliminar</p>
