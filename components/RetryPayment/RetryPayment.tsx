@@ -111,12 +111,14 @@ export const RetryPayment = () => {
                         placeholder='Introduce solo números'
                         mask='9999 9999 9999 9999'
                         maskChar={null}
+                        value={card.number}
                         onChange={(e) => changeElement("number", e.target.value)}
                       />
                     </div>
                     <div className='input-container'>
                       <label>Nombre del titular</label>
                       <input
+                        value={card.holder}
                         placeholder='Introduce el nombre impreso de la tarjeta'
                         onChange={(e) => changeElement("holder", e.target.value)}
                       />
@@ -124,7 +126,7 @@ export const RetryPayment = () => {
                     <div className='inputs-column'>
                       <div className='input-container'>
                         <label>Mes</label>
-                        <select defaultValue={"MM"} onChange={(e) => changeElement("exp_month", e.target.value)}>
+                        <select value={card.exp_month} defaultValue={"MM"} onChange={(e) => changeElement("exp_month", e.target.value)}>
                           <option disabled value={"MM"}>MM</option>
                           {
                             Month.map((month: number, index: number) => {
@@ -139,7 +141,7 @@ export const RetryPayment = () => {
                       </div>
                       <div className='input-container'>
                         <label>Año</label>
-                        <select defaultValue={"AA"} onChange={(e) => changeElement("exp_year", e.target.value)}>
+                        <select value={card.exp_year} defaultValue={"AA"} onChange={(e) => changeElement("exp_year", e.target.value)}>
                           <option disabled value={"AA"}>AA</option>
                           {
                             Year.map((year: number, index: number) => {
@@ -157,6 +159,7 @@ export const RetryPayment = () => {
                         <input
                           placeholder='***'
                           type='password'
+                          value={card.cvc}
                           onChange={(e) => changeElement("cvc", e.target.value)}
                         />
                       </div>
