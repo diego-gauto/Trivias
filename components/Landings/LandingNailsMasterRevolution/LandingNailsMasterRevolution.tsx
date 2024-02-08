@@ -224,7 +224,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     return returnValue;
   };
 
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   return (
     <SuscriptionContain>
@@ -235,10 +235,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <br />
             Inscripciones sólo desde el
             <br />
-            29 de Enero al 03 de Febrero
+            03 de Febrero al 29 de Febrero
           </h4>
           <Countdown
-            date={1707015599000}
+            date={1709247641000}
             renderer={(props) => (
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>
@@ -277,9 +277,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           />
           <div className="progress-container">
             <div
-              className={`progress-bar ${
-                checkProgress().x100 >= 100 && "full"
-              }`}
+              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
+                }`}
               style={
                 {
                   "--progress": checkProgress().x100 + "%",
