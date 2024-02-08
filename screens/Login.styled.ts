@@ -1,6 +1,6 @@
-import PhoneInput from "react-phone-number-input";
+import PhoneInput from 'react-phone-number-input';
 
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 /**** new style ****/
 export const BackgroundLoader = styled.div`

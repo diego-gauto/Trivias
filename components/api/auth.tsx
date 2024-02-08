@@ -114,9 +114,31 @@ export const updateLastSignIn = async (user: any) => {
       return error
     });
 };
-export const updateComeFromApi = async (user: any) => {
+export const updateComeFromApi = async (user: { come_from: string, id: any }) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "auth/user/comefrom", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updatePhoneNumberApi = async (user: { phone_number: string, id: any }) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "auth/user/phonenumber", user)
+    .then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};
+export const updateExtraInfoApi = async (user: { phone_number: string, come_from: string, id: any, origin_state: string }) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "auth/user/update-extra-info", user)
     .then((res) => {
       return res.data
     })

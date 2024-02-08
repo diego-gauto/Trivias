@@ -28,4 +28,7 @@ export interface IUser {
   role: string;
   conekta_id: string;
   plan_id: string;
+  come_from: string;
+  country: string;
+  origin_state: any;
 }
