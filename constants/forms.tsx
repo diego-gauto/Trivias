@@ -297,6 +297,43 @@ const forms: Form[] = [
       textButton: "",
     },
   },
+  {
+    name: "Tanda Pinceles 12 Febrero 2024",
+    title:
+      "<p>¡Únete a nuestra tanda de pinceles Gonvar!🥳🖌️</p>",
+    subtitle:
+      "<p><strong>Registro Válido Sólo desde Hoy y máximo este viernes 16 de Febrero,</strong> plan de 4 pagos flexibles.</p><p>🚨Los lugares son limitados, asegúrate de conseguir lugar antes de que se agoten</span>.</p><p>Recuerda que al ser un programa LIMITADO tienes máximo hasta el Sábado 17 para poder realizar tu pago. Este es un plan que les damos a todas ustedes con todo el cariño para que puedan obtener su pincel profesional y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu lugar y darte indicaciones de pago y envíos.</p><p><strong>Completa el formulario</strong> para elegir una de las opciones de pincel que tenemos para ti en esta Tanda.</p>",
+    createdAt: "12-02-2024 16:16:08",
+    editedAt: "12-02-2024 16:16:08",
+    img: { source: "/images/forms/form02Feb2024.jpeg", isVisible: true },
+    optionsArray: [
+      {
+        isVisible: true,
+        label:
+          "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️ <strong>Hazlo</strong> sólo si estás comprometida a completar tu primer pago <strong>máximo el Sábado 17, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera.Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.</p>",
+        options: [
+          `Apartar Pincel profesional de aplicación Kolinsky 100% natural del Número 10 con acabado en aluminio Ligero Gold Rose. (Disponible para entrega inmediata en caso de liquidar antes )
+          Incluye:
+          💕Envío Gratis a todo México 
+          💕Estuche de viaje con acabado  Soft touch
+          💕Curso de cuidados del pincel Gratis`,
+          `Apartar Kit de Pinceles Profesionales de Arte Van Gogh, diseñados con acabado Fino en aluminio Rose Gold Cada pincel ofrece una combinación única de cerdas suaves y resistentes que garantizan una aplicación suave y precisa. Fabricados con mangos ergonómicos para un control óptimo, estos pinceles son la herramienta perfecta para artistas de todos los niveles.(Disponible solo para entrega en 4 semanas)
+          Incluye:
+          💕5 Pinceles de doble punta (10 Pinceles de Arte)
+          💕Envío Gratis a todo México
+          💕Estuche de viaje  con acabado Soft Touch
+          💕Curso de uso de los Pinceles Gratis`,
+        ],
+      },
+      { isVisible: false, label: "", options: ["", ""] },
+      { isVisible: false, label: "", options: ["", ""] },
+    ],
+    redirect: {
+      type: "thankYouPage",
+      link: "",
+      textButton: "",
+    },
+  },
 ];
 
 export default forms;
