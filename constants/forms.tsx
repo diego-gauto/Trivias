@@ -317,7 +317,7 @@ const forms: Form[] = [
           💕Envío Gratis a todo México\n
           💕Estuche de viaje con acabado  Soft touch\n
           💕Curso de cuidados del pincel Gratis\n`,
-          `Apartar Kit de Pinceles Profesionales de Arte Van Gogh, diseñados con acabado Fino en aluminio Rose Gold Cada pincel ofrece una combinación única de cerdas suaves y resistentes que garantizan una aplicación suave y precisa. Fabricados con mangos ergonómicos para un control óptimo, estos pinceles son la herramienta perfecta para artistas de todos los niveles.(Disponible solo para entrega en 4 semanas)\n
+          `Apartar Kit de Pinceles Profesionales de Arte Van Gogh, diseñados con acabado Fino en aluminio Rose Gold. Cada pincel ofrece una combinación única de cerdas suaves y resistentes que garantizan una aplicación suave y precisa. Fabricados con mangos ergonómicos para un control óptimo, estos pinceles son la herramienta perfecta para artistas de todos los niveles. (Disponible solo para entrega en 4 semanas)\n
           Incluye:\n
           💕5 Pinceles de doble punta (10 Pinceles de Arte)\n
           💕Envío Gratis a todo México\n
