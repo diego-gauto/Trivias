@@ -310,7 +310,7 @@ const forms: Form[] = [
       {
         isVisible: true,
         label:
-          "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️ <strong>Hazlo</strong> sólo si estás comprometida a completar tu primer pago <strong>máximo el Sábado 17</strong>, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera.Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.</p>",
+          "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️ <strong>Hazlo</strong> sólo si estás comprometida a completar tu primer pago <strong>máximo el Sábado 17</strong>, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera.Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.</p><p>En ambas opciones el costo será de $880MXN en 4 pagos de $220MXN, uno por semana",
         options: [
           `Apartar Pincel profesional de aplicación Kolinsky 100% natural del Número 10 con acabado en aluminio Ligero Gold Rose. (Disponible para entrega inmediata en caso de liquidar antes)\n
           Incluye:\n
