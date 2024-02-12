@@ -64,12 +64,14 @@ const ComeFromModal = (props: IComeFromModal) => {
     if (phoneNumber.length === 0) {
       return false;
     }
-    return phoneNumber.length >= 12;
+    if (phoneNumber.startsWith('52')) {
+      return phoneNumber.length === 12 || phoneNumber.length === 13;
+    }
+    return phoneNumber.length >= 10;
   }
 
   const updateExtraInfo = async () => {
     setLoader(true);
-    debugger;
     let hasErrors = false;
     if (comeFrom === '' && user.come_from !== '') {
       setComeFrom(user.come_from);
