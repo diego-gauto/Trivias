@@ -19,13 +19,8 @@ import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
 import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
-import forms from "../../constants/forms";
 import { db } from "../../firebase/firebaseConfig";
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from "../../screens/Login.styled";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
 
 interface Option {
@@ -163,9 +158,9 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    const selectedForm = forms[Number(formId) - 1];
-    setForm(selectedForm);
-    setLoading(false);
+    // const selectedForm = forms[Number(formId) - 1];
+    // setForm(selectedForm);
+    // setLoading(false);
 
     const fetchData = async () => {
       try {
@@ -228,7 +223,7 @@ const Formularios = () => {
           }
         }
 
-        // setLoading(false);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener los datos del formulario:", error);
       }
@@ -548,9 +543,9 @@ const Formularios = () => {
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                  formik.errors.option3 && (
-                    <div className={errorOption}>{formik.errors.option3}</div>
-                  )
+                formik.errors.option3 && (
+                  <div className={errorOption}>{formik.errors.option3}</div>
+                )
                 : null}
             </div>
           </div>
