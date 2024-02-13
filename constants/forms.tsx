@@ -272,7 +272,7 @@ const forms: Form[] = [
     title:
       "<p>¡Gran Venta Nocturna Gonvar! 🎁💘<br>Hasta el 40% de descuento</p>",
     subtitle:
-      "<p><strong>Válido Sólo desde Hoy y máximo este lunes 5 de Febrero</strong> los mejores precios en <strong>producto de uñas</strong> nunca antes vistos. 🔥<br><br>💘¡El día del amor y la amistad está cerca! Y Gonvar te quiere consentir.<br><br>Recuerda que al ser un Kit LIMITADO y con descuento tienes máximo hasta el Domingo para poder realizar tu pago. Este es un regalo que les damos a todas ustedes con todo el cariño para que puedan darle el mejor uso a todos los productos y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu kit y darte indicaciones de pago y envíos.<br><br><strong>Completa el formulario</strong> para apartar uno de nuestros 4 kits con diferentes productos y precios.</p>",
+      "<p><strong>Válido Sólo desde Hoy y máximo este lunes 5 de Febrero</strong> los mejores precios en <strong>producto de uñas</strong> nunca antes vistos. 🔥<br><br>💘¡El día del amor y la amistad está cerca! Y Gonvar te quiere consentir.<br><br>Recuerda que al ser un Kit LIMITADO y con descuento tienes máximo hasta el lunes para poder realizar tu pago. Este es un regalo que les damos a todas ustedes con todo el cariño para que puedan darle el mejor uso a todos los productos y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu kit y darte indicaciones de pago y envíos.<br><br><strong>Completa el formulario</strong> para apartar uno de nuestros 4 kits con diferentes productos y precios.</p>",
     createdAt: "02-02-2024 16:28:23",
     editedAt: "02-02-2024 16:36:42",
     img: { source: "/images/forms/form02Feb2024.jpeg", isVisible: true },
@@ -282,10 +282,47 @@ const forms: Form[] = [
         label:
           "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️<strong>Hazlo</strong> sólo sí estás comprometida a completar tu pago <strong>máximo el lunes</strong>, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera. Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.<br><br>Recomendación: La Mystery Box contiene <strong>GRANDES SORPRESAS Y PRODUCTOS SECRETOS de la Marca</strong> donde ahorras $1,899 pesos y obtienes hasta 70% de descuento.<br><br>Perfecto, hermosa. Estas apunto de apartar tu kit con DESCUENTO, solo debes elegir cuál de las 4 opciones de kit vas a querer:</p>",
         options: [
-          `Apartar Kit Nails Máster(Precio real: $.3,654MXN) NO pagarás eso. Precio para ti: $1,949MXN`,
+          `Apartar Kit Nails Máster (Precio real: $3,654MXN) NO pagarás eso. Precio para ti: $1,949MXN`,
           "Apartar Mystery Box Love Edition + Drill (Precio real: $3,699MXN) NO pagarás eso. Precio para ti: $1,999MXN",
           "Apartar Mystery Box Love Edition + Pincel (Precio real: $3,699MXN) NO pagarás eso. Precio para ti: $1,999MXN",
           "Hacer pedido personalizado (a partir de 3,000 pesos MXN)",
+        ],
+      },
+      { isVisible: false, label: "", options: ["", ""] },
+      { isVisible: false, label: "", options: ["", ""] },
+    ],
+    redirect: {
+      type: "thankYouPage",
+      link: "",
+      textButton: "",
+    },
+  },
+  {
+    name: "Tanda Pinceles 12 Febrero 2024",
+    title:
+      "<p>¡Únete a nuestra tanda de pinceles Gonvar!🥳🖌️</p>",
+    subtitle:
+      "<p><strong>Registro Válido Sólo desde Hoy y máximo este viernes 16 de Febrero,</strong> plan de 4 pagos flexibles.</p><p>🚨Los lugares son limitados, asegúrate de conseguir lugar antes de que se agoten</span>.</p><p>Recuerda que al ser un programa LIMITADO tienes máximo hasta el Sábado 17 para poder realizar tu pago. Este es un plan que les damos a todas ustedes con todo el cariño para que puedan obtener su pincel profesional y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu lugar y darte indicaciones de pago y envíos.</p><p><strong>Completa el formulario</strong> para elegir una de las opciones de pincel que tenemos para ti en esta Tanda.</p>",
+    createdAt: "12-02-2024 16:16:08",
+    editedAt: "12-02-2024 16:16:08",
+    img: { source: "/images/forms/form9-12Feb2024.jpeg", isVisible: true },
+    optionsArray: [
+      {
+        isVisible: true,
+        label:
+          "<p><strong>Elige sólo uno</strong> para apartarlo y <strong>consiéntete.</strong> 🙋🏻‍♀️ <strong>Hazlo</strong> sólo si estás comprometida a completar tu primer pago <strong>máximo el Sábado 17</strong>, ya que estos son LIMITADOS y al seleccionarlo dejarás a alguien fuera.Te mandaremos un mensaje de Whatsapp para confirmarte tu pedido.</p><p>En ambas opciones el costo será de $880MXN en 4 pagos de $220MXN, uno por semana",
+        options: [
+          `Apartar Pincel profesional de aplicación Kolinsky 100% natural del Número 10 con acabado en aluminio Ligero Gold Rose. (Disponible para entrega inmediata en caso de liquidar antes)\n
+          Incluye:\n
+          💕Envío Gratis a todo México\n
+          💕Estuche de viaje con acabado  Soft touch\n
+          💕Curso de cuidados del pincel Gratis\n`,
+          `Apartar Kit de Pinceles Profesionales de Arte Van Gogh, diseñados con acabado Fino en aluminio Rose Gold. Cada pincel ofrece una combinación única de cerdas suaves y resistentes que garantizan una aplicación suave y precisa. Fabricados con mangos ergonómicos para un control óptimo, estos pinceles son la herramienta perfecta para artistas de todos los niveles. (Disponible solo para entrega en 4 semanas)\n
+          Incluye:\n
+          💕5 Pinceles de doble punta (10 Pinceles de Arte)\n
+          💕Envío Gratis a todo México\n
+          💕Estuche de viaje  con acabado Soft Touch\n
+          💕Curso de uso de los Pinceles Gratis`,
         ],
       },
       { isVisible: false, label: "", options: ["", ""] },
