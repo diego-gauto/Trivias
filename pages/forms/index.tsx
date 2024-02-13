@@ -229,7 +229,7 @@ const Formularios = () => {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, [formId]);
 
   useEffect(() => {
