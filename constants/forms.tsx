@@ -305,7 +305,7 @@ const forms: Form[] = [
       "<p><strong>Registro Válido Sólo desde Hoy y máximo este viernes 16 de Febrero,</strong> plan de 4 pagos flexibles.</p><p>🚨Los lugares son limitados, asegúrate de conseguir lugar antes de que se agoten</span>.</p><p>Recuerda que al ser un programa LIMITADO tienes máximo hasta el Sábado 17 para poder realizar tu pago. Este es un plan que les damos a todas ustedes con todo el cariño para que puedan obtener su pincel profesional y lo disfruten al máximo con ustedes y sus clientas. Te contactaremos lo más rápido posible para confirmar tu lugar y darte indicaciones de pago y envíos.</p><p><strong>Completa el formulario</strong> para elegir una de las opciones de pincel que tenemos para ti en esta Tanda.</p>",
     createdAt: "12-02-2024 16:16:08",
     editedAt: "12-02-2024 16:16:08",
-    img: { source: "/images/forms/form02Feb2024.jpeg", isVisible: true },
+    img: { source: "/images/forms/form9-12Feb2024.jpeg", isVisible: true },
     optionsArray: [
       {
         isVisible: true,
