@@ -119,6 +119,8 @@ export const returnNotificationImage = (notification: any) => {
     return PAYMENT_REMINDER_ANUALY;
   } else if (notification.type === '17') {
     return GONVAR_WELCOME_LOGO_ICON;
+  } else if (notification.type === '18') {
+    return PAYMENT_FAILED_ICON;
   } else {
     return '';
   }
@@ -157,6 +159,8 @@ export const returnNotificationTitles = (notification: any, name: any) => {
     return 'Tu suscripción cuatrimestral está por renovarse.';
   } else if (notification.type === '17') {
     return 'Bienvenida a GONVAR';
+  } else if (notification.type === '18') {
+    return 'Renovación de suscripción pendiente';
   } else {
     return '';
   }
@@ -201,6 +205,8 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     ).toLocaleDateString()} de manera automática.`;
   } else if (notification.type === '17') {
     return 'Empieza a disfrutar en la mejor academia de Latam con los +65 cursos de uñas, pestañas y maquillaje; incluidos en tu suscripción.';
+  } else if (notification.type === '18') {
+    return `${user} recuerda que esta a punto de finalizar tu suscripción, dirígete a la sección de métodos de pago para renovar tu suscripción`;
   } else {
     return '';
   }
