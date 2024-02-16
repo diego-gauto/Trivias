@@ -49,6 +49,7 @@ import {
 import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { RetryPayModal } from "../Modals/RetryPayModal/RetryPayModal";
 
 interface NotificationByUser {
   notification_id: number
@@ -82,6 +83,8 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
+  const [show, setShow] = useState(false);
+  const [withSubscription, setWithSubscription] = useState(true);
 
   const modalNotificationsRef = useRef<any>(null);
 
@@ -209,14 +212,19 @@ const NavBar = () => {
           }
         }
 
-        if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 1 || userDataAuth.user.level === 4)) {
-          customerOrders({ conekta_id: userDataAuth.user.conekta_id }).then((res) => {
-            console.log(res.data.data);
-            const response = res.data.data;
-            if (response.length > 0 && response[0].payment_status === "pending_payment") {
-              // let order = response[0];
-            }
-          })
+        // if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 1 || userDataAuth.user.level === 4 || userDataAuth.user.level === 7)) {
+
+        //   customerOrders({ conekta_id: userDataAuth.user.conekta_id }).then((res) => {
+        //     const response = res.data.data;
+        //     if (response.length > 0 && response[0].payment_status === "pending_payment") {
+        //       setShow(true);
+        //       setWithSubscription(true);
+        //     }
+        //   })
+        // }
+        if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8)) {
+          setShow(true);
+          setWithSubscription(false);
         }
 
         setUserData(userDataAuth.user);
@@ -309,6 +317,7 @@ const NavBar = () => {
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
+      <RetryPayModal show={show} onHide={() => { setShow(false) }} withSubscription={withSubscription} />
       {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {

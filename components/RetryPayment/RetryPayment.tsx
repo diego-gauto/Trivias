@@ -6,25 +6,39 @@ import { Month, PayOptions, Year } from './constants';
 import InputMask from "react-input-mask";
 import { FaChevronDown } from "react-icons/fa";
 import { checkEmpty } from './functions';
-import { conektaPm } from '../api/users';
+import { conektaPm, updateMembership } from '../api/users';
 import { useAuth } from '../../hooks/useAuth';
 import { attachPaymentMethodConekta } from '../api/profile';
 import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from '../api/checkout';
+import { createNotification } from '../api/notifications';
+import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
+import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
 declare let window: any
 
 export const RetryPayment = () => {
   let userDataAuth: any = useAuth();
+  const context = useAuth();
+  const user = context.user;
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>("card");
   const [loaderAdd, setLoaderAdd] = useState<boolean>(false)
-  const [card, setCard] = useState<ICard>({
+  const [card, setCard] = useState<any>({
     cvc: '',
     exp_month: '',
     exp_year: '',
     number: '',
     holder: '',
   });
+  const [barcode, setBarcode] = useState("");
+  const [product, setProduct] = useState({ price: 149 });
+  const [reference, setReference] = useState("");
+  const [bank_ref, setBank_ref] = useState("");
+  const [expiresAt, setExpiresAt] = useState();
+  const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
+  const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
+
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
     let c: any = card;
@@ -100,6 +114,8 @@ export const RetryPayment = () => {
     }
     conektaPm(body).then((res) => {
       const conektaPaymentMethods = res.data.payment_methods.data
+      console.log(conektaPaymentMethods);
+
       const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
       setPaymentMethods(extractedProperties);
     })
@@ -107,8 +123,109 @@ export const RetryPayment = () => {
   useEffect(() => {
     getPaymentMethods();
   }, [userDataAuth])
+
+  const pay = () => {
+    const filter = paymentMethods.filter((x) => x.default)
+    const pm = filter[0]
+    let plan_id = "";
+
+    if (user.level === 5 && user.type === 1599) plan_id = "anual";
+    if (user.level === 5 && user.type === 3497) plan_id = "anual_v1_1";
+    if (user.level === 8) plan_id = "cuatrimestre";
+
+    const data = {
+      id: pm?.id,
+      conekta_id: user.conekta_id,
+      plan_id: plan_id,
+      userId: user.user_id
+    }
+    conektaSubscriptionApi(data).then(async (res) => {
+      if (res?.data.data.status === 'active') {
+        const sub = res.data.data;
+        const membership = {
+          final_date: sub.billing_cycle_end,
+          method: "conekta",
+          level: user.level,
+          payment_method: sub.card_id,
+          plan_id: sub.id,
+          plan_name: "Gonvar Plus",
+          start_date: sub.billing_cycle_start,
+          type: user.type,
+          userId: user.user_id
+        }
+        await updateMembership(membership)
+        window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
+      } else {
+        let notification = {
+          userId: user.user_id,
+          type: "8",
+          notificationId: '',
+          amount: user.type,
+          productName: 'Gonvar Plus',
+          frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
+        }
+        await createNotification(notification);
+        const msg = "pago-rechazado"
+        window.location.href = user.level === 5 ? `/pagofallidoanualidad?error=${msg}` : `/pagofallidocuatrimestre?error=${msg}`;
+      }
+    })
+  }
+
+  const payWithOxxo = () => {
+    setProduct({ ...product, price: user.type })
+    const currentDate: any = new Date();
+    const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+    let data = {
+      conekta_id: user.conekta_id,
+      expires_at: Math.round(new Date(futureDate).getTime() / 1000),
+      title: 'Gonvar Plus',
+      price: user.type * 100,
+      meta: {
+        type: 'subscription',
+        course_id: 0,
+        frecuency: user.level === 5 ? 'anual' : 'cuatrimestral',
+        duration: 0
+      }
+    }
+    conektaOxxoApi(data).then((res) => {
+      let response = res.data.data;
+      setBarcode(response.charges.data[0].payment_method.barcode_url);
+      setReference(response.charges.data[0].payment_method.reference);
+      setExpiresAt(response.charges.data[0].payment_method.expires_at)
+      setOxxoIsActive(true);
+    })
+  }
+
+  const payWitSpei = () => {
+    const currentDate: any = new Date();
+    const futureDate = new Date(currentDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+    let data = {
+      conekta_id: user.conekta_id,
+      expires_at: Math.round(new Date(futureDate).getTime() / 1000),
+      title: 'Gonvar Plus',
+      price: product.price * 100,
+      meta: {
+        type: "subscription",
+        course_id: 0,
+        frecuency: user.level === 5 ? 'anual' : 'cuatrimestral',
+        duration: 0
+      }
+    }
+
+    conektaSpeiApi(data).then((res) => {
+      const charges = res.data.data.charges.data[0];
+      const reference = charges.payment_method.clabe;
+      setBank_ref(reference);
+      setSpeiIsActive(true);
+    })
+  }
+
   return (
     <RetryPaymentContainer>
+      <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={user} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
+      <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={user} product={product} bank_ref={bank_ref} />
       <div className='complete-contain'>
         <div className='main-container'>
           <h2>Métodos de pago</h2>
@@ -133,7 +250,7 @@ export const RetryPayment = () => {
           }
           {
             paymentMethods.length > 0 &&
-            <button className={(addPayment ? "fade" : "")}>Reintentar pago</button>
+            <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
           }
           <button
             className='type2'
@@ -259,11 +376,11 @@ export const RetryPayment = () => {
             }
             {
               selectedButton === "oxxo" &&
-              <button className='type3 oxxo'>Pagar con oxxo</button>
+              <button className='type3 oxxo' onClick={payWithOxxo}>Pagar con oxxo</button>
             }
             {
               selectedButton === "transfer" &&
-              <button className='type3 spei'>Pagar con spei</button>
+              <button className='type3 spei' onClick={payWitSpei}>Pagar con spei</button>
             }
           </div>
         </div>
