@@ -8,16 +8,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import FileUpload from "../../../../components/admin/Forms/fileUpload/fileUpload";
-
 import { createFormApi } from "../../../../components/api/form";
 import { db } from "../../../../firebase/firebaseConfig";
 import styles from "./create.module.css";
 
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+
+interface Answer {
+  label: string;
+  value: string;
+}
+
 interface Option {
   isVisible: boolean | null;
   label: string;
-  options: string[];
+  options: Answer[];
 }
 
 interface Form {
@@ -64,9 +69,9 @@ const CreateForm = () => {
     editedAt: "",
     img: { source: "", isVisible: false },
     optionsArray: [
-      { isVisible: false, label: "", options: ["", ""] },
-      { isVisible: false, label: "", options: ["", ""] },
-      { isVisible: false, label: "", options: ["", ""] },
+      { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },
+      { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },
+      { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },
     ],
     redirect: {
       type: "thankYouPage",
@@ -75,7 +80,7 @@ const CreateForm = () => {
     },
   };
 
-  const [updatedForm, setUpdatedForm] = useState<Form | null>(null);
+  const [updatedForm, setUpdatedForm] = useState<Form>(data);
 
   const nextformId = localStorage.getItem("nextFormId");
   const routeStorageForm: string = `/forms/form_${nextformId}`;
@@ -151,7 +156,7 @@ const CreateForm = () => {
 
   const handleLabelOptionAChange = (content: string, questionIndex: number) => {
     setUpdatedForm((prevForm) => {
-      if (!prevForm) return null;
+      // if (!prevForm) return null;
 
       const updatedOptionsArray = (prevForm.optionsArray || []).map(
         (option, index) =>
@@ -167,15 +172,15 @@ const CreateForm = () => {
 
   const handleAddOption = (questionIndex: number) => {
     setUpdatedForm((prevForm) => {
-      if (!prevForm) return null;
+      // if (!prevForm) return null;
 
       const updatedOptionsArray = (prevForm.optionsArray || []).map(
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options ? [...question.options, ""] : [""],
-              }
+              ...question,
+              options: question.options ? [...question.options, { label: "", value: "" }] : [{ label: "", value: "" }],
+            }
             : question
       );
 
@@ -188,20 +193,20 @@ const CreateForm = () => {
 
   const handleRemoveOption = (questionIndex: number, optionIndex: number) => {
     setUpdatedForm((prevForm) => {
-      if (!prevForm) return null;
+      // if (!prevForm) return null;
 
       const updatedOptionsArray = (prevForm.optionsArray || []).map(
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? [
-                      ...question.options.slice(0, optionIndex),
-                      ...question.options.slice(optionIndex + 1),
-                    ]
-                  : [],
-              }
+              ...question,
+              options: question.options
+                ? [
+                  ...question.options.slice(0, optionIndex),
+                  ...question.options.slice(optionIndex + 1),
+                ]
+                : [],
+            }
             : question
       );
 
@@ -218,23 +223,83 @@ const CreateForm = () => {
     content: string
   ) => {
     setUpdatedForm((prevForm) => {
-      if (!prevForm) return null;
+
+      // const updatedOptionsArray = (prevForm.optionsArray).map(
+      //   (question, index) =>
+      //     index === questionIndex
+      //       ? {
+      //         ...question,
+      //         options: question.options
+      //           ? [
+      //             ...question.options.slice(0, optionIndex),
+      //             { ...question.options[optionIndex], label: content } as Answer,
+      //             ...question.options.slice(optionIndex + 1),
+      //           ]
+      //           : [],
+      //       }
+      //       : question
+      // );
 
       const updatedOptionsArray = (prevForm.optionsArray || []).map(
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? [
-                      ...question.options.slice(0, optionIndex),
-                      content,
-                      ...question.options.slice(optionIndex + 1),
-                    ]
-                  : [],
-              }
+              ...question,
+              options: question.options
+                ? question.options.map((pair, idx) =>
+                  idx === optionIndex
+                    ? { ...pair, label: content }
+                    : pair
+                )
+                : [],
+            }
             : question
       );
+      return {
+        ...prevForm,
+        optionsArray: updatedOptionsArray,
+      };
+    });
+  };
+
+  const handleValueOptionChange = (
+    questionIndex: number,
+    optionIndex: number,
+    content: string
+  ) => {
+    setUpdatedForm((prevForm) => {
+      // if (!prevForm) return null;
+
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+              ...question,
+              options: question.options
+                ? question.options.map((pair, idx) =>
+                  idx === optionIndex
+                    ? { ...pair, value: content }
+                    : pair
+                )
+                : [],
+            }
+            : question
+      );
+      // const updatedOptionsArray = (prevForm.optionsArray).map(
+      //   (question, index) =>
+      //     index === questionIndex
+      //       ? {
+      //         ...question,
+      //         options: question.options
+      //           ? [
+      //             ...question.options.slice(0, optionIndex),
+      //             { ...question.options[optionIndex], value: content } as Answer,
+      //             ...question.options.slice(optionIndex + 1),
+      //           ]
+      //           : [],
+      //       }
+      //       : question
+      // );
 
       return {
         ...prevForm,
@@ -245,7 +310,7 @@ const CreateForm = () => {
 
   const handleOptionVisibilityChange = (questionIndex: number) => {
     setUpdatedForm((prevForm) => {
-      if (!prevForm) return null;
+      // if (!prevForm) return null;
 
       const updatedOptionsArray = (prevForm.optionsArray || []).map(
         (option, index) =>
@@ -442,9 +507,8 @@ const CreateForm = () => {
         <div className={questionGroup} key={questionIndex}>
           <div className={lineaAtravesada}></div>
 
-          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${
-            questionIndex + 1
-          }:`}</label>
+          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${questionIndex + 1
+            }:`}</label>
           <ReactQuill
             className={editor}
             id={`option${questionIndex + 1}`}
@@ -467,25 +531,62 @@ const CreateForm = () => {
                 {`Opción ${optionIndex + 1}:`}
               </label>
               {optionIndex < 2 ? (
-                <input
-                  type="text"
-                  id={`option${questionIndex + 1}_${optionIndex + 1}`}
-                  value={
-                    updatedForm?.optionsArray[questionIndex]?.options[
-                      optionIndex
-                    ]
-                  }
-                  onChange={(e) =>
-                    handleLabelOptionChange(
-                      questionIndex,
-                      optionIndex,
-                      e.target.value
-                    )
-                  }
-                />
+                // <input
+                //   type="text"
+                //   id={`option${questionIndex + 1}_${optionIndex + 1}`}
+                //   value={
+                //     updatedForm?.optionsArray[questionIndex]?.options[
+                //       optionIndex
+                //     ]
+                //   }
+                //   onChange={(e) =>
+                //     handleLabelOptionChange(
+                //       questionIndex,
+                //       optionIndex,
+                //       e.target.value
+                //     )
+                //   }
+                // />
+                <>
+                  <ReactQuill
+                    className={editor}
+                    id={`option${questionIndex + 1}_${optionIndex + 1}`}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[
+                        optionIndex
+                      ]?.label
+                    }
+                    onChange={(value) =>
+                      handleLabelOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        value
+                      )
+                    }
+                    modules={editorOptions.modules}
+                    formats={editorOptions.formats}
+                  />
+                  <label htmlFor={`option_${questionIndex}_${optionIndex}_value`}>
+                    Respuesta corta:
+                  </label>
+                  <input
+                    type="text"
+                    id={`option_${questionIndex}_${optionIndex}_value`}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[optionIndex]?.value || ""
+                    }
+                    onChange={(e) =>
+                      handleValueOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        e.target.value
+                      )
+                    }
+                  />
+                </>
               ) : (
                 <>
-                  <input
+                  {/* <input
                     type="text"
                     id={`option${questionIndex + 1}_${optionIndex + 1}`}
                     value={
@@ -500,8 +601,44 @@ const CreateForm = () => {
                         e.target.value
                       )
                     }
+                  /> */}
+                  <ReactQuill
+                    className={editor}
+                    id={`option${questionIndex + 1}_${optionIndex + 1}`}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[
+                        optionIndex
+                      ]?.label
+                    }
+                    onChange={(value) =>
+                      handleLabelOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        value
+                      )
+                    }
+                    modules={editorOptions.modules}
+                    formats={editorOptions.formats}
+                  />
+                  <label htmlFor={`option_${questionIndex}_${optionIndex}_value`}>
+                    Respuesta corta:
+                  </label>
+                  <input
+                    type="text"
+                    id={`option_${questionIndex}_${optionIndex}_value`}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[optionIndex]?.value || ""
+                    }
+                    onChange={(e) =>
+                      handleValueOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        e.target.value
+                      )
+                    }
                   />
                   <button
+                    className={newOptionButton}
                     onClick={() =>
                       handleRemoveOption(questionIndex, optionIndex)
                     }

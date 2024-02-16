@@ -23,10 +23,15 @@ import { db } from "../../firebase/firebaseConfig";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
 
+interface Answer {
+  label: string;
+  value: string;
+}
+
 interface Option {
   isVisible: boolean | null;
   label: string;
-  options: string[];
+  options: Answer[];
 }
 
 interface Form {

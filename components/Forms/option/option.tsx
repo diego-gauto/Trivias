@@ -2,9 +2,14 @@ import React, { useState } from "react";
 
 import styles from "./option.module.css";
 
+interface Answer {
+  label: string;
+  value: string;
+}
+
 interface OptionComponentProps {
   label: string;
-  options: string[];
+  options: Answer[];
   onOptionChange: (value: string) => void;
   isVisible: boolean; // Nueva prop para controlar la visibilidad
 
@@ -29,9 +34,9 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
     onOptionChange(optionValue)
   };
 
-  const handleCustomButtonClick = (option: string) => {
-    setSelectedOption(option);
-    onOptionChange(option);
+  const handleCustomButtonClick = (option: Answer) => {
+    setSelectedOption(option.value);
+    onOptionChange(option.value);
   };
 
   const displayContent = ({ content }: DisplayContentProps) => {
@@ -56,10 +61,10 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
         <div className={optionButton} key={index}>
           <input
             type="radio"
-            id={option}
+            id={option.value}
             name={`${label}-options`}
-            value={option}
-            checked={selectedOption === option}
+            value={option.value}
+            checked={selectedOption === option.value}
             onChange={handleRadioChange}
           />
           {/* <span
@@ -68,12 +73,15 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             role="button"
             tabIndex={0}>
           </span> */}
-          <label className={optionLabel} htmlFor={option} onClick={() => handleCustomButtonClick(option)}>{option.split("111").map((line, idx) => (
-            <span key={idx}>
-              {line}
-              <br />
-            </span>
-          ))}</label>
+          <label className={optionLabel} htmlFor={option.value} onClick={() => handleCustomButtonClick(option)}>
+            {/* {option.split("111").map((line, idx) => (
+              <span key={idx}>
+                {line}
+                <br />
+              </span>
+            ))} */}
+            {displayContent({ content: option.label })}
+          </label>
         </div>
       ))}
     </div>
