@@ -173,7 +173,18 @@ const Login = () => {
           if (!res[0].come_from) {
             setUser(res[0]);
             setShowUpdateComeFrom(true);
-          } else {
+          } else if (res[0].come_from === 'null') {
+            setUser(res[0]);
+            setShowUpdateComeFrom(true);
+          }
+          else if (!res[0].phone_number) {
+            setUser(res[0]);
+            setShowUpdateComeFrom(true);
+          } else if (`${res[0].phone_number}`.startsWith('52') && !res[0].origin_state) {
+            setUser(res[0]);
+            setShowUpdateComeFrom(true);
+          }
+          else {
             updateSignIn(res[0]);
             localStorage.setItem('email', signUpData.credentials.email);
             authRedirect("login", res[0])

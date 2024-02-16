@@ -2,15 +2,22 @@ import React, { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 
+import { collection, doc, setDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { getFormApi, updateFormApi } from "../../../../components/api/form";
-import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import { db } from "../../../../firebase/firebaseConfig";
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from "../../../../screens/Login.styled";
 import styles from "./update.module.css";
+import FileUpload from "../../../../components/admin/Forms/fileUpload/fileUpload";
 
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 interface Option {
   isVisible: boolean | null;
   label: string;
@@ -36,7 +43,22 @@ interface Form {
 }
 
 const UpdateForm = () => {
-  const { container, lineaAtravesada, inputGroup, titleGroup, editor, imgGroup, questionGroup, options, newOptionButton, checkGroup, redirectGroup, buttonContainer, button, textButtonGroup } = styles;
+  const {
+    container,
+    lineaAtravesada,
+    inputGroup,
+    titleGroup,
+    editor,
+    imgGroup,
+    questionGroup,
+    options,
+    newOptionButton,
+    checkGroup,
+    redirectGroup,
+    buttonContainer,
+    button,
+    textButtonGroup,
+  } = styles;
 
   const data: Form = {
     name: "",
@@ -60,13 +82,13 @@ const UpdateForm = () => {
   const [updatedForm, setUpdatedForm] = useState<Form | null>(null);
   const [loading, setLoading] = useState(true);
 
-
   const {
     query: { formId },
   } = useRouter();
 
-  const router = useRouter();
+  const routeStorageForm: string = `/forms/form_${formId}`;
 
+  const router = useRouter();
 
   const editorOptions = {
     modules: {
@@ -77,7 +99,15 @@ const UpdateForm = () => {
         ["clean"],
       ],
     },
-    formats: ["bold", "italic", "underline", "strike", "color", "background", "size"],
+    formats: [
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "color",
+      "background",
+      "size",
+    ],
   };
 
   useEffect(() => {
@@ -88,15 +118,13 @@ const UpdateForm = () => {
 
     const fetchData = async () => {
       try {
-
-        const formIdNumber: number = (Number(formId))
+        const formIdNumber: number = Number(formId);
 
         const res = await getFormApi(formIdNumber);
 
-        const formTemp = res[0]
+        const formTemp = res[0];
 
         if (formTemp) {
-
           // Parsear la cadena JSON en la propiedad "questions"
           formTemp.img = JSON.parse(formTemp.img);
 
@@ -106,14 +134,13 @@ const UpdateForm = () => {
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
           setUpdatedForm(formTemp);
-          console.log(formTemp)
+          console.log(formTemp);
         }
 
         setLoading(false);
       } catch (error) {
-        console.error('Error al obtener los datos del formulario:', error);
+        console.error("Error al obtener los datos del formulario:", error);
       }
-
     };
 
     fetchData();
@@ -129,7 +156,10 @@ const UpdateForm = () => {
   };
 
   const handleSubtitleChange = (content: string) => {
-    setUpdatedForm((prevForm) => ({ ...(prevForm as Form), subtitle: content }));
+    setUpdatedForm((prevForm) => ({
+      ...(prevForm as Form),
+      subtitle: content,
+    }));
   };
 
   const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,8 +181,9 @@ const UpdateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((option, index) =>
-        index === questionIndex ? { ...option, label: content } : option
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (option, index) =>
+          index === questionIndex ? { ...option, label: content } : option
       );
 
       return {
@@ -166,10 +197,14 @@ const UpdateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? { ...question, options: question.options ? [...question.options, ""] : [""] }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options ? [...question.options, ""] : [""],
+              }
+            : question
       );
 
       return {
@@ -183,15 +218,19 @@ const UpdateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? {
-            ...question,
-            options: question.options
-              ? [...question.options.slice(0, optionIndex), ...question.options.slice(optionIndex + 1)]
-              : [],
-          }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options
+                  ? [
+                      ...question.options.slice(0, optionIndex),
+                      ...question.options.slice(optionIndex + 1),
+                    ]
+                  : [],
+              }
+            : question
       );
 
       return {
@@ -201,19 +240,28 @@ const UpdateForm = () => {
     });
   };
 
-  const handleLabelOptionChange = (questionIndex: number, optionIndex: number, content: string) => {
+  const handleLabelOptionChange = (
+    questionIndex: number,
+    optionIndex: number,
+    content: string
+  ) => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? {
-            ...question,
-            options: question.options
-              ? [...question.options.slice(0, optionIndex), content, ...question.options.slice(optionIndex + 1)]
-              : [],
-          }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options
+                  ? [
+                      ...question.options.slice(0, optionIndex),
+                      content,
+                      ...question.options.slice(optionIndex + 1),
+                    ]
+                  : [],
+              }
+            : question
       );
 
       return {
@@ -227,8 +275,11 @@ const UpdateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((option, index) =>
-        index === questionIndex ? { ...option, isVisible: !option.isVisible } : option
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (option, index) =>
+          index === questionIndex
+            ? { ...option, isVisible: !option.isVisible }
+            : option
       );
 
       return {
@@ -243,8 +294,8 @@ const UpdateForm = () => {
       ...(prevForm as Form),
       redirect: {
         ...prevForm!.redirect,
-        type: value as "thankYouPage" | "customLink",  // Asegurarse de que el valor sea del tipo correcto
-        link: value === "thankYouPage" ? "" : prevForm!.redirect.link,  // Restablecer el valor del enlace si se cambia a otra opción
+        type: value as "thankYouPage" | "customLink", // Asegurarse de que el valor sea del tipo correcto
+        link: value === "thankYouPage" ? "" : prevForm!.redirect.link, // Restablecer el valor del enlace si se cambia a otra opción
       },
     }));
   };
@@ -273,13 +324,15 @@ const UpdateForm = () => {
 
   const handleCopy = () => {
     // Guardar datos temporalmente (por ejemplo, en localStorage)
-    localStorage.setItem('formData', JSON.stringify(updatedForm));
+    localStorage.setItem("formData", JSON.stringify(updatedForm));
 
     // Obtener la URL completa para la nueva ruta
-    const copyUrl = `${window.location.origin}/admin/forms/createForm?copy=${true}`;
+    const copyUrl = `${
+      window.location.origin
+    }/admin/forms/createForm?copy=${true}`;
 
     // Abrir una nueva pestaña con window.open y redirigir usando router.push solo en la pestaña actual
-    const newTab = window.open(copyUrl, '_blank');
+    const newTab = window.open(copyUrl, "_blank");
     if (newTab) {
       newTab.focus();
 
@@ -289,12 +342,11 @@ const UpdateForm = () => {
       }
     } else {
       // Manejar el caso en el que la apertura de ventana falla (puede deberse a bloqueadores de ventanas emergentes)
-      console.error('No se pudo abrir la nueva pestaña');
+      console.error("No se pudo abrir la nueva pestaña");
     }
   };
 
   const handleUpdate = () => {
-
     const formatDate = (date: Date): string => {
       const day = date.getDate().toString().padStart(2, "0");
       const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -311,18 +363,31 @@ const UpdateForm = () => {
     const currentDate = new Date();
     updatedFormCopy.editedAt = formatDate(currentDate);
 
-    console.log(updatedFormCopy)
+    console.log(updatedFormCopy);
     // Lógica para crear el formulario
-    const formIdNumber: number = (Number(formId))
+    const formIdNumber: number = Number(formId);
     updateFormApi(formIdNumber, updatedFormCopy)
-      .then((result) => {
-        console.log(result)
+      .then(async (result) => {
+        console.log(result);
         if (result === true) {
+          const customId = `form_${formId}`;
+
+          try {
+            const formDocRef = doc(collection(db, "forms"), customId);
+            await setDoc(formDocRef, updatedFormCopy);
+            console.log(
+              "Formulario actualizado exitosamente en Firebase con ID:",
+              customId
+            );
+            alert("Formulario actualizado exitosamente en Firebase.");
+          } catch (error) {
+            console.error("Error al guardar en Firebase:", error);
+          }
           // Formulario creado exitosamente
-          alert("Formulario actualizado exitosamente.");
+          alert("Formulario actualizado exitosamente en MySQL.");
         } else {
           // Trivia no fue creada
-          alert("Erro al crear al actualizar el formulario.");
+          alert("Erro al actualizar al actualizar el formulario.");
         }
       })
       .catch((error) => {
@@ -333,12 +398,12 @@ const UpdateForm = () => {
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: "center", justifyContent: "center" }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
@@ -383,6 +448,7 @@ const UpdateForm = () => {
       <div className={lineaAtravesada}></div>
 
       <div className={inputGroup}>
+        <FileUpload route={routeStorageForm} updateFormImg={setUpdatedForm} />
         <label htmlFor="imgPath">Imagen:</label>
         <input
           type="text"
@@ -411,53 +477,92 @@ const UpdateForm = () => {
 
       {[0, 1, 2].map((questionIndex) => (
         <div className={questionGroup} key={questionIndex}>
-
           <div className={lineaAtravesada}></div>
 
-          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${questionIndex + 1}:`}</label>
+          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${
+            questionIndex + 1
+          }:`}</label>
           <ReactQuill
             className={editor}
             id={`option${questionIndex + 1}`}
             value={updatedForm?.optionsArray[questionIndex]?.label}
-            onChange={(content) => handleLabelOptionAChange(content, questionIndex)}
+            onChange={(content) =>
+              handleLabelOptionAChange(content, questionIndex)
+            }
             modules={editorOptions.modules}
             formats={editorOptions.formats}
           />
 
-          {[...Array.from({ length: updatedForm?.optionsArray[questionIndex]?.options.length || 0 }).keys()].map(
-            (optionIndex) => (
-              <div className={options} key={optionIndex}>
-                <label htmlFor={`option${questionIndex + 1}_${optionIndex + 1}`}>
-                  {`Opción ${optionIndex + 1}:`}
-                </label>
-                {optionIndex < 2 ? (
+          {[
+            ...Array.from({
+              length:
+                updatedForm?.optionsArray[questionIndex]?.options.length || 0,
+            }).keys(),
+          ].map((optionIndex) => (
+            <div className={options} key={optionIndex}>
+              <label htmlFor={`option${questionIndex + 1}_${optionIndex + 1}`}>
+                {`Opción ${optionIndex + 1}:`}
+              </label>
+              {optionIndex < 2 ? (
+                <input
+                  type="text"
+                  id={`option${questionIndex + 1}_${optionIndex + 1}`}
+                  value={
+                    updatedForm?.optionsArray[questionIndex]?.options[
+                      optionIndex
+                    ]
+                  }
+                  onChange={(e) =>
+                    handleLabelOptionChange(
+                      questionIndex,
+                      optionIndex,
+                      e.target.value
+                    )
+                  }
+                />
+              ) : (
+                <>
                   <input
                     type="text"
                     id={`option${questionIndex + 1}_${optionIndex + 1}`}
-                    value={updatedForm?.optionsArray[questionIndex]?.options[optionIndex]}
-                    onChange={(e) => handleLabelOptionChange(questionIndex, optionIndex, e.target.value)}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[
+                        optionIndex
+                      ]
+                    }
+                    onChange={(e) =>
+                      handleLabelOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        e.target.value
+                      )
+                    }
                   />
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      id={`option${questionIndex + 1}_${optionIndex + 1}`}
-                      value={updatedForm?.optionsArray[questionIndex]?.options[optionIndex]}
-                      onChange={(e) => handleLabelOptionChange(questionIndex, optionIndex, e.target.value)}
-                    />
-                    <button onClick={() => handleRemoveOption(questionIndex, optionIndex)}>Eliminar</button>
-                  </>
-                )}
-              </div>
-            )
-          )}
+                  <button
+                    onClick={() =>
+                      handleRemoveOption(questionIndex, optionIndex)
+                    }
+                  >
+                    Eliminar
+                  </button>
+                </>
+              )}
+            </div>
+          ))}
 
-          <button className={newOptionButton} onClick={() => handleAddOption(questionIndex)}>Agregar nueva opción</button>
+          <button
+            className={newOptionButton}
+            onClick={() => handleAddOption(questionIndex)}
+          >
+            Agregar nueva opción
+          </button>
           <div className={checkGroup}>
             <label>
               <input
                 type="checkbox"
-                checked={updatedForm?.optionsArray[questionIndex]?.isVisible || false}
+                checked={
+                  updatedForm?.optionsArray[questionIndex]?.isVisible || false
+                }
                 onChange={() => handleOptionVisibilityChange(questionIndex)}
               />
               Hacer visible la pregunta {questionIndex + 1}
@@ -514,7 +619,9 @@ const UpdateForm = () => {
             <button className={button}>Cancelar</button>
           </a>
         </Link>
-        <button className={button} onClick={handleCopy}>Copiar Formulario</button>
+        <button className={button} onClick={handleCopy}>
+          Copiar Formulario
+        </button>
         <button className={button} onClick={handleUpdate}>
           Editar Formulario
         </button>

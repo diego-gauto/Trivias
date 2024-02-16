@@ -7,10 +7,16 @@ import Papa from "papaparse";
 import UserFormList from "../../../../components/admin/Forms/userFormList/userFormList";
 // import { getAllTriviasApi } from "../../../../components/api/trivias";
 import { getUsersByFormApi } from "../../../../components/api/userform";
-import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from "../../../../screens/Login.styled";
 import styles from "./listUser.module.css";
+import { getUserMembership } from "../../../../components/api/users";
 
 interface UserForm {
+  id: number;
   user_id: number;
   nombre: string;
   apellido: string;
@@ -18,6 +24,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
+  suscription_status: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -45,9 +52,25 @@ const UsersForms = () => {
   const firstIndex = lastIndex - usersPerPage;
   const users = usersForms.slice(firstIndex, lastIndex);
   const npage = Math.ceil(usersForms.length / usersPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1)
+  const numbers = [...Array(npage + 1).keys()].slice(1);
 
-  const { main, buttonContainer, volver, volverText, link, titles, title, selectContainer, selectGroup, select, button, pagination, pageItem, pageLink, active } = styles
+  const {
+    main,
+    buttonContainer,
+    volver,
+    volverText,
+    link,
+    titles,
+    title,
+    selectContainer,
+    selectGroup,
+    select,
+    button,
+    pagination,
+    pageItem,
+    pageLink,
+    active,
+  } = styles;
 
   const {
     query: { formId },
@@ -56,11 +79,11 @@ const UsersForms = () => {
   const downloadCsv = () => {
     const csv = Papa.unparse(usersForms);
 
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'usersForms.csv');
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "usersForms.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -71,6 +94,7 @@ const UsersForms = () => {
       try {
         // Realiza la llamada a la API para obtener los usuarios del formulario
         const usersData = await getUsersByFormApi(Number(formId));
+        console.log(usersData);
 
         const formatDate = (date: Date): string => {
           const day = date.getDate().toString().padStart(2, "0");
@@ -83,18 +107,19 @@ const UsersForms = () => {
           return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
         };
 
-        const mappedUsers = usersData.map((user: UserForm, index: number) => ({
-          ...user,
-          user_id: index + 1,
-          fecha: formatDate(new Date(user.fecha)),
-          isUser: user.isUser ? "Si" : "No"
-        }));
-
+        const mappedUsers = usersData.map((user: UserForm, index: number) => {
+          return {
+            ...user,
+            id: index + 1,
+            fecha: formatDate(new Date(user.fecha)),
+            isUser: user.user_id ? "Si" : "No",
+          };
+        });
         setUsersForms(mappedUsers);
-        console.log(mappedUsers)
-        setLoading(false)
+        console.log(mappedUsers);
+        setLoading(false);
       } catch (error) {
-        console.error('Error al obtener las trivias:', error);
+        console.error("Error al obtener las trivias:", error);
       }
     };
 
@@ -103,33 +128,35 @@ const UsersForms = () => {
   }, []);
 
   const prevPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
-  const changeCurrentPage = (e: MouseEvent<HTMLAnchorElement>, page: number) => {
-    e.preventDefault()
-    setCurrentPage(page)
-  }
+  const changeCurrentPage = (
+    e: MouseEvent<HTMLAnchorElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setCurrentPage(page);
+  };
 
   const nextPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     }
-  }
-
+  };
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: "center", justifyContent: "center" }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
@@ -144,7 +171,9 @@ const UsersForms = () => {
               </div>
             </a>
           </Link>
-          <button className={button} onClick={downloadCsv} >Descargar CSV</button>
+          <button className={button} onClick={downloadCsv}>
+            Descargar CSV
+          </button>
         </div>
         <h2 className={title}>Listados de usuarios</h2>
         <h3>Total de usuarios: {usersForms.length}</h3>
@@ -154,15 +183,20 @@ const UsersForms = () => {
 
       <nav>
         <ul className={pagination}>
-
           {npage <= 5 ? (
             // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
             numbers.map((number, index) => (
               <li
-                className={`${pageItem} ${currentPage === number ? active : ''}`}
+                className={`${pageItem} ${
+                  currentPage === number ? active : ""
+                }`}
                 key={index}
               >
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, number)}>
+                <a
+                  href=""
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, number)}
+                >
                   {number}
                 </a>
               </li>
@@ -171,23 +205,35 @@ const UsersForms = () => {
             // Si hay más de 5 páginas, muestra controles para la primera, anterior, actual, siguiente y última página
             <>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, 1)}>Primera</a>
+                <a
+                  href=""
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, 1)}
+                >
+                  Primera
+                </a>
               </li>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => prevPage(e)}>Anterior</a>
+                <a href="" className={pageLink} onClick={(e) => prevPage(e)}>
+                  Anterior
+                </a>
               </li>
 
               <li className={`${pageItem} ${active}`}>
-                <span className={pageLink}>
-                  {currentPage}
-                </span>
+                <span className={pageLink}>{currentPage}</span>
               </li>
 
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={nextPage}>Siguiente</a>
+                <a href="" className={pageLink} onClick={nextPage}>
+                  Siguiente
+                </a>
               </li>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, npage)}>
+                <a
+                  href=""
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, npage)}
+                >
                   Última
                 </a>
               </li>
@@ -197,5 +243,5 @@ const UsersForms = () => {
       </nav>
     </div>
   );
-}
+};
 export default UsersForms;

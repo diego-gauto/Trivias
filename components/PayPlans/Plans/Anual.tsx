@@ -46,7 +46,7 @@ const Anual = (props: IData) => {
 
   }, [setver])
   const goTo = () => {
-    if (user.id) {
+    if (user && user.id) {
       let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
       if (user.level === 0 && user.final_date < today) {
         router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: "3" } })
@@ -95,7 +95,7 @@ const Anual = (props: IData) => {
             <span><i>Cargo automático anual</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            {user && (!user.level || user.level === 0) && <button className="purple-button" onClick={goTo}>Comenzar ahora</button>}
+            {(user && (!user.level || user.level === 0) || !user) && <button className="purple-button" onClick={goTo}>Comenzar Plan<br /> Anual</button>}
             {user && (user.level === 1 || user.level === 7) && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
           </div>
         </div>

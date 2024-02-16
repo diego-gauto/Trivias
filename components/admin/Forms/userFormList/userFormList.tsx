@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import UserFormRow from "../userFormRow/userFormRow";
 
 interface UserForm {
+  id: number;
   user_id: number;
   nombre: string;
   apellido: string;
@@ -10,6 +11,7 @@ interface UserForm {
   numeroWhatsapp: string;
   pais: string;
   isUser: boolean;
+  suscription_status: string;
   fecha: string;
   option1: string;
   option2: string;
@@ -22,7 +24,7 @@ interface UserFormListProps {
 
 const UserTriviaList = ({ usersForm }: UserFormListProps) => {
   return (
-    <div className="mt-2">
+    <div className="table-responsive">
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -33,6 +35,7 @@ const UserTriviaList = ({ usersForm }: UserFormListProps) => {
             <th>WhatsApp</th>
             <th>Pais</th>
             <th>Usuaria</th>
+            <th>Membresía</th>
             <th>fecha</th>
             <th>Respuesta 1</th>
             <th>Respuesta 2</th>
@@ -41,7 +44,7 @@ const UserTriviaList = ({ usersForm }: UserFormListProps) => {
         </thead>
         <tbody>
           {usersForm.map((user) => (
-            <UserFormRow key={user.user_id} userForm={user} />
+            <UserFormRow key={user.id} userForm={user} />
           ))}
         </tbody>
       </Table>

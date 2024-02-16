@@ -70,6 +70,8 @@ const SelectorForms = () => {
       try {
         const formsData = await getAllFormsApi();
         setForms(formsData);
+        const nextFormId = formsData.length + 1;
+        localStorage.setItem("nextFormId", nextFormId)
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener las trivias:', error);

@@ -68,7 +68,12 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             role="button"
             tabIndex={0}>
           </span> */}
-          <label className={optionLabel} htmlFor={option} onClick={() => handleCustomButtonClick(option)}>{option}</label>
+          <label className={optionLabel} htmlFor={option} onClick={() => handleCustomButtonClick(option)}>{option.split("111").map((line, idx) => (
+            <span key={idx}>
+              {line}
+              <br />
+            </span>
+          ))}</label>
         </div>
       ))}
     </div>

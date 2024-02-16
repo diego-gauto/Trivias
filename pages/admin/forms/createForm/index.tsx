@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 
+import { collection, doc, setDoc } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import FileUpload from "../../../../components/admin/Forms/fileUpload/fileUpload";
+
 import { createFormApi } from "../../../../components/api/form";
+import { db } from "../../../../firebase/firebaseConfig";
 import styles from "./create.module.css";
 
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 interface Option {
   isVisible: boolean | null;
   label: string;
@@ -35,7 +39,22 @@ interface Form {
 }
 
 const CreateForm = () => {
-  const { container, lineaAtravesada, inputGroup, titleGroup, editor, imgGroup, questionGroup, options, newOptionButton, checkGroup, redirectGroup, buttonContainer, button, textButtonGroup } = styles;
+  const {
+    container,
+    lineaAtravesada,
+    inputGroup,
+    titleGroup,
+    editor,
+    imgGroup,
+    questionGroup,
+    options,
+    newOptionButton,
+    checkGroup,
+    redirectGroup,
+    buttonContainer,
+    button,
+    textButtonGroup,
+  } = styles;
 
   const data: Form = {
     name: "",
@@ -58,6 +77,9 @@ const CreateForm = () => {
 
   const [updatedForm, setUpdatedForm] = useState<Form | null>(null);
 
+  const nextformId = localStorage.getItem("nextFormId");
+  const routeStorageForm: string = `/forms/form_${nextformId}`;
+
   const router = useRouter();
 
   const editorOptions = {
@@ -69,7 +91,15 @@ const CreateForm = () => {
         ["clean"],
       ],
     },
-    formats: ["bold", "italic", "underline", "strike", "color", "background", "size"],
+    formats: [
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "color",
+      "background",
+      "size",
+    ],
   };
   useEffect(() => {
     // Check if formId is present in the query parameters
@@ -77,7 +107,7 @@ const CreateForm = () => {
 
     if (copy) {
       // Load data from localStorage if formId is present
-      const storedFormData = localStorage.getItem('formData');
+      const storedFormData = localStorage.getItem("formData");
       if (storedFormData) {
         const parsedFormData = JSON.parse(storedFormData);
         setUpdatedForm(parsedFormData);
@@ -98,7 +128,10 @@ const CreateForm = () => {
   };
 
   const handleSubtitleChange = (content: string) => {
-    setUpdatedForm((prevForm) => ({ ...(prevForm as Form), subtitle: content }));
+    setUpdatedForm((prevForm) => ({
+      ...(prevForm as Form),
+      subtitle: content,
+    }));
   };
 
   const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,8 +153,9 @@ const CreateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((option, index) =>
-        index === questionIndex ? { ...option, label: content } : option
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (option, index) =>
+          index === questionIndex ? { ...option, label: content } : option
       );
 
       return {
@@ -135,10 +169,14 @@ const CreateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? { ...question, options: question.options ? [...question.options, ""] : [""] }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options ? [...question.options, ""] : [""],
+              }
+            : question
       );
 
       return {
@@ -152,15 +190,19 @@ const CreateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? {
-            ...question,
-            options: question.options
-              ? [...question.options.slice(0, optionIndex), ...question.options.slice(optionIndex + 1)]
-              : [],
-          }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options
+                  ? [
+                      ...question.options.slice(0, optionIndex),
+                      ...question.options.slice(optionIndex + 1),
+                    ]
+                  : [],
+              }
+            : question
       );
 
       return {
@@ -170,19 +212,28 @@ const CreateForm = () => {
     });
   };
 
-  const handleLabelOptionChange = (questionIndex: number, optionIndex: number, content: string) => {
+  const handleLabelOptionChange = (
+    questionIndex: number,
+    optionIndex: number,
+    content: string
+  ) => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((question, index) =>
-        index === questionIndex
-          ? {
-            ...question,
-            options: question.options
-              ? [...question.options.slice(0, optionIndex), content, ...question.options.slice(optionIndex + 1)]
-              : [],
-          }
-          : question
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (question, index) =>
+          index === questionIndex
+            ? {
+                ...question,
+                options: question.options
+                  ? [
+                      ...question.options.slice(0, optionIndex),
+                      content,
+                      ...question.options.slice(optionIndex + 1),
+                    ]
+                  : [],
+              }
+            : question
       );
 
       return {
@@ -196,8 +247,11 @@ const CreateForm = () => {
     setUpdatedForm((prevForm) => {
       if (!prevForm) return null;
 
-      const updatedOptionsArray = (prevForm.optionsArray || []).map((option, index) =>
-        index === questionIndex ? { ...option, isVisible: !option.isVisible } : option
+      const updatedOptionsArray = (prevForm.optionsArray || []).map(
+        (option, index) =>
+          index === questionIndex
+            ? { ...option, isVisible: !option.isVisible }
+            : option
       );
 
       return {
@@ -212,8 +266,8 @@ const CreateForm = () => {
       ...(prevForm as Form),
       redirect: {
         ...prevForm!.redirect,
-        type: value as "thankYouPage" | "customLink",  // Asegurarse de que el valor sea del tipo correcto
-        link: value === "thankYouPage" ? "" : prevForm!.redirect.link,  // Restablecer el valor del enlace si se cambia a otra opción
+        type: value as "thankYouPage" | "customLink", // Asegurarse de que el valor sea del tipo correcto
+        link: value === "thankYouPage" ? "" : prevForm!.redirect.link, // Restablecer el valor del enlace si se cambia a otra opción
       },
     }));
   };
@@ -242,23 +296,23 @@ const CreateForm = () => {
 
   const handlePreview = () => {
     // Guardar datos temporalmente (por ejemplo, en localStorage)
-    localStorage.setItem('formData', JSON.stringify(updatedForm));
+    localStorage.setItem("formData", JSON.stringify(updatedForm));
 
     // Obtener la URL completa para la nueva ruta
     const previewUrl = `${window.location.origin}/forms/preview`;
 
     // Abrir una nueva pestaña con window.open y redirigir usando router.push solo en la pestaña actual
-    const newTab = window.open(previewUrl, '_blank');
+    const newTab = window.open(previewUrl, "_blank");
     if (newTab) {
       newTab.focus();
 
       // Verificar si la pestaña actual es la pestaña principal antes de redirigir con router.push
       if (window.opener) {
-        router.push('/forms/preview');
+        router.push("/forms/preview");
       }
     } else {
       // Manejar el caso en el que la apertura de ventana falla (puede deberse a bloqueadores de ventanas emergentes)
-      console.error('No se pudo abrir la nueva pestaña');
+      console.error("No se pudo abrir la nueva pestaña");
     }
   };
 
@@ -281,17 +335,29 @@ const CreateForm = () => {
     const currentDate = new Date();
     updatedFormCopy.createdAt = formatDate(currentDate);
     updatedFormCopy.editedAt = formatDate(currentDate);
-    updatedFormCopy.title = "titulo de prueba";
-    updatedFormCopy.subtitle = "subtitulo de prueba"
 
-    console.log(updatedFormCopy)
+    console.log(updatedFormCopy);
     // Lógica para crear el formulario
     createFormApi(updatedFormCopy)
-      .then((result) => {
-        console.log(result)
+      .then(async (result) => {
+        console.log(result);
         if (result === true) {
+          const customId = `form_${nextformId}`;
+
+          try {
+            const formDocRef = doc(collection(db, "forms"), customId);
+            console.log(formDocRef);
+            await setDoc(formDocRef, updatedFormCopy);
+            console.log(
+              "Formulario creado exitosamente en Firebase con ID:",
+              customId
+            );
+            alert("Formulario creado exitosamente en Firebase.");
+          } catch (error) {
+            console.error("Error al guardar en Firebase:", error);
+          }
           // Formulario creado exitosamente
-          alert("Formulario creada exitosamente.");
+          alert("Formulario creada exitosamente en MySQL.");
         } else {
           // Trivia no fue creada
           alert("Erro al crear al crear el formulario.");
@@ -345,6 +411,7 @@ const CreateForm = () => {
       <div className={lineaAtravesada}></div>
 
       <div className={inputGroup}>
+        <FileUpload route={routeStorageForm} updateFormImg={setUpdatedForm} />
         <label htmlFor="imgPath">Imagen:</label>
         <input
           type="text"
@@ -373,53 +440,92 @@ const CreateForm = () => {
 
       {[0, 1, 2].map((questionIndex) => (
         <div className={questionGroup} key={questionIndex}>
-
           <div className={lineaAtravesada}></div>
 
-          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${questionIndex + 1}:`}</label>
+          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${
+            questionIndex + 1
+          }:`}</label>
           <ReactQuill
             className={editor}
             id={`option${questionIndex + 1}`}
             value={updatedForm?.optionsArray[questionIndex]?.label}
-            onChange={(content) => handleLabelOptionAChange(content, questionIndex)}
+            onChange={(content) =>
+              handleLabelOptionAChange(content, questionIndex)
+            }
             modules={editorOptions.modules}
             formats={editorOptions.formats}
           />
 
-          {[...Array.from({ length: updatedForm?.optionsArray[questionIndex]?.options.length || 0 }).keys()].map(
-            (optionIndex) => (
-              <div className={options} key={optionIndex}>
-                <label htmlFor={`option${questionIndex + 1}_${optionIndex + 1}`}>
-                  {`Opción ${optionIndex + 1}:`}
-                </label>
-                {optionIndex < 2 ? (
+          {[
+            ...Array.from({
+              length:
+                updatedForm?.optionsArray[questionIndex]?.options.length || 0,
+            }).keys(),
+          ].map((optionIndex) => (
+            <div className={options} key={optionIndex}>
+              <label htmlFor={`option${questionIndex + 1}_${optionIndex + 1}`}>
+                {`Opción ${optionIndex + 1}:`}
+              </label>
+              {optionIndex < 2 ? (
+                <input
+                  type="text"
+                  id={`option${questionIndex + 1}_${optionIndex + 1}`}
+                  value={
+                    updatedForm?.optionsArray[questionIndex]?.options[
+                      optionIndex
+                    ]
+                  }
+                  onChange={(e) =>
+                    handleLabelOptionChange(
+                      questionIndex,
+                      optionIndex,
+                      e.target.value
+                    )
+                  }
+                />
+              ) : (
+                <>
                   <input
                     type="text"
                     id={`option${questionIndex + 1}_${optionIndex + 1}`}
-                    value={updatedForm?.optionsArray[questionIndex]?.options[optionIndex]}
-                    onChange={(e) => handleLabelOptionChange(questionIndex, optionIndex, e.target.value)}
+                    value={
+                      updatedForm?.optionsArray[questionIndex]?.options[
+                        optionIndex
+                      ]
+                    }
+                    onChange={(e) =>
+                      handleLabelOptionChange(
+                        questionIndex,
+                        optionIndex,
+                        e.target.value
+                      )
+                    }
                   />
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      id={`option${questionIndex + 1}_${optionIndex + 1}`}
-                      value={updatedForm?.optionsArray[questionIndex]?.options[optionIndex]}
-                      onChange={(e) => handleLabelOptionChange(questionIndex, optionIndex, e.target.value)}
-                    />
-                    <button onClick={() => handleRemoveOption(questionIndex, optionIndex)}>Eliminar</button>
-                  </>
-                )}
-              </div>
-            )
-          )}
+                  <button
+                    onClick={() =>
+                      handleRemoveOption(questionIndex, optionIndex)
+                    }
+                  >
+                    Eliminar
+                  </button>
+                </>
+              )}
+            </div>
+          ))}
 
-          <button className={newOptionButton} onClick={() => handleAddOption(questionIndex)}>Agregar nueva opción</button>
+          <button
+            className={newOptionButton}
+            onClick={() => handleAddOption(questionIndex)}
+          >
+            Agregar nueva opción
+          </button>
           <div className={checkGroup}>
             <label>
               <input
                 type="checkbox"
-                checked={updatedForm?.optionsArray[questionIndex]?.isVisible || false}
+                checked={
+                  updatedForm?.optionsArray[questionIndex]?.isVisible || false
+                }
                 onChange={() => handleOptionVisibilityChange(questionIndex)}
               />
               Hacer visible la pregunta {questionIndex + 1}
@@ -476,7 +582,9 @@ const CreateForm = () => {
             <button className={button}>Cancelar</button>
           </a>
         </Link>
-        <button className={button} onClick={handlePreview}>Vista previa</button>
+        <button className={button} onClick={handlePreview}>
+          Vista previa
+        </button>
         <button className={button} onClick={handleCreate}>
           Crear Formulario
         </button>
