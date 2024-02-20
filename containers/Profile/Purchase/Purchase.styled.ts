@@ -1,8 +1,8 @@
-import { Row } from "react-bootstrap";
-import InputMask from "react-input-mask";
+import { Row } from 'react-bootstrap';
+import InputMask from 'react-input-mask';
 
-import Image from "next/image";
-import styled, { css, keyframes } from "styled-components";
+import Image from 'next/image';
+import styled, { css, keyframes } from 'styled-components';
 
 /*** ReDo screen styles */
 export const Container = styled.div`
@@ -334,7 +334,7 @@ export const Container = styled.div`
         }
       }
       .circle {
-        z-indez: 2;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -588,7 +588,7 @@ export const Container = styled.div`
         }
       }
       .circle {
-        z-indez: 2;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -956,7 +956,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 60px;
   font-weight: 700;
   color: #3f1168;
@@ -998,7 +998,7 @@ export const DataPaymentContain = styled.div`
   align-items: center;
 `;
 export const ProcessText = styled.p`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   position: absolute;
   text-align: center;
@@ -1017,7 +1017,7 @@ export const Division = styled.div`
   background: gray;
 `;
 export const TextPosition = styled.p`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: absolute;
@@ -1038,7 +1038,7 @@ export const Division2 = styled.div`
   background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
 `;
 export const PastText = styled.p`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   position: absolute;
   color: #6717cd;
@@ -1074,7 +1074,7 @@ export const ContainTitle = styled.h1`
   justify-content: space-between;
   font-weight: 600;
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 600px) {
     font-size: 14px;
@@ -1093,7 +1093,7 @@ export const PaymentContain = styled.div<{ active: any }>`
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
     cursor: pointer;
   }
-  ${(props) =>
+  ${props =>
     props.active == true &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -1108,8 +1108,8 @@ export const PaymentDetail = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
-export const PaymentMethod = styled("div")<{ active: any }>`
-  ${(props) =>
+export const PaymentMethod = styled('div')<{ active: any }>`
+  ${props =>
     props.active == true &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -1134,7 +1134,7 @@ export const PayText = styled.p`
   text-align: center;
   font-weight: 600;
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 12px;
@@ -1144,7 +1144,7 @@ export const PayText2 = styled.p`
   text-align: center;
   font-weight: 600;
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     display: none;
@@ -1199,19 +1199,19 @@ export const PayPal = styled.i`
     width: 120px;
   }
 `;
-export const CardIconResp = styled("i")<{ brand: any }>`
-  ${(props) =>
-    props.brand == "visa" &&
+export const CardIconResp = styled('i')<{ brand: any }>`
+  ${props =>
+    props.brand == 'visa' &&
     css`
       background-image: url(../images/visa-icon.png);
     `}
-  ${(props) =>
-    props.brand == "mastercard" &&
+  ${props =>
+    props.brand == 'mastercard' &&
     css`
       background-image: url(../images/mastercard-icon.png);
     `}
-  ${(props) =>
-    props.brand == "amex" &&
+  ${props =>
+    props.brand == 'amex' &&
     css`
       background-image: url(../images/amex-icon.png);
     `}
@@ -1260,9 +1260,9 @@ export const NewMethodBox = styled.div<{ active: any; plan: any }>`
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${(props) =>
+  ${props =>
     props.active == true &&
-    props.plan == "stripe" &&
+    props.plan == 'stripe' &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
     `}
@@ -1288,8 +1288,8 @@ export const NewMethodBoxPaypal = styled.div<{ plan: any }>`
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${(props) =>
-    props.plan == "paypal" &&
+  ${props =>
+    props.plan == 'paypal' &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
     `}
@@ -1310,7 +1310,7 @@ export const ButtonContain = styled.div`
   justify-content: space-between;
 `;
 export const TransparentButton = styled.button`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   height: 50px;
@@ -1330,7 +1330,7 @@ export const TransparentButton = styled.button`
   }
 `;
 export const PurpleButton = styled.button`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
@@ -1365,7 +1365,7 @@ const glow = keyframes`
   }
 `;
 export const PurpleBuyButton = styled.button`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
@@ -1412,7 +1412,7 @@ export const PurchaseContainer = styled.div`
 `;
 export const CourseId = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 12px;
@@ -1421,7 +1421,7 @@ export const CourseId = styled.p`
 export const CourseName = styled.h1`
   font-size: 24px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -1435,7 +1435,7 @@ export const CourseName = styled.h1`
 export const CourseCost = styled.span`
   color: #6717cd;
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   @media (max-width: 1115px) {
     font-size: 20px;
   }
@@ -1448,7 +1448,7 @@ export const CourseCostResp = styled.span`
   color: #6717cd;
   font-size: 20px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   @media (max-width: 1023px) {
     display: flex;
     font-size: 18px;
@@ -1488,7 +1488,7 @@ export const NumberLesson = styled.div`
   right: 10px;
   display: flex;
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: white;
   padding-block: 5px;
   padding-inline: 10px;
@@ -1514,7 +1514,7 @@ export const CourseImage = styled.img`
 `;
 export const TitleCourse = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
   @media (max-width: 1023px) {
@@ -1526,7 +1526,7 @@ export const TitleCourse = styled.p`
 `;
 export const Subtitle = styled.p`
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 10px;
@@ -1534,7 +1534,7 @@ export const Subtitle = styled.p`
 `;
 export const CourseInfo = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     display: none;
@@ -1564,7 +1564,7 @@ export const InputText = styled.label`
   flex-direction: column;
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   @media (max-width: 400px) {
     font-size: 12px;
   }
@@ -1573,7 +1573,7 @@ export const InputText = styled.label`
 export const RowCard = styled(Row)`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   label {
     margin-bottom: 0;
   }
@@ -1583,7 +1583,7 @@ export const RowCard = styled(Row)`
     padding: 10px 0px 10px 20px;
     font-size: 14px;
     font-weight: 300;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
   input.form-control:focus {
     outline: 1px solid #8e2de2;
@@ -1601,7 +1601,7 @@ export const RowCard = styled(Row)`
 
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
   border-radius: 20px;
@@ -1615,7 +1615,7 @@ export const Input = styled.input`
 `;
 export const InputCard = styled(InputMask)`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
   border-radius: 20px;
@@ -1649,7 +1649,7 @@ export const Text = styled.p`
   gap: 5px;
   font-size: 14px;
   color: #6717cd;
-  font-family: "Raleyway", sans-serif;
+  font-family: 'Raleyway', sans-serif;
   font-weight: 600;
   margin: 0;
   @media (max-width: 600px) {
@@ -1658,7 +1658,7 @@ export const Text = styled.p`
 `;
 export const Text2 = styled.p`
   font-size: 14px;
-  font-family: "Raleyway", sans-serif;
+  font-family: 'Raleyway', sans-serif;
   font-weight: 600;
   margin: 0;
   @media (max-width: 600px) {
@@ -1667,7 +1667,7 @@ export const Text2 = styled.p`
 `;
 export const Text3 = styled.p`
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const BotContainer = styled.div`
@@ -1681,7 +1681,7 @@ export const PurchaseText = styled.p`
   align-items: center;
   justify-content: space-between;
   font-size: 14px;
-  font-family: "Raleyway", sans-serif;
+  font-family: 'Raleyway', sans-serif;
   font-weight: 600;
   margin: 0;
   @media (max-width: 400px) {
@@ -1691,7 +1691,7 @@ export const PurchaseText = styled.p`
 export const PurchaseData = styled.span`
   align-items: center;
   font-size: 14px;
-  font-family: "Raleyway", sans-serif;
+  font-family: 'Raleyway', sans-serif;
   font-weight: 400;
   margin: 0;
   @media (max-width: 1023px) {

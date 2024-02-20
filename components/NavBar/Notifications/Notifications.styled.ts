@@ -12,7 +12,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   padding: 20px 5px;
   border-radius: 8px;
   width: 400px;
-  z-indez: 10;
+  z-index: 10;
   gap: 20px;
   display: flex;
   flex-direction: column;
