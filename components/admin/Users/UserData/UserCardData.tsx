@@ -114,8 +114,12 @@ const UserCardData = (props: CardData) => {
     )
   }
 
-  const haveASubscription = (level: number, method: string) => {
+  const oldHaveASubscription = (level: number, method: string) => {
     return [1, 4, 5, 6, 7, 8].includes(level) || 'admin' === method;
+  }
+
+  const haveASubscription = (level: number) => {
+    return level !== 0 && level !== 10;
   }
 
   const getMembershipTextByLevel = (level: number) => {
@@ -162,7 +166,7 @@ const UserCardData = (props: CardData) => {
   console.log(user);
 
   const getSubscriptionJSXElementByUserValues = (): JSX.Element[] => {
-    if (!(haveASubscription(user.level, user.method) || user.final_date >= today)) {
+    if (!(haveASubscription(user.level) || user.final_date >= today)) {
       return (
         []
       );
@@ -235,7 +239,9 @@ const UserCardData = (props: CardData) => {
               Suscripción Actual
               <Label>
                 {
-                  (haveASubscription(user.level, user.method) || user.final_date >= today) ? getMembershipTextByLevel(user.level) : "Sin suscripción"
+                  (haveASubscription(user.level) && user.final_date >= today)
+                    ? getMembershipTextByLevel(user.level)
+                    : "Sin suscripción"
                 }
               </Label>
             </Info>
@@ -243,7 +249,7 @@ const UserCardData = (props: CardData) => {
               getSubscriptionJSXElementByUserValues()
             }
             {
-              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
+              (haveASubscription(user.level) && user.final_date >= today) &&
               <img src={GonvarImg} className="img-gonvar" />
             }
           </UserInfo>
@@ -251,11 +257,11 @@ const UserCardData = (props: CardData) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
             <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddDays(true); }}>Editar días de suscripción</TransparentButton>
             {
-              !((haveASubscription(user.level, user.method) || user.final_date >= today)) &&
+              !((haveASubscription(user.level) && user.final_date >= today)) &&
               <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddSubscriptionPlan(true); }}>Activar plan de suscripción</TransparentButton>
             }
             {
-              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
+              (haveASubscription(user.level) && user.final_date >= today) &&
               <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowRemoveSuscription(true); }}>Eliminar suscripción</TransparentButton>
             }
           </div>
