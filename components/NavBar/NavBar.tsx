@@ -104,17 +104,22 @@ const NavBar = () => {
       current: modalNotificationsRef.current
     }
 
-    if (targetObject.target !== null) {
+    if (targetObject.target != null && targetObject.current != null) {
       if ((targetObject.target as HTMLDivElement).id === targetObject.current.id) {
         return;
       }
       const parent1 = (targetObject.target as HTMLDivElement).parentNode as HTMLDivElement;
-      if (parent1.id === targetObject.current.id) {
-        return;
+      if (parent1 != null) {
+        if (parent1.id === targetObject.current.id) {
+          return;
+        }
       }
+
       const parent2 = parent1.parentNode as HTMLDivElement;
-      if (parent2.id === targetObject.current.id) {
-        return;
+      if (parent2 != null) {
+        if (parent2.id === targetObject.current.id) {
+          return;
+        }
       }
     }
 
@@ -137,7 +142,8 @@ const NavBar = () => {
       'notification-info',
       'title',
       'message',
-      'date-text'
+      'date-text',
+      'notifications',
     ];
     const classList = [...(target as HTMLDivElement).classList];
 
