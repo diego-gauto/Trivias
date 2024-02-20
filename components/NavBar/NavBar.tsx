@@ -99,6 +99,54 @@ const NavBar = () => {
       return;
     }
 
+    const targetObject = {
+      target: event.target,
+      current: modalNotificationsRef.current
+    }
+
+    if (targetObject.target !== null) {
+      if ((targetObject.target as HTMLDivElement).id === targetObject.current.id) {
+        return;
+      }
+      const parent1 = (targetObject.target as HTMLDivElement).parentNode as HTMLDivElement;
+      if (parent1.id === targetObject.current.id) {
+        return;
+      }
+      const parent2 = parent1.parentNode as HTMLDivElement;
+      if (parent2.id === targetObject.current.id) {
+        return;
+      }
+    }
+
+    /*
+    <div class="notification-data">
+    <img class="notification-image" src="../images/notifications/not_8.png">
+    <div class="notification-texts">
+      <div class="notification-info">
+        <p class="title">Renovación de suscripción pendiente</p>
+        <p class="message">Diego recuerda que esta a punto de finalizar tu suscripción, dirígete a la sección de métodos de pago para renovar tu suscripción</p>
+      </div>
+      <p class="date-text">Martes 13 de Febrero, 2024. 4:15 p.m.</p>
+    </div>
+  </div>
+    */
+    const classArrayToCheck = [
+      'notification-data',
+      'notification-image',
+      'notification-texts',
+      'notification-info',
+      'title',
+      'message',
+      'date-text'
+    ];
+    const classList = [...(target as HTMLDivElement).classList];
+
+    for (const classItem of classList) {
+      if (classArrayToCheck.includes(classItem)) {
+        return;
+      }
+    }
+
     if (modalNotificationsRef.current && !modalNotificationsRef.current.contains(event.target)) {
       if (!openNotification) {
         setOpenNotification(openNotification);
@@ -384,6 +432,7 @@ const NavBar = () => {
               }
               <NotificationContainer
                 ref={modalNotificationsRef}
+                id="notification-container"
                 style={
                   {
                     height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
@@ -590,6 +639,7 @@ const NavBar = () => {
                 }
                 <NotificationContainer
                   ref={modalNotificationsRef}
+                  id="notification-container"
                   style={
                     {
                       height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'

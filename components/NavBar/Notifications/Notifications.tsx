@@ -9,14 +9,42 @@ import { LESSON_PATH, REWARDS_PATH } from '../../../constants/paths';
 import { formatDateNotification, returnNotificationImage, returnNotificationMessage, returnNotificationTitles } from '../../../utils/functions';
 import { user } from 'firebase-functions/v1/auth';
 import { userById } from '../../api/users';
-const Notifications = (props: any) => {
+
+interface NotificationByUser {
+  notification_id: number
+  user_id: number
+  type: string
+  status: number
+  created_at: string
+  source_table: string
+  course_id?: number
+  season?: number
+  lesson?: number
+  title?: string
+  score?: number
+  user_comment_id?: number
+  user_like_id?: number
+  amount?: number
+  product_name?: string
+  reward_id?: number
+  due_date?: number
+}
+
+interface NotificationsProps {
+  notification: NotificationByUser,
+  user: any,
+  openNotifications: () => void,
+  unReadNotification: number,
+  setUnReadNotification: React.Dispatch<React.SetStateAction<number>>,
+}
+
+const Notifications = (props: NotificationsProps) => {
   const router = useRouter();
   let today = new Date().getTime() / 1000;
   const { notification, openNotifications, unReadNotification, setUnReadNotification, user } = props;
   const [newStatus, setNewStatus] = useState<boolean>(notification?.status === 0 ? false : true);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
-
 
   const ClickNotification = () => {
     if (notification.type === "1" ||
@@ -49,24 +77,25 @@ const Notifications = (props: any) => {
       setNewStatus(true);
       updateNotificationStatusApi(notificationUpdate).then((res) => {
         setUnReadNotification(unReadNotification - 1);
-        // openNotifications();
       })
-    } else {
-      // openNotifications();
     }
   }
 
   useEffect(() => {
     if (notification.type === "3" || notification.type === "4") {
-      userById(notification.type === "4" ? notification.user_like_id : notification.user_comment_id).then((res) => {
-        setImage(res.data[0].photo);
-        setName(res.data[0].name)
-      })
+      const { type, user_like_id, user_comment_id } = notification;
+      if (user_like_id !== undefined && user_comment_id !== undefined) {
+        userById(type === "4" ? user_like_id + '' : user_comment_id + '').then((res) => {
+          setImage(res.data[0].photo);
+          setName(res.data[0].name)
+        })
+      }
+
     }
   }, [])
 
   return (
-    <NotificationData newStatus={newStatus} status={notification} >
+    <NotificationData newStatus={newStatus} status={notification.status} >
       <div className="notification-data" onClick={ClickNotification}>
         {(notification.type !== "3" && notification.type !== "4") && <img className='notification-image' src={returnNotificationImage(notification)} />}
         {(notification.type === "3" || notification.type === "4") && <div style={{ position: "relative" }}>
@@ -85,7 +114,7 @@ const Notifications = (props: any) => {
             </p>}
           </div>
           <p className='date-text'>
-            {formatDateNotification(notification.created_at)}
+            {formatDateNotification((new Date(notification.created_at)).getDate())}
           </p>
         </div>
 
