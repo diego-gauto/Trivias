@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
-import { getInvoicesApi } from "../../api/admin";
+import { getInvoicesApi, getInvoicesWithOffsetTestApi } from "../../api/admin";
 import { AdminContain, Table } from "../SideBar.styled";
 import {
   Container,
@@ -14,16 +14,38 @@ import {
   TitleContain,
 } from "./Pay.styled";
 
-const Pay = () => {
-  const [invoices, setInvoices] = useState([]);
+import Pagination from '../../Pagination/Pagination';
 
-  const retrieveInvoices = () => {
-    getInvoicesApi().then((res) => {
-      let tempInvoices = res.data.invoices.sort((a: any, b: any) => {
-        return a.paid_at < b.paid_at ? 1 : -1;
-      })
-      setInvoices(tempInvoices)
-    })
+export interface Invoice {
+  id: number
+  amount: number
+  method: string
+  paid_at: string
+  product: string
+  user_id: number
+  name: string
+  email: string
+}
+
+const Pay = () => {
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [offset, setOffset] = useState<number>(0);
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    retrieveInvoices();
+  }, []);
+
+  const retrieveInvoices = async () => {
+    try {
+      const { invoices, count } = (await getInvoicesWithOffsetTestApi({ offset })).data;
+      console.log(invoices);
+      setInvoices(invoices);
+      setCount(count);
+    } catch (error) {
+      console.error(error);
+    }
+    changePage(0);
   }
 
   const formatDate = (value: any) => {
@@ -31,9 +53,9 @@ const Pay = () => {
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
 
-  useEffect(() => {
-    retrieveInvoices();
-  }, []);
+  const changePage = (page: number) => {
+    setOffset(page * 100);
+  }
 
   return (
     <AdminContain>
@@ -41,6 +63,11 @@ const Pay = () => {
         <Container>
           <TitleContain>
             <Title>Ventas</Title>
+            <Pagination
+              changePage={changePage}
+              currentPage={(offset / 100)}
+              totalPage={Math.ceil(count / 100)}
+            />
           </TitleContain>
           <Table id="Pay">
             <tbody style={{ display: 'inline-table', width: '100%' }}>
@@ -54,22 +81,15 @@ const Pay = () => {
               </tr>
               {/* TABLAS */}
               {
-                invoices.map((invoice: any, index: number) => {
+                invoices.map((invoice, index: number) => {
                   return (
                     <tr key={"allPayment" + index}>
                       <td>
                         <ProfileContain>
                           <Imagecontain>
-                            {invoice && invoice.photo
-                              ?
-                              < Profile
-                                src={invoice.photo}
-                              />
-                              :
-                              <Profile
-                                src={DEFAULT_USER_IMG}
-                              />
-                            }
+                            <Profile
+                              src={DEFAULT_USER_IMG}
+                            />
                           </Imagecontain>
                           {invoice.name}
                         </ProfileContain>
