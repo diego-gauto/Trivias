@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DEFAULT_USER_IMG } from "../../../constants/paths";
 import { getInvoicesApi, getInvoicesWithOffsetTestApi } from "../../api/admin";
 import { AdminContain, Table } from "../SideBar.styled";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
   Container,
   IconContain,
@@ -31,12 +32,14 @@ const Pay = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [offset, setOffset] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     retrieveInvoices();
-  }, []);
+  }, [offset]);
 
   const retrieveInvoices = async () => {
+    setIsLoading(true);
     try {
       const { invoices, count } = (await getInvoicesWithOffsetTestApi({ offset })).data;
       console.log(invoices);
@@ -44,8 +47,9 @@ const Pay = () => {
       setCount(count);
     } catch (error) {
       console.error(error);
+      changePage(0);
     }
-    changePage(0);
+    setIsLoading(false);
   }
 
   const formatDate = (value: any) => {
@@ -62,7 +66,7 @@ const Pay = () => {
       <PayContain>
         <Container>
           <TitleContain>
-            <Title>Ventas</Title>
+            <Title>Ventas: {count}</Title>
             <Pagination
               changePage={changePage}
               currentPage={(offset / 100)}
@@ -81,7 +85,8 @@ const Pay = () => {
               </tr>
               {/* TABLAS */}
               {
-                invoices.map((invoice, index: number) => {
+                !isLoading &&
+                invoices.map((invoice, index) => {
                   return (
                     <tr key={"allPayment" + index}>
                       <td>
@@ -109,6 +114,14 @@ const Pay = () => {
               }
             </tbody>
           </Table>
+          {
+            isLoading &&
+            <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+              <LoaderImage>
+                <LoaderContain />
+              </LoaderImage>
+            </Background>
+          }
         </Container>
       </PayContain>
     </AdminContain>
