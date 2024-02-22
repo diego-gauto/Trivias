@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { ModalContainer, RetryPayModalContain } from './RetryPayModal.styled'
 import { IRetryPayModal } from './IRetryPayModal'
 import { useAuth } from '../../../hooks/useAuth';
-import { conektaPm } from '../../api/users';
+import { conektaPm, updateMembership } from '../../api/users';
 import router from "next/router";
 
 import { customerOrders, retryPayment } from '../../api/profile';
 import { IoClose } from 'react-icons/io5';
+import { IPm } from '../../RetryPayment/IRetryPayment';
+import { conektaSubscriptionApi } from '../../api/checkout';
+import { createNotification } from '../../api/notifications';
 const alert_icon = "/images/RetryPayment/alert-icon.png";
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
@@ -14,41 +17,68 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const user = context.user;
   const [pm, setPm] = useState<any>([]);
   const [isLaoding, setIsloading] = useState(false);
+  const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
   const [invoice, setInvoice] = useState({} as any);
-  const [cards, setCards] = useState(0);
+
   const pay = () => {
-    console.log(user);
-    console.log(invoice);
-    console.log(pm);
+    const filter = paymentMethods.filter((x) => x.default)
+    const pm = filter[0]
+    let plan_id = "";
 
-    let body = {
-      paymentMethodId: pm.id,
-      amount: invoice.amount,
-      orderId: invoice.id
+    if (user.level === 5 && user.type === 1599) plan_id = "anual";
+    if (user.level === 5 && user.type === 3497) plan_id = "anual_v1_1";
+    if (user.level === 8) plan_id = "cuatrimestre";
+
+    const data = {
+      id: pm?.id,
+      conekta_id: user.conekta_id,
+      plan_id: plan_id,
+      userId: user.user_id
     }
-
-    retryPayment(body).then((res) => {
-      console.log(res);
-
+    conektaSubscriptionApi(data).then(async (res) => {
+      if (res?.data.data.status === 'active') {
+        const sub = res.data.data;
+        const membership = {
+          final_date: sub.billing_cycle_end,
+          method: "conekta",
+          level: user.level,
+          payment_method: sub.card_id,
+          plan_id: sub.id,
+          plan_name: "Gonvar Plus",
+          start_date: sub.billing_cycle_start,
+          type: user.type,
+          userId: user.user_id
+        }
+        await updateMembership(membership)
+        window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
+      } else {
+        let notification = {
+          userId: user.user_id,
+          type: "8",
+          notificationId: '',
+          amount: user.type,
+          productName: 'Gonvar Plus',
+          frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
+        }
+        await createNotification(notification);
+        const msg = "pago-rechazado"
+        window.location.href = user.level === 5 ? `/pagofallidoanualidad?error=${msg}` : `/pagofallidocuatrimestre?error=${msg}`;
+      }
     })
-
-    // window.location.href ="month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
   }
 
-  const paymentMethods = () => {
+  const getPaymentMethods = () => {
     setIsloading(true);
     let body = {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id
     }
     conektaPm(body).then((res) => {
-      let cards = res.data.payment_methods.data
-      let card = cards.filter((x: any) => x.default);
-      setPm(card[0]);
-      if (cards) {
-        setCards(cards.length)
-      }
-      setIsloading(false);
+      const conektaPaymentMethods = res.data.payment_methods.data
+      console.log(conektaPaymentMethods);
+
+      const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
+      setPaymentMethods(extractedProperties);
     })
   }
 
@@ -65,7 +95,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   }
 
   useEffect(() => {
-    paymentMethods();
+    getPaymentMethods();
     // dueOrders();
   }, [])
 
@@ -98,7 +128,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
                 </p>
               </>
           }
-          {withSubscription && cards > 0 && <button onClick={pay}>Reintentar pago</button>}
+          {paymentMethods.length > 0 && <button onClick={pay}>Reintentar pago</button>}
           <button onClick={goTo}>Actualiza info de pago</button>
         </div>
       </RetryPayModalContain>}
