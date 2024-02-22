@@ -121,7 +121,9 @@ export const RetryPayment = () => {
     })
   }
   useEffect(() => {
-    getPaymentMethods();
+    if (userDataAuth.user) {
+      getPaymentMethods();
+    }
   }, [userDataAuth])
 
   const pay = () => {

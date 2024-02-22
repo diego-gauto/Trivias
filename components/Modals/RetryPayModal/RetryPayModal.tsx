@@ -10,6 +10,7 @@ import { IoClose } from 'react-icons/io5';
 import { IPm } from '../../RetryPayment/IRetryPayment';
 import { conektaSubscriptionApi } from '../../api/checkout';
 import { createNotification } from '../../api/notifications';
+import { user } from 'firebase-functions/v1/auth';
 const alert_icon = "/images/RetryPayment/alert-icon.png";
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
@@ -94,9 +95,13 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   }
 
   useEffect(() => {
-    getPaymentMethods();
+    console.log(user)
+    if (user) {
+      getPaymentMethods();
+    }
+
     // dueOrders();
-  }, [])
+  }, [user])
 
   return (
     <ModalContainer show={show} centered>
