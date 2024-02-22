@@ -15,6 +15,17 @@ export const RetryPayModalContain = styled.div`
   justify-content: center;
   padding: 30px;
   width: 100%;
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    color: #3f1168;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.67;
+    }
+  }
   .data-contain {
     display: flex;
     flex-direction: column;

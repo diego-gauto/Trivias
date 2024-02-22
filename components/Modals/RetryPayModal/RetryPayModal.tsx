@@ -6,6 +6,7 @@ import { conektaPm } from '../../api/users';
 import router from "next/router";
 
 import { customerOrders, retryPayment } from '../../api/profile';
+import { IoClose } from 'react-icons/io5';
 const alert_icon = "/images/RetryPayment/alert-icon.png";
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
@@ -14,7 +15,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const [pm, setPm] = useState<any>([]);
   const [isLaoding, setIsloading] = useState(false);
   const [invoice, setInvoice] = useState({} as any);
-
+  const [cards, setCards] = useState(0);
   const pay = () => {
     console.log(user);
     console.log(invoice);
@@ -44,6 +45,9 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       let cards = res.data.payment_methods.data
       let card = cards.filter((x: any) => x.default);
       setPm(card[0]);
+      if (cards) {
+        setCards(cards.length)
+      }
       setIsloading(false);
     })
   }
@@ -61,13 +65,14 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   }
 
   useEffect(() => {
-    // paymentMethods();
+    paymentMethods();
     // dueOrders();
   }, [])
 
   return (
-    <ModalContainer show={show} onHide={onHide} centered>
+    <ModalContainer show={show} centered>
       {!isLaoding && <RetryPayModalContain>
+        <IoClose className='close' onClick={onHide} />
         <div className='data-contain'>
           <img src={alert_icon} className='alert-icon' />
           <p className='bold'>Tu cuenta està suspendida.</p>
@@ -93,7 +98,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
                 </p>
               </>
           }
-          {withSubscription && <button onClick={pay}>Reintentar pago</button>}
+          {withSubscription && cards > 0 && <button onClick={pay}>Reintentar pago</button>}
           <button onClick={goTo}>Actualiza info de pago</button>
         </div>
       </RetryPayModalContain>}
