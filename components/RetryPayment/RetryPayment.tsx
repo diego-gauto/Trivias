@@ -222,6 +222,30 @@ export const RetryPayment = () => {
     })
   }
 
+  const returnFrecuency = () => {
+    if (user.level === 5 || user.level === 4) {
+      return "Anual"
+    } else if (user.level === 1 || user.level === 6) {
+      return "Mensual"
+    } else if (user.level === 7 || user.level === 8) {
+      return "Cuatrimestral"
+    } else {
+      return "NA"
+    }
+  }
+
+  const returnPrice = () => {
+    if (user.level === 5 || user.level === 4) {
+      return `$${user.type} / Anual `
+    } else if (user.level === 1 || user.level === 6) {
+      return `$${user.type} / Mensual `
+    } else if (user.level === 7 || user.level === 8) {
+      return `$${user.type} / Cuatrimestral `
+    } else {
+      return "NA"
+    }
+  }
+
   return (
     <RetryPaymentContainer>
       <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={user} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
@@ -359,8 +383,8 @@ export const RetryPayment = () => {
                 </div>
                 <p className='description-text'>
                   Presionando en el botón "Guardar" estás dando tu consentimiento
-                  para que Gonvar automáticamente continúe con tu suscripción
-                  ( Mensual, Cuatrimestral, Anual, según sea el caso ) y te cobremos ( precio / período )
+                  para que Gonvar automáticamente continúe con tu suscripción &nbsp;
+                  {returnFrecuency()} y te cobremos {returnPrice()}
                   en el medio de pago que estás agregando hasta que tu decidas cancelarla.
                   <br /><br />
                   Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a

@@ -118,12 +118,12 @@ export const RetryPayModal = (props: IRetryPayModal) => {
               </>
               :
               <>
-                <p className='bold'>Se ha terminado tu suscripción y {user.level === 5 ? "tu año" : "tus 4 meses"} de acceso. ¡No te preocupes!</p>\
+                <p className='bold'>Se ha terminado tu suscripción y {user.level === 5 ? "tu año" : "tus 4 meses"} de acceso. ¡No te preocupes!</p>
                 <p className='paragraph'>
                   Si quieres seguir disfrutando de los
                   cursos disponibles en Gonvar+, {user.level === 8 ? `puedes agregar 4 meses de acceso más por ${user.type} MXN` :
                     `puedes agregar 1 año de acceso más por ${user.type} MXN`}
-                  y así recuperar tus beneficios obtenidos.
+                  &nbsp; y así recuperar tus beneficios obtenidos.
                 </p>
               </>
           }

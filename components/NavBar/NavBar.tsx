@@ -85,7 +85,6 @@ const NavBar = () => {
   const [userData, setUserData] = useState<any>(null);
   const [show, setShow] = useState(false);
   const [withSubscription, setWithSubscription] = useState(true);
-
   const modalNotificationsRef = useRef<any>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -222,7 +221,8 @@ const NavBar = () => {
         //     }
         //   })
         // }
-        if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8)) {
+
+        if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8) && pathname !== "/reintentar-pago") {
           setShow(true);
           setWithSubscription(false);
         }
