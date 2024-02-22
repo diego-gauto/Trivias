@@ -83,7 +83,7 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [withSubscription, setWithSubscription] = useState(true);
 
   const modalNotificationsRef = useRef<any>(null);

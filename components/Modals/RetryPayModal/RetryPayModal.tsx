@@ -75,10 +75,9 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     }
     conektaPm(body).then((res) => {
       const conektaPaymentMethods = res.data.payment_methods.data
-      console.log(conektaPaymentMethods);
-
       const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
       setPaymentMethods(extractedProperties);
+      setIsloading(false);
     })
   }
 
