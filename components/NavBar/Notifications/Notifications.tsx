@@ -114,7 +114,7 @@ const Notifications = (props: NotificationsProps) => {
             </p>}
           </div>
           <p className='date-text'>
-            {formatDateNotification((new Date(notification.created_at)).getDate())}
+            {formatDateNotification((new Date(notification.created_at)))}
           </p>
         </div>
 
