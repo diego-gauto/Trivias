@@ -89,16 +89,30 @@ export const updateCouponStatusApi = async (coupon: any) => {
 
 //Invoice
 
+interface InvoicesAxiosReponse {
+  invoices: Invoice[],
+  count: number
+}
+
+export interface Invoice {
+  id: number
+  amount: number
+  method: string
+  paid_at: string
+  product: string
+  user_id: number
+  name: string
+  email: string
+}
+
 export const getInvoicesApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/invoices")
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<InvoicesAxiosReponse>("https://gonvar.inowu.dev/" + "admin/invoices");
+};
+
+export const getInvoicesWithOffsetTestApi = async (body: { offset: number }) => {
+  return axios
+    .post<InvoicesAxiosReponse>("https://gonvar.inowu.dev/" + "admin/invoices", body);
 };
 
 //Users
