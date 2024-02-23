@@ -212,7 +212,7 @@ export const returnNotificationMessage = (notification: any, user: any) => {
   }
 };
 
-export function formatDateNotification(created_at: number) {
+export function formatDateNotification(date: Date) {
   const daysOfWeek = [
     'Domingo',
     'Lunes',
@@ -236,8 +236,6 @@ export function formatDateNotification(created_at: number) {
     'Noviembre',
     'Diciembre',
   ];
-
-  const date = new Date(created_at);
   const dayOfWeek = daysOfWeek[date.getUTCDay()];
   const dayOfMonth = date.getUTCDate();
   const month = monthsOfYear[date.getMonth()];
