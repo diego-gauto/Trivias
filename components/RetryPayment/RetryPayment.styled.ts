@@ -246,10 +246,127 @@ export const RetryPaymentContainer = styled.div`
         }
       }
       .show-contain {
-        max-height: 1000px;
+        max-height: 1050px;
         overflow: unset;
         opacity: 1;
         pointer-events: unset;
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    button {
+      padding-block: 10px;
+      padding-inline: 30px;
+      font-size: 14px;
+    }
+    button.type2 {
+      width: fit-content;
+    }
+    button.type3 {
+      width: fit-content;
+    }
+    .complete-contain {
+      width: 90%;
+      padding-block: 30px;
+      .main-container {
+        gap: 15px;
+        width: unset;
+        .description {
+          font-size: 1rem;
+          br {
+            display: none;
+          }
+        }
+        .description-2 {
+          font-size: 1rem;
+        }
+        .payment-container {
+          gap: 30px;
+          .edit {
+            p {
+              font-size: 1rem;
+            }
+          }
+          .payment-method {
+            img {
+              width: 40px;
+            }
+            .dots {
+              font-size: 1.3rem;
+            }
+            .text {
+              font-size: 1.1rem;
+            }
+          }
+        }
+        .add-payment-container {
+          gap: 30px;
+          .card-container {
+            align-items: center;
+            flex-direction: column;
+            .right-side {
+              width: fit-content;
+            }
+          }
+          .description-text {
+            font-size: 20px;
+            text-align: justify;
+            padding-inline: 20px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 750px) {
+    .complete-contain {
+      width: 100%;
+      background-color: transparent;
+      padding-inline: 20px;
+      padding-block: 0px;
+      .main-container {
+        .description {
+          width: 350px;
+        }
+        .add-payment-container {
+          .description-text {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .edit {
+      width: 320px;
+    }
+    .complete-contain {
+      .main-container {
+        .add-payment-container {
+          gap: 15px;
+          .button-container {
+            .box-container {
+              width: 150px;
+              p {
+                font-size: 12px;
+              }
+            }
+          }
+          .card-container {
+            gap: 15px;
+            .left-side {
+              width: 90%;
+              align-items: center;
+              .input-container {
+                width: 85%;
+              }
+              .inputs-column {
+                input {
+                  width: 80px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

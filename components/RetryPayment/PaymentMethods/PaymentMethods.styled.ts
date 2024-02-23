@@ -75,4 +75,7 @@ export const PaymentMethodsContainer = styled.div`
       gap: 10px;
     }
   }
+  @media (max-width: 991px) {
+    gap: 15px;
+  }
 `;

@@ -232,7 +232,7 @@ export const RetryPayment = () => {
     } else if (user.level === 7 || user.level === 8) {
       return "Cuatrimestral"
     } else {
-      return "NA"
+      return "NA "
     }
   }
 
@@ -244,173 +244,176 @@ export const RetryPayment = () => {
     } else if (user.level === 7 || user.level === 8) {
       return `$${user.type} / Cuatrimestral `
     } else {
-      return "NA"
+      return "NA "
     }
   }
-
-  return (
-    <RetryPaymentContainer>
-      <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={user} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
-      <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={user} product={product} bank_ref={bank_ref} />
-      <div className='complete-contain'>
-        <div className='main-container'>
-          <h2>Métodos de pago</h2>
-          <p className='description'>Edita tus métodos de pago y agrega una forma de pago<br /> adicional como respaldo.</p>
-          {
-            paymentMethods.length > 0 &&
-            <div className='payment-container'>
-              {
-                paymentMethods.map((pm: IPm, index: number) => {
-                  return (
-                    <PaymentMethods
-                      pm={pm}
-                      index={index}
-                      pm_size={paymentMethods.length}
-                      changePaymentMethod={changePaymentMethod}
-                      key={"pm-" + index}
-                    />
-                  )
-                })
-              }
-            </div>
-          }
-          {
-            paymentMethods.length > 0 &&
-            <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
-          }
-          <button
-            className='type2'
-            onClick={handleAddpayment}>
-            Agregar método de pago
-            <FaChevronDown className={(addPayment ? "rotate" : "")} />
-          </button>
-          <a href='/preview' className={'actives ' + (addPayment ? "fade" : "")}>Ir a mis cursos</a>
-          <div className={'add-payment-container ' + (addPayment ? "show-contain" : "")}>
-            <div className='button-container'>
-              {
-                PayOptions.map((pay: IPayOption, index: number) => {
-                  return (
-                    <div className={'box-container ' + (selectedButton === pay.id ? "selected-box" : "")} key={"pay-button" + index} onClick={() => setSelectedButton(pay.id)}>
-                      {selectedButton === pay.id
-                        ? <img src={pay.img_select} />
-                        : <img src={pay.img_unselect} />
-                      }
-                      {pay.title !== "" && <p>{pay.title}</p>}
-                    </div>
-                  )
-                })
-              }
-            </div>
+  if (user) {
+    return (
+      <RetryPaymentContainer>
+        <OxxoModal show={oxxoIsActive} setShow={setOxxoIsActive} user={user} product={product} barcode={barcode} reference={reference} expires_at={expiresAt} />
+        <SpeiModal show={speiIsActive} setShow={setSpeiIsActive} user={user} product={product} bank_ref={bank_ref} />
+        <div className='complete-contain'>
+          <div className='main-container'>
+            <h2>Métodos de pago</h2>
+            <p className='description'>Edita tus métodos de pago y agrega una forma de pago<br /> adicional como respaldo.</p>
             {
-              selectedButton === "card" &&
-              <>
-                <div className='card-container'>
-                  <div className='left-side'>
-                    <div className='input-container'>
-                      <label>Número de la tarjeta</label>
-                      <InputMask
-                        placeholder='Introduce solo números'
-                        mask='9999 9999 9999 9999'
-                        maskChar={null}
-                        value={card.number}
-                        onChange={(e) => changeElement("number", e.target.value)}
+              paymentMethods.length > 0 &&
+              <div className='payment-container'>
+                {
+                  paymentMethods.map((pm: IPm, index: number) => {
+                    return (
+                      <PaymentMethods
+                        pm={pm}
+                        index={index}
+                        pm_size={paymentMethods.length}
+                        changePaymentMethod={changePaymentMethod}
+                        key={"pm-" + index}
                       />
-                    </div>
-                    <div className='input-container'>
-                      <label>Nombre del titular</label>
-                      <input
-                        value={card.holder}
-                        placeholder='Introduce el nombre impreso de la tarjeta'
-                        onChange={(e) => changeElement("holder", e.target.value)}
-                      />
-                    </div>
-                    <div className='inputs-column'>
-                      <div className='input-container'>
-                        <label>Mes</label>
-                        <select value={card.exp_month} onChange={(e) => changeElement("exp_month", e.target.value)}>
-                          <option disabled value={"MM"}>MM</option>
-                          {
-                            Month.map((month: number, index: number) => {
-                              return (
-                                <option key={"mes-" + index} value={month}>
-                                  {month}
-                                </option>
-                              )
-                            })
-                          }
-                        </select>
+                    )
+                  })
+                }
+              </div>
+            }
+            {
+              paymentMethods.length > 0 &&
+              <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
+            }
+            <button
+              className='type2'
+              onClick={handleAddpayment}>
+              Agregar método de pago
+              <FaChevronDown className={(addPayment ? "rotate" : "")} />
+            </button>
+            <a href='/preview' className={'actives ' + (addPayment ? "fade" : "")}>Ir a mis cursos</a>
+            <div className={'add-payment-container ' + (addPayment ? "show-contain" : "")}>
+              <div className='button-container'>
+                {
+                  PayOptions.map((pay: IPayOption, index: number) => {
+                    return (
+                      <div className={'box-container ' + (selectedButton === pay.id ? "selected-box" : "")} key={"pay-button" + index} onClick={() => setSelectedButton(pay.id)}>
+                        {selectedButton === pay.id
+                          ? <img src={pay.img_select} />
+                          : <img src={pay.img_unselect} />
+                        }
+                        {pay.title !== "" && <p>{pay.title}</p>}
                       </div>
+                    )
+                  })
+                }
+              </div>
+              {
+                selectedButton === "card" &&
+                <>
+                  <div className='card-container'>
+                    <div className='left-side'>
                       <div className='input-container'>
-                        <label>Año</label>
-                        <select value={card.exp_year} onChange={(e) => changeElement("exp_year", e.target.value)}>
-                          <option disabled value={"AA"}>AA</option>
-                          {
-                            Year.map((year: number, index: number) => {
-                              return (
-                                <option key={"year-" + index} value={year}>
-                                  {year}
-                                </option>
-                              )
-                            })
-                          }
-                        </select>
-                      </div>
-                      <div className='input-container'>
-                        <label>CVV</label>
-                        <input
-                          placeholder='***'
-                          type='password'
-                          value={card.cvc}
-                          onChange={(e) => changeElement("cvc", e.target.value)}
+                        <label>Número de la tarjeta</label>
+                        <InputMask
+                          placeholder='Introduce solo números'
+                          mask='9999 9999 9999 9999'
+                          maskChar={null}
+                          value={card.number}
+                          onChange={(e) => changeElement("number", e.target.value)}
                         />
                       </div>
+                      <div className='input-container'>
+                        <label>Nombre del titular</label>
+                        <input
+                          value={card.holder}
+                          placeholder='Introduce el nombre impreso de la tarjeta'
+                          onChange={(e) => changeElement("holder", e.target.value)}
+                        />
+                      </div>
+                      <div className='inputs-column'>
+                        <div className='input-container'>
+                          <label>Mes</label>
+                          <select value={card.exp_month} onChange={(e) => changeElement("exp_month", e.target.value)}>
+                            <option disabled value={"MM"}>MM</option>
+                            {
+                              Month.map((month: number, index: number) => {
+                                return (
+                                  <option key={"mes-" + index} value={month}>
+                                    {month}
+                                  </option>
+                                )
+                              })
+                            }
+                          </select>
+                        </div>
+                        <div className='input-container'>
+                          <label>Año</label>
+                          <select value={card.exp_year} onChange={(e) => changeElement("exp_year", e.target.value)}>
+                            <option disabled value={"AA"}>AA</option>
+                            {
+                              Year.map((year: number, index: number) => {
+                                return (
+                                  <option key={"year-" + index} value={year}>
+                                    {year}
+                                  </option>
+                                )
+                              })
+                            }
+                          </select>
+                        </div>
+                        <div className='input-container'>
+                          <label>CVV</label>
+                          <input
+                            placeholder='***'
+                            type='password'
+                            value={card.cvc}
+                            onChange={(e) => changeElement("cvc", e.target.value)}
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='right-side'>
-                    <div className={'card-img ' + (checkEmpty(card) ? "background-checked " : "")}>
-                      <div className='square' />
-                      <p className='number'>{card.number}</p>
-                      <div className='last-data'>
-                        <p>{card.holder}</p>
-                        {
-                          (card.exp_month !== "" || card.exp_year !== "") &&
-                          <div className='date'>
-                            <p>mes/año</p>
-                            <p>{card.exp_month}/{card.exp_year}</p>
-                          </div>
-                        }
+                    <div className='right-side'>
+                      <div className={'card-img ' + (checkEmpty(card) ? "background-checked " : "")}>
+                        <div className='square' />
+                        <p className='number'>{card.number}</p>
+                        <div className='last-data'>
+                          <p>{card.holder}</p>
+                          {
+                            (card.exp_month !== "" || card.exp_year !== "") &&
+                            <div className='date'>
+                              <p>mes/año</p>
+                              <p>{card.exp_month}/{card.exp_year}</p>
+                            </div>
+                          }
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <p className='description-text'>
-                  Presionando en el botón "Guardar" estás dando tu consentimiento
-                  para que Gonvar automáticamente continúe con tu suscripción &nbsp;
-                  {returnFrecuency()} y te cobremos {returnPrice()}
-                  en el medio de pago que estás agregando hasta que tu decidas cancelarla.
-                  <br /><br />
-                  Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a
-                  tu perfil y presiona en el botón "Cancelar suscripción"
-                </p>
-                {
-                  loaderAdd
-                    ? <LoaderContainSpinner />
-                    : <button className='type3' onClick={addNewCard}>Guardar</button>
-                }
+                  <p className='description-text'>
+                    Presionando en el botón "Guardar" estás dando tu consentimiento
+                    para que Gonvar automáticamente continúe con tu suscripción &nbsp;
+                    {returnFrecuency()} y te cobremos {returnPrice()}
+                    en el medio de pago que estás agregando hasta que tu decidas cancelarla.
+                    <br /><br />
+                    Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a
+                    tu perfil y presiona en el botón "Cancelar suscripción"
+                  </p>
+                  {
+                    loaderAdd
+                      ? <LoaderContainSpinner />
+                      : <button className='type3' onClick={addNewCard}>Guardar</button>
+                  }
 
-              </>
-            }
-            {
-              selectedButton === "oxxo" &&
-              <button className='type3 oxxo' onClick={payWithOxxo}>Pagar con oxxo</button>
-            }
-            {
-              selectedButton === "transfer" &&
-              <button className='type3 spei' onClick={payWitSpei}>Pagar con spei</button>
-            }
+                </>
+              }
+              {
+                selectedButton === "oxxo" &&
+                <button className='type3 oxxo' onClick={payWithOxxo}>Pagar con oxxo</button>
+              }
+              {
+                selectedButton === "transfer" &&
+                <button className='type3 spei' onClick={payWitSpei}>Pagar con spei</button>
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </RetryPaymentContainer>
-  )
+      </RetryPaymentContainer>
+    )
+  } else {
+    return <div />
+  }
 }
