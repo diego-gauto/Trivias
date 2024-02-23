@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const Data = styled.div`
@@ -34,14 +34,14 @@ export const Info = styled.div`
 `;
 export const Text1 = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
 `;
 export const Text2 = styled.p`
   font-size: 18px;
   font-weight: 600;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const InputContain = styled.div`
@@ -52,11 +52,11 @@ export const InputContain = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   border: 1px solid #6717cd;
@@ -78,7 +78,7 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: #6717cd;
@@ -91,6 +91,39 @@ export const PurpleButton = styled.button`
   &:hover {
     background-color: #5000b5;
     transform: scale(1.03);
+    transition: 0.5s ease all;
+  }
+`;
+export const CustomButton = styled.button`
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: transparent;
+  border-radius: 30px;
+  color: black;
+  width: fit-content;
+  white-space: nowrap;
+  font-weight: 600;
+  &:hover {
+    transform: scale(1.03);
+    transition: 0.5s ease all;
+  }
+`;
+export const GreenButton = styled.button`
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background: #17cd46;
+  border-radius: 30px;
+  color: white;
+  border: none;
+  width: fit-content;
+  white-space: nowrap;
+  font-weight: 600;
+  &:hover {
+    background-color: #15aa3b;
     transition: 0.5s ease all;
   }
 `;
@@ -120,12 +153,12 @@ export const CardContain = styled.div`
 `;
 export const CardTitle = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const CardSubTitle = styled.p`
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
 `;
 export const LessonText = styled.div`
@@ -133,7 +166,7 @@ export const LessonText = styled.div`
   top: 10px;
   right: 10px;
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #6717cd;
   opacity: 0.8;
   font-weight: 600;
