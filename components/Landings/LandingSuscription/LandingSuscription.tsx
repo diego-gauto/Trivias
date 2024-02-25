@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
@@ -9,16 +8,16 @@ import router from "next/router";
 import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
 import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-import { SuscriptionContain } from "./LandingSuscription.styled";
+import { SuscriptionContain, FirstSection } from "./LandingSuscription.styled";
 import { RewardComponent } from "../Components/Reward";
 import { ICourse } from "../../Courses/Modules/ISliders";
+import Countdown from "react-countdown";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -89,6 +88,23 @@ interface ILandingSuscription {
   type: string;
   isFacebook?: boolean;
 }
+
+const checkProgress = () => {
+  const oneDay = 24 * 60 * 60 * 1000;
+  const firstDate = new Date("13/04/2023 23:00:00"); //final
+  const secondDate = new Date(); //today
+  //Fechas pa calar
+  // const firstDate = new Date('10/13/2023 23:59:00');
+  // const secondDate = new Date('10/09/2023 00:00:00');
+  const diffDays = Math.floor(
+    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
+  );
+  let returnValue = {
+    x100: 80,
+    texto: "CUPO CASI AGOTADO",
+  };
+  return returnValue;
+};
 
 const LandingSuscription = (props: ILandingSuscription) => {
   const { price, type, isFacebook } = props;
@@ -213,7 +229,67 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
-
+        <FirstSection>
+          <div className="fechas">
+            <h4>
+              <b>Actualización 2024</b>
+              <br />
+              Inscripciones sólo desde el
+              <br />
+              03 de Febrero al 29 de Febrero
+            </h4>
+            <Countdown
+              date={new Date(2024, 2, 16)}
+              renderer={(props) => (
+                <div className="countdown">
+                  <h2>TIEMPO RESTANTE</h2>
+                  <div className="time">
+                    <div className="countdown-block">
+                      <p className="tiempo">
+                        {props.days < 10 && 0}
+                        {props.days}
+                      </p>
+                      <p className="sub">DIAS</p>
+                    </div>
+                    <div className="countdown-block">
+                      <p className="tiempo">
+                        {props.hours < 10 && 0}
+                        {props.hours}
+                      </p>
+                      <p className="sub">HORAS</p>
+                    </div>
+                    <div className="countdown-block">
+                      <p className="tiempo">
+                        {props.minutes < 10 && 0}
+                        {props.minutes}
+                      </p>
+                      <p className="sub">MINUTOS</p>
+                    </div>
+                    <div className="countdown-block">
+                      <p className="tiempo">
+                        {props.seconds < 10 && 0}
+                        {props.seconds}
+                      </p>
+                      <p className="sub">SEGUNDOS</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            />
+            <div className="progress-container">
+              <div
+                className={`progress-bar ${checkProgress().x100 >= 100 && "full"
+                  }`}
+                style={
+                  {
+                    "--progress": checkProgress().x100 + "%",
+                  } as React.CSSProperties
+                }
+                progress-text={checkProgress().texto}
+              />
+            </div>
+          </div>
+        </FirstSection>
         <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
@@ -223,8 +299,22 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
 
         <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
+        { /* <h3 className="bold space">Si necesitas ayuda con tu inscripción, presiona este botón y te atenderemos para ayudarte</h3> */}
+        <div className="dudas-section">
+          <div className="all-center">
+            <div style={{ padding: '0 15px' }} className="text-end">
+              <h2>Si necesitas ayuda con tu inscripción, <span className="p-pink bold">presiona este botón y te atenderemos para ayudarte.</span></h2>
+            </div>
+            <div className="dudas-img">
+              <img src={pointWatsap} className="point" />
+              <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
+                <img src={watsapOut} className="me-3" />
+                <p className="my-1 bold">Contacta con<br /> un agente</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
