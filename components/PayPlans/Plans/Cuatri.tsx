@@ -99,8 +99,18 @@ const Cuatri = (props: IData) => {
             <span><i className="white">Cargo automático cada 4 meses</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            {(user && (!user.level || user.level === 0) || !user) && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>}
-            {user && (user.level === 1 || user.level === 7) && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a Cuatrimestre</button>}
+            {
+              /*user && (user.level === 1 || user.level === 7)
+              && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>*/
+            }
+            {
+              user && (user.level !== 1 && user.level !== 7)
+              && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>
+            }
+            {
+              user && (user.level === 1 || user.level === 7)
+              && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a Cuatrimestre</button>
+            }
           </div>
         </div>
         <div className="main-body">
