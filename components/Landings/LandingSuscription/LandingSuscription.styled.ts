@@ -69,7 +69,7 @@ export const SuscriptionContain = styled.div`
 
   .intro-section {
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 0;
     position: relative;
     .gonvarplus {
       margin-block: 60px;
@@ -124,7 +124,8 @@ export const SuscriptionContain = styled.div`
 
   .courses-section {
     width: 100%;
-    margin-block: 50px;
+    margin-top: 0px;
+    margin-bottom: 50px;
     .special-course {
       display: flex;
       flex-direction: column;
@@ -552,21 +553,37 @@ export const SuscriptionContain = styled.div`
   .dudas-section {
     width: 100%;
     margin-block: 75px;
-    .dudas-img {
-      position: relative;
-      .watsap-button {
-        position: absolute;
-        cursor: pointer;
-        width: 250px;
-        transform: translateX(180px) translateY(-100px);
-        border: none;
-        padding-block: 10px;
-        padding-inline: 25px;
-        border-radius: 50px;
-        color: #ffffff;
-        background-color: #28af25;
-      }
-    }
+  }
+
+  .dudas-img {
+    position: relative;
+  }
+
+  .watsap-button-only {
+    position: absolute;
+    cursor: pointer;
+    width: 250px;
+    border: none;
+    padding-block: 10px;
+    padding-inline: 25px;
+    border-radius: 50px;
+    color: #ffffff;
+    background-color: #28af25;
+    display: flex;
+    align-items: center;
+  }
+
+  .watsap-button {
+    position: absolute;
+    cursor: pointer;
+    width: 250px;
+    transform: translateX(180px) translateY(-100px);
+    border: none;
+    padding-block: 10px;
+    padding-inline: 25px;
+    border-radius: 50px;
+    color: #ffffff;
+    background-color: #28af25;
   }
 
   .btn {
@@ -723,6 +740,8 @@ export const SuscriptionContain = styled.div`
       }
     }
   }
+  @media (max-width: 1100px) {
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 1100px) {
     .intro-section {
@@ -742,11 +761,13 @@ export const SuscriptionContain = styled.div`
           bottom: -180px;
         }
         .resp-left {
-          min-width: 160px;
+          min-width: 60px;
           left: 0px;
+          top: 46%;
         }
         .image-right {
           right: 0px;
+          top: 46%;
           position: absolute;
           bottom: -180px;
           .white-line {
@@ -954,6 +975,12 @@ export const SuscriptionContain = styled.div`
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 650px) {
+    .resp-left {
+      display: none;
+    }
+    .image-right {
+      display: none;
+    }
     .intro-section {
       .gonvarplus {
         width: 280px;
@@ -1323,8 +1350,18 @@ export const SuscriptionContain = styled.div`
       }
     }
 
+    .watsap-button-only {
+      padding-block: 6px;
+      padding-inline: 20px;
+      width: 200px;
+      img {
+        width: 35px;
+        margin-right: 0.5rem !important;
+      }
+    }
+
     .dudas-section {
-      margin-block: 0px;
+      margin-block: 35px;
       .all-center {
         flex-direction: column;
         .text-end {
@@ -1585,8 +1622,8 @@ export const FirstSection = styled.div`
   width: 100%;
   position: relative;
   padding-block: 15px;
-  color: #fff;
-  background: linear-gradient(to right, #46108a, #3f0969);
+  color: #3f1168;
+  background: white;
   .extra-margin {
     margin-top: 20px;
   }
@@ -1637,9 +1674,9 @@ export const FirstSection = styled.div`
           background: rgb(179, 185, 189);
           background: linear-gradient(
             180deg,
-            #b3b9bd 0%,
+            #d2d6d8 0%,
             #ffffff 50%,
-            #b3b9bd 100%
+            #d2d6d8 100%
           );
           font-size: 5rem;
         }
@@ -1651,7 +1688,7 @@ export const FirstSection = styled.div`
     justify-content: center;
     .progress-bar {
       border-radius: 32px;
-      background-color: #f6f7fa;
+      background-color: #e0e3e4;
       width: 400px;
       height: 50px;
       position: relative;
@@ -1700,9 +1737,6 @@ export const FirstSection = styled.div`
     }
   }
   @media (max-width: 850px) {
-    h4 {
-      font-size: 0.8rem;
-    }
     margin-bottom: 25px;
     .left-img {
       top: 700px;

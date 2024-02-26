@@ -209,9 +209,70 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="extra-header">
         <button className="header-button" onClick={() => handleRedirection()}>Comenzar ahora</button>
       </div>
+      <img src={upsideLines} />
+      <FirstSection>
+        <div className="fechas">
+          <h4>
+            <b>¡Inscríbete en línea hoy!</b>
+            <br />
+            Inscripciones sólo desde
+            <br />
+            03 de Febrero al 16 de Marzo
+          </h4>
+          <Countdown
+            date={new Date(2024, 2, 16)}
+            renderer={(props) => (
+              <div className="countdown">
+                <h2>TIEMPO RESTANTE</h2>
+                <div className="time">
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.days < 10 && 0}
+                      {props.days}
+                    </p>
+                    <p className="sub">DIAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.hours < 10 && 0}
+                      {props.hours}
+                    </p>
+                    <p className="sub">HORAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.minutes < 10 && 0}
+                      {props.minutes}
+                    </p>
+                    <p className="sub">MINUTOS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.seconds < 10 && 0}
+                      {props.seconds}
+                    </p>
+                    <p className="sub">SEGUNDOS</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          />
+          <div className="progress-container">
+            <div
+              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
+                }`}
+              style={
+                {
+                  "--progress": checkProgress().x100 + "%",
+                } as React.CSSProperties
+              }
+              progress-text={checkProgress().texto}
+            />
+          </div>
+        </div>
+      </FirstSection>
       <div className="intro-section" >
         <div className="background-images">
-          <img src={upsideLines} />
           <div className="image-contain">
             <img src={left_girl} className="left-woman" />
             <img src={right_girl} className="right-woman" />
@@ -229,67 +290,6 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
-        <FirstSection>
-          <div className="fechas">
-            <h4>
-              <b>Actualización 2024</b>
-              <br />
-              Inscripciones sólo desde el
-              <br />
-              03 de Febrero al 29 de Febrero
-            </h4>
-            <Countdown
-              date={new Date(2024, 2, 16)}
-              renderer={(props) => (
-                <div className="countdown">
-                  <h2>TIEMPO RESTANTE</h2>
-                  <div className="time">
-                    <div className="countdown-block">
-                      <p className="tiempo">
-                        {props.days < 10 && 0}
-                        {props.days}
-                      </p>
-                      <p className="sub">DIAS</p>
-                    </div>
-                    <div className="countdown-block">
-                      <p className="tiempo">
-                        {props.hours < 10 && 0}
-                        {props.hours}
-                      </p>
-                      <p className="sub">HORAS</p>
-                    </div>
-                    <div className="countdown-block">
-                      <p className="tiempo">
-                        {props.minutes < 10 && 0}
-                        {props.minutes}
-                      </p>
-                      <p className="sub">MINUTOS</p>
-                    </div>
-                    <div className="countdown-block">
-                      <p className="tiempo">
-                        {props.seconds < 10 && 0}
-                        {props.seconds}
-                      </p>
-                      <p className="sub">SEGUNDOS</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            />
-            <div className="progress-container">
-              <div
-                className={`progress-bar ${checkProgress().x100 >= 100 && "full"
-                  }`}
-                style={
-                  {
-                    "--progress": checkProgress().x100 + "%",
-                  } as React.CSSProperties
-                }
-                progress-text={checkProgress().texto}
-              />
-            </div>
-          </div>
-        </FirstSection>
         <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
@@ -300,16 +300,17 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
         <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
         { /* <h3 className="bold space">Si necesitas ayuda con tu inscripción, presiona este botón y te atenderemos para ayudarte</h3> */}
-        <div className="dudas-section">
+        <div className="dudas-section" style={{
+          paddingInline: '50px'
+        }}>
+          <h4 className="bold" style={{
+            marginBottom: '40px'
+          }}>Si necesitas ayuda con tu inscripción, <br /><span className="p-pink">presiona este botón</span> y te atenderemos para ayudarte.</h4>
           <div className="all-center">
-            <div style={{ padding: '0 15px' }} className="text-end">
-              <h2>Si necesitas ayuda con tu inscripción, <span className="p-pink bold">presiona este botón y te atenderemos para ayudarte.</span></h2>
-            </div>
-            <div className="dudas-img">
-              <img src={pointWatsap} className="point" />
-              <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
-                <img src={watsapOut} className="me-3" />
-                <p className="my-1 bold">Contacta con<br /> un agente</p>
+            <div style={{ display: 'flex', width: '100%', height: '120px', justifyContent: 'center' }}>
+              <div className="watsap-button-only" onClick={() => redirectToWhatsAppChat()}>
+                <img src={watsapOut} />
+                <p className="my-1 bold">Contacta con un agente</p>
               </div>
             </div>
           </div>
