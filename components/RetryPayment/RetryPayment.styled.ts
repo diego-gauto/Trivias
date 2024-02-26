@@ -33,10 +33,10 @@ export const RetryPaymentContainer = styled.div`
     border: none;
     border-radius: 100px;
     color: #fff;
-    padding-block: 14px;
-    padding-inline: 50px;
+    padding-block: 8px;
+    padding-inline: 30px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 14px;
     transition: 0.3s ease all;
     &:hover {
       opacity: 0.67;
@@ -46,7 +46,7 @@ export const RetryPaymentContainer = styled.div`
     border: 2px solid #9a1aff;
     background-color: transparent;
     justify-content: center;
-    width: 100%;
+    width: 60%;
     color: #9a1aff;
     display: flex;
     gap: 10px;
@@ -73,7 +73,7 @@ export const RetryPaymentContainer = styled.div`
     flex-direction: column;
     gap: 5px;
     label {
-      font-size: 16px;
+      font-size: 14px;
       color: #3f1168;
       font-weight: 300;
       text-align: start;
@@ -94,7 +94,7 @@ export const RetryPaymentContainer = styled.div`
   .complete-contain {
     display: flex;
     justify-content: center;
-    width: 85%;
+    width: 60%;
     background-color: #fff;
     padding-block: 60px;
     border-radius: 40px;
@@ -103,7 +103,7 @@ export const RetryPaymentContainer = styled.div`
       flex-direction: column;
       align-items: center;
       gap: 25px;
-      width: 780px;
+      width: 100%;
       text-align: center;
       .payment-container {
         display: flex;
@@ -121,11 +121,11 @@ export const RetryPaymentContainer = styled.div`
       }
       .description {
         font-weight: 500;
-        font-size: 1.4rem;
+        font-size: 1rem;
       }
       .description-2 {
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       .add-payment-container {
         display: flex;
@@ -137,12 +137,12 @@ export const RetryPaymentContainer = styled.div`
         overflow: hidden;
         opacity: 0;
         pointer-events: none;
-        width: 100%;
+        width: 80%;
         .description-text {
           color: #3f1168;
           text-align: start;
           font-weight: 500;
-          font-size: 26px;
+          font-size: 14px;
         }
         .button-container {
           display: flex;
@@ -182,7 +182,7 @@ export const RetryPaymentContainer = styled.div`
         .card-container {
           display: flex;
           gap: 30px;
-          width: 100%;
+          width: auto;
           .left-side {
             display: flex;
             flex-direction: column;
@@ -253,7 +253,7 @@ export const RetryPaymentContainer = styled.div`
       }
     }
   }
-  @media (max-width: 991px) {
+  @media (max-width: 1300px) {
     button {
       padding-block: 10px;
       padding-inline: 30px;
@@ -292,10 +292,10 @@ export const RetryPaymentContainer = styled.div`
               width: 40px;
             }
             .dots {
-              font-size: 1.3rem;
+              font-size: 1rem;
             }
             .text {
-              font-size: 1.1rem;
+              font-size: 1rem;
             }
           }
         }
@@ -309,7 +309,7 @@ export const RetryPaymentContainer = styled.div`
             }
           }
           .description-text {
-            font-size: 20px;
+            font-size: 14px;
             text-align: justify;
             padding-inline: 20px;
           }

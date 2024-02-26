@@ -109,7 +109,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
         <IoClose className='close' onClick={onHide} />
         <div className='data-contain'>
           <img src={alert_icon} className='alert-icon' />
-          <p className='bold'>Tu cuenta està suspendida.</p>
+          <p className='bold'>Tu cuenta está suspendida.</p>
           {
             withSubscription
               ?
@@ -132,7 +132,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
                 </p>
               </>
           }
-          {paymentMethods.length > 0 && <button onClick={pay}>Reintentar pago</button>}
+          {paymentMethods.length > 0 && <button onClick={pay} style={{ background: "#3f1168" }}>Reintentar pago</button>}
           <button onClick={goTo}>Actualiza info de pago</button>
         </div>
       </RetryPayModalContain>}

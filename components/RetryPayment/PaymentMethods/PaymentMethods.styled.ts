@@ -10,18 +10,18 @@ export const PaymentMethodsContainer = styled.div`
     gap: 10px;
     align-items: center;
     img {
-      width: 50px;
+      width: 30px;
     }
     p {
       color: black;
     }
     .dots {
-      font-size: 1.5rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-top: 10px;
     }
     .text {
-      font-size: 1.3rem;
+      font-size: 1rem;
       font-weight: 500;
     }
   }

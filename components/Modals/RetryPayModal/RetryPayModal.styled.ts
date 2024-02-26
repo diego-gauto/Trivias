@@ -30,8 +30,8 @@ export const RetryPayModalContain = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     width: 280px;
+    text-align: left;
     .alert-icon {
       width: 50px;
       margin-bottom: 10px;
