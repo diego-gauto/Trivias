@@ -42,9 +42,7 @@ const Anual = (props: IData) => {
     }
   }
 
-  useEffect(() => {
 
-  }, [setver])
   const goTo = () => {
     if (user && user.id) {
       let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
@@ -66,6 +64,47 @@ const Anual = (props: IData) => {
       localStorage.setItem("anual", "true");
       router.push(SIGNUP_PATH)
     }
+  }
+
+  const isActiveUser = () => {
+    const today = new Date().getTime() / 1000;
+    return user.final_date > today;
+  }
+
+  const haveMonthSuscription = () => {
+    return user.level === 1;
+  }
+
+  const haveCuatrimestralSuscription = () => {
+    return user.level === 7;
+  }
+
+  /*
+  Mensual => No cambia
+  Cuatrimestral => en caso de ser mensual (1 y 6)
+  Anual => en caso de ser mensual activo (1 y 6) o en caso de ser cuatrimestral (7, 8)
+  */
+  const generateButton = (): JSX.Element => {
+    const onClickDefaultHandler = goTo;
+    const onClickUpdateHandler = () => { setOpen(true) };
+
+    const isAbleToUpdate = user && isActiveUser() && (haveCuatrimestralSuscription() || haveMonthSuscription());
+
+    if (isAbleToUpdate) {
+      return (
+        <button
+          className="purple-button"
+          onClick={onClickUpdateHandler}>
+          Cambiar <br />a plan Anual
+        </button>
+      );
+    }
+
+    return <button
+      className="purple-button"
+      onClick={onClickDefaultHandler}>
+      Comenzar <br /> Plan Anual
+    </button>
   }
 
   return (
@@ -96,16 +135,7 @@ const Anual = (props: IData) => {
           </div>
           <div className="d-flex justify-content-center mb-3">
             {
-              /*(user && (!user.level || user.level === 0) || !user)
-              && <button className="purple-button" onClick={goTo}>Comenzar Plan<br /> Anual</button>*/
-            }
-            {
-              user && (user.level !== 1 && user.level !== 7)
-              && <button className="purple-button" onClick={goTo}>Comenzar Plan<br /> Anual</button>
-            }
-            {
-              user && (user.level === 1 || user.level === 7)
-              && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>
+              generateButton()
             }
           </div>
         </div>

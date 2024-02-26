@@ -43,10 +43,6 @@ const Cuatri = (props: IData) => {
     }
   }
 
-  useEffect(() => {
-
-  }, [setver])
-
   const goTo = () => {
     if (user && user.id) {
       let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
@@ -69,6 +65,46 @@ const Cuatri = (props: IData) => {
       router.push(SIGNUP_PATH)
     }
   }
+
+  const isActiveUser = () => {
+    const today = new Date().getTime() / 1000;
+    return user.final_date > today;
+  }
+
+  const haveMonthSuscription = () => {
+    return user.level === 1;
+  }
+
+  /*
+  Mensual => No cambia
+  Cuatrimestral => en caso de ser mensual (1 y 6)
+  Anual => en caso de ser mensual activo (1 y 6) o en caso de ser cuatrimestral (7, 8)
+  */
+  const generateButton = (): JSX.Element => {
+    const onClickDefaultHandler = goTo;
+    const onClickUpdateHandler = () => { setOpen(true) };
+
+    const isAbleToUpdate = user && isActiveUser() && haveMonthSuscription();
+
+    if (isAbleToUpdate) {
+      return (
+        <button
+          className="white-button"
+          onClick={onClickUpdateHandler}>
+          Cambiar <br />a plan Cuatrimestral
+        </button>
+      );
+    }
+
+    return <button
+      className="white-button"
+      onClick={onClickDefaultHandler}>
+      Comenzar <br />Plan Cuatrimestral
+    </button>
+  }
+
+  console.log({ user });
+
   return (
     <PlanStyles>
       <ChangePlanModal
@@ -100,16 +136,7 @@ const Cuatri = (props: IData) => {
           </div>
           <div className="d-flex justify-content-center mb-3">
             {
-              /*user && (user.level === 1 || user.level === 7)
-              && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>*/
-            }
-            {
-              user && (user.level !== 1 && user.level !== 7)
-              && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>
-            }
-            {
-              user && (user.level === 1 || user.level === 7)
-              && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a Cuatrimestre</button>
+              generateButton()
             }
           </div>
         </div>
