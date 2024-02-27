@@ -571,6 +571,7 @@ export const SuscriptionContain = styled.div`
     background-color: #28af25;
     display: flex;
     align-items: center;
+    justify-content: space-around;
   }
 
   .watsap-button {
@@ -1700,7 +1701,7 @@ export const FirstSection = styled.div`
         content: attr(progress-text);
         font-weight: 700;
         font-size: 1.2rem;
-        color: #3f1168;
+        color: white;
       }
       &::before {
         content: '';
@@ -1708,7 +1709,7 @@ export const FirstSection = styled.div`
         width: var(--progress);
         height: 100%;
         border-radius: 32px;
-        background: #00e1ff;
+        background: #3f1168;
       }
     }
   }

@@ -310,7 +310,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div style={{ display: 'flex', width: '100%', height: '120px', justifyContent: 'center' }}>
               <div className="watsap-button-only" onClick={() => redirectToWhatsAppChat()}>
                 <img src={watsapOut} />
-                <p className="my-1 bold">Contacta con un agente</p>
+                <p className="my-1 bold">Contacta con <br />un agente</p>
               </div>
             </div>
           </div>
