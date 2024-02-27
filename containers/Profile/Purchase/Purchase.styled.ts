@@ -113,7 +113,7 @@ export const Container = styled.div`
   }
   .purchase-info {
     p {
-      text-align: center;
+      text-align: start;
       color: #9b8faa;
       font-size: 17px;
     }
