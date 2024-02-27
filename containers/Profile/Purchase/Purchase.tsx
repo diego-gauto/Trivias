@@ -889,15 +889,15 @@ const Purchase = () => {
             </div>
           </div>
           <div className="purchase-info">
-            <p>Los precios están sujetos a cambios sin previo aviso. Los códigos de descuento no son acumulables. <br />
+            <p>Los precios están sujetos a cambios sin previo aviso. Los códigos de descuento no son acumulables.
               Al adquirir tu suscripción <b>Gonvar+</b>, obtienes acceso ilimitado a todos los cursos incluidos en la membresía
-              para verlos todas las veces que desees durante el tiempo que cubra tu pago. <br />
+              para verlos todas las veces que desees durante el tiempo que cubra tu pago.
               Cuentas con acceso a la comunidad exclusiva de <b>Gonvar</b> donde podrás intercambiar experiencias con
-              los instructores. <br />
-              La suscripción mensual <b>Gonvar+</b> es autorrenovable, por lo que el siguiente cobro se llevará a cabo exactamente
-              un mes después de la inscripción inicial. <br />
-              Al cancelar la renovación de la membresía, tu plan actual seguirá disponible hasta que termine el mes de
-              duración. <b>Puedes cancelar en cualquier momento.</b> <br />
+              los instructores.</p><br />
+            <p>La suscripción mensual <b>Gonvar+</b> es autorrenovable, por lo que el siguiente cobro se llevará a cabo exactamente
+              un mes después de la inscripción inicial.</p><br />
+            <p>Al cancelar la renovación de la membresía, tu plan actual seguirá disponible hasta que termine el mes de
+              duración. <b>Puedes cancelar en cualquier momento.</b>
               Al confirmar tu compra, aceptas <b>los términos, condiciones y políticas de Gonvar.</b></p>
           </div>
           <div className="purchase-responsive">

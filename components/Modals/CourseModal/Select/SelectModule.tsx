@@ -66,7 +66,7 @@ const SelectModule4 = (props: ISelect) => {
                   {
                     season.lessons.length > 1 &&
                     <span>
-                      ({season.lessons.length} lecciónes)
+                      ({season.lessons.length} lecciones)
                     </span>
                   }
                 </p>

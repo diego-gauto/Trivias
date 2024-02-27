@@ -89,7 +89,7 @@ export const AllSeasons = ({
             <Title>
               {name}
               {!openSeason &&
-                <EpisodesNumber>{lessons?.length} Lecciónes</EpisodesNumber>}
+                <EpisodesNumber>{lessons?.length} Lecciones</EpisodesNumber>}
             </Title>
             <Button
               onClick={onSeasonEditClick}
