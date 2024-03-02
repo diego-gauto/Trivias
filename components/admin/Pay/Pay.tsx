@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import { DEFAULT_USER_IMG, OXXO_PAY_METHOD, SPEI_PAY_METHOD, CONEKTA_PAY_METHOD, ADMIN_PAY_METHOD, PAYPAL_PAY_METHOD, STRIPE_PAY_METHOD, UNKNOWN_PAY_METHOD } from "../../../constants/paths";
 import { getInvoicesApi, getInvoicesWithOffsetTestApi } from "../../api/admin";
 import { AdminContain, Table } from "../SideBar.styled";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
@@ -27,6 +27,8 @@ export interface Invoice {
   name: string
   email: string
 }
+
+type MethodFromInvoices = 'stripe' | 'paypal' | 'conekta' | 'admin' | 'oxxo' | 'spei';
 
 const Pay = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -59,6 +61,38 @@ const Pay = () => {
 
   const changePage = (page: number) => {
     setOffset(page * 100);
+  }
+
+  const generateIconContain = (methodValue: string): JSX.Element => {
+    const styles: React.CSSProperties = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
+
+    const method: MethodFromInvoices = methodValue as MethodFromInvoices;
+
+    let srcPath = UNKNOWN_PAY_METHOD;
+    if (method === 'admin') {
+      srcPath = ADMIN_PAY_METHOD;
+    } else if (method === 'conekta') {
+      srcPath = CONEKTA_PAY_METHOD;
+    } else if (method === 'oxxo') {
+      srcPath = OXXO_PAY_METHOD;
+    } else if (method === 'paypal') {
+      srcPath = PAYPAL_PAY_METHOD;
+    } else if (method === 'spei') {
+      srcPath = SPEI_PAY_METHOD;
+    } else if (method === 'stripe') {
+      srcPath = STRIPE_PAY_METHOD;
+    }
+
+    return <td style={styles}>
+      <img style={{
+        border: '3px solid #d9d9d9',
+        borderRadius: '5px',
+      }} src={srcPath} alt={`${method} logo`} />
+    </td>;
   }
 
   return (
@@ -103,11 +137,9 @@ const Pay = () => {
                       <td>{formatDate(invoice.paid_at)}</td>
                       <td style={{ fontWeight: 600 }}>$ {invoice.amount / 100}.00</td>
                       <td>{invoice.product}</td>
-                      {invoice.method.includes('stripe') ? <td>
-                        <IconContain><Method brand={'stripe'} /></IconContain>
-                      </td> : <td>
-                        <IconContain><Method brand={'paypal'} /></IconContain>
-                      </td>}
+                      {
+                        generateIconContain(invoice.method)
+                      }
                     </tr>
                   )
                 })

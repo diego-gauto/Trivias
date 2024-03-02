@@ -18,6 +18,15 @@ export const CUATRIMESTRAL_SUSCRIPTION_REDIRECT = "/suscripcion-cuatrimestral";
 export const SUPPORT_PATH = "/centro-de-ayuda";
 //images
 export const DEFAULT_USER_IMG = "/images/profile/default_img.png";
+
+export const OXXO_PAY_METHOD = "/images/admin/oxxo_pay_method.png";
+export const SPEI_PAY_METHOD = "/images/admin/spei_pay_method.png";
+export const ADMIN_PAY_METHOD = "/images/admin/admin_pay_method.png";
+export const CONEKTA_PAY_METHOD = "/images/admin/conekta_pay_method.png";
+export const PAYPAL_PAY_METHOD = "/images/admin/paypal_pay_method.png";
+export const STRIPE_PAY_METHOD = "/images/admin/stripe_pay_method.png";
+export const UNKNOWN_PAY_METHOD = "/images/admin/unknown_pay_method.png";
+
 // temporary paths
 export const ANUAL_FORM = 'https://forms.gle/kjGgEEMEvYzmq7118';
 export const NAILS_FORM = 'https://forms.gle/LN27h3QKtYq1v29s9';
