@@ -20,6 +20,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const [isLaoding, setIsloading] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
   const [invoice, setInvoice] = useState({} as any);
+  const [error, setError] = useState(false);
 
   const pay = () => {
     const filter = paymentMethods.filter((x) => x.default)
@@ -53,6 +54,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
         await updateMembership(membership)
         window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
       } else {
+        setError(true);
         let notification = {
           userId: user.user_id,
           type: "8",
@@ -131,6 +133,11 @@ export const RetryPayModal = (props: IRetryPayModal) => {
                   &nbsp; y así recuperar tus beneficios obtenidos.
                 </p>
               </>
+          }
+          {error &&
+            <p className='paragraph' style={{ color: 'red', fontSize: '12px' }}>
+              No hemos podido procesar tu pago, puedes volver a reintentar o dirigirte a actualizar tus medios de pago
+            </p>
           }
           {paymentMethods.length > 0 && <button onClick={pay} style={{ background: "#3f1168" }}>Reintentar pago</button>}
           <button onClick={goTo}>Actualiza info de pago</button>

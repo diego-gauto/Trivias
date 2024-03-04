@@ -38,6 +38,7 @@ export const RetryPayment = () => {
   const [expiresAt, setExpiresAt] = useState();
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
+  const [error, setError] = useState(false);
 
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
@@ -158,6 +159,7 @@ export const RetryPayment = () => {
         await updateMembership(membership)
         window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
       } else {
+        setError(true);
         let notification = {
           userId: user.user_id,
           type: "8",
@@ -167,6 +169,7 @@ export const RetryPayment = () => {
           frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
         }
         await createNotification(notification);
+
         const msg = "pago-rechazado"
         window.location.href = user.level === 5 ? `/pagofallidoanualidad?error=${msg}` : `/pagofallidocuatrimestre?error=${msg}`;
       }
@@ -274,6 +277,7 @@ export const RetryPayment = () => {
                 }
               </div>
             }
+            {error && <p className='description' style={{ color: 'red' }}>No hemos podido procesar tu pago, puedes volver a intentar o probar con otro medio de pago</p>}
             {
               paymentMethods.length > 0 &&
               <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
@@ -402,11 +406,21 @@ export const RetryPayment = () => {
               }
               {
                 selectedButton === "oxxo" &&
-                <button className='type3 oxxo' onClick={payWithOxxo}>Pagar con oxxo</button>
+                <div>
+                  <p className='description-text mb-5'>Presiona el botón de generar ficha de pago oxxo para visualizarla y poder descargarla.
+                    Una vez que abones en una tienda Oxxo tardaremos 48hs en procesar tu pago y a continuación podrás comenzar con
+                    tus cursos</p>
+                  <button className='type3 oxxo' onClick={payWithOxxo}>Genera ficha de pago OXXO</button>
+                </div>
               }
               {
                 selectedButton === "transfer" &&
-                <button className='type3 spei' onClick={payWitSpei}>Pagar con spei</button>
+                <div>
+                  <p className='description-text mb-5'>Presiona el botón de generar ficha de transferencia para visualizarla y
+                    poder descargarla. Una vez que realices la transferencia tardaremos 48hs en procesar tu pago y a continuación
+                    podrás comenzar con tus cursos</p>
+                  <button className='type3 spei' onClick={payWitSpei}>Genera ficha para transferencia</button>
+                </div>
               }
             </div>
           </div>
