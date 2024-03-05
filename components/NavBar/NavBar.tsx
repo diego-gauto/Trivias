@@ -86,6 +86,7 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const [withSubscription, setWithSubscription] = useState(true);
   const modalNotificationsRef = useRef<any>(null);
+  const [firstTime, setFirstTime] = useState(true);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (event === null) {
@@ -317,7 +318,7 @@ const NavBar = () => {
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
-      <RetryPayModal show={show} onHide={() => { setShow(false) }} withSubscription={withSubscription} />
+      {firstTime && <RetryPayModal show={show} onHide={() => { setShow(false); setFirstTime(false); }} withSubscription={withSubscription} />}
       {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {
