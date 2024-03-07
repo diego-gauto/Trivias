@@ -64,8 +64,6 @@ export const RetryPayModal = (props: IRetryPayModal) => {
           frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
         }
         await createNotification(notification);
-        const msg = "pago-rechazado"
-        window.location.href = user.level === 5 ? `/pagofallidoanualidad?error=${msg}` : `/pagofallidocuatrimestre?error=${msg}`;
       }
     })
   }
@@ -105,6 +103,51 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     // dueOrders();
   }, [user])
 
+  const returnSubscription = () => {
+    switch (user.level) {
+      case 0:
+        return "cuatrimestral"
+      case 5:
+        return "anual"
+      case 6:
+        return "mensual"
+      case 8:
+        return "cuatrimestral"
+      default:
+        return
+    }
+  }
+
+  const returnAccess = () => {
+    switch (user.level) {
+      case 0:
+        return "tus 4 meses"
+      case 5:
+        return "tu año"
+      case 6:
+        return "tu mes"
+      case 8:
+        return "tus 4 meses"
+      default:
+        return
+    }
+  }
+
+  const returnAccessCondition = () => {
+    switch (user.level) {
+      case 0:
+        return `puedes agregar 4 meses de acceso más por 1599 MXN`
+      case 5:
+        return `puedes agregar 1 año de acceso más por ${user.type} MXN`
+      case 6:
+        return `puedes agregar 1 mes de acceso más por ${user.type} MXN`
+      case 8:
+        return `puedes agregar 4 meses de acceso más por ${user.type} MXN`
+      default:
+        return
+    }
+  }
+
   return (
     <ModalContainer show={show} centered>
       {!isLaoding && <RetryPayModalContain>
@@ -125,11 +168,10 @@ export const RetryPayModal = (props: IRetryPayModal) => {
               </>
               :
               <>
-                <p className='bold'>Se ha terminado tu suscripción y {user.level === 5 ? "tu año" : "tus 4 meses"} de acceso. ¡No te preocupes!</p>
+                <p className='bold'>Se ha terminado tu suscripción {returnSubscription()} y {returnAccess()} de acceso. ¡No te preocupes!</p>
                 <p className='paragraph'>
                   Si quieres seguir disfrutando de los
-                  cursos disponibles en Gonvar+, {user.level === 8 ? `puedes agregar 4 meses de acceso más por ${user.type} MXN` :
-                    `puedes agregar 1 año de acceso más por ${user.type} MXN`}
+                  cursos disponibles en Gonvar+, {returnAccessCondition()}
                   &nbsp; y así recuperar tus beneficios obtenidos.
                 </p>
               </>

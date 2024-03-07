@@ -94,7 +94,7 @@ export const RetryPaymentContainer = styled.div`
   .complete-contain {
     display: flex;
     justify-content: center;
-    width: 60%;
+    width: calc(60% + 40px);
     background-color: #fff;
     padding-block: 60px;
     border-radius: 40px;
@@ -183,6 +183,7 @@ export const RetryPaymentContainer = styled.div`
           display: flex;
           gap: 30px;
           width: auto;
+          margin-inline: 40px;
           .left-side {
             display: flex;
             flex-direction: column;
