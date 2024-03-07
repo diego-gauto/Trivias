@@ -7,9 +7,21 @@ import { getUserInvoices } from '../../../store/actions/ProfileActions';
 import { HistoryContainer } from './User.styled'
 import { getCourseApi } from '../../../components/api/lessons';
 
+export interface Invoice {
+  id: number
+  amount: number
+  method: string
+  paid_at: string
+  product: string
+  user_id: number
+  formatDate: string
+  finalDate: string
+  status: string
+}
+
 export const History = ({ user, addPayment }: any) => {
   const [option, setOption] = useState(0);
-  const [invoices, setInvoices] = useState<any>([])
+  const [invoices, setInvoices] = useState<Invoice[]>([])
   const [allOptions, setAllOptions] = useState([])
   const today = new Date().getTime() / 1000;
   const handleLeft = () => {
@@ -94,6 +106,22 @@ export const History = ({ user, addPayment }: any) => {
     retrieveInvoices()
   }, []);
 
+  if (invoices) {
+    console.log({ invoices });
+  }
+
+  const formatAmountNumberToString = (amount: number) => {
+
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      // These options are needed to round to whole numbers if that's what you want.
+      //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+      //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+    return formatter.format(amount);
+  }
+
   return (
     <HistoryContainer addPayment={addPayment}>
       <div className='title'>
@@ -118,14 +146,21 @@ export const History = ({ user, addPayment }: any) => {
           </div>
           <div className='line' />
           <div className='history-info'>
-            <p>Expiración</p>
-            <p className='second-info'>{invoices[option]?.finalDate}</p>
+            <p>Monto</p>
+            <p className='second-info'>{invoices[option]?.amount !== undefined ? formatAmountNumberToString(invoices[option]?.amount || 0) : ''}</p>
           </div>
-          <div className='line' />
-          <div className='history-info'>
-            <p>Estatus</p>
-            <p className='second-info'>{invoices[option]?.status}</p>
-          </div>
+          {
+            /*<div className='line' />
+            <div className='history-info'>
+              <p>Expiración</p>
+              <p className='second-info'>{invoices[option]?.finalDate}</p>
+            </div>
+            <div className='line' />
+            <div className='history-info'>
+              <p>Estatus</p>
+              <p className='second-info'>{invoices[option]?.status}</p>
+            </div>*/
+          }
         </div>
         <RiArrowRightSLine style={{ fontSize: 60, cursor: "pointer" }} onClick={handleRight} />
       </div>

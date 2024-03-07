@@ -43,24 +43,37 @@ const Cuatri = (props: IData) => {
     }
   }
 
-  useEffect(() => {
-
-  }, [setver])
-
   const goTo = () => {
     if (user && user.id) {
       let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-      if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: "3" } })
-        // router.push({ pathname: ANUAL_FORM })
+      // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
+      // Si una usuaria es de pago recurrente nivel 1, 4, 7
+      //debugger;
+      if ([1, 4, 7].includes(user.level)/* && user.final_date < (today - 6 * 24 * 60 * 60)*/) {
+        router.push(PREVIEW_PATH);
       }
-      if (user.level === 0 && user.final_date > today) {
-        router.push(PREVIEW_PATH)
+      // Pagos no recurrentes
+      // 1. Con final_date vencido (inactivas)
+      // 2. Con final_date no vencido (activas)
+      else if ([5, 6, 8].includes(user.level)) {
+        if (user.final_date < today) {
+          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: "3" } });
+        } else {
+          router.push(PREVIEW_PATH);
+        }
       }
-      if ((user.level > 0 && user.final_date > today) || complete_nails.length > 0) {
-        router.push(PREVIEW_PATH)
+      // niveles 3 pausados
+      else if (user.level === 3) {
+        router.push(PREVIEW_PATH);
       }
-      if (user.level > 0 && user.final_date < today) {
+      else if (user.level === 0) {
+        if (user.final_date < today) {
+          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: "3" } })
+        } else {
+          router.push(PREVIEW_PATH);
+        }
+      }
+      else if (complete_nails.length > 0) {
         router.push(PREVIEW_PATH)
       }
     }
@@ -69,6 +82,46 @@ const Cuatri = (props: IData) => {
       router.push(SIGNUP_PATH)
     }
   }
+
+  const isActiveUser = () => {
+    const today = new Date().getTime() / 1000;
+    return user.final_date > today;
+  }
+
+  const haveMonthSuscription = () => {
+    return user.level === 1;
+  }
+
+  /*
+  Mensual => No cambia
+  Cuatrimestral => en caso de ser mensual (1 y 6)
+  Anual => en caso de ser mensual activo (1 y 6) o en caso de ser cuatrimestral (7, 8)
+  */
+  const generateButton = (): JSX.Element => {
+    const onClickDefaultHandler = goTo;
+    const onClickUpdateHandler = () => { setOpen(true) };
+
+    const isAbleToUpdate = user && isActiveUser() && haveMonthSuscription();
+
+    if (isAbleToUpdate) {
+      return (
+        <button
+          className="white-button"
+          onClick={onClickUpdateHandler}>
+          Cambiar <br />a plan Cuatrimestral
+        </button>
+      );
+    }
+
+    return <button
+      className="white-button"
+      onClick={onClickDefaultHandler}>
+      Comenzar <br />Plan Cuatrimestral
+    </button>
+  }
+
+  console.log({ user });
+
   return (
     <PlanStyles>
       <ChangePlanModal
@@ -99,8 +152,9 @@ const Cuatri = (props: IData) => {
             <span><i className="white">Cargo automático cada 4 meses</i></span>
           </div>
           <div className="d-flex justify-content-center mb-3">
-            {(user && (!user.level || user.level === 0) || !user) && <button className="white-button" onClick={goTo}>Comenzar plan<br /> Cuatrimestral</button>}
-            {user && (user.level === 1 || user.level === 7) && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a Cuatrimestre</button>}
+            {
+              generateButton()
+            }
           </div>
         </div>
         <div className="main-body">

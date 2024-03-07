@@ -9,3 +9,7 @@
 .link:hover{
   color: #d24dd3;
 }
+
+.handCursor{
+  cursor: pointer;
+}

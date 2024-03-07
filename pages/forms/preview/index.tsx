@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { collection, doc, getDoc } from "firebase/firestore";
 // import { isValidPhoneNumber } from "react-phone-number-input";
 import { useFormik } from "formik";
 // import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 
+import { getFormApi } from "../../../components/api/form";
 import { createUserFormApi } from "../../../components/api/userform";
 import Countdown from "../../../components/Forms/countdown/countdown";
 import InputApellido from "../../../components/Forms/inputApellido/inputApellido";
@@ -15,13 +17,19 @@ import InputWatsapp from "../../../components/Forms/inputWhatsapp/inputWhatsapp"
 import ModalSuccessUserCreate from "../../../components/Forms/Modals/modalSuccesUserCreate";
 import ModalUserExist from "../../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../../components/Forms/option/option";
+import { db } from "../../../firebase/firebaseConfig";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import styles from "./preview.module.css";
+
+interface Answer {
+  label: string;
+  value: string;
+}
 
 interface Option {
   isVisible: boolean | null;
   label: string;
-  options: string[];
+  options: Answer[];
 }
 
 interface Form {
@@ -120,12 +128,60 @@ const Formularios = () => {
     const fetchData = async () => {
       try {
 
-        const storedFormData = localStorage.getItem('formData');
-        if (storedFormData) {
-          setForm(JSON.parse(storedFormData));
-        }
+        if (formId) {
 
-        setLoading(false);
+          const formIdNumber: number = Number(formId);
+          const res = await getFormApi(formIdNumber);
+          const formTemp = res[0];
+
+          if (formTemp) {
+
+            formTemp.img = JSON.parse(formTemp.img);
+            formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
+            formTemp.redirect = JSON.parse(formTemp.redirect);
+            setForm(formTemp);
+          } else {
+            try {
+              // Identificador único del formulario que deseas recuperar
+              const customId = `form_${formId}`; // Reemplaza con tu lógica para obtener el ID del formulario
+
+              // Referencia al documento del formulario en Firestore
+              const formDocRef = doc(collection(db, "forms"), customId);
+
+              // Obtén los datos del formulario desde Firestore
+              const formSnapshot = await getDoc(formDocRef);
+
+              if (formSnapshot.exists()) {
+                // El documento existe, puedes acceder a los datos
+                const formData = formSnapshot.data() as Form;
+                console.log("Datos del formulario recuperados:", formData);
+
+                setForm(formData);
+                setLoading(false);
+
+                // Ahora puedes utilizar formData en tu lógica
+              } else {
+                // El documento no existe
+                console.log(
+                  "El formulario con ID",
+                  customId,
+                  "no fue encontrado en Firebase."
+                );
+              }
+            } catch (error) {
+              console.error("Error al recuperar datos desde Firebase:", error);
+            }
+          }
+
+        } else {
+          const storedFormData = localStorage.getItem('formData');
+          if (storedFormData) {
+            setForm(JSON.parse(storedFormData));
+          }
+
+          setLoading(false);
+        }
+        setLoading(false)
       } catch (error) {
         console.error('Error al obtener los datos del formulario:', error);
       }
@@ -334,7 +390,7 @@ const Formularios = () => {
       <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
       <div className={formContainer}>
         <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
-        <p className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</p>
+        <h4 className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</h4>
         <div className={lineaAtravesada}></div>
 
         <Countdown />

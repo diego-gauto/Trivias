@@ -61,7 +61,7 @@ const ModalAddDays = ({ show, setShow, user }: Props) => {
       tempFinalDate = today + (days * 86400);
       user.final_date = tempFinalDate;
     }
-    updateMembershipDaysApi(user).then((res: any) => {
+    updateMembershipDaysApi({ final_date: user.final_date, id: user.id }).then((res: any) => {
       alert(`Se ${days === 1 ? 'agregó' : 'agregaron'}: ${days} ${(days === 1 ? 'día' : 'días')} del usuario ${user.name}`);
       handleClose();
     });
@@ -76,7 +76,7 @@ const ModalAddDays = ({ show, setShow, user }: Props) => {
     tempFinalDate = user.final_date - (days * 86400);
     user.final_date = tempFinalDate;
 
-    updateMembershipDaysApi(user).then((res: any) => {
+    updateMembershipDaysApi({ final_date: user.final_date, id: user.id }).then((res: any) => {
       alert(`Se ${days === 1 ? 'eliminó' : 'eliminaron'}: ${days} ${(days === 1 ? 'día' : 'días')} del usuario ${user.name}`);
       handleClose();
     });
@@ -97,6 +97,8 @@ const ModalAddDays = ({ show, setShow, user }: Props) => {
             onChange={(e: any) => {
               setDays(parseInt(e.target.value));
             }}
+            min={0}
+            max={365}
           />
         </InputContain>
         <ButtonContain>

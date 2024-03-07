@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import Modal1 from "./Modal/Modal";
 import ModalAddDays from "./Modal/ModalAddDays";
 import ModalRemoveSubscription from './Modal/ModalRemoveSubscription';
@@ -114,8 +114,77 @@ const UserCardData = (props: CardData) => {
     )
   }
 
-  const haveASubscription = (level: number, method: string) => {
+  const oldHaveASubscription = (level: number, method: string) => {
     return [1, 4, 5, 6, 7, 8].includes(level) || 'admin' === method;
+  }
+
+  const haveASubscription = (level: number, final_date: number) => {
+    return (level !== 0 && level !== 10) && final_date > today;
+  }
+
+  const haveRecurrentSuscription = (level: number) => {
+    return [1, 4, 7].includes(level);
+  }
+
+  const generateButtons = (): JSX.Element[] => {
+    const fontStyles: CSSProperties = {
+      fontWeight: 'bold',
+      color: '#6717cd',
+      fontSize: '22px'
+    };
+
+    if (haveRecurrentSuscription(user.level)) {
+      const fontStyles2: CSSProperties = {
+        ...fontStyles,
+        textAlign: 'center',
+        paddingInline: '25px'
+      }
+      return [<p style={fontStyles2}>
+        Usuario de pago recurrente.
+      </p>,
+      <p style={fontStyles2}>
+        No sé le puede agregar / remover dias ni eliminar suscripción.
+      </p>
+      ];
+    }
+
+    const elements: JSX.Element[] = [];
+
+    if (user.level === 10) {
+      return [<p style={fontStyles}>
+        Comunicarse con soporte.
+      </p>];
+    }
+
+    if ([0, 5, 6, 8].includes(user.level)) {
+      elements.push(
+        <TransparentButton
+          style={{ width: '100%', maxWidth: '350px' }}
+          onClick={() => { setShowAddDays(true); }}>
+          Editar días de suscripción
+        </TransparentButton>
+      );
+    }
+
+    if (!haveASubscription(user.level, user.final_date)) {
+      elements.push(
+        <TransparentButton
+          style={{ width: '100%', maxWidth: '350px' }}
+          onClick={() => { setShowAddSubscriptionPlan(true); }}>
+          Activar plan de suscripción
+        </TransparentButton>
+      );
+    } else {
+      elements.push(
+        <TransparentButton
+          style={{ width: '100%', maxWidth: '350px' }}
+          onClick={() => { setShowRemoveSuscription(true); }}>
+          Eliminar suscripción
+        </TransparentButton>
+      )
+    }
+
+    return elements;
   }
 
   const getMembershipTextByLevel = (level: number) => {
@@ -162,7 +231,7 @@ const UserCardData = (props: CardData) => {
   console.log(user);
 
   const getSubscriptionJSXElementByUserValues = (): JSX.Element[] => {
-    if (!(haveASubscription(user.level, user.method) || user.final_date >= today)) {
+    if (!(haveASubscription(user.level, user.final_date))) {
       return (
         []
       );
@@ -235,7 +304,9 @@ const UserCardData = (props: CardData) => {
               Suscripción Actual
               <Label>
                 {
-                  (haveASubscription(user.level, user.method) || user.final_date >= today) ? getMembershipTextByLevel(user.level) : "Sin suscripción"
+                  (haveASubscription(user.level, user.final_date))
+                    ? getMembershipTextByLevel(user.level)
+                    : "Sin suscripción"
                 }
               </Label>
             </Info>
@@ -243,20 +314,14 @@ const UserCardData = (props: CardData) => {
               getSubscriptionJSXElementByUserValues()
             }
             {
-              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
+              (haveASubscription(user.level, user.final_date)) &&
               <img src={GonvarImg} className="img-gonvar" />
             }
           </UserInfo>
           {/* Para agrupar los botones */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-            <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddDays(true); }}>Editar días de suscripción</TransparentButton>
             {
-              !((haveASubscription(user.level, user.method) || user.final_date >= today)) &&
-              <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowAddSubscriptionPlan(true); }}>Activar plan de suscripción</TransparentButton>
-            }
-            {
-              (haveASubscription(user.level, user.method) || user.final_date >= today) &&
-              <TransparentButton style={{ width: '100%', maxWidth: '350px' }} onClick={() => { setShowRemoveSuscription(true); }}>Eliminar suscripción</TransparentButton>
+              generateButtons()
             }
           </div>
         </>

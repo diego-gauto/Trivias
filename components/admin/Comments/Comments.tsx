@@ -4,23 +4,23 @@ import { MdDeleteForever } from "react-icons/md";
 import { deleteCommentAnswers, deleteCommentToAnswers, deleteThisComment, getComments } from "../../api/admin";
 import { getCoursesApi } from "../../api/courses";
 import { addCommentAnswerApi, addCommentToAnswerApi } from "../../api/lessons";
-import { createNotification } from "../../api/notifications";
 import { getUserApi } from "../../api/users";
 import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
 import { GrClose } from "react-icons/gr";
-const Comments = () => {
 
+const Comments = () => {
   const [comments, setComments] = useState<any>()
   const [userData, setUserData] = useState<any>(null);
   const [comment, setComment] = useState<any>()
   const [answer, setAnswer] = useState<any>("")
   const [answerComment, setAnswerComment] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
-  const [course, setCourse] = useState<any>([]);
-  const [coursesId, setCoursesId] = useState<any>([])
-  const [level, setLevel] = useState<any>(1)
+  const [courses, setCourse] = useState<any>([]);
+  const [coursesId, setCoursesId] = useState<any>([]);
+  const [level, setLevel] = useState<any>(1);
   const [loader, setLoader] = useState<number>(-1);
+  const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
 
   useEffect(() => {
     retrievComments()
@@ -28,7 +28,9 @@ const Comments = () => {
 
   const retrievComments = async () => {
     let user: any;
-    if (localStorage.getItem("email")) user = await getUserApi(localStorage.getItem("email"))
+    if (localStorage.getItem("email")) {
+      user = await getUserApi(localStorage.getItem("email"))
+    }
     setUserData(user);
     getComments().then(async (res) => {
       let tempComments = res.data.comments
@@ -69,6 +71,7 @@ const Comments = () => {
         }
       })
       setCourse(availableCourses);
+      console.log({ availableCourses });
     })
   }
   const FilteredComments = (course_id: number) => {
@@ -111,7 +114,11 @@ const Comments = () => {
     }
     deleteThisComment(body).then(() => {
       alert('Comentario eliminado')
-      retrievComments()
+      if (selectedCourseId === -1) {
+        retrievComments();
+      } else {
+        FilteredComments(selectedCourseId);
+      }
     })
     setLoader(-1);
   }
@@ -125,7 +132,11 @@ const Comments = () => {
       answer: value
     }
     deleteCommentAnswers(answer).then(() => {
-      retrievComments();
+      if (selectedCourseId === -1) {
+        retrievComments();
+      } else {
+        FilteredComments(selectedCourseId);
+      }
     })
   }
   const deleteAnswerComment = (value: any) => {
@@ -137,7 +148,11 @@ const Comments = () => {
       answer: value
     }
     deleteCommentToAnswers(answer).then(() => {
-      retrievComments();
+      if (selectedCourseId === -1) {
+        retrievComments();
+      } else {
+        FilteredComments(selectedCourseId);
+      }
     })
   }
 
@@ -154,27 +169,23 @@ const Comments = () => {
       courseId: comment.course_id
     }
     if (answer) {
-      // let notification = {
-      //   userId: x.user_id ? x.user_id : "",
-      //   message: 'Alguien te ha comentado',
-      //   type: 'comment',
-      //   notificationId: '',
-      //   courseId: course.id,
-      //   title: course.title,
-      //   lesson: lesson,
-      //   season: season,
-      //   name: user.name
-      // }
-      // createNotification(notification);
       addCommentAnswerApi(body).then((res) => {
-        retrievComments();
+        if (selectedCourseId === -1) {
+          retrievComments();
+        } else {
+          FilteredComments(selectedCourseId);
+        }
         setAnswer("");
         setPopUp(false);
       })
     }
     if (answerComment) {
       addCommentToAnswerApi(body).then((res) => {
-        retrievComments();
+        if (selectedCourseId === -1) {
+          retrievComments();
+        } else {
+          FilteredComments(selectedCourseId);
+        }
         setAnswerComment("");
         setPopUp(false);
       })
@@ -201,7 +212,7 @@ const Comments = () => {
       <div className="courses-header">
         <h1 className="main-title">Comentarios</h1>
         {
-          course.length > 0 &&
+          courses.length > 0 &&
           <div>
             <select onChange={(e) => {
               if (e.target.value === '-1') {
@@ -210,10 +221,11 @@ const Comments = () => {
               else {
                 FilteredComments(parseInt(e.target.value))
               }
+              setSelectedCourseId(parseInt(e.target.value));
             }}>
               <option value={-1}>Ver todos</option>
               {
-                course.map((course: any, index: number) => {
+                courses.map((course: any, index: number) => {
                   return (
                     <option key={"course_comment_" + index} value={course.id}>
                       {course.title}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { updateMembershipPlanApi } from "../../../../api/users";
 
@@ -6,10 +6,8 @@ import { CloseIcon } from "../UsersCardData.styled";
 import {
   ButtonContain,
   Container,
-  Input,
-  InputContain,
-  Label,
-  PurpleButton,
+  GreenButton,
+  CustomButton,
   Title,
   TitleContain,
 } from "./Modal.styled";
@@ -41,81 +39,132 @@ interface Props {
   setShow: (value: boolean) => void;
 }
 
+type SuscriptionOption = "Month" | "Cuatri" | "Annual" | "None";
+
 const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
+  const [suscription, setSuscription] = useState<SuscriptionOption>("None");
+  const [price, setPrice] = useState<number>(0);
   const handleClose = () => setShow(false);
 
-  const addMembership = async (type: number) => {
-    if (confirm("Seguro que quieres agregar un plan" + (type === 1 ? "Mensual" : (type === 2 ? "Anual" : "Cuatrimestral")))) {
-      if (type === 1) {
-        //mensual
-        let body = {
-          user_final_date: user.final_date,
-          start_date: user.start_date,
-          level: 6,
-          id: user.id,
-          days: 30,
-          type: 459,
-        }
-        await updateMembershipPlanApi(body).then((res) => {
-          if (res.response) {
-            alert(res.response.data.data)
-          }
-          else {
-            alert("Membresia Actualizada con exito!")
-          }
-        });
-      }
-      if (type === 2) {
-        //anual
-        let body = {
-          user_final_date: user.final_date,
-          start_date: user.start_date,
-          level: 5,
-          id: user.id,
-          days: 365,
-          type: 3497,
-        }
-        await updateMembershipPlanApi(body).then((res) => {
-          if (res.response) {
-            alert(res.response.data.data)
-          }
-          else {
-            alert("Anualidad Actualizada con exito!")
-          }
-        });
-      }
-      if (type === 3) {
-        //cuatrimestral
-        let body = {
-          user_final_date: user.final_date,
-          start_date: user.start_date,
-          level: 8,
-          id: user.id,
-          days: 120,
-          type: 1599,
-        }
-        await updateMembershipPlanApi(body).then((res) => {
-          if (res.response) {
-            alert(res.response.data.data)
-          }
-          else {
-            alert("Plan Cuatrimestral Actualizado con exito!")
-          }
-          window.location.reload();
-        });
+  const addMembership = async () => {
+    if (suscription === "None") {
+      return;
+    }
+    let body = {};
+    if (suscription === "Month") {
+      //mensual
+      body = {
+        user_final_date: user.final_date,
+        start_date: user.start_date,
+        level: 6,
+        id: user.id,
+        days: 30,
+        type: `${price}00`,
       }
     }
+    if (suscription === "Annual") {
+      //anual
+      body = {
+        user_final_date: user.final_date,
+        start_date: user.start_date,
+        level: 5,
+        id: user.id,
+        days: 365,
+        type: `${price}00`,
+      }
+    }
+    if (suscription === "Cuatri") {
+      //cuatrimestral
+      body = {
+        user_final_date: user.final_date,
+        start_date: user.start_date,
+        level: 8,
+        id: user.id,
+        days: 120,
+        type: `${price}00`,
+      }
+    }
+    console.log(body);
+    const suscriptionTypeString = suscription === "Month" ? "Mensual" : suscription === "Annual" ? "Anual" : "Cuatrimestral";
+    const message = "Seguro que quieres agregar un plan " + suscriptionTypeString;
+    if (!confirm(message)) {
+      return;
+    }
+    try {
+      const response = await updateMembershipPlanApi(body);
+      console.log(response);
+      alert(`Plan ${suscriptionTypeString} actualizado con exito!`);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const generateCSSPropertiesToButton = (hexColor: string, selected: boolean) => {
+    const noSelectedValues: CSSProperties = {
+      border: `2px #${hexColor} solid`,
+      backgroundColor: `transparent`
+    }
+
+    const selectedValues: CSSProperties = {
+      border: `none`,
+      backgroundColor: `#${hexColor}`,
+      color: 'white'
+    }
+
+    return selected ? selectedValues : noSelectedValues;
   }
 
   const generateMembershipsButtons = () => {
     return (<>
-      <PurpleButton onClick={() => addMembership(1)}>Agregar Mensualidad</PurpleButton>
-      <PurpleButton onClick={() => addMembership(2)} style={{ background: "#1740cd" }}>
-        Agregar Anualidad</PurpleButton>
-      <PurpleButton onClick={() => addMembership(3)} style={{ background: "#a317cd" }}>
+      <CustomButton
+        onClick={() => setSuscription("Month")}
+        style={generateCSSPropertiesToButton('6717CD', suscription === "Month")}
+      >
+        Agregar Mensualidad
+      </CustomButton>
+      <CustomButton
+        onClick={() => setSuscription("Cuatri")}
+        style={generateCSSPropertiesToButton('a317cd', suscription === "Cuatri")}
+      >
         Agregar Plan Cuatrimestral
-      </PurpleButton>
+      </CustomButton>
+      <CustomButton
+        onClick={() => setSuscription("Annual")}
+        style={generateCSSPropertiesToButton('1740cd', suscription === "Annual")}
+      >
+        Agregar Anualidad
+      </CustomButton>
     </>);
+  }
+
+  const generatePricesByOption = () => {
+    const pricesMounth = [459, 249, 149];
+    const pricesCuatri = [1599];
+    const pricesAnnual = [3497, 1599];
+
+    let prices: number[] = [];
+    if (suscription === "Month") {
+      prices = pricesMounth;
+    } else if (suscription === "Annual") {
+      prices = pricesAnnual;
+    } else if (suscription === "Cuatri") {
+      prices = pricesCuatri;
+    }
+
+    if (suscription === "None") {
+      return [];
+    }
+
+    const options: JSX.Element[] = [];
+    for (const price of prices) {
+      const newElement =
+        <option
+          value={price}
+        >{price}</option>;
+      options.push(newElement);
+    }
+    return options;
   }
 
   return (
@@ -126,12 +175,80 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
           <CloseIcon onClick={handleClose} />
         </TitleContain>
         <ButtonContain>
-          {
-            generateMembershipsButtons()
-          }
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px',
+            }}>
+              <p>Seleccione un tipo de suscripción</p>
+              {
+                generateMembershipsButtons()
+              }
+            </div>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '5px'
+            }}>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                padding: '5px'
+              }}>
+                <p style={{
+                  textAlign: 'center'
+                }}>Seleccione un precio</p>
+                <select
+                  style={{
+                    width: '100%',
+                    borderRadius: '35px',
+                    paddingLeft: '10px',
+                    height: '50px'
+                  }}
+                  name=""
+                  id=""
+                  onChange={(event) => {
+                    setPrice(parseInt(event.target.value));
+                  }}
+                >
+                  <option
+                    value="0"
+                    disabled
+                    selected
+                  >Seleccione un precio</option>
+                  {
+                    generatePricesByOption()
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+          <div style={{
+            paddingTop: '20px'
+          }}>
+            {
+              (price !== 0 && suscription !== "None") &&
+              <GreenButton
+                onClick={() => addMembership()}>
+                Continuar
+              </GreenButton>
+            }
+            {
+              (price === 0 || suscription === "None") &&
+              <p>Una vez seleccione una suscripción y un precio podrá continuar</p>
+            }
+          </div>
         </ButtonContain>
       </Container>
-    </Modal>
+    </Modal >
   )
 }
 export default ModalAddSubscriptionPlan;

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styled, { css } from "styled-components";
+import Image from 'next/image';
+import styled, { css } from 'styled-components';
 
 export const RewardContainer = styled.div`
   display: flex;
@@ -205,6 +205,9 @@ export const RewardsTitle = styled.div`
     top: 0;
     right: 0;
     transform-origin: top right;
+    @media (max-width: 1920px) {
+      transform: scale(0.85);
+    }
     @media (max-width: 1500px) {
       transform: scale(0.85);
     }
@@ -233,8 +236,8 @@ export const RewardCardContainer = styled.div<{
   padding-left: 40px;
  cursor: pointer;
  transition: 0.25s ease all;
-  ${(props) =>
-    props.type == "points" &&
+  ${props =>
+    props.type == 'points' &&
     css<{ reward: any }>`
       top: 0;
       right: 0;
@@ -242,21 +245,21 @@ export const RewardCardContainer = styled.div<{
       z-index: 12;
       box-shadow: 65px 15px 40px -15px black;
       transform-origin: top right;
-      ${(props) =>
-        props.reward == "months" &&
+      ${props =>
+        props.reward == 'months' &&
         css`
           transform: scale(0.8);
           z-index: 9;
         `}
-      ${(props) =>
-        props.reward == "certificates" &&
+      ${props =>
+        props.reward == 'certificates' &&
         css`
           transform: scale(0.6);
           z-index: 7;
         `}
     `}
-  ${(props) =>
-    props.type == "months" &&
+  ${props =>
+    props.type == 'months' &&
     css<{ reward: any }>`
       top: 185px;
       right: 0;
@@ -265,8 +268,8 @@ export const RewardCardContainer = styled.div<{
       transform: scale(0.8);
       box-shadow: 65px 15px 40px -15px black;
       transform-origin: top right;
-      ${(props) =>
-        props.reward == "months" &&
+      ${props =>
+        props.reward == 'months' &&
         css`
           transform: scale(1);
           top: 125px;
@@ -274,15 +277,15 @@ export const RewardCardContainer = styled.div<{
           z-index: 12;
           box-shadow: 65px -15px 40px -15px black, 204px 15px 40px -15px black;
         `}
-      ${(props) =>
-        props.reward == "certificates" &&
+      ${props =>
+        props.reward == 'certificates' &&
         css`
           box-shadow: 65px -15px 40px -15px black;
           top: 100px;
         `}
     `}
-  ${(props) =>
-    props.type == "certificates" &&
+  ${props =>
+    props.type == 'certificates' &&
     css<{ reward: any }>`
       top: 340px;
       right: 0;
@@ -290,8 +293,8 @@ export const RewardCardContainer = styled.div<{
       z-index: 7;
       transform: scale(0.6);
       transform-origin: top right;
-      ${(props) =>
-        props.reward == "certificates" &&
+      ${props =>
+        props.reward == 'certificates' &&
         css`
           transform: scale(1);
           top: 235px;
@@ -395,7 +398,7 @@ export const RewardCardContainer = styled.div<{
       stroke: url(#gradient);
       stroke-width: 34px;
       stroke-dasharray: 565;
-          stroke-dashoffset: ${(props) => props.progress};
+          stroke-dashoffset: ${props => props.progress};
       stroke-linecap: round;
       cx: 110px;
       cy: 110px;
@@ -529,7 +532,7 @@ export const InsideContain = styled.div`
 
 export const PointsText = styled.p`
   font-size: 36px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #e0c3fc;
   margin: 0;
   span {
@@ -579,7 +582,7 @@ export const ProgressSvg = styled.svg`
     stroke-dasharray: 289;
   }
 `;
-export const ProgressCircle = styled("circle")<{
+export const ProgressCircle = styled('circle')<{
   progress: number;
   progressResp: number;
 }>`
@@ -591,11 +594,11 @@ export const ProgressCircle = styled("circle")<{
   cx: 60px;
   cy: 60px;
   r: 55px;
-  stroke-dashoffset: ${(props) => props.progress};
+  stroke-dashoffset: ${props => props.progress};
   stroke-linecap: round;
   @media (max-width: 1023px) {
     stroke-dasharray: 289;
-    stroke-dashoffset: ${(props) => props.progressResp};
+    stroke-dashoffset: ${props => props.progressResp};
     cx: 50px;
     cy: 50px;
     r: 46px;
@@ -627,7 +630,7 @@ export const CurrentLevel = styled.p`
   font-size: 44px;
   line-height: 50px;
   font-weight: 600;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #e0c3fc;
   margin: 0;
   @media (max-width: 1023px) {

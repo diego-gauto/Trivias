@@ -20,10 +20,12 @@ const FormList = ({ forms }: FormListProps) => {
         <thead>
           <tr>
             <th>Nº de Formulario</th>
+            <th>Copy Link</th>
             <th>Título</th>
             <th>Fecha de Creación</th>
             <th>Fecha de Edición</th>
             <th>Inscritos</th>
+            <th>Previsualizar</th>
           </tr>
         </thead>
         <tbody>

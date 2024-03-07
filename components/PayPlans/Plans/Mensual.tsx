@@ -8,6 +8,7 @@ import { PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../co
 import { useAuth } from "../../../hooks/useAuth";
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
+import { user } from "firebase-functions/v1/auth";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -44,16 +45,35 @@ const Mensual = (props: IData) => {
   const goTo = () => {
     if (user && user.id) {
       let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-      if (user.level === 0 && user.final_date < today) {
-        router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "3" } })
+      // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
+      // Si una usuaria es de pago recurrente nivel 1, 4, 7
+      // debugger;
+      console.log({ user });
+      if ([1, 4, 7].includes(user.level)/* && user.final_date < (today - 6 * 24 * 60 * 60)*/) {
+        router.push(PREVIEW_PATH);
       }
-      if (user.level === 0 && user.final_date > today) {
-        router.push(PREVIEW_PATH)
+      // Pagos no recurrentes
+      // 1. Con final_date vencido (inactivas)
+      // 2. Con final_date no vencido (activas)
+      else if ([5, 6, 8].includes(user.level)) {
+        if (user.final_date < today) {
+          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "3" } });
+        } else {
+          router.push(PREVIEW_PATH);
+        }
       }
-      if ((user.level > 0 && user.final_date > today) || complete_nails.length > 0) {
-        router.push(PREVIEW_PATH)
+      // niveles 3 pausados
+      else if (user.level === 3) {
+        router.push(PREVIEW_PATH);
       }
-      if (user.level > 0 && user.final_date < today) {
+      else if (user.level === 0) {
+        if (user.final_date < today) {
+          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: "3" } });
+        } else {
+          router.push(PREVIEW_PATH);
+        }
+      }
+      else if (complete_nails.length > 0) {
         router.push(PREVIEW_PATH)
       }
     }

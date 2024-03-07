@@ -1,11 +1,18 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import React, { Dispatch, SetStateAction } from "react";
+
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+
 import { storage } from "../../../../firebase/firebaseConfig";
+
+interface Answer {
+  label: string;
+  value: string;
+}
 
 interface Option {
   isVisible: boolean | null;
   label: string;
-  options: string[];
+  options: Answer[];
 }
 
 interface Form {
@@ -28,7 +35,7 @@ interface Form {
 
 interface FileUploadProps {
   route: string;
-  updateFormImg: Dispatch<SetStateAction<Form | null>>;
+  updateFormImg: Dispatch<SetStateAction<Form>>;
 }
 
 const FileUpload = ({ route, updateFormImg }: FileUploadProps) => {

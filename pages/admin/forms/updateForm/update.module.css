@@ -61,7 +61,7 @@
       margin: 0 0 10px 5px;
     }
 
-    .options button {
+    /* .options button {
       width: 100px;
       height: 25px;
       border: 0;
@@ -73,10 +73,9 @@
       font-weight: 500;
       font-size: 12px;
       line-height: 15px;
-      /* identical to box height */
       color: #ffffff;
       margin-left:10px;
-    }
+    } */
 
     .newOptionButton {
       width: 150px;
