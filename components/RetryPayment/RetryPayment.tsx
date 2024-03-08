@@ -39,6 +39,7 @@ export const RetryPayment = () => {
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
+  const [token, setToken] = useState('');
 
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
@@ -70,12 +71,11 @@ export const RetryPayment = () => {
       token_id: tokenId,
       conekta_id: user.conekta_id
     }
-    attachPaymentMethodConekta(body).then((res) => {
-      getPaymentMethods();
-      console.log(res);
-      setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-      setLoaderAdd(false);
-    })
+    setToken(tokenId);
+    // attachPaymentMethodConekta(body).then((res) => {
+    //   getPaymentMethods();
+    //   setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+    // })
   }
   const conektaErrorResponseHandler = (response: any) => {
     alert("Hay un error en los datos de la tarjeta!")
@@ -128,6 +128,10 @@ export const RetryPayment = () => {
     }
   }, [userDataAuth])
 
+  useEffect(() => {
+    pay();
+  }, [token])
+
   const pay = () => {
     const filter = paymentMethods.filter((x) => x.default)
     const pm = filter[0]
@@ -138,7 +142,7 @@ export const RetryPayment = () => {
     if (user.level === 8) plan_id = "cuatrimestre";
 
     const data = {
-      id: pm?.id,
+      id: token ? token : pm?.id,
       conekta_id: user.conekta_id,
       plan_id: plan_id,
       userId: user.user_id
