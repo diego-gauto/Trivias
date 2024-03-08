@@ -44,6 +44,7 @@ export const RetryPayModalContain = styled.div`
   }
   .bold {
     font-weight: 600;
+    align-self: baseline;
   }
   .paragraph {
     margin-top: 10px;

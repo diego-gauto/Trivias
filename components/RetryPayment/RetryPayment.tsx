@@ -258,7 +258,7 @@ export const RetryPayment = () => {
         <div className='complete-contain'>
           <div className='main-container'>
             <h2>Métodos de pago</h2>
-            <p className='description'>Edita tus métodos de pago y agrega una forma de pago<br /> adicional como respaldo.</p>
+            <p className='description' style={{ textAlign: 'left' }}>Edita tus métodos de pago y agrega una forma de pago<br /> adicional como respaldo.</p>
             {
               paymentMethods.length > 0 &&
               <div className='payment-container'>
@@ -277,7 +277,7 @@ export const RetryPayment = () => {
                 }
               </div>
             }
-            {error && <p className='description' style={{ color: 'red' }}>No hemos podido procesar tu pago, puedes volver a intentar o probar con otro medio de pago</p>}
+            {error && <p className='description' style={{ color: 'red' }}>No hemos podido procesar tu pago, puedes reintentar tu pago nuevamente o intentar con otro medio de pago.</p>}
             {
               paymentMethods.length > 0 &&
               <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
@@ -388,7 +388,7 @@ export const RetryPayment = () => {
                     </div>
                   </div>
                   <p className='description-text'>
-                    Presionando en el botón "Guardar" estás dando tu consentimiento
+                    Presionando en el botón "Pagar" estás dando tu consentimiento
                     para que Gonvar automáticamente continúe con tu suscripción &nbsp;
                     {returnFrecuency()} y te cobremos {returnPrice()}
                     en el medio de pago que estás agregando hasta que tu decidas cancelarla.
@@ -399,7 +399,7 @@ export const RetryPayment = () => {
                   {
                     loaderAdd
                       ? <LoaderContainSpinner />
-                      : <button className='type3' onClick={addNewCard}>Guardar</button>
+                      : <button className='type3' onClick={addNewCard}>Pagar</button>
                   }
 
                 </>
@@ -408,7 +408,7 @@ export const RetryPayment = () => {
                 selectedButton === "oxxo" &&
                 <div>
                   <p className='description-text mb-5'>Presiona el botón de generar ficha de pago oxxo para visualizarla y poder descargarla.
-                    Una vez que abones en una tienda Oxxo tardaremos 48hs en procesar tu pago y a continuación podrás comenzar con
+                    Una vez que abones en una tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a continuación podrás comenzar con
                     tus cursos</p>
                   <button className='type3 oxxo' onClick={payWithOxxo}>Genera ficha de pago OXXO</button>
                 </div>
@@ -417,7 +417,7 @@ export const RetryPayment = () => {
                 selectedButton === "transfer" &&
                 <div>
                   <p className='description-text mb-5'>Presiona el botón de generar ficha de transferencia para visualizarla y
-                    poder descargarla. Una vez que realices la transferencia tardaremos 48hs en procesar tu pago y a continuación
+                    poder descargarla. Una vez que realices la transferencia tardaremos máximo 48hs en procesar tu pago y a continuación
                     podrás comenzar con tus cursos</p>
                   <button className='type3 spei' onClick={payWitSpei}>Genera ficha para transferencia</button>
                 </div>

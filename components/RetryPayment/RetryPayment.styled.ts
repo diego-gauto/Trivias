@@ -60,7 +60,7 @@ export const RetryPaymentContainer = styled.div`
     }
   }
   button.type3 {
-    width: 100%;
+    width: 50%;
   }
   button.oxxo {
     background-color: #d8363e;
@@ -94,7 +94,8 @@ export const RetryPaymentContainer = styled.div`
   .complete-contain {
     display: flex;
     justify-content: center;
-    width: calc(60% + 40px);
+    width: auto;
+    padding-inline: 20px;
     background-color: #fff;
     padding-block: 60px;
     border-radius: 40px;
@@ -137,7 +138,8 @@ export const RetryPaymentContainer = styled.div`
         overflow: hidden;
         opacity: 0;
         pointer-events: none;
-        width: 80%;
+        width: 100%;
+        max-width: 600px;
         .description-text {
           color: #3f1168;
           text-align: start;
@@ -146,8 +148,8 @@ export const RetryPaymentContainer = styled.div`
         }
         .button-container {
           display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
+          justify-content: space-between;
+          width: 100%;
           gap: 20px;
           .box-container {
             display: flex;
@@ -182,16 +184,28 @@ export const RetryPaymentContainer = styled.div`
         .card-container {
           display: flex;
           gap: 30px;
-          width: auto;
+          width: 100%;
           margin-inline: 40px;
           .left-side {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            .input-container {
+              input,
+              select {
+                width: 100%;
+              }
+              select {
+                height: 100%;
+                padding-inline: 5px;
+                width: 60px;
+              }
+            }
             .inputs-column {
               display: flex;
               gap: 20px;
               input {
+                width: 100%;
                 border-radius: 4px;
               }
             }
@@ -267,7 +281,6 @@ export const RetryPaymentContainer = styled.div`
       width: fit-content;
     }
     .complete-contain {
-      width: 90%;
       padding-block: 30px;
       .main-container {
         gap: 15px;
@@ -303,8 +316,8 @@ export const RetryPaymentContainer = styled.div`
         .add-payment-container {
           gap: 30px;
           .card-container {
-            align-items: center;
-            flex-direction: column;
+            // align-items: center;
+            // flex-direction: column;
             .right-side {
               width: fit-content;
             }
@@ -321,6 +334,7 @@ export const RetryPaymentContainer = styled.div`
   @media (max-width: 750px) {
     .complete-contain {
       width: 100%;
+      flex-direction: column;
       background-color: transparent;
       padding-inline: 20px;
       padding-block: 0px;
@@ -334,6 +348,17 @@ export const RetryPaymentContainer = styled.div`
           }
         }
       }
+    }
+  }
+  @media (max-width: 600px) {
+    .card-container {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .button-container {
+      scale: 0.7;
+      width: auto !important;
     }
   }
   @media (max-width: 480px) {

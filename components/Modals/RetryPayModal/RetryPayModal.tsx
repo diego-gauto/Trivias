@@ -106,7 +106,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const returnSubscription = () => {
     switch (user.level) {
       case 0:
-        return "cuatrimestral"
+        return ""
       case 5:
         return "anual"
       case 6:
@@ -121,7 +121,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const returnAccess = () => {
     switch (user.level) {
       case 0:
-        return "tus 4 meses"
+        return "tus días"
       case 5:
         return "tu año"
       case 6:
@@ -178,7 +178,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
           }
           {error &&
             <p className='paragraph' style={{ color: 'red', fontSize: '12px' }}>
-              No hemos podido procesar tu pago, puedes volver a reintentar o dirigirte a actualizar tus medios de pago
+              No hemos podido procesar tu pago, puedes reintentar el pago nuevamente o dirigirte a Actualizar info de pago
             </p>
           }
           {paymentMethods.length > 0 && <button onClick={pay} style={{ background: "#3f1168" }}>Reintentar pago</button>}
