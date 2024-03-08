@@ -14,6 +14,24 @@ export const SuscriptionContain = styled.div`
       opacity: 0.5;
     }
   }
+  .watsap-button-ultimate {
+    background-color: #28af25;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 20px;
+    border-radius: 50px;
+    width: 200px;
+    color: white;
+    line-height: normal;
+    img {
+      width: 25px;
+      height: 25px;
+      margin-right: 0.5rem;
+    }
+  }
+
   .extra-header {
     padding-inline: 10px;
     padding-block: 15px;
@@ -60,8 +78,8 @@ export const SuscriptionContain = styled.div`
     font-weight: 800 !important;
   }
   .space {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
   .big-title {
     font-size: 65px;
@@ -72,7 +90,8 @@ export const SuscriptionContain = styled.div`
     margin-bottom: 0;
     position: relative;
     .gonvarplus {
-      margin-block: 60px;
+      margin-top: 60px;
+      margin-bottom: 10px;
     }
     .plusgonvar {
       width: 70px;
@@ -125,13 +144,16 @@ export const SuscriptionContain = styled.div`
   .courses-section {
     width: 100%;
     margin-top: 0px;
-    margin-bottom: 50px;
+    background-color: #3f1168;
+    color: white;
+    padding-block: 40px;
     .special-course {
       display: flex;
       flex-direction: column;
       width: 100%;
       align-items: center;
       text-align: center;
+      padding-inline: 30px;
       img {
         width: 50%;
         border-radius: 30px;
@@ -202,7 +224,8 @@ export const SuscriptionContain = styled.div`
   }
 
   .ubi-section {
-    margin-block: 75px;
+    padding-block: 75px;
+    padding-inline: 35px;
     width: 100%;
     position: relative;
     .back-ghosts {
@@ -225,8 +248,10 @@ export const SuscriptionContain = styled.div`
   }
 
   .instructores-section {
-    margin-block: 75px;
+    padding-block: 75px;
     width: 100%;
+    background-color: #3f1168;
+    color: white;
     button {
       padding-block: 5px;
       font-size: 18px;
@@ -259,7 +284,7 @@ export const SuscriptionContain = styled.div`
           font-size: 18px;
         }
         i {
-          font-size: 14px;
+          font-size: 18px;
         }
       }
     }
@@ -267,9 +292,10 @@ export const SuscriptionContain = styled.div`
 
   .difficulties-section {
     width: 100%;
-    margin-block: 75px;
+    padding-block: 75px;
+    padding-inline: 25px;
     .dif-lines {
-      margin-block: 50px;
+      padding-block: 50px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -286,8 +312,11 @@ export const SuscriptionContain = styled.div`
   }
 
   .teaching-section {
-    margin-block: 75px;
+    padding-block: 75px;
+    padding-inline: 20px;
     width: 100%;
+    background-color: #3f1168;
+    color: white;
     .teach-lines {
       margin-top: 50px;
       margin-bottom: 100px;
@@ -303,10 +332,11 @@ export const SuscriptionContain = styled.div`
         .line-desc {
           width: 350px;
           position: absolute;
-          background-color: #ffffff;
+          background-color: rgba(255, 255, 255, 0.9);
           transform: translateY(50px);
           bottom: 0;
           .bold {
+            color: #3f1168;
             font-size: 1.8rem;
           }
         }
@@ -353,29 +383,42 @@ export const SuscriptionContain = styled.div`
   }
 
   .cellphone-section {
-    margin-block: 75px;
-    width: 1200px;
+    padding-block: 75px;
     position: relative;
-    .cell-body {
-      .title {
-        font-size: 45px;
-        font-weight: 700;
-      }
-      .subtitle {
-        margin-left: 55px;
-        margin-block: 40px;
-      }
-      .back-lines {
-        position: absolute;
-        z-index: -1;
-        .line-1 {
-          transform: translate(-70px, -50px);
+    background-color: #3f1168;
+    color: white;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    .cellphone-section-container {
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+      .cell-body {
+        padding-left: 15px;
+        padding-right: 20px;
+        .title {
+          font-size: 45px;
+          font-weight: 700;
         }
-        .line-2 {
-          transform: translate(130px, 260px);
+        .subtitle {
+          margin-left: 55px;
+          margin-block: 40px;
         }
-        .line-3 {
-          transform: translate(70px, -230px);
+        .back-lines {
+          position: absolute;
+          z-index: -1;
+          .line-1 {
+            transform: translate(-70px, -50px);
+          }
+          .line-2 {
+            transform: translate(130px, 260px);
+          }
+          .line-3 {
+            transform: translate(70px, -230px);
+          }
         }
       }
     }
@@ -436,8 +479,11 @@ export const SuscriptionContain = styled.div`
 
   .cost-section {
     position: relative;
-    margin-block: 75px;
+    padding-block: 75px;
+    padding-inline: 25px;
     width: 100%;
+    background-color: #3f1168;
+    color: white;
     .chica-img {
       position: absolute;
       left: 0;
@@ -463,6 +509,8 @@ export const SuscriptionContain = styled.div`
   .testimonio-section {
     padding-block: 50px;
     width: 100%;
+    background-color: #3f1168;
+    color: white;
     .experiences-container {
       display: flex;
       justify-content: center;
@@ -534,7 +582,7 @@ export const SuscriptionContain = styled.div`
   .inspo-section {
     overflow: hidden;
     width: 90%;
-    margin-block: 75px;
+    padding-block: 75px;
     .inspo-swiper {
       display: unset;
       .w-est {
@@ -552,7 +600,7 @@ export const SuscriptionContain = styled.div`
 
   .dudas-section {
     width: 100%;
-    margin-block: 75px;
+    padding-block: 75px;
   }
 
   .dudas-img {
@@ -764,11 +812,11 @@ export const SuscriptionContain = styled.div`
         .resp-left {
           min-width: 60px;
           left: 0px;
-          top: 46%;
+          top: 52%;
         }
         .image-right {
           right: 0px;
-          top: 46%;
+          top: 52%;
           position: absolute;
           bottom: -180px;
           .white-line {
@@ -823,11 +871,11 @@ export const SuscriptionContain = styled.div`
           display: none;
         }
         .level {
-          width: 150px;
+          width: 130px;
           margin-inline: 5px;
         }
         .bigger {
-          width: 123px;
+          width: 103px;
         }
       }
     }
@@ -856,9 +904,12 @@ export const SuscriptionContain = styled.div`
     }
     .cellphone-section {
       width: 100%;
+      padding-right: 15px;
       .cell-body {
         text-align: center !important;
         margin: 5px;
+        padding-left: 15px;
+        padding-right: 10px;
         .text-center {
           margin-block: 25px;
         }
@@ -975,7 +1026,23 @@ export const SuscriptionContain = styled.div`
     }
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
+  @media (min-width: 650px) {
+    .watsap-button-ultimate {
+      width: 230px;
+      color: white;
+      line-height: 1.5;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
   @media (max-width: 650px) {
+    .upside-lines {
+      display: none;
+    }
     .resp-left {
       display: none;
     }
@@ -1035,7 +1102,8 @@ export const SuscriptionContain = styled.div`
       }
     }
     .ubi-section {
-      margin-block: 40px;
+      padding-block: 40px;
+      padding-inline: 0;
       .back-ghosts {
         display: none;
       }
@@ -1055,7 +1123,8 @@ export const SuscriptionContain = styled.div`
       }
     }
     .instructores-section {
-      margin-block: 20px;
+      padding-block: 20px;
+      padding-block: 20px;
       .btn {
         padding: unset;
         padding-block: 5px;
@@ -1080,7 +1149,7 @@ export const SuscriptionContain = styled.div`
               font-size: 18px;
             }
             .p-pink {
-              font-size: 10px;
+              font-size: 18px;
             }
           }
         }
@@ -1137,7 +1206,8 @@ export const SuscriptionContain = styled.div`
       }
     }
     .teaching-section {
-      margin-block: 40px;
+      padding-block: 40px;
+      padding-inline: 15px;
       h3 {
         .p-pink {
           font-weight: 600;
@@ -1185,6 +1255,7 @@ export const SuscriptionContain = styled.div`
     .cellphone-section {
       width: 100%;
       margin-block: 25px;
+      padding-right: 15px;
       .title {
         font-size: 1.6rem !important;
         .p-pink {
@@ -1194,6 +1265,8 @@ export const SuscriptionContain = styled.div`
       .cell-body {
         text-align: center !important;
         margin: 5px;
+        padding-left: 15px;
+        padding-right: 10px;
         .text-center {
           margin-block: 25px;
         }
@@ -1281,7 +1354,7 @@ export const SuscriptionContain = styled.div`
     }
 
     .cost-section {
-      margin-block: 25px;
+      padding-block: 25px;
       display: flex;
       flex-direction: column;
       .chica-img {
@@ -1444,6 +1517,10 @@ export const SuscriptionContain = styled.div`
     }
   }
   @media (max-width: 400px) {
+    .upside-lines {
+      display: none;
+    }
+
     .intro-section {
       .gonvarplus {
         width: 250px;
@@ -1457,10 +1534,6 @@ export const SuscriptionContain = styled.div`
       .all-center {
         .center {
           gap: 8px;
-          button {
-            width: 155px;
-            font-size: 14px !important;
-          }
         }
       }
       .space {
@@ -1530,6 +1603,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .cellphone-section {
+      padding-right: 15px;
       .text-end {
         padding-inline: 20px;
       }
@@ -1614,278 +1688,6 @@ export const SuscriptionContain = styled.div`
           }
         }
       }
-    }
-  }
-`;
-
-export const FirstSection = styled.div`
-  //SECTION
-  width: 100%;
-  position: relative;
-  padding-block: 15px;
-  color: #3f1168;
-  background: white;
-  .extra-margin {
-    margin-top: 20px;
-  }
-  .big-text {
-    font-size: 90px;
-  }
-  .left-img {
-    min-width: 420px;
-    width: 43%;
-    z-index: 1;
-    position: absolute;
-    transform: translate(0px, -40px);
-    left: 0;
-  }
-  .right-img-1 {
-    min-width: 350px;
-    width: 34%;
-    z-index: 1;
-    position: absolute;
-    right: 0;
-    transform: translateY(-460px);
-  }
-  .right-img-2 {
-    min-width: 340px;
-    width: 30%;
-    z-index: 1;
-    position: absolute;
-    transform: translateY(-115px);
-    right: 0;
-  }
-  .countdown {
-    margin-top: 32px;
-    .time {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      .countdown-block {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        .tiempo {
-          width: 120px;
-          height: 130px;
-          color: #000;
-          border-radius: 24px;
-          border: 2px solid #6b7074;
-          background: rgb(179, 185, 189);
-          background: linear-gradient(
-            180deg,
-            #d2d6d8 0%,
-            #ffffff 50%,
-            #d2d6d8 100%
-          );
-          font-size: 5rem;
-        }
-      }
-    }
-  }
-  .progress-container {
-    display: flex;
-    justify-content: center;
-    .progress-bar {
-      border-radius: 32px;
-      background-color: #e0e3e4;
-      width: 400px;
-      height: 50px;
-      position: relative;
-      &.full {
-        outline: 2px solid #ff0000;
-      }
-      &::after {
-        position: relative;
-        content: attr(progress-text);
-        font-weight: 700;
-        font-size: 1.2rem;
-        color: white;
-      }
-      &::before {
-        content: '';
-        position: absolute;
-        width: var(--progress);
-        height: 100%;
-        border-radius: 32px;
-        background: #3f1168;
-      }
-    }
-  }
-  @media (max-width: 1000px) {
-    .space {
-      .big-text {
-        font-size: 75px;
-      }
-    }
-    .left-img {
-      trasnform: unset;
-      top: 650px;
-      width: 30%;
-      min-width: 240px;
-    }
-    .right-img-1 {
-      max-width: 350px;
-      width: 32%;
-      min-width: unset;
-      transform: translateY(-360px);
-      min-width: 250px;
-    }
-    .right-img-2 {
-      min-width: 250px;
-      transform: translateY(220px);
-    }
-  }
-  @media (max-width: 850px) {
-    margin-bottom: 25px;
-    .left-img {
-      top: 700px;
-      min-width: 200px;
-    }
-    .right-img-1 {
-      transform: translateY(-345px);
-      min-width: 160px;
-    }
-    .right-img-2 {
-      min-width: 140px;
-      transform: translateY(200px);
-    }
-    .fechas {
-      margin-top: 1.5rem !important;
-      margin-bottom: 70px !important;
-    }
-    .space {
-      .subtitle {
-        font-size: 18px;
-        margin-top: 20px;
-        font-weight: 800;
-      }
-    }
-    .all-center {
-      img {
-        width: 150px;
-        height: 25px;
-      }
-      h3 {
-        margin-block: 15px;
-        font-size: 16px;
-      }
-    }
-    .extra-margin {
-      font-size: 18px;
-      padding-inline: 20px;
-    }
-    .btn {
-      padding: 0px;
-      padding-inline: 30px;
-      padding-block: 8px;
-      font-size: 16px;
-      line-height: 20px;
-    }
-  }
-  @media (max-width: 550px) {
-    padding-block: 5px;
-    padding-bottom: 30px;
-    .space {
-      margin-block: 5px;
-      .big-text {
-        font-size: 45px;
-        line-height: 45px;
-      }
-      .subtitle {
-        margin-top: 5px;
-        margin-bottom: 0px;
-      }
-    }
-    .progress-container {
-      .progress-bar {
-        margin-bottom: 8px;
-        width: 350px;
-        height: 40px;
-      }
-    }
-    .fechas {
-      margin-top: 0.5rem !important;
-      margin-bottom: 20px !important;
-    }
-    .countdown {
-      margin-top: 10px;
-      .time {
-        .countdown-block {
-          .tiempo {
-            width: 65px;
-            height: 60px;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-          }
-          .sub {
-            font-size: 0.6em;
-          }
-        }
-      }
-    }
-    .right-img-1 {
-      transform: translateY(-155px);
-      min-width: 80px;
-      width: 20%;
-    }
-    .left-img {
-      top: 480px;
-      min-width: 160px;
-      left: -10px;
-    }
-    .right-img-2 {
-      min-width: 125px;
-      transform: translateY(140px);
-      right: -20px;
-    }
-    .all-center {
-      .space {
-        margin-block: 5px;
-      }
-    }
-  }
-  @media (max-width: 400px) {
-    .space {
-      margin-bottom: 5px;
-      .big-text {
-        font-size: 45px;
-      }
-      .subtitle {
-        font-size: 16px;
-        font-weight: 500;
-      }
-    }
-    .all-center {
-      img {
-        width: 120px;
-        height: 20px;
-      }
-      h3 {
-        padding-left: 10px;
-        font-size: 12px;
-        margin-block: 5px;
-      }
-    }
-    .extra-margin {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-    .left-img {
-      top: 560px;
-      left: -20px;
-    }
-    .right-img-2 {
-      transform: translateY(140px);
-      right: -30px;
-    }
-    .btn {
-      padding-block: 5px;
-      font-size: 13px;
-      padding-inline: 25px;
-      line-height: 18px;
-      font-weight: 500;
     }
   }
 `;

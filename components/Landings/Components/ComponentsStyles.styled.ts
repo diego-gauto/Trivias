@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RewardsContainer = styled.div`
-  margin-block: 75px;
+  padding-block: 75px;
+
   width: 100%;
   position: relative;
   .side-images {

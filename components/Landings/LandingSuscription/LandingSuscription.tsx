@@ -14,7 +14,8 @@ import { getLandingReviewApi } from "../../api/admin";
 import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-import { SuscriptionContain, FirstSection } from "./LandingSuscription.styled";
+import { SuscriptionContain } from "./LandingSuscription.styled";
+import { FirstSection } from "./FirstSection.tyled";
 import { RewardComponent } from "../Components/Reward";
 import { ICourse } from "../../Courses/Modules/ISliders";
 import Countdown from "react-countdown";
@@ -206,18 +207,15 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
   return (
     <SuscriptionContain>
-      <div className="extra-header">
-        <button className="header-button" onClick={() => handleRedirection()}>Comenzar ahora</button>
-      </div>
-      <img src={upsideLines} />
+      <img className="upside-lines" src={upsideLines} />
       <FirstSection>
-        <div className="fechas">
-          <h4>
-            <b>¡Inscríbete en línea hoy!</b>
-            <br />
-            Inscripciones sólo desde
-            <br />
-            03 de Febrero al 16 de Marzo
+        <div className="fechas" style={{
+          color: 'white'
+        }}>
+          <h4 style={{
+            fontSize: '20px'
+          }}>
+            Desde 03 de Febrero<br /> al 16 de Marzo
           </h4>
           <Countdown
             date={new Date(2024, 2, 16)}
@@ -271,6 +269,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
           </div>
         </div>
       </FirstSection>
+      {/*
+      Aquí termina FisrtSection
+      */}
       <div className="intro-section" >
         <div className="background-images">
           <div className="image-contain">
@@ -305,10 +306,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
         }}>
           <h4 className="bold" style={{
             marginBottom: '40px'
-          }}>Si necesitas ayuda con tu inscripción, <br /><span className="p-pink">presiona este botón</span> y te atenderemos para ayudarte.</h4>
+          }}>Solicitar ayuda</h4>
           <div className="all-center">
-            <div style={{ display: 'flex', width: '100%', height: '120px', justifyContent: 'center' }}>
-              <div className="watsap-button-only" onClick={() => redirectToWhatsAppChat()}>
+            <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+              <div className="watsap-button-ultimate" onClick={() => redirectToWhatsAppChat()}>
                 <img src={watsapOut} />
                 <p className="my-1 bold">Contacta con <br />un agente</p>
               </div>
@@ -319,15 +320,15 @@ const LandingSuscription = (props: ILandingSuscription) => {
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="h1"><b>MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
           <img src={specialCourse?.image} />
           <p className="title">Nails Master Revolution</p>
-          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
-          <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
-          <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
+          <p className="">Ahora ya disponible en tu suscripción Gonvar+.</p>
+          <p className="">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
+          <p className="">Técnicas de Escultural y Tips incluídas.</p>
         </div>
         <div className="all-center space">
           <div className="group-buttons">
@@ -495,7 +496,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </div>
           </div>} */}
         <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
-        <h5 className="p-pink"><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
+        <h5 className=""><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
       </div>
 
 
@@ -666,37 +667,39 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
       <div className="all-center cellphone-section">
-        <div className="text-end cell-body">
-          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas <br /></b> y conviértete en una experta <br />
-            en uñas y belleza!</h2>
-          <div className="back-lines all-center">
-            <img src={backCell} className="line-1" />
-            <img src={backCell3} className="line-2" />
-            <img src={backCell2} className="line-3" />
-          </div>
-          <div className="subtitle">
-            <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
-              <b className="p-pink no-bold"> asesorías individuales e ilimitadas
-                con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
-              metas con confianza.
+        <div className="cellphone-section-container">
+          <div className="text-end cell-body">
+            <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas <br /></b> y conviértete en una experta <br />
+              en uñas y belleza!</h2>
+            <div className="back-lines all-center">
+              <img src={backCell} className="line-1" />
+              <img src={backCell3} className="line-2" />
+              <img src={backCell2} className="line-3" />
+            </div>
+            <div className="subtitle">
+              <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
+                <b className="p-pink no-bold"> asesorías individuales e ilimitadas
+                  con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
+                metas con confianza.
+                {
+                  responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+                }
+              </h3>
               {
-                responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+                responsive650 && <img src={asesoriaTel} className="ms-3" />
               }
-            </h3>
-            {
-              responsive650 && <img src={asesoriaTel} className="ms-3" />
-            }
-          </div>
-          <div className="text-center ">
-            {
-              !responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
-            }
-          </div>
+            </div>
+            <div className="text-center ">
+              {
+                !responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+              }
+            </div>
 
+          </div>
+          {
+            !responsive650 && <img src={asesoriaTel} className="ms-3" />
+          }
         </div>
-        {
-          !responsive650 && <img src={asesoriaTel} className="ms-3" />
-        }
       </div>
       <div className="benefits-section">
         <div className="title all-center">
