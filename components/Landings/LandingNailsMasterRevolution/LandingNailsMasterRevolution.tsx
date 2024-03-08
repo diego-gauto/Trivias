@@ -235,10 +235,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <br />
             Inscripciones sólo desde el
             <br />
-            03 de Febrero al 29 de Febrero
+            03 de Febrero al 16 de Marzo
           </h4>
           <Countdown
-            date={1709247641000}
+            date={new Date(2024, 2, 16)}
             renderer={(props) => (
               <div className="countdown">
                 <h2>TIEMPO RESTANTE</h2>
