@@ -73,7 +73,6 @@ export const RetryPayment = () => {
     attachPaymentMethodConekta(body).then((res) => {
       getPaymentMethods();
       console.log(res);
-
       setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
       setLoaderAdd(false);
     })
