@@ -86,12 +86,13 @@ views.set(4, false);
 
 interface ILandingSuscription {
   price: string;
-  type: string;
+  type: "mensual" | "anual" | "cuatrimestral";
   isFacebook?: boolean;
+  origin?: "facebook" | "google" | "tiktok";
 }
 
 const LandingSuscription = (props: ILandingSuscription) => {
-  const { price, type, isFacebook } = props;
+  const { price, type, isFacebook, origin } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
   const [cursos, setCursos] = useState(1)
@@ -180,7 +181,51 @@ const LandingSuscription = (props: ILandingSuscription) => {
         if (type === "anual") {
           localStorage.setItem('anual', 'true')
         }
-        if (type === "cuatrimstral") {
+        if (type === "cuatrimestral") {
+          localStorage.setItem('cuatri', 'true')
+        }
+        router.push(SIGNUP_PATH)
+      }
+    }
+  }
+
+  const handleNewRedirection = async () => {
+    if (isFacebook) {
+      router.push(Landing_Facebook);
+    } else {
+      if (origin === 'facebook' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=10');
+      } else if (origin === 'google' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=11');
+      } else if (origin === 'tiktok' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=12');
+      }
+      if (localStorage.getItem('email')) {
+        const user = await getUserApi(localStorage.getItem('email'))
+        // tiene que ser activo, y no tiene que ser nivel 0
+        if (user.final_date > (new Date().getTime() / 1000)) {
+          router.push(PREVIEW_PATH)
+        } else {
+          if (type === "mensual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '3' } })
+          }
+          if (type === "anual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '3' } })
+          }
+          if (type === "cuatrimestral") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } });
+          }
+        }
+      } else {
+        console.log(2);
+
+        if (type === "mensual") {
+          localStorage.setItem('month', 'true')
+        }
+        if (type === "anual") {
+          localStorage.setItem('anual', 'true')
+        }
+        if (type === "cuatrimestral") {
           localStorage.setItem('cuatri', 'true')
         }
         router.push(SIGNUP_PATH)
@@ -191,7 +236,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
   return (
     <SuscriptionContain>
       <div className="extra-header">
-        <button className="header-button" onClick={() => handleRedirection()}>Comenzar ahora</button>
+        <button className="header-button" onClick={() => handleNewRedirection()}>Comenzar ahora</button>
       </div>
       <div className="intro-section" >
         <div className="background-images">
@@ -217,26 +262,28 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 65 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
           {responsive650 && <br />}
           <h4 className="bold">Sólo {price}</h4>
         </div>
 
-        <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
+        <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>
       </div>
 
       <div className="courses-section">
         <div className="space">
-          <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="bold">En esta plataforma de aprendizaje encontrarás</h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS{responsive650 && <br />}, PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
-          <img src={specialCourse?.image} />
-          <p className="title">Nails Master Revolution</p>
+          <img src='images\landing_suscription\portada_lash_master.jpg' />
+          <p className="title">Lash Master</p>
           <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
-          <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
-          <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
+          {/* <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p> */}
+
+          <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
+          <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
         </div>
         <div className="all-center space">
           <div className="group-buttons">
@@ -403,7 +450,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 <i>Nombre del instructor</i></p>
             </div>
           </div>} */}
-        <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
+        <button className="btn left-right mb-3" onClick={() => handleNewRedirection()}>¡Comienza ahora!</button>
         <h5 className="p-pink"><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
       </div>
 
@@ -478,7 +525,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <h3 className="bold space">Los cursos son impartidos por {responsive650 && <br />}<b className="p-pink no-bold">instructores profesionales
           y {responsive650 && <br />}certificados,</b> {!responsive650 && <br />}que estarán guiándote {responsive650 && <br />}paso a paso, durante tu aprendizaje.</h3>
-        <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing mb-5" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -589,7 +636,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
               metas con confianza.
               {
-                responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+                responsive650 && <button className="btn up-down" onClick={() => handleNewRedirection()}>Comienza ahora<br /> por {price}</button>
               }
             </h3>
             {
@@ -598,7 +645,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           </div>
           <div className="text-center ">
             {
-              !responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
+              !responsive650 && <button className="btn up-down" onClick={() => handleNewRedirection()}>Comienza ahora<br /> por {price}</button>
             }
           </div>
 
@@ -669,9 +716,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
           <h2 className="red bolder red-font">Costo total real: <del>{responsive650 && <br />}$74,719.00 MXN</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 65{responsive650 && <br />} cursos completos</h2>
+          <h2 className="p-pink bolder big-font">Más de 70{responsive650 && <br />} cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
-          <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
+          <button className="btn left-right mt-5" onClick={() => handleNewRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
       </div>
@@ -782,7 +829,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </Swiper>
           </div>
           <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
-            en nuestros más de 65 cursos.</h4>
+            en nuestros más de 70 cursos.</h4>
 
           {/*     Catalogo?????????????????????????????????????         
             <div className="all-center">
