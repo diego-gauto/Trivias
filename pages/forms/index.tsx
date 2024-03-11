@@ -560,7 +560,7 @@ const Formularios = () => {
           </div>
           <div className={lineaAtravesada}></div>
 
-          {isForm10or11or12 && <div className={center}><p>Envía tu solicitud y serás redirijida a </p><p><b>nuestro exclusivo canal de WhatsApp</b></p></div>}
+          {isForm10or11or12 && <div className={center}><p>Al enviar tu solicitud te redirigiremos </p><p>a nuestro grupo de WhatsApp. Gracias</p></div>}
 
           <div className={buttonContainer}>
             <button
@@ -574,14 +574,16 @@ const Formularios = () => {
             </button>
           </div>
         </form>
-      </div>
+      </div >
       {isUserCreateModalVisible && (
         <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />
       )}
-      {isUserExistModalVisible && (
-        <ModalUserExist closeModal={setIsUserExistModalVisible} />
-      )}
-    </div>
+      {
+        isUserExistModalVisible && (
+          <ModalUserExist closeModal={setIsUserExistModalVisible} />
+        )
+      }
+    </div >
   );
 };
 
