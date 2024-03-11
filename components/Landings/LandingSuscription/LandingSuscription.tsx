@@ -10,15 +10,20 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
+import {
+  Landing_Facebook,
+  PREVIEW_PATH,
+  PURCHASE_PATH,
+  SIGNUP_PATH,
+} from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
 import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
-import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-import { SuscriptionContain } from "./LandingSuscription.styled";
-import { RewardComponent } from "../Components/Reward";
 import { ICourse } from "../../Courses/Modules/ISliders";
+import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
+import { RewardComponent } from "../Components/Reward";
+import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -199,8 +204,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         router.push('https://www.gonvar.io/forms?formId=11');
       } else if (origin === 'tiktok' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=12');
-      }
-      if (localStorage.getItem('email')) {
+      } else if (localStorage.getItem('email')) {
         const user = await getUserApi(localStorage.getItem('email'))
         // tiene que ser activo, y no tiene que ser nivel 0
         if (user.final_date > (new Date().getTime() / 1000)) {
