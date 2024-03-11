@@ -60,6 +60,9 @@ const Formularios = () => {
   const {
     query: { formId },
   } = useRouter();
+
+  const isForm10or11or12 = formId === "10" || formId === "11" || formId === "12";
+
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const router = useRouter();
 
@@ -112,6 +115,7 @@ const Formularios = () => {
     optionContainer,
     buttonContainer,
     submitButton,
+    center
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -555,6 +559,8 @@ const Formularios = () => {
             </div>
           </div>
           <div className={lineaAtravesada}></div>
+
+          {isForm10or11or12 && <div className={center}><p>Envía tu solicitud y serás redirijida a </p><p><b>nuestro exclusivo canal de WhatsApp</b></p></div>}
 
           <div className={buttonContainer}>
             <button

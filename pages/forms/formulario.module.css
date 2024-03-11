@@ -175,6 +175,10 @@
   background-color: #5000b5;
 }
 
+.center{
+  text-align: center;
+}
+
 @media screen and (max-width: 839px) {
   .logo{
     max-width: 100%;
