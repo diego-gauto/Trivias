@@ -560,7 +560,7 @@ const Formularios = () => {
           </div>
           <div className={lineaAtravesada}></div>
 
-          {isForm10or11or12 && <div className={center}><p>Al enviar tu solicitud te redirigiremos </p><p>a nuestro grupo de WhatsApp. Gracias</p></div>}
+          {isForm10or11or12 && form?.redirect.type === "customLink" && <div className={center}><p>Al enviar tu solicitud te redirigiremos </p><p>a nuestro grupo de WhatsApp. Gracias</p></div>}
 
           <div className={buttonContainer}>
             <button
