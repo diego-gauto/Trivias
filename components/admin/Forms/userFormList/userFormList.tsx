@@ -23,6 +23,7 @@ interface UserFormListProps {
 }
 
 const UserTriviaList = ({ usersForm }: UserFormListProps) => {
+
   return (
     <div className="table-responsive">
       <Table striped bordered hover>

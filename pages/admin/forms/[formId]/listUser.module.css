@@ -124,6 +124,10 @@
   }
 }
 
+.custom_table{
+  width:  88%;
+}
+
 @media (max-width: 768px) {
   .volver {
     position: absolute;
