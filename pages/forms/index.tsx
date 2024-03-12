@@ -323,25 +323,25 @@ const Formularios = () => {
       }
     };
 
-    if (formId == '10') {
-      console.log("Cargado estático")
-      setForm(form10)
-      setLoading(false);
-    }
-    else if (formId == '11') {
-      console.log("Cargado estático")
-      setForm(form11)
-      setLoading(false);
-    }
-    else if (formId == '12') {
-      console.log("Cargado estático")
-      setForm(form12)
-      setLoading(false);
-    }
-    else {
-      console.log("Cargado dinámico")
-      fetchData();
-    }
+    // if (formId == '10') {
+    //   console.log("Cargado estático")
+    //   setForm(form10)
+    //   setLoading(false);
+    // }
+    // else if (formId == '11') {
+    //   console.log("Cargado estático")
+    //   setForm(form11)
+    //   setLoading(false);
+    // }
+    // else if (formId == '12') {
+    //   console.log("Cargado estático")
+    //   setForm(form12)
+    //   setLoading(false);
+    // }
+    // else {
+    //   console.log("Cargado dinámico")
+    // }
+    fetchData();
 
   }, [formId]);
 
