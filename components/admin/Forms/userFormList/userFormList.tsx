@@ -38,9 +38,9 @@ const UserTriviaList = ({ usersForm }: UserFormListProps) => {
             <th>Usuaria</th>
             <th>Membresía</th>
             <th>fecha</th>
-            <th>Respuesta 1</th>
-            <th>Respuesta 2</th>
-            <th>Respuesta 3</th>
+            <th>Opción 1</th>
+            <th>Opción 2</th>
+            <th>Opción 3</th>
           </tr>
         </thead>
         <tbody>
