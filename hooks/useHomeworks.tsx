@@ -21,7 +21,7 @@ export const HomeworksProvider = ({ children }: any) => {
   const loadHomeworks = async (homeworkParams: { user_id: number, course_id: number }) => {
     try {
       const response = await getCourseHomeworksOfUser(homeworkParams);
-      console.log(response.data);
+      // console.log(response.data);
       setHomeworks(response.data);
     } catch (error) {
       if (error instanceof Error) {
