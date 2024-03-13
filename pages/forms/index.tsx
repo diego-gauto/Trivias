@@ -269,9 +269,11 @@ const Formularios = () => {
         const tiempoTotal = endTimestamp - startTimestamp;
         console.log(`La llamada a la API tomó ${tiempoTotal} milisegundos`);
 
-        const formTemp = res[0];
 
-        if (formTemp) {
+        if (res && res.length > 0) {
+
+          const formTemp = res[0];
+
           // Parsear la cadena JSON en la propiedad "questions"
           formTemp.img = JSON.parse(formTemp.img);
 
@@ -281,6 +283,7 @@ const Formularios = () => {
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
           console.log(formTemp);
+          console.log("from Server")
 
           setForm(formTemp);
           setLoading(false);
