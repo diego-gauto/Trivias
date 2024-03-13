@@ -67,7 +67,7 @@ const ActiveUserConekta = ({ ondHide, show, user }: any) => {
               payment_method: sub.card_id,
               plan_id: sub.id,
               plan_name: "Gonvar Plus",
-              start_date: user.final_date === 0 ? sub.billing_cycle_start : user.final_date,
+              start_date: user.final_date === 0 ? sub.billing_cycle_start : user.start_date,
               userId: user.user_id,
               level: 1,
               method: "conekta"

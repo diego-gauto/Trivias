@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
 
-    width: 88%;
+    width: 100%;
     text-align: center;
     margin-bottom: 2%;
     font-family: "Montserrat";
@@ -122,6 +122,39 @@
       background-color: #520795;
     }
   }
+}
+
+.custom_table{
+  width:  100%;
+}
+
+@media (max-width: 1500px) {
+  .main{
+
+    .titles{
+      width:  95%;
+    }
+
+    .custom_table{
+      width:  95%;
+    }
+  }
+
+}
+
+
+@media (max-width: 1300px) {
+  .main{
+
+    .titles{
+      width: 100%;
+    }
+
+    .custom_table{
+      width:  100%;
+    }
+  }
+
 }
 
 @media (max-width: 768px) {

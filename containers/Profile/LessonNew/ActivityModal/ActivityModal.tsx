@@ -34,7 +34,7 @@ const ActivityModal = (props: IActivityModal) => {
       return null;
     }
     // lessonHomeworks.sort((h1, h2) => (new Date(h2.created_at)).getTime() - (new Date(h1.created_at)).getTime());
-    console.log({ lessonHomeworks });
+    // console.log({ lessonHomeworks });
     const currentHomework = lessonHomeworks[0];
     return currentHomework as IReducedHomework;
   }
