@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
@@ -8,6 +9,7 @@ import router from "next/router";
 import { Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import { Landing_Facebook, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
 import { getLandingReviewApi } from "../../api/admin";
@@ -15,10 +17,8 @@ import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { SuscriptionContain } from "./LandingSuscription.styled";
-import { FirstSection } from "./FirstSection.tyled";
 import { RewardComponent } from "../Components/Reward";
 import { ICourse } from "../../Courses/Modules/ISliders";
-import Countdown from "react-countdown";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -86,29 +86,13 @@ views.set(4, false);
 
 interface ILandingSuscription {
   price: string;
-  type: string;
+  type: "mensual" | "anual" | "cuatrimestral";
   isFacebook?: boolean;
+  origin?: "facebook" | "google" | "tiktok";
 }
 
-const checkProgress = () => {
-  const oneDay = 24 * 60 * 60 * 1000;
-  const firstDate = new Date("13/04/2023 23:00:00"); //final
-  const secondDate = new Date(); //today
-  //Fechas pa calar
-  // const firstDate = new Date('10/13/2023 23:59:00');
-  // const secondDate = new Date('10/09/2023 00:00:00');
-  const diffDays = Math.floor(
-    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
-  );
-  let returnValue = {
-    x100: 80,
-    texto: "CUPO CASI AGOTADO",
-  };
-  return returnValue;
-};
-
 const LandingSuscription = (props: ILandingSuscription) => {
-  const { price, type, isFacebook } = props;
+  const { price, type, isFacebook, origin } = props;
   const [ver, setver] = useState(true)
   const [reviews, setReviews] = useState([])
   const [cursos, setCursos] = useState(1)
@@ -197,7 +181,50 @@ const LandingSuscription = (props: ILandingSuscription) => {
         if (type === "anual") {
           localStorage.setItem('anual', 'true')
         }
-        if (type === "cuatrimstral") {
+        if (type === "cuatrimestral") {
+          localStorage.setItem('cuatri', 'true')
+        }
+        router.push(SIGNUP_PATH)
+      }
+    }
+  }
+
+  const handleNewRedirection = async () => {
+    if (isFacebook) {
+      router.push(Landing_Facebook);
+    } else {
+      if (origin === 'facebook' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=10');
+      } else if (origin === 'google' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=11');
+      } else if (origin === 'tiktok' && type === 'cuatrimestral') {
+        router.push('https://www.gonvar.io/forms?formId=12');
+      } else if (localStorage.getItem('email')) {
+        const user = await getUserApi(localStorage.getItem('email'))
+        // tiene que ser activo, y no tiene que ser nivel 0
+        if (user.final_date > (new Date().getTime() / 1000)) {
+          router.push(PREVIEW_PATH)
+        } else {
+          if (type === "mensual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'month', v: '3' } })
+          }
+          if (type === "anual") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '3' } })
+          }
+          if (type === "cuatrimestral") {
+            router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' } });
+          }
+        }
+      } else {
+        console.log(2);
+
+        if (type === "mensual") {
+          localStorage.setItem('month', 'true')
+        }
+        if (type === "anual") {
+          localStorage.setItem('anual', 'true')
+        }
+        if (type === "cuatrimestral") {
           localStorage.setItem('cuatri', 'true')
         }
         router.push(SIGNUP_PATH)
@@ -207,73 +234,12 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
   return (
     <SuscriptionContain>
-      <img className="upside-lines" src={upsideLines} />
-      <FirstSection>
-        <div className="fechas" style={{
-          color: 'white'
-        }}>
-          <h4 style={{
-            fontSize: '20px'
-          }}>
-            Desde 03 de Febrero<br /> al 16 de Marzo
-          </h4>
-          <Countdown
-            date={new Date(2024, 2, 16)}
-            renderer={(props) => (
-              <div className="countdown">
-                <h2>TIEMPO RESTANTE</h2>
-                <div className="time">
-                  <div className="countdown-block">
-                    <p className="tiempo">
-                      {props.days < 10 && 0}
-                      {props.days}
-                    </p>
-                    <p className="sub">DIAS</p>
-                  </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
-                      {props.hours < 10 && 0}
-                      {props.hours}
-                    </p>
-                    <p className="sub">HORAS</p>
-                  </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
-                      {props.minutes < 10 && 0}
-                      {props.minutes}
-                    </p>
-                    <p className="sub">MINUTOS</p>
-                  </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
-                      {props.seconds < 10 && 0}
-                      {props.seconds}
-                    </p>
-                    <p className="sub">SEGUNDOS</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          />
-          <div className="progress-container">
-            <div
-              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
-                }`}
-              style={
-                {
-                  "--progress": checkProgress().x100 + "%",
-                } as React.CSSProperties
-              }
-              progress-text={checkProgress().texto}
-            />
-          </div>
-        </div>
-      </FirstSection>
-      {/*
-      Aquí termina FisrtSection
-      */}
+      <div className="extra-header">
+        <button className="header-button" onClick={() => handleNewRedirection()}>Comenzar ahora</button>
+      </div>
       <div className="intro-section" >
         <div className="background-images">
+          <img src={upsideLines} />
           <div className="image-contain">
             <img src={left_girl} className="left-woman" />
             <img src={right_girl} className="right-woman" />
@@ -291,44 +257,32 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
+
         <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 65 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
           {responsive650 && <br />}
           <h4 className="bold">Sólo {price}</h4>
         </div>
 
-        <button className="btn left-right" onClick={() => handleRedirection()} >¡Comenzar ahora!</button>
-        { /* <h3 className="bold space">Si necesitas ayuda con tu inscripción, presiona este botón y te atenderemos para ayudarte</h3> */}
-        <div className="dudas-section" style={{
-          paddingInline: '50px'
-        }}>
-          <h4 className="bold" style={{
-            marginBottom: '40px'
-          }}>Solicitar ayuda</h4>
-          <div className="all-center">
-            <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-              <div className="watsap-button-ultimate" onClick={() => redirectToWhatsAppChat()}>
-                <img src={watsapOut} />
-                <p className="my-1 bold">Contacta con <br />un agente</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>
       </div>
+
       <div className="courses-section">
         <div className="space">
-          <h2 className="bold">En esta plataforma encontrarás</h2>
-          <h2 className="h1"><b>MÁS DE 65 CURSOS DE UÑAS{responsive650 && <br />} Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="bold">En esta plataforma de aprendizaje encontrarás</h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS{responsive650 && <br />}, PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
-          <img src={specialCourse?.image} />
-          <p className="title">Nails Master Revolution</p>
-          <p className="">Ahora ya disponible en tu suscripción Gonvar+.</p>
-          <p className="">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
-          <p className="">Técnicas de Escultural y Tips incluídas.</p>
+          <img src='images\landing_suscription\portada_lash_master.jpg' />
+          <p className="title">Lash Master</p>
+          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+          {/* <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p> */}
+
+          <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
+          <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
         </div>
         <div className="all-center space">
           <div className="group-buttons">
@@ -495,8 +449,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 <i>Nombre del instructor</i></p>
             </div>
           </div>} */}
-        <button className="btn left-right mb-3" onClick={() => handleRedirection()}>¡Comienza ahora!</button>
-        <h5 className=""><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
+        <button className="btn left-right mb-3" onClick={() => handleNewRedirection()}>¡Comienza ahora!</button>
+        <h5 className="p-pink"><i>Y aprende muchas otras técnicas{responsive650 && <br />} sobre imagen personal.</i></h5>
       </div>
 
 
@@ -570,7 +524,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <h3 className="bold space">Los cursos son impartidos por {responsive650 && <br />}<b className="p-pink no-bold">instructores profesionales
           y {responsive650 && <br />}certificados,</b> {!responsive650 && <br />}que estarán guiándote {responsive650 && <br />}paso a paso, durante tu aprendizaje.</h3>
-        <button className="btn up-down spacing mb-5" onClick={() => handleRedirection()}>Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing mb-5" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -667,39 +621,37 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
       <div className="all-center cellphone-section">
-        <div className="cellphone-section-container">
-          <div className="text-end cell-body">
-            <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas <br /></b> y conviértete en una experta <br />
-              en uñas y belleza!</h2>
-            <div className="back-lines all-center">
-              <img src={backCell} className="line-1" />
-              <img src={backCell3} className="line-2" />
-              <img src={backCell2} className="line-3" />
-            </div>
-            <div className="subtitle">
-              <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
-                <b className="p-pink no-bold"> asesorías individuales e ilimitadas
-                  con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
-                metas con confianza.
-                {
-                  responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
-                }
-              </h3>
-              {
-                responsive650 && <img src={asesoriaTel} className="ms-3" />
-              }
-            </div>
-            <div className="text-center ">
-              {
-                !responsive650 && <button className="btn up-down" onClick={() => handleRedirection()}>Comienza ahora<br /> por {price}</button>
-              }
-            </div>
-
+        <div className="text-end cell-body">
+          <h2 className="title">¡Obtén <b className="p-pink">asesorías personalizadas <br /></b> y conviértete en una experta <br />
+            en uñas y belleza!</h2>
+          <div className="back-lines all-center">
+            <img src={backCell} className="line-1" />
+            <img src={backCell3} className="line-2" />
+            <img src={backCell2} className="line-3" />
           </div>
-          {
-            !responsive650 && <img src={asesoriaTel} className="ms-3" />
-          }
+          <div className="subtitle">
+            <h3 className="bold">Mejora tu proceso de aprendizaje con nuestras
+              <b className="p-pink no-bold"> asesorías individuales e ilimitadas
+                con nuestros instructores certificados.</b>{responsive650 && <><br /><br /></>} Aprende de manera correcta y alcanza tus
+              metas con confianza.
+              {
+                responsive650 && <button className="btn up-down" onClick={() => handleNewRedirection()}>Comienza ahora<br /> por {price}</button>
+              }
+            </h3>
+            {
+              responsive650 && <img src={asesoriaTel} className="ms-3" />
+            }
+          </div>
+          <div className="text-center ">
+            {
+              !responsive650 && <button className="btn up-down" onClick={() => handleNewRedirection()}>Comienza ahora<br /> por {price}</button>
+            }
+          </div>
+
         </div>
+        {
+          !responsive650 && <img src={asesoriaTel} className="ms-3" />
+        }
       </div>
       <div className="benefits-section">
         <div className="title all-center">
@@ -763,9 +715,9 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <img src={chica} className="ms-5 chica-img" />
         <div className="mx-3">
           <h2 className="red bolder red-font">Costo total real: <del>{responsive650 && <br />}$74,719.00 MXN</del></h2>
-          <h2 className="p-pink bolder big-font">Más de 65{responsive650 && <br />} cursos completos</h2>
+          <h2 className="p-pink bolder big-font">Más de 70{responsive650 && <br />} cursos completos</h2>
           <h2 className="green bolder big-font">Sólo {price}</h2>
-          <button className="btn left-right mt-5" onClick={() => handleRedirection()}>¡Quiero comenzar <br />ahora!</button>
+          <button className="btn left-right mt-5" onClick={() => handleNewRedirection()}>¡Quiero comenzar <br />ahora!</button>
         </div>
         <img src={manosPrecio} className="manos" />
       </div>
@@ -876,7 +828,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </Swiper>
           </div>
           <h4 className="bold mt-5">Además, <b className="p-pink no-bold">aprende a hacer todos estos diseños </b>
-            en nuestros más de 65 cursos.</h4>
+            en nuestros más de 70 cursos.</h4>
 
           {/*     Catalogo?????????????????????????????????????         
             <div className="all-center">
