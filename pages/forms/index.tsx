@@ -433,7 +433,7 @@ const Formularios = () => {
       } catch (error) {
         // en caso de error en el server
         // Obtengo los datos mokeados
-        console.log(error);
+        console.log("error del server", error);
         if (formId == "10") {
           console.log("Cargado estático");
           setForm(form10);
