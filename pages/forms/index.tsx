@@ -65,6 +65,7 @@ const Formularios = () => {
     query: { formId },
   } = useRouter();
 
+  console.log(formId);
   const isForm10or11or12 =
     formId === "10" || formId === "11" || formId === "12";
 
@@ -354,6 +355,8 @@ const Formularios = () => {
       try {
         const formIdNumber: number = Number(formId);
 
+        console.log(formIdNumber);
+
         const res = await getFormApi(formIdNumber);
 
         if (res && res.length > 0) {
@@ -407,6 +410,7 @@ const Formularios = () => {
               }
             }
           } catch (error) {
+            p;
             console.error("Error al recuperar datos desde Firebase:", error);
             // en caso de error en Firebase
             // Obtengo los datos mokeados
@@ -430,6 +434,7 @@ const Formularios = () => {
       } catch (error) {
         // en caso de error en el server
         // Obtengo los datos mokeados
+        console.log(error);
         if (formId == "10") {
           console.log("Cargado estático");
           setForm(form10);
