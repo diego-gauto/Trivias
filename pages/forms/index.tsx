@@ -395,6 +395,7 @@ const Formularios = () => {
             } else {
               // El documento no existe
               // Obtengo los datos mokeados
+              console.log("entro al else de firebase");
               if (formId == "10") {
                 console.log("Cargado estático");
                 setForm(form10);
