@@ -314,6 +314,21 @@ const Formularios = () => {
                 customId,
                 "no fue encontrado en Firebase."
               );
+              if (formId == '10') {
+                console.log("Cargado estático")
+                setForm(form10)
+                setLoading(false);
+              }
+              else if (formId == '11') {
+                console.log("Cargado estático")
+                setForm(form11)
+                setLoading(false);
+              }
+              else if (formId == '12') {
+                console.log("Cargado estático")
+                setForm(form12)
+                setLoading(false);
+              }
             }
           } catch (error) {
             console.error("Error al recuperar datos desde Firebase:", error);
@@ -323,6 +338,21 @@ const Formularios = () => {
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener los datos del formulario:", error);
+        if (formId == '10') {
+          console.log("Cargado estático")
+          setForm(form10)
+          setLoading(false);
+        }
+        else if (formId == '11') {
+          console.log("Cargado estático")
+          setForm(form11)
+          setLoading(false);
+        }
+        else if (formId == '12') {
+          console.log("Cargado estático")
+          setForm(form12)
+          setLoading(false);
+        }
       }
     };
 
