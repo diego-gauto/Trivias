@@ -20,7 +20,7 @@ export const getFormApi = async (idForm: number) => {
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return [];
     });
 };
 
