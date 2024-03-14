@@ -452,7 +452,7 @@ const Formularios = () => {
     };
 
     fetchData();
-  }, [formId]);
+  }, []);
 
   useEffect(() => {
     if (errorMessage) {
