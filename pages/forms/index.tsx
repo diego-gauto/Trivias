@@ -86,8 +86,8 @@ const Formularios = () => {
       { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },
     ],
     redirect: {
-      type: "thankYouPage",
-      link: "",
+      type: "customLink",
+      link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
       textButton: "",
     },
   }
@@ -114,8 +114,8 @@ const Formularios = () => {
       },
       { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },],
     redirect: {
-      type: "thankYouPage",
-      link: "",
+      type: "customLink",
+      link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
       textButton: "",
     },
   }
@@ -142,8 +142,8 @@ const Formularios = () => {
       },
       { isVisible: false, label: "", options: [{ label: "", value: "" }, { label: "", value: "" }] },],
     redirect: {
-      type: "thankYouPage",
-      link: "",
+      type: "customLink",
+      link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
       textButton: "",
     },
   }
