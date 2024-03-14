@@ -332,6 +332,21 @@ const Formularios = () => {
             }
           } catch (error) {
             console.error("Error al recuperar datos desde Firebase:", error);
+            if (formId == '10') {
+              console.log("Cargado estático")
+              setForm(form10)
+              setLoading(false);
+            }
+            else if (formId == '11') {
+              console.log("Cargado estático")
+              setForm(form11)
+              setLoading(false);
+            }
+            else if (formId == '12') {
+              console.log("Cargado estático")
+              setForm(form12)
+              setLoading(false);
+            }
           }
         }
 
