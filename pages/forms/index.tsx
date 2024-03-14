@@ -410,7 +410,6 @@ const Formularios = () => {
               }
             }
           } catch (error) {
-            p;
             console.error("Error al recuperar datos desde Firebase:", error);
             // en caso de error en Firebase
             // Obtengo los datos mokeados
