@@ -64,19 +64,21 @@ const Formularios = () => {
   // } = useRouter();
 
   const router = useRouter();
-  let formId: string | undefined;
+  let formId: string | undefined = router.query.formId as string | undefined;
+  console.log(formId);
+  let isForm10or11or12: boolean = true;
   // Check if the router object exists before accessing its properties
-  if (router?.query) {
-    // Access the query parameters
-    formId = router.query.formId as string; // Do something with the query parameters
-    console.log(`ID: ${formId}`);
-  }
+  // if (router?.query) {
+  //   // Access the query parameters
+  //   formId = router.query.formId as string; // Do something with the query parameters
+  //   console.log(`ID: ${formId}`);
+  // }
 
-  const isForm10or11or12 =
-    formId === undefined ||
-    formId === "10" ||
-    formId === "11" ||
-    formId === "12";
+  // const isForm10or11or12 =
+  //   formId === undefined ||
+  //   formId === "10" ||
+  //   formId === "11" ||
+  //   formId === "12";
 
   const form10: Form = {
     name: "campaña 11 Febrero 2024 Facebook",
@@ -293,8 +295,14 @@ const Formularios = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (router.isReady) {
+      console.log(formId);
+      formId = router.query.formId as string | undefined;
+      fetchData();
+      isForm10or11or12 =
+        undefined || formId === "10" || formId === "11" || formId === "12";
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     if (errorMessage) {
