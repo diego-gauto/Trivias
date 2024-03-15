@@ -399,8 +399,10 @@ const Formularios = () => {
               // El documento no existe
               // Obtengo los datos mokeados
               console.log("entro al else de firebase");
-              console.log("Cargado estático");
-              setForm(form10);
+              const res2 = await getFormApi(formIdNumber);
+
+              console.log("Cargado en 2da etapa");
+              setForm(res2);
               setLoading(false);
             }
           } catch (error) {
