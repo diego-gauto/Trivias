@@ -399,6 +399,7 @@ const Formularios = () => {
               // El documento no existe
               // Obtengo los datos mokeados
               console.log("entro al else de firebase");
+              const formId2 = Number(router.query.formId);
               const res2 = await getFormApi(formIdNumber);
 
               console.log("Cargado en 2da etapa");
