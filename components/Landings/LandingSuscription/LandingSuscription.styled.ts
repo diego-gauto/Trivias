@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SuscriptionContain = styled.div`
   position: relative;
@@ -14,24 +14,6 @@ export const SuscriptionContain = styled.div`
       opacity: 0.5;
     }
   }
-  .watsap-button-ultimate {
-    background-color: #28af25;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 20px;
-    border-radius: 50px;
-    width: 200px;
-    color: white;
-    line-height: normal;
-    img {
-      width: 25px;
-      height: 25px;
-      margin-right: 0.5rem;
-    }
-  }
-
   .extra-header {
     padding-inline: 10px;
     padding-block: 15px;
@@ -78,8 +60,8 @@ export const SuscriptionContain = styled.div`
     font-weight: 800 !important;
   }
   .space {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
   .big-title {
     font-size: 65px;
@@ -87,11 +69,10 @@ export const SuscriptionContain = styled.div`
 
   .intro-section {
     width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 100px;
     position: relative;
     .gonvarplus {
-      margin-top: 60px;
-      margin-bottom: 10px;
+      margin-block: 60px;
     }
     .plusgonvar {
       width: 70px;
@@ -143,17 +124,13 @@ export const SuscriptionContain = styled.div`
 
   .courses-section {
     width: 100%;
-    margin-top: 0px;
-    background-color: #3f1168;
-    color: white;
-    padding-block: 40px;
+    margin-block: 50px;
     .special-course {
       display: flex;
       flex-direction: column;
       width: 100%;
       align-items: center;
       text-align: center;
-      padding-inline: 30px;
       img {
         width: 50%;
         border-radius: 30px;
@@ -224,8 +201,7 @@ export const SuscriptionContain = styled.div`
   }
 
   .ubi-section {
-    padding-block: 75px;
-    padding-inline: 35px;
+    margin-block: 75px;
     width: 100%;
     position: relative;
     .back-ghosts {
@@ -248,10 +224,8 @@ export const SuscriptionContain = styled.div`
   }
 
   .instructores-section {
-    padding-block: 75px;
+    margin-block: 75px;
     width: 100%;
-    background-color: #3f1168;
-    color: white;
     button {
       padding-block: 5px;
       font-size: 18px;
@@ -284,7 +258,7 @@ export const SuscriptionContain = styled.div`
           font-size: 18px;
         }
         i {
-          font-size: 18px;
+          font-size: 14px;
         }
       }
     }
@@ -292,10 +266,9 @@ export const SuscriptionContain = styled.div`
 
   .difficulties-section {
     width: 100%;
-    padding-block: 75px;
-    padding-inline: 25px;
+    margin-block: 75px;
     .dif-lines {
-      padding-block: 50px;
+      margin-block: 50px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -312,11 +285,8 @@ export const SuscriptionContain = styled.div`
   }
 
   .teaching-section {
-    padding-block: 75px;
-    padding-inline: 20px;
+    margin-block: 75px;
     width: 100%;
-    background-color: #3f1168;
-    color: white;
     .teach-lines {
       margin-top: 50px;
       margin-bottom: 100px;
@@ -332,11 +302,10 @@ export const SuscriptionContain = styled.div`
         .line-desc {
           width: 350px;
           position: absolute;
-          background-color: rgba(255, 255, 255, 0.9);
+          background-color: #ffffff;
           transform: translateY(50px);
           bottom: 0;
           .bold {
-            color: #3f1168;
             font-size: 1.8rem;
           }
         }
@@ -383,42 +352,29 @@ export const SuscriptionContain = styled.div`
   }
 
   .cellphone-section {
-    padding-block: 75px;
+    margin-block: 75px;
+    width: 1200px;
     position: relative;
-    background-color: #3f1168;
-    color: white;
-    padding-right: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    .cellphone-section-container {
-      display: flex;
-      flex-direction: row;
-      max-width: 1200px;
-      .cell-body {
-        padding-left: 15px;
-        padding-right: 20px;
-        .title {
-          font-size: 45px;
-          font-weight: 700;
+    .cell-body {
+      .title {
+        font-size: 45px;
+        font-weight: 700;
+      }
+      .subtitle {
+        margin-left: 55px;
+        margin-block: 40px;
+      }
+      .back-lines {
+        position: absolute;
+        z-index: -1;
+        .line-1 {
+          transform: translate(-70px, -50px);
         }
-        .subtitle {
-          margin-left: 55px;
-          margin-block: 40px;
+        .line-2 {
+          transform: translate(130px, 260px);
         }
-        .back-lines {
-          position: absolute;
-          z-index: -1;
-          .line-1 {
-            transform: translate(-70px, -50px);
-          }
-          .line-2 {
-            transform: translate(130px, 260px);
-          }
-          .line-3 {
-            transform: translate(70px, -230px);
-          }
+        .line-3 {
+          transform: translate(70px, -230px);
         }
       }
     }
@@ -479,11 +435,8 @@ export const SuscriptionContain = styled.div`
 
   .cost-section {
     position: relative;
-    padding-block: 75px;
-    padding-inline: 25px;
+    margin-block: 75px;
     width: 100%;
-    background-color: #3f1168;
-    color: white;
     .chica-img {
       position: absolute;
       left: 0;
@@ -509,8 +462,6 @@ export const SuscriptionContain = styled.div`
   .testimonio-section {
     padding-block: 50px;
     width: 100%;
-    background-color: #3f1168;
-    color: white;
     .experiences-container {
       display: flex;
       justify-content: center;
@@ -582,7 +533,7 @@ export const SuscriptionContain = styled.div`
   .inspo-section {
     overflow: hidden;
     width: 90%;
-    padding-block: 75px;
+    margin-block: 75px;
     .inspo-swiper {
       display: unset;
       .w-est {
@@ -600,39 +551,22 @@ export const SuscriptionContain = styled.div`
 
   .dudas-section {
     width: 100%;
-    padding-block: 75px;
-  }
-
-  .dudas-img {
-    position: relative;
-  }
-
-  .watsap-button-only {
-    position: absolute;
-    cursor: pointer;
-    width: 250px;
-    border: none;
-    padding-block: 10px;
-    padding-inline: 25px;
-    border-radius: 50px;
-    color: #ffffff;
-    background-color: #28af25;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .watsap-button {
-    position: absolute;
-    cursor: pointer;
-    width: 250px;
-    transform: translateX(180px) translateY(-100px);
-    border: none;
-    padding-block: 10px;
-    padding-inline: 25px;
-    border-radius: 50px;
-    color: #ffffff;
-    background-color: #28af25;
+    margin-block: 75px;
+    .dudas-img {
+      position: relative;
+      .watsap-button {
+        position: absolute;
+        cursor: pointer;
+        width: 250px;
+        transform: translateX(180px) translateY(-100px);
+        border: none;
+        padding-block: 10px;
+        padding-inline: 25px;
+        border-radius: 50px;
+        color: #ffffff;
+        background-color: #28af25;
+      }
+    }
   }
 
   .btn {
@@ -789,8 +723,6 @@ export const SuscriptionContain = styled.div`
       }
     }
   }
-  @media (max-width: 1100px) {
-  }
   /////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 1100px) {
     .intro-section {
@@ -810,13 +742,11 @@ export const SuscriptionContain = styled.div`
           bottom: -180px;
         }
         .resp-left {
-          min-width: 60px;
+          min-width: 160px;
           left: 0px;
-          top: 52%;
         }
         .image-right {
           right: 0px;
-          top: 52%;
           position: absolute;
           bottom: -180px;
           .white-line {
@@ -871,11 +801,11 @@ export const SuscriptionContain = styled.div`
           display: none;
         }
         .level {
-          width: 130px;
+          width: 150px;
           margin-inline: 5px;
         }
         .bigger {
-          width: 103px;
+          width: 123px;
         }
       }
     }
@@ -904,12 +834,9 @@ export const SuscriptionContain = styled.div`
     }
     .cellphone-section {
       width: 100%;
-      padding-right: 15px;
       .cell-body {
         text-align: center !important;
         margin: 5px;
-        padding-left: 15px;
-        padding-right: 10px;
         .text-center {
           margin-block: 25px;
         }
@@ -1026,29 +953,7 @@ export const SuscriptionContain = styled.div`
     }
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  @media (min-width: 650px) {
-    .watsap-button-ultimate {
-      width: 230px;
-      color: white;
-      line-height: 1.5;
-      img {
-        width: 40px;
-        height: 40px;
-        margin-right: 0.5rem;
-      }
-    }
-  }
-
   @media (max-width: 650px) {
-    .upside-lines {
-      display: none;
-    }
-    .resp-left {
-      display: none;
-    }
-    .image-right {
-      display: none;
-    }
     .intro-section {
       .gonvarplus {
         width: 280px;
@@ -1102,8 +1007,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .ubi-section {
-      padding-block: 40px;
-      padding-inline: 0;
+      margin-block: 40px;
       .back-ghosts {
         display: none;
       }
@@ -1123,8 +1027,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .instructores-section {
-      padding-block: 20px;
-      padding-block: 20px;
+      margin-block: 20px;
       .btn {
         padding: unset;
         padding-block: 5px;
@@ -1149,7 +1052,7 @@ export const SuscriptionContain = styled.div`
               font-size: 18px;
             }
             .p-pink {
-              font-size: 18px;
+              font-size: 10px;
             }
           }
         }
@@ -1206,8 +1109,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .teaching-section {
-      padding-block: 40px;
-      padding-inline: 15px;
+      margin-block: 40px;
       h3 {
         .p-pink {
           font-weight: 600;
@@ -1255,7 +1157,6 @@ export const SuscriptionContain = styled.div`
     .cellphone-section {
       width: 100%;
       margin-block: 25px;
-      padding-right: 15px;
       .title {
         font-size: 1.6rem !important;
         .p-pink {
@@ -1265,8 +1166,6 @@ export const SuscriptionContain = styled.div`
       .cell-body {
         text-align: center !important;
         margin: 5px;
-        padding-left: 15px;
-        padding-right: 10px;
         .text-center {
           margin-block: 25px;
         }
@@ -1354,7 +1253,7 @@ export const SuscriptionContain = styled.div`
     }
 
     .cost-section {
-      padding-block: 25px;
+      margin-block: 25px;
       display: flex;
       flex-direction: column;
       .chica-img {
@@ -1424,18 +1323,8 @@ export const SuscriptionContain = styled.div`
       }
     }
 
-    .watsap-button-only {
-      padding-block: 6px;
-      padding-inline: 20px;
-      width: 200px;
-      img {
-        width: 35px;
-        margin-right: 0.5rem !important;
-      }
-    }
-
     .dudas-section {
-      margin-block: 35px;
+      margin-block: 0px;
       .all-center {
         flex-direction: column;
         .text-end {
@@ -1517,10 +1406,6 @@ export const SuscriptionContain = styled.div`
     }
   }
   @media (max-width: 400px) {
-    .upside-lines {
-      display: none;
-    }
-
     .intro-section {
       .gonvarplus {
         width: 250px;
@@ -1534,6 +1419,10 @@ export const SuscriptionContain = styled.div`
       .all-center {
         .center {
           gap: 8px;
+          button {
+            width: 155px;
+            font-size: 14px !important;
+          }
         }
       }
       .space {
@@ -1603,7 +1492,6 @@ export const SuscriptionContain = styled.div`
       }
     }
     .cellphone-section {
-      padding-right: 15px;
       .text-end {
         padding-inline: 20px;
       }
