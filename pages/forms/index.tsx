@@ -61,13 +61,13 @@ interface DisplayContentProps {
 }
 
 const Formularios = () => {
-  const {
-    query: { formId },
-  } = useRouter();
+  // const {
+  //   query: { formId },
+  // } = useRouter();
 
-  console.log(formId);
-  const isForm10or11or12 =
-    formId === "10" || formId === "11" || formId === "12";
+  const router = useRouter();
+
+  let isForm10or11or12 = false;
 
   const form10: Form = {
     name: "campaña 11 Febrero 2024 Facebook",
@@ -244,9 +244,10 @@ const Formularios = () => {
   };
 
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
-  const router = useRouter();
+  // const router = useRouter();
 
   const [form, setForm] = useState<Form | null>();
+  const [formId, setFormId] = useState<string | null>(null);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -352,8 +353,10 @@ const Formularios = () => {
     // setLoading(false);
 
     const fetchData = async () => {
+      isForm10or11or12 = formId === "10" || formId === "11" || formId === "12";
+
       try {
-        const formIdNumber: number = Number(formId);
+        const formIdNumber: number = Number(router.query.formId);
 
         console.log(formIdNumber);
 
@@ -396,37 +399,17 @@ const Formularios = () => {
               // El documento no existe
               // Obtengo los datos mokeados
               console.log("entro al else de firebase");
-              if (formId == "10") {
-                console.log("Cargado estático");
-                setForm(form10);
-                setLoading(false);
-              } else if (formId == "11") {
-                console.log("Cargado estático");
-                setForm(form11);
-                setLoading(false);
-              } else if (formId == "12") {
-                console.log("Cargado estático");
-                setForm(form12);
-                setLoading(false);
-              }
+              console.log("Cargado estático");
+              setForm(form10);
+              setLoading(false);
             }
           } catch (error) {
             console.error("Error al recuperar datos desde Firebase:", error);
             // en caso de error en Firebase
             // Obtengo los datos mokeados
-            if (formId == "10") {
-              console.log("Cargado estático");
-              setForm(form10);
-              setLoading(false);
-            } else if (formId == "11") {
-              console.log("Cargado estático");
-              setForm(form11);
-              setLoading(false);
-            } else if (formId == "12") {
-              console.log("Cargado estático");
-              setForm(form12);
-              setLoading(false);
-            }
+            console.log("Cargado estático");
+            setForm(form10);
+            setLoading(false);
           }
         }
 
@@ -435,24 +418,19 @@ const Formularios = () => {
         // en caso de error en el server
         // Obtengo los datos mokeados
         console.log("error del server", error);
-        if (formId == "10") {
-          console.log("Cargado estático");
-          setForm(form10);
-          setLoading(false);
-        } else if (formId == "11") {
-          console.log("Cargado estático");
-          setForm(form11);
-          setLoading(false);
-        } else if (formId == "12") {
-          console.log("Cargado estático");
-          setForm(form12);
-          setLoading(false);
-        }
+        console.log("Cargado estático");
+        setForm(form10);
+        setLoading(false);
       }
     };
 
+    if (router && router.query && router.query.formId !== undefined) {
+      console.log(router.query);
+      setFormId(router.query.formId as string);
+    }
+
     fetchData();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (errorMessage) {
