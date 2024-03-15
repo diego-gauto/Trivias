@@ -16,8 +16,6 @@ import InputApellido from "../../components/Forms/inputApellido/inputApellido";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
-import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
-import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
 import { db } from "../../firebase/firebaseConfig";
 import {
@@ -66,8 +64,19 @@ const Formularios = () => {
   // } = useRouter();
 
   const router = useRouter();
+  let formId: string | undefined;
+  // Check if the router object exists before accessing its properties
+  if (router?.query) {
+    // Access the query parameters
+    formId = router.query.formId as string; // Do something with the query parameters
+    console.log(`ID: ${formId}`);
+  }
 
-  let isForm10or11or12 = false;
+  const isForm10or11or12 =
+    formId === undefined ||
+    formId === "10" ||
+    formId === "11" ||
+    formId === "12";
 
   const form10: Form = {
     name: "campaña 11 Febrero 2024 Facebook",
@@ -127,127 +136,10 @@ const Formularios = () => {
     },
   };
 
-  const form11: Form = {
-    name: "campaña 11 Febrero 2024 Google",
-    title:
-      "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
-    subtitle:
-      "<p><strong>Más de 70 cursos</strong> de uñas, maquillaje y pestañas <strong>incluídos</strong>. Además, recibe acceso a cursos de Lash Master (3 cursos de pestañas en Técnicas Clásica, Abanicos Tecnológicos, Diseños y Efectos). Aprende en línea, <strong>Desde cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de <s>$6,307.00 MXN</s> reducido a un costo total de $1,599.00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). 💞 <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de $399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳</p>",
-    createdAt: "11-03-2024 15:40:36",
-    editedAt: "11-03-2024 20:50:35",
-    img: {
-      source:
-        "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/forms%2Fform_11?alt=media&token=331dbb48-875b-42ea-8d84-c3ee52271390",
-      isVisible: true,
-    },
-    optionsArray: [
-      {
-        isVisible: true,
-        label: `<p>Recuerda que el <strong>costo del programa es de $1,599.00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa "Gonvar+ cuatrimestral" participan para <strong>ganar un iPad Nuevo</strong>, remodelación de su salón y miles de pesos más! <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Marzo. Elige tu plan de Pagos:</p>`,
-        options: [
-          {
-            label: "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
-            value: "Pagaré en 4 partes de 399 pesos",
-          },
-          {
-            label: "Pagaré en una sola exhibición máximo el día sábado",
-            value: "Pagaré en una sola exhibición",
-          },
-        ],
-      },
-      {
-        isVisible: true,
-        label: `<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>`,
-        options: [
-          {
-            label: "<p>Si, me comprometo a realizar el programa</p>",
-            value: "Si, me comprometo",
-          },
-          {
-            label: "<p>No, gracias. Quiero perder mi lugar</p>",
-            value: "No, gracias",
-          },
-        ],
-      },
-      {
-        isVisible: false,
-        label: "",
-        options: [
-          { label: "", value: "" },
-          { label: "", value: "" },
-        ],
-      },
-    ],
-    redirect: {
-      type: "customLink",
-      link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
-      textButton: "",
-    },
-  };
-
-  const form12: Form = {
-    name: "campaña 11 Febrero 2024 TikTok",
-    title:
-      "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
-    subtitle:
-      "<p><strong>Más de 70 cursos</strong> de uñas, maquillaje y pestañas <strong>incluídos</strong>. Además, recibe acceso a cursos de Lash Master (3 cursos de pestañas en Técnicas Clásica, Abanicos Tecnológicos, Diseños y Efectos). Aprende en línea, <strong>Desde cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de <s>$6,307.00 MXN</s> reducido a un costo total de $1,599.00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). 💞 <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de $399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳</p>",
-    createdAt: "11-03-2024 15:40:36",
-    editedAt: "11-03-2024 20:50:35",
-    img: {
-      source:
-        "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/forms%2Fform_12?alt=media&token=341dc223-087c-422e-a418-771b8f6627be",
-      isVisible: true,
-    },
-    optionsArray: [
-      {
-        isVisible: true,
-        label: `<p>Recuerda que el <strong>costo del programa es de $1,599.00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa "Gonvar+ cuatrimestral" participan para <strong>ganar un iPad Nuevo</strong>, remodelación de su salón y miles de pesos más! <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Marzo. Elige tu plan de Pagos:</p>`,
-        options: [
-          {
-            label: "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
-            value: "Pagaré en 4 partes de 399 pesos",
-          },
-          {
-            label: "Pagaré en una sola exhibición máximo el día sábado",
-            value: "Pagaré en una sola exhibición",
-          },
-        ],
-      },
-      {
-        isVisible: true,
-        label: `<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>`,
-        options: [
-          {
-            label: "<p>Si, me comprometo a realizar el programa</p>",
-            value: "Si, me comprometo",
-          },
-          {
-            label: "<p>No, gracias. Quiero perder mi lugar</p>",
-            value: "No, gracias",
-          },
-        ],
-      },
-      {
-        isVisible: false,
-        label: "",
-        options: [
-          { label: "", value: "" },
-          { label: "", value: "" },
-        ],
-      },
-    ],
-    redirect: {
-      type: "customLink",
-      link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
-      textButton: "",
-    },
-  };
-
   const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   // const router = useRouter();
 
   const [form, setForm] = useState<Form | null>();
-  const [formId, setFormId] = useState<string | null>(null);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -257,20 +149,6 @@ const Formularios = () => {
   const [loading, setLoading] = useState(true);
 
   const errorRef = useRef<HTMLDivElement>(null);
-
-  // const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
-  // const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
-  // const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
-
-  // const [isImageVisible, setIsImageVisible] = useState(true);
-  // const [isOption1Visible, setIsOption1Visible] = useState(true);
-  // const [isOption2Visible, setIsOption2Visible] = useState(true);
-  // const [isOption3Visible, setIsOption3Visible] = useState(true);
-
-  const [isUserCreateModalVisible, setIsUserCreateModalVisible] =
-    useState(false);
-  const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
-  // const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
 
   const {
     container,
@@ -348,17 +226,9 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    // const selectedForm = forms[Number(formId) - 1];
-    // setForm(selectedForm);
-    // setLoading(false);
-
     const fetchData = async () => {
-      isForm10or11or12 = formId === "10" || formId === "11" || formId === "12";
-
       try {
-        const formIdNumber: number = Number(router.query.formId);
-
-        console.log(formIdNumber);
+        const formIdNumber: number = Number(formId);
 
         const res = await getFormApi(formIdNumber);
 
@@ -374,6 +244,7 @@ const Formularios = () => {
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
           console.log("from Server");
+          console.log(formTemp);
 
           setForm(formTemp);
           setLoading(false);
@@ -398,12 +269,8 @@ const Formularios = () => {
             } else {
               // El documento no existe
               // Obtengo los datos mokeados
-              console.log("entro al else de firebase");
-              const formId2 = Number(router.query.formId);
-              const res2 = await getFormApi(formIdNumber);
-
-              console.log("Cargado en 2da etapa");
-              setForm(res2);
+              console.log("En el else de Firebase.Cargado estático");
+              setForm(form10);
               setLoading(false);
             }
           } catch (error) {
@@ -420,20 +287,14 @@ const Formularios = () => {
       } catch (error) {
         // en caso de error en el server
         // Obtengo los datos mokeados
-        console.log("error del server", error);
         console.log("Cargado estático");
         setForm(form10);
         setLoading(false);
       }
     };
 
-    if (router && router.query && router.query.formId !== undefined) {
-      console.log(router.query);
-      setFormId(router.query.formId as string);
-    }
-
     fetchData();
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     if (errorMessage) {
@@ -471,11 +332,6 @@ const Formularios = () => {
     formik.setFieldValue("numeroWhatsApp", value);
     formik.setFieldValue("nombrePais", selectedCountry);
     formik.setFieldValue("codigoPais", selectedCode);
-
-    // const isValid = isValidPhoneNumber(value, selectedCode)
-    // console.log(value)
-    // console.log(selectedCode)
-    // console.log(isValid)
   };
 
   const handleNombreBlur = () => {
@@ -493,11 +349,6 @@ const Formularios = () => {
   const handlePaisBlur = () => {
     formik.setFieldTouched("numeroWhatsApp", true);
   };
-
-  // const handleRedirect = (createUserSuccess: boolean) => {
-  //   router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
-  //   console.log("entro")
-  // };
 
   const handleSubmit = async (values: any) => {
     const lowerCaseMail = values.correo.toLowerCase();
@@ -774,12 +625,6 @@ const Formularios = () => {
           </div>
         </form>
       </div>
-      {isUserCreateModalVisible && (
-        <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />
-      )}
-      {isUserExistModalVisible && (
-        <ModalUserExist closeModal={setIsUserExistModalVisible} />
-      )}
     </div>
   );
 };
