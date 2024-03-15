@@ -129,7 +129,9 @@ export const RetryPayment = () => {
   }, [userDataAuth])
 
   useEffect(() => {
-    pay();
+    if (token) {
+      pay();
+    }
   }, [token])
 
   const pay = () => {
@@ -176,7 +178,6 @@ export const RetryPayment = () => {
         await createNotification(notification);
 
         const msg = "pago-rechazado"
-        window.location.href = user.level === 5 ? `/pagofallidoanualidad?error=${msg}` : `/pagofallidocuatrimestre?error=${msg}`;
       }
     })
   }
@@ -282,7 +283,7 @@ export const RetryPayment = () => {
                 }
               </div>
             }
-            {error && <p className='description' style={{ color: 'red' }}>No hemos podido procesar tu pago, puedes reintentar tu pago nuevamente o intentar con otro medio de pago.</p>}
+            {error && <p className='description' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o intentar con otro medio de pago.</p>}
             {
               paymentMethods.length > 0 &&
               <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
