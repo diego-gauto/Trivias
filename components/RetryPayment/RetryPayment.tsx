@@ -166,6 +166,7 @@ export const RetryPayment = () => {
         await updateMembership(membership)
         window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
       } else {
+        setLoaderAdd(false)
         setError(true);
         let notification = {
           userId: user.user_id,
