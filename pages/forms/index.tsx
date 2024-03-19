@@ -62,6 +62,20 @@ const Formularios = () => {
   const router = useRouter();
   let formId: string | undefined = router.query.formId as string | undefined;
   console.log(formId);
+  const validFormIds = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ]; // Arreglo de IDs válidos
   const specialFormIds = ["10", "11", "12", undefined];
 
   // const form10: Form = {
@@ -214,6 +228,11 @@ const Formularios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (typeof formId !== "string" || !validFormIds.includes(formId)) {
+          // Si formId no está incluido en los IDs válidos, redirigir a página de error
+          router.push("/forms/formnotfound");
+          return; // Detener la ejecución de fetchData
+        }
         const formIdNumber: number = Number(formId);
 
         const res = await getFormApi(formIdNumber);
@@ -262,17 +281,17 @@ const Formularios = () => {
           }
         }
 
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         console.error("Error al recuperar datos desde el server:", error);
       }
     };
 
     if (router.isReady) {
-      formId = router.query.formId as string | undefined;
+      // formId = router.query.formId as string | undefined;
       fetchData();
     }
-  }, [router.isReady]);
+  }, [router.isReady, formId]);
 
   useEffect(() => {
     if (errorMessage) {
