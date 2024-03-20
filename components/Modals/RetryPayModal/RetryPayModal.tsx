@@ -27,8 +27,12 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     const pm = filter[0]
     let plan_id = "";
 
+    if (user.level === 0) plan_id = "cuatrimestre";
     if (user.level === 5 && user.type === 1599) plan_id = "anual";
     if (user.level === 5 && user.type === 3497) plan_id = "anual_v1_1";
+    if (user.level === 6 && user.type === 149) plan_id = "mensual";
+    if (user.level === 6 && user.type === 249) plan_id = "mensual_v1_1";
+    if (user.level === 6 && user.type === 459) plan_id = "mensual_v1_2";
     if (user.level === 8) plan_id = "cuatrimestre";
 
     const data = {
