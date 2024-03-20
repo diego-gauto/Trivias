@@ -21,27 +21,7 @@ const Lesson = () => {
   const context = useAuth();
   const { course, isLoading, tempLesson } = useCourse();
   const [show, setShow] = useState(false);
-  const params: any = useRouter()
 
-  const openActivityModal = () => {
-    let notification = {
-      userId: context.user.user_id,
-      type: "14",
-      notificationId: '',
-      courseId: course.id,
-      season: +params.query.season,
-      lesson: +params.query.lesson,
-      title: course.title,
-    }
-    getNotifications({ userId: context.user.user_id }).then((res) => {
-      if (res.data.filter((x) => x.course_id !== null &&
-        x.type === "14" &&
-        x.course_id === course.id).length === 0) {
-        createNotification(notification);
-      }
-    })
-    setShow(true)
-  }
   const [position, setPosition] = useState(1);
   const { loadHomeworks } = useContext(HomeworksContext);
 
