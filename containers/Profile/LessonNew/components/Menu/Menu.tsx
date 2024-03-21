@@ -15,16 +15,37 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { HiPencil } from "react-icons/hi2";
 import { IUserHomework } from "../../../../../interfaces/IUserHomeworks";
 import { HomeworksContext } from "../../../../../hooks/useHomeworks";
+import { UserQuiz, getUserQuizApi } from "../../../../../components/api/lessons";
+import { getGenericQueryResponse } from "../../../../../components/api/admin";
 
 interface IMenu {
   course: ICourseResponse;
   user: IUserInfoResult;
 }
+
+interface IQuizOfLesson {
+  id: number,
+  passing_grade: number,
+  lessons_id: number,
+  points: number
+}
+
+interface IUserQuiz {
+  id: number
+  grade: number
+  lesson_id: number
+  quiz_id: number
+  user_id: number
+}
+
 const Menu = (props: IMenu) => {
   const { course, user } = props;
   const { homeworks } = useContext(HomeworksContext);
   const [selected, setSelected] = useState<any>([]);
   const params = useRouter();
+  const [isLoadingQuizzes, setIsLoadingQuizzes] = useState<boolean>(true);
+  const [userQuizzes, setUserQuizzes] = useState<IUserQuiz[]>([]);
+  const [courseQuizzes, setCoursesQuizzes] = useState<IQuizOfLesson[]>([]);
 
   useEffect(() => {
     let temp_selected: boolean[] = [];
@@ -38,6 +59,34 @@ const Menu = (props: IMenu) => {
     let temp = [...selected]
     temp[index] = !temp[index];
     setSelected(temp)
+  }
+
+  useEffect(() => {
+    loadUserQuizzes();
+  }, []);
+
+  const loadUserQuizzes = async () => {
+    try {
+      const selectQuizzesOfCourse =
+        `select q.id, q.passing_grade, q.lessons_id, q.points
+       from lessons as l 
+       inner join seasons as s on s.id = l.seasons_id  
+       inner join courses as c on c.id = s.course_id
+       inner join quizzes as q on q.lessons_id = l.id
+       where c.id = ${course.id} and l.quiz = 1;`;
+      const quizzesOfCourseResponse = await getGenericQueryResponse(selectQuizzesOfCourse);
+      setCoursesQuizzes(quizzesOfCourseResponse.data.data);
+
+      const selectQuizzesOfUser =
+        `select id, grade, lesson_id, quiz_id, user_id 
+        from user_quizzes 
+        where user_id = ${user.id};`;
+      const quizzesOfUserResponse = await getGenericQueryResponse(selectQuizzesOfUser);
+      setUserQuizzes(quizzesOfUserResponse.data.data);
+      setIsLoadingQuizzes(false);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleGotTo = (season: number, lesson: number) => {
@@ -107,6 +156,97 @@ const Menu = (props: IMenu) => {
     )
   }
 
+  const getQuizJSX = (lesson: ILesson): JSX.Element => {
+    const { id: lessonId } = lesson;
+
+    const texts = {
+      default: 'Esta lección tiene un quiz',
+      approve: 'Quiz aprobado',
+      notApprobe: 'Quiz no aprobado'
+    }
+
+    const userQuiz = userQuizzes.find(quiz => quiz.lesson_id === lessonId);
+
+    // En caso de no existir un quiz realizado por el usuario, 
+    // indicar que la lección tiene uno
+    if (!userQuiz) {
+      return (
+        <div className={`activity activity--default`}>
+          {getIconByClassname('activity--default', '#7f21cf', HW_ICON)}
+          {texts.default}
+        </div>
+      )
+    }
+
+    // Si existe...
+
+    const lessonQuiz = courseQuizzes.find(quiz => quiz.lessons_id === lessonId);
+
+    // Esto no debería de ocurrir nunca...
+    if (!lessonQuiz) {
+      return (<></>);
+    }
+
+
+    /*
+    const generateGradePercent = (lessonId: number) => {
+      const quiz = userQuizzes.find((quiz) => quiz.lesson_id == lessonId);
+      const grade = quiz ? quiz.grade : 0;
+      const { points } = lesson.lesson_quizzes;
+
+      return (grade / points) * 100;
+    }
+    */
+
+    const gradePercent = (userQuiz.grade / lessonQuiz.points) * 100;
+    // ¿Es un quiz aprobado? En caso de que sí
+    if (lessonQuiz.passing_grade < gradePercent) {
+      return (
+        <div className='activity activity--approve'>
+          {getIconByClassname('activity--approve', '#197569')}
+          {texts.approve}
+        </div>
+      )
+    }
+
+    // En caso de que no sea un quiz aprobado...
+    return (
+      <div className='activity activity--not-approve'>
+        {getIconByClassname('activity--not-approve', '#d72424')}
+        {texts.notApprobe}
+      </div>
+    )
+  }
+
+  const getQuizJSXTestCSS = (lesson: ILesson): JSX.Element[] => {
+    const { id: lessonId } = lesson;
+
+    const texts = {
+      default: 'Esta lección tiene un quiz',
+      approve: 'Quiz aprobado',
+      notApprobe: 'Quiz no aprobado'
+    }
+
+    return [
+      <div className={`activity activity--default`}>
+        {getIconByClassname('activity--default', '#7f21cf', HW_ICON)}
+        {texts.default}
+      </div>,
+      <div className='activity activity--approve'>
+        {getIconByClassname('activity--approve', '#197569')}
+        {texts.approve}
+      </div>,
+      <div className='activity activity--not-approve'>
+        {getIconByClassname('activity--not-approve', '#d72424')}
+        {texts.notApprobe}
+      </div>
+    ]
+  }
+
+  if (isLoadingQuizzes) {
+    return (<p>Cargando...</p>);
+  }
+
   return (
     <MainContainer>
       {
@@ -152,11 +292,16 @@ const Menu = (props: IMenu) => {
                             getHomeworkText(lesson)
                           }
                           {
+                            /*
                             lesson.quiz === 1 &&
                             <div className='activity'>
                               <img src={HW_ICON} />
                               Esta lección tiene un quiz
                             </div>
+                            */
+                          }
+                          {
+                            lesson.quiz === 1 && getQuizJSX(lesson)
                           }
                           {
                             lesson.lesson_material.length > 0 &&

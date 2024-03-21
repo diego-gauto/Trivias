@@ -8,6 +8,7 @@ import { getHomeworkUserApi } from '../../../../../components/api/homeworks';
 import { IUserHomework } from '../../../../../interfaces/IUserHomeworks';
 import { IUserInfoResult } from '../../../../../interfaces/IUser';
 import { ILesson } from '../../../../../interfaces/ICourseNew';
+import { getGenericQueryResponse } from '../../../../../components/api/admin';
 
 interface IVideoProps {
   user: IUserInfoResult,
@@ -20,11 +21,13 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
   const params = useRouter()
   const { season, lesson }: any = params.query;
   const { reload } = useCourse();
-  const [duration, setDuration] = useState<any>(0);
+  const [duration, setDuration] = useState<number>(0);
   const [homework, setHomework] = useState<IUserHomework | null>(null);
+  const [isQuizApprove, setIsQuizApprove] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     getUserHomework();
+    getUserQuiz();
   }, [actualLesson]);
 
   const getUserHomework = async () => {
@@ -46,7 +49,27 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
     }
   }
 
-  const takeNextLessonOrShowModal = () => {
+  const getUserQuiz = async () => {
+    try {
+      const selectIsUserApprove =
+        `select (grade / points) * 100 > passing_grade as is_approve
+        from quizzes as q 
+        inner join user_quizzes as uq on uq.quiz_id = q.id 
+        where uq.user_id = ${user.id} and q.lessons_id = ${actualLesson.id};`;
+      const isUserApproveResponse = await getGenericQueryResponse(selectIsUserApprove);
+      if (isUserApproveResponse.data.data.length === 0) {
+        setIsQuizApprove(undefined);
+      }
+      const isUserApprove = isUserApproveResponse.data.data[0]["is_approve"];
+      setIsQuizApprove(isUserApprove === '1');
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+      }
+    }
+  }
+
+  const takeNextLessonOrShowModal = async () => {
     if (actualLesson.quiz === 0 && actualLesson.homework === 0) {
       // Si no hay tarea o quiz, siguiente lección
       goToNextLesson(course, +season, +lesson);
@@ -62,8 +85,15 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
         openModal();
       }
     } else if (actualLesson.quiz === 1) {
-      // Si la lección tiene quiz, mostrar modal
-      openModal();
+      // Si la lección tiene quiz, pero el usuario no ha realizado el quiz, mostrar
+      if (isQuizApprove === undefined) {
+        openModal();
+      } else if (isQuizApprove === true) {
+        // Si el usuario aprobo el quiz, ir a la siguiente lección
+        goToNextLesson(course, +season, +lesson);
+      } else {
+        openModal();
+      }
     }
   }
 
@@ -98,8 +128,7 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
       onEnded={finishedLesson}
       onDuration={(duration) => {
         handleDuration(duration);
-      }
-      }
+      }}
       onProgress={(state) => {
         handleProgress(user, course, params, duration, state.playedSeconds)
       }}
