@@ -1,18 +1,161 @@
+import { useRouter } from "next/router";
 
+import { collection, doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebaseConfig";
 
 import styles from "./thankYou.module.css";
+import { useEffect, useState } from "react";
+import { getFormApi } from "../../api/form";
+
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from "../../../screens/Login.styled";
+
+interface Answer {
+  label: string;
+  value: string;
+}
+
+interface Option {
+  isVisible: boolean | null;
+  label: string;
+  options: Answer[];
+}
+
+interface Form {
+  name: string;
+  title: string;
+  subtitle: string;
+  createdAt: string;
+  editedAt: string;
+  img: {
+    source: string;
+    isVisible: boolean | null;
+  };
+  optionsArray: Option[];
+  redirect: {
+    type: "thankYouPage" | "customLink";
+    link: string;
+    textButton: string;
+  };
+}
 
 const ThankYouForm = () => {
+  const [form, setForm] = useState<Form | null>();
+  const [loading, setLoading] = useState(true);
 
-  const { container, textContainer, title, subtitle, paragraph, imgContainer } = styles
+  const { container, textContainer, title, subtitle, paragraph, imgContainer } =
+    styles;
+
+  const router = useRouter();
+  let formId = router.query.formId;
+  console.log(formId);
+
+  const validFormIds = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ]; // Arreglo de IDs válidos
+  const specialFormIds = ["10", "11", "12", undefined];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (typeof formId !== "string" || !validFormIds.includes(formId)) {
+          // Si formId no está incluido en los IDs válidos, redirigir a página de error
+          router.push("/forms/formnotfound");
+          return; // Detener la ejecución de fetchData
+        }
+        const formIdNumber: number = Number(formId);
+
+        const res = await getFormApi(formIdNumber);
+
+        if (res && res.length > 0) {
+          const formTemp = res[0];
+
+          // Parsear la cadena JSON en la propiedad "questions"
+          formTemp.img = JSON.parse(formTemp.img);
+
+          // Parsear la cadena JSON en la propiedad "result"
+          formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
+
+          formTemp.redirect = JSON.parse(formTemp.redirect);
+
+          console.log("from Server");
+          console.log(formTemp);
+
+          setForm(formTemp);
+          setLoading(false);
+        } else {
+          try {
+            // Identificador único del formulario que deseas recuperar
+            const customId = `form_${formId}`;
+
+            // Referencia al documento del formulario en Firestore
+            const formDocRef = doc(collection(db, "forms"), customId);
+
+            // Obtén los datos del formulario desde Firestore
+            const formSnapshot = await getDoc(formDocRef);
+
+            if (formSnapshot.exists()) {
+              // El documento existe, puedes acceder a los datos
+              const formData = formSnapshot.data() as Form;
+              console.log("Datos del formulario recuperados:", formData);
+
+              setForm(formData);
+              setLoading(false);
+            } else {
+              // El documento no existe
+              // redirigir a pagina de error
+              console.log("El formulario no existe en Firebase");
+            }
+          } catch (error) {
+            console.error("Error al recuperar datos desde Firebase:", error);
+          }
+        }
+
+        // setLoading(false);
+      } catch (error) {
+        console.error("Error al recuperar datos desde el server:", error);
+      }
+    };
+
+    if (router.isReady) {
+      // formId = router.query.formId as string | undefined;
+      fetchData();
+    }
+  }, [router.isReady, formId]);
+
+  if (loading) {
+    return (
+      <Background style={{ alignItems: "center", justifyContent: "center" }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    );
+  }
 
   return (
     <div className={container}>
-
       <div className={textContainer}>
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
-        <p className={paragraph}>En los próximos dias nos comunicaremos contigo para <br />indicarte los pasos a seguir.</p>
+        <p className={paragraph}>
+          En los próximos dias nos comunicaremos contigo para <br />
+          indicarte los pasos a seguir.
+        </p>
       </div>
 
       <div className={imgContainer}>
@@ -22,7 +165,6 @@ const ThankYouForm = () => {
         />
       </div>
     </div>
-
   );
-}
+};
 export default ThankYouForm;

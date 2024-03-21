@@ -365,16 +365,18 @@ const Formularios = () => {
     console.log(createUserDto);
 
     try {
-      const res = await createUserFormApi(createUserDto);
-      const createUserResult = res.data.result;
+      // const res = await createUserFormApi(createUserDto);
+      // const createUserResult = res.data.result;
+      const createUserResult = true;
       console.log(createUserResult);
       // const createUserResult = false;
 
       if (createUserResult) {
-        const link =
-          form?.redirect?.type === "thankYouPage"
-            ? "/forms/thankyoupage"
-            : form?.redirect?.link || "";
+        // const link =
+        //   form?.redirect?.type === "thankYouPage"
+        //     ? "/forms/thankyoupage"
+        //     : form?.redirect?.link || "";
+        const link = "forms/thankyoupage?formId=" + formId;
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
