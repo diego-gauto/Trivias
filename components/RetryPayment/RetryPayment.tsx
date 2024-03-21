@@ -8,7 +8,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { checkEmpty } from './functions';
 import { conektaPm, updateMembership } from '../api/users';
 import { useAuth } from '../../hooks/useAuth';
-import { attachPaymentMethodConekta } from '../api/profile';
+import { attachPaymentMethodConekta, detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from '../api/profile';
 import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
 import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from '../api/checkout';
 import { createNotification } from '../api/notifications';
@@ -40,6 +40,8 @@ export const RetryPayment = () => {
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [token, setToken] = useState('');
+  const [loader, setLoader] = useState<boolean>(false);
+  const [option, setOption] = useState(0);
 
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
@@ -89,26 +91,21 @@ export const RetryPayment = () => {
   const handleAddpayment = () => {
     setAddPayment(!addPayment);
   }
-  const changePaymentMethod = (index: number, deflt: boolean) => {
-    let tempPaymentsMethods: IPm[] = [...paymentMethods];
-    if (tempPaymentsMethods.length > 1) {
-      if (deflt) {
-        tempPaymentsMethods[index]!.default = false;
-        if (index === 0) {
-          tempPaymentsMethods[1]!.default = true;
-        } else {
-          tempPaymentsMethods[0]!.default = true;
-        }
-      }
-      else {
-        let idx = tempPaymentsMethods.findIndex((val) => val.default === true);
-        tempPaymentsMethods[idx]!.default = false;
-        tempPaymentsMethods[index]!.default = true;
-      }
-      setPaymentMethods(tempPaymentsMethods)
+
+  const changePaymentMethod = (pm: IPm) => {
+    setLoader(true);
+    let body = {
+      payment_method: pm.id,
+      stripe_id: user.stripe_id,
+      conekta_id: user.conekta_id
     }
+    setDefaultPaymentMethodConekta(body).then((res) => {
+      getPaymentMethods()
+      setLoader(false);
+    })
   }
   const getPaymentMethods = () => {
+    setLoader(true);
     let user = userDataAuth.user;
     let body = {
       stripe_id: user.stripe_id,
@@ -116,10 +113,11 @@ export const RetryPayment = () => {
     }
     conektaPm(body).then((res) => {
       const conektaPaymentMethods = res.data.payment_methods.data
-      console.log(conektaPaymentMethods);
-
       const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
+      console.log(extractedProperties);
+
       setPaymentMethods(extractedProperties);
+      setLoader(false);
     })
   }
   useEffect(() => {
@@ -261,6 +259,17 @@ export const RetryPayment = () => {
       return "NA "
     }
   }
+
+  const detachPayment = async (card: IPm) => {
+    setLoader(true);
+    let body = {
+      payment_method: card.id,
+      conekta_id: user.conekta_id
+    }
+    detachPaymentMethodConekta(body).then(() => {
+      getPaymentMethods();
+    })
+  }
   if (user) {
     return (
       <RetryPaymentContainer>
@@ -273,7 +282,7 @@ export const RetryPayment = () => {
             {
               paymentMethods.length > 0 &&
               <div className='payment-container'>
-                {
+                {!loader ?
                   paymentMethods.map((pm: IPm, index: number) => {
                     return (
                       <PaymentMethods
@@ -282,16 +291,17 @@ export const RetryPayment = () => {
                         pm_size={paymentMethods.length}
                         changePaymentMethod={changePaymentMethod}
                         key={"pm-" + index}
+                        handleDelete={detachPayment}
                       />
                     )
-                  })
+                  }) : <LoaderContainSpinner />
                 }
               </div>
             }
-            {error && <p className='description' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o intentar con otro medio de pago.</p>}
+            {error && option === 0 && <p className='description' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o dirigirte a Agregar método de pago.</p>}
             {
               paymentMethods.length > 0 &&
-              <button className={(addPayment ? "fade" : "")} onClick={pay}>Reintentar pago</button>
+              <button className={(addPayment ? "fade" : "")} onClick={() => { pay(); setOption(0) }}>Reintentar pago</button>
             }
             <button
               className='type2'
@@ -324,7 +334,7 @@ export const RetryPayment = () => {
                       <div className='input-container'>
                         <label>Número de la tarjeta</label>
                         <InputMask
-                          placeholder='Introduce solo números'
+                          placeholder='**** **** **** ****'
                           mask='9999 9999 9999 9999'
                           maskChar={null}
                           value={card.number}
@@ -332,10 +342,10 @@ export const RetryPayment = () => {
                         />
                       </div>
                       <div className='input-container'>
-                        <label>Nombre del titular</label>
+                        <label>Nombre</label>
                         <input
                           value={card.holder}
-                          placeholder='Introduce el nombre impreso de la tarjeta'
+                          placeholder='Nombre del propetario'
                           onChange={(e) => changeElement("holder", e.target.value)}
                         />
                       </div>
@@ -407,10 +417,11 @@ export const RetryPayment = () => {
                     Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a
                     tu perfil y presiona en el botón "Cancelar suscripción"
                   </p>
+                  {<p className='description-text' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o dirigirte a Agregar método de pago.</p>}
                   {
                     loaderAdd
                       ? <LoaderContainSpinner />
-                      : <button className='type3' onClick={addNewCard}>Pagar</button>
+                      : <button className='type3' onClick={() => { addNewCard(); setOption(1) }}>Pagar</button>
                   }
 
                 </>

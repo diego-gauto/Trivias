@@ -4,7 +4,7 @@ import { IPaymentMethods } from './IPaymentMethods';
 const master_card = "/images/RetryPayment/mastercard.png";
 
 export const PaymentMethods = (props: IPaymentMethods) => {
-  const { pm, index, pm_size, changePaymentMethod } = props;
+  const { pm, index, pm_size, changePaymentMethod, handleDelete } = props;
 
   return (
     <PaymentMethodsContainer>
@@ -19,7 +19,7 @@ export const PaymentMethods = (props: IPaymentMethods) => {
           pm_size > 1
             ?
             <div className='default'>
-              <div className={'input-radio ' + (pm.default ? "selected-radio" : "")} onClick={() => changePaymentMethod(index, pm.default)}>
+              <div className={'input-radio ' + (pm.default ? "selected-radio" : "")} onClick={() => { changePaymentMethod(pm) }}>
                 <div className='dot' />
               </div>
               <p>Predeterminada</p>
@@ -30,7 +30,7 @@ export const PaymentMethods = (props: IPaymentMethods) => {
         <div className='right'>
           {
             !pm.default ?
-              <p className='actives'>Eliminar</p>
+              <p className='actives' onClick={() => { handleDelete(pm) }}>Eliminar</p>
               : <div style={{ width: 80 }} />
           }
         </div>

@@ -182,11 +182,11 @@ export const RetryPayModal = (props: IRetryPayModal) => {
           }
           {error &&
             <p className='paragraph' style={{ color: 'red', fontSize: '12px' }}>
-              No hemos podido procesar tu pago, puedes reintentar el pago nuevamente o dirigirte a Actualizar info de pago
+              No hemos podido procesar tu pago, puedes reintentar el pago nuevamente o dirigirte a Actualizar info. de pago
             </p>
           }
           {paymentMethods.length > 0 && <button onClick={pay} style={{ background: "#3f1168" }}>Reintentar pago</button>}
-          <button onClick={goTo}>Actualiza info de pago</button>
+          <button onClick={goTo}>Actualiza info. de pago</button>
         </div>
       </RetryPayModalContain>}
     </ModalContainer>
