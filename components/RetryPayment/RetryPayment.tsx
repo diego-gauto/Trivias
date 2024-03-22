@@ -170,15 +170,15 @@ export const RetryPayment = () => {
       } else {
         setLoaderAdd(false)
         setError(true);
-        let notification = {
-          userId: user.user_id,
-          type: "8",
-          notificationId: '',
-          amount: user.type,
-          productName: 'Gonvar Plus',
-          frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        }
-        await createNotification(notification);
+        // let notification = {
+        //   userId: user.user_id,
+        //   type: "8",
+        //   notificationId: '',
+        //   amount: user.type,
+        //   productName: 'Gonvar Plus',
+        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
+        // }
+        // await createNotification(notification);
 
         const msg = "pago-rechazado"
       }
@@ -336,7 +336,7 @@ export const RetryPayment = () => {
                         <InputMask
                           placeholder='**** **** **** ****'
                           mask='9999 9999 9999 9999'
-                          maskChar={null}
+                          maskChar={'*'}
                           value={card.number}
                           onChange={(e) => changeElement("number", e.target.value)}
                         />
@@ -417,7 +417,7 @@ export const RetryPayment = () => {
                     Puedes cancelar la suscripción en cualquier momento. Para hacerlo, dirígite a
                     tu perfil y presiona en el botón "Cancelar suscripción"
                   </p>
-                  {<p className='description-text' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o dirigirte a Agregar método de pago.</p>}
+                  {error && option === 1 && <p className='description-text' style={{ color: 'red', textAlign: 'left' }}>No hemos podido procesar tu pago, puedes reintentar tu <br />pago nuevamente o probar con otro método de pago.</p>}
                   {
                     loaderAdd
                       ? <LoaderContainSpinner />
