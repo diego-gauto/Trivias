@@ -59,15 +59,15 @@ export const RetryPayModal = (props: IRetryPayModal) => {
         window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
       } else {
         setError(true);
-        let notification = {
-          userId: user.user_id,
-          type: "8",
-          notificationId: '',
-          amount: user.type,
-          productName: 'Gonvar Plus',
-          frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        }
-        await createNotification(notification);
+        // let notification = {
+        //   userId: user.user_id,
+        //   type: "8",
+        //   notificationId: '',
+        //   amount: user.type,
+        //   productName: 'Gonvar Plus',
+        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
+        // }
+        // await createNotification(notification);
       }
     })
   }
