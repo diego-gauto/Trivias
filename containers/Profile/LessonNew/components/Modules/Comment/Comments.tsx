@@ -9,7 +9,6 @@ import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addComment
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { DEFAULT_USER_IMG } from "../../../../../../constants/paths";
 import { createNotification } from "../../../../../../components/api/notifications";
-import { notification } from "antd";
 
 export interface Comment {
   answers: Answer[]
@@ -478,7 +477,6 @@ const Comments = (props: IComments) => {
                           <div className='middle'>
                             <p>{answer_comment.comment}</p>
                           </div>
-
                         </div>
                       )
                     })}

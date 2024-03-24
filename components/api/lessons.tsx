@@ -196,7 +196,13 @@ export const deleteCommentLikeApi = async (comment: any) => {
     });
 };
 
-export const addCommentAnswerApi = async (comment: any) => {
+export const addCommentAnswerApi = async (comment: {
+  comment: string,
+  userId: number,
+  commentId: number,
+  courseId: number
+}) => {
+  // comment.comment}', ${comment.userId}, ${comment.commentId}, ${comment.courseId
   return axios
     .post("https://gonvar.inowu.dev/" + `lessons/add-comment-answer`, comment)
     .then((res) => {
@@ -232,7 +238,12 @@ export const deleteCommentAnswerLikeApi = async (comment: any) => {
     });
 };
 
-export const addCommentToAnswerApi = async (comment: any) => {
+export const addCommentToAnswerApi = async (comment: {
+  comment: string,
+  userId: number,
+  commentId: number
+}) => {
+  // comment.comment}', ${comment.userId}, ${comment.commentId
   return axios
     .post("https://gonvar.inowu.dev/" + `lessons/add-comment-to-answer`, comment)
     .then((res) => {

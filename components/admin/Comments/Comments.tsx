@@ -255,20 +255,16 @@ const Comments = () => {
       notificationId: '',
       courseId: comment.course_id,
       lesson: comment.lessons_id,
-      season: comment.season_number,
+      season: comment.season_number - 1,
       userCommentId: answer === undefined ? comment.user_id : answer.user_id,
     }
-
-    let body: any;
-    body = {
-      userId: userData.id,
-      comment: level === 1 ? answerText : answerComment,
-      commentId: comment.id,
-      courseId: comment.course_id
-    }
-
     if (answerText) {
-      addCommentAnswerApi(body).then((res) => {
+      addCommentAnswerApi({
+        userId: userData.id,
+        comment: level === 1 ? answerText : answerComment,
+        commentId: comment.id,
+        courseId: comment.course_id
+      }).then((res) => {
         if (selectedCourseId === -1) {
           retrievComments();
         } else {
@@ -279,7 +275,11 @@ const Comments = () => {
         createNotification(notification);
       })
     } else if (answerComment) {
-      addCommentToAnswerApi(body).then((res) => {
+      addCommentToAnswerApi({
+        userId: answer === undefined ? comment.user_id : answer.user_id,
+        comment: level === 1 ? answerText : answerComment,
+        commentId: answer === undefined ? comment.id : answer.id,
+      }).then((res) => {
         if (selectedCourseId === -1) {
           retrievComments();
         } else {
