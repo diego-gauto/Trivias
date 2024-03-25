@@ -55,7 +55,7 @@ const Notifications = (props: NotificationsProps) => {
       notification.type === "14") {
       router.push({
         pathname: LESSON_PATH,
-        query: { id: notification.course_id, season: notification.season, lesson: notification.lesson },
+        query: { id: notification.course_id, season: notification.season ?? 0, lesson: notification.lesson ?? 0 },
       });
     }
     if (notification.type === "7") {
