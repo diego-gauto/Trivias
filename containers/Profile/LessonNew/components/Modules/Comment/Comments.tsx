@@ -155,12 +155,10 @@ const Comments = (props: IComments) => {
       setResponses(temp);
       setLastComments(tempComments);
       setCurrentComments(res.data.data)
-      console.log({ comments: res.data.data });
     })
   }
 
   const like = (comment: Comment) => {
-    console.log({ comment });
     if (comment.user_id === user.user_id) {
       return;
     }

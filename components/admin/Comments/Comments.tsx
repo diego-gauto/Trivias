@@ -128,7 +128,6 @@ const Comments = () => {
     }
     setUserData(user);
     getComments().then(async (res) => {
-      console.log({ res: res.data });
       let tempComments = res.data.comments
       if (user.role === "admin") {
         let array = user.roles[7].courses.split(",");
@@ -163,7 +162,6 @@ const Comments = () => {
         }
       })
       setCourse(availableCourses);
-      console.log({ availableCourses });
     })
   }
   const FilteredComments = (course_id: number) => {
@@ -379,8 +377,6 @@ const Comments = () => {
                     </div>
                     {answer1.comments.length > 0 ? <p className="title pl">Respuestas</p> : <p className="title pl">Sin Respuestas</p>}
                     {answer1.comments && answer1.comments.map((answer2, ans_ind: number) => {
-                      console.log(answer2.comment);
-                      console.log({ answerLastLevel: answer2 });
                       return (
                         <div className="answer pl" key={"admin_answer_comment_" + ans_ind}>
                           <div className="left">
