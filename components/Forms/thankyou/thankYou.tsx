@@ -7,6 +7,8 @@ import styles from "./thankYou.module.css";
 import { useEffect, useState } from "react";
 import { getFormApi } from "../../api/form";
 
+const watsapOut = "/images/landing_suscription/whatsapp_outline.png";
+
 import {
   Background,
   LoaderContain,
@@ -46,8 +48,18 @@ const ThankYouForm = () => {
   const [form, setForm] = useState<Form | null>();
   const [loading, setLoading] = useState(true);
 
-  const { container, textContainer, title, subtitle, paragraph, imgContainer } =
-    styles;
+  const {
+    container,
+    textContainer,
+    title,
+    subtitle,
+    paragraph,
+    imgContainer,
+    watsapButton,
+    allCenter,
+    watsapLogo,
+    whatsappContainer,
+  } = styles;
 
   const router = useRouter();
   let formId = router.query.formId;
@@ -68,6 +80,35 @@ const ThankYouForm = () => {
     "12",
   ]; // Arreglo de IDs válidos
   const specialFormIds = ["10", "11", "12", undefined];
+
+  const isLinkToWhatsappGroup = (text: string | undefined): boolean => {
+    // Si el texto es undefined, retornar false
+    if (typeof text !== "string" || text.trim() === "") {
+      return false;
+    }
+
+    // Verificar si el texto comienza con el prefijo correcto
+    if (!text.startsWith("https://chat.whatsapp.com/")) {
+      return false;
+    }
+
+    // Extraer el código del grupo de WhatsApp del enlace
+    const groupCode = text.slice("https://chat.whatsapp.com/".length);
+
+    console.log(groupCode);
+    // Verificar si el código del grupo tiene la longitud esperada (22 caracteres)
+    return groupCode.length === 22;
+  };
+
+  const redirectToWhatsAppChat = () => {
+    const link = form?.redirect.link;
+    if (link) {
+      router.push(link);
+    } else {
+      // Manejar el caso en el que link es undefined
+      console.error("El enlace de redirección es indefinido");
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,6 +197,22 @@ const ThankYouForm = () => {
           En los próximos dias nos comunicaremos contigo para <br />
           indicarte los pasos a seguir.
         </p>
+
+        {isLinkToWhatsappGroup(form?.redirect.link) && (
+          <div className={whatsappContainer}>
+            <p className={paragraph}>
+              Te invitamos a unirte a <br />
+              nuestro grupo de whatsapp
+            </p>
+            <div
+              className={`${watsapButton} ${allCenter}`}
+              onClick={() => redirectToWhatsAppChat()}
+            >
+              <img src={watsapOut} className={watsapLogo} />
+              <p className="my-1">Quiero unirme</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className={imgContainer}>
