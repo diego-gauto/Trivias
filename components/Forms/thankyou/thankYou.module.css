@@ -130,10 +130,10 @@
 
   .watsapButton {
     cursor: pointer;
-    width: 220px;
+    width: 200px;
     height: 50px;
     border: none;
-    padding: 0 25px;
+    padding: 0 45px;
 
     border-radius: 50px;
     color: #ffffff;
@@ -141,6 +141,10 @@
     background-color: #28af25;
 
     margin: 0 0 0 30px;
+
+    @media (max-width: 719px) {
+      margin: 0 auto;
+    }
   }
 }
 

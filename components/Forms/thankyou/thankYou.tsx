@@ -194,22 +194,25 @@ const ThankYouForm = () => {
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
         <p className={paragraph}>
-          En los próximos dias nos comunicaremos contigo para <br />
+          En los próximos días nos comunicaremos contigo para <br />
           indicarte los pasos a seguir.
         </p>
 
         {isLinkToWhatsappGroup(form?.redirect.link) && (
           <div className={whatsappContainer}>
             <p className={paragraph}>
-              Te invitamos a unirte a <br />
-              nuestro grupo de whatsapp
+              <b>2do Paso</b>
+              <br />
+              Únete al grupo de whatsapp ahora
             </p>
             <div
               className={`${watsapButton} ${allCenter}`}
               onClick={() => redirectToWhatsAppChat()}
             >
               <img src={watsapOut} className={watsapLogo} />
-              <p className="my-1">Quiero unirme</p>
+              <p className="my-1">
+                <b>Unirme</b>
+              </p>
             </div>
           </div>
         )}
