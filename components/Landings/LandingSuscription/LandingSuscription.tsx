@@ -353,7 +353,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
 
 
 
-        <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
+        <h3 className="bold">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
           <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>

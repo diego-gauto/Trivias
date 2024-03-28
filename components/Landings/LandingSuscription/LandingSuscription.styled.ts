@@ -149,7 +149,7 @@ export const SuscriptionContain = styled.div`
       }
     }
     .gonvarplus {
-      margin-block: 60px;
+      margin-block: 10px;
     }
     .plusgonvar {
       width: 70px;
@@ -182,7 +182,7 @@ export const SuscriptionContain = styled.div`
         .left-image {
           position: absolute;
           left: -10px;
-          top: -555px;
+          top: -180px;
           width: 30%;
           max-width: 550px;
         }
@@ -198,7 +198,7 @@ export const SuscriptionContain = styled.div`
           right: 0px;
           width: 22%;
           max-width: 450px;
-          top: -440px;
+          top: -25px;
         }
         .images-fade {
           position: absolute;
@@ -273,7 +273,6 @@ export const SuscriptionContain = styled.div`
     }
     .course-container {
       margin-inline: 15px;
-      gap: 20px;
       .res {
         display: none;
       }
@@ -814,7 +813,6 @@ export const SuscriptionContain = styled.div`
     .courses-section {
       .course-container {
         margin-inline: 8px;
-        gap: 20px;
         .res {
           display: flex;
         }
@@ -842,11 +840,15 @@ export const SuscriptionContain = styled.div`
           position: absolute;
           bottom: -180px;
         }
+        .resp-left,
+        .resp-right {
+          z-index: -1;
+        }
         .resp-left {
           position: absolute;
           width: 240px;
           left: -12px;
-          top: 940px;
+          top: 780px;
         }
         .image-right {
           right: 0px;
@@ -1112,11 +1114,11 @@ export const SuscriptionContain = styled.div`
       }
       .background-images-responsive {
         .resp-left {
-          top: 770px;
+          top: 840px;
         }
         .resp-right {
           width: 180px;
-          top: -450px;
+          top: -327px;
         }
       }
       .progress-container {
@@ -1582,6 +1584,22 @@ export const SuscriptionContain = styled.div`
       .plusgonvar {
         width: 32px;
         height: 32px;
+      }
+      .background-images {
+        .image-contain {
+          .left-image {
+            left: -10px;
+            top: -180px;
+            width: 30%;
+          }
+          .right-image {
+            right: 0px;
+            top: -25px;
+          }
+          .resp-left {
+            top: 885px;
+          }
+        }
       }
     }
     .courses-section {
