@@ -1,5 +1,5 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
+// background-color: rgba(210, 68, 209, 0.25);
 export const SuscriptionContain = styled.div`
   position: relative;
   text-align: center;
@@ -69,8 +69,71 @@ export const SuscriptionContain = styled.div`
 
   .intro-section {
     width: 100%;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
     position: relative;
+    background: linear-gradient(
+      180deg,
+      rgba(210, 68, 209, 0.25) 55%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    .countdown {
+      margin-top: 32px;
+      .time {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        .countdown-block {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          .tiempo {
+            width: 120px;
+            height: 130px;
+            color: #000;
+            border-radius: 24px;
+            border: 2px solid #6b7074;
+            background: rgb(179, 185, 189);
+            background: linear-gradient(
+              180deg,
+              #b3b9bd 0%,
+              #ffffff 50%,
+              #b3b9bd 100%
+            );
+            font-size: 5rem;
+          }
+        }
+      }
+    }
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      .progress-bar {
+        border-radius: 32px;
+        background-color: #f6f7fa;
+        width: 400px;
+        height: 50px;
+        position: relative;
+        &.full {
+          outline: 2px solid #ff0000;
+        }
+        &::after {
+          position: relative;
+          content: attr(progress-text);
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: #3f1168;
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          width: var(--progress);
+          height: 100%;
+          border-radius: 32px;
+          background: #00e1ff;
+        }
+      }
+    }
     .gonvarplus {
       margin-block: 60px;
     }
@@ -102,12 +165,26 @@ export const SuscriptionContain = styled.div`
           width: 30%;
           max-width: 550px;
         }
+        .left-image {
+          position: absolute;
+          left: -80px;
+          top: -550px;
+          width: 30%;
+          max-width: 550px;
+        }
         .right-woman {
           position: absolute;
           right: -80px;
           width: 22%;
           max-width: 390px;
           top: -15px;
+        }
+        .right-image {
+          position: absolute;
+          right: 0px;
+          width: 22%;
+          max-width: 390px;
+          top: -385px;
         }
         .images-fade {
           position: absolute;
@@ -201,9 +278,10 @@ export const SuscriptionContain = styled.div`
   }
 
   .ubi-section {
-    margin-block: 75px;
+    padding-block: 75px;
     width: 100%;
     position: relative;
+    background-color: rgba(210, 68, 209, 0.25);
     .back-ghosts {
       .g-1 {
         position: absolute;
@@ -266,7 +344,8 @@ export const SuscriptionContain = styled.div`
 
   .difficulties-section {
     width: 100%;
-    margin-block: 75px;
+    padding-block: 75px;
+    background-color: rgba(210, 68, 209, 0.25);
     .dif-lines {
       margin-block: 50px;
       display: flex;
@@ -314,9 +393,12 @@ export const SuscriptionContain = styled.div`
   }
 
   .certificado-section {
-    width: 1200px;
-    margin-block: 75px;
+    width: 100%;
+    /* background-color: rgba(210, 68, 209, 0.25); */
+    padding-block: 75px;
+    padding-inline: 12%;
     position: relative;
+    background-color: rgba(210, 68, 209, 0.25);
     .back-lines {
       position: absolute;
       z-index: -1;
@@ -382,8 +464,9 @@ export const SuscriptionContain = styled.div`
 
   .benefits-section {
     width: 100%;
-    margin-block: 75px;
-    padding-right: 100px;
+    padding-block: 75px;
+    padding-inline: 70px;
+    background-color: rgba(210, 68, 209, 0.25);
     .all-center {
       padding-left: 50px;
       h2 {
@@ -462,6 +545,7 @@ export const SuscriptionContain = styled.div`
   .testimonio-section {
     padding-block: 50px;
     width: 100%;
+    background-color: rgba(210, 68, 209, 0.25);
     .experiences-container {
       display: flex;
       justify-content: center;
@@ -551,7 +635,9 @@ export const SuscriptionContain = styled.div`
 
   .dudas-section {
     width: 100%;
-    margin-block: 75px;
+    padding-top: 40px;
+    margin-bottom: 35px;
+    background-color: rgba(210, 68, 209, 0.25);
     .dudas-img {
       position: relative;
       .watsap-button {
@@ -742,8 +828,10 @@ export const SuscriptionContain = styled.div`
           bottom: -180px;
         }
         .resp-left {
-          min-width: 160px;
-          left: 0px;
+          position: absolute;
+          width: 240px;
+          left: -12px;
+          top: 650px;
         }
         .image-right {
           right: 0px;
@@ -757,7 +845,10 @@ export const SuscriptionContain = styled.div`
           }
         }
         .resp-right {
-          min-width: 120px;
+          width: 220px;
+          top: -425px;
+          position: absolute;
+          right: 0px;
         }
       }
       .background-images {
@@ -970,6 +1061,14 @@ export const SuscriptionContain = styled.div`
         padding-block: 8px;
         padding-inline: 25px;
         font-size: 14px;
+      }
+      .background-images-responsive {
+        .resp-left {
+          display: none;
+        }
+        .resp-right {
+          display: none;
+        }
       }
     }
     .courses-section {
