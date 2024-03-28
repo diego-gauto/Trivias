@@ -228,7 +228,7 @@ export const SuscriptionContain = styled.div`
       }
       p {
         margin: 0;
-        font-size: 1rem;
+        font-size: 1.25rem;
         font-weight: 400;
       }
       .title {
