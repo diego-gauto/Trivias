@@ -80,6 +80,8 @@ export const RetryPayment = () => {
     // })
   }
   const conektaErrorResponseHandler = (response: any) => {
+    console.log(response);
+
     alert("Hay un error en los datos de la tarjeta!")
     setLoaderAdd(false)
   };
