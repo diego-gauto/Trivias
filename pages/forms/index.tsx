@@ -18,11 +18,7 @@ import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import OptionComponent from "../../components/Forms/option/option";
 import { db } from "../../firebase/firebaseConfig";
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from "../../screens/Login.styled";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
 
 interface Answer {
@@ -365,10 +361,10 @@ const Formularios = () => {
     console.log(createUserDto);
 
     try {
-      // const res = await createUserFormApi(createUserDto);
-      // const createUserResult = res.data.result;
-      const createUserResult = true;
-      console.log(createUserResult);
+      const res = await createUserFormApi(createUserDto);
+      const createUserResult = res.data.result;
+      // const createUserResult = true;
+      // console.log(createUserResult);
       // const createUserResult = false;
 
       if (createUserResult) {
@@ -596,9 +592,9 @@ const Formularios = () => {
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                  formik.errors.option3 && (
-                    <div className={errorOption}>{formik.errors.option3}</div>
-                  )
+                formik.errors.option3 && (
+                  <div className={errorOption}>{formik.errors.option3}</div>
+                )
                 : null}
             </div>
           </div>
