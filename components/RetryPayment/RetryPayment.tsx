@@ -59,6 +59,8 @@ export const RetryPayment = () => {
           cvc: card.cvc,
         }
       }
+      console.log(tempCard);
+
       window.Conekta.Token.create(
         tempCard,
         conektaSuccessResponseHandler,
