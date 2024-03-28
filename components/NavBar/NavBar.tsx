@@ -372,7 +372,7 @@ const NavBar = () => {
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
-      {firstTime && <RetryPayModal show={show} onHide={() => { setShow(false); setFirstTime(false); }} withSubscription={withSubscription} />}
+      {firstTime && userData && userData.email === 'leo_dany_1998@hotmail.com' && <RetryPayModal show={show} onHide={() => { setShow(false); setFirstTime(false); }} withSubscription={withSubscription} />}
       {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {
