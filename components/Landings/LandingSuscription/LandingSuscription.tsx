@@ -344,14 +344,14 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <img src={right_responsive_hands} className="resp-right" alt="chicas-lado-derecho" />
           </div>
         </div>
-        {
-          /*
-          <div className="">
+
+
+        <div className="">
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
           <img src={plus} className="mt-4 plusgonvar" />
         </div>
-          */
-        }
+
+
 
         <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
@@ -364,7 +364,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>
 
         <div className="whatsap-container">
-          <div className="watsap-button all-center">
+          <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
             <img src="/images/landing_suscription/whatsapp_outline.png" className="" />
             <p className="bold" style={{ margin: '0' }}>Contacta con <br />un agente</p>
           </div>

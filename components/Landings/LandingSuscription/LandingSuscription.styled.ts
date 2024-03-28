@@ -846,7 +846,7 @@ export const SuscriptionContain = styled.div`
           position: absolute;
           width: 240px;
           left: -12px;
-          top: 750px;
+          top: 940px;
         }
         .image-right {
           right: 0px;
@@ -1116,7 +1116,7 @@ export const SuscriptionContain = styled.div`
         }
         .resp-right {
           width: 180px;
-          top: -310px;
+          top: -450px;
         }
       }
       .progress-container {
