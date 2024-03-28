@@ -9,6 +9,101 @@ import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addComment
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { DEFAULT_USER_IMG } from "../../../../../../constants/paths";
 import { createNotification } from "../../../../../../components/api/notifications";
+import { notification } from "antd";
+
+export interface Comment {
+  answers: Answer[]
+  comment: string
+  comment_created_at: string
+  comment_id: number
+  lessons_id: number
+  likes: CommentLike[]
+  name: string
+  photo: string
+  user_id: number
+}
+
+export interface CommentLike {
+  id: number,
+  user_id: number,
+  comments_id: number,
+}
+
+export interface Answer {
+  commentA_id: number
+  comment: string
+  commentA_created_at: string
+  name: string
+  photo: string
+  role: string
+  comment_user_id: number
+  likes: AnswerLike[]
+  comments: FinalComment[]
+}
+
+export interface AnswerLike {
+  id: number
+  comment_user_id: number
+  comment_answers_id: number
+  comment: string
+  created_at: string
+  comments_id: number
+  user_id: number
+  course_id: number
+}
+
+export interface FinalComment {
+  commentToAnswer_id: number
+  comment: string
+  commentToAnswer_created_at: string
+  name: string
+  photo: string
+  role: string
+  comment_user_id: number
+  likes: FinalCommentLike[]
+}
+
+export interface FinalCommentLike {
+  id: number
+  comment_user_id: number
+  comment_answer_comment_id: number
+  comment: string
+  comment_answers_id: number
+  user_id: number
+  created_at: string
+}
+
+export interface User {
+  id: number
+  name: string
+  last_name: string
+  email: string
+  password: string
+  phone_number: string
+  role: string
+  photo: string
+  score: number
+  stripe_id: string
+  provider: string
+  created_at: string
+  past_user: string
+  subscription: number
+  last_sign_in: string
+  country: string
+  conekta_id: string
+  terms: number
+  come_from: string
+  origin_state: any
+  user_id: number
+  final_date: number
+  level: number
+  method: any
+  payment_method: any
+  plan_id: any
+  plan_name: any
+  start_date: number
+  type: any
+}
 
 interface IComments {
   course: any,
@@ -16,14 +111,14 @@ interface IComments {
 }
 const Comments = (props: IComments) => {
   const { course, lesson } = props;
-  const [currentComments, setCurrentComments] = useState<any>([]);
+  const [currentComments, setCurrentComments] = useState<Comment[]>([]);
   const [comment, setComment] = useState("");
   const [answer, setAnswer] = useState("");
   const [answerComment, setAnswerComment] = useState("");
   const [responses, setResponses] = useState<any>([]);
   const [lastComments, setLastComments] = useState<any>([]);
   const context = useAuth();
-  const user = context.user;
+  const user = context.user as User;
 
   const addLessonComment = () => {
     let body: any;
@@ -61,17 +156,22 @@ const Comments = (props: IComments) => {
       setResponses(temp);
       setLastComments(tempComments);
       setCurrentComments(res.data.data)
+      console.log({ comments: res.data.data });
     })
   }
 
-  const like = (x: any) => {
+  const like = (comment: Comment) => {
+    console.log({ comment });
+    if (comment.user_id === user.user_id) {
+      return;
+    }
     let temp = {
       userId: user.user_id,
-      commentId: x.comment_id
+      commentId: comment.comment_id
     }
-    if (x.likes.findIndex((x: any) => x.user_id == user.user_id) === -1) {
+    if (comment.likes.findIndex((commentLike) => commentLike.user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.user_id,
+        userId: comment.user_id,
         type: "4",
         notificationId: '',
         courseId: course.id,
@@ -79,10 +179,12 @@ const Comments = (props: IComments) => {
         season: router.query.season,
         userLikeId: user.user_id,
       }
+
       createNotification(notification);
       addCommentLikeApi(temp).then(() => {
         getComments();
       })
+
     } else {
       deleteCommentLikeApi(temp).then(() => {
         getComments();
@@ -90,15 +192,19 @@ const Comments = (props: IComments) => {
     }
   }
 
-  const likeAnswer = (x: any) => {
-    let temp = {
-      userId: user.user_id,
-      commentId: x.commentA_id
+  const likeAnswer = (answer: Answer) => {
+    if (answer.comment_user_id === user.user_id) {
+      return;
     }
 
-    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
+    let temp = {
+      userId: user.user_id,
+      commentId: answer.commentA_id
+    }
+
+    if (answer.likes.findIndex((answerLike) => answerLike.comment_user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.comment_user_id,
+        userId: answer.comment_user_id,
         type: "4",
         notificationId: '',
         courseId: course.id,
@@ -106,10 +212,12 @@ const Comments = (props: IComments) => {
         season: router.query.season,
         userLikeId: user.user_id,
       }
+
       createNotification(notification);
       addCommentAnswerLikeApi(temp).then(() => {
         getComments();
       })
+
     } else {
       deleteCommentAnswerLikeApi(temp).then((res) => {
         getComments();
@@ -117,14 +225,18 @@ const Comments = (props: IComments) => {
     }
   }
 
-  const likeCommentAnswer = (x: any) => {
+  const likeCommentAnswer = (comment: FinalComment) => {
+    if (comment.comment_user_id === user.user_id) {
+      return;
+    }
+
     let temp = {
       userId: user.user_id,
-      commentId: x.commentToAnswer_id
+      commentId: comment.commentToAnswer_id
     }
-    if (x.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
+    if (comment.likes.findIndex((x: any) => x.comment_user_id == user.user_id) === -1) {
       let notification = {
-        userId: x.comment_user_id,
+        userId: comment.comment_user_id,
         type: "4",
         notificationId: '',
         courseId: course.id,
@@ -244,10 +356,10 @@ const Comments = (props: IComments) => {
           <p className="regular-text">En esta sección puedes realizar comentarios, preguntas o sugerencias relacionadas a esta clase.</p>
           <div className='comment'>
             <Profile
-              src={DEFAULT_USER_IMG}
+              src={user.photo ? user.photo : DEFAULT_USER_IMG}
             />
             <div className='comment-contain'>
-              <CommentInput value={comment} maxLength={255} placeholder="Escribe tus comentarios" onChange={(e: any) => {
+              <CommentInput value={comment} maxLength={255} placeholder="Escribe tus comentarios" onChange={(e) => {
                 setComment(e.target.value)
               }}
                 onKeyDown={(e) => {
@@ -259,53 +371,42 @@ const Comments = (props: IComments) => {
                 {comment.length}/255
               </p>
             </div>
-
-            {/* <Button style={{ color: !comment ? 'gray' : '#6717cd', 'borderColor': !comment ? 'gray' : '#6717cd' }} onClick={addLessonComment}>Comentar</Button> */}
           </div>
         </CommentContain>
         <div className='line-m'></div>
-        {currentComments.map((x: any, index: any) => {
+        {currentComments.map((comment, index) => {
           return (
             <div className='comment-container' key={'comments-' + index}>
               <div className="top">
-                {x.photo
-                  ?
-                  <Profile src={x.photo} />
-                  :
-                  <Profile
-                    src={DEFAULT_USER_IMG}
-                  />}
-                <p>{x.name} <span>{getDate(x.comment_created_at)}</span></p>
+                <Profile
+                  src={comment.photo ? comment.photo : DEFAULT_USER_IMG} />
+                <p>{comment.name} <span>{getDate(comment.comment_created_at)}</span></p>
               </div>
               <div className='middle'>
-                <p>{x.comment}</p>
+                <p>{comment.comment}</p>
               </div>
               <div className="bottom">
                 <div className='left'>
                   <div className='new-comment'>
-                    <div className='like' onClick={() => { like(x) }}>
-                      {x.likes.findIndex((x: any) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
+                    <div className='like' onClick={() => { like(comment) }}>
+                      {comment.likes.findIndex((x) => x.user_id == user.user_id) !== -1 ? <FaHeart /> :
                         <FiHeart />}
-                      <p>{x.likes.length}</p>
+                      <p>{comment.likes.length}</p>
                     </div>
                     <button onClick={() => { toggle(index) }}>Responder</button>
                   </div>
                   {responses[index] && <div className='answer-input'>
-                    {user.photoURL
-                      ?
-                      <Profile src={user.photo} />
-                      :
-                      <Profile
-                        src={DEFAULT_USER_IMG}
-                      />}
+                    <Profile
+                      src={user.photo ? user.photo : DEFAULT_USER_IMG}
+                    />
                     <div className='comment-contain'>
                       <input value={answer} className='answer' placeholder='Escribe tu respuesta' type="text" maxLength={255}
-                        onChange={(e: any) => {
+                        onChange={(e) => {
                           setAnswer(e.target.value)
                         }}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
-                            answerQuestion(x);
+                            answerQuestion(comment);
                           }
                         }} />
                       <p className='comment-limit'>
@@ -316,48 +417,40 @@ const Comments = (props: IComments) => {
                   }
                 </div>
               </div>
-              {x.answers.map((ans: any, idx: any) => {
+              {comment.answers.map((answer, idx) => {
                 return (
                   <div className='answer-container' key={"Comments " + idx}>
                     <div className="top">
-                      {ans.photo
-                        ?
-                        <Profile src={ans.photo} />
-                        :
-                        <Profile
-                          src={DEFAULT_USER_IMG}
-                        />}
-                      <p>{ans.name} {ans.role === "admin" && <MdVerified />} <span>{getDate(ans.commentA_created_at)}</span></p>
+                      <Profile
+                        src={answer.photo ? answer.photo : DEFAULT_USER_IMG}
+                      />
+                      <p>{answer.name} {answer.role === "admin" && <MdVerified />} <span>{getDate(answer.commentA_created_at)}</span></p>
                     </div>
                     <div className='middle'>
-                      <p>{ans.comment}</p>
+                      <p>{answer.comment}</p>
                     </div>
                     <div className="bottom">
                       <div className='left'>
                         <div className='new-comment'>
-                          <div className='like' onClick={() => { likeAnswer(ans) }}>
-                            {ans.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
+                          <div className='like' onClick={() => { likeAnswer(answer) }}>
+                            {answer.likes.findIndex((x) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                               <FiHeart />}
-                            <p>{ans.likes.length}</p>
+                            <p>{answer.likes.length}</p>
                           </div>
                           <button onClick={() => { toggleAnswers(index, idx) }}>Responder</button>
                         </div>
                         {lastComments[index][idx] && <div className='answer-input'>
-                          {user.photoURL
-                            ?
-                            <Profile src={user.photo} />
-                            :
-                            <Profile
-                              src={DEFAULT_USER_IMG}
-                            />}
+                          <Profile
+                            src={user.photo ? user.photo : DEFAULT_USER_IMG}
+                          />
                           <div className='comment-contain'>
                             <input value={answerComment} className='answer' placeholder='Escribe tu respuesta' type="text"
-                              onChange={(e: any) => {
+                              onChange={(e) => {
                                 setAnswerComment(e.target.value)
                               }}
                               onKeyDown={(e) => {
                                 if (e.key === "Enter") {
-                                  answerQuestion(ans);
+                                  answerQuestion(answer);
                                 }
                               }} />
                             <p className='comment-limit'>
@@ -368,20 +461,16 @@ const Comments = (props: IComments) => {
                         </div>}
                       </div>
                     </div>
-                    {ans.comments.map((answer_comment: any, idx: any) => {
+                    {answer.comments.map((answer_comment, idx) => {
                       return (
                         <div className='answer-container' key={"Comments " + idx}>
                           <div className="top">
-                            {answer_comment.photo
-                              ?
-                              <Profile src={answer_comment.photo} />
-                              :
-                              <Profile
-                                src={DEFAULT_USER_IMG}
-                              />}
+                            <Profile
+                              src={answer_comment.photo ? answer_comment.photo : DEFAULT_USER_IMG}
+                            />
                             <p>{answer_comment.name} {answer_comment.role === "admin" && <MdVerified />} <span>{getDate(answer_comment.commentToAnswer_created_at)}</span></p>
                             <div className='like' onClick={() => { likeCommentAnswer(answer_comment) }}>
-                              {answer_comment.likes.findIndex((x: any) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
+                              {answer_comment.likes.findIndex((x) => x.comment_user_id == user.user_id) !== -1 ? <FaHeart /> :
                                 <FiHeart />}
                               <p>{answer_comment.likes.length}</p>
                             </div>

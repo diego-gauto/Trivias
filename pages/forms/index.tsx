@@ -16,11 +16,13 @@ import InputApellido from "../../components/Forms/inputApellido/inputApellido";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
-import ModalSuccessUserCreate from "../../components/Forms/Modals/modalSuccesUserCreate";
-import ModalUserExist from "../../components/Forms/Modals/modalUserExist";
 import OptionComponent from "../../components/Forms/option/option";
 import { db } from "../../firebase/firebaseConfig";
-import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
 
 interface Answer {
@@ -57,11 +59,85 @@ interface DisplayContentProps {
 }
 
 const Formularios = () => {
-  const {
-    query: { formId },
-  } = useRouter();
-  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
   const router = useRouter();
+  let formId: string | undefined = router.query.formId as string | undefined;
+  console.log(formId);
+  const validFormIds = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ]; // Arreglo de IDs válidos
+  const specialFormIds = ["10", "11", "12", undefined];
+
+  // const form10: Form = {
+  //   name: "campaña 11 Febrero 2024 Facebook",
+  //   title:
+  //     "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
+  //   subtitle:
+  //     "<p><strong>Más de 70 cursos</strong> de uñas, maquillaje y pestañas <strong>incluídos</strong>. Además, recibe acceso a cursos de Lash Master (3 cursos de pestañas en Técnicas Clásica, Abanicos Tecnológicos, Diseños y Efectos). Aprende en línea, <strong>Desde cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de <s>$6,307.00 MXN</s> reducido a un costo total de $1,599.00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). 💞 <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de $399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳</p>",
+  //   createdAt: "11-03-2024 15:40:36",
+  //   editedAt: "11-03-2024 20:50:35",
+  //   img: {
+  //     source:
+  //       "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/forms%2Fform_10?alt=media&token=bf9cd061-79de-4657-854a-85dd5c4bb4a8",
+  //     isVisible: true,
+  //   },
+  //   optionsArray: [
+  //     {
+  //       isVisible: true,
+  //       label: `<p>Recuerda que el <strong>costo del programa es de $1,599.00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa "Gonvar+ cuatrimestral" participan para <strong>ganar un iPad Nuevo</strong>, remodelación de su salón y miles de pesos más! <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Marzo. Elige tu plan de Pagos:</p>`,
+  //       options: [
+  //         {
+  //           label: "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
+  //           value: "Pagaré en 4 partes de 399 pesos",
+  //         },
+  //         {
+  //           label: "Pagaré en una sola exhibición máximo el día sábado",
+  //           value: "Pagaré en una sola exhibición",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       isVisible: true,
+  //       label: `<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>`,
+  //       options: [
+  //         {
+  //           label: "<p>Si, me comprometo a realizar el programa</p>",
+  //           value: "Si, me comprometo",
+  //         },
+  //         {
+  //           label: "<p>No, gracias. Quiero perder mi lugar</p>",
+  //           value: "No, gracias",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       isVisible: false,
+  //       label: "",
+  //       options: [
+  //         { label: "", value: "" },
+  //         { label: "", value: "" },
+  //       ],
+  //     },
+  //   ],
+  //   redirect: {
+  //     type: "customLink",
+  //     link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
+  //     textButton: "",
+  //   },
+  // };
+
+  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
+  // const router = useRouter();
 
   const [form, setForm] = useState<Form | null>();
 
@@ -73,20 +149,6 @@ const Formularios = () => {
   const [loading, setLoading] = useState(true);
 
   const errorRef = useRef<HTMLDivElement>(null);
-
-  // const [selectedOption1, setSelectedOption1] = useState<string | null>(null);
-  // const [selectedOption2, setSelectedOption2] = useState<string | null>(null);
-  // const [selectedOption3, setSelectedOption3] = useState<string | null>(null);
-
-  // const [isImageVisible, setIsImageVisible] = useState(true);
-  // const [isOption1Visible, setIsOption1Visible] = useState(true);
-  // const [isOption2Visible, setIsOption2Visible] = useState(true);
-  // const [isOption3Visible, setIsOption3Visible] = useState(true);
-
-  const [isUserCreateModalVisible, setIsUserCreateModalVisible] =
-    useState(false);
-  const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
-  // const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
 
   const {
     container,
@@ -112,6 +174,7 @@ const Formularios = () => {
     optionContainer,
     buttonContainer,
     submitButton,
+    center,
   } = styles;
 
   const validationSchema = Yup.object().shape({
@@ -163,26 +226,20 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-    // const selectedForm = forms[Number(formId) - 1];
-    // setForm(selectedForm);
-    // setLoading(false);
-
     const fetchData = async () => {
       try {
+        if (typeof formId !== "string" || !validFormIds.includes(formId)) {
+          // Si formId no está incluido en los IDs válidos, redirigir a página de error
+          router.push("/forms/formnotfound");
+          return; // Detener la ejecución de fetchData
+        }
         const formIdNumber: number = Number(formId);
-
-        const startTimestamp = performance.now();
 
         const res = await getFormApi(formIdNumber);
 
-        const endTimestamp = performance.now();
+        if (res && res.length > 0) {
+          const formTemp = res[0];
 
-        const tiempoTotal = endTimestamp - startTimestamp;
-        console.log(`La llamada a la API tomó ${tiempoTotal} milisegundos`);
-
-        const formTemp = res[0];
-
-        if (formTemp) {
           // Parsear la cadena JSON en la propiedad "questions"
           formTemp.img = JSON.parse(formTemp.img);
 
@@ -191,6 +248,7 @@ const Formularios = () => {
 
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
+          console.log("from Server");
           console.log(formTemp);
 
           setForm(formTemp);
@@ -198,7 +256,7 @@ const Formularios = () => {
         } else {
           try {
             // Identificador único del formulario que deseas recuperar
-            const customId = `form_${formId}`; // Reemplaza con tu lógica para obtener el ID del formulario
+            const customId = `form_${formId}`;
 
             // Referencia al documento del formulario en Firestore
             const formDocRef = doc(collection(db, "forms"), customId);
@@ -213,29 +271,27 @@ const Formularios = () => {
 
               setForm(formData);
               setLoading(false);
-
-              // Ahora puedes utilizar formData en tu lógica
             } else {
               // El documento no existe
-              console.log(
-                "El formulario con ID",
-                customId,
-                "no fue encontrado en Firebase."
-              );
+              // redirigir a pagina de error
+              console.log("El formulario no existe en Firebase");
             }
           } catch (error) {
             console.error("Error al recuperar datos desde Firebase:", error);
           }
         }
 
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
-        console.error("Error al obtener los datos del formulario:", error);
+        console.error("Error al recuperar datos desde el server:", error);
       }
     };
 
-    fetchData();
-  }, [formId]);
+    if (router.isReady) {
+      // formId = router.query.formId as string | undefined;
+      fetchData();
+    }
+  }, [router.isReady, formId]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -273,11 +329,6 @@ const Formularios = () => {
     formik.setFieldValue("numeroWhatsApp", value);
     formik.setFieldValue("nombrePais", selectedCountry);
     formik.setFieldValue("codigoPais", selectedCode);
-
-    // const isValid = isValidPhoneNumber(value, selectedCode)
-    // console.log(value)
-    // console.log(selectedCode)
-    // console.log(isValid)
   };
 
   const handleNombreBlur = () => {
@@ -295,11 +346,6 @@ const Formularios = () => {
   const handlePaisBlur = () => {
     formik.setFieldTouched("numeroWhatsApp", true);
   };
-
-  // const handleRedirect = (createUserSuccess: boolean) => {
-  //   router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
-  //   console.log("entro")
-  // };
 
   const handleSubmit = async (values: any) => {
     const lowerCaseMail = values.correo.toLowerCase();
@@ -548,13 +594,21 @@ const Formularios = () => {
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                formik.errors.option3 && (
-                  <div className={errorOption}>{formik.errors.option3}</div>
-                )
+                  formik.errors.option3 && (
+                    <div className={errorOption}>{formik.errors.option3}</div>
+                  )
                 : null}
             </div>
           </div>
           <div className={lineaAtravesada}></div>
+
+          {specialFormIds.includes(formId) &&
+            form?.redirect.type === "customLink" && (
+              <div className={center}>
+                <p>Al enviar tu solicitud te redirigiremos </p>
+                <p>a nuestro grupo de WhatsApp. Gracias</p>
+              </div>
+            )}
 
           <div className={buttonContainer}>
             <button
@@ -569,12 +623,6 @@ const Formularios = () => {
           </div>
         </form>
       </div>
-      {isUserCreateModalVisible && (
-        <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />
-      )}
-      {isUserExistModalVisible && (
-        <ModalUserExist closeModal={setIsUserExistModalVisible} />
-      )}
     </div>
   );
 };

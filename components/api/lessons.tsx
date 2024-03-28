@@ -61,16 +61,19 @@ export const updateUserProgressApi = async (progress: any) => {
     });
 };
 
-export const getUserQuizApi = async (quiz: any) => {
+export interface UserQuiz {
+  id: number
+  grade: number
+  lesson_id: number
+  quiz_id: number
+  user_id: number
+}
+
+export const getUserQuizApi = async (quiz: { lessonId: number, userId: number }) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "lessons/user-quiz", quiz)
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .post<{
+      data: UserQuiz[]
+    }>("https://gonvar.inowu.dev/" + "lessons/user-quiz", quiz);
 };
 
 export const updateUserProgressByQuizApi = async (progress: any) => {

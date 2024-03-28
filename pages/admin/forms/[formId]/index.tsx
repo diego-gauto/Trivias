@@ -7,13 +7,8 @@ import Papa from "papaparse";
 import UserFormList from "../../../../components/admin/Forms/userFormList/userFormList";
 // import { getAllTriviasApi } from "../../../../components/api/trivias";
 import { getUsersByFormApi } from "../../../../components/api/userform";
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from "../../../../screens/Login.styled";
+import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import styles from "./listUser.module.css";
-import { getUserMembership } from "../../../../components/api/users";
 
 interface UserForm {
   id: number;
@@ -70,6 +65,7 @@ const UsersForms = () => {
     pageItem,
     pageLink,
     active,
+    custom_table
   } = styles;
 
   const {
@@ -179,7 +175,10 @@ const UsersForms = () => {
         <h3>Total de usuarios: {usersForms.length}</h3>
       </div>
 
-      <UserFormList usersForm={users} />
+      <div className={custom_table}>
+
+        <UserFormList usersForm={users} />
+      </div>
 
       <nav>
         <ul className={pagination}>
@@ -187,9 +186,8 @@ const UsersForms = () => {
             // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
             numbers.map((number, index) => (
               <li
-                className={`${pageItem} ${
-                  currentPage === number ? active : ""
-                }`}
+                className={`${pageItem} ${currentPage === number ? active : ""
+                  }`}
                 key={index}
               >
                 <a

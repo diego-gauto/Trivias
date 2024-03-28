@@ -142,7 +142,9 @@ export const RewardComponent = (props: IReward) => {
             </div>
           </div>
         </div>
-        <h5>Gracias a nuestro sistema de puntos,{responsive650 && <br />} beneficios y certificados acumulables, <br />
+        <h5 style={{
+          paddingInline: '20px'
+        }}>Gracias a nuestro sistema de puntos,{responsive650 && <br />} beneficios y certificados acumulables, <br />
           <b className="p-pink bold">puedes ganar miles de pesos en productos y premios</b> <br />
           sólo por <b>permanecer suscrita, concluir tus {responsive650 && <br />}cursos y hacer tus tareas.</b></h5>
       </RewardsContainer>
