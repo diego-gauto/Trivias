@@ -600,13 +600,13 @@ const Formularios = () => {
           </div>
           <div className={lineaAtravesada}></div>
 
-          {specialFormIds.includes(formId) &&
+          {/* {specialFormIds.includes(formId) &&
             form?.redirect.type === "customLink" && (
               <div className={center}>
                 <p>Al enviar tu solicitud te redirigiremos </p>
                 <p>a nuestro grupo de WhatsApp. Gracias</p>
               </div>
-            )}
+            )} */}
 
           <div className={buttonContainer}>
             <button
