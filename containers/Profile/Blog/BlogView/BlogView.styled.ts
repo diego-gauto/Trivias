@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BlogContainer = styled.div`
   display: flex;
@@ -348,6 +348,7 @@ export const GonvarAd = styled.div`
   border-radius: 20px;
   border: 1px solid #c6c6c6;
   padding: 20px;
+  gap: 20px;
   @media (max-width: 700px) {
     flex-direction: column;
     gap: 30px;
@@ -357,7 +358,6 @@ export const GonvarAd = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 100px;
     width: 50%;
     @media (max-width: 700px) {
       width: 100%;
@@ -371,7 +371,7 @@ export const GonvarAd = styled.div`
       margin: 0;
     }
     .img-display {
-      width: 50%;
+      width: 80%;
       @media (max-width: 700px) {
         width: 70%;
       }

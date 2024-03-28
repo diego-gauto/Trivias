@@ -9,7 +9,6 @@ import { addCommentAnswerApi, addCommentAnswerLikeApi, addCommentApi, addComment
 import { useAuth } from "../../../../../../hooks/useAuth";
 import { DEFAULT_USER_IMG } from "../../../../../../constants/paths";
 import { createNotification } from "../../../../../../components/api/notifications";
-import { notification } from "antd";
 
 export interface Comment {
   answers: Answer[]
@@ -156,12 +155,10 @@ const Comments = (props: IComments) => {
       setResponses(temp);
       setLastComments(tempComments);
       setCurrentComments(res.data.data)
-      console.log({ comments: res.data.data });
     })
   }
 
   const like = (comment: Comment) => {
-    console.log({ comment });
     if (comment.user_id === user.user_id) {
       return;
     }
@@ -478,7 +475,6 @@ const Comments = (props: IComments) => {
                           <div className='middle'>
                             <p>{answer_comment.comment}</p>
                           </div>
-
                         </div>
                       )
                     })}

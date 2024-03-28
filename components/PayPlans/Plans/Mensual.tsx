@@ -48,7 +48,6 @@ const Mensual = (props: IData) => {
       // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
       // Si una usuaria es de pago recurrente nivel 1, 4, 7
       // debugger;
-      console.log({ user });
       if ([1, 4, 7].includes(user.level)/* && user.final_date < (today - 6 * 24 * 60 * 60)*/) {
         router.push(PREVIEW_PATH);
       }

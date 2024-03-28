@@ -8,23 +8,118 @@ import { getUserApi } from "../../api/users";
 import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
 import { GrClose } from "react-icons/gr";
+import { createNotification } from "../../api/notifications";
+
+export interface Comment {
+  id: number
+  comment: string
+  created_at: string
+  user_id: number
+  lessons_id: number
+  course_id: number
+  lesson_title: string
+  lesson_number: number
+  season_number: number
+  course_title: string
+  season_title: string
+  answers: Answer[]
+  formatDate: string
+}
+
+export interface Answer {
+  id: number
+  comment: string
+  created_at: string
+  comments_id: number
+  user_id: number
+  course_id: number
+  comments: CommentOfAnswer[]
+}
+
+export interface CommentOfAnswer {
+  id: number
+  comment: string
+  comment_answers_id: number
+  user_id: number
+  created_at: string
+}
+
+export interface Course {
+  id: number
+  about: string
+  certificate_color: string
+  difficulty: string
+  mandatory: number
+  image: string
+  phrase: string
+  price: number
+  rating: number
+  reviews: number
+  subtitle: string
+  title: string
+  type: string
+  sequential: number
+  created_at: string
+  duration: number
+  published: number
+  route: string
+  course_number: number
+  with_certificate: number
+  material_route: string
+  professors: Professor[]
+  categories: Category[]
+  materials: Material[]
+}
+
+export interface Professor {
+  id: number
+  course_id: number
+  professors_id: number
+  name: string
+  about: string
+  sign: string
+  image: string
+}
+
+export interface Category {
+  id: number
+  course_id: number
+  categories_id: number
+  name: string
+}
+
+export interface Material {
+  id: number
+  course_id: number
+  materials_id: number
+  name: string
+}
 
 const Comments = () => {
-  const [comments, setComments] = useState<any>()
+  const [comments, setComments] = useState<Comment[]>()
   const [userData, setUserData] = useState<any>(null);
-  const [comment, setComment] = useState<any>()
-  const [answer, setAnswer] = useState<any>("")
+  const [comment, setComment] = useState<Comment | undefined>(undefined)
+  const [answer, setAnswer] = useState<Answer | undefined>(undefined)
+  const [answerText, setAnswerText] = useState<any>("")
   const [answerComment, setAnswerComment] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
-  const [courses, setCourse] = useState<any>([]);
-  const [coursesId, setCoursesId] = useState<any>([]);
-  const [level, setLevel] = useState<any>(1);
+  const [courses, setCourse] = useState<Course[]>([]);
+  const [coursesId, setCoursesId] = useState<number[]>([]);
+  const [level, setLevel] = useState<number>(1);
   const [loader, setLoader] = useState<number>(-1);
   const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
 
   useEffect(() => {
     retrievComments()
   }, [])
+
+  const getFormattedDate = () => {
+    let today = new Date();
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
   const retrievComments = async () => {
     let user: any;
@@ -36,7 +131,7 @@ const Comments = () => {
       let tempComments = res.data.comments
       if (user.role === "admin") {
         let array = user.roles[7].courses.split(",");
-        let temp: any = [];
+        let temp: number[] = [];
         await Promise.all(array.map((x: any) => {
           temp.push(+x)
         }))
@@ -53,11 +148,7 @@ const Comments = () => {
         setCoursesId(temp);
       }
       tempComments.forEach((element: any) => {
-        let tempDate: any = new Date(element.created_at);
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        element.formatDate = getFormattedDate();
       });
       setComments(tempComments)
     })
@@ -71,17 +162,12 @@ const Comments = () => {
         }
       })
       setCourse(availableCourses);
-      console.log({ availableCourses });
     })
   }
   const FilteredComments = (course_id: number) => {
-    getComments().then(async (res: any) => {
-      res.data.comments.forEach((element: any) => {
-        let tempDate: any = new Date();
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    getComments().then(async (res) => {
+      res.data.comments.forEach((comment) => {
+        comment.formatDate = getFormattedDate();
       });
       let tempComments = res.data.comments
       tempComments = res.data.comments.filter((x: any) => x.course_id === course_id);
@@ -89,16 +175,12 @@ const Comments = () => {
     })
   }
   const AllComments = () => {
-    getComments().then(async (res: any) => {
-      res.data.comments.forEach((element: any) => {
-        let tempDate: any = new Date();
-        let tempDay = tempDate.getDate()
-        let tempMonth = tempDate.getMonth() + 1;
-        let tempYear = tempDate.getFullYear()
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    getComments().then(async (res) => {
+      res.data.comments.forEach((comment) => {
+        comment.formatDate = getFormattedDate();
       });
       let tempComments = res.data.comments
-      tempComments = res.data.comments.filter((x: any) => coursesId.includes(x.course_id));
+      tempComments = res.data.comments.filter((comment) => coursesId.includes(comment.course_id));
       setComments(tempComments);
     })
   }
@@ -161,26 +243,41 @@ const Comments = () => {
       alert("No tienes permisos para esta acción");
       return;
     }
-    let body: any;
-    body = {
-      userId: userData.id,
-      comment: level === 1 ? answer : answerComment,
-      commentId: comment.id,
-      courseId: comment.course_id
+    if (comment === undefined) {
+      return;
     }
-    if (answer) {
-      addCommentAnswerApi(body).then((res) => {
+    debugger;
+    let notification = {
+      userId: userData.id,
+      type: "3",
+      notificationId: '',
+      courseId: comment.course_id,
+      lesson: comment.lessons_id,
+      season: comment.season_number - 1,
+      userCommentId: answer === undefined ? comment.user_id : answer.user_id,
+    }
+    if (answerText) {
+      addCommentAnswerApi({
+        userId: userData.id,
+        comment: level === 1 ? answerText : answerComment,
+        commentId: comment.id,
+        courseId: comment.course_id
+      }).then((res) => {
         if (selectedCourseId === -1) {
           retrievComments();
         } else {
           FilteredComments(selectedCourseId);
         }
-        setAnswer("");
+        setAnswerText("");
         setPopUp(false);
+        createNotification(notification);
       })
-    }
-    if (answerComment) {
-      addCommentToAnswerApi(body).then((res) => {
+    } else if (answerComment) {
+      addCommentToAnswerApi({
+        userId: answer === undefined ? comment.user_id : answer.user_id,
+        comment: level === 1 ? answerText : answerComment,
+        commentId: answer === undefined ? comment.id : answer.id,
+      }).then((res) => {
         if (selectedCourseId === -1) {
           retrievComments();
         } else {
@@ -188,6 +285,7 @@ const Comments = () => {
         }
         setAnswerComment("");
         setPopUp(false);
+        createNotification(notification);
       })
     }
   }
@@ -207,6 +305,7 @@ const Comments = () => {
     });
   }
 
+
   return (
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
@@ -225,7 +324,7 @@ const Comments = () => {
             }}>
               <option value={-1}>Ver todos</option>
               {
-                courses.map((course: any, index: number) => {
+                courses.map((course, index: number) => {
                   return (
                     <option key={"course_comment_" + index} value={course.id}>
                       {course.title}
@@ -238,40 +337,51 @@ const Comments = () => {
         }
       </div>
       <AdminCommentsContainer>
-        {comments && comments.map((x: any, index: number) => {
+        {comments && comments.map((comment, index: number) => {
           return (
             <div className="comment-row" key={"admin_comments_" + index}>
               <div className="top">
-                <p><span>Curso: </span>{x.course_title}</p>
-                <p><span>Temporada: </span>{x.season_title}</p>
-                <p><span>Lección: </span>{x.lesson_title}</p>
-                <p><span>Comentario: </span>{x.comment}</p>
-                <p><span>Fecha: </span>{x.formatDate}</p>
+                <p><span>Curso: </span>{comment.course_title}</p>
+                <p><span>Temporada: </span>{comment.season_title}</p>
+                <p><span>Lección: </span>{comment.lesson_title}</p>
+                <p><span>Comentario: </span>{comment.comment}</p>
+                <p><span>Fecha: </span>{comment.formatDate}</p>
                 <div className="buttons">
-                  <button className="add" onClick={() => { goTo(x) }}>Ir a comentario</button>
-                  <button className="add" onClick={() => { setComment(x); setPopUp(true); setLevel(1) }}>Responder Comentario</button>
+                  <button className="add" onClick={() => { goTo(comment) }}>Ir a comentario</button>
+                  <button className="add" onClick={() => {
+                    setComment(comment);
+                    setAnswer(undefined);
+                    setPopUp(true);
+                    setLevel(1);
+                  }}>Responder Comentario</button>
                   {
                     loader === index ? <p>Cargando...</p>
-                      : <button className="delete" onClick={() => { deleteComment(x, index) }}>Eliminar</button>
+                      : <button className="delete" onClick={() => { deleteComment(comment, index) }}>Eliminar</button>
                   }
                 </div>
               </div>
-              {x.answers.length > 0 ? <p className="title">Respuestas</p> : <p className="title">Sin Respuestas</p>}
-              {x.answers.map((answer: any, ans_ind: number) => {
+              {comment.answers.length > 0 ? <p className="title">Respuestas</p> : <p className="title">Sin Respuestas</p>}
+              {comment.answers && comment.answers.map((answer1, ans_ind: number) => {
                 return (
                   <div className="answer" key={"admin_answer_" + ans_ind}>
                     <div className="left">
-                      <p>Fecha: {formatDate(answer.created_at)} <MdDeleteForever onClick={() => { deleteAnswer(answer) }} /></p>
-                      <p>{answer.comment}</p>
-                      <button className="add" onClick={() => { setComment(answer); setPopUp(true); setLevel(2) }}>Responder Comentario</button>
+                      <p>Fecha: {formatDate(answer1.created_at)} <MdDeleteForever onClick={() => { deleteAnswer(answer1) }} /></p>
+                      <p>{answer1.comment}</p>
+                      <button className="add" onClick={() => {
+                        setComment(comment);
+                        setAnswer(answer1);
+                        setPopUp(true);
+                        setLevel(2);
+                      }
+                      }>Responder Comentario</button>
                     </div>
-                    {answer.comments.length > 0 ? <p className="title pl">Respuestas</p> : <p className="title pl">Sin Respuestas</p>}
-                    {answer.comments.map((answer: any, ans_ind: number) => {
+                    {answer1.comments.length > 0 ? <p className="title pl">Respuestas</p> : <p className="title pl">Sin Respuestas</p>}
+                    {answer1.comments && answer1.comments.map((answer2, ans_ind: number) => {
                       return (
                         <div className="answer pl" key={"admin_answer_comment_" + ans_ind}>
                           <div className="left">
-                            <p>Fecha: {formatDate(answer.created_at)} <MdDeleteForever onClick={() => { deleteAnswerComment(answer) }} /></p>
-                            <p>{answer.comment}</p>
+                            <p>Fecha: {formatDate(answer2.created_at)} <MdDeleteForever onClick={() => { deleteAnswerComment(answer2) }} /></p>
+                            <p>{answer2.comment}</p>
                           </div>
                         </div>
                       )
@@ -283,11 +393,11 @@ const Comments = () => {
           )
         })}
         {popUp && <div className="pop-up">
-          <GrClose onClick={() => { setPopUp(false); setAnswer(""); setAnswerComment("") }} />
+          <GrClose onClick={() => { setPopUp(false); setAnswerText(""); setAnswerComment("") }} />
           <h1>Responder comentario</h1>
           <div className="comment-contain">
-            <textarea placeholder="La solución es..." maxLength={255} onChange={(e) => { level === 1 ? setAnswer(e.target.value) : setAnswerComment(e.target.value) }} />
-            <p className="indicator"> {answer.length} / 255</p>
+            <textarea placeholder="La solución es..." maxLength={255} onChange={(e) => { level === 1 ? setAnswerText(e.target.value) : setAnswerComment(e.target.value) }} />
+            <p className="indicator"> {answerText.length} / 255</p>
           </div>
           <button onClick={() => { answerQuestion() }}>Agregar</button>
         </div>}

@@ -49,7 +49,9 @@ const Courses = () => {
   window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
+  // aquí hay un problema
   const goTo = () => {
+    debugger;
     if (userData) {
       let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
       if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {

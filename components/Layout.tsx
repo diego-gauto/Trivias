@@ -29,10 +29,26 @@ const Layout = ({ children }: any) => {
     setTimeout(() => setIsLoading(false), 1000)
   }, []);
 
+  const isVisibleNavbar = (pathname: string) => {
+    const blackListOfURLs: string[] = [
+      "forms",
+      "suscripcion-cuatrimestral-",
+      "nails-master-revolution-"
+    ];
+    for (let index = 0; index < blackListOfURLs.length; index++) {
+      const url = blackListOfURLs[index] ?? '';
+      if (pathname.startsWith(url)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <Body >
       {
-        router.pathname.slice(1, 6) !== "forms" && <NavBar />
+        /*router.pathname.slice(1, 6) !== "forms" && <NavBar />*/
+        isVisibleNavbar(router.pathname.slice(1)) && <NavBar />
       }
 
       <ChildrenContain style={{

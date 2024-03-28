@@ -91,8 +91,6 @@ const Lesson = () => {
               }
               setCurrentLesson(res.seasons[season]!.lessons[lesson]);
               setCourse(res);
-              console.log('Value of courseData');
-              console.log({ res });
               getDataForNextLesson(res);
               setIsLoading(false);
 

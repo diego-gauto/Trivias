@@ -184,3 +184,15 @@ export const customerOrders = async (data: any) => {
       return error
     });
 };
+
+export const retryPayment = async (data: any) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + `profile/subscription/retry`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error
+    });
+};

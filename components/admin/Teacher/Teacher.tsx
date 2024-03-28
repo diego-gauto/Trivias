@@ -15,17 +15,25 @@ import { createProfessorApi, deleteProfessorApi, getProfessorApi, updateImagesfr
 import { IoMdExit } from 'react-icons/io';
 import { useRouter } from 'next/router';
 
+export interface Professor {
+  id: number
+  about: string
+  name: string
+  image: string
+  sign: string
+}
+
 const Teacher = () => {
   const [newTeacher, setNewTeacher] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [edit, setEdit] = useState<number>(-1);
-  const [teachers, setTeachers] = useState<any>([]);
+  const [teachers, setTeachers] = useState<Professor[]>([]);
   const [editImage, setEditImage] = useState<any>("");
   const [editSignImage, setEditSignImage] = useState<any>("");
   const [addImage, setAddImage] = useState<any>("");
   const [addSign, setAddSign] = useState<any>("");
   const router = useRouter();
-  const [updateTeacher, setUpdateTeacher] = useState<any>({
+  const [updateTeacher, setUpdateTeacher] = useState<Professor>({
     name: "",
     about: "",
     image: "",
@@ -64,7 +72,7 @@ const Teacher = () => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       setEditImage(reader.result)
-      setUpdateTeacher({ ...updateTeacher, image: reader.result })
+      setUpdateTeacher({ ...updateTeacher, image: reader.result as string })
     };
   }
   const changeSign = (file: any) => {
@@ -72,7 +80,7 @@ const Teacher = () => {
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
       setEditSignImage(reader.result)
-      setUpdateTeacher({ ...updateTeacher, sign: reader.result })
+      setUpdateTeacher({ ...updateTeacher, sign: reader.result as string })
     };
   }
   const createTeacher = () => {
@@ -114,7 +122,7 @@ const Teacher = () => {
   }
   const getAllteachers = () => {
     getProfessorApi().then((res) => {
-      setTeachers(res);
+      setTeachers(res.data.data);
     })
   }
   const changeUpdateData = (professor: any) => {
@@ -137,13 +145,14 @@ const Teacher = () => {
   }
   const update = async (val: any) => {
     if (editImage !== "") {
-      await updateProfessorImage(updateTeacher.image, updateTeacher.id).then((res) => {
-        updateTeacher.image = res;
+      await updateProfessorImage(updateTeacher.image, updateTeacher.id + '').then((res) => {
+        updateTeacher.image = res as any;
       })
     }
     if (editSignImage !== "") {
-      await updateProfessorSignature(updateTeacher.sign, updateTeacher.id).then((res) => {
-        updateTeacher.sign = res;
+      // Aquí se manda id, pero en los parametros dice name, posible ERROR
+      await updateProfessorSignature(updateTeacher.sign, updateTeacher.id + '').then((res) => {
+        updateTeacher.sign = res as any;
       })
     }
     updateProfessorApi(updateTeacher).then(() => {
@@ -257,12 +266,12 @@ const Teacher = () => {
           {teachers !== null
             ? <>
               {
-                teachers.map((val: any, i: any) => {
+                teachers.map((teacher, i: any) => {
                   return (
                     <CatContain key={"Categorias " + i}>
                       <EditCat>
                         <CatText>
-                          {val.name}
+                          {teacher.name}
                         </CatText>
                         <div>
                           {
@@ -271,8 +280,8 @@ const Teacher = () => {
                               <InputContain style={{ width: 500 }}>
                                 <Label>Nombre del Instructor</Label>
                                 <Input
-                                  defaultValue={val.name}
-                                  placeholder={"Editar nombre de: " + val.name}
+                                  defaultValue={teacher.name}
+                                  placeholder={"Editar nombre de: " + teacher.name}
                                   onChange={(e: any) => {
                                     setUpdateTeacher({ ...updateTeacher, name: e.target.value })
                                   }}
@@ -281,8 +290,8 @@ const Teacher = () => {
                               <InputContain style={{ width: 500 }}>
                                 <Label>Descripción del Instructor</Label>
                                 <Input
-                                  defaultValue={val.about == undefined ? "Nueva descripción" : val.about}
-                                  placeholder={val.about == undefined ? "Agregar descripción" : "Editar descripción: " + val.about}
+                                  defaultValue={teacher.about == undefined ? "Nueva descripción" : teacher.about}
+                                  placeholder={teacher.about == undefined ? "Agregar descripción" : "Editar descripción: " + teacher.about}
                                   onChange={(e: any) => {
                                     setUpdateTeacher({ ...updateTeacher, about: e.target.value })
                                   }}
@@ -298,7 +307,7 @@ const Teacher = () => {
                                 />
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                   {
-                                    (val.image && editImage == "") ? <img src={val.image} />
+                                    (teacher.image && editImage == "") ? <img src={teacher.image} />
                                       :
                                       <>
                                         {
@@ -318,7 +327,7 @@ const Teacher = () => {
                                 />
                                 <div style={{ display: "flex", justifyContent: "center" }}>
                                   {
-                                    (val.sign && editSignImage == "") ? <img src={val.sign} style={{ height: 40 }} />
+                                    (teacher.sign && editSignImage == "") ? <img src={teacher.sign} style={{ height: 40 }} />
                                       :
                                       <>
                                         {
@@ -331,7 +340,7 @@ const Teacher = () => {
                               <ButtonContain >
                                 <Button
                                   onClick={() => {
-                                    update(val);
+                                    update(teacher);
                                   }}
                                 >Editar</Button>
                               </ButtonContain>
@@ -341,9 +350,9 @@ const Teacher = () => {
 
                       </EditCat>
                       <CatData>
-                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); changeUpdateData(val); setNewTeacher(false) }} />
+                        <EditIcon onClick={() => { (edit !== i ? setEdit(i) : setEdit(-1)); changeUpdateData(teacher); setNewTeacher(false) }} />
                         <CloseIcon onClick={() => {
-                          Delete(val); setEdit(-1);
+                          Delete(teacher); setEdit(-1);
                         }} />
                       </CatData>
                     </CatContain>

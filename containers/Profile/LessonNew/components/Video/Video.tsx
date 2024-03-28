@@ -59,9 +59,10 @@ const Video = ({ user, actualLesson, course, openModal }: IVideoProps) => {
       const isUserApproveResponse = await getGenericQueryResponse(selectIsUserApprove);
       if (isUserApproveResponse.data.data.length === 0) {
         setIsQuizApprove(undefined);
+      } else {
+        const isUserApprove = isUserApproveResponse.data.data[0]["is_approve"];
+        setIsQuizApprove(isUserApprove === '1');
       }
-      const isUserApprove = isUserApproveResponse.data.data[0]["is_approve"];
-      setIsQuizApprove(isUserApprove === '1');
     } catch (error) {
       if (error instanceof Error) {
         console.error(error);

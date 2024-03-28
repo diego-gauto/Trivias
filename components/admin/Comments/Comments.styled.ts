@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const AdminCommentsContainer = styled.div`
   padding: 20px;
@@ -56,6 +56,7 @@ export const AdminCommentsContainer = styled.div`
       display: flex;
       flex-direction: column;
       gap: 20px;
+      padding-left: 25px;
       .add {
         background: #6717cd;
       }

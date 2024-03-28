@@ -234,10 +234,10 @@ const Courses = () => {
   }
   useEffect(() => {
     getProfessorApi().then((profs) => {
-      profs.forEach((element: any) => {
+      profs.data.data.forEach((element: any) => {
         element.professors_id = element.id;
       });
-      setProfessors(profs)
+      setProfessors(profs.data.data)
     })
     getMaterialsApi().then((mats) => {
       mats.forEach((element: any) => {

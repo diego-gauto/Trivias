@@ -22,7 +22,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { conektaCustomer } from "../api/auth";
 import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { updateMembership } from "../api/profile";
+import { customerOrders, updateMembership } from "../api/profile";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -49,6 +49,7 @@ import {
 import { SlBell } from "react-icons/sl";
 import Notifications from "./Notifications/Notifications";
 import { NotificationContainer } from "./Notifications/Notifications.styled";
+import { RetryPayModal } from "../Modals/RetryPayModal/RetryPayModal";
 
 interface NotificationByUser {
   notification_id: number
@@ -82,8 +83,10 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-
+  const [show, setShow] = useState(false);
+  const [withSubscription, setWithSubscription] = useState(true);
   const modalNotificationsRef = useRef<any>(null);
+  const [firstTime, setFirstTime] = useState(true);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (event === null) {
@@ -244,10 +247,10 @@ const NavBar = () => {
           conektaCustomer(body)
         };
 
+        let today = new Date().getTime() / 1000;
         userNotifications(userDataAuth.user.user_id)
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
-          let today = new Date().getTime() / 1000;
           if (today > course[0].final_date) {
             var day = new Date();
             var nextYear = new Date();
@@ -261,6 +264,22 @@ const NavBar = () => {
               alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
             })
           }
+        }
+
+        // if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 1 || userDataAuth.user.level === 4 || userDataAuth.user.level === 7)) {
+
+        //   customerOrders({ conekta_id: userDataAuth.user.conekta_id }).then((res) => {
+        //     const response = res.data.data;
+        //     if (response.length > 0 && response[0].payment_status === "pending_payment") {
+        //       setShow(true);
+        //       setWithSubscription(true);
+        //     }
+        //   })
+        // }
+        let diff = Math.round((today - userDataAuth.user.final_date) / 86400);
+        if (userDataAuth.user.final_date < today && diff < 90 && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0)) && pathname !== "/reintentar-pago") {
+          setShow(true);
+          setWithSubscription(false);
         }
 
         setUserData(userDataAuth.user);
@@ -349,9 +368,11 @@ const NavBar = () => {
       window.location.href = "/";
     }
   };
+
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
+      {firstTime && userData && userData.email === 'leo_dany_1998@hotmail.com' && <RetryPayModal show={show} onHide={() => { setShow(false); setFirstTime(false); }} withSubscription={withSubscription} />}
       {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
       <LogoContain>
         {
