@@ -267,13 +267,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
       }
       <div className="intro-section" >
         <img src={upsideLines} />
-        <div className="mt-3 fechas">
+        <div className="fechas" style={{ marginTop: '-20px' }}>
           <h4>
-            <b>Actualización 2024</b>
+            <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Inscripciones sólo desde el
-            <br />
-            16 de Marzo al 20 de Abril
+            Desde el 16 de Marzo al 20 de Abril
           </h4>
           <Countdown
             date={new Date(2024, 3, 20)}
@@ -364,12 +362,20 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
 
         <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>
+
+        <div className="whatsap-container">
+          <div className="watsap-button all-center">
+            <img src="/images/landing_suscription/whatsapp_outline.png" className="" />
+            <p className="bold" style={{ margin: '0' }}>Contacta con <br />un agente</p>
+          </div>
+        </div>
+
       </div>
 
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma de aprendizaje encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS{responsive650 && <br />}, PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS,{responsive650 && <br />}PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
@@ -381,7 +387,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
           <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
         </div>
-        <div className="all-center space">
+        <div className="all-center space less-margin">
           <div className="group-buttons">
             <div className="center">
               <button className={`${cursos === 1 && 'select'}`} onClick={() => setCursos(1)}>Cursos de Arte</button>
@@ -621,7 +627,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <h3 className="bold space">Los cursos son impartidos por {responsive650 && <br />}<b className="p-pink no-bold">instructores profesionales
           y {responsive650 && <br />}certificados,</b> {!responsive650 && <br />}que estarán guiándote {responsive650 && <br />}paso a paso, durante tu aprendizaje.</h3>
-        <button className="btn up-down spacing mb-5" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -770,14 +776,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                {
-                  type === "mensual" ?
-                    <>
-                      <h5><b className="p-pink">20% de descuento</b> en productos a partir del 2° mes</h5>
-                      <h5><b className="p-pink">40% de descuento</b> en productos a partir del 4° mes</h5>
-                    </> :
-                    <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
-                }
+                <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
               </div>
             </div>
 
