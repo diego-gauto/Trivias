@@ -219,7 +219,9 @@ const Quiz = (props: IQuiz) => {
         if (progress !== undefined) {
           progress.status = 1;
         }
-        //lesson.progress[tempIndex].status = true;
+        if (lesson.progress[tempIndex]) {
+          lesson.progress[tempIndex].status = 1;
+        }
         await updateUserProgressByQuizApi(progress);
       }
       await updateUserScoreApi(tempData);
@@ -227,7 +229,9 @@ const Quiz = (props: IQuiz) => {
     } else {
       if (points >= lesson.lesson_quizzes.passing_grade) {
         let tempIndex = lesson.progress.findIndex((x: any) => x.user_id === user.user_id);
-        // lesson.progress[tempIndex].status = true;
+        if (lesson.progress[tempIndex]) {
+          lesson.progress[tempIndex].status = 1;
+        }
         const progress = lesson.progress[tempIndex];
         if (progress !== undefined) {
           progress.status = 1;
