@@ -158,6 +158,7 @@ const Quiz = (props: IQuiz) => {
   };
 
   const checkAnswer = () => {
+    debugger;
     let score = 100 / lesson.lesson_quizzes.questions.length;
     let total =
       lesson.lesson_quizzes.points / lesson.lesson_quizzes.questions.length;
@@ -195,55 +196,38 @@ const Quiz = (props: IQuiz) => {
   }
 
   const checkQuiz = async () => {
+    if (!lesson) {
+      return;
+    }
     setLoader(true);
     let progress = {
       lessonId: lesson.id,
       user_id: user.user_id,
     };
-    let tempQuiz = {
+    let quiz = {
       lessonId: lesson.id,
       userId: user.user_id,
       grade: grade,
       quizId: lesson.lesson_quizzes.id,
     };
-    let tempData = {
+    let score = {
       points: user.score + grade,
       userId: user.user_id,
     };
-
+    debugger;
     setStep(2);
-    if (userQuizzes.length === 0) {
-      if (points >= lesson.lesson_quizzes.passing_grade) {
-        let tempIndex = lesson.progress.findIndex((x: any) => x.user_id === user.user_id);
-        const progress = lesson.progress[tempIndex];
-        if (progress !== undefined) {
-          progress.status = 1;
-        }
-        if (lesson.progress[tempIndex]) {
-          lesson.progress[tempIndex].status = 1;
-        }
-        await updateUserProgressByQuizApi(progress);
+    await updateUserQuizApi(quiz);
+    const gradePercent = generateGradePercent(lesson.id);
+    if (gradePercent >= lesson.lesson_quizzes?.passing_grade) {
+      let currentUserIndex = lesson.progress.findIndex((progress) => progress.user_id === user.user_id);
+      if (lesson.progress[currentUserIndex]) {
+        lesson.progress[currentUserIndex].status = 1;
       }
-      await updateUserScoreApi(tempData);
-      await updateUserQuizApi(tempQuiz);
-    } else {
-      if (points >= lesson.lesson_quizzes.passing_grade) {
-        let tempIndex = lesson.progress.findIndex((x: any) => x.user_id === user.user_id);
-        if (lesson.progress[tempIndex]) {
-          lesson.progress[tempIndex].status = 1;
-        }
-        const progress = lesson.progress[tempIndex];
-        if (progress !== undefined) {
-          progress.status = 1;
-        }
-        await updateUserProgressByQuizApi(progress);
-        if (userQuizzes.find((quiz) => quiz.lesson_id == lesson.id)) {
-          await updateUserQuizApi(tempQuiz);
-        } else {
-          await updateUserScoreApi(tempData);
-          await updateUserQuizApi(tempQuiz);
-        }
-      }
+      // Actualiza para que el usuario tiene el progreso de esa lección, solo si existe el registro
+      await updateUserProgressByQuizApi(progress);
+    }
+    if (!userQuizzes.find((quiz) => quiz.lesson_id == lesson.id)) {
+      await updateUserScoreApi(score);
     }
     reload();
     setLoader(false);
@@ -327,7 +311,11 @@ const Quiz = (props: IQuiz) => {
                         } pts</p>
                       </div>
                     </div>}
-                  <div className='passing-grade' style={{ left: `calc(${lesson.lesson_quizzes.passing_grade}% - 8px)` }}>
+                  <div
+                    className='passing-grade'
+                    style={{
+                      left: `calc(${lesson.lesson_quizzes.passing_grade}% - 8px)`
+                    }}>
                     <div className='line'>
                       <p className='minimum-top'>{lesson.lesson_quizzes?.passing_grade}%</p>
                       <p className='minimum'>MINIMO</p>
@@ -463,20 +451,9 @@ const Quiz = (props: IQuiz) => {
               <div
                 className="passing-grade"
                 style={{
-                  left: `calc(${lesson.lesson_quizzes.passing_grade}% - 58px)`,
+                  left: `calc(${lesson.lesson_quizzes.passing_grade}% - 13px)`,
                 }}
               >
-                <p
-                  style={{
-                    color: userQuizzes?.find(
-                      (x: any) => x.lesson_id == lesson.id
-                    )
-                      ? "#FFB800"
-                      : "#8628e2",
-                  }}
-                >
-                  {lesson.lesson_quizzes.passing_grade} pts
-                </p>
                 <div className='line'>
                   <p className='minimum-top'>{lesson.lesson_quizzes?.passing_grade}%</p>
                   <p className='minimum'>MINIMO</p>

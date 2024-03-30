@@ -26,13 +26,12 @@ const Progress = (props: IProgress) => {
 
   useEffect(() => {
     let viewed = 0;
-    course.seasons.forEach((s: any) => {
-      s.lessons.forEach((l: any) => {
-        let array = l.progress.filter((x: any) => x.user_id === user.id && x.status === 1)
-        if (l.users.includes(user?.id) && l.homework === 0 && l.quiz === 0) {
+    course.seasons.forEach((season) => {
+      season.lessons.forEach((lesson) => {
+        let array = lesson.progress.filter((progress) => progress.user_id === user.id && progress.status === 1)
+        if (lesson.users.includes(user?.id) && lesson.homework === 0 && lesson.quiz === 0) {
           viewed++;
-        }
-        if (l.users.includes(user?.id) && (l.homework === 1 || l.quiz === 1) && array.length > 0) {
+        } else if (lesson.users.includes(user?.id) && (lesson.homework === 1 || lesson.quiz === 1) && array.length > 0) {
           viewed++;
         }
       });
@@ -83,7 +82,7 @@ const Progress = (props: IProgress) => {
       }
       setCertificate(true)
     }
-
+    debugger;
     setCount(viewed);
 
   }, [course])

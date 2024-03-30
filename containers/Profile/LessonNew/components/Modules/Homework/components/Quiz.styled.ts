@@ -64,7 +64,6 @@ export const Bottom = styled.div`
   .quiz-bar-container {
     display: flex;
     gap: 40px;
-
     .quiz-bar {
       position: relative;
       flex: 1;
@@ -74,7 +73,9 @@ export const Bottom = styled.div`
       color: #8628e2;
       font-weight: 700;
       font-size: 14px;
-
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .quiz-bar-progress {
         position: relative;
         height: 100%;
@@ -105,11 +106,9 @@ export const Bottom = styled.div`
         top: 50%;
         transform: translateY(-50%);
         height: 100%;
-
         p {
           align-self: center;
         }
-
         .line {
           position: relative;
           border-left: 3px dashed #ffb800;
