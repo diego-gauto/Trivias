@@ -85,7 +85,6 @@ const Progress = (props: IProgress) => {
       }
       setCertificate(true)
     }
-    debugger;
     setCount(viewed);
 
   }, [course])

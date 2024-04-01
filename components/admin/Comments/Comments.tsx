@@ -246,7 +246,6 @@ const Comments = () => {
     if (comment === undefined) {
       return;
     }
-    debugger;
     let notification = {
       userId: userData.id,
       type: "3",

@@ -23,7 +23,6 @@ const Courses = ({ course, data, userData, season, lesson, menu, handleClick }: 
 
   useEffect(() => {
     let viewed = 0;
-    debugger;
     course.seasons.forEach((s: any) => {
       s.lessons.forEach((l: any) => {
         let array = l.progress.filter((x: any) => x.user_id === userData.user_id && x.status === 1)
