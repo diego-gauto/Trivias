@@ -2,18 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { BsArrowRepeat, BsCheckCircleFill, BsFileArrowUp } from "react-icons/bs";
 
-import router from "next/router";
 import { Bottom, DoneContainer, QuestionContainer, QuizContainer, QuizStatus, Top } from "./Quiz.styled";
-import progress from "antd/es/progress";
-import { verify } from "crypto";
 import { Answer } from "../Homework.styled";
 import { UserQuiz, getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateUserScoreApi } from "../../../../../../../components/api/lessons";
 import { useCourse } from "../../../../../../../hooks/useLesson";
-import { GiDonerKebab } from "react-icons/gi";
-import { user } from "firebase-functions/v1/auth";
-import { reload } from "firebase/auth";
-import next from "next";
-import lesson from "../../../../../../../pages/lesson";
+import { IUserInfoResult } from "../../../../../../../interfaces/IUser";
 
 export interface Lesson {
   id: number
@@ -74,7 +67,7 @@ export interface Answer {
 
 interface IQuiz {
   lesson: Lesson,
-  user: any;
+  user: IUserInfoResult;
 }
 
 const Quiz = (props: IQuiz) => {
@@ -102,7 +95,6 @@ const Quiz = (props: IQuiz) => {
       tempAnswers.push([]);
     });
     setAnswers(tempAnswers);
-
   }, [lesson])
 
   const getUserQuiz = async () => {
@@ -158,7 +150,6 @@ const Quiz = (props: IQuiz) => {
   };
 
   const checkAnswer = () => {
-    debugger;
     let score = 100 / lesson.lesson_quizzes.questions.length;
     let total =
       lesson.lesson_quizzes.points / lesson.lesson_quizzes.questions.length;
@@ -196,9 +187,6 @@ const Quiz = (props: IQuiz) => {
   }
 
   const checkQuiz = async () => {
-    if (!lesson) {
-      return;
-    }
     setLoader(true);
     let progress = {
       lessonId: lesson.id,
@@ -214,20 +202,32 @@ const Quiz = (props: IQuiz) => {
       points: user.score + grade,
       userId: user.user_id,
     };
-    debugger;
     setStep(2);
-    await updateUserQuizApi(quiz);
-    const gradePercent = generateGradePercent(lesson.id);
-    if (gradePercent >= lesson.lesson_quizzes?.passing_grade) {
+    const gradePercent = (grade / lesson.lesson_quizzes.points) * 100;
+    const passingGrade = lesson.lesson_quizzes.passing_grade;
+    // Si el usuario cumple con el minimo necesario para considerar el quiz aprobado, actualiza el progreso
+    // Así se hace en homework
+    if (gradePercent >= passingGrade) {
       let currentUserIndex = lesson.progress.findIndex((progress) => progress.user_id === user.user_id);
-      if (lesson.progress[currentUserIndex]) {
-        lesson.progress[currentUserIndex].status = 1;
+      const lessonProgress = lesson.progress[currentUserIndex];
+      if (lessonProgress) {
+        lessonProgress.status = 1;
       }
       // Actualiza para que el usuario tiene el progreso de esa lección, solo si existe el registro
-      await updateUserProgressByQuizApi(progress);
+      const userProgessResponse = await updateUserProgressByQuizApi(progress);
     }
-    if (!userQuizzes.find((quiz) => quiz.lesson_id == lesson.id)) {
+    // Si no existe un registro para el usuario previamente al finalizar el quiz, se agrega al score el valor del quiz
+    const userQuiz = userQuizzes.find((quiz) => quiz.lesson_id == lesson.id);
+    if (userQuiz === undefined) {
       await updateUserScoreApi(score);
+      // Se actualiza el valor registrado por el usuario, pues es su primer intento
+      await updateUserQuizApi(quiz);
+    } else {
+      // En caso de existir un registro previo, se actualiza el valor en user_quizzes, pero
+      // solo en caso de que la calificación anterior sea peor que la actual
+      if (userQuiz.grade < grade) {
+        await updateUserQuizApi(quiz);
+      }
     }
     reload();
     setLoader(false);
@@ -471,6 +471,11 @@ const Quiz = (props: IQuiz) => {
           </button>
         </DoneContainer>
       )}
+      <div>
+        <div>
+          <p>{JSON.stringify(userQuizzes.find(uq => uq.user_id = user.id), null, 2)}</p>
+        </div>
+      </div>
     </QuizContainer>
   );
 };

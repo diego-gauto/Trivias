@@ -74,7 +74,7 @@ export const Bottom = styled.div`
       font-weight: 700;
       font-size: 14px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       .quiz-bar-progress {
         position: relative;

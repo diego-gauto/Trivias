@@ -28,10 +28,13 @@ const Progress = (props: IProgress) => {
     let viewed = 0;
     course.seasons.forEach((season) => {
       season.lessons.forEach((lesson) => {
-        let array = lesson.progress.filter((progress) => progress.user_id === user.id && progress.status === 1)
-        if (lesson.users.includes(user?.id) && lesson.homework === 0 && lesson.quiz === 0) {
+        let userProgress = lesson.progress.filter((progress) => {
+          return progress.user_id === user.id && progress.status === 1;
+        });
+        const lessonIncludesTheUser = lesson.users.includes(user?.id);
+        if (lessonIncludesTheUser && lesson.homework === 0 && lesson.quiz === 0) {
           viewed++;
-        } else if (lesson.users.includes(user?.id) && (lesson.homework === 1 || lesson.quiz === 1) && array.length > 0) {
+        } else if (lessonIncludesTheUser && (lesson.homework === 1 || lesson.quiz === 1) && userProgress.length > 0) {
           viewed++;
         }
       });
