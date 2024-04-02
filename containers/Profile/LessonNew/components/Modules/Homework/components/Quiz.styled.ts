@@ -90,7 +90,7 @@ export const Bottom = styled.div`
           top: -50%;
           .max {
             position: absolute;
-            top: -25px;
+            top: -45px;
             width: max-content;
             transform: translateX(-50%);
           }

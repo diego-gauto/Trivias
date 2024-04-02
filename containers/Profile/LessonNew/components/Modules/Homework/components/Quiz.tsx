@@ -251,9 +251,14 @@ const Quiz = (props: IQuiz) => {
     setFinishAttempt(false);
   }
 
-  const generateGradePercent = (lessonId: number) => {
+  const generateDBGradePercent = (lessonId: number) => {
     const quiz = userQuizzes.find((quiz) => quiz.lesson_id == lessonId);
-    const grade = quiz ? quiz.grade : 0;
+    const gradeDB = quiz ? quiz.grade : 0;
+    const { points } = lesson.lesson_quizzes;
+
+    return (gradeDB / points) * 100;
+  }
+  const generateCurrentGradePercent = () => {
     const { points } = lesson.lesson_quizzes;
 
     return (grade / points) * 100;
@@ -269,7 +274,7 @@ const Quiz = (props: IQuiz) => {
     </>);
   }
 
-  if (Math.floor(generateGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade && !isFinishAttempt) {
+  if (Math.floor(generateDBGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade && !isFinishAttempt) {
     return (
       <QuizStatus color="#00CC99" rgb={"rgb(213,227,232)"} text="#006b51" icon="#00CC99">
         <BsCheckCircleFill className="icon" />
@@ -307,10 +312,10 @@ const Quiz = (props: IQuiz) => {
                 <div className='quiz-bar'>
                   {userQuizzes?.find((x: any) => x.lesson_id == lesson.id)
                     && <div className='quiz-bar-progress'
-                      style={{ width: `${generateGradePercent(lesson.id)}%` }}>
+                      style={{ width: `${generateDBGradePercent(lesson.id)}%` }}>
                       <div className='line'>
-                        <p className='max'>{
-                          Math.floor(generateGradePercent(lesson.id))
+                        <p className='max' style={{ textAlign: 'center' }}>tu mejor intento<br />{
+                          Math.floor(generateDBGradePercent(lesson.id))
                         } %</p>
                       </div>
                     </div>}
@@ -359,7 +364,7 @@ const Quiz = (props: IQuiz) => {
       {step == 1 && (
         <QuestionContainer>
           <div className="question-bar">
-            <div className="progress" style={{ width: `${grade / lesson.lesson_quizzes.points}%` }}></div>
+            <div className="progress" style={{ width: `${(grade / lesson.lesson_quizzes.points) * 100}%` }}></div>
           </div>
           <div className="question-title">
             <h2 dangerouslySetInnerHTML={
@@ -444,19 +449,17 @@ const Quiz = (props: IQuiz) => {
           </div>
           <div className="quiz-bar-container">
             <div className="quiz-bar">
-              {userQuizzes.find((userQuiz) => userQuiz.lesson_id == lesson.id) && (
-                <div
-                  className="quiz-bar-progress"
-                  style={{ width: `${generateGradePercent(lesson.id)}%` }}>
+              <div
+                className="quiz-bar-progress"
+                style={{ width: `${generateCurrentGradePercent()}%` }}>
 
-                  <div className="line">
-                    <p className='max'>
-                      {
-                        Math.floor(generateGradePercent(lesson.id))
-                      } %</p>
-                  </div>
+                <div className="line">
+                  <p className='max'>
+                    {
+                      Math.floor(generateCurrentGradePercent())
+                    } %</p>
                 </div>
-              )}
+              </div>
               <div
                 className="passing-grade"
                 style={{
