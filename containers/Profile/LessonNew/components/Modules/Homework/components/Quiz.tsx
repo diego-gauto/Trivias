@@ -85,6 +85,7 @@ const Quiz = (props: IQuiz) => {
   const [grade, setGrade] = useState(0);
   const [isLoadingQuiz, setIsLoadingQuiz] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [isFinishAttempt, setFinishAttempt] = useState(false);
 
   useEffect(() => {
     getUserQuiz();
@@ -229,6 +230,7 @@ const Quiz = (props: IQuiz) => {
         await updateUserQuizApi(quiz);
       }
     }
+    setFinishAttempt(true);
     reload();
     setLoader(false);
   };
@@ -246,6 +248,7 @@ const Quiz = (props: IQuiz) => {
       tempAnswers.push([]);
     });
     setAnswers(tempAnswers);
+    setFinishAttempt(false);
   }
 
   const generateGradePercent = (lessonId: number) => {
@@ -266,7 +269,7 @@ const Quiz = (props: IQuiz) => {
     </>);
   }
 
-  if (Math.floor(generateGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade) {
+  if (Math.floor(generateGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade && !isFinishAttempt) {
     return (
       <QuizStatus color="#00CC99" rgb={"rgb(213,227,232)"} text="#006b51" icon="#00CC99">
         <BsCheckCircleFill className="icon" />
@@ -308,7 +311,7 @@ const Quiz = (props: IQuiz) => {
                       <div className='line'>
                         <p className='max'>{
                           Math.floor(generateGradePercent(lesson.id))
-                        } pts</p>
+                        } %</p>
                       </div>
                     </div>}
                   <div
@@ -321,8 +324,10 @@ const Quiz = (props: IQuiz) => {
                       <p className='minimum'>MINIMO</p>
                     </div>
                   </div>
-                  <div className="quiz-bar-points">
-                    {lesson.lesson_quizzes.points} pts
+                </div>
+                <div className="points-container">
+                  <div className="point-child"                  >
+                    <p>{lesson.lesson_quizzes.points} pts</p>
                   </div>
                 </div>
               </div>
@@ -354,7 +359,7 @@ const Quiz = (props: IQuiz) => {
       {step == 1 && (
         <QuestionContainer>
           <div className="question-bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
+            <div className="progress" style={{ width: `${grade / lesson.lesson_quizzes.points}%` }}></div>
           </div>
           <div className="question-title">
             <h2 dangerouslySetInnerHTML={
@@ -408,14 +413,18 @@ const Quiz = (props: IQuiz) => {
       )}
       {step == 2 && (
         <DoneContainer>
-          <div className="bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
-          </div>
+          {
+            /*
+            <div className="bar">
+              <div className="progress" style={{ width: `${progress}%` }}></div>
+            </div>
+            */
+          }
           <div className="quiz-results">
             <div className="left">
               <h2>
                 {points >= lesson.lesson_quizzes.passing_grade
-                  ? "FELICIDADES !!!"
+                  ? "¡FELICIDADES!"
                   : "SIGUE INTENTANDO"}
               </h2>
               <p>
@@ -435,7 +444,7 @@ const Quiz = (props: IQuiz) => {
           </div>
           <div className="quiz-bar-container">
             <div className="quiz-bar">
-              {userQuizzes?.find((x: any) => x.lesson_id == lesson.id) && (
+              {userQuizzes.find((userQuiz) => userQuiz.lesson_id == lesson.id) && (
                 <div
                   className="quiz-bar-progress"
                   style={{ width: `${generateGradePercent(lesson.id)}%` }}>
@@ -460,7 +469,7 @@ const Quiz = (props: IQuiz) => {
                 </div>
               </div>
             </div>
-            <div className="quiz-bar-points">100 pts</div>
+            <div className="quiz-bar-points">{lesson.lesson_quizzes.points} pts</div>
           </div>
           <button
             onClick={() => {
@@ -471,11 +480,6 @@ const Quiz = (props: IQuiz) => {
           </button>
         </DoneContainer>
       )}
-      <div>
-        <div>
-          <p>{JSON.stringify(userQuizzes.find(uq => uq.user_id = user.id), null, 2)}</p>
-        </div>
-      </div>
     </QuizContainer>
   );
 };

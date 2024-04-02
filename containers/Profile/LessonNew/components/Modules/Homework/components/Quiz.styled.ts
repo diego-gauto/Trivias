@@ -37,6 +37,7 @@ export const Top = styled.div`
     justify-content: center;
     background: linear-gradient(180deg, #6818ce 0%, #8d2de2 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 
     .points {
@@ -74,7 +75,7 @@ export const Bottom = styled.div`
       font-weight: 700;
       font-size: 14px;
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
       .quiz-bar-progress {
         position: relative;
@@ -138,6 +139,24 @@ export const Bottom = styled.div`
       font-weight: 700;
       font-size: 14px;
       color: #a855f7;
+    }
+    .points-container {
+      width: 144px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .point-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ca9ff3;
+        padding: 5px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #a855f7;
+        text-align: center;
+      }
     }
   }
 

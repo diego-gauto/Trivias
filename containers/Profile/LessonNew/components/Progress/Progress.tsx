@@ -18,8 +18,7 @@ interface IProgress {
 const Progress = (props: IProgress) => {
   const { course, user } = props;
   const [count, setCount] = useState(0);
-  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
-  const [certficate, setCertificate] = useState<any>(false);
+  const [certficate, setCertificate] = useState<boolean>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
   const params = useRouter();
   const { id, season, lesson }: any = params.query;
@@ -116,7 +115,7 @@ const Progress = (props: IProgress) => {
 
   return (
     <MainContainer>
-      {(course.with_certificate === 1 && certficate && !responsive1124) && <CertificateOn onClick={() => { goToCertificate() }}>
+      {(course.with_certificate === 1 && certficate) && <CertificateOn onClick={() => { goToCertificate() }}>
         <p>Obtener certificado</p>
       </CertificateOn>}
       <div className="content">
