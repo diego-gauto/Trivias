@@ -97,9 +97,7 @@ const Courses = () => {
         setLoggedIn(true);
         setUserData(res);
         // coursesAll(res);
-        console.log(res);
         getAllCourseDataApi(res.id).then((data) => {
-          console.log(data);
           setCourses(data);
           setVideoCourse(data.video_preview);
           setSeasonIndex(data.video_preview.currentSeason);
