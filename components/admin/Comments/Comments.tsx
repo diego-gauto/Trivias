@@ -1,7 +1,7 @@
 import router from "next/router";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { deleteCommentAnswers, deleteCommentToAnswers, deleteThisComment, getComments } from "../../api/admin";
+import { deleteCommentAnswers, deleteCommentToAnswers, deleteThisComment, getComments, getGenericQueryResponse } from "../../api/admin";
 import { getCoursesApi } from "../../api/courses";
 import { addCommentAnswerApi, addCommentToAnswerApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
@@ -9,6 +9,9 @@ import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
 import { GrClose } from "react-icons/gr";
 import { createNotification } from "../../api/notifications";
+import { generateCommentsByCourseIdQuery, generateAnswersByCommentIdQuery, generateAnswersOfAnswersByAnswerIdQuery, generateCommentsByCourseIdCountQuery, generateCoursesQuery } from './Querys';
+import Pagination from '../../Pagination/Pagination';
+import { DefaultColumn } from "../DefaultComponents/DefaultComponents.styled";
 
 export interface Comment {
   id: number
@@ -46,72 +49,120 @@ export interface CommentOfAnswer {
 
 export interface Course {
   id: number
-  about: string
-  certificate_color: string
-  difficulty: string
-  mandatory: number
-  image: string
-  phrase: string
-  price: number
-  rating: number
-  reviews: number
-  subtitle: string
   title: string
-  type: string
-  sequential: number
+}
+
+export interface User {
+  id: number
+  name: string
+  last_name: string
+  email: string
+  password: string
+  phone_number: string
+  role: string
+  photo: string
+  score: number
+  stripe_id: string
+  provider: string
   created_at: string
-  duration: number
-  published: number
-  route: string
-  course_number: number
-  with_certificate: number
-  material_route: string
-  professors: Professor[]
-  categories: Category[]
-  materials: Material[]
+  past_user: string
+  subscription: number
+  last_sign_in: string
+  country: string
+  conekta_id: string
+  terms: number
+  come_from: string
+  origin_state: any
+  user_id: number
+  final_date: number
+  level: number
+  method: any
+  payment_method: any
+  plan_id: any
+  plan_name: any
+  start_date: number
+  type: any
+  payment_methods: any[]
+  user_courses: UserCourse[]
+  user_progress: UserProgress[]
+  user_history: UserHistory[]
+  user_certificates: UserCertificate[]
+  roles: Role[]
 }
 
-export interface Professor {
+export interface UserCourse {
   id: number
+  user_id: number
   course_id: number
-  professors_id: number
-  name: string
-  about: string
-  sign: string
-  image: string
+  final_date: number
 }
 
-export interface Category {
+export interface UserProgress {
   id: number
-  course_id: number
-  categories_id: number
-  name: string
+  user_id: number
+  seconds: number
+  time: number
+  lessons_id: number
+  status: number
 }
 
-export interface Material {
+export interface UserHistory {
   id: number
+  user_id: number
   course_id: number
-  materials_id: number
-  name: string
+  season_id: number
+  lesson_id: number
+  last_seen: string
+}
+
+export interface UserCertificate {
+  id: number
+  user_id: number
+  course_id: number
+  folio: string
+  created_at: string
+}
+
+export interface Role {
+  id: number
+  role: string
+  source_table: string
+  create?: number
+  edit?: number
+  delete?: number
+  view: number
+  user_id: number
+  courses?: string
+  request?: number
+  report?: number
 }
 
 const Comments = () => {
-  const [comments, setComments] = useState<Comment[]>()
-  const [userData, setUserData] = useState<any>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [user, setUser] = useState<User>({} as User);
   const [comment, setComment] = useState<Comment | undefined>(undefined)
   const [answer, setAnswer] = useState<Answer | undefined>(undefined)
   const [answerText, setAnswerText] = useState<any>("")
   const [answerComment, setAnswerComment] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
-  const [courses, setCourse] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [coursesId, setCoursesId] = useState<number[]>([]);
   const [level, setLevel] = useState<number>(1);
   const [loader, setLoader] = useState<number>(-1);
   const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
+  const [offset, setOffset] = useState(0);
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    retrievComments()
+    getUserData();
+    getCountOfComments();
+    getCoursesForAdmin();
   }, [])
+
+  useEffect(() => {
+    getCoursesForAdmin();
+    retrievCommentsNew();
+  }, [offset, selectedCourseId])
 
   const getFormattedDate = () => {
     let today = new Date();
@@ -121,73 +172,149 @@ const Comments = () => {
     return `${day}/${month}/${year}`;
   }
 
-  const retrievComments = async () => {
-    let user: any;
-    if (localStorage.getItem("email")) {
-      user = await getUserApi(localStorage.getItem("email"))
+  const formatDate = (date: string) => {
+    let today = new Date(date);
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  const changePage = (page: number) => {
+    setOffset(page * 50);
+  }
+
+  const getUserData = async () => {
+    try {
+      if (localStorage.getItem("email")) {
+        const user = await getUserApi(localStorage.getItem("email"));
+        setUser(user);
+      } else {
+        throw new Error(`No existe un email con el cual buscar la información del usuario en localStorage`);
+      }
+    } catch (error) {
+      throw error;
     }
-    setUserData(user);
-    getComments().then(async (res) => {
-      let tempComments = res.data.comments
-      if (user.role === "admin") {
-        let array = user.roles[7].courses.split(",");
-        let temp: number[] = [];
-        await Promise.all(array.map((x: any) => {
-          temp.push(+x)
-        }))
-        tempComments = res.data.comments.filter((x: any) => temp.includes(x.course_id));
-        getCoursesForAdmin(temp);
-        setCoursesId(temp);
-      }
-      if (user.role === "superAdmin") {
-        let temp: any = [];
-        await Promise.all(tempComments.map((x: any) => {
-          temp.push(+x.course_id)
-        }))
-        getCoursesForAdmin(temp);
-        setCoursesId(temp);
-      }
-      tempComments.forEach((element: any) => {
-        element.formatDate = getFormattedDate();
-      });
-      setComments(tempComments)
-    })
   }
-  const getCoursesForAdmin = (courses_id: any) => {
-    getCoursesApi().then((res) => {
-      let availableCourses: any = [];
-      res.map((course: any) => {
-        if (courses_id.includes(course.id)) {
-          availableCourses.push(course);
+
+  const getCountOfComments = async () => {
+    try {
+      const courseId = selectedCourseId === -1 ? undefined : selectedCourseId;
+      const countQuery = generateCommentsByCourseIdCountQuery(courseId);
+      const countResponse = await getGenericQueryResponse(countQuery);
+      const count = countResponse.data.data[0]["count"] as number;
+      setCount(count);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const retrievCommentsNew = async () => {
+    try {
+      await getCountOfComments();
+      const courseId = selectedCourseId === -1 ? undefined : selectedCourseId;
+      const queryMainComments = generateCommentsByCourseIdQuery(courseId, offset);
+      const response = await getGenericQueryResponse(queryMainComments);
+
+      interface TempComment {
+        id: number,
+        comment: string,
+        created_at: string,
+        user_id: number,
+        lessons_id: number,
+        course_id: number,
+        course_title: string,
+        lesson_title: string,
+        lesson_number: number,
+        season_number: number,
+        season_title: string,
+      }
+
+      interface TempAnswer {
+        id: number,
+        comment: string,
+        created_at: string,
+        comments_id: number,
+        user_id: number,
+        course_id: number,
+      }
+
+      const comments = response.data.data as TempComment[];
+
+      let finalCommentsResult: Comment[] = [];
+      finalCommentsResult = await Promise.all(comments.map(async (comment, indexComment) => {
+        const queryAnswers = generateAnswersByCommentIdQuery(comment.id);
+        const responseAnswer = await getGenericQueryResponse(queryAnswers);
+        const answers = responseAnswer.data.data as TempAnswer[];
+
+        const finalAnswers = await Promise.all(answers.map(async (answer, indexAnswer) => {
+          const queryAnswersOfAnswer = generateAnswersOfAnswersByAnswerIdQuery(answer.id);
+          const answersOfAnswerResponse = await getGenericQueryResponse(queryAnswersOfAnswer);
+          const answersOfAnswer = answersOfAnswerResponse.data.data as CommentOfAnswer[];
+          return {
+            ...answer,
+            comments: answersOfAnswer
+          }
+        }));
+        return {
+          ...comment,
+          formatDate: formatDate(comment.created_at),
+          answers: finalAnswers
         }
+      }));
+
+      setComments(finalCommentsResult);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  /*
+    const retrievComments = async () => {
+      let user: any;
+      if (localStorage.getItem("email")) {
+        user = await getUserApi(localStorage.getItem("email"))
+      }
+      setUser(user);
+      // 1. Establecer la info del usuario
+      getComments().then(async (res) => {
+        let tempComments = res.data.comments
+        if (user.role === "admin") {
+          let array = user.roles[7].courses.split(",");
+          let temp: number[] = [];
+          await Promise.all(array.map((x: any) => {
+            temp.push(+x)
+          }))
+          tempComments = res.data.comments.filter((x: any) => temp.includes(x.course_id));
+          getCoursesForAdmin(temp);
+          setCoursesId(temp);
+        }
+        if (user.role === "superAdmin") {
+          let temp: any = [];
+          await Promise.all(tempComments.map((x: any) => {
+            temp.push(+x.course_id)
+          }))
+          getCoursesForAdmin(temp);
+          setCoursesId(temp);
+        }
+        tempComments.forEach((element: any) => {
+          element.formatDate = getFormattedDate();
+        });
+        setComments(tempComments)
       })
-      setCourse(availableCourses);
-    })
+    }*/
+  const getCoursesForAdmin = async () => {
+    try {
+      const query = generateCoursesQuery();
+      const res = await getGenericQueryResponse(query);
+      setCourses(res.data.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
-  const FilteredComments = (course_id: number) => {
-    getComments().then(async (res) => {
-      res.data.comments.forEach((comment) => {
-        comment.formatDate = getFormattedDate();
-      });
-      let tempComments = res.data.comments
-      tempComments = res.data.comments.filter((x: any) => x.course_id === course_id);
-      setComments(tempComments);
-    })
-  }
-  const AllComments = () => {
-    getComments().then(async (res) => {
-      res.data.comments.forEach((comment) => {
-        comment.formatDate = getFormattedDate();
-      });
-      let tempComments = res.data.comments
-      tempComments = res.data.comments.filter((comment) => coursesId.includes(comment.course_id));
-      setComments(tempComments);
-    })
-  }
+
   const deleteComment = (value: any, index: number) => {
     setLoader(index);
-    console.log(value)
-    if (userData.role === "admin" && userData.roles[8].delete === 0) {
+    if (user.role === "admin" && user.roles[8]?.delete === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -196,17 +323,13 @@ const Comments = () => {
     }
     deleteThisComment(body).then(() => {
       alert('Comentario eliminado')
-      if (selectedCourseId === -1) {
-        retrievComments();
-      } else {
-        FilteredComments(selectedCourseId);
-      }
+      retrievCommentsNew();
     })
     setLoader(-1);
   }
 
   const deleteAnswer = (value: any) => {
-    if (userData.role === "admin" && userData.roles[8].delete === 0) {
+    if (user.role === "admin" && user.roles[8]?.delete === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -214,15 +337,11 @@ const Comments = () => {
       answer: value
     }
     deleteCommentAnswers(answer).then(() => {
-      if (selectedCourseId === -1) {
-        retrievComments();
-      } else {
-        FilteredComments(selectedCourseId);
-      }
+      retrievCommentsNew();
     })
   }
   const deleteAnswerComment = (value: any) => {
-    if (userData.role === "admin" && userData.roles[8].delete === 0) {
+    if (user.role === "admin" && user.roles[8]?.delete === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -230,16 +349,12 @@ const Comments = () => {
       answer: value
     }
     deleteCommentToAnswers(answer).then(() => {
-      if (selectedCourseId === -1) {
-        retrievComments();
-      } else {
-        FilteredComments(selectedCourseId);
-      }
+      retrievCommentsNew();
     })
   }
 
   const answerQuestion = () => {
-    if (userData.role === "admin" && userData.roles[8].create === 0) {
+    if (user.role === "admin" && user.roles[8]?.create === 0) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -247,7 +362,7 @@ const Comments = () => {
       return;
     }
     let notification = {
-      userId: userData.id,
+      userId: user.id,
       type: "3",
       notificationId: '',
       courseId: comment.course_id,
@@ -257,16 +372,12 @@ const Comments = () => {
     }
     if (answerText) {
       addCommentAnswerApi({
-        userId: userData.id,
+        userId: user.id,
         comment: level === 1 ? answerText : answerComment,
         commentId: comment.id,
         courseId: comment.course_id
       }).then((res) => {
-        if (selectedCourseId === -1) {
-          retrievComments();
-        } else {
-          FilteredComments(selectedCourseId);
-        }
+        retrievCommentsNew();
         setAnswerText("");
         setPopUp(false);
         createNotification(notification);
@@ -277,24 +388,12 @@ const Comments = () => {
         comment: level === 1 ? answerText : answerComment,
         commentId: answer === undefined ? comment.id : answer.id,
       }).then((res) => {
-        if (selectedCourseId === -1) {
-          retrievComments();
-        } else {
-          FilteredComments(selectedCourseId);
-        }
+        retrievCommentsNew();
         setAnswerComment("");
         setPopUp(false);
         createNotification(notification);
       })
     }
-  }
-
-  const formatDate = (value: any) => {
-    let tempDate: any = new Date(value);
-    let tempDay = tempDate.getDate()
-    let tempMonth = tempDate.getMonth() + 1;
-    let tempYear = tempDate.getFullYear()
-    return `${tempDay}/${tempMonth}/${tempYear}`
   }
 
   const goTo = (value: any) => {
@@ -304,22 +403,27 @@ const Comments = () => {
     });
   }
 
-
   return (
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
-        <h1 className="main-title">Comentarios</h1>
+        <div className='header'>
+          <DefaultColumn gap={5}>
+            <div className='top-title'>
+              <h2 className='title'>Comentarios</h2>
+            </div>
+          </DefaultColumn>
+          <Pagination
+            changePage={changePage}
+            currentPage={(offset / 50)}
+            totalPage={Math.ceil(count / 50)}
+          />
+        </div>
         {
           courses.length > 0 &&
           <div>
             <select onChange={(e) => {
-              if (e.target.value === '-1') {
-                AllComments();
-              }
-              else {
-                FilteredComments(parseInt(e.target.value))
-              }
               setSelectedCourseId(parseInt(e.target.value));
+              setOffset(0);
             }}>
               <option value={-1}>Ver todos</option>
               {
