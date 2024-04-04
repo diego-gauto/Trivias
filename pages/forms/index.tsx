@@ -71,6 +71,7 @@ const Formularios = () => {
     "10",
     "11",
     "12",
+    "13",
   ]; // Arreglo de IDs válidos
   const specialFormIds = ["10", "11", "12", undefined];
 
