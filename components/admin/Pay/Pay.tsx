@@ -16,7 +16,7 @@ import {
 } from "./Pay.styled";
 
 import Pagination from '../../Pagination/Pagination';
-import { generateGetInvoicesCountQuery, generateGetInvoicesQuery } from './Queries';
+import { generateGetInvoicesCountQuery, generateGetInvoicesQuery, getDistinctMethodsOfInvoice } from './Queries';
 
 export interface Invoice {
   id: number
@@ -37,10 +37,16 @@ const Pay = () => {
   const [count, setCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [email, setEmail] = useState<string>("");
+  const [methods, setMethods] = useState<string[]>([]);
+  const [selectedMethodIndex, setSelectedMethodIndex] = useState<number>(-1);
+
+  useEffect(() => {
+    getDistinctMethodsOfInvoices();
+  }, [])
 
   useEffect(() => {
     newRetrieveInvoices();
-  }, [offset, email]);
+  }, [offset, email, selectedMethodIndex]);
 
   const retrieveInvoices = async () => {
     setIsLoading(true);
@@ -59,20 +65,31 @@ const Pay = () => {
     setIsLoading(true);
     try {
       // Inovices count
-      const queryInvoicesCount = generateGetInvoicesCountQuery(email);
+      const queryInvoicesCount = generateGetInvoicesCountQuery(email, methods[selectedMethodIndex]);
       const responseInvoicesCount = await getGenericQueryResponse(queryInvoicesCount);
       const count = responseInvoicesCount.data.data[0]["count"];
       setCount(count);
       // Invoices data
-      const queryInvoices = generateGetInvoicesQuery(email, offset);
+      const queryInvoices = generateGetInvoicesQuery(email, methods[selectedMethodIndex], offset);
       const responseInvoices = await getGenericQueryResponse(queryInvoices);
       const data = responseInvoices.data.data;
       setInvoices(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
     setIsLoading(false);
+  }
+
+  const getDistinctMethodsOfInvoices = async () => {
+    try {
+      const query = getDistinctMethodsOfInvoice();
+      const response = await getGenericQueryResponse(query);
+      const methods = response.data.data.map(m => m["method"]);
+      methods.sort()
+      setMethods(methods);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const formatDate = (value: any) => {
@@ -122,12 +139,16 @@ const Pay = () => {
         <Container>
           <TitleContain>
             <div style={{
-              width: '100%'
+              width: '100%',
             }}>
-              <div className="rows">
+              <div className="rows" style={{
+                display: 'flex',
+                flexDirection: 'column',
+                paddingBlock: '20px',
+                paddingInline: '30px',
+                gap: '10px'
+              }}>
                 <div className="input-contain" style={{
-                  paddingBlock: '20px',
-                  paddingInline: '30px',
                   minWidth: '50%'
                 }}>
                   <label className="input-label">Usuario</label>
@@ -137,16 +158,29 @@ const Pay = () => {
                     placeholder="Email del usuario"
                     value={email}
                     onChange={(event) => {
-                      console.log(event.target.value);
                       setEmail(event.target.value);
                     }}
                   />
+                </div>
+                <div className="input-contain" style={{
+                  minWidth: '50%'
+                }}>
+                  <label className="input-label">Método de Pago</label>
+                  <select onChange={(event) => {
+                    setSelectedMethodIndex(parseInt(event.target.value));
+                  }}>
+                    <option key={`method_${0}`} value="-1">Sin especificar</option>
+                    {
+                      methods.map((method, index) => {
+                        return <option key={`method_${index + 1}`} value={index}>{method}</option>;
+                      })
+                    }
+                  </select>
                 </div>
               </div>
               <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-
               }}>
                 <Title>Ventas: {count}</Title>
                 <Pagination
