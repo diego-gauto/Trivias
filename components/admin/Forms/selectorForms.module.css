@@ -1,15 +1,15 @@
-.main{
+.main {
   width: 100%;
   padding: 3% 3% 0 3%;
   display: flex;
   flex-direction: column;
 }
 
-.titles{
+.titles {
   display: flex;
 }
 
-.main h2{
+.main h2 {
   width: 100%;
   text-align: center;
   margin-bottom: 2%;
@@ -22,13 +22,13 @@
   color: #520795;
 }
 
-.buttonContainer{
+.buttonContainer {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2%;
 }
 
-.main button{
+.main button {
   width: 250px;
   height: 80px;
   border: 0;
@@ -73,14 +73,16 @@
   }
 
   .main h2 {
-    font-size: 28px; /* Reducir el tamaño de fuente para dispositivos pequeños */
-    line-height: 36px; /* Ajustar el espacio entre líneas para dispositivos pequeños */
+    font-size: 28px;
+    /* Reducir el tamaño de fuente para dispositivos pequeños */
+    line-height: 36px;
+    /* Ajustar el espacio entre líneas para dispositivos pequeños */
   }
 
-  .main button{
+  .main button {
     width: 200px;
-    height: 40px;
     font-size: 18px;
+
   }
 }
 
@@ -93,11 +95,13 @@
   }
 
   .main h2 {
-    font-size: 28px; /* Reducir el tamaño de fuente para dispositivos pequeños */
-    line-height: 36px; /* Ajustar el espacio entre líneas para dispositivos pequeños */
+    font-size: 28px;
+    /* Reducir el tamaño de fuente para dispositivos pequeños */
+    line-height: 36px;
+    /* Ajustar el espacio entre líneas para dispositivos pequeños */
   }
 
-  .buttonContainer{
+  .buttonContainer {
     justify-content: center;
   }
 }

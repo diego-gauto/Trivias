@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DEFAULT_USER_IMG, OXXO_PAY_METHOD, SPEI_PAY_METHOD, CONEKTA_PAY_METHOD, ADMIN_PAY_METHOD, PAYPAL_PAY_METHOD, STRIPE_PAY_METHOD, UNKNOWN_PAY_METHOD } from "../../../constants/paths";
-import { getInvoicesApi, getInvoicesWithOffsetTestApi } from "../../api/admin";
+import { getGenericQueryResponse, getInvoicesApi, getInvoicesWithOffsetTestApi } from "../../api/admin";
 import { AdminContain, Table } from "../SideBar.styled";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
@@ -16,6 +16,7 @@ import {
 } from "./Pay.styled";
 
 import Pagination from '../../Pagination/Pagination';
+import { generateGetInvoicesCountQuery, generateGetInvoicesQuery } from './Queries';
 
 export interface Invoice {
   id: number
@@ -35,21 +36,41 @@ const Pay = () => {
   const [offset, setOffset] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
-    retrieveInvoices();
-  }, [offset]);
+    newRetrieveInvoices();
+  }, [offset, email]);
 
   const retrieveInvoices = async () => {
     setIsLoading(true);
     try {
       const { invoices, count } = (await getInvoicesWithOffsetTestApi({ offset })).data;
-      console.log(invoices);
       setInvoices(invoices);
       setCount(count);
     } catch (error) {
       console.error(error);
       changePage(0);
+    }
+    setIsLoading(false);
+  }
+
+  const newRetrieveInvoices = async () => {
+    setIsLoading(true);
+    try {
+      // Inovices count
+      const queryInvoicesCount = generateGetInvoicesCountQuery(email);
+      const responseInvoicesCount = await getGenericQueryResponse(queryInvoicesCount);
+      const count = responseInvoicesCount.data.data[0]["count"];
+      setCount(count);
+      // Invoices data
+      const queryInvoices = generateGetInvoicesQuery(email, offset);
+      const responseInvoices = await getGenericQueryResponse(queryInvoices);
+      const data = responseInvoices.data.data;
+      setInvoices(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
     }
     setIsLoading(false);
   }
@@ -100,12 +121,41 @@ const Pay = () => {
       <PayContain>
         <Container>
           <TitleContain>
-            <Title>Ventas: {count}</Title>
-            <Pagination
-              changePage={changePage}
-              currentPage={(offset / 100)}
-              totalPage={Math.ceil(count / 100)}
-            />
+            <div style={{
+              width: '100%'
+            }}>
+              <div className="rows">
+                <div className="input-contain" style={{
+                  paddingBlock: '20px',
+                  paddingInline: '30px',
+                  minWidth: '50%'
+                }}>
+                  <label className="input-label">Usuario</label>
+                  <input
+                    className="input-create"
+                    type="text"
+                    placeholder="Email del usuario"
+                    value={email}
+                    onChange={(event) => {
+                      console.log(event.target.value);
+                      setEmail(event.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+
+              }}>
+                <Title>Ventas: {count}</Title>
+                <Pagination
+                  changePage={changePage}
+                  currentPage={(offset / 100)}
+                  totalPage={Math.ceil(count / 100)}
+                />
+              </div>
+            </div>
           </TitleContain>
           <Table id="Pay">
             <tbody style={{ display: 'inline-table', width: '100%' }}>
@@ -120,29 +170,31 @@ const Pay = () => {
               {/* TABLAS */}
               {
                 !isLoading &&
-                invoices.map((invoice, index) => {
-                  return (
-                    <tr key={"allPayment" + index}>
-                      <td>
-                        <ProfileContain>
-                          <Imagecontain>
-                            <Profile
-                              src={DEFAULT_USER_IMG}
-                            />
-                          </Imagecontain>
-                          {invoice.name}
-                        </ProfileContain>
-                      </td>
-                      <td>{invoice.email}</td>
-                      <td>{formatDate(invoice.paid_at)}</td>
-                      <td style={{ fontWeight: 600 }}>$ {invoice.amount / 100}.00</td>
-                      <td>{invoice.product}</td>
-                      {
-                        generateIconContain(invoice.method)
-                      }
-                    </tr>
-                  )
-                })
+                invoices
+                  .filter(invoice => invoice.email.startsWith(email))
+                  .map((invoice, index) => {
+                    return (
+                      <tr key={"allPayment" + index}>
+                        <td>
+                          <ProfileContain>
+                            <Imagecontain>
+                              <Profile
+                                src={DEFAULT_USER_IMG}
+                              />
+                            </Imagecontain>
+                            {invoice.name}
+                          </ProfileContain>
+                        </td>
+                        <td>{invoice.email}</td>
+                        <td>{formatDate(invoice.paid_at)}</td>
+                        <td style={{ fontWeight: 600 }}>$ {invoice.amount / 100}.00</td>
+                        <td>{invoice.product}</td>
+                        {
+                          generateIconContain(invoice.method)
+                        }
+                      </tr>
+                    )
+                  })
               }
             </tbody>
           </Table>
