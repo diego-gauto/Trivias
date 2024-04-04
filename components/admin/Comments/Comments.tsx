@@ -9,7 +9,7 @@ import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
 import { GrClose } from "react-icons/gr";
 import { createNotification } from "../../api/notifications";
-import { generateCommentsByCourseIdQuery, generateAnswersByCommentIdQuery, generateAnswersOfAnswersByAnswerIdQuery, generateCommentsByCourseIdCountQuery, generateCoursesQuery } from './Querys';
+import { generateCommentsByCourseIdQuery, generateAnswersByCommentIdQuery, generateAnswersOfAnswersByAnswerIdQuery, generateCommentsByCourseIdCountQuery, generateCoursesQuery, generateGetAdminUsersQuery } from './Querys';
 import Pagination from '../../Pagination/Pagination';
 import { DefaultColumn } from "../DefaultComponents/DefaultComponents.styled";
 
@@ -140,6 +140,7 @@ export interface Role {
 const Comments = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [user, setUser] = useState<User>({} as User);
+  const [adminUserIds, setAdminUserIds] = useState<number[]>([]);
   const [comment, setComment] = useState<Comment | undefined>(undefined)
   const [answer, setAnswer] = useState<Answer | undefined>(undefined)
   const [answerText, setAnswerText] = useState<any>("")
@@ -157,20 +158,13 @@ const Comments = () => {
     getUserData();
     getCountOfComments();
     getCoursesForAdmin();
+    getAdminUserIds();
   }, [])
 
   useEffect(() => {
     getCoursesForAdmin();
     retrievCommentsNew();
   }, [offset, selectedCourseId])
-
-  const getFormattedDate = () => {
-    let today = new Date();
-    let day = today.getDate();
-    let month = today.getMonth() + 1;
-    let year = today.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
 
   const formatDate = (date: string) => {
     let today = new Date(date);
@@ -312,6 +306,19 @@ const Comments = () => {
     }
   }
 
+  const getAdminUserIds = async () => {
+    try {
+      const query = generateGetAdminUsersQuery();
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as { user_id: number }[];
+      const userIds = data.map(data => data["user_id"]);
+      console.log({ userIds });
+      setAdminUserIds(userIds);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const deleteComment = (value: any, index: number) => {
     setLoader(index);
     if (user.role === "admin" && user.roles[8]?.delete === 0) {
@@ -403,6 +410,23 @@ const Comments = () => {
     });
   }
 
+  const isPriorityToShow = (comment: Comment) => {
+    let isPriority = false;
+    // Si el comentario no tiene respuesta, es que le hace falta una
+    if (comment.answers.length === 0) {
+      isPriority = true;
+    }
+    else {
+      const lastComment = comment.answers[comment.answers.length - 1];
+      const lastAnswerIsUserAdmin = adminUserIds.includes(lastComment!.user_id);
+      // Si la ultima respuesta no es de un usuario admin, es que 
+      if (!lastAnswerIsUserAdmin) {
+        isPriority = true;
+      }
+    }
+    return isPriority;
+  }
+
   return (
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
@@ -442,7 +466,13 @@ const Comments = () => {
       <AdminCommentsContainer>
         {comments && comments.map((comment, index: number) => {
           return (
-            <div className="comment-row" key={"admin_comments_" + index}>
+            <div
+              className="comment-row"
+              key={"admin_comments_" + index}
+              style={{
+                backgroundColor: `${isPriorityToShow(comment) ? '#F7DBEA' : '#FFF'}`
+              }}
+            >
               <div className="top">
                 <p><span>Curso: </span>{comment.course_title}</p>
                 <p><span>Temporada: </span>{comment.season_title}</p>

@@ -44,3 +44,8 @@ export const generateCoursesQuery = () => {
   const query = `select id, title from courses;`;
   return query;
 };
+
+export const generateGetAdminUsersQuery = () => {
+  const query = `select user_id from admin_users;`;
+  return query;
+};
