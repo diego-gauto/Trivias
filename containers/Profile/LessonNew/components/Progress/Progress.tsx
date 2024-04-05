@@ -39,7 +39,7 @@ const Progress = (props: IProgress) => {
       });
     });
 
-    if (course.lessons.length == viewed) {
+    if (course.lessons.length == viewed && course.with_certificate === 1) {
       let ids = {
         userId: user.id,
         courseId: course.id
