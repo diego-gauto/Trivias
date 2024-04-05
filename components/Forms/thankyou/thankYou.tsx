@@ -1,19 +1,14 @@
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import { collection, doc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebaseConfig";
+import { useRouter } from "next/router";
 
-import styles from "./thankYou.module.css";
-import { useEffect, useState } from "react";
+import { db } from "../../../firebase/firebaseConfig";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getFormApi } from "../../api/form";
+import styles from "./thankYou.module.css";
 
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png";
-
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from "../../../screens/Login.styled";
 
 interface Answer {
   label: string;
@@ -78,6 +73,7 @@ const ThankYouForm = () => {
     "10",
     "11",
     "12",
+    "13",
   ]; // Arreglo de IDs válidos
   const specialFormIds = ["10", "11", "12", undefined];
 
