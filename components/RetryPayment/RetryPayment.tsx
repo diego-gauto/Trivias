@@ -52,7 +52,7 @@ export const RetryPayment = () => {
     } else {
       let tempCard = {
         card: {
-          number: card.number.replaceAll(" ", ""),
+          number: card.number.replaceAll(" ", "").replace(/\*/g, ""),
           name: card.holder,
           exp_month: card.exp_month,
           exp_year: card.exp_year,
