@@ -43,6 +43,10 @@ export const RetryPayment = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
 
+  useEffect(() => {
+    window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
+  }, [])
+
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
     let c: any = card;
