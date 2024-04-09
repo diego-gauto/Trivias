@@ -49,3 +49,119 @@ export const generateGetAdminUsersQuery = () => {
   const query = `select user_id from admin_users;`;
   return query;
 };
+
+type Preferency = 'all' | 'with-response' | 'without-response';
+
+export interface CommentStructure {
+  comment_id: number;
+  comment_comment: string;
+  comment_created_at: string;
+  comment_user_id: number;
+  lessons_id: number;
+  comment_course_id: number;
+  comment_answer_id: number;
+  comment_answer_comment: string;
+  comment_answer_created_at: string;
+  comments_id: number;
+  comment_answer_user_id: number;
+  comment_answer_course_id: number;
+  comment_answer_comment_id: number;
+  comment_answer_comment_comment: number;
+  comment_answer_comment_user_id: number;
+  comment_answer_comment_created_at: string;
+  lesson_title: string;
+  lesson_number: number;
+  season_number: number;
+  course_title: string;
+  season_title: string;
+}
+
+export const generateCountAllComments = (courseId: number) => {
+  const where = courseId !== -1 ? ` WHERE course_id = ${courseId}` : '';
+  const query = `SELECT COUNT(*) as count FROM comments${where};`;
+  return query;
+};
+
+export const generateGetAllComments = (
+  preferency: Preferency,
+  courseId: number,
+  offset: number
+) => {
+  let responseCondition = '';
+  if (preferency === 'with-response') {
+    responseCondition = 'comment_answer_id IS NOT NULL';
+  } else if (preferency === 'without-response') {
+    responseCondition = 'comment_answer_id IS NULL';
+  } else if (preferency === 'all') {
+  }
+  const courseIdCondition =
+    courseId !== -1 ? `comment_course_id = ${courseId}` : '';
+  const conditions = [courseIdCondition, responseCondition]
+    .filter(c => c.length > 0)
+    .join(' AND ');
+  const where = conditions.length > 0 ? `WHERE ${conditions}` : '';
+  const query = `SELECT all_comments_and_answers.*,
+    l.title  AS lesson_title,
+    l.number AS lesson_number,
+    s.season AS season_number,
+    c.title  AS course_title,
+    s.name   AS season_title
+    FROM (
+        SELECT comments_2.id as 'comment_id', 
+        comments_2.comment as 'comment_comment', 
+        comments_2.created_at as 'comment_created_at',
+        comments_2.user_id as 'comment_user_id',
+        comments_2.lessons_id,
+        comments_2.course_id as 'comment_course_id',
+        comment_answers.id as 'comment_answer_id',
+        comment_answers.comment as 'comment_answer_comment',
+      comment_answers.created_at as 'comment_answer_created_at',
+      comment_answers.comments_id,
+      comment_answers.user_id as 'comment_answer_user_id',
+      comment_answers.course_id as 'comment_answer_course_id',
+      comment_answer_comment.id as 'comment_answer_comment_id',
+      comment_answer_comment.comment as 'comment_answer_comment_comment',
+      comment_answer_comment.user_id as 'comment_answer_comment_user_id',
+      comment_answer_comment.created_at as 'comment_answer_comment_created_at'
+        FROM (
+          SELECT * FROM comments 
+          ${courseId !== -1 ? `WHERE course_id = ${courseId}` : ''}
+          ORDER BY created_at DESC
+          LIMIT 100 OFFSET ${offset}
+        ) AS comments_2
+        LEFT JOIN comment_answers ON comments_2.id = comment_answers.comments_id 
+        LEFT JOIN comment_answer_comment ON comment_answers.id = comment_answer_comment.comment_answers_id 
+    
+        UNION
+        
+        SELECT comments_2.id as 'comment_id', 
+        comments_2.comment as 'comment_comment', 
+        comments_2.created_at as 'comment_created_at',
+        comments_2.user_id as 'comment_user_id',
+        comments_2.lessons_id,
+        comments_2.course_id as 'comment_course_id',
+        comment_answers.id as 'comment_answer_id',
+        comment_answers.comment as 'comment_answer_comment',
+      comment_answers.created_at as 'comment_answer_created_at',
+      comment_answers.comments_id,
+      comment_answers.user_id as 'comment_answer_user_id',
+      comment_answers.course_id as 'comment_answer_course_id',
+      comment_answer_comment.id as 'comment_answer_comment_id',
+      comment_answer_comment.comment as 'comment_answer_comment_comment',
+      comment_answer_comment.user_id as 'comment_answer_comment_user_id',
+      comment_answer_comment.created_at as 'comment_answer_comment_created_at'
+        FROM (
+          SELECT * FROM comments 
+          ${courseId !== -1 ? `WHERE course_id = ${courseId}` : ''}
+          ORDER BY created_at DESC
+          LIMIT 100 OFFSET ${offset}
+        ) AS comments_2
+        RIGHT JOIN comment_answers ON comments_2.id = comment_answers.comments_id 
+        RIGHT JOIN comment_answer_comment ON comment_answers.id = comment_answer_comment.comment_answers_id
+    ) AS all_comments_and_answers
+    INNER JOIN lessons AS l ON l.id = all_comments_and_answers.lessons_id
+    INNER JOIN courses AS c ON c.id = all_comments_and_answers.comment_course_id
+    INNER JOIN seasons AS s ON s.id = l.seasons_id
+    ORDER BY comment_created_at DESC, comment_id, comment_answer_created_at desc, comment_answer_id;`;
+  return query;
+};

@@ -9,7 +9,16 @@ import { AdminContain, Table } from "../SideBar.styled";
 import { AdminCommentsContainer } from "./Comments.styled";
 import { GrClose } from "react-icons/gr";
 import { createNotification } from "../../api/notifications";
-import { generateCommentsByCourseIdQuery, generateAnswersByCommentIdQuery, generateAnswersOfAnswersByAnswerIdQuery, generateCommentsByCourseIdCountQuery, generateCoursesQuery, generateGetAdminUsersQuery } from './Querys';
+import {
+  generateCommentsByCourseIdQuery,
+  generateAnswersByCommentIdQuery,
+  generateAnswersOfAnswersByAnswerIdQuery,
+  generateCoursesQuery,
+  generateGetAdminUsersQuery,
+  generateGetAllComments,
+  CommentStructure,
+  generateCountAllComments
+} from './Querys';
 import Pagination from '../../Pagination/Pagination';
 import { DefaultColumn } from "../DefaultComponents/DefaultComponents.styled";
 
@@ -147,7 +156,7 @@ const Comments = () => {
   const [answerComment, setAnswerComment] = useState<any>("")
   const [popUp, setPopUp] = useState<any>(false)
   const [courses, setCourses] = useState<Course[]>([]);
-  const [coursesId, setCoursesId] = useState<number[]>([]);
+  // const [coursesId, setCoursesId] = useState<number[]>([]);
   const [level, setLevel] = useState<number>(1);
   const [loader, setLoader] = useState<number>(-1);
   const [selectedCourseId, setSelectedCourseId] = useState<number>(-1);
@@ -163,7 +172,7 @@ const Comments = () => {
 
   useEffect(() => {
     getCoursesForAdmin();
-    retrievCommentsNew();
+    retrievComments();
   }, [offset, selectedCourseId])
 
   const formatDate = (date: string) => {
@@ -193,8 +202,7 @@ const Comments = () => {
 
   const getCountOfComments = async () => {
     try {
-      const courseId = selectedCourseId === -1 ? undefined : selectedCourseId;
-      const countQuery = generateCommentsByCourseIdCountQuery(courseId);
+      const countQuery = generateCountAllComments(selectedCourseId);
       const countResponse = await getGenericQueryResponse(countQuery);
       const count = countResponse.data.data[0]["count"] as number;
       setCount(count);
@@ -262,6 +270,140 @@ const Comments = () => {
       console.error(error);
     }
   }
+
+  const retrievComments = async () => {
+    try {
+      await getCountOfComments();
+      const query = await generateGetAllComments('all', selectedCourseId, offset);
+      console.log(query);
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as CommentStructure[];
+
+
+      const onlyComments = filterOnlyComments(data);
+      const onlyAnswers = filterOnlyAnswers(data);
+      const onlyAnswersWithAnswer = filterOnlyAnswersWithAnswer(data);
+
+      const result: Comment[] = onlyComments.map((comment) => {
+        const newComment: Comment = {
+          course_title: comment.course_title,
+          id: comment.comment_id,
+          comment: comment.comment_comment,
+          course_id: comment.comment_course_id,
+          created_at: comment.comment_created_at,
+          lesson_number: comment.lesson_number,
+          season_number: comment.season_number,
+          user_id: comment.comment_user_id,
+          season_title: comment.season_title,
+          lessons_id: comment.lessons_id,
+          lesson_title: comment.lesson_title,
+          formatDate: formatDate(comment.comment_created_at),
+          answers: onlyAnswers.filter((a) => a.comment_id === comment.comment_id).map(a => {
+            return {
+              comment: a.comment_answer_comment,
+              comments_id: comment.comment_id,
+              course_id: a.comment_answer_course_id,
+              id: a.comment_answer_id,
+              user_id: a.comment_answer_user_id,
+              created_at: a.comment_answer_created_at,
+              comments: onlyAnswersWithAnswer.filter(aa => aa.comment_answer_id === a.comment_answer_id).map(aa => {
+                return {
+                  comment_answers_id: aa.comment_answer_id,
+                  comment: aa.comment_answer_comment,
+                  created_at: aa.comment_answer_comment_created_at,
+                  user_id: aa.comment_answer_comment_user_id,
+                  id: aa.comment_answer_comment_id
+                }
+              })
+            }
+          })
+        };
+
+        return {
+          ...newComment
+        }
+      });
+
+      console.log({ comments: result });
+      setComments(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const filterOnlyComments = (comments: CommentStructure[]) => {
+    const onlyCommentsData = comments.map(({
+      comment_id,
+      comment_comment,
+      comment_created_at,
+      comment_user_id,
+      lessons_id,
+      comment_course_id,
+      course_title,
+      lesson_number,
+      lesson_title,
+      season_number,
+      season_title
+    }) => {
+      return {
+        comment_id,
+        comment_comment,
+        comment_created_at,
+        comment_user_id,
+        lessons_id,
+        comment_course_id,
+        course_title,
+        lesson_number,
+        lesson_title,
+        season_number,
+        season_title
+      }
+    });
+    console.log({ onlyCommentsData });
+    const onlyComments = new Set([...onlyCommentsData.filter(c => c.comment_id !== null)]);
+    return [...onlyComments];
+  }
+
+  const filterOnlyAnswers = (comments: CommentStructure[]) => {
+    const onlyAnswersData = comments.map(({
+      comment_id,
+      comment_comment,
+      comment_created_at,
+      comment_user_id,
+      lessons_id,
+      comment_course_id,
+      comment_answer_id,
+      comment_answer_comment,
+      comment_answer_created_at,
+      comments_id,
+      comment_answer_user_id,
+      comment_answer_course_id
+    }) => {
+      return {
+        comment_id,
+        comment_comment,
+        comment_created_at,
+        comment_user_id,
+        lessons_id,
+        comment_course_id,
+        comment_answer_id,
+        comment_answer_comment,
+        comment_answer_created_at,
+        comments_id,
+        comment_answer_user_id,
+        comment_answer_course_id
+      }
+    });
+    const filteredAnswers = onlyAnswersData.filter((a) => a.comment_id !== null && a.comment_answer_id !== null);
+    const noRepeatAnswers = [...new Set(filteredAnswers)];
+    return noRepeatAnswers;
+  }
+
+  const filterOnlyAnswersWithAnswer = (comments: CommentStructure[]) => {
+    const filteredAnswersWithAnswer = comments.filter((c) => c.comment_id !== null && c.comment_answer_id !== null && c.comment_answer_comment_id !== null);
+    return filteredAnswersWithAnswer;
+  }
+
   /*
     const retrievComments = async () => {
       let user: any;
@@ -312,7 +454,6 @@ const Comments = () => {
       const response = await getGenericQueryResponse(query);
       const data = response.data.data as { user_id: number }[];
       const userIds = data.map(data => data["user_id"]);
-      console.log({ userIds });
       setAdminUserIds(userIds);
     } catch (error) {
       console.error(error);
@@ -330,7 +471,7 @@ const Comments = () => {
     }
     deleteThisComment(body).then(() => {
       alert('Comentario eliminado')
-      retrievCommentsNew();
+      retrievComments();
     })
     setLoader(-1);
   }
@@ -344,7 +485,7 @@ const Comments = () => {
       answer: value
     }
     deleteCommentAnswers(answer).then(() => {
-      retrievCommentsNew();
+      retrievComments();
     })
   }
   const deleteAnswerComment = (value: any) => {
@@ -356,7 +497,7 @@ const Comments = () => {
       answer: value
     }
     deleteCommentToAnswers(answer).then(() => {
-      retrievCommentsNew();
+      retrievComments();
     })
   }
 
@@ -384,7 +525,7 @@ const Comments = () => {
         commentId: comment.id,
         courseId: comment.course_id
       }).then((res) => {
-        retrievCommentsNew();
+        retrievComments();
         setAnswerText("");
         setPopUp(false);
         createNotification(notification);
@@ -395,7 +536,7 @@ const Comments = () => {
         comment: level === 1 ? answerText : answerComment,
         commentId: answer === undefined ? comment.id : answer.id,
       }).then((res) => {
-        retrievCommentsNew();
+        retrievComments();
         setAnswerComment("");
         setPopUp(false);
         createNotification(notification);
