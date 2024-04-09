@@ -11,13 +11,15 @@ import { useAuth } from '../../hooks/useAuth';
 import { attachPaymentMethodConekta, detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from '../api/profile';
 import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
 import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from '../api/checkout';
-import { createNotification } from '../api/notifications';
+import router from "next/router";
 import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
 import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
+import { PREVIEW_PATH } from '../../constants/paths';
 declare let window: any
 
 export const RetryPayment = () => {
   let userDataAuth: any = useAuth();
+  let today = new Date().getTime() / 1000;
   const context = useAuth();
   const user = context.user;
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([])
@@ -115,6 +117,10 @@ export const RetryPayment = () => {
   const getPaymentMethods = () => {
     setLoader(true);
     let user = userDataAuth.user;
+    console.log(user);
+
+    if ((user.level > 0 && user.final_date > today) || (user.level === 0 && user.final_date > today))
+      router.push({ pathname: PREVIEW_PATH })
     let body = {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id
@@ -131,6 +137,8 @@ export const RetryPayment = () => {
   useEffect(() => {
     if (userDataAuth.user) {
       getPaymentMethods();
+    } else {
+      router.push({ pathname: PREVIEW_PATH })
     }
   }, [userDataAuth])
 
@@ -343,7 +351,7 @@ export const RetryPayment = () => {
                         <label>Número de la tarjeta</label>
                         <InputMask
                           placeholder='**** **** **** ****'
-                          mask='9999 9999 9999 9999'
+                          mask={card.number.startsWith(37) ? '9999 9999 9999 999' : '9999 9999 9999 9999'}
                           maskChar={'*'}
                           value={card.number}
                           onChange={(e) => changeElement("number", e.target.value)}
