@@ -220,7 +220,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
       if (origin === 'facebook' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=10');
       } else if (origin === 'google' && type === 'cuatrimestral') {
-        router.push('https://www.gonvar.io/forms?formId=11');
+        router.push('https://www.gonvar.io/forms?formId=14');
       } else if (origin === 'tiktok' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=12');
       } else if (localStorage.getItem('email')) {

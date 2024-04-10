@@ -81,17 +81,10 @@ const Terms = () => {
       </p>
       <p>
         <span className='underline'>Precio. </span>
-        El Usuario pagará al Prestador por los Servicios elegidos al ingresar a la Plataforma de $149.00 (Ciento cincuenta pesos
-        mexicanos mensuales 00/100 M.N.). El precio de los Servicios son los que en adelante se describen, en el entendido de que
-        los mismos podrán variar de tiempo en tiempo, y a discreción única del Prestador, por lo que el Prestador no será responsable
-        de cualquier menoscabo que dicha alteración de precio pudiera causar al Usuario.
-      </p>
-      <p>
-        <span className='underline'>Precio. </span>
-        El Usuario pagará al Prestador por los Servicios elegidos al ingresar a la Plataforma de $149.00 (Ciento cincuenta
-        pesos mexicanos mensuales 00/100 M.N.). El precio de los Servicios son los que en adelante se describen, en el entendido
-        de que los mismos podrán variar de tiempo en tiempo, y a discreción única del Prestador, por lo que el Prestador no
-        será responsable de cualquier menoscabo que dicha alteración de precio pudiera causar al Usuario.
+        El Usuario pagará al Prestador por los Servicios elegidos al ingresar a la Plataforma de $459.00 (Cuatrocientos cincuenta y nueve pesos
+        mexicanos mensuales 00/100 M.N.), $1599.00 (Mil quinientos noventa y nueve pesos mexicanos cuatrimestrales 00/100 M.N.) o $3497.00 (Tres mil cuatrocientos noventa y
+        siete pesos mexicanos anuales 00/100 M.N.). El precio de los Servicios son los que en adelante se describen, en el entendido de que los mismos podrán variar de tiempo
+        en tiempo, y a discreción única del Prestador, por lo que el Prestador no será responsable de cualquier menoscabo que dicha alteración de precio pudiera causar al Usuario.
       </p>
       <p>
         <span className='underline'>Métodos de Pago. </span>
