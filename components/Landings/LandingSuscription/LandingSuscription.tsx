@@ -379,13 +379,24 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
-          <img src='images\landing_suscription\portada_lash_master.jpg' />
-          <p className="title">Lash Master</p>
-          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
-          {/* <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p> */}
-
-          <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
-          <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
+          {
+            type === 'cuatrimestral' && origin === 'google' ?
+              <>
+                <img src={specialCourse?.image} />
+                <p className="title">Nails Master Revolution</p>
+                <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+                <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
+                <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
+              </>
+              :
+              <>
+                <img src='images\landing_suscription\portada_lash_master.jpg' />
+                <p className="title">Lash Master</p>
+                <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+                <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
+                <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
+              </>
+          }
         </div>
         <div className="all-center space less-margin">
           <div className="group-buttons">
