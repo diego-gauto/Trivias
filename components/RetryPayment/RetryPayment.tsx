@@ -257,7 +257,7 @@ export const RetryPayment = () => {
       return "Anual"
     } else if (user.level === 1 || user.level === 6) {
       return "Mensual"
-    } else if (user.level === 7 || user.level === 8) {
+    } else if (user.level === 7 || user.level === 8 || user.level === 0) {
       return "Cuatrimestral"
     } else {
       return "NA "
@@ -271,6 +271,8 @@ export const RetryPayment = () => {
       return `$${user.type} / Mensual `
     } else if (user.level === 7 || user.level === 8) {
       return `$${user.type} / Cuatrimestral `
+    } else if (user.level === 0) {
+      return `1599 / Cuatrimestral `
     } else {
       return "NA "
     }
