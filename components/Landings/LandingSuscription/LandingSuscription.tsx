@@ -267,8 +267,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
       }
       <div className="intro-section" >
         <img src={upsideLines} />
-        <div className="fechas" style={{ marginTop: '-20px' }}>
-          <h4>
+        <div className="fechas" style={{ marginTop: '-80px' }}>
+          <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
             Desde el 16 de Marzo al 20 de Abril
@@ -276,8 +276,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <Countdown
             date={new Date(2024, 3, 20)}
             renderer={(props) => (
-              <div className="countdown">
-                <h2>TIEMPO RESTANTE</h2>
+              <div className="countdown" style={{ marginTop: '0' }}>
+                <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
                 <div className="time">
                   <div className="countdown-block">
                     <p className="tiempo">
@@ -346,19 +346,16 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
 
 
-        <div className="">
+        <div className="m-2">
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
-          <img src={plus} className="mt-4 plusgonvar" />
+          <img src={plus} className="plusgonvar" />
         </div>
 
-
-
-        <h3 className="bold">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
+        <h3 className="bold font-size-16">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
-          {responsive650 && <br />}
-          <h4 className="bold">Sólo {price}</h4>
+          <h4 className="bold font-size-16">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold font-size-16">Sólo {price}</h4>
         </div>
 
         <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>

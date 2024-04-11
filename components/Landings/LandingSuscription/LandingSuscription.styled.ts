@@ -1062,13 +1062,26 @@ export const SuscriptionContain = styled.div`
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   @media (max-width: 650px) {
+    .space {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
     .intro-section {
+      .font-size-19 {
+        font-size: 19px;
+      }
+      .font-size-18 {
+        font-size: 18px;
+      }
+      .font-size-16 {
+        font-size: 16px;
+      }
       .countdown {
         .time {
           .countdown-block {
             .tiempo {
               width: 70px;
-              height: 65px;
+              height: 57px;
               font-size: 2.2rem;
             }
             .sub {
@@ -1099,8 +1112,8 @@ export const SuscriptionContain = styled.div`
       .gonvarplus {
         width: 280px;
         margin-block: 0px;
-        margin-top: 40px;
-        margin-bottom: 20px;
+        margin-top: 0;
+        margin-bottom: 0;
       }
       h3,
       h4 {
@@ -1114,7 +1127,8 @@ export const SuscriptionContain = styled.div`
       }
       .background-images-responsive {
         .resp-left {
-          top: 840px;
+          top: 560px;
+          left: -50px;
         }
         .resp-right {
           width: 180px;
@@ -1124,7 +1138,7 @@ export const SuscriptionContain = styled.div`
       .progress-container {
         .progress-bar {
           width: 340px;
-          height: 50px;
+          height: 35px;
         }
         &::after {
           content: attr(progress-text);
@@ -1577,6 +1591,10 @@ export const SuscriptionContain = styled.div`
     }
   }
   @media (max-width: 400px) {
+    .space {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
     .intro-section {
       .gonvarplus {
         width: 250px;
