@@ -23,13 +23,13 @@ export interface IAllCourses {
   getAllCourses: any;
   material_route: string;
   with_certificate: boolean;
-  professors: [IProfessors];
-  categories: [ICategories];
-  materials: [IMaterials];
+  professors: IProfessors[];
+  categories: ICategories[];
+  materials: IMaterials[];
   published: boolean;
-  allProfessors: [IProfessors];
-  allCategories: [ICategories];
-  allMaterials: [IMaterials];
+  allProfessors: IProfessors[];
+  allCategories: ICategories[];
+  allMaterials: IMaterials[];
 }
 export interface IProfessors {
   id: number;

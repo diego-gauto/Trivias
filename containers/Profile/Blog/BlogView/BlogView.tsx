@@ -32,6 +32,7 @@ const BlogView = () => {
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
   const url = window.location.href;
   const getGonvarAdImage = "/images/Navbar/NavbarLogo.png"
+  const banner = '/images/blog/banner-blogs.jpg';
   const router = useRouter();
   const ref = useRef<any>(null);
   let topicTitleCount: any = 0
@@ -293,31 +294,40 @@ const BlogView = () => {
                       index == 0 &&
                       <GonvarAd>
                         <div className="img">
-                          <p className="title">GONVAR +</p>
-                          <img className="img-display" src={getGonvarAdImage} />
+                          {/* <p className="title">GONVAR +</p> */}
+                          <img className="img-display" src={banner} />
                         </div>
                         <div className="all-texts">
-                          <p className="space">Instructores internacionales</p>
-                          <p className="space">Aprende 24/7 desde donde quieras, y
-                            accede a +180 clases ya disponibles.
+                          <p className="space">¡<strong>Descarga Gratis</strong> tus libros de belleza favoritos!</p>
+                          <ul>
+                            <li>
+                              <p>El libro de las uñas</p>
+                            </li>
+                            <li>
+                              <p>El libro de las Pestañas</p>
+                            </li>
+                            <li>
+                              <p>El libro de manicura</p>
+                            </li>
+                            <li>
+                              <p>Muchos manuales más</p>
+                            </li>
+                          </ul>
+                          <p className="space">Totalmente gratis, comienza a aprender todo sobre belleza en nuestros manuales Gonvar.
                           </p>
-                          <p className="text-style space">(47 calificaciones)
-                            <span><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /><AiFillStar /></span>
-                          </p>
-                          <p className="space">
-                            Aprende paso a paso y desde cero, las mejores técnicas de uñas,
-                            por instructores 100% capacitados.
-                          </p>
-                          <p>Diseño y decoración</p>
-                          <p>Técnicas en tendencias</p>
-                          <p className="space">¡Mano alzada, 3D, Stamping, micro-pintura,
-                            one Stroke, Uñas esculturales, Polygel, técnica
-                            express, técnica de tips, pedicure y mucho más!
+                          <p className="space">Solo haz click aquí abajo, elige tus manuales y compra sin costo.
                           </p>
                           <div className="button-contain">
-                            <button className="button-gonvar" onClick={goToCourses}>
-                              Inscríbete a solo $1599 MXN al año
+                            {
+                              /*
+                              <button className="button-gonvar" onClick={goToCourses}>
+                              Descargar Manuales
                             </button>
+                              */
+                            }
+                            <a className="button-gonvar" style={{ textDecoration: 'none' }} target="_blank" href='https://bit.ly/3J3ofsV'>
+                              Descargar Manuales
+                            </a>
                           </div>
                         </div>
                       </GonvarAd>

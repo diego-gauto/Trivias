@@ -103,7 +103,6 @@ const Quiz = () => {
   const removeAnswer = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
     tempQuiz.questions[index].answers.splice(ind, 1)
-    console.log({ ...tempQuiz })
     setQuiz({ ...tempQuiz })
   }
   const submit = () => {

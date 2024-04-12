@@ -88,7 +88,8 @@ export const RewardsContainer = styled.div`
     }
   }
   @media (max-width: 650px) {
-    margin-block: 50px;
+    margin-block: 0;
+    padding-block: 35px;
     .text-title {
       font-size: 1.7rem !important;
       text-align: start;

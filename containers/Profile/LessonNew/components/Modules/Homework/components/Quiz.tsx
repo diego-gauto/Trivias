@@ -2,18 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { BsArrowRepeat, BsCheckCircleFill, BsFileArrowUp } from "react-icons/bs";
 
-import router from "next/router";
 import { Bottom, DoneContainer, QuestionContainer, QuizContainer, QuizStatus, Top } from "./Quiz.styled";
-import progress from "antd/es/progress";
-import { verify } from "crypto";
 import { Answer } from "../Homework.styled";
 import { UserQuiz, getUserQuizApi, updateUserProgressByQuizApi, updateUserQuizApi, updateUserScoreApi } from "../../../../../../../components/api/lessons";
 import { useCourse } from "../../../../../../../hooks/useLesson";
-import { GiDonerKebab } from "react-icons/gi";
-import { user } from "firebase-functions/v1/auth";
-import { reload } from "firebase/auth";
-import next from "next";
-import lesson from "../../../../../../../pages/lesson";
+import { IUserInfoResult } from "../../../../../../../interfaces/IUser";
 
 export interface Lesson {
   id: number
@@ -74,7 +67,7 @@ export interface Answer {
 
 interface IQuiz {
   lesson: Lesson,
-  user: any;
+  user: IUserInfoResult;
 }
 
 const Quiz = (props: IQuiz) => {
@@ -92,6 +85,7 @@ const Quiz = (props: IQuiz) => {
   const [grade, setGrade] = useState(0);
   const [isLoadingQuiz, setIsLoadingQuiz] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [isFinishAttempt, setFinishAttempt] = useState(false);
 
   useEffect(() => {
     getUserQuiz();
@@ -102,7 +96,6 @@ const Quiz = (props: IQuiz) => {
       tempAnswers.push([]);
     });
     setAnswers(tempAnswers);
-
   }, [lesson])
 
   const getUserQuiz = async () => {
@@ -200,47 +193,44 @@ const Quiz = (props: IQuiz) => {
       lessonId: lesson.id,
       user_id: user.user_id,
     };
-    let tempQuiz = {
+    let quiz = {
       lessonId: lesson.id,
       userId: user.user_id,
       grade: grade,
       quizId: lesson.lesson_quizzes.id,
     };
-    let tempData = {
+    let score = {
       points: user.score + grade,
       userId: user.user_id,
     };
-
     setStep(2);
-    if (userQuizzes.length === 0) {
-      if (points >= lesson.lesson_quizzes.passing_grade) {
-        let tempIndex = lesson.progress.findIndex((x: any) => x.user_id === user.user_id);
-        const progress = lesson.progress[tempIndex];
-        if (progress !== undefined) {
-          progress.status = 1;
-        }
-        //lesson.progress[tempIndex].status = true;
-        await updateUserProgressByQuizApi(progress);
+    const gradePercent = (grade / lesson.lesson_quizzes.points) * 100;
+    const passingGrade = lesson.lesson_quizzes.passing_grade;
+    // Si el usuario cumple con el minimo necesario para considerar el quiz aprobado, actualiza el progreso
+    // Así se hace en homework
+    if (gradePercent >= passingGrade) {
+      let currentUserIndex = lesson.progress.findIndex((progress) => progress.user_id === user.user_id);
+      const lessonProgress = lesson.progress[currentUserIndex];
+      if (lessonProgress) {
+        lessonProgress.status = 1;
       }
-      await updateUserScoreApi(tempData);
-      await updateUserQuizApi(tempQuiz);
+      // Actualiza para que el usuario tiene el progreso de esa lección, solo si existe el registro
+      const userProgessResponse = await updateUserProgressByQuizApi(progress);
+    }
+    // Si no existe un registro para el usuario previamente al finalizar el quiz, se agrega al score el valor del quiz
+    const userQuiz = userQuizzes.find((quiz) => quiz.lesson_id == lesson.id);
+    if (userQuiz === undefined) {
+      await updateUserScoreApi(score);
+      // Se actualiza el valor registrado por el usuario, pues es su primer intento
+      await updateUserQuizApi(quiz);
     } else {
-      if (points >= lesson.lesson_quizzes.passing_grade) {
-        let tempIndex = lesson.progress.findIndex((x: any) => x.user_id === user.user_id);
-        // lesson.progress[tempIndex].status = true;
-        const progress = lesson.progress[tempIndex];
-        if (progress !== undefined) {
-          progress.status = 1;
-        }
-        await updateUserProgressByQuizApi(progress);
-        if (userQuizzes.find((quiz) => quiz.lesson_id == lesson.id)) {
-          await updateUserQuizApi(tempQuiz);
-        } else {
-          await updateUserScoreApi(tempData);
-          await updateUserQuizApi(tempQuiz);
-        }
+      // En caso de existir un registro previo, se actualiza el valor en user_quizzes, pero
+      // solo en caso de que la calificación anterior sea peor que la actual
+      if (userQuiz.grade < grade) {
+        await updateUserQuizApi(quiz);
       }
     }
+    setFinishAttempt(true);
     reload();
     setLoader(false);
   };
@@ -258,11 +248,17 @@ const Quiz = (props: IQuiz) => {
       tempAnswers.push([]);
     });
     setAnswers(tempAnswers);
+    setFinishAttempt(false);
   }
 
-  const generateGradePercent = (lessonId: number) => {
+  const generateDBGradePercent = (lessonId: number) => {
     const quiz = userQuizzes.find((quiz) => quiz.lesson_id == lessonId);
-    const grade = quiz ? quiz.grade : 0;
+    const gradeDB = quiz ? quiz.grade : 0;
+    const { points } = lesson.lesson_quizzes;
+
+    return (gradeDB / points) * 100;
+  }
+  const generateCurrentGradePercent = () => {
     const { points } = lesson.lesson_quizzes;
 
     return (grade / points) * 100;
@@ -278,7 +274,7 @@ const Quiz = (props: IQuiz) => {
     </>);
   }
 
-  if (Math.floor(generateGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade) {
+  if (Math.floor(generateDBGradePercent(lesson.id)) >= lesson.lesson_quizzes?.passing_grade && !isFinishAttempt) {
     return (
       <QuizStatus color="#00CC99" rgb={"rgb(213,227,232)"} text="#006b51" icon="#00CC99">
         <BsCheckCircleFill className="icon" />
@@ -316,21 +312,27 @@ const Quiz = (props: IQuiz) => {
                 <div className='quiz-bar'>
                   {userQuizzes?.find((x: any) => x.lesson_id == lesson.id)
                     && <div className='quiz-bar-progress'
-                      style={{ width: `${generateGradePercent(lesson.id)}%` }}>
+                      style={{ width: `${generateDBGradePercent(lesson.id)}%` }}>
                       <div className='line'>
-                        <p className='max'>{
-                          Math.floor(generateGradePercent(lesson.id))
-                        } pts</p>
+                        <p className='max' style={{ textAlign: 'center' }}>tu mejor intento<br />{
+                          Math.floor(generateDBGradePercent(lesson.id))
+                        } %</p>
                       </div>
                     </div>}
-                  <div className='passing-grade' style={{ left: `calc(${lesson.lesson_quizzes.passing_grade}% - 8px)` }}>
+                  <div
+                    className='passing-grade'
+                    style={{
+                      left: `calc(${lesson.lesson_quizzes.passing_grade}% - 8px)`
+                    }}>
                     <div className='line'>
                       <p className='minimum-top'>{lesson.lesson_quizzes?.passing_grade}%</p>
                       <p className='minimum'>MINIMO</p>
                     </div>
                   </div>
-                  <div className="quiz-bar-points">
-                    {lesson.lesson_quizzes.points} pts
+                </div>
+                <div className="points-container">
+                  <div className="point-child"                  >
+                    <p>{lesson.lesson_quizzes.points} pts</p>
                   </div>
                 </div>
               </div>
@@ -362,7 +364,7 @@ const Quiz = (props: IQuiz) => {
       {step == 1 && (
         <QuestionContainer>
           <div className="question-bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
+            <div className="progress" style={{ width: `${(grade / lesson.lesson_quizzes.points) * 100}%` }}></div>
           </div>
           <div className="question-title">
             <h2 dangerouslySetInnerHTML={
@@ -416,14 +418,18 @@ const Quiz = (props: IQuiz) => {
       )}
       {step == 2 && (
         <DoneContainer>
-          <div className="bar">
-            <div className="progress" style={{ width: `${progress}%` }}></div>
-          </div>
+          {
+            /*
+            <div className="bar">
+              <div className="progress" style={{ width: `${progress}%` }}></div>
+            </div>
+            */
+          }
           <div className="quiz-results">
             <div className="left">
               <h2>
                 {points >= lesson.lesson_quizzes.passing_grade
-                  ? "FELICIDADES !!!"
+                  ? "¡FELICIDADES!"
                   : "SIGUE INTENTANDO"}
               </h2>
               <p>
@@ -443,43 +449,30 @@ const Quiz = (props: IQuiz) => {
           </div>
           <div className="quiz-bar-container">
             <div className="quiz-bar">
-              {userQuizzes?.find((x: any) => x.lesson_id == lesson.id) && (
-                <div
-                  className="quiz-bar-progress"
-                  style={{ width: `${generateGradePercent(lesson.id)}%` }}>
+              <div
+                className="quiz-bar-progress"
+                style={{ width: `${generateCurrentGradePercent()}%` }}>
 
-                  <div className="line">
-                    <p className='max'>
-                      {
-                        Math.floor(generateGradePercent(lesson.id))
-                      } %</p>
-                  </div>
+                <div className="line">
+                  <p className='max'>
+                    {
+                      Math.floor(generateCurrentGradePercent())
+                    } %</p>
                 </div>
-              )}
+              </div>
               <div
                 className="passing-grade"
                 style={{
-                  left: `calc(${lesson.lesson_quizzes.passing_grade}% - 58px)`,
+                  left: `calc(${lesson.lesson_quizzes.passing_grade}% - 13px)`,
                 }}
               >
-                <p
-                  style={{
-                    color: userQuizzes?.find(
-                      (x: any) => x.lesson_id == lesson.id
-                    )
-                      ? "#FFB800"
-                      : "#8628e2",
-                  }}
-                >
-                  {lesson.lesson_quizzes.passing_grade} pts
-                </p>
                 <div className='line'>
                   <p className='minimum-top'>{lesson.lesson_quizzes?.passing_grade}%</p>
                   <p className='minimum'>MINIMO</p>
                 </div>
               </div>
             </div>
-            <div className="quiz-bar-points">100 pts</div>
+            <div className="quiz-bar-points">{lesson.lesson_quizzes.points} pts</div>
           </div>
           <button
             onClick={() => {

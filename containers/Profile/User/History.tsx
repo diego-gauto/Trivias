@@ -106,10 +106,6 @@ export const History = ({ user, addPayment }: any) => {
     retrieveInvoices()
   }, []);
 
-  if (invoices) {
-    console.log({ invoices });
-  }
-
   const formatAmountNumberToString = (amount: number) => {
 
     const formatter = new Intl.NumberFormat('en-US', {

@@ -1,15 +1,19 @@
 import axios from "axios";
 
+export interface Professor {
+  id: number
+  about: string
+  name: string
+  image: string
+  sign: string
+  professors_id: number
+}
+
 export const getProfessorApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "professors/getProfessors")
-    .then((res) => {
-      return res.data.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{
+      data: Professor[]
+    }>("https://gonvar.inowu.dev/" + "professors/getProfessors");
 };
 export const createProfessorApi = async (professor: any) => {
   return axios

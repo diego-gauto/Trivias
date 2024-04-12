@@ -108,8 +108,10 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
+type Origin = "facebook" | "google" | "tiktok";
+
 interface ILandingNailsRevolution {
-  type?: string;
+  type?: Origin;
 }
 const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   const { type } = props;
@@ -224,7 +226,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     return returnValue;
   };
 
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   return (
     <SuscriptionContain>
@@ -277,9 +279,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           />
           <div className="progress-container">
             <div
-              className={`progress-bar ${
-                checkProgress().x100 >= 100 && "full"
-              }`}
+              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
+                }`}
               style={
                 {
                   "--progress": checkProgress().x100 + "%",

@@ -5,8 +5,23 @@ import { updateCourseImage } from '../../../../store/actions/courseActions';
 import { updateCourseApi } from '../../../api/courses';
 import { getUserApi } from '../../../api/users';
 import { LoaderButton, OptionColor, SelectOption } from '../Courses.styled';
-import { IAllCourses, ICategories, IMaterials, IProfessors } from './IAllCourses';
-const AllCourses = (props: IAllCourses) => {
+// import { IAllCourses, ICategories, IMaterials, IProfessors } from './IAllCourses';
+import { ICategories, ICourses, IMaterials, IProfessors } from '../ICourses';
+import { createNotification } from '../../../api/notifications';
+import { getGenericQueryResponse, postGenericQueryResponse } from '../../../api/admin';
+
+interface AllCoursesProps extends ICourses {
+  openCourseEdit: number,
+  openCourse: (courseIndex: number) => void,
+  moveTo: (index: number) => void,
+  allProfessors: IProfessors[],
+  allMaterials: IMaterials[],
+  allCategories: ICategories[],
+  index: number,
+  getAllCourses: () => void
+}
+
+const AllCourses = (props: AllCoursesProps) => {
   const router = useRouter();
   const [startEdit, setStartEdit] = useState<boolean>(false);
   const [loader, setLoader] = useState<boolean>(false);
@@ -67,7 +82,7 @@ const AllCourses = (props: IAllCourses) => {
     with_certificate,
     material_route,
   } = props;
-  const [course, setCourse] = useState<any>({
+  const [course, setCourse] = useState<ICourses>({
     id: id,
     title: title,
     subtitle: subtitle,
@@ -221,7 +236,10 @@ const AllCourses = (props: IAllCourses) => {
         })
       }
       setLoader(true);
-      console.log(course);
+
+      if (course.published) {
+        sendNotificationToAllActiveUsers();
+      }
 
       updateCourseApi(course).then(() => {
         setStartEdit(false);
@@ -242,9 +260,57 @@ const AllCourses = (props: IAllCourses) => {
       }
     })
   }
-  const deleteCourse = () => {
 
+  const sendNotificationToAllActiveUsers = async () => {
+    try {
+      const toleranceDays = 10;
+      const secondsOfTolerance = toleranceDays * 24 * 60 * 60;
+      const insertCourseNotificationQuery = `select u.id from users as u inner join 
+      memberships as m on m.user_id = u.id 
+      where from_unixtime(m.final_date + ${secondsOfTolerance}) > now() and m.level != 10;`;
+      const activeUsersResponse = await getGenericQueryResponse(insertCourseNotificationQuery);
+      const activeUsers = activeUsersResponse.data.data;
+      // Para que sea para todos los usuarios de la consulta, remover el .filter
+      activeUsers.filter(user => {
+        // 54598 para alberto, 49678 para Diego
+        return [54598, 49678].includes(user["id"]);
+      }).forEach(user => {
+        sendNotificationToUser(user["id"])
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  const sendNotificationToUser = async (userId: number) => {
+    try {
+      const createNotificationResponse = await postGenericQueryResponse("insert into notification (type) values ('10');");
+      const insertIdNotification = createNotificationResponse.data.data.insertId;
+      const insertCourseNotificationQuery = `insert into course_notification 
+      (notification_id, course_id, title, user_id) 
+      values (${insertIdNotification}, ${course.id}, '${course.title}', ${userId});`;
+      await getGenericQueryResponse(insertCourseNotificationQuery);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  const sendMailToUser = (userId: number) => {
+    try {
+      let mailData = {
+        name: '',
+        to: '',
+        sender: '',
+        idTemplateBrevo: 0,
+        date: '',
+        courseName: '',
+      }
+
+    } catch (error) {
+
+    }
+  }
+
   return (
     <div className="edit-course" id={`course-${index}`}>
       <div className="title-contain" onClick={() => { openCourse(index), moveTo(index) }}>
@@ -414,7 +480,7 @@ const AllCourses = (props: IAllCourses) => {
                                 className="map-options"
                                 key={"secuencial-edit_" + index}
                                 onClick={() => setCourse({
-                                  ...course, sequential: val === "Flexible" ? false : true
+                                  ...course, sequential: val === "Flexible" ? 0 : 1
                                 })}
                               >
                                 {val}
@@ -829,7 +895,7 @@ const AllCourses = (props: IAllCourses) => {
                                 className="map-options"
                                 key={"published_" + index}
                                 onClick={() => setCourse({
-                                  ...course, published: val === "Publicado" ? true : false
+                                  ...course, published: val === "Publicado" ? 1 : 0
                                 })}
                               >
                                 {val}

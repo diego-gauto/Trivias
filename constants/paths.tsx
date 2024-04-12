@@ -34,5 +34,5 @@ export const NAILS_FORM = "https://forms.gle/LN27h3QKtYq1v29s9";
 export const Landing_Facebook = "https://bit.ly/inscripcionesgonvar";
 export const NAilS_REVOLUTION_FORM = "https://www.gonvar.io/forms?formId=10";
 export const NAilS_REVOLUTION_FORM_GOOGLE =
-  "https://www.gonvar.io/forms?formId=11";
+  "https://www.gonvar.io/forms?formId=15";
 export const NAilS_REVOLUTION_FORM_TT = "https://www.gonvar.io/forms?formId=12";

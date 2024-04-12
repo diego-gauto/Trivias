@@ -120,8 +120,6 @@ const Cuatri = (props: IData) => {
     </button>
   }
 
-  console.log({ user });
-
   return (
     <PlanStyles>
       <ChangePlanModal

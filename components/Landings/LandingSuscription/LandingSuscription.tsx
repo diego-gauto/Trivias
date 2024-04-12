@@ -19,6 +19,7 @@ import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1"
 import { SuscriptionContain } from "./LandingSuscription.styled";
 import { RewardComponent } from "../Components/Reward";
 import { ICourse } from "../../Courses/Modules/ISliders";
+import Countdown from "react-countdown";
 
 const cursoBackground = "/images/landing_suscription/Rectangle 684.png"
 const gonvar = "/images/landing_suscription/gonvar cuad 1.png"
@@ -75,8 +76,14 @@ const antonio = "/images/landing_suscription/Antonio.png"
 const liz = "/images/landing_suscription/Liz.png"
 const left_responsive_girls = "/images/landing_suscription/responsive/chica_izquierda.svg"
 const right_responsive_girls = "/images/landing_suscription/responsive/chica_derecha.svg"
-const left_girl = "/images/landing_suscription/left_girl.png"
-const right_girl = "/images/landing_suscription/right_girl.png"
+// const left_girl = "/images/landing_suscription/left_girl.png"
+// const right_girl = "/images/landing_suscription/right_girl.png"
+
+const right_hands = "/images/landing_suscription/manos-hacia-lado-izquierdo.png"
+const left_hands = "/images/landing_suscription/manos-hacia-lado-derecho.png"
+
+const left_responsive_hands = "/images/landing_suscription/responsive/manos-hacia-lado-derecho.png"
+const right_responsive_hands = "/images/landing_suscription/responsive/manos-hacia-lado-izquierdo.png"
 
 let views = new Map<number, boolean>();
 views.set(1, false);
@@ -90,6 +97,23 @@ interface ILandingSuscription {
   isFacebook?: boolean;
   origin?: "facebook" | "google" | "tiktok";
 }
+
+const checkProgress = () => {
+  const oneDay = 24 * 60 * 60 * 1000;
+  const firstDate = new Date("13/04/2023 23:00:00"); //final
+  const secondDate = new Date(); //today
+  //Fechas pa calar
+  // const firstDate = new Date('10/13/2023 23:59:00');
+  // const secondDate = new Date('10/09/2023 00:00:00');
+  const diffDays = Math.floor(
+    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
+  );
+  let returnValue = {
+    x100: 80,
+    texto: "CUPO CASI AGOTADO",
+  };
+  return returnValue;
+};
 
 const LandingSuscription = (props: ILandingSuscription) => {
   const { price, type, isFacebook, origin } = props;
@@ -196,7 +220,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
       if (origin === 'facebook' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=10');
       } else if (origin === 'google' && type === 'cuatrimestral') {
-        router.push('https://www.gonvar.io/forms?formId=11');
+        router.push('https://www.gonvar.io/forms?formId=14');
       } else if (origin === 'tiktok' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=12');
       } else if (localStorage.getItem('email')) {
@@ -233,58 +257,145 @@ const LandingSuscription = (props: ILandingSuscription) => {
   }
 
   return (
-    <SuscriptionContain>
-      <div className="extra-header">
+    <SuscriptionContain id="main-container">
+      {
+        /*
+        <div className="extra-header">
         <button className="header-button" onClick={() => handleNewRedirection()}>Comenzar ahora</button>
       </div>
+        */
+      }
       <div className="intro-section" >
+        <img src={upsideLines} />
+        <div className="fechas" style={{ marginTop: '-80px' }}>
+          <h4 style={{ margin: '0', fontSize: '16px' }}>
+            <b>¡Inscríbete en línea hoy!</b>
+            <br />
+            Desde el 16 de Marzo al 20 de Abril
+          </h4>
+          <Countdown
+            date={new Date(2024, 3, 20)}
+            renderer={(props) => (
+              <div className="countdown" style={{ marginTop: '0' }}>
+                <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
+                <div className="time">
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.days < 10 && 0}
+                      {props.days}
+                    </p>
+                    <p className="sub" style={{ fontWeight: 'bold' }}>DIAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.hours < 10 && 0}
+                      {props.hours}
+                    </p>
+                    <p className="sub" style={{ fontWeight: 'bold' }}>HORAS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.minutes < 10 && 0}
+                      {props.minutes}
+                    </p>
+                    <p className="sub" style={{ fontWeight: 'bold' }}>MINUTOS</p>
+                  </div>
+                  <div className="countdown-block">
+                    <p className="tiempo">
+                      {props.seconds < 10 && 0}
+                      {props.seconds}
+                    </p>
+                    <p className="sub" style={{ fontWeight: 'bold' }}>SEGUNDOS</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          />
+          <div className="progress-container">
+            <div
+              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
+                }`}
+              style={
+                {
+                  "--progress": checkProgress().x100 + "%",
+                } as React.CSSProperties
+              }
+              progress-text={checkProgress().texto}
+            />
+          </div>
+        </div>
         <div className="background-images">
-          <img src={upsideLines} />
           <div className="image-contain">
-            <img src={left_girl} className="left-woman" />
+            {
+              /*
+              <img src={left_girl} className="left-woman" />
             <img src={right_girl} className="right-woman" />
+              */
+            }
+            <img src={left_hands} className="left-image" />
+            <img src={right_hands} className="right-image" />
             <div className="images-fade" />
           </div>
         </div>
         <div className="background-images-responsive">
-          <img src={left_responsive_girls} className="resp-left image-resp" alt="chicas-lado-izquierdo" />
+          <img src={left_responsive_hands} className="resp-left image-resp" alt="chicas-lado-izquierdo" />
           <div className="image-right image-resp">
             <div className="white-line" />
-            <img src={right_responsive_girls} className="resp-right" alt="chicas-lado-derecho" />
+            <img src={right_responsive_hands} className="resp-right" alt="chicas-lado-derecho" />
           </div>
         </div>
-        <div className="">
+
+
+        <div className="m-2">
           <img src={gonvar} className="gonvarplus" alt="gonvar-logo" />
-          <img src={plus} className="mt-4 plusgonvar" />
+          <img src={plus} className="plusgonvar" />
         </div>
 
-        <h3 className="bold space">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
+        <h3 className="bold font-size-16">La suscripción {type}{responsive650 && <br />} que te permite ver {responsive650 && <br />} <b className="p-pink no-bold">{!responsive650 && <br />} cientos de cursos {responsive650 && <br />} </b> de uñas y belleza en línea.</h3>
 
         <div className="space">
-          <h4 className="bold">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
-          {responsive650 && <br />}
-          <h4 className="bold">Sólo {price}</h4>
+          <h4 className="bold font-size-16">¡Accede a <b className="p-pink no-bold">más de 70 cursos {responsive650 && <br />}</b> hoy mismo!</h4>
+          <h4 className="bold font-size-16">Sólo {price}</h4>
         </div>
 
         <button className="btn left-right" onClick={() => handleNewRedirection()} >¡Comenzar ahora!</button>
+
+        <div className="whatsap-container">
+          <div className="watsap-button all-center" onClick={() => redirectToWhatsAppChat()}>
+            <img src="/images/landing_suscription/whatsapp_outline.png" className="" />
+            <p className="bold" style={{ margin: '0' }}>Contacta con <br />un agente</p>
+          </div>
+        </div>
+
       </div>
 
       <div className="courses-section">
         <div className="space">
           <h2 className="bold">En esta plataforma de aprendizaje encontrarás</h2>
-          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS{responsive650 && <br />}, PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
+          <h2 className="h1"><b className="p-pink">MÁS DE 70 CURSOS DE UÑAS,{responsive650 && <br />}PESTAÑAS Y BELLEZA EN LÍNEA</b></h2>
           <h2 className="bold">donde aprenderás desde cero y {responsive650 && <br />}paso a paso.</h2>
         </div>
         <div className="special-course">
-          <img src='images\landing_suscription\portada_lash_master.jpg' />
-          <p className="title">Lash Master</p>
-          <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
-          {/* <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p> */}
-
-          <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
-          <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
+          {
+            type === 'cuatrimestral' && origin === 'google' ?
+              <>
+                <img src={specialCourse?.image} />
+                <p className="title">Nails Master Revolution</p>
+                <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+                <p className="p-pink">La Certificación en aplicación de {responsive650 && <br />} uñas acrílicas desde 0 a Profesional.</p>
+                <p className="p-pink">Técnicas de Escultural y Tips incluídas.</p>
+              </>
+              :
+              <>
+                <img src='images\landing_suscription\portada_lash_master.jpg' />
+                <p className="title">Lash Master</p>
+                <p className="p-pink">Ahora ya disponible en tu suscripción Gonvar+.</p>
+                <p className="p-pink">Los cursos de aplicación de {responsive650 && <br />} extensiones de pestañas desde 0 a Profesional.</p>
+                <p className="p-pink">Técnica Clásica y Abanicos tecnologicos incluidos. {responsive650 && <br />} Diseños y efectos.</p>
+              </>
+          }
         </div>
-        <div className="all-center space">
+        <div className="all-center space less-margin">
           <div className="group-buttons">
             <div className="center">
               <button className={`${cursos === 1 && 'select'}`} onClick={() => setCursos(1)}>Cursos de Arte</button>
@@ -524,7 +635,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
         </div>
         <h3 className="bold space">Los cursos son impartidos por {responsive650 && <br />}<b className="p-pink no-bold">instructores profesionales
           y {responsive650 && <br />}certificados,</b> {!responsive650 && <br />}que estarán guiándote {responsive650 && <br />}paso a paso, durante tu aprendizaje.</h3>
-        <button className="btn up-down spacing mb-5" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
+        <button className="btn up-down spacing" onClick={() => handleNewRedirection()}>Quiero comenzar<br /> hoy mismo</button>
       </div>
 
 
@@ -673,14 +784,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             <div className="list">
               <img src={descuento} className="me-3" />
               <div className="m-0">
-                {
-                  type === "mensual" ?
-                    <>
-                      <h5><b className="p-pink">20% de descuento</b> en productos a partir del 2° mes</h5>
-                      <h5><b className="p-pink">40% de descuento</b> en productos a partir del 4° mes</h5>
-                    </> :
-                    <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
-                }
+                <h5><b className="p-pink">40% de descuento</b> en todo el producto Gonvar.</h5>
               </div>
             </div>
 

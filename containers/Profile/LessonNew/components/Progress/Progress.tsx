@@ -18,27 +18,28 @@ interface IProgress {
 const Progress = (props: IProgress) => {
   const { course, user } = props;
   const [count, setCount] = useState(0);
-  const responsive1124 = useMediaQuery({ query: "(max-width: 1124px)" });
-  const [certficate, setCertificate] = useState<any>(false);
+  const [certficate, setCertificate] = useState<boolean>(false);
   const [certificate_id, setCertificate_id] = useState<any>("");
   const params = useRouter();
   const { id, season, lesson }: any = params.query;
 
   useEffect(() => {
     let viewed = 0;
-    course.seasons.forEach((s: any) => {
-      s.lessons.forEach((l: any) => {
-        let array = l.progress.filter((x: any) => x.user_id === user.id && x.status === 1)
-        if (l.users.includes(user?.id) && l.homework === 0 && l.quiz === 0) {
+    course.seasons.forEach((season) => {
+      season.lessons.forEach((lesson) => {
+        let userProgress = lesson.progress.filter((progress) => {
+          return progress.user_id === user.id && progress.status === 1;
+        });
+        const lessonIncludesTheUser = lesson.users.includes(user?.id);
+        if (lessonIncludesTheUser && lesson.homework === 0 && lesson.quiz === 0) {
           viewed++;
-        }
-        if (l.users.includes(user?.id) && (l.homework === 1 || l.quiz === 1) && array.length > 0) {
+        } else if (lessonIncludesTheUser && (lesson.homework === 1 || lesson.quiz === 1) && userProgress.length > 0) {
           viewed++;
         }
       });
     });
 
-    if (course.lessons.length == viewed) {
+    if (course.lessons.length == viewed && course.with_certificate === 1) {
       let ids = {
         userId: user.id,
         courseId: course.id
@@ -83,7 +84,6 @@ const Progress = (props: IProgress) => {
       }
       setCertificate(true)
     }
-
     setCount(viewed);
 
   }, [course])
@@ -115,7 +115,7 @@ const Progress = (props: IProgress) => {
 
   return (
     <MainContainer>
-      {(course.with_certificate === 1 && certficate && !responsive1124) && <CertificateOn onClick={() => { goToCertificate() }}>
+      {(course.with_certificate === 1 && certficate) && <CertificateOn onClick={() => { goToCertificate() }}>
         <p>Obtener certificado</p>
       </CertificateOn>}
       <div className="content">

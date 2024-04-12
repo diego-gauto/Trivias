@@ -38,6 +38,7 @@ export interface IUserInfo {
   plan_name: any;
   start_date: number;
   type: any;
+  origin_state: string;
 }
 
 export interface IProgress {

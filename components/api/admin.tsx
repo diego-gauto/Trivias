@@ -430,16 +430,44 @@ export const updateLandingProductApi = async (user: any) => {
     });
 };
 
+
+export interface Comment {
+  id: number
+  comment: string
+  created_at: string
+  user_id: number
+  lessons_id: number
+  course_id: number
+  lesson_title: string
+  lesson_number: number
+  season_number: number
+  course_title: string
+  season_title: string
+  answers: Answer[]
+  formatDate: string
+}
+
+export interface Answer {
+  id: number
+  comment: string
+  created_at: string
+  comments_id: number
+  user_id: number
+  course_id: number
+  comments: CommentOfAnswer[]
+}
+
+export interface CommentOfAnswer {
+  id: number
+  comment: string
+  comment_answers_id: number
+  user_id: number
+  created_at: string
+}
+
 export const getComments = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/" + "all/comments")
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{ comments: Comment[] }>("https://gonvar.inowu.dev/" + "admin/" + "all/comments");
 };
 
 export const deleteCommentAnswers = async (answer: any) => {
