@@ -31,9 +31,10 @@ import { getUsersStripe } from "../../../components/api/conekta/test";
 import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
 import { SOCIALS_ARRAY } from "../../../constants/arrays";
 import { returnPrice, returnPriceTag } from "../../../utils/functions";
+import { IUserInfoResult } from "../../../interfaces/IUser";
 declare let window: any
 const Purchase = () => {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
   const [isLoading, setIsLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState<any>(false);
   const [error, setError] = useState(false);
@@ -158,7 +159,7 @@ const Purchase = () => {
       setLoggedIn(false)
     }
   }, [])
-  const guardCheckout = (userData: any) => {
+  const guardCheckout = (userData: IUserInfoResult) => {
     let today = new Date().getTime() / 1000;
     if (router.query.type == "course") {
       let user_course = userData.user_courses.filter((x: any) => x.course_id === +id);
@@ -169,7 +170,14 @@ const Purchase = () => {
         });
       }
     }
-    if (router.query.type == "subscription" && (userData.level === 1 || userData.final_date > today || userData.level === 3 || userData.level === 4)) {
+    /*
+      [1, 4, 7] son niveles donde las usuarias debería de encontrarse en reintento de pago
+      El resto de los niveles no tienen 10 días de gracia, debido a que no deberían
+      de encontrarse en este proceso.
+    */
+    if (router.query.type == "subscription"
+      && (([1, 4, 7].includes(userData.level) && userData.final_date > today - 10 * 24 * 60 * 60)
+        || [0, 5, 6, 8].includes(userData.level) && userData.final_date > today)) {
       window.location.href = PREVIEW_PATH;
     }
   }

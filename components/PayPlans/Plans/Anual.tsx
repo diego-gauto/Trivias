@@ -8,6 +8,7 @@ import { ANUAL_FORM, PREVIEW_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../c
 import { IUser } from "../../../interfaces/IUserData";
 import { PlanStyles } from "./Plans.styled";
 import ChangePlanModal from "../../Modals/ChangePlanModal/ChangePlanModal";
+import { goTo } from "./functions";
 
 const gPlus = "/images/pay_plans/G+.png"
 let views = new Map<number, boolean>();
@@ -42,46 +43,6 @@ const Anual = (props: IData) => {
     }
   }
 
-  const goTo = () => {
-    if (user && user.id) {
-      let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-      // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
-      // Si una usuaria es de pago recurrente nivel 1, 4, 7
-      // debugger;
-      if ([1, 4, 7].includes(user.level)/* && user.final_date < (today - 6 * 24 * 60 * 60)*/) {
-        router.push(PREVIEW_PATH);
-      }
-      // Pagos no recurrentes
-      // 1. Con final_date vencido (inactivas)
-      // 2. Con final_date no vencido (activas)
-      else if ([5, 6, 8].includes(user.level)) {
-        if (user.final_date < today) {
-          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: "3" } });
-        } else {
-          router.push(PREVIEW_PATH);
-        }
-      }
-      // niveles 3 pausados
-      else if (user.level === 3) {
-        router.push(PREVIEW_PATH);
-      }
-      else if (user.level === 0) {
-        if (user.final_date < today) {
-          router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: "3" } });
-        } else {
-          router.push(PREVIEW_PATH);
-        }
-      }
-      else if (complete_nails.length > 0) {
-        router.push(PREVIEW_PATH)
-      }
-    }
-    else {
-      localStorage.setItem("anual", "true");
-      router.push(SIGNUP_PATH)
-    }
-  }
-
   const isActiveUser = () => {
     const today = new Date().getTime() / 1000;
     return user.final_date > today;
@@ -101,7 +62,6 @@ const Anual = (props: IData) => {
   Anual => en caso de ser mensual activo (1 y 6) o en caso de ser cuatrimestral (7, 8)
   */
   const generateButton = (): JSX.Element => {
-    const onClickDefaultHandler = goTo;
     const onClickUpdateHandler = () => { setOpen(true) };
 
     const isAbleToUpdate = user && isActiveUser() && (haveCuatrimestralSuscription() || haveMonthSuscription());
@@ -118,7 +78,7 @@ const Anual = (props: IData) => {
 
     return <button
       className="purple-button"
-      onClick={onClickDefaultHandler}>
+      onClick={(e) => goTo(user, 'A')}>
       Comenzar <br /> Plan Anual
     </button>
   }
