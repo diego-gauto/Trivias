@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoChevronDown } from 'react-icons/io5';
-import { updateUser } from '../api/users';
+import { updateUser, updateUserOfferReference } from '../api/users';
 
 const ThankYouSubscriptionMonth = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -34,10 +34,10 @@ const ThankYouSubscriptionMonth = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     let body = {
-      comeFrom: formData.option,
-      userId: userData.user_id
+      offer_reference: formData.option,
+      userId: parseInt(userData.user_id)
     }
-    updateUser(body).then((res) => {
+    updateUserOfferReference(body).then((res) => {
       window.location.href = "/preview";
     })
   }

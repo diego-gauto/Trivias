@@ -9,7 +9,7 @@ import { SOCIALS_ARRAY } from '../../constants/arrays';
 import register from '../../pages/auth/register';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { updateNails, updateUser } from '../api/users';
+import { updateNails, updateUser, updateUserOfferReference } from '../api/users';
 import * as yup from "yup";
 
 const PaymentFailedSubscriptionAnual = () => {
@@ -39,10 +39,10 @@ const PaymentFailedSubscriptionAnual = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     let body = {
-      comeFrom: formData.option,
-      userId: userData.user_id
+      offer_reference: formData.option,
+      userId: parseInt(userData.user_id)
     }
-    updateUser(body).then((res) => {
+    updateUserOfferReference(body).then((res) => {
       router.push({ pathname: PURCHASE_PATH, query: { type: 'subscription', frequency: 'anual', v: '3' } })
     })
   }

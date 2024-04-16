@@ -185,7 +185,7 @@ export const cancelPaypal = async (user: any) => {
           return axios
             .post(
               "https://gonvar.inowu.dev/" +
-                "subscriptions/paypal-canceled-subscription",
+              "subscriptions/paypal-canceled-subscription",
               user
             )
             .then((res) => {
@@ -245,6 +245,18 @@ export const userById = async (userId: string) => {
 export const updateUser = async (user: any) => {
   return axios
     .put("https://gonvar.inowu.dev/" + "users/user", user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
+};
+
+export const updateUserOfferReference = async (user: { userId: number, offer_reference: string }) => {
+  return axios
+    .put("https://gonvar.inowu.dev/" + "users/update-user-offer-reference", user)
     .then((res) => {
       return res;
     })

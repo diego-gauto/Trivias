@@ -4,7 +4,7 @@ import { PREVIEW_PATH } from '../../constants/paths';
 import { ThankYouContainer } from './ThankYou.styled';
 import { useAuth } from '../../hooks/useAuth';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { updateUser } from '../api/users';
+import { updateUser, updateUserOfferReference } from '../api/users';
 import { SOCIALS_ARRAY } from '../../constants/arrays';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -34,10 +34,10 @@ const ThankYouSubscriptionAnual = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async formData => {
     let body = {
-      comeFrom: formData.option,
-      userId: userData.user_id
+      offer_reference: formData.option,
+      userId: parseInt(userData.user_id)
     }
-    updateUser(body).then((res) => {
+    updateUserOfferReference(body).then((res) => {
       window.location.href = "/preview";
     })
   }
