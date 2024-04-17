@@ -1,7 +1,7 @@
 
 
 import { useEffect, useState } from "react";
-import { updateAdminRole } from "../../../api/admin";
+import { Admin, updateAdminRole } from "../../../api/admin";
 import { SelectContain } from "../../Coupons/Coupons.styled";
 import { InputContain } from "../../Courses/Form/CourseForm_Create.styled";
 import { CaretD2, Label2 } from "../../Courses/Form/Select/SelectStyles.styled";
@@ -29,15 +29,13 @@ import {
 import RoleEdit from "./RoleEdit";
 
 type Props = {
-  admin: any;
+  admin: Admin;
   setIsVisible: (open: boolean) => void;
-  adminID: any;
-  role: any;
   handleClick: any;
-  courses: any;
+  courses: { id: number, title: string, published: boolean }[];
 };
 
-const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, courses }: Props) => {
+const AdminDataUpdate = ({ admin, setIsVisible, handleClick, courses }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [updatedRole, setUpdatedRole] = useState<boolean>(false);
@@ -49,7 +47,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
   }
 
   const updateRole = () => {
-    updateAdminRole(admin.user_id).then((res) => {
+    updateAdminRole(admin.user_id + '').then((res) => {
       handleClick();
       setIsVisible(false);
       setOpen(false);
@@ -116,14 +114,14 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
               {admin.phone_number === "undefined" ? "N/A" : admin.phone_number}
             </Label>
           </InfoResponsive>
-          {admin.role === 'admin' &&
+          {admin.role !== '' &&
             <InputContain>
               <InfoResponsive>Cambiar rol</InfoResponsive>
-              {admin.role === 'admin' &&
+              {admin.role !== 'admin' &&
                 <IconRoleContain>
                   <SelectContain key={1}>
                     <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
-                      {!updatedRole && <>{admin.role === 'superAdmin' ? ("superAdmin") : ("admin")}</>}
+                      {!updatedRole && <>{'superAdmin' === admin.role ? "superAdmin" : "admin"}</>}
                       {updatedRole && value}
                       <CaretD2 />
                     </SelectedRoleContain>
@@ -152,7 +150,7 @@ const AdminDataUpdate = ({ admin, setIsVisible, adminID, role, handleClick, cour
           </ButtonRoleContain>
         }
         {show &&
-          <RoleEdit show={show} setShow={setShow} adminID={adminID} admin={admin} role={role} refresh={refresh} courses={courses} />
+          <RoleEdit show={show} setShow={setShow} admin={admin} refresh={refresh} courses={courses} />
         }
       </>
     </UserContain>

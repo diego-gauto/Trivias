@@ -17,7 +17,7 @@ import {
   Title,
   TitleContain,
 } from "./RoleEdit.styled";
-import { updateAdminAccessApi } from "../../../api/admin";
+import { Admin, AdminType, getGenericQueryResponse, updateAdminAccessApi } from "../../../api/admin";
 
 type CheckBoxValues = {
   name: string;
@@ -25,151 +25,216 @@ type CheckBoxValues = {
 };
 
 type RoleProps = {
-  admin: any;
+  admin: Admin;
   setShow: (open: boolean) => void;
-  adminID: any;
-  role: any;
   show: boolean;
   refresh: any,
-  courses: any
+  courses: { id: number, title: string, published: boolean }[]
 };
 
-const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: RoleProps) => {
-  const handleClose = () => setShow(false);
-  const [roles, setRoles] = useState<any>([{ role: "Cursos", active: false, name: "course", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
-  { role: "Cupones", active: false, name: "coupons", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
-  { role: "Blogs", active: false, name: "blogs", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
-  { role: "Recompensas", active: false, name: "rewards", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }, { active: false, task: "Solicitudes" }] },
-  { role: "Usuarios", active: false, name: "users", tasks: [{ active: false, task: "Editar" }, { active: false, task: "Generar Reporte" }] },
-  { role: "Landing", active: false, name: "landing", tasks: [] },
-  { role: "Pagos", active: false, name: "payments", tasks: [] },
-  { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] },
-  { role: "Comentarios", active: false, name: "comments", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }], courses: [] }]);
-  const [loading, setLoading] = useState(true);
-  const [values, setValues] = useState("");
-  const [valuesComments, setValuesComments] = useState("");
-  const [popUp, setPopUp] = useState<any>(false);
-  useEffect(() => {
+type TaskValue = "Crear" | "Editar" | "Eliminar" | "Solicitudes" | "Generar Reporte" | "Descargar";
 
-    const temp = roles
-    admin.adminTypes.forEach((element: any) => {
-      temp.forEach((role: any) => {
-        if (element.role === role.name) {
-          role.active = changeValue(element.view);
-          if (element.role !== 'homeworks' || element.role !== 'landing' || element.role !== 'payments') {
-            role.tasks.forEach((task: any) => {
-              if (task.task === "Crear") {
-                task.active = changeValue(element.create)
-              }
-              if (task.task === "Editar") {
-                task.active = changeValue(element.edit)
-              }
-              if (task.task === "Eliminar") {
-                task.active = changeValue(element.delete)
-              }
-              if (task.task === "Solicitudes") {
-                task.active = changeValue(element.request)
-              }
-              if (task.task === "Generar Reporte") {
-                task.active = changeValue(element.report)
-              }
-            });
-          }
-          if (element.role === 'homeworks') {
-            setValues(element.courses.split(","))
-          }
+interface AdminRole {
+  role: string,
+  active: boolean,
+  name: string,
+  tasks: { active: boolean, task: TaskValue }[],
+  courses?: string[]
+}
+
+const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
+  const handleClose = () => setShow(false);
+  const [roles, setRoles] = useState<AdminRole[]>([
+    { role: "Cursos", active: false, name: "course", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+    { role: "Cupones", active: false, name: "coupons", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+    { role: "Blogs", active: false, name: "blogs", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }] },
+    { role: "Recompensas", active: false, name: "rewards", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }, { active: false, task: "Solicitudes" }] },
+    { role: "Usuarios", active: false, name: "users", tasks: [{ active: false, task: "Editar" }, { active: false, task: "Generar Reporte" }] },
+    { role: "Landing", active: false, name: "landing", tasks: [] },
+    { role: "Pagos", active: false, name: "payments", tasks: [] },
+    { role: "Tarea", active: false, name: "homeworks", tasks: [], courses: [] },
+    { role: "Comentarios", active: false, name: "comments", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Eliminar" }, { active: false, task: "Editar" }], courses: [] },
+    { role: "Trivias", active: false, name: "trivias", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Editar" }] },
+    { role: "Listado de Trivias", active: false, name: "trivias_list", tasks: [{ active: false, task: "Descargar" },] },
+    { role: "Formularios", active: false, name: "forms", tasks: [{ active: false, task: "Crear" }, { active: false, task: "Editar" }] },
+    { role: "Listado de Formularios", active: false, name: "forms_list", tasks: [{ active: false, task: "Descargar" },] },
+    { role: "Listado de Sorteos", active: false, name: "tickets_list", tasks: [{ active: false, task: "Descargar" },] },
+    { role: "Listado de Membresias", active: false, name: "memberships_list", tasks: [{ active: false, task: "Descargar" },] }]);
+  const [loading, setLoading] = useState(true);
+  const [homeworksCourseIds, setHomeworksCourseIds] = useState<number[]>([]);
+  const [commentsCourseIds, setCommentsCourseIds] = useState<number[]>([]);
+  const [popUpComments, setPopUpComments] = useState<boolean>(false);
+  const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
+
+  useEffect(() => {
+    const temp: AdminRole[] = [];
+    admin.adminTypes.forEach((element) => {
+      const role = roles.find(role => role.name === element.role);
+      if (role === undefined) {
+        return;
+      }
+
+      role.active = changeValue(element.view ? 1 : 0);
+      role.tasks.forEach((task) => {
+        if (task.task === "Crear") {
+          // element.create = task.active ? 1 : 0;
+          task.active = element.create === 1;
+        }
+        else if (task.task === "Editar") {
+          // element.edit = task.active ? 1 : 0;
+          task.active = element.edit === 1;
+        }
+        else if (task.task === "Eliminar") {
+          // element.delete = task.active ? 1 : 0;
+          task.active = element.delete === 1;
+        }
+        else if (task.task === "Solicitudes") {
+          // element.request = task.active ? 1 : 0;
+          task.active = element.request === 1;
+        }
+        else if (task.task === "Generar Reporte") {
+          // element.report = task.active ? 1 : 0;
+          task.active = element.report === 1;
+        }
+        else if (task.task === "Descargar") {
+          // element.download = task.active ? 1 : 0;
+          task.active = element.download === 1;
         }
       });
+
+      if (element.role === 'homeworks') {
+        const newValue = element.courses?.split(',').map(courseId => parseInt(courseId));
+        setHomeworksCourseIds(newValue || []);
+      } else if (element.role === 'comments') {
+        const newValue = element.courses?.split(',').map(courseId => parseInt(courseId));
+        setCommentsCourseIds(newValue || []);
+      }
+      temp.push(role);
     });
     setRoles(temp);
     setLoading(false)
   }, [])
 
-  const changeValue = (value: any) => {
-    if (value === 0) return false;
-    if (value === 1) return true;
-    else return
+  const changeValue = (value: number) => {
+    return value === 1;
   }
 
   const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {
     const value = e.target.checked;
-    roles[indexRole].active = value;
+    roles[indexRole]!.active = value;
     setRoles(roles);
   };
 
   const handleChange = (e: { target: CheckBoxValues }, indexRole: number, indexTask: number) => {
     const value = e.target.checked;
-    roles[indexRole].tasks[indexTask].active = value;
+    roles[indexRole]!.tasks[indexTask]!.active = value;
     setRoles(roles);
   };
 
-  const handleMultiple = (e: any, role: string) => {
-    let temp: any = values;
-    if (values.includes(e.toString())) {
-      const index = values.indexOf(e.toString());
+  const handleMultipleHomeworkIds = (courseId: number) => {
+    let temp = [...homeworksCourseIds];
+    if (homeworksCourseIds.includes(courseId)) {
+      const index = homeworksCourseIds.indexOf(courseId);
       if (index > -1) {
         temp.splice(index, 1);
-        setValues(temp);
+        setHomeworksCourseIds(temp);
       }
     } else {
-      temp.push(e.toString())
-      setValues(temp);
+      temp.push(courseId)
+      setHomeworksCourseIds(temp);
     }
   }
 
-  const updateAdminType = () => {
-    admin.adminTypes.forEach((element: any) => {
-      roles.forEach((role: any) => {
-        if (element.role === role.name) {
-          element.view = role.active
-          if (element.role !== 'homeworks' || element.role !== 'landing' || element.role !== 'payments') {
-            role.tasks.forEach((task: any) => {
-              if (task.task === "Crear") {
-                element.create = task.active
-              }
-              if (task.task === "Editar") {
-                element.edit = task.active
-              }
-              if (task.task === "Eliminar") {
-                element.delete = task.active
-              }
-              if (task.task === "Solicitudes") {
-                element.request = task.active
-              }
-              if (task.task === "Generar Reporte") {
-                element.report = task.active
-              }
-            });
-          }
-          if (element.role === 'homeworks') {
-            element.courses = values;
-          }
+  const handleMultipleCommentIds = (courseId: number) => {
+    let temp = [...commentsCourseIds];
+    if (commentsCourseIds.includes(courseId)) {
+      const index = commentsCourseIds.indexOf(courseId);
+      if (index > -1) {
+        temp.splice(index, 1);
+        setCommentsCourseIds(temp);
+      }
+    } else {
+      temp.push(courseId)
+      setCommentsCourseIds(temp);
+    }
+  }
+
+  const updateAdminType = async () => {
+    // debugger;
+    admin.adminTypes.forEach((element) => {
+      const role = roles.find((role) => role.name === element.role);
+      if (role === undefined) {
+        return;
+      }
+      element.view = role.active ? 1 : 0;
+      role.tasks.forEach((task) => {
+        if (task.task === "Crear") {
+          element.create = task.active ? 1 : 0;
+        }
+        else if (task.task === "Editar") {
+          element.edit = task.active ? 1 : 0;
+        }
+        else if (task.task === "Eliminar") {
+          element.delete = task.active ? 1 : 0;
+        }
+        else if (task.task === "Solicitudes") {
+          element.request = task.active ? 1 : 0;
+        }
+        else if (task.task === "Generar Reporte") {
+          element.report = task.active ? 1 : 0;
+        }
+        else if (task.task === "Descargar") {
+          element.download = task.active ? 1 : 0;
         }
       });
+      if (element.role === 'homeworks') {
+        element.courses = homeworksCourseIds.filter(id => !Number.isNaN(id)).join(', ');
+      } else if (element.role === 'comments') {
+        element.courses = commentsCourseIds.filter(id => !Number.isNaN(id)).join(', ');
+      }
     });
 
     let user = {
       user_id: admin.user_id,
       roles: admin.adminTypes
     }
-    updateAdminAccessApi(user).then(() => {
+
+    try {
+      const res = await updateAdminAccessApi(user);
       setShow(false);
       refresh();
       alert("Accesos actualizados");
-    })
+    } catch (error) {
+      console.error(error);
+      alert("Error al intentar actualizar los permisos");
+    }
   };
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal show={popUp} onHide={() => { setPopUp(false) }} centered>
+      <Modal show={popUpComments} onHide={() => { setPopUpComments(false) }} centered>
         <ModalCustom>
           <h2>Cursos</h2>
-          {courses.map((course: any, index: number) => {
+          {courses.map((course, index: number) => {
             return (
               <div className="flex" key={"courses" + index}>
                 <p>{course.title}</p>
-                <input defaultChecked={values.includes(course.id.toString())} type="checkbox"
-                  onChange={(e) => { handleMultiple(course.id, "homeworks") }} />
+                <input defaultChecked={commentsCourseIds.includes(course.id)} type="checkbox"
+                  onChange={(e) => { handleMultipleCommentIds(course.id) }} />
+              </div>
+            )
+          })}
+        </ModalCustom>
+      </Modal>
+      <Modal show={popUpHomerworks} onHide={() => { setPopUpHomerworks(false) }} centered>
+        <ModalCustom>
+          <h2>Cursos</h2>
+          {courses.map((course, index: number) => {
+            return (
+              <div className="flex" key={"courses" + index}>
+                <p>{course.title}</p>
+                <input defaultChecked={homeworksCourseIds.includes(course.id)} type="checkbox"
+                  onChange={(e) => { handleMultipleHomeworkIds(course.id) }} />
               </div>
             )
           })}
@@ -184,31 +249,28 @@ const RoleEdit = ({ show, setShow, admin, adminID, role, refresh, courses }: Rol
           <SectionOptions>
             <Info>Secciones a las que tiene acceso</Info>
             <SelectedRoleContain>
-              {!loading && roles.map((x: any, indexR: number) => {
+              {!loading && roles.map((role, indexR) => {
                 return (
                   <div className="role-row" key={"role" + indexR}>
                     <RowContain>
-                      <li>{x.role}</li>
-                      <input type="checkbox" name={x.name} defaultChecked={x.active} onChange={(e) => handleRole(e, indexR)} />
+                      <li>{role.role}</li>
+                      <input type="checkbox" name={role.name} defaultChecked={role.active} onChange={(e) => handleRole(e, indexR)} />
                     </RowContain>
-                    {x.tasks.map((task: any, indexT: number) => {
+                    {role.tasks.map((task, indexT) => {
                       return (
-                        <div className="tasks" key={"role" + indexR + indexT}>
+                        <div className="tasks" key={"role" + (indexR + indexT)}>
                           <input type="checkbox" name={task.task} defaultChecked={task.active} onChange={(e) => handleChange(e, indexR, indexT)} />
                           <li>{task.task}</li>
                         </div>
                       )
                     })}
-                    {(courses.length > 0 && x.name === 'homeworks') && <p className="open-courses" onClick={() => {
-                      setPopUp(true)
+                    {(courses.length > 0 && ['homeworks', 'comments'].includes(role.name)) && <p className="open-courses" onClick={() => {
+                      if (role.name === 'homeworks') {
+                        setPopUpHomerworks(true);
+                      } else {
+                        setPopUpComments(true);
+                      }
                     }}>Ver cursos</p>}
-                    {/* {(courses.length > 0 && x.name === 'homeworks') && <select name="" defaultValue={values} multiple onChange={(e) => { handleMultiple(e, "homeworks") }}>
-                      {courses.map((course: any) => {
-                        return (
-                          <option value={course.id}>{course.title}</option>
-                        )
-                      })}
-                    </select>} */}
                   </div>
                 )
               })}

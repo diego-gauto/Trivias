@@ -1,15 +1,41 @@
 import axios from "axios";
 
+type RoleValue = "course" | "coupons" | "blogs" | "rewards" | "users" | "landing" | "payments" | "homeworks" | "comments" | "trivias" | "trivias_list" | "forms" | "forms_list" | "tickets_list" | "memberships_list";
+
+export interface Admin {
+  user_id: number
+  name: string
+  email: string
+  score: number
+  created_at: string
+  phone_number: string
+  role: string
+  plan_name: any
+  final_date: number
+  level: number
+  adminTypes: AdminType[]
+}
+
+export interface AdminType {
+  id: number
+  role: RoleValue
+  source_table: string
+  create?: number
+  edit?: number
+  delete?: number
+  view: number
+  user_id: number
+  courses?: string
+  request?: number
+  report?: number
+  download?: number
+}
+
 export const getAdmins = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/admins")
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{
+      admins: Admin[]
+    }>("https://gonvar.inowu.dev/" + "admin/admins");
 };
 
 export const updateAdminRole = async (userId: string) => {

@@ -19,16 +19,18 @@ const SideBar = ({ show, onHide }: any) => {
   const [isCoupons, setIsCoupons] = useState<boolean>();
   const [isUsers, setIsUsers] = useState<boolean>();
   const [isTrivias, setIsTrivias] = useState<boolean>();
+  const [isTriviasList, setIsTriviasList] = useState<boolean>();
   const [isForms, setIsForms] = useState<boolean>();
+  const [isFormsList, setIsFormsList] = useState<boolean>();
+  const [isTicketsList, setIsTicketsList] = useState<boolean>();
+  const [isMembershipsList, setIsMembershipsList] = useState<boolean>();
   const [isComments, setIsComments] = useState<boolean>();
   const [index, setIndex] = useState(0)
   const [section, setSection] = useState(0)
   const [userData, setUserData] = useState<any>(null);
 
-  const changeValue = (value: any) => {
-    if (value === 0) return false;
-    if (value === 1) return true;
-    else return
+  const changeValue = (value: number) => {
+    return value === 1
   }
 
   try {
@@ -49,6 +51,12 @@ const SideBar = ({ show, onHide }: any) => {
           if (role.role === "homeworks" && changeValue(role.view)) setIsHomeworks(true);
           if (role.role === "blogs" && changeValue(role.view)) setIsBlogs(true);
           if (role.role === "comments" && changeValue(role.view)) setIsComments(true);
+          if (role.role === "trivias" && changeValue(role.view)) setIsTrivias(true);
+          if (role.role === "trivias_list" && changeValue(role.view)) setIsTriviasList(true);
+          if (role.role === "forms" && changeValue(role.view)) setIsForms(true);
+          if (role.role === "forms_list" && changeValue(role.view)) setIsFormsList(true);
+          if (role.role === "tickets_list" && changeValue(role.view)) setIsTicketsList(true);
+          if (role.role === "memberships_list" && changeValue(role.view)) setIsMembershipsList(true);
         });
         setUserData(userDataAuth.user);
         if (userDataAuth.user.role === 'superAdmin') {
@@ -205,7 +213,7 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Assigments</li>
           </Link>}
-          {(isSuperAdmin || isHomeworks) && <Link href="/admin/Comments">
+          {(isSuperAdmin || isComments) && <Link href="/admin/Comments">
             <li style={{ color: index == 9 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(9)
               onHide()
@@ -223,19 +231,19 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Trivias</li>
           </Link>}
-          {(isSuperAdmin || isForms) && <Link href="/admin/Forms">
+          {(isSuperAdmin || (isForms || isFormsList)) && <Link href="/admin/Forms">
             <li style={{ color: index == 13 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(13)
               onHide()
             }}>Forms</li>
           </Link>}
-          {(isSuperAdmin || isForms) && <Link href="/admin/Tickets">
+          {(isSuperAdmin || isTicketsList) && <Link href="/admin/Tickets">
             <li style={{ color: index == 14 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(14)
               onHide()
             }}>Tickets</li>
           </Link>}
-          {(isSuperAdmin || isForms) && <Link href="/admin/Memberships">
+          {(isSuperAdmin || isMembershipsList) && <Link href="/admin/Memberships">
             <li style={{ color: index == 15 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(15)
               onHide()

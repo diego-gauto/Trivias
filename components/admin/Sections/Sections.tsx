@@ -11,10 +11,12 @@ import {
   TitleContain,
   ModalContain,
 } from "./Sections.styled";
-import { getAdmins, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
+import { Admin, getAdmins, getGenericQueryResponse, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
 import { Button } from "../Courses/CourseMain.styled";
 import { IoClose } from "react-icons/io5";
 import { getCoursesApi } from "../../api/lessons";
+import { defaultValues, /*getRolesWithDefaults*/ } from './DefaultValues';
+import { Role } from "../Comments/Comments";
 
 export type INewUser = {
   name?: string,
@@ -42,26 +44,29 @@ export type INewUser = {
 };
 
 const Sections = () => {
-  const [users, setUsers] = useState<Array<any>>([]);
+  const [users, setUsers] = useState<Admin[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [role, setRole] = useState<string>();
-  const [adminID, setAdminID] = useState<string>();
-  const [selectedAdmin, setSelectedAdmin] = useState<any>({});
+  const [selectedAdmin, setSelectedAdmin] = useState<Admin>({} as Admin);
   const [newMember, setNewMember] = useState<boolean>(false);
   const [member, setMember] = useState<any>("");
   const [find, setFind] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});
-  const [courses, setCourses] = useState<any>([]);
+  const [courses, setCourses] = useState<{ id: number, title: string, published: boolean }[]>([]);
   const [displayValue, setDisplayValue] = useState<string>('none');
   const [topValue, setTopValue] = useState<string>('-100%');
 
-  const getAllCourses = () => {
-    getCoursesApi().then((res) => {
-      setCourses(res);
-    });
+  const getAllCourses = async () => {
+    try {
+      const query = `select id, title, published from courses order by title;`;
+      const response = await getGenericQueryResponse(query);
+      const coursesData = response.data.data.map(c => { return { ...c, published: c.published === 1 } });
+      setCourses(coursesData);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  const editRole = async (user: any): Promise<void> => {
+  const editRole = async (user: Admin): Promise<void> => {
     // setIsVisible(true);
     setModalVisible(true);
     setSelectedAdmin(user);
@@ -77,10 +82,37 @@ const Sections = () => {
     return new Date(tempDate).toLocaleDateString("es-MX")
   }
 
-  const retrieveAdmin = () => {
-    getAdmins().then((res) => {
-      setUsers(res.data.admins);
-    })
+  const retrieveAdmin = async () => {
+    try {
+      const res = await getAdmins();
+      const admins = res.data.admins;
+      const getRolesWithDefaults = (
+        currentValues: any[],
+        userId: number
+      ): any[] => {
+        const dvRoles = defaultValues.map(dv => dv.role);
+        const cvRoles = currentValues.map(cv => cv.role);
+        const result = dvRoles.map((dvRole, dvIndex) => {
+          const indexOfRole = cvRoles.indexOf(dvRole);
+          if (indexOfRole !== -1) {
+            return currentValues[indexOfRole];
+          }
+          return defaultValues[dvIndex];
+        });
+
+        return result.filter(v => v !== undefined).map(v => { return { ...v, user_id: userId } });
+      };
+
+      const newAdmins = admins.map((admin) => {
+        return {
+          ...admin,
+          adminTypes: getRolesWithDefaults(admin.adminTypes, admin.user_id)
+        }
+      });
+      setUsers(newAdmins);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleClick = () => {
@@ -169,7 +201,7 @@ const Sections = () => {
         <ModalContain className="modal" style={{ display: `${displayValue}`, top: `${topValue}` }}>
           {
             isVisible &&
-            <AdminDataUpdate admin={selectedAdmin} adminID={adminID} setIsVisible={setModalVisible} role={role} handleClick={handleClick} courses={courses} />
+            <AdminDataUpdate admin={selectedAdmin} setIsVisible={setModalVisible} handleClick={handleClick} courses={courses} />
           }
         </ModalContain>
       </GeneralContain>
