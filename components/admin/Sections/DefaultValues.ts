@@ -178,20 +178,3 @@ export const defaultValues: AdminType[] = [
     download: 0,
   },
 ];
-
-export const getRolesWithDefaults = (
-  currentValues: AdminType[],
-  userId: number
-): AdminType[] => {
-  const dvRoles = defaultValues.map(dv => dv.role);
-  const cvRoles = currentValues.map(cv => cv.role);
-  const result = dvRoles.map((dvRole, dvIndex) => {
-    const indexOfRole = cvRoles.indexOf(dvRole);
-    if (indexOfRole !== -1) {
-      return currentValues[indexOfRole];
-    }
-    return defaultValues[dvIndex];
-  });
-
-  return result.filter(v => v !== undefined);
-};
