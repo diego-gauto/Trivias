@@ -3,16 +3,34 @@ import axios from "axios";
 interface IPrint {
   reward_id: number;
 }
+
+export type IRewardResponse = IReward[]
+
+export interface IReward {
+  id: number
+  about: string
+  image: string
+  product_type: string
+  title: string
+  type: string
+  month: number
+  points: number
+  published: string
+  price: number
+}
+
 export const getRewardsApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "rewards/getRewards")
-    .then((res) => {
-      return res.data.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{
+      data: IRewardResponse
+    }>("https://gonvar.inowu.dev/" + "rewards/getRewards");
+  /*.then((res) => {
+    return res.data.data
+  })
+  .catch((error) => {
+    console.log(error);
+    return error
+  });*/
 };
 export const getPublishedRewardsApi = async () => {
   return axios
@@ -80,16 +98,33 @@ export const updateRewardImageApi = async (reward: any) => {
       return error
     });
 };
+
+export interface IRequest {
+  id: number
+  created_at: string
+  status: number
+  user_id: number
+  reward_id: number
+  name: string
+  month: number
+  type: string
+  phone_number: string
+  email: string
+  title: string
+}
+
 export const getRequestsApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "rewards/getRequests")
-    .then((res) => {
-      return res.data.data
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{
+      data: IRequest[]
+    }>("https://gonvar.inowu.dev/" + "rewards/getRequests");
+  /*.then((res) => {
+    return res.data.data
+  })
+  .catch((error) => {
+    console.log(error);
+    return error
+  });*/
 };
 export const getClaimedReward = async (userId: any) => {
   return axios

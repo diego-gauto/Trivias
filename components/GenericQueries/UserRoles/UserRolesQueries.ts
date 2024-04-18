@@ -3,7 +3,7 @@ export const generateUserIdQuery = (email: string) => {
   return query;
 };
 
-export const generateUserRoleQuery = (userId: number) => {
+export const generateUserRoleAccessQuery = (userId: number) => {
   const query = `SELECT id, 
       role, 
       'admin_courses' AS source_table, 
@@ -256,5 +256,10 @@ export const generateUserRoleQuery = (userId: number) => {
       admin_memberships_list.download
     FROM admin_memberships_list
     WHERE user_id = ${userId}`;
+  return query;
+};
+
+export const generateUserRolesLevelQuery = (userId: number) => {
+  const query = `select \`role\` from users where id = ${userId};`;
   return query;
 };

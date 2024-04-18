@@ -12,26 +12,10 @@ import AllCourses from './AllCourses/AllCourses';
 import { CourseContainer, LoaderButton, OptionColor, SelectOption } from './Courses.styled';
 import { ICategories, ICourses, IMaterials, IProfessors } from './ICourses';
 import { createNotification } from '../../api/notifications';
-import { generateUserIdQuery, generateUserRoleQuery } from './Queries';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { getGenericQueryResponse } from '../../api/admin';
 import { useRouter } from 'next/router';
-
-type RoleName = 'course' | 'coupons' | 'blogs' | 'rewards' | 'users' | 'landing' | 'payments' | 'homeworks' | 'comments' | 'trivias' | 'trivias_list' | 'forms' | 'forms_list' | 'tickets_list' | 'memberships_list';
-
-interface Role {
-  id: number
-  role: RoleName
-  source_table: string
-  create?: number
-  edit?: number
-  delete?: number
-  view: number
-  user_id: number
-  courses?: string
-  request?: number
-  report?: number
-  download?: number
-}
+import { Role } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface UserAccesss {
   canView: boolean;
@@ -42,8 +26,8 @@ interface UserAccesss {
 
 const Courses = () => {
   const router = useRouter();
-  const [userRoles, setUserRoles] = useState<Role[]>([]);
   const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
+  const [userLevel, setUserLevel] = useState<'admin' | 'superAdmin' | 'user'>('user');
   const [loader, setLoader] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [professors, setProfessors] = useState<any>([]);
@@ -128,10 +112,10 @@ const Courses = () => {
       const userIdQuery = generateUserIdQuery(email);
       const userIdResponse = await getGenericQueryResponse(userIdQuery);
       const userId = userIdResponse.data.data[0]['id'];
-      const userRolesQuery = generateUserRoleQuery(userId);
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      setUserRoles(userRoles);
       const role = userRoles.find(role => role.role === 'course');
       setUserAccess({
         canView: role?.view === 1,
@@ -139,6 +123,11 @@ const Courses = () => {
         canDelete: role?.delete === 1,
         canCreate: role?.create === 1
       });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
@@ -221,7 +210,7 @@ const Courses = () => {
     setCourse({ ...course, materials: tempMaterials })
   }
   const createCourse = async () => {
-    if (!userAccess.canCreate) {
+    if ((!userAccess.canCreate && userLevel === 'admin')) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -828,7 +817,7 @@ const Courses = () => {
                 loader && <LoaderButton />
               }
               {
-                (!loader && userAccess.canCreate) &&
+                (!loader && (userAccess.canCreate || userLevel === 'superAdmin')) &&
                 <button className="create-button" onClick={createCourse}>
                   Crear curso
                 </button>
@@ -873,7 +862,7 @@ const Courses = () => {
                 id={course.id}
                 index={index}
                 key={"AllCourses_" + index}
-                canEdit={userAccess.canEdit}
+                canEdit={userAccess.canEdit || userLevel === 'superAdmin'}
               />
             )
           })
