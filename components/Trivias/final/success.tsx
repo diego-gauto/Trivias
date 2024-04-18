@@ -16,7 +16,7 @@ const Success = () => {
   return (
     <div className={successContainer}>
       <h1 className={title}>¡Felicidades!</h1>
-      <p className={ganaste}>Ganaste el acceso a <span className={span}>más de 65 cursos de uñas y belleza </span>en línea con un descuento especial.</p>
+      <p className={ganaste}>Ganaste el acceso a <span className={span}>más de 70 cursos de uñas y belleza </span>en línea con un descuento especial.</p>
       <p className={red}>Costo total real: <span className={tachado}>$74,719.00 MXN</span></p>
       <p className={green}> Sólo $3,497.00 MXN</p>
       <p className={acceso}>(Acceso por año con renovación automática)</p>

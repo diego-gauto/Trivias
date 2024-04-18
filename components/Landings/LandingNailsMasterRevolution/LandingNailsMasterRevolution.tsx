@@ -340,7 +340,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         <div className="data">
           <p className="text">
             Ahora disponible en tu suscripción Gonvar+ <br />
-            Más de 65 cursos de uñas y belleza incluídos.
+            Más de 70 cursos de uñas y belleza incluídos.
           </p>
         </div>
         <div className="info-top">
