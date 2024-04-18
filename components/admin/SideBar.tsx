@@ -208,7 +208,7 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Users</li>
           </Link>}
-          {(isSuperAdmin || isUsers) && <Link href="/admin/Cancel">
+          {(isSuperAdmin) && <Link href="/admin/Cancel">
             <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(10)
               onHide()

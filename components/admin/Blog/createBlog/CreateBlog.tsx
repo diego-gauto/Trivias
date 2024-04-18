@@ -11,6 +11,17 @@ import { GiExitDoor } from 'react-icons/gi';
 import { createBlogsApi, deleteBlogsApi, getBlogsApi, getSingleBlogApi, updateBlogImageApi, updateBlogsApi, updateSubTopicImageApi } from '../../../api/blog';
 import { updateBlogImage, updateSubTopicImage } from '../../../../store/actions/FireBaseImages';
 import { getUserApi } from '../../../api/users';
+import { Role, UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../../GenericQueries/UserRoles/UserRolesQueries';
+import { getGenericQueryResponse } from '../../../api/admin';
+
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+  canCreate: boolean;
+}
+
 const CreateBlog = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [processLoader, setProcessLoader] = useState<boolean>(false);
@@ -75,14 +86,46 @@ const CreateBlog = () => {
     "align"
   ];
   const { blogId } = routerState;
-  const [userData, setUserData] = useState<any>(null);
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+
+  const { canView, canCreate, canDelete, canEdit } = userAccess;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'blogs');
+      console.log({ role });
+      setUserAccess({
+        canView: role?.view === 1,
+        canEdit: role?.edit === 1,
+        canDelete: role?.delete === 1,
+        canCreate: role?.create === 1
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
 
   useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setUserData(res);
-      })
-    }
+    getUserData();
   }, [])
 
   const goToBlog = () => {
@@ -99,7 +142,7 @@ const CreateBlog = () => {
     }
   }
   const addTheme = () => {
-    if (userData.role === "admin" && userData.roles[2].create === 0) {
+    if (userLevel === "admin" && !canCreate) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -155,7 +198,7 @@ const CreateBlog = () => {
     setBlog({ ...tempBlog })
   }
   const createNewBlog = async () => {
-    if (userData.role === "admin" && userData.roles[2].create === 0) {
+    if (userLevel === "admin" && !canCreate) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -223,7 +266,7 @@ const CreateBlog = () => {
     }
   }
   const editBlog = async () => {
-    if (userData.role === "admin" && userData.roles[2].edit === 0) {
+    if (userLevel === "admin" && !canEdit) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -294,7 +337,7 @@ const CreateBlog = () => {
     })
   }
   const deleteBlogSql = async () => {
-    if (userData.role === "admin" && userData.roles[2].delete === 0) {
+    if (userLevel === "admin" && !canDelete) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -327,6 +370,7 @@ const CreateBlog = () => {
   useEffect(() => {
     getNewBlog();
   }, [quill])
+
   return (
     <BlogBackground>
       <div className="blog-container">
@@ -338,11 +382,13 @@ const CreateBlog = () => {
             </p>
           </div>
           <div className="blog-buttons">
-            <button className="add-theme" onClick={addTheme}>
-              <p className="theme-text">
-                Agregar Subtema
-              </p>
-            </button>
+            {
+              canEdit && <button className="add-theme" onClick={addTheme}>
+                <p className="theme-text">
+                  Agregar Subtema
+                </p>
+              </button>
+            }
             {
               !processLoader
                 ?
@@ -354,7 +400,7 @@ const CreateBlog = () => {
                 : <LoaderContain />
             }
             {
-              blogId &&
+              (blogId && canDelete) &&
               <button className="delete-blog" onClick={deleteBlogSql}>
                 <p className="theme-text">
                   Eliminar blog

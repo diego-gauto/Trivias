@@ -11,38 +11,71 @@ import { updateBlogImage, updateSubTopicImage } from '../../../store/actions/Fir
 import { getUserApi } from '../../api/users';
 import { formatBlogDate } from '../../../utils/functions';
 import { IUserInfoResult } from '../../../interfaces/IUser';
+import { UserLevelValue, Role } from '../../../components/GenericQueries/UserRoles/UserRolesInterfaces';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../../components/GenericQueries/UserRoles/UserRolesQueries';
+import { getGenericQueryResponse } from '../../../components/api/admin';
+
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+  canCreate: boolean;
+}
 
 const Blog = () => {
   const [blogs, setBlogs] = useState<Array<any>>([]);
-  const [oldBlogs, setoldBlogs] = useState<any>([]);
   const [loader, setLoader] = useState(false);
-  const [userData, setUserData] = useState<IUserInfoResult | null>(null);
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+
+  const { canView, canCreate, canDelete, canEdit } = userAccess;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'blogs');
+      setUserAccess({
+        canView: role?.view === 1,
+        canEdit: role?.edit === 1,
+        canDelete: role?.delete === 1,
+        canCreate: role?.create === 1
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const goToCreateBlog = () => {
-    if (userData === null) {
-      return;
-    }
-    if (userData.role === "admin" && userData.roles[2].create === 0) {
+    if (userLevel === "admin" && !canCreate) {
       alert("No tienes permisos para esta acción");
       return;
     }
     router.push({ pathname: "/admin/CreateBlog" })
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setUserData(res);
-      })
-    }
-  }, [])
-
   const goToEditBlog = (blog: any) => {
-    // let blogText: any = blog.title.replaceAll(" ", "-");
-    if (userData === null) {
-      return;
-    }
-    if (userData.role === "admin" && userData.roles[2].edit === 0) {
+    if (userLevel === "admin" && !(canEdit || canDelete)) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -106,17 +139,19 @@ const Blog = () => {
           <p className="title">
             Blog
           </p>
-          <button className="add-course" onClick={goToCreateBlog}>
-            <p className="add-text">
-              Agregar Blog
-            </p>
-          </button>
+          {
+            canCreate && <button className="add-course" onClick={goToCreateBlog}>
+              <p className="add-text">
+                Agregar Blog
+              </p>
+            </button>
+          }
         </div>
         {
           loader ?
             <div className="blogs">
               {
-                blogs.map((blog: any, index: any) => {
+                canView && blogs.map((blog: any, index: any) => {
                   return (
                     <BlogCard key={"blog-card " + index}>
                       <div className="img-contain" onClick={() => { goToEditBlog(blog) }}>

@@ -15,7 +15,7 @@ import { createNotification } from '../../api/notifications';
 import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { getGenericQueryResponse } from '../../api/admin';
 import { useRouter } from 'next/router';
-import { Role } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface UserAccesss {
   canView: boolean;
@@ -27,7 +27,7 @@ interface UserAccesss {
 const Courses = () => {
   const router = useRouter();
   const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
-  const [userLevel, setUserLevel] = useState<'admin' | 'superAdmin' | 'user'>('user');
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
   const [loader, setLoader] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [professors, setProfessors] = useState<any>([]);
