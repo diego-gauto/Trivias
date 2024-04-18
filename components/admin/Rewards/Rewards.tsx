@@ -119,26 +119,26 @@ const Rewards = () => {
     return date.slice(0, 10)
   }
 
-  const confirmRequest = (data: any) => {
+  const confirmRequest = (request: IRequest) => {
     if (!canRequest && userLevel === 'admin') {
       alert("No tienes permisos para esta acción");
       return;
     }
     let notification = {
-      userId: data.user_id,
+      userId: request.user_id,
       message: 'Recompensa aprovada',
       type: 'reward',
       subType: "request",
       notificationId: '',
       score: 0,
-      title: data.title,
+      title: request.title,
     }
-    if (!data.status) {
+    if (!request.status) {
       var result = confirm("Desea que esta recompensa sea reclamada?");
       if (result === true) {
-        console.log(data);
-        data.status = 1;
-        updateRequestStatusApi(data).then((res) => {
+        console.log(request);
+        request.status = 1;
+        updateRequestStatusApi(request).then((res) => {
           getAllRequests();
         })
       }
