@@ -1,3 +1,5 @@
+import { UserLevelValue } from '../components/GenericQueries/UserRoles/UserRolesInterfaces';
+
 export interface IUserDataProps {
   name: string;
   lastName: string;
@@ -25,7 +27,7 @@ export interface IUser {
   final_date: any;
   plan_name: string;
   method: string;
-  role: string;
+  role: UserLevelValue;
   conekta_id: string;
   plan_id: string;
   come_from: string;

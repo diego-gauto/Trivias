@@ -26,7 +26,7 @@ import {
   UnActive,
   UnActiveLbl,
 } from "./Coupons.styled";
-import { Role } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../GenericQueries/UserRoles/UserRolesQueries";
 
 interface UserAccesss {
@@ -46,7 +46,7 @@ const Coupons = () => {
   const [coupon, setCoupon] = useState<ICoupon | null>(null);
   const [coupons, setCoupons] = useState<ICoupon[]>([]);
   const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
-  const [userLevel, setUserLevel] = useState<'admin' | 'superAdmin' | 'user'>('user');
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
   const { canCreate, canDelete, canEdit, canView } = userAccess;
 
@@ -110,7 +110,6 @@ const Coupons = () => {
   const getAllCoupons = async () => {
     try {
       const res = await retrieveCoupons();
-      console.log({ res });
       setCoupons(res.data.coupons);
     } catch (error) {
       console.error(error);

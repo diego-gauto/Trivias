@@ -27,6 +27,7 @@ import { AdminLoader } from "../../SideBar.styled";
 import { Modal } from "react-bootstrap";
 import { getLessonFromUserApi } from "../../../api/admin";
 import { user } from "firebase-functions/v1/auth";
+import { UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
 
 interface CardData {
   currentUser: any;
@@ -34,6 +35,8 @@ interface CardData {
   setIsVisible: (open: boolean) => void;
   courses: Array<any>;
   openUserCardData: any;
+  canEdit: boolean;
+  userLevel: UserLevelValue;
 };
 
 export interface IUserWithMembership {
@@ -58,7 +61,7 @@ export interface IUserWithMembership {
 }
 
 const UserCardData = (props: CardData) => {
-  const { currentUser, setIsVisible, courses, openUserCardData, isVisible } = props;
+  const { currentUser, setIsVisible, courses, openUserCardData, isVisible, canEdit, userLevel } = props;
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
   const [showAddSubscriptionPlan, setShowAddSubscriptionPlan] = useState(false);
@@ -321,6 +324,7 @@ const UserCardData = (props: CardData) => {
           {/* Para agrupar los botones */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
             {
+              ((canEdit && userLevel === 'admin') || userLevel === 'superAdmin') &&
               generateButtons()
             }
           </div>

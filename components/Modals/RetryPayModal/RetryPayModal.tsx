@@ -99,7 +99,6 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   }
 
   useEffect(() => {
-    console.log(user)
     if (user) {
       getPaymentMethods();
     }

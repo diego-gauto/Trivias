@@ -16,12 +16,14 @@ import {
 } from "./UsersList.styled";
 import EditUserModal from "./EditUserModal";
 import { getCoursesApi } from "../../api/lessons";
-import { getAllUsers, getCountriesApi, getLessonFromUserApi, userForExcel } from "../../api/admin";
+import { getAllUsers, getCountriesApi, getGenericQueryResponse, getLessonFromUserApi, userForExcel } from "../../api/admin";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import UserFilters from "./UserFilters/UserFilters";
 import { useAuth } from "../../../hooks/useAuth";
 import { FormatDateForBack } from "../../../utils/functions";
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../GenericQueries/UserRoles/UserRolesQueries";
+import { Role, UserLevelValue } from "../../GenericQueries/UserRoles/UserRolesInterfaces";
 
 export interface SelectedUser {
   id?: string;
@@ -60,6 +62,12 @@ export interface Users {
   role: string;
 };
 
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canReport: boolean;
+}
+
 const UsersList = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [allUsers, setAllUsers] = useState<Array<any>>([]);
@@ -77,29 +85,58 @@ const UsersList = () => {
   const [filterValue, setFilterValue] = useState<string>("");
   const [countries, setCountries] = useState<any>([]);
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
-  const [userData, setUserData] = useState<any>(null);
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canEdit: false, canReport: false });
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
   const [filters, setFilters] = useState<any>([
     'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', -1, 0
   ]);
   const [dates, setDates] = useState<any>([[], []]);
-  const [userDownload, setUserDownload] = useState<any>([]);
+
   const [loadCard, setLoadCard] = useState(false);
   const [loginDate, setLoginDate] = useState<any>([null, null]);
   const [createDate, setCreateDate] = useState<any>([null, null]);
-  const menuRef = useRef<any>(null);
+
+  const { canEdit, canReport, canView } = userAccess;
+
+
   let usersPerPage: number = 100;
   let today = new Date().getTime() / 1000;
-  try {
-    var userDataAuth = useAuth();
-    useEffect(() => {
-      if (userDataAuth.user !== null) {
-        setUserData(userDataAuth.user);
-      }
-    }, [userDataAuth])
 
-  } catch (error) {
-    console.log(error)
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'users');
+      setUserAccess({
+        canView: role?.view === 1,
+        canReport: role?.report === 1,
+        canEdit: role?.edit === 1,
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
   }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   const openUserCardData = async (user: any) => {
     setLoadCard(false);
     getLessonFromUserApi(user.id).then((res) => {
@@ -262,16 +299,6 @@ const UsersList = () => {
   }
   const Gonvar: any = async () => {
     let sendUsers: any = [];
-    // await users.map(async (user) => {
-    //   if (user.final_date < today) {
-    //     sendUsers.push({
-    //       nombre: user.name,
-    //       apellido: user.last_name,
-    //       correo: user.email,
-    //       whatsapp: user.phone_number,
-    //     })
-    //   }
-    // })
     await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
       await res.map(async (user: any) => {
         sendUsers.push({
@@ -321,7 +348,7 @@ const UsersList = () => {
                   />
                 </SearchContain>
               </div>
-              {((userData?.role === 'admin' && userData?.roles[4].report === 0) || userData?.role === "superAdmin")
+              {((userLevel === 'admin' && canReport) || userLevel === "superAdmin")
                 && <CsvDownloader
                   filename="usersData"
                   extension=".csv"
@@ -403,7 +430,15 @@ const UsersList = () => {
         </Container>
         {
           isVisible &&
-          <UserCardData currentUser={selectedUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={courses} openUserCardData={openUserCardData} />
+          <UserCardData
+            currentUser={selectedUser}
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
+            courses={courses}
+            openUserCardData={openUserCardData}
+            canEdit={canEdit}
+            userLevel={userLevel}
+          />
         }
       </UserContain>
       <UserFilters

@@ -13,13 +13,21 @@ import { UserShow } from '../Users/UsersList.styled';
 import { IAdminUsers } from '../../../interfaces/IAdmin';
 import { FormatDateForBack, formatDate } from '../../../utils/functions';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { usersForExcelApi } from '../../api/admin';
+import { getGenericQueryResponse, usersForExcelApi } from '../../api/admin';
 import UserCardData from '../Users/UserData/UserCardData';
 import { BsFileEarmarkExcelFill } from 'react-icons/bs';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 type SuscriptionOption = "todos" | "mensual" | "anual" | "cuatri";
 interface MethodData {
   method: string
+}
+
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canReport: boolean;
 }
 
 const Users = () => {
@@ -32,7 +40,44 @@ const Users = () => {
   const [showCourseSelect, setShowCourseSelect] = useState(false);
   const [methodSelected, setMethodSelected] = useState<SuscriptionOption>("todos");
   let adminContext = useAdmin();
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canReport: false, canEdit: false });
+  const { canEdit, canReport, canView } = userAccess;
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+
   const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses, permits } = adminContext;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'users');
+      setUserAccess({
+        canView: role?.view === 1,
+        canEdit: role?.edit === 1,
+        canReport: role?.delete === 1
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
+
+
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
   }
@@ -416,7 +461,15 @@ const Users = () => {
       </DefaultContainer>
       {
         isVisible &&
-        <UserCardData currentUser={currentUser} isVisible={isVisible} setIsVisible={setIsVisible} courses={payCourses} openUserCardData={openUserCard} />
+        <UserCardData
+          currentUser={currentUser}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+          courses={payCourses}
+          openUserCardData={openUserCard}
+          canEdit={canEdit}
+          userLevel={userLevel}
+        />
       }
     </AdminContain>
   )

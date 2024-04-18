@@ -9,7 +9,7 @@ import { AdminContain } from "../SideBar.styled";
 import AddReward from "./Modals/AddReward";
 import EditReward from "./Modals/EditReward";
 import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
-import { Role } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 import {
   Reward,
@@ -28,7 +28,7 @@ interface UserAccesss {
 
 const Rewards = () => {
   let currentMonth = (new Date().getMonth()) + 1;
-  const [userLevel, setUserLevel] = useState<'admin' | 'superAdmin' | 'user'>('user');
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
   const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false, canRequest: false });
   const [showAddReward, setShowAddReward] = useState(false);
   const [rewards, setRewards] = useState<IReward[]>([]);
@@ -53,7 +53,6 @@ const Rewards = () => {
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
       const role = userRoles.find(role => role.role === 'rewards');
-      console.log({ role });
       setUserAccess({
         canView: role?.view === 1,
         canEdit: /* role?.edit === 1 */ false,
