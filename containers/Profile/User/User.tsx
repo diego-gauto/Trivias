@@ -75,7 +75,7 @@ const User = () => {
     setTimeLevel(Math.floor(getMonth))
     let tempTimeLevel: any = Math.floor(getMonth);
     await getRewardsApi().then(async (res) => {
-      await Promise.all(res.map((reward: any) => {
+      await Promise.all(res.data.data.map((reward: any) => {
         tempRewards.push(reward);
       }))
     })

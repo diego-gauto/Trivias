@@ -40,8 +40,8 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
     let tempPoints: any = [];
     let tempMonths: any = [];
     getRewardsApi().then((res) => {
-      tempPoints = res.filter((x: any) => x.type === 'points');
-      tempMonths = res.filter((x: any) => x.type === 'months');
+      tempPoints = res.data.data.filter((x: any) => x.type === 'points');
+      tempMonths = res.data.data.filter((x: any) => x.type === 'months');
       tempPoints.sort((a: any, b: any) => a.points - b.points);
       tempMonths.sort((a: any, b: any) => a.month - b.month);
 
