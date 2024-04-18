@@ -64,17 +64,27 @@ export const updateAdminAccessApi = async (data: any) => {
 };
 
 // Coupons
-
+export interface ICoupon {
+  id: number
+  code: string
+  discount: number
+  name: string
+  status: number
+  type: string
+  users: any[]
+}
 export const retrieveCoupons = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/coupons")
-    .then((res) => {
-      return res
-    })
-    .catch((error) => {
-      console.log(error);
-      return error
-    });
+    .get<{
+      coupons: ICoupon[]
+    }>("https://gonvar.inowu.dev/" + "admin/coupons");
+  /*.then((res) => {
+    return res
+  })
+  .catch((error) => {
+    console.log(error);
+    return error
+  });*/
 };
 
 export const addCouponApi = async (coupon: any) => {
