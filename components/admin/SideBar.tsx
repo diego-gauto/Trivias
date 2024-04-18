@@ -25,8 +25,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isTicketsList, setIsTicketsList] = useState<boolean>();
   const [isMembershipsList, setIsMembershipsList] = useState<boolean>();
   const [isComments, setIsComments] = useState<boolean>();
-  const [index, setIndex] = useState(0)
-  const [section, setSection] = useState(0)
+  const [index, setIndex] = useState(0);
   const [userData, setUserData] = useState<any>(null);
 
   const changeValue = (value: number) => {
@@ -151,7 +150,11 @@ const SideBar = ({ show, onHide }: any) => {
     <Container show={show}>
       <IoClose className="close-admin-menu" onClick={onHide} />
       <div className="tab" style={{ whiteSpace: "pre" }}>
-        <Text>Learning Products</Text>
+        {
+          isSuperAdmin || (
+            isCourses || isLanding || isRewards
+          ) && <Text>Learning Products</Text>
+        }
         <ul>
           {(isSuperAdmin || isCourses) && <Link href="/admin/Courses">
             <li style={{ color: index == 0 ? "#ffa500" : "#fff" }} onClick={() => {
@@ -172,7 +175,11 @@ const SideBar = ({ show, onHide }: any) => {
             }}>Rewards</li>
           </Link>}
         </ul>
-        <Text>Market & Sell</Text>
+        {
+          isSuperAdmin || (
+            isCoupons || isPay
+          ) && <Text>Market & Sell</Text>
+        }
         <ul>
           {(isSuperAdmin || isCoupons) && <Link href="/admin/Coupons">
             <li style={{ color: index == 3 ? "#ffa500" : "#fff" }} onClick={() => {
@@ -187,7 +194,13 @@ const SideBar = ({ show, onHide }: any) => {
             }}>Orders</li>
           </Link>}
         </ul>
-        <Text>Support Your Students</Text>
+        {
+          (isSuperAdmin || (
+            isUsers || isHomeworks || isComments || isBlogs
+            || isTrivias || isTriviasList || isForms || isFormsList
+            || isTicketsList || isMembershipsList
+          )) && <Text>Support Your Students</Text>
+        }
         <ul>
           {(isSuperAdmin || isUsers) && <Link href="/admin/Users">
             <li style={{ color: index == 5 ? "#ffa500" : "#fff" }} onClick={() => {
@@ -195,12 +208,6 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Users</li>
           </Link>}
-          {/* {(isSuperAdmin || isUsers) && <Link href="/admin/Pause">
-            <li style={{ color: index == 12 ? "#ffa500" : "#fff" }} onClick={() => {
-              setIndex(11)
-              onHide()
-            }}>Pause Review</li>
-          </Link>} */}
           {(isSuperAdmin || isUsers) && <Link href="/admin/Cancel">
             <li style={{ color: index == 10 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(10)
@@ -225,7 +232,7 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Blogs</li>
           </Link>}
-          {(isSuperAdmin || isTrivias) && <Link href="/admin/Trivias">
+          {(isSuperAdmin || (isTrivias || isTriviasList)) && <Link href="/admin/Trivias">
             <li style={{ color: index == 11 ? "#ffa500" : "#fff" }} onClick={() => {
               setIndex(11)
               onHide()
@@ -250,15 +257,19 @@ const SideBar = ({ show, onHide }: any) => {
             }}>Memberships</li>
           </Link>}
         </ul>
-        <Text>Organization</Text>
-        {isSuperAdmin && <ul>
-          <Link href="/admin/Sections">
-            <li style={{ color: index == 8 ? "#ffa500" : "#fff" }} onClick={() => {
-              setIndex(8)
-              onHide()
-            }}>Team Members</li>
-          </Link>
-        </ul>}
+        {isSuperAdmin &&
+          <>
+            <Text>Organization</Text>
+            <ul>
+              <Link href="/admin/Sections">
+                <li style={{ color: index == 8 ? "#ffa500" : "#fff" }} onClick={() => {
+                  setIndex(8)
+                  onHide()
+                }}>Team Members</li>
+              </Link>
+            </ul>
+          </>
+        }
       </div>
     </Container>
   )

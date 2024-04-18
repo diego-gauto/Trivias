@@ -18,7 +18,8 @@ interface AllCoursesProps extends ICourses {
   allMaterials: IMaterials[],
   allCategories: ICategories[],
   index: number,
-  getAllCourses: () => void
+  getAllCourses: () => void,
+  canEdit: boolean
 }
 
 const AllCourses = (props: AllCoursesProps) => {
@@ -81,6 +82,7 @@ const AllCourses = (props: AllCoursesProps) => {
     getAllCourses,
     with_certificate,
     material_route,
+    canEdit
   } = props;
   const [course, setCourse] = useState<ICourses>({
     id: id,
@@ -1006,16 +1008,18 @@ const AllCourses = (props: AllCoursesProps) => {
             }
           </div>
           <div className="rows" style={{ justifyContent: "center", marginTop: 10 }}>
-            <div className="button-data">
-              <button
-                className="edit-button"
-                onClick={() => setStartEdit(!startEdit)}
-              >
-                {!startEdit ? "Iniciar Edición" : "Cancelar Edición"}
-              </button>
-            </div>
             {
-              !startEdit &&
+              canEdit && <div className="button-data">
+                <button
+                  className="edit-button"
+                  onClick={() => setStartEdit(!startEdit)}
+                >
+                  {!startEdit ? "Iniciar Edición" : "Cancelar Edición"}
+                </button>
+              </div>
+            }
+            {
+              (!startEdit && canEdit) &&
               <div className="button-data">
                 <button
                   className="save-button"

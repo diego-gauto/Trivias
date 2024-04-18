@@ -12,8 +12,38 @@ import AllCourses from './AllCourses/AllCourses';
 import { CourseContainer, LoaderButton, OptionColor, SelectOption } from './Courses.styled';
 import { ICategories, ICourses, IMaterials, IProfessors } from './ICourses';
 import { createNotification } from '../../api/notifications';
+import { generateUserIdQuery, generateUserRoleQuery } from './Queries';
+import { getGenericQueryResponse } from '../../api/admin';
+import { useRouter } from 'next/router';
+
+type RoleName = 'course' | 'coupons' | 'blogs' | 'rewards' | 'users' | 'landing' | 'payments' | 'homeworks' | 'comments' | 'trivias' | 'trivias_list' | 'forms' | 'forms_list' | 'tickets_list' | 'memberships_list';
+
+interface Role {
+  id: number
+  role: RoleName
+  source_table: string
+  create?: number
+  edit?: number
+  delete?: number
+  view: number
+  user_id: number
+  courses?: string
+  request?: number
+  report?: number
+  download?: number
+}
+
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+  canCreate: boolean;
+}
 
 const Courses = () => {
+  const router = useRouter();
+  const [userRoles, setUserRoles] = useState<Role[]>([]);
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canCreate: false, canDelete: false, canEdit: false });
   const [loader, setLoader] = useState(false);
   const [courses, setCourses] = useState<any>([]);
   const [professors, setProfessors] = useState<any>([]);
@@ -88,13 +118,36 @@ const Courses = () => {
   const published = [
     "Publicado", "No Publicado"
   ]
-  const [userData, setUserData] = useState<any>(null);
-  useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
-        setUserData(res);
-      })
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      const userRolesQuery = generateUserRoleQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      setUserRoles(userRoles);
+      const role = userRoles.find(role => role.role === 'course');
+      setUserAccess({
+        canView: role?.view === 1,
+        canEdit: role?.edit === 1,
+        canDelete: role?.delete === 1,
+        canCreate: role?.create === 1
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
     }
+  }
+
+  useEffect(() => {
+    getUserData();
   }, [])
   const openCourse = (courseIndex: number) => {
     if (openCourseEdit === courseIndex) {
@@ -167,8 +220,8 @@ const Courses = () => {
     }
     setCourse({ ...course, materials: tempMaterials })
   }
-  const createCourse = () => {
-    if (userData.role === "admin" && userData.roles[0].create === 0) {
+  const createCourse = async () => {
+    if (!userAccess.canCreate) {
       alert("No tienes permisos para esta acción");
       return;
     }
@@ -200,7 +253,8 @@ const Courses = () => {
       }
       let tempImage = course.image;
       course.image = "";
-      createCoursesApi(course).then((res) => {
+      try {
+        const res = await createCoursesApi(course);
         course.id = res;
         let notification = {
           type: "10",
@@ -210,17 +264,41 @@ const Courses = () => {
           season: 0,
           lesson: 0,
         }
-        createNotification(notification);
-        updateCourseImage(course.id, tempImage).then((image) => {
-          course.image = image;
-          updateCourseImageFromApi(course).then(() => {
-            getCoursesApi().then((res) => {
-              setLoader(false);
-              setCourses(res);
-            });
+
+        // createNotification(notification);
+        const image = await updateCourseImage(course.id, tempImage);
+        course.image = image;
+        await updateCourseImageFromApi(course);
+        const getCoursesResponse = await getCoursesApi();
+        setLoader(false);
+        setCourses(getCoursesResponse);
+        /*
+        createCoursesApi(course).then((res) => {
+          course.id = res;
+          let notification = {
+            type: "10",
+            notificationId: '',
+            title: course.title,
+            courseId: res,
+            season: 0,
+            lesson: 0,
+          }
+          createNotification(notification);
+          updateCourseImage(course.id, tempImage).then((image) => {
+            course.image = image;
+            updateCourseImageFromApi(course).then(() => {
+              getCoursesApi().then((res) => {
+                setLoader(false);
+                setCourses(res);
+              });
+            })
           })
         })
-      })
+        */
+      } catch (error) {
+        console.error(error);
+      }
+
     }
     else {
       setLoader(false);
@@ -257,19 +335,19 @@ const Courses = () => {
     <AdminContain style={{ flexDirection: "column" }}>
       <div className="courses-header">
         <h1 className="main-title">Crear Curso</h1>
-        <div className="courses-buttons">
-          <Link href="/admin/Teacher">
-            <button>Profesores</button>
-          </Link>
-          <Link href="/admin/CourseAttributes">
-            <button>Categorías</button>
-          </Link>
-          <Link href="/admin/Materials">
-            <button>Materiales</button>
-          </Link>
-
-
-        </div>
+        {
+          (userAccess.canEdit && userAccess.canCreate && userAccess.canDelete) && <div className="courses-buttons">
+            <Link href="/admin/Teacher">
+              <button>Profesores</button>
+            </Link>
+            <Link href="/admin/CourseAttributes">
+              <button>Categorías</button>
+            </Link>
+            <Link href="/admin/Materials">
+              <button>Materiales</button>
+            </Link>
+          </div>
+        }
       </div>
       <CourseContainer>
         <div className="create-course">
@@ -747,15 +825,14 @@ const Courses = () => {
           <div className="rows" style={{ justifyContent: "center" }}>
             <div className="input-contain" style={{ alignItems: "center" }}>
               {
-                !loader
-                  ?
-                  <button className="create-button" onClick={createCourse}>
-                    Crear curso
-                  </button>
-                  :
-                  <LoaderButton />
+                loader && <LoaderButton />
               }
-
+              {
+                (!loader && userAccess.canCreate) &&
+                <button className="create-button" onClick={createCourse}>
+                  Crear curso
+                </button>
+              }
             </div>
           </div>
         </div>
@@ -796,6 +873,7 @@ const Courses = () => {
                 id={course.id}
                 index={index}
                 key={"AllCourses_" + index}
+                canEdit={userAccess.canEdit}
               />
             )
           })
