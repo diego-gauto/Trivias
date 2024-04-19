@@ -5,6 +5,7 @@ import { FiCopy } from "react-icons/fi";
 import Link from "next/link";
 
 import style from "./formRow.module.css";
+import { UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
 
 interface Form {
   id: number;
@@ -15,21 +16,14 @@ interface Form {
 
 interface FormRowProps {
   form: Form;
-  idForm: Number
+  idForm: Number;
+  canView: boolean;
+  canEdit: boolean;
+  userLevel: UserLevelValue;
 }
 
-// const formatDate = (date: Date): string => {
-//   const day = date.getDate().toString().padStart(2, "0");
-//   const month = (date.getMonth() + 1).toString().padStart(2, "0");
-//   const year = date.getFullYear();
-//   const hours = date.getHours().toString().padStart(2, "0");
-//   const minutes = date.getMinutes().toString().padStart(2, "0");
-//   const seconds = date.getSeconds().toString().padStart(2, "0");
 
-//   return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-// };
-
-const FormRow = ({ form, idForm }: FormRowProps) => {
+const FormRow = ({ form, idForm, canEdit, userLevel, canView }: FormRowProps) => {
   const [copied, setCopied] = useState(false);
 
   const { link, handCursor } = style
@@ -54,29 +48,42 @@ const FormRow = ({ form, idForm }: FormRowProps) => {
   }, [copied]);
 
   return (
-
     <tr className="pointer">
-
       <td>{form.id}</td>
       <td onClick={handleCopyLink} title="Copiar ruta">
         {copied ? 'Copiado' : <FiCopy className={handCursor} />}
       </td>
       <td>
-        <Link href={`/admin/forms/updateForm?formId=${idForm}`}>
-          <a className={link} title="Editar">{form.name}</a>
-        </Link>
+        {
+          ((canEdit && userLevel === 'admin') || userLevel === 'superAdmin') ?
+            <Link href={`/admin/forms/updateForm?formId=${idForm}`}>
+              <a className={link} title="Editar">{form.name}</a>
+            </Link>
+            :
+            <p className={link} title="Editar">{form.name}</p>
+        }
       </td>
       <td>{form.createdAt}</td>
       <td>{form.editedAt}</td>
       <td>
-        <Link href={`/admin/forms/${idForm}`}>
-          <a className={link}> ver inscritos</a>
-        </Link>
+        {
+          ((canView && userLevel === 'admin') || userLevel === 'superAdmin') ?
+            <Link href={`/admin/forms/${idForm}`}>
+              <a className={link}> ver inscritos</a>
+            </Link>
+            :
+            <p className={link}> ver inscritos</p>
+        }
+
       </td>
       <td>
-        <Link href={`/forms/preview?formId=${idForm}`} passHref>
-          <a className={link} target="_blank" rel="noopener noreferrer"> Previsualizar</a>
-        </Link>
+        {
+          ((canView && userLevel === 'admin') || userLevel === 'superAdmin') ?
+            <Link href={`/forms/preview?formId=${idForm}`} passHref>
+              <a className={link} target="_blank" rel="noopener noreferrer"> Previsualizar</a>
+            </Link>
+            : <p className={link}> Previsualizar</p>
+        }
       </td>
     </tr>
 
