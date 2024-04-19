@@ -28,6 +28,7 @@ interface UserAccesss {
   canView: boolean;
   canEdit: boolean;
   canReport: boolean;
+  canDelete: boolean;
 }
 
 const Users = () => {
@@ -40,8 +41,8 @@ const Users = () => {
   const [showCourseSelect, setShowCourseSelect] = useState(false);
   const [methodSelected, setMethodSelected] = useState<SuscriptionOption>("todos");
   let adminContext = useAdmin();
-  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canReport: false, canEdit: false });
-  const { canEdit, canReport, canView } = userAccess;
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canReport: false, canEdit: false, canDelete: false });
+  const { canEdit, canReport, canView, canDelete } = userAccess;
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
   const { countries, users, userLoader, comeFrom, methods, userFilters, totalUsers, setUserFilters, courses, payCourses, permits } = adminContext;
@@ -60,10 +61,12 @@ const Users = () => {
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
       const role = userRoles.find(role => role.role === 'users');
+      console.log({ role });
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
-        canReport: role?.delete === 1
+        canReport: role?.delete === 1,
+        canDelete: role?.delete === 1,
       });
       // Role level
       const userLevelQuery = generateUserRolesLevelQuery(userId);
@@ -77,6 +80,9 @@ const Users = () => {
     }
   }
 
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const handleUserCalendar = () => {
     setUserCalendar(!userCalendar);
@@ -180,7 +186,7 @@ const Users = () => {
             <DefaultColumn gap={5}>
               <div className='top-title'>
                 {
-                  permits &&
+                  (permits) && ((userLevel === 'admin' && canReport) || userLevel === 'superAdmin') &&
                   <CsvDownloader
                     filename="usersData"
                     extension=".csv"
@@ -194,262 +200,275 @@ const Users = () => {
                 }
                 <h2 className='title'>Usuarios: {totalUsers}</h2>
               </div>
-              <DefaultSearchContainer>
-                <div className='search-icon' />
-                <input
-                  className='search-input'
-                  placeholder="Buscar un Usuario"
-                  onChange={(e) => { changeData('name', e.target.value) }}
-                  type={"text"}
-                />
-              </DefaultSearchContainer>
+              {
+                ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+                <DefaultSearchContainer>
+                  <div className='search-icon' />
+                  <input
+                    className='search-input'
+                    placeholder="Buscar un Usuario"
+                    onChange={(e) => { changeData('name', e.target.value) }}
+                    type={"text"}
+                  />
+                </DefaultSearchContainer>
+              }
             </DefaultColumn>
-            <Pagination
-              changePage={changePage}
-              currentPage={(userFilters.offset / 100)}
-              totalPage={Math.ceil(totalUsers / 100)}
-            />
+            {
+              ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+              <Pagination
+                changePage={changePage}
+                currentPage={(userFilters.offset / 100)}
+                totalPage={Math.ceil(totalUsers / 100)}
+              />
+            }
           </div>
-          <DefaultColumn gap={10}>
-            <h2 className='title-filter'>Filtros</h2>
-            <DefaultRow gap={20}>
-              <DefaultFilterContain>
-                <p className='title-filter'>Por Suscripción</p>
-                <select defaultValue={userFilters.membership} onChange={(e) => { changeData('membership', e.target.value) }}>
-                  <option value="todos">Todos</option>
-                  <option value="mensual">Mensual</option>
-                  <option value="anual">Anual</option>
-                  <option value="cuatri">Cuatrimestral</option>
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Estado de Suscripción</p>
-                <select defaultValue={userFilters.state} onChange={(e) => { changeData('state', e.target.value) }}>
-                  <option value="todos">Todos</option>
-                  <option value="active">Activa</option>
-                  <option value="not-active">No Activa</option>
-                </select>
-              </DefaultFilterContain>
-              {
-                userFilters.membership === "mensual"
-              }
-              <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
-                <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
-                <select defaultValue={userFilters.price} onChange={(e) => { changeData('price', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
-                  <option value={-1}>Todos</option>
-                  {
-                    userFilters.membership === "mensual" &&
-                    price_month.map((price: number, index: number) => {
-                      return (
-                        <option value={price} key={"precio_mensual" + index}> +{price}</option>
-                      )
-                    })
-                  }
-                  {
-                    userFilters.membership === "anual" &&
-                    price_anual.map((price: number, index: number) => {
-                      return (
-                        <option value={price} key={"precio_anual" + index}> +{price}</option>
-                      )
-                    })
-                  }
-                  {
-                    userFilters.membership === "cuatri" &&
-                    price_cuatri.map((price: number, index: number) => {
-                      return (
-                        <option value={price} key={"precio_cuatri" + index}> +{price}</option>
-                      )
-                    })
-                  }
-                </select>
-              </DefaultFilterContain>
-            </DefaultRow>
-            <DefaultRow gap={20}>
-              <DefaultFilterContain>
-                <p className='title-filter'>Método de pago</p>
-                <select defaultValue={userFilters.method} onChange={(e) => { changeData('method', e.target.value) }}>
-                  <option value="todos">Todos</option>
-                  {
-                    getMethodsBySuscription(methodSelected).map((method: string, index: number) => {
-                      return (
-                        <option value={method} key={"metodos_" + index}>{method}</option>
-                      )
-                    })
-                  }
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Rango de Fecha de creacion del usuario</p>
-                <select defaultValue="todos" onChange={(e) => showUserCalendar(e.target.value)}>
-                  <option value="todos">Fechas Normal</option>
-                  <option value="abrir">Calendario</option>
-                </select>
+
+          {
+            ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+            <DefaultColumn gap={10}>
+              <h2 className='title-filter'>Filtros</h2>
+              <DefaultRow gap={20}>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Por Suscripción</p>
+                  <select defaultValue={userFilters.membership} onChange={(e) => { changeData('membership', e.target.value) }}>
+                    <option value="todos">Todos</option>
+                    <option value="mensual">Mensual</option>
+                    <option value="anual">Anual</option>
+                    <option value="cuatri">Cuatrimestral</option>
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Estado de Suscripción</p>
+                  <select defaultValue={userFilters.state} onChange={(e) => { changeData('state', e.target.value) }}>
+                    <option value="todos">Todos</option>
+                    <option value="active">Activa</option>
+                    <option value="not-active">No Activa</option>
+                  </select>
+                </DefaultFilterContain>
                 {
-                  openUserCalendar &&
-                  <div className='calendar-contain'>
-                    {
-                      userCalendar
-                        ?
-                        <>
-                          <IoClose className='icon' onClick={handleUserCalendar} />
-                          <Calendar
-                            onChange={(e: any) => { filterDate('dates_created', e) }}
-                            allowPartialRange={true}
-                            returnValue='range'
-                            selectRange={true}
-                          />
-                        </>
-                        :
-                        <AiFillPlusCircle className='icon-open' onClick={handleUserCalendar} />
-                    }
-                  </div>
+                  userFilters.membership === "mensual"
                 }
-              </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Rango Ultimo login del usuario</p>
-                <select defaultValue="todos" onChange={(e) => showLoginCalendar(e.target.value)}>
-                  <option value="todos">Fechas Normal</option>
-                  <option value="abrir">Calendario</option>
-                </select>
-                {
-                  openloginCalendar &&
-                  <div className='calendar-contain'>
+                <DefaultFilterContain className={userFilters.membership === "todos" ? "disable-contain" : ""}>
+                  <p className={'title-filter ' + (userFilters.membership === "todos" ? "disable-txt" : "")}>Por precio</p>
+                  <select defaultValue={userFilters.price} onChange={(e) => { changeData('price', parseInt(e.target.value)) }} className={userFilters.membership === "todos" ? "disable" : ""}>
+                    <option value={-1}>Todos</option>
                     {
-                      loginCalendar
-                        ?
-                        <>
-                          <IoClose className='icon' onClick={handleLoginCalendar} />
-                          <Calendar
-                            onChange={(e: any) => { filterDate('dates_login', e) }}
-                            allowPartialRange={true}
-                            returnValue='range'
-                            selectRange={true}
-                          />
-                        </>
-                        :
-                        <AiFillPlusCircle className='icon-open' onClick={handleLoginCalendar} />
+                      userFilters.membership === "mensual" &&
+                      price_month.map((price: number, index: number) => {
+                        return (
+                          <option value={price} key={"precio_mensual" + index}> +{price}</option>
+                        )
+                      })
                     }
-                  </div>
-                }
-              </DefaultFilterContain>
-            </DefaultRow>
-            <DefaultRow gap={20}>
-              <DefaultFilterContain>
-                <p className='title-filter'>
-                  Por Pais
-                </p>
-                <select defaultValue={userFilters.country} onChange={(e) => { changeData("country", e.target.value) }}>
-                  <option value="todos" >Todos</option>
+                    {
+                      userFilters.membership === "anual" &&
+                      price_anual.map((price: number, index: number) => {
+                        return (
+                          <option value={price} key={"precio_anual" + index}> +{price}</option>
+                        )
+                      })
+                    }
+                    {
+                      userFilters.membership === "cuatri" &&
+                      price_cuatri.map((price: number, index: number) => {
+                        return (
+                          <option value={price} key={"precio_cuatri" + index}> +{price}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </DefaultFilterContain>
+              </DefaultRow>
+              <DefaultRow gap={20}>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Método de pago</p>
+                  <select defaultValue={userFilters.method} onChange={(e) => { changeData('method', e.target.value) }}>
+                    <option value="todos">Todos</option>
+                    {
+                      getMethodsBySuscription(methodSelected).map((method: string, index: number) => {
+                        return (
+                          <option value={method} key={"metodos_" + index}>{method}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Rango de Fecha de creacion del usuario</p>
+                  <select defaultValue="todos" onChange={(e) => showUserCalendar(e.target.value)}>
+                    <option value="todos">Fechas Normal</option>
+                    <option value="abrir">Calendario</option>
+                  </select>
                   {
-                    countries.map((val: any, index: number) => {
-                      return (
-                        <option value={val.country} key={"paises" + index}>{val.country}</option>
-                      )
-                    })
-                  }
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain >
-                <p className='title-filter'>Procedencia</p>
-                <select defaultValue={userFilters.come_from} onChange={(e) => { changeData("come_from", e.target.value) }}>
-                  <option value={"todos"}>Todos</option>
-                  {
-                    comeFrom.map((val: any, index: number) => {
-                      return (
-                        <option value={val.come_from} key={"procedencia" + index}>{val.come_from}</option>
-                      )
-                    })
-                  }
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Min. Gastado</p>
-                <input
-                  onChange={(e) => changeData('spent_min', e.target.value)}
-                  placeholder='0'
-                  type='number'
-                  defaultValue={userFilters.spent_min}
-                />
-              </DefaultFilterContain>
-            </DefaultRow>
-            <DefaultRow gap={20}>
-              <DefaultFilterContain>
-                <p className='title-filter'>Por cursos</p>
-                <select defaultValue={userFilters.courses} onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
-                  <option value={0}>Todos</option>
-                  {
-                    courses.map((val: any, index: number) => {
-                      return (
-                        <option value={val.id} key={"cursos" + index}>{val.title}</option>
-                      )
-                    })
-                  }
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain className={!showCourseSelect ? "disable-contain" : ""}>
-                <p className={'title-filter ' + (!showCourseSelect ? "disable-txt" : "")}>Progreso</p>
-                <select defaultValue={userFilters.progress} onChange={(e) => { changeData('progress', parseInt(e.target.value)) }} className={!showCourseSelect ? "disable" : ""}>
-                  <option value={0}>Todos</option>
-                  <option value={25}>25%</option>
-                  <option value={50}>50%</option>
-                  <option value={75}>75%</option>
-                  <option value={100}>100%</option>
-                </select>
-              </DefaultFilterContain>
-              <DefaultFilterContain>
-                <p className='title-filter'>Max Gastado.</p>
-                <input
-                  onChange={(e) => changeData('spent_max', e.target.value)}
-                  placeholder='0'
-                  type='number'
-                  defaultValue={userFilters.spent_max}
-                />
-              </DefaultFilterContain>
-            </DefaultRow>
-          </DefaultColumn>
-        </div>
-        <div className='table-contain'>
-          <AdminTable id="Users">
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
-              <tr>
-                <th>Usuario</th>
-                <th>Correo Electrónico</th>
-                <th>Fecha de Creación</th>
-                <th>Amount spent</th>
-                <th>Visualizar</th>
-              </tr>
-              {/* TABLAS */}
-              {
-                <>
-                  {
-                    !userLoader &&
-                    <>
+                    openUserCalendar &&
+                    <div className='calendar-contain'>
                       {
-                        users.length > 0 && (
-                          users.map((user: IAdminUsers, index: number) => {
-                            return (
-                              <tr key={index}>
-                                <td style={{ fontWeight: 600 }}>
-                                  <ProfileContain>
-                                    <Profile />
-                                    {user.name}
-                                  </ProfileContain>
-                                </td>
-                                <td >{user.email}</td>
-                                <td>{formatDate(user.created_at)}</td>
-                                <td>MXN${user.spent}</td>
-                                <td onClick={() => openUserCard(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                              </tr>
-                            )
-                          }))
+                        userCalendar
+                          ?
+                          <>
+                            <IoClose className='icon' onClick={handleUserCalendar} />
+                            <Calendar
+                              onChange={(e: any) => { filterDate('dates_created', e) }}
+                              allowPartialRange={true}
+                              returnValue='range'
+                              selectRange={true}
+                            />
+                          </>
+                          :
+                          <AiFillPlusCircle className='icon-open' onClick={handleUserCalendar} />
                       }
-                    </>
+                    </div>
                   }
-                </>
-              }
-            </tbody>
-          </AdminTable>
+                </DefaultFilterContain>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Rango Ultimo login del usuario</p>
+                  <select defaultValue="todos" onChange={(e) => showLoginCalendar(e.target.value)}>
+                    <option value="todos">Fechas Normal</option>
+                    <option value="abrir">Calendario</option>
+                  </select>
+                  {
+                    openloginCalendar &&
+                    <div className='calendar-contain'>
+                      {
+                        loginCalendar
+                          ?
+                          <>
+                            <IoClose className='icon' onClick={handleLoginCalendar} />
+                            <Calendar
+                              onChange={(e: any) => { filterDate('dates_login', e) }}
+                              allowPartialRange={true}
+                              returnValue='range'
+                              selectRange={true}
+                            />
+                          </>
+                          :
+                          <AiFillPlusCircle className='icon-open' onClick={handleLoginCalendar} />
+                      }
+                    </div>
+                  }
+                </DefaultFilterContain>
+              </DefaultRow>
+              <DefaultRow gap={20}>
+                <DefaultFilterContain>
+                  <p className='title-filter'>
+                    Por Pais
+                  </p>
+                  <select defaultValue={userFilters.country} onChange={(e) => { changeData("country", e.target.value) }}>
+                    <option value="todos" >Todos</option>
+                    {
+                      countries.map((val: any, index: number) => {
+                        return (
+                          <option value={val.country} key={"paises" + index}>{val.country}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain >
+                  <p className='title-filter'>Procedencia</p>
+                  <select defaultValue={userFilters.come_from} onChange={(e) => { changeData("come_from", e.target.value) }}>
+                    <option value={"todos"}>Todos</option>
+                    {
+                      comeFrom.map((val: any, index: number) => {
+                        return (
+                          <option value={val.come_from} key={"procedencia" + index}>{val.come_from}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Min. Gastado</p>
+                  <input
+                    onChange={(e) => changeData('spent_min', e.target.value)}
+                    placeholder='0'
+                    type='number'
+                    defaultValue={userFilters.spent_min}
+                  />
+                </DefaultFilterContain>
+              </DefaultRow>
+              <DefaultRow gap={20}>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Por cursos</p>
+                  <select defaultValue={userFilters.courses} onChange={(e) => { changeData('courses', parseInt(e.target.value)) }}>
+                    <option value={0}>Todos</option>
+                    {
+                      courses.map((val: any, index: number) => {
+                        return (
+                          <option value={val.id} key={"cursos" + index}>{val.title}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain className={!showCourseSelect ? "disable-contain" : ""}>
+                  <p className={'title-filter ' + (!showCourseSelect ? "disable-txt" : "")}>Progreso</p>
+                  <select defaultValue={userFilters.progress} onChange={(e) => { changeData('progress', parseInt(e.target.value)) }} className={!showCourseSelect ? "disable" : ""}>
+                    <option value={0}>Todos</option>
+                    <option value={25}>25%</option>
+                    <option value={50}>50%</option>
+                    <option value={75}>75%</option>
+                    <option value={100}>100%</option>
+                  </select>
+                </DefaultFilterContain>
+                <DefaultFilterContain>
+                  <p className='title-filter'>Max Gastado.</p>
+                  <input
+                    onChange={(e) => changeData('spent_max', e.target.value)}
+                    placeholder='0'
+                    type='number'
+                    defaultValue={userFilters.spent_max}
+                  />
+                </DefaultFilterContain>
+              </DefaultRow>
+            </DefaultColumn>
+          }
         </div>
+        {
+          ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+          <div className='table-contain'>
+            <AdminTable id="Users">
+              <tbody style={{ display: 'inline-table', width: '100%' }}>
+                <tr>
+                  <th>Usuario</th>
+                  <th>Correo Electrónico</th>
+                  <th>Fecha de Creación</th>
+                  <th>Amount spent</th>
+                  <th>Visualizar</th>
+                </tr>
+                {/* TABLAS */}
+                {
+                  <>
+                    {
+                      !userLoader &&
+                      <>
+                        {
+                          users.length > 0 && (
+                            users.map((user: IAdminUsers, index: number) => {
+                              return (
+                                <tr key={index}>
+                                  <td style={{ fontWeight: 600 }}>
+                                    <ProfileContain>
+                                      <Profile />
+                                      {user.name}
+                                    </ProfileContain>
+                                  </td>
+                                  <td >{user.email}</td>
+                                  <td>{formatDate(user.created_at)}</td>
+                                  <td>MXN${user.spent}</td>
+                                  <td onClick={() => openUserCard(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
+                                </tr>
+                              )
+                            }))
+                        }
+                      </>
+                    }
+                  </>
+                }
+              </tbody>
+            </AdminTable>
+          </div>
+        }
         {
           userLoader &&
           <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
