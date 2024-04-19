@@ -12,9 +12,15 @@ interface Trivia {
 
 interface TriviaListProps {
   trivias: Trivia[];
+  canViewTrivias: boolean;
 }
 
-const TriviaList = ({ trivias }: TriviaListProps) => {
+const TriviaList = ({ trivias, canViewTrivias }: TriviaListProps) => {
+
+  if (!canViewTrivias) {
+    return (<></>);
+  }
+
   return (
     <div className="mt-2">
       <Table striped bordered hover>

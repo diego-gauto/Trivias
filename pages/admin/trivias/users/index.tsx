@@ -9,6 +9,9 @@ import { getAllTriviasApi } from "../../../../components/api/trivias";
 import { getAllUsersApi } from "../../../../components/api/usertrivia";
 import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
 import styles from "./listUser.module.css";
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../../../components/GenericQueries/UserRoles/UserRolesQueries";
+import { getGenericQueryResponse } from "../../../../components/api/admin";
+import { Role, UserLevelValue } from "../../../../components/GenericQueries/UserRoles/UserRolesInterfaces";
 
 interface UserTrivia {
   id: number;
@@ -27,6 +30,11 @@ type Trivia = {
 
 let allUsers: any = [];
 
+interface UserAccesssTriviasList {
+  canViewTriviasList: boolean;
+  canDownloadTriviasList: boolean;
+}
+
 const UsersTrivias = () => {
   const [userTrivias, setUserTrivias] = useState<UserTrivia[]>([]);
   const [trivias, setTrivias] = useState<Trivia[]>([])
@@ -35,15 +43,50 @@ const UsersTrivias = () => {
   const [selectedIsUser, setSelectedIsUser] = useState<string | null>(""); // Nuevo estado
   const [loading, setLoading] = useState(true);
 
+  const [userAccessTriviasList, setUserAccessTriviasList] = useState<UserAccesssTriviasList>({ canDownloadTriviasList: false, canViewTriviasList: false });
+
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 25;
   const lastIndex = currentPage * usersPerPage;
   const firstIndex = lastIndex - usersPerPage;
   const users = userTrivias.slice(firstIndex, lastIndex);
   const npage = Math.ceil(userTrivias.length / usersPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1)
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
   const { main, buttonContainer, volver, volverText, link, titles, title, selectContainer, selectGroup, select, button, pagination, pageItem, pageLink, active } = styles
+
+  const { canDownloadTriviasList, canViewTriviasList } = userAccessTriviasList;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const roleTriviasList = userRoles.find(role => role.role === 'trivias_list');
+      setUserAccessTriviasList({
+        canDownloadTriviasList: roleTriviasList?.download === 1,
+        canViewTriviasList: roleTriviasList?.view === 1,
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
 
   const downloadCsv = () => {
     const csv = Papa.unparse(userTrivias);
@@ -76,7 +119,7 @@ const UsersTrivias = () => {
         console.error('Error al obtener las trivias:', error);
       }
     };
-
+    getUserData();
     // Llama a la función para cargar las trivias al cargar inicialmente el componente
     fetchTrivias();
   }, []);
@@ -138,7 +181,6 @@ const UsersTrivias = () => {
 
         setUserTrivias(filteredUsers);
         setLoading(false);
-        console.log(filteredUsers)
       } catch (error) {
         console.error('Error al obtener los usuarios:', error);
       }
@@ -192,9 +234,6 @@ const UsersTrivias = () => {
     )
   }
 
-
-  console.log(selectedTrivia)
-  console.log(allUsers)
   return (
     <div className={main}>
       <div className={titles}>
@@ -207,7 +246,10 @@ const UsersTrivias = () => {
               </div>
             </a>
           </Link>
-          <button className={button} onClick={downloadCsv} >Descargar CSV</button>
+          {
+            ((canDownloadTriviasList && userLevel === 'admin')
+              || userLevel === 'superAdmin') && <button className={button} onClick={downloadCsv} >Descargar CSV</button>
+          }
         </div>
         <h2 className={title}>Listados de usuarios</h2>
         <h3>Total de usuarios: {userTrivias.length}</h3>
@@ -252,22 +294,6 @@ const UsersTrivias = () => {
 
       </div>
       <UserTriviaList usersTrivia={users} />
-      {/* <nav>
-        <ul className={pagination}>
-          <li className={pageItem}>
-            <a href="" className={pageLink} onClick={(e) => prevPage(e)}>Anterior</a>
-          </li>
-          {numbers.map((number, index) => (
-            <li className={`${pageItem} ${currentPage === number ? active : ''}`} key={index}>
-              <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, number)}>{number}</a>
-            </li>
-          ))}
-          <li className={pageItem}>
-            <a href="" className={pageLink} onClick={nextPage}>Siguiente</a>
-          </li>
-
-        </ul>
-      </nav> */}
       <nav>
         <ul className={pagination}>
 
