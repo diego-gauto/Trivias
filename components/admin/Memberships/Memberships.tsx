@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AdminContain } from '../SideBar.styled';
 import { AdminTable2, DefaultColumn, DefaultContainer } from '../DefaultComponents/DefaultComponents.styled';
 import Pagination from '../../Pagination/Pagination'
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getCloseToEndingMembershipUsers } from '../../api/admin';
+import { getCloseToEndingMembershipUsers, getGenericQueryResponse } from '../../api/admin';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface Memberships {
   id: number,
@@ -71,6 +73,11 @@ const getTextSusctiptionByLevel = (level: number) => {
   return "Anual"
 }
 
+interface UserAccesss {
+  canView: boolean;
+  canDownload: boolean;
+}
+
 const Memberships = () => {
   const today = getDateWithNewFormat(new Date()).slice(0, 10);
   const [hasFiltered, setHasFiltered] = useState<boolean>(false);
@@ -82,6 +89,45 @@ const Memberships = () => {
 
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [finalDate, setFinalDate] = useState<Date>(new Date());
+
+  const [userAccess, setUserAccess] = useState<UserAccesss>({ canDownload: false, canView: false });
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+
+  const { canDownload, canView } = userAccess;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'memberships_list');
+      setUserAccess({
+        canView: role?.view === 1,
+        canDownload: role?.download === 1,
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const downloadListCSVHandler = () => {
     const thereAreData = data.length > 0;
@@ -161,111 +207,123 @@ const Memberships = () => {
             <DefaultColumn gap={5}>
               <div className='top-title'>
                 <h2 className='title'>Membresias por finalizar</h2>
-                <span style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'right' }}>
-                  Cantidad de usuarios: {data.length}
-                </span>
+                {
+                  ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+                  <span style={{ fontSize: '18px', fontWeight: 'bold', textAlign: 'right' }}>
+                    Cantidad de usuarios: {data.length}
+                  </span>
+                }
               </div>
             </DefaultColumn>
-            <Pagination
-              changePage={changePage}
-              currentPage={(offset / 100)}
-              totalPage={Math.ceil(filteredData.length / 100)}
-            />
+            {
+              ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+              <Pagination
+                changePage={changePage}
+                currentPage={(offset / 100)}
+                totalPage={Math.ceil(filteredData.length / 100)}
+              />
+            }
           </div>
-          <div className='bottom-header'>
-            <div>
-              <label
-                style={{
-                  fontSize: '20px'
-                }}
-                htmlFor="memberships-filter">Filtro de membresía</label>
-              <select
-                ref={memberFilterHTMLSelect}
-                style={{
-                  width: '100%',
-                  height: '40px',
-                }}
-                name="memberships-filter"
-                id="memberships-filter">
-                <option value="TODOS">Todos</option>
-                <option value="MENSUAL">Mensual</option>
-                <option value="CUATRIMESTRAL">Cuatrimestral</option>
-                <option value="ANUAL">Anual</option>
-              </select>
-            </div>
-            <form>
+          {
+            ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+            <div className='bottom-header'>
               <div>
                 <label
                   style={{
                     fontSize: '20px'
                   }}
-                  htmlFor="start-date-input">Inicio</label>
-                <input
+                  htmlFor="memberships-filter">Filtro de membresía</label>
+                <select
+                  ref={memberFilterHTMLSelect}
                   style={{
                     width: '100%',
-                    borderRadius: '20px',
                     height: '40px',
-                    padding: '15px',
-                    border: 'solid 1px #6717cd',
                   }}
-                  type="date"
-                  name="start-date"
-                  id="start-date-input"
-                  min={today}
-                  value={startDate.toJSON().slice(0, 10)}
-                  onChange={(e) => {
-                    setStartDate(new Date(e.target.value));
-                  }}
-                />
-                <label
-                  style={{
-                    fontSize: '20px'
-                  }}
-                  htmlFor="start-date-input">Fin</label>
-                <input
-                  style={{
-                    width: '100%',
-                    borderRadius: '20px',
-                    height: '40px',
-                    padding: '15px',
-                    border: 'solid 1px #6717cd',
-                  }}
-                  type="date"
-                  name="final-date"
-                  id="final-date-input"
-                  min={today}
-                  value={finalDate.toJSON().slice(0, 10)}
-                  onChange={(e) => {
-                    setFinalDate(new Date(e.target.value));
-                  }}
-                />
+                  name="memberships-filter"
+                  id="memberships-filter">
+                  <option value="TODOS">Todos</option>
+                  <option value="MENSUAL">Mensual</option>
+                  <option value="CUATRIMESTRAL">Cuatrimestral</option>
+                  <option value="ANUAL">Anual</option>
+                </select>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
+              <form>
+                <div>
+                  <label
+                    style={{
+                      fontSize: '20px'
+                    }}
+                    htmlFor="start-date-input">Inicio</label>
+                  <input
+                    style={{
+                      width: '100%',
+                      borderRadius: '20px',
+                      height: '40px',
+                      padding: '15px',
+                      border: 'solid 1px #6717cd',
+                    }}
+                    type="date"
+                    name="start-date"
+                    id="start-date-input"
+                    min={today}
+                    value={startDate.toJSON().slice(0, 10)}
+                    onChange={(e) => {
+                      setStartDate(new Date(e.target.value));
+                    }}
+                  />
+                  <label
+                    style={{
+                      fontSize: '20px'
+                    }}
+                    htmlFor="start-date-input">Fin</label>
+                  <input
+                    style={{
+                      width: '100%',
+                      borderRadius: '20px',
+                      height: '40px',
+                      padding: '15px',
+                      border: 'solid 1px #6717cd',
+                    }}
+                    type="date"
+                    name="final-date"
+                    id="final-date-input"
+                    min={today}
+                    value={finalDate.toJSON().slice(0, 10)}
+                    onChange={(e) => {
+                      setFinalDate(new Date(e.target.value));
+                    }}
+                  />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
+                </div>
+              </form>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '35px',
+                  padding: '15px 0',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                <button
+                  type="button"
+                  style={{ height: 'fit-content', width: '100%', fontSize: '20px' }}
+                  className='button button-purple'
+                  onClick={filterMembershipsHandler}
+                >Filtrar</button>
+                {
+                  ((canDownload && userLevel === 'admin') || userLevel === 'superAdmin') &&
+                  <button
+                    type="button"
+                    style={{ height: 'fit-content', width: '100%', fontSize: '20px' }}
+                    className='button button-purple'
+                    onClick={downloadListCSVHandler}
+                  >Descargar listado</button>
+                }
               </div>
-            </form>
-            <div
-              style={{
-                display: 'flex',
-                gap: '35px',
-                padding: '15px 0',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-              }}>
-              <button
-                type="button"
-                style={{ height: 'fit-content', width: '100%', fontSize: '20px' }}
-                className='button button-purple'
-                onClick={filterMembershipsHandler}
-              >Filtrar</button>
-              <button
-                type="button"
-                style={{ height: 'fit-content', width: '100%', fontSize: '20px' }}
-                className='button button-purple'
-                onClick={downloadListCSVHandler}
-              >Descargar listado</button>
             </div>
-          </div>
+          }
         </div>
         {
           !isLoadingData &&
@@ -276,7 +334,8 @@ const Memberships = () => {
           </Background>
         }
         {
-          hasFiltered && <div className='table-contain'>
+          (hasFiltered) && ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+          <div className='table-contain'>
             <AdminTable2>
               <tbody style={{ display: 'inline-table', width: '100%' }}>
                 <tr>
