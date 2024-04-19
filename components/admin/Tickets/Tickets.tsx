@@ -5,6 +5,9 @@ import Pagination from '../../Pagination/Pagination';
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getAdminMassiveLotteryApi } from '../../api/notifications';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
+import { getGenericQueryResponse } from '../../api/admin';
 
 interface TicketRowData {
   name: string;
@@ -13,6 +16,11 @@ interface TicketRowData {
   phone_number: string;
   ticket_value: number;
 };
+
+interface UserAccesss {
+  canView: boolean;
+  canDownload: boolean;
+}
 
 const jsonToCsv = (items: any) => {
   const header = Object.keys(items[0]);
@@ -50,8 +58,43 @@ const Tickets = () => {
   const [offset, setOffset] = useState(0);
   const [filteredData, setFilteredData] = useState<TicketRowData[]>([]);
   const [selectedOption, setSelectedOption] = useState<FilterValue>('NAME');
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+  const [userAccessTrivias, setUserAccessTrivias] = useState<UserAccesss>({ canDownload: false, canView: false });
+
+  const { canView, canDownload } = userAccessTrivias;
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find(role => role.role === 'tickets_list');
+      setUserAccessTrivias({
+        canView: role?.view === 1,
+        canDownload: role?.download === 1,
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  }
 
   useEffect(() => {
+    getUserData();
     getData();
   }, []);
 
@@ -120,58 +163,68 @@ const Tickets = () => {
                 <h2 className='title'>Sorteos</h2>
               </div>
             </DefaultColumn>
-            <Pagination
-              changePage={changePage}
-              currentPage={(offset / 100)}
-              totalPage={Math.ceil(filteredData.length / 100)}
-            />
+            {
+              ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+              <Pagination
+                changePage={changePage}
+                currentPage={(offset / 100)}
+                totalPage={Math.ceil(filteredData.length / 100)}
+              />
+            }
           </div>
-          <div className='bottom-header'>
-            <div>
-              <p className='title-filter'>Usuarios activos: {totalUsers}</p>
-              <p className='title-filter'>Cantidad total de boletos: {totalTickets}</p>
-            </div>
-            <form>
-              <div className='search-input-tickets'>
-                <div className='search-input-container'>
-                  <div className='search-icon' />
-                  <input
-                    style={{ fontSize: '18px' }}
-                    className='search-input'
-                    placeholder="Buscar"
-                    onChange={handleInputSearchChangeValue}
-                    type={"text"}
-                    value={textFilter}
-                  />
-                </div>
+          {
+            ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+            <div className='bottom-header'>
+              <div>
+                <p className='title-filter'>Usuarios activos: {totalUsers}</p>
+                <p className='title-filter'>Cantidad total de boletos: {totalTickets}</p>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
-                <div className="option" style={{ fontSize: '18px' }}>
-                  <input id='radio-name' type="radio" checked={selectedOption === 'NAME'} value={'NAME'} onChange={() => {
-                    setSelectedOption('NAME');
-                    setTextFilter('');
-                  }}
-                  />
-                  <label htmlFor='radio-name'>Por correo eléctronico</label>
+              <form>
+                <div className='search-input-tickets'>
+                  <div className='search-input-container'>
+                    <div className='search-icon' />
+                    <input
+                      style={{ fontSize: '18px' }}
+                      className='search-input'
+                      placeholder="Buscar"
+                      onChange={handleInputSearchChangeValue}
+                      type={"text"}
+                      value={textFilter}
+                    />
+                  </div>
                 </div>
-                <div className="option" style={{ fontSize: '18px' }}>
-                  <input id='radio-ticket-number' type="radio" checked={selectedOption === 'TICKET_NUMBER'} value={'TICKET_NUMBER'} onChange={() => {
-                    setSelectedOption('TICKET_NUMBER');
-                    setTextFilter('');
-                  }} />
-                  <label htmlFor='radio-ticket-number'>Por número de boleto</label>
+                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
+                  <div className="option" style={{ fontSize: '18px' }}>
+                    <input id='radio-name' type="radio" checked={selectedOption === 'NAME'} value={'NAME'} onChange={() => {
+                      setSelectedOption('NAME');
+                      setTextFilter('');
+                    }}
+                    />
+                    <label htmlFor='radio-name'>Por correo eléctronico</label>
+                  </div>
+                  <div className="option" style={{ fontSize: '18px' }}>
+                    <input id='radio-ticket-number' type="radio" checked={selectedOption === 'TICKET_NUMBER'} value={'TICKET_NUMBER'} onChange={() => {
+                      setSelectedOption('TICKET_NUMBER');
+                      setTextFilter('');
+                    }} />
+                    <label htmlFor='radio-ticket-number'>Por número de boleto</label>
+                  </div>
                 </div>
-              </div>
-            </form>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <button
-                type="button"
-                style={{ height: 'fit-content', fontSize: '20px' }}
-                className='button button-purple'
-                onClick={downloadListCSVHandler}
-              >Descargar listado</button>
+              </form>
+              {
+                ((canDownload && userLevel === 'admin') || userLevel === 'superAdmin') &&
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <button
+                    type="button"
+                    style={{ height: 'fit-content', fontSize: '20px' }}
+                    className='button button-purple'
+                    onClick={downloadListCSVHandler}
+                  >Descargar listado</button>
+                </div>
+              }
             </div>
-          </div>
+          }
+
         </div>
         {
           !isLoadingData &&
@@ -182,35 +235,39 @@ const Tickets = () => {
           </Background>
         }
         <div className='table-contain'>
-          <AdminTable id="Users">
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
-              <tr>
-                <th>Boleto</th>
-                <th>Nombre</th>
-                <th>Correo Electrónico</th>
-                <th>Telefono</th>
-              </tr>
-              {
-                isLoadingData &&
-                filteredData.filter((_, index) => index >= offset && index < (offset + 100))
-                  .map((user, index) => {
-                    return (
-                      <tr key={index}>
-                        <td style={{ fontWeight: 600 }}>
-                          <ProfileContain>
-                            <Profile />
-                            {user.ticket_value}
-                          </ProfileContain>
-                        </td>
-                        <td>{`${user.name} ${user.last_name}`}</td>
-                        <td>{user.email}</td>
-                        <td>{user.phone_number}</td>
-                      </tr>
-                    )
-                  })
-              }
-            </tbody>
-          </AdminTable>
+          {
+            ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+            <AdminTable id="Users">
+              <tbody style={{ display: 'inline-table', width: '100%' }}>
+                <tr>
+                  <th>Boleto</th>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Telefono</th>
+                </tr>
+                {
+                  isLoadingData &&
+                  filteredData.filter((_, index) => index >= offset && index < (offset + 100))
+                    .map((user, index) => {
+                      return (
+                        <tr key={index}>
+                          <td style={{ fontWeight: 600 }}>
+                            <ProfileContain>
+                              <Profile />
+                              {user.ticket_value}
+                            </ProfileContain>
+                          </td>
+                          <td>{`${user.name} ${user.last_name}`}</td>
+                          <td>{user.email}</td>
+                          <td>{user.phone_number}</td>
+                        </tr>
+                      )
+                    })
+                }
+              </tbody>
+            </AdminTable>
+          }
+
         </div>
       </DefaultContainer>
     </AdminContain >
