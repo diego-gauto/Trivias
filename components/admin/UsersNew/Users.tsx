@@ -186,7 +186,7 @@ const Users = () => {
             <DefaultColumn gap={5}>
               <div className='top-title'>
                 {
-                  (permits) && ((userLevel === 'admin' && canReport) || userLevel === 'superAdmin') &&
+                  ((permits) && ((userLevel === 'admin' && canReport) || userLevel === 'superAdmin')) &&
                   <CsvDownloader
                     filename="usersData"
                     extension=".csv"

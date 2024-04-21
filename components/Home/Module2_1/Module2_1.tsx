@@ -10,6 +10,8 @@ import { ModuleContainer, Subtittle1, Tittle } from "../Module2_1/Module2_1.styl
 import { IModule2_1 } from "./IModule2_1";
 import { PurpleEmptyButton } from "./PurpleEmptyButton/PurpleEmptyButton";
 import { PurpleModule2Button } from "./PurpleModule2Button/PurpleModule2Button";
+import { haveAccess, IUserData } from "../../GlobalFunctions";
+
 
 export const Module2_1 = (props: IModule2_1) => {
   const { data, img, user } = props;
@@ -31,18 +33,17 @@ export const Module2_1 = (props: IModule2_1) => {
 
   }, [data, setlandingData]);
 
-
   const startFromRedirect = () => {
     if (user) {
-      if (user.level === 1) {
-        router.push(PREVIEW_PATH)
+      if (haveAccess(user.level, user.final_date, user.role, user.method)) {
+        router.push(PREVIEW_PATH);
       }
       else {
-        router.push(`${PLAN_PATH}`)
+        router.push(PLAN_PATH);
       }
     } else {
       localStorage.setItem("plan", "true");
-      router.push(SIGNUP_PATH)
+      router.push(SIGNUP_PATH);
     }
   }
 

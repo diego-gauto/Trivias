@@ -2,6 +2,7 @@ import { CERTIFICATES_PATH, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PR
 import { IUser } from "../interfaces/IUserData";
 import { ICourse } from "../interfaces/ICourse";
 import router from "next/router";
+import { haveAccess, MembershipMethodValue } from "../components/GlobalFunctions";
 let today = new Date().getTime() / 1000;
 
 export const authRedirect = (type: string, userInfo?: any) => {
@@ -88,36 +89,18 @@ export const goToCertificate = (course: any) => {
   });
 }
 export const goToSuscription = (user: IUser, course: ICourse) => {
-  let diff = Math.round((today - user.final_date) / 86400);
   if (user) {
-    let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-    //New condition subscription flow
-    if ((course.type === "Mensual" && user.final_date > today) || user.role === 'superAdmin' || diff <= 6 || complete_nails.length > 0) {
+    // Falta considerar nivel 3 (Pausado, en este caso es necesario mandar a PROFILE_PATH)
+    if (haveAccess(user.level, user.final_date, user.role, user.method as MembershipMethodValue) && course.type === "Mensual") {
       router.push({
         pathname: LESSON_PATH,
         query: { id: course.id, season: 0, lesson: 0 },
       });
-    }
-    if (course.type === "Mensual" && user.level === 0 && user.final_date < today) {
-      router.push(`${PLAN_PATH}`)
-    }
-    if ((course.type === "Mensual") && user.role === 'user' && (user.final_date < today && user.level === 3)) {
-      router.push(`${PROFILE_PATH}`)
-    }
-    if (course.type === "Producto" && course.pay) {
-      router.push({
-        pathname: LESSON_PATH,
-        query: { id: course.id, season: 0, lesson: 0 },
-      });
-    }
-    if (course.type === 'Producto' && !course.pay) {
-      router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: course.id } })
+    } else {
+      router.push(PLAN_PATH);
     }
   }
   else {
-    if (course.type === "Producto") {
-      localStorage.setItem("course", `${course.id}`);
-    }
     if (course.type === "Mensual") {
       localStorage.setItem("plan", `true`);
     }

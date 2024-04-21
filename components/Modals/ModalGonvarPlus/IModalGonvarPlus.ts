@@ -1,10 +1,8 @@
-import { IUser } from "../../../interfaces/IUserData";
-
 export interface ICourse {
   openModal: boolean;
   setOpenModal: any;
   course: [];
-  user: IUser;
+  user: any;
   loggedIn: boolean;
 }
 interface IProfessor {

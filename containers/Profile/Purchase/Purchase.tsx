@@ -32,6 +32,7 @@ import ActiveUserConekta from "../../../pages/auth/Modals/ActiveUserConekta";
 import { SOCIALS_ARRAY } from "../../../constants/arrays";
 import { returnPrice, returnPriceTag } from "../../../utils/functions";
 import { IUserInfoResult } from "../../../interfaces/IUser";
+import { haveAccess, MembershipMethodValue } from "../../../components/GlobalFunctions";
 declare let window: any
 const Purchase = () => {
   const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
@@ -176,9 +177,11 @@ const Purchase = () => {
       de encontrarse en este proceso.
     */
     if (router.query.type == "subscription"
-      && (([1, 4, 7].includes(userData.level) && userData.final_date > today - 10 * 24 * 60 * 60)
-        || [0, 5, 6, 8].includes(userData.level) && userData.final_date > today)) {
-      window.location.href = PREVIEW_PATH;
+      //&& (([1, 4, 7].includes(userData.level) && userData.final_date > today - 10 * 24 * 60 * 60)
+      // || [0, 5, 6, 8].includes(userData.level) && userData.final_date > today)) 
+      && haveAccess(userData.level, userData.final_date, userData.role as any, userData.method as MembershipMethodValue)) {
+      // window.location.href = PREVIEW_PATH;
+      router.push(PREVIEW_PATH);
     }
   }
 

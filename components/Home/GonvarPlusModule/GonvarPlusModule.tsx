@@ -8,9 +8,16 @@ import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import { ModalGonvarPlus } from "../../Modals/ModalGonvarPlus/ModalGonvarPlus";
 import { getWholeCourses } from "../../../store/actions/courseActions";
+import { haveAccess, haveAccessFinal, IUserData } from "../../GlobalFunctions";
 declare let Hls: any
 
-export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
+interface Props {
+  loggedIn: any,
+  user: IUserData,
+  courses: any,
+}
+
+export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
   const responsive1140 = useMediaQuery({ query: "(max-width: 1140px)" });
   const responsive768 = useMediaQuery({ query: "(max-width: 784px)" });
   const responsive576 = useMediaQuery({ query: "(max-width: 576px)" });
@@ -51,8 +58,8 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: any) => {
   }
   const goTo = () => {
     if (user) {
-      let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-      if (user.final_date > today || complete_nails.length > 0) {
+      // let complete_nails = user.user_courses.filter((user: any) => user.course_id === 57 && user.final_date > today);
+      if (haveAccess(user.level, user.final_date, user.role, user.method) /* || complete_nails.length > 0 */) {
         router.push(PREVIEW_PATH)
       }
       else {

@@ -11,6 +11,7 @@ import { ANUAL_FORM, LESSON_PATH, LOGIN_PATH, PLAN_PATH, PURCHASE_PATH } from '.
 import { useRouter } from 'next/router';
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { BsPlayCircle } from 'react-icons/bs';
+import { haveAccess, MembershipMethodValue } from '../../GlobalFunctions';
 
 const Sliders = (props: ICourseData) => {
   const { slideNumber, slideType, innerWidth, allCourses, user, containLoader } = props;
@@ -26,16 +27,16 @@ const Sliders = (props: ICourseData) => {
   const router = useRouter();
   const GonvarLogo = "../images/purchase/logo.png";
   const sendTo = () => {
-    if (user && user.level === 0 && user.final_date < today) {
-      router.push({
-        pathname: PLAN_PATH
-      })
-    }
-    else {
+    // Cambiar aquí 
+    if (!user) {
       localStorage.setItem("plan", "true");
       router.push({
         pathname: LOGIN_PATH
-      })
+      });
+    } else {
+      router.push({
+        pathname: PLAN_PATH
+      });
     }
   }
   const [texts, setTexts] = useState({
@@ -283,7 +284,8 @@ const Sliders = (props: ICourseData) => {
               slideType === "makeup-courses" &&
               <ButtonContain>
                 {
-                  (user && user.level === 0 && user.final_date < today) &&
+                  // (user && ([0, 5, 6, 8].includes(user.level) && user.final_date < today) || ([1, 4, 7].includes(user.level) && user.final_date < (today - (10 * 24 * 60 * 60)))) &&
+                  (user && !haveAccess(user.level, user.final_date, user.role, user.method as MembershipMethodValue)) &&
                   // <Link href={{ pathname: PLAN_PATH }}>
                   <div className="grey-field" style={{ maxWidth: "fit-content", position: "relative" }} onClick={sendTo}>
                     <PurpleButton>

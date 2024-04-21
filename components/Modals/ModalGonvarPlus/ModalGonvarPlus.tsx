@@ -9,7 +9,7 @@ import { getTeacher } from '../../../store/actions/courseActions';
 import CourseModal from '../CourseModal/CourseModal';
 import { ICourse } from './IModalGonvarPlus';
 import { BackgroundContainer, BottomContainer, CoursesContainer, Middlecontainer, ModalContainer } from './ModalGonvarPlus.styled';
-
+import { haveAccess } from '../../GlobalFunctions';
 
 export const ModalGonvarPlus = (props: ICourse) => {
   let today = new Date().getTime() / 1000;
@@ -58,15 +58,16 @@ export const ModalGonvarPlus = (props: ICourse) => {
 
   const goTo = () => {
     if (user) {
-      if (user.level === 1 || user.final_date > today) {
-        router.push(PREVIEW_PATH)
+      // if (user.level === 1 || user.final_date > today) {
+      if (haveAccess(user.level, user.final_date, user.role, user.method)) {
+        router.push(PREVIEW_PATH);
       }
       else {
-        router.push(`${PLAN_PATH}`)
+        router.push(`${PLAN_PATH}`);
       }
     }
     else {
-      router.push(SIGNUP_PATH)
+      router.push(SIGNUP_PATH);
     }
   }
   return (

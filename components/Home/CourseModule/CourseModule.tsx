@@ -10,6 +10,7 @@ import { ICourseModuleProps } from "./ICourseModuleProps";
 import { useEffect, useState } from "react";
 import { Text03 } from "../Module4_Carousel/SlideModule/SlideModule.styled";
 import CourseModal from "../../Modals/CourseModal/CourseModal";
+import { haveAccess } from "../../GlobalFunctions";
 declare let Hls: any
 const gPlus = "/images/purchase/logo.png"
 export const CourseModule = (props: ICourseModuleProps) => {
@@ -48,10 +49,27 @@ export const CourseModule = (props: ICourseModuleProps) => {
     }
 
   }
-  const goTo = () => {
-    let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-    if (user.level > 0 || user.final_date > today || complete_nails.length > 0) {
-      router.push(PREVIEW_PATH)
+  const goTo = async () => {
+    // let complete_nails = user.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
+    if (!user) {
+      localStorage.setItem("plan", 'true');
+      router.push(SIGNUP_PATH);
+      return;
+    }
+
+    try {
+      console.log({ user });
+      if (haveAccess(user.level, user.final_date, user.role as any, user.method as any)) {
+        router.push(PREVIEW_PATH);
+      } else {
+        router.push(PLAN_PATH);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    /*if (user.level > 0 || user.final_date > today || complete_nails.length > 0) {
+      router.push(PREVIEW_PATH);
     }
     else {
       if (loggedIn) {
@@ -59,9 +77,9 @@ export const CourseModule = (props: ICourseModuleProps) => {
       }
       if (!loggedIn) {
         localStorage.setItem("plan", 'true');
-        router.push(SIGNUP_PATH)
+        router.push(SIGNUP_PATH);
       }
-    }
+    }*/
   }
   useEffect(() => {
     doVideoStuff()

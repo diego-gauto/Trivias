@@ -21,6 +21,7 @@ import {
 import { ICourses, ILessons, ISeasons } from "./ICourses";
 import Sliders from "./Modules/Sliders";
 import { useMediaQuery } from "react-responsive";
+import { haveAccess } from "../GlobalFunctions";
 
 const Courses = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -50,40 +51,18 @@ const Courses = () => {
     setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
   });
   // aquí hay un problema
-  const goTo = () => {
-    // debugger
+  // Agregar 10 dias de gracia (1, 4, 7)
+  const goToNew = () => {
     if (userData) {
-      let complete_nails = userData.user_courses.filter((val: any) => val.course_id === 57 && val.final_date > today);
-      if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date >= today))) {
+      if (haveAccess(userData.level, userData.final_date, userData.role, userData.method)) {
         router.push({
           pathname: LESSON_PATH,
           query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
         });
+      } else {
+        router.push(PLAN_PATH);
       }
-      if (videoCourse.type === "Producto" && userData.user_courses.find((x: any) => (x.course_id === videoCourse.id && x.final_date <= today))) {
-        if (videoCourse.id === 45) {
-          router.push({
-            pathname: PURCHASE_PATH, query: { type: 'course', id: videoCourse.id }
-          });
-        }
-        else {
-          router.push({ pathname: PLAN_PATH })
-        }
-
-      }
-      if ((videoCourse.type === "Mensual" && userData.final_date > today) || complete_nails.length > 0 || userData.role === 'superAdmin') {
-        router.push({
-          pathname: LESSON_PATH,
-          query: { id: videoCourse.id, season: seasonIndex, lesson: lessonIndex },
-        });
-      }
-      if (videoCourse.type === "Mensual" && (userData.level === 0 && userData.final_date < today)) {
-        router.push({
-          pathname: PLAN_PATH,
-        });
-      }
-    }
-    else {
+    } else {
       localStorage.setItem("plan", "true");
       router.push({ pathname: LOGIN_PATH })
     }
@@ -156,7 +135,7 @@ const Courses = () => {
             </div>
             <div className="button-contain">
               <div className="grey-field" style={{ maxWidth: "fit-content" }}>
-                <PurpleButton onClick={goTo}>
+                <PurpleButton onClick={goToNew}>
                   <BsTriangle />
                   Reproducir
                 </PurpleButton>

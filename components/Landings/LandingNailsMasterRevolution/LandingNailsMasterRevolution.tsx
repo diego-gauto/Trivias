@@ -19,12 +19,13 @@ import {
   NAilS_REVOLUTION_FORM,
   NAilS_REVOLUTION_FORM_GOOGLE,
   NAilS_REVOLUTION_FORM_TT,
+  PLAN_PATH,
   PREVIEW_PATH,
   PURCHASE_PATH,
   SIGNUP_PATH,
 } from "../../../constants/paths";
 import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
-import { getLandingReviewApi } from "../../api/admin";
+import { getGenericQueryResponse, getLandingReviewApi } from "../../api/admin";
 import { getUserApi } from "../../api/users";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
@@ -68,6 +69,7 @@ import {
   TwelveSection,
 } from "./LandingNailsMasterRevolution.styled";
 import { RewardComponent } from "../Components/Reward";
+import { haveAccess } from "../../GlobalFunctions";
 
 const pointWatsap = "/images/landing_suscription/point_at_button.png";
 const watsapOut = "/images/landing_suscription/whatsapp_outline.png";
@@ -163,7 +165,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     }
   };
 
-  const handleRedirection = () => {
+  const handleRedirection = async () => {
     if (type) {
       if (type === "facebook") {
         router.push(NAilS_REVOLUTION_FORM);
@@ -176,29 +178,38 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       }
       return;
     } else {
-      if (localStorage.getItem("email")) {
-        getUserApi(localStorage.getItem("email")).then((res) => {
-          let tempCourse = res.user_courses.filter(
-            (x: any) => x.course_id === 57
-          );
-          if (tempCourse.length > 0 && tempCourse[0].final_date > today) {
-            router.push({
-              pathname: PREVIEW_PATH,
-            });
-          }
-          if (
-            (tempCourse.length > 0 && tempCourse[0].final_date < today) ||
-            tempCourse.length === 0
-          ) {
-            router.push({
-              pathname: PURCHASE_PATH,
-              query: { type: "course", id: 57 },
-            });
-          }
-        });
-      } else {
+
+      const email = localStorage.getItem("email");
+
+      if (email === null) {
         localStorage.setItem("nailMaster", "true");
         router.push(SIGNUP_PATH);
+        return;
+      }
+
+      interface IUser {
+        user_id: number
+        level: number
+        role: string
+        method: string
+        final_date: number
+      }
+
+      try {
+        const userIdQuery = `SELECT id FROM users WHERE email LIKE '${email}';`;
+        const response = await getGenericQueryResponse(userIdQuery);
+        const userId = response.data.data[0]["id"];
+        const queryUserData = `select user_id, level, role, method, final_date from users as u inner join memberships as m on m.user_id = u.id where user_id = ${userId}; `
+        const responseUserData = await getGenericQueryResponse(queryUserData);
+        const user = responseUserData.data.data[0] as IUser;
+        console.log({ user });
+        if (haveAccess(user.level, user.final_date, user.role as any, user.method as any)) {
+          router.push(PREVIEW_PATH);
+        } else {
+          router.push(PLAN_PATH);
+        }
+      } catch (error) {
+        console.error(error);
       }
     }
   };
