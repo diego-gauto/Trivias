@@ -30,7 +30,7 @@ export const haveAccess = (
 
   if (
     RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
-    method === 'conekta' &&
+    (method === 'conekta' || method === 'paypal') &&
     finalDate2.getTime() / 1000 > today - tolerance
   ) {
     return true;
@@ -43,7 +43,7 @@ export const haveAccess = (
   return false;
 };
 
-export const haveAccessFinal = (
+export const isNotValidToRetry = (
   userLevel: number,
   finalDate: number,
   userRole: 'user' | 'admin' | 'superAdmin',
@@ -51,20 +51,28 @@ export const haveAccessFinal = (
 ) => {
   const today = new Date().getTime() / 1000;
   const tolerance = TOLERANCE_DAYS_COUNT * 24 * 60 * 60;
+  const finalDate2 = new Date(finalDate * 1000);
 
-  if (NO_RECURRING_PAYMENT_LEVELS.includes(userLevel) && finalDate < today) {
+  if (
+    NO_RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
+    finalDate2.getTime() / 1000 > today
+  ) {
     return true;
   }
 
   if (
     RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
     method === 'conekta' &&
-    finalDate < today - tolerance
+    finalDate2.getTime() / 1000 > today - tolerance
   ) {
     return true;
   }
 
-  if (userRole === 'superAdmin') {
+  if (method === 'paypal') {
+    return true;
+  }
+
+  if (['superAdmin', 'admin'].includes(userRole)) {
     return true;
   }
 

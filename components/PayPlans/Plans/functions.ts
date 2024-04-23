@@ -2,6 +2,7 @@ import router from 'next/router';
 
 import {
   PREVIEW_PATH,
+  PROFILE_PATH,
   PURCHASE_PATH,
   SIGNUP_PATH,
 } from '../../../constants/paths';
@@ -27,10 +28,11 @@ export const goTo = (user: IUser, type: Suscription) => {
     ) {
       router.push(PREVIEW_PATH);
     }
+    // Cambiar
     // Pagos no recurrentes
     // 1. Con final_date vencido (inactivas)
     // 2. Con final_date no vencido (activas)
-    else if ([5, 6, 8].includes(user.level)) {
+    else if ([0, 5, 6, 8].includes(user.level)) {
       if (user.final_date < today) {
         router.push({
           pathname: PURCHASE_PATH,
@@ -42,16 +44,7 @@ export const goTo = (user: IUser, type: Suscription) => {
     }
     // niveles 3 pausados
     else if (user.level === 3) {
-      router.push(PREVIEW_PATH);
-    } else if (user.level === 0) {
-      if (user.final_date < today) {
-        router.push({
-          pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency, v: '3' },
-        });
-      } else {
-        router.push(PREVIEW_PATH);
-      }
+      router.push(PROFILE_PATH);
     } else if (complete_nails.length > 0) {
       router.push(PREVIEW_PATH);
     } else {

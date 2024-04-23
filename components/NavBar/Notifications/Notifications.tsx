@@ -5,7 +5,7 @@ import { MdOutlineComment } from 'react-icons/md';
 import { updateNotificationStatusApi } from '../../api/notifications';
 import { INotifications } from './INotifications';
 import { NotificationData } from './Notifications.styled';
-import { LESSON_PATH, REWARDS_PATH } from '../../../constants/paths';
+import { LESSON_PATH, REWARDS_PATH, RETRY_PAYMENT_PATH } from '../../../constants/paths';
 import { formatDateNotification, returnNotificationImage, returnNotificationMessage, returnNotificationTitles } from '../../../utils/functions';
 import { user } from 'firebase-functions/v1/auth';
 import { userById } from '../../api/users';
@@ -58,16 +58,18 @@ const Notifications = (props: NotificationsProps) => {
         query: { id: notification.course_id, season: notification.season ?? 0, lesson: notification.lesson ?? 0 },
       });
     }
-    if (notification.type === "7") {
+    else if (notification.type === "7") {
       router.push({
         pathname: LESSON_PATH,
         query: { id: notification.course_id, season: 0, lesson: 0 },
       });
     }
-    if (notification.type === "13" || notification.type === "12") {
+    else if (notification.type === "13" || notification.type === "12") {
       router.push({
         pathname: REWARDS_PATH,
       });
+    } else if (notification.type === "18") {
+      router.push(RETRY_PAYMENT_PATH);
     }
     if (notification.status === 0) {
       let notificationUpdate = {

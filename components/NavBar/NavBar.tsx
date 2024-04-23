@@ -277,7 +277,14 @@ const NavBar = () => {
         //   })
         // }
         let diff = Math.round((today - userDataAuth.user.final_date) / 86400);
-        if (userDataAuth.user.final_date < today && diff < 90 && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0)) && pathname !== "/reintentar-pago") {
+        const haveNoRecurrentSubscription = ([0, 5, 6, 8].includes(userDataAuth.user.level));
+        const haveRecurrentSubscription = ([1, 4, 7].includes(userDataAuth.user.level) && userDataAuth.user.method === 'conekta');
+        const withTolerance = userDataAuth.user.final_date < today - 10 * 24 * 60 * 60;
+        const withoutTolerance = userDataAuth.user.final_date < today;
+        if (diff < 90
+          // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0)) 
+          && ((haveNoRecurrentSubscription && withoutTolerance) || (haveRecurrentSubscription && withTolerance))
+          && pathname !== "/reintentar-pago") {
           setShow(true);
           setWithSubscription(false);
         }

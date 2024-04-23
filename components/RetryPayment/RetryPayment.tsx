@@ -14,7 +14,9 @@ import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from '../api/c
 import router from "next/router";
 import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
 import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
-import { PREVIEW_PATH } from '../../constants/paths';
+import { PLAN_PATH, PREVIEW_PATH } from '../../constants/paths';
+import { haveAccess } from '../GlobalFunctions';
+
 declare let window: any
 
 export const RetryPayment = () => {
@@ -119,8 +121,18 @@ export const RetryPayment = () => {
     let user = userDataAuth.user;
     console.log(user);
 
-    if ((user.level > 0 && user.final_date > today) || (user.level === 0 && user.final_date > today))
-      router.push({ pathname: PREVIEW_PATH })
+    let diff = Math.round((today - user.final_date) / 86400);
+
+    if (diff > 90) {
+      router.push(PLAN_PATH);
+      return;
+    }
+
+    if (haveAccess(user.level, user.final_date, user.role, user.method)) {
+      // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
+      router.push({ pathname: PREVIEW_PATH });
+      return;
+    }
     let body = {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id

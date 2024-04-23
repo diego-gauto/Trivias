@@ -8,7 +8,7 @@ import { WhiteButton } from "../../common/WhiteButton/WhiteButton";
 import { useEffect, useState } from "react";
 import { ModalGonvarPlus } from "../../Modals/ModalGonvarPlus/ModalGonvarPlus";
 import { getWholeCourses } from "../../../store/actions/courseActions";
-import { haveAccess, haveAccessFinal, IUserData } from "../../GlobalFunctions";
+import { haveAccess, IUserData } from "../../GlobalFunctions";
 declare let Hls: any
 
 interface Props {
