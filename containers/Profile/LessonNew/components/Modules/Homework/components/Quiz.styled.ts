@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const QuizContainer = styled.div`
+  text-align: center;
   display: flex;
   padding-inline: 40px;
   padding-block: 20px;
@@ -12,11 +13,21 @@ export const QuizContainer = styled.div`
     gap: 40px;
     width: 100%;
   }
+
+  @media screen and (max-width: 768px) {
+    padding-inline: 10px;
+
+    .quiz-info {
+      gap: 80px;
+    }
+  }
 `;
 
 export const Top = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 5px;
+
   * {
     margin: 0;
   }
@@ -29,7 +40,7 @@ export const Top = styled.div`
   .circle {
     border: 5px solid #8527e1;
     border-radius: 50%;
-    width: 144px;
+    min-width: 144px;
     height: 144px;
     display: flex;
     flex-direction: column;
@@ -51,6 +62,12 @@ export const Top = styled.div`
       font-size: 14px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const Bottom = styled.div`
@@ -64,7 +81,7 @@ export const Bottom = styled.div`
 
   .quiz-bar-container {
     display: flex;
-    gap: 40px;
+    gap: 10px;
     .quiz-bar {
       position: relative;
       flex: 1;
@@ -174,6 +191,19 @@ export const Bottom = styled.div`
     font-weight: 500;
     height: 45px;
   }
+
+  @media screen and (max-width: 768px) {
+    .quiz-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      height: 85px;
+
+      .points-container {
+        align-self: center;
+      }
+    }
+  }
 `;
 
 export const QuestionContainer = styled.div`
@@ -246,6 +276,22 @@ export const QuestionContainer = styled.div`
     margin: auto;
     width: 145px;
     height: 45px;
+  }
+
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+
+    .question-title {
+      justify-content: center;
+    }
+
+    ol.answers {
+      margin-block: 20px;
+      display: grid;
+      grid-template-columns: auto;
+      gap: 10px;
+      padding-inline: 30px;
+    }
   }
 `;
 
@@ -405,6 +451,29 @@ export const DoneContainer = styled.div`
     text-transform: uppercase;
     font-weight: 500;
     height: 45px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .quiz-results {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding-inline: 0px;
+    }
+
+    .quiz-bar-container {
+      display: flex;
+      flex-direction: column;
+      height: 100px;
+      padding-inline: 20px;
+
+      .quiz-bar {
+      }
+
+      .quiz-bar-points {
+        align-self: center;
+      }
+    }
   }
 `;
 
