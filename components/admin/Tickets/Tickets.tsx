@@ -184,7 +184,7 @@ const Tickets = () => {
                   <div className='search-input-container'>
                     <div className='search-icon' />
                     <input
-                      style={{ fontSize: '18px' }}
+                      style={{ fontSize: '18px', paddingLeft: '50px' }}
                       className='search-input'
                       placeholder="Buscar"
                       onChange={handleInputSearchChangeValue}

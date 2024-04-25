@@ -7,6 +7,7 @@ import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.s
 import { getCloseToEndingMembershipUsers, getGenericQueryResponse } from '../../api/admin';
 import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { generateMemberhsipsQuery } from './Queries';
 
 interface Memberships {
   id: number,
@@ -172,7 +173,6 @@ const Memberships = () => {
   const filterMembershipsHandler = async () => {
     const membershipValue = memberFilterHTMLSelect.current?.value as LevelFilter;
 
-
     const selectedMembership = levels[membershipValue ?? "TODOS"];
 
     if (startDate === undefined || finalDate === undefined) {
@@ -183,9 +183,66 @@ const Memberships = () => {
 
     try {
       setIsLoadingData(false);
-      const response = await getCloseToEndingMembershipUsers(selectedMembership, startDate, finalDate);
-      setData(response.data.data);
-      setFilteredData(response.data.data);
+
+      const nowFromServer = `SELECT now() as current_moment;`;
+
+      const responseNow = await getGenericQueryResponse(nowFromServer);
+
+      const millisServer = new Date(responseNow.data.data[0]["current_moment"]).getTime();
+      const millisClient = new Date().getTime();
+
+      const diffMillisServerClient = Math.abs(millisServer - millisClient) / 1000;
+
+      console.log({ millisServer, millisClient, dif: (millisServer - millisClient) });
+
+      const startDateTime = startDate.toJSON().slice(0, 10);
+      const finalDateTime = finalDate.toJSON().slice(0, 10);
+
+      const query = generateMemberhsipsQuery(startDateTime, finalDateTime, selectedMembership.join(', '));
+      const sds = `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+      const fds = `${finalDate.getFullYear()}-${finalDate.getMonth() + 1}-${finalDate.getDate()}`;
+      // const query2 = generateMemberhsipsTestQuery(diffMillisServerClient, sds, fds/* , selectedMembership.join(', ') */);
+      const response2 = await getGenericQueryResponse(query);
+      // const response3 = await getGenericQueryResponse(query2);
+
+      interface IMembership {
+        id: number
+        name: string
+        last_name: string
+        email: string
+        phone_number: string
+        final_date: number
+        level: number
+        method: string
+      }
+
+      const data = response2.data.data as IMembership[];
+
+      const mapFuction = (membership: IMembership): Memberships => {
+        const fd = new Date(membership.final_date * 1000);
+        const formatedFinalDate = `${fd.getFullYear()}-${fd.getMonth() + 1}-${fd.getDate()} ${fd.getHours()}:${fd.getMinutes()}:${fd.getSeconds()}`;
+        const millisecondsDiff = new Date(new Date(fd.getFullYear(), fd.getMonth(), fd.getDate(), fd.getHours(), fd.getMinutes(), fd.getSeconds()).getTime() - (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1).getTime())).getTime();
+
+        const todayTime = new Date().getTime();
+        const fdTime = fd.getTime();
+
+        console.log(`${todayTime} - ${fdTime} = ${todayTime - fdTime}`);
+
+        const datediff = Math.ceil(millisecondsDiff / (1000 * 60 * 60 * 24));
+
+        return {
+          ...membership,
+          final_date: formatedFinalDate,
+          datediff
+        }
+      }
+
+      const formatedData = data.map(mapFuction);
+
+      console.log(response2.data.query);
+
+      setData(formatedData);
+      setFilteredData(formatedData);
       setIsLoadingData(true);
       setHasFiltered(true);
     } catch (error) {
@@ -194,6 +251,30 @@ const Memberships = () => {
     changePage(0);
   }
 
+  const createNewData = async () => {
+    try {
+      let year = 2024;
+      let month = 0;
+      let day = 1;
+      let hour = 1;
+
+      let date = new Date(year, month, day, hour);
+
+      let query = `INSERT INTO memberships2 (final_date) VALUES`;
+      let values = [];
+      let i = 0;
+      let value = date.getTime() / 1000;
+      while (i < 1200) {
+        values.push(`(${value})`);
+        value += 60 * 60;
+        i++;
+      }
+      query = `${query} ${values.join(', ')}`;
+      console.log({ query });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const changePage = (page: number) => {
     setOffset(page * 100);
@@ -364,7 +445,7 @@ const Memberships = () => {
                           <td>{membership.phone_number}</td>
                           <td>{getTextSusctiptionByLevel(membership.level)}</td>
                           <td>{membership.method}</td>
-                          <td>{getDateWithNewFormat(new Date(final_date))}</td>
+                          <td>{membership.final_date}</td>
                           <td>{membership.datediff}</td>
                         </tr>
                       )

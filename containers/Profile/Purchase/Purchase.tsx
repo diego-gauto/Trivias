@@ -440,7 +440,28 @@ const Purchase = () => {
         conektaSubscriptionApi(data).then(async (res) => {
           if (res?.data.data.status === 'active') {
             let sub = res.data.data;
-            await updateMembership({ ...plan, final_date: sub.billing_cycle_end, payment_method: sub.card_id, plan_id: sub.id, plan_name: product.title, start_date: sub.billing_cycle_start, userId: userData.user_id, level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7 })
+            await updateMembership({
+              ...plan,
+              final_date: sub.billing_cycle_end,
+              payment_method: sub.card_id,
+              plan_id: sub.id,
+              plan_name: product.title,
+              start_date: sub.billing_cycle_start,
+              userId: userData.user_id,
+              level: (frequency === "month" || trial === "true") ? 1 : frequency === "anual" ? 4 : 7
+            });
+            /*
+            const QUERY = `UPDATE memberships SET 
+              final_date = ${membership.final_date},
+                method = '${membership.method}',
+                level = ${membership.level},
+                payment_method = '${membership.payment_method}',
+                plan_id = '${membership.plan_id}',
+                plan_name = '${membership.plan_name}',
+                start_date = ${membership.start_date},
+                type = ${membership.type}
+                WHERE user_id = ${membership.userId};`;
+            */
             // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
             window.location.href = getRouteByFrequency(frequency, true);
           } else {

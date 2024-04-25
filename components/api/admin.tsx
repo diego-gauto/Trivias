@@ -616,7 +616,7 @@ export const getGenericQueryResponse = async (query: string) => {
   const body = {
     query
   }
-  return axios.post<{ data: any[] }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
+  return axios.post<{ data: any[], query: string }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
 }
 
 interface InsertSQLResult {
