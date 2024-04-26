@@ -149,6 +149,13 @@ export const RetryPayment = () => {
       setLoader(false);
     })
   }
+
+  const getNewUserLevel = (level: number) => {
+    if ([4, 5].includes(level)) return 4;
+    if ([0, 7, 8].includes(level)) return 7;
+    if ([1, 6].includes(level)) return 1;
+  }
+
   useEffect(() => {
     if (userDataAuth.user) {
       getPaymentMethods();
@@ -182,13 +189,14 @@ export const RetryPayment = () => {
       plan_id: plan_id,
       userId: user.user_id
     }
+
     conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
           final_date: sub.billing_cycle_end,
           method: "conekta",
-          level: user.level,
+          level: getNewUserLevel(user.level),
           payment_method: sub.card_id,
           plan_id: sub.id,
           plan_name: "Gonvar Plus",
