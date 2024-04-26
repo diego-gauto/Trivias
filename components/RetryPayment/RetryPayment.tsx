@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { RetryPaymentContainer } from './RetryPayment.styled'
-import { ICard, IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
-import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { Month, PayOptions, Year } from './constants';
-import InputMask from "react-input-mask";
+import React, { useEffect, useState } from "react";
+
 import { FaChevronDown } from "react-icons/fa";
-import { checkEmpty } from './functions';
-import { conektaPm, updateMembership } from '../api/users';
-import { useAuth } from '../../hooks/useAuth';
-import { attachPaymentMethodConekta, detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from '../api/profile';
-import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
-import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from '../api/checkout';
+import InputMask from "react-input-mask";
+
 import router from "next/router";
-import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
-import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
-import { PLAN_PATH, PREVIEW_PATH } from '../../constants/paths';
-import { haveAccess } from '../GlobalFunctions';
+
+import { PLAN_PATH, PREVIEW_PATH } from "../../constants/paths";
+import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
+import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
+import { useAuth } from "../../hooks/useAuth";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
+import { conektaPm, updateMembership } from "../api/users";
+import { haveAccess } from "../GlobalFunctions";
+import { Month, PayOptions, Year } from "./constants";
+import { checkEmpty } from "./functions";
+import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
+import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
+import { RetryPaymentContainer } from "./RetryPayment.styled";
 
 declare let window: any
 
@@ -166,12 +169,12 @@ export const RetryPayment = () => {
     let plan_id = "";
 
     if (user.level === 0) plan_id = "cuatrimestre";
-    if (user.level === 5 && user.type === 1599) plan_id = "anual";
-    if (user.level === 5 && user.type === 3497) plan_id = "anual_v1_1";
-    if (user.level === 6 && user.type === 149) plan_id = "mensual";
-    if (user.level === 6 && user.type === 249) plan_id = "mensual_v1_1";
-    if (user.level === 6 && user.type === 459) plan_id = "mensual_v1_2";
-    if (user.level === 8) plan_id = "cuatrimestre";
+    if ([4, 5].includes(user.level) && user.type === 1599) plan_id = "anual";
+    if ([4, 5].includes(user.level) && user.type === 3497) plan_id = "anual_v1_1";
+    if ([1, 6].includes(user.level) && user.type === 149) plan_id = "mensual";
+    if ([1, 6].includes(user.level) && user.type === 249) plan_id = "mensual_v1_1";
+    if ([1, 6].includes(user.level) && user.type === 459) plan_id = "mensual_v1_2";
+    if ([7, 8].includes(user.level)) plan_id = "cuatrimestre";
 
     const data = {
       id: token ? token : pm?.id,
