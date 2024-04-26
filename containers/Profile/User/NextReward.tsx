@@ -17,6 +17,8 @@ import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
 import { conektaResumeSubscription } from "../../../components/api/profile";
 import { getUsersStripe } from "../../../components/api/conekta/test";
 import ChangePlanModal from "../../../components/Modals/ChangePlanModal/ChangePlanModal";
+import { haveAccess } from "../../../components/GlobalFunctions";
+import { time } from "console";
 
 const or_star = "/images/cancel_modal/or_star.png"
 const gr_star = "/images/cancel_modal/gr_star.png"
@@ -122,6 +124,93 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       window.location.reload()
     })
   }
+
+  const getSubscriptionJSX = (
+    userLevel: number,
+    finalDate: number,
+    userRole: 'user' | 'admin' | 'superAdmin',
+    method: string
+  ): JSX.Element | undefined => {
+    const today = new Date().getTime() / 1000;
+    const tolerance = 10 * 24 * 60 * 60;
+
+    if (userLevel === 5 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">anual</span></p>
+    } else if (userLevel === 6 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">mensual</span></p>
+    } else if (userLevel === 8 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">cuatrimestral</span></p>
+    }
+
+    if (userLevel === 1 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">mensual</span></p>
+    } else if ((userLevel === 1 && method === 'conekta') && finalDate > (today - tolerance)) {
+      return <p>Gonvar+ <span className="span">mensual, reintentando pago</span></p>
+    }
+
+
+    if (userLevel === 4 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">anual</span></p>
+    } else if (userLevel === 4 && method === 'conekta' && finalDate > today - tolerance) {
+      return <p>Gonvar+ <span className="span">anual, reintentando pago</span></p>
+    }
+
+    if (userLevel === 7 && finalDate > today) {
+      return <p>Gonvar+ <span className="span">cuatrimestral</span></p>
+    } else if (userLevel === 7 && method === 'conekta' && finalDate > today - tolerance) {
+      return <p>Gonvar+ <span className="span">cuatrimestral, reintentando pago</span></p>
+    }
+
+    return userRole === 'superAdmin' ? undefined : <p>Sin suscripción</p>;
+  };
+
+  const generateNextPaymentJSX = (userLevel: number, userRole: string, userSubscription: 0 | 1, finalDate: number) => {
+    /*
+    Si el usuario esta sin suscripción o sin días, no mostrar la etiqueta de "Próximo cargo"
+    */
+    const today = new Date().getTime() / 1000;
+    const result =
+      <>
+        <p className="text-1">
+          Próximo cargo
+        </p>
+        <div className="subscription-info">
+          {(([1, 4, 5, 6, 7, 8].includes(userLevel) && userSubscription === 0)
+            || (userLevel === 0 && finalDate > today && userSubscription === 0)) ? <p >
+            <span className="span">{formatDateUser()}</span>
+          </p> :
+            <p><span className="span">
+              {(user.subscription === 1 && finalDate > today)
+                ? `Haz cancelado tu suscripción, te quedan ${getDays()} días`
+                : "s/f"}
+            </span></p>}
+        </div>
+      </>
+      ;
+
+    // Activo con días agregados
+    // level 0 con final date mayor a hoy
+    if (userLevel === 0 && finalDate > today) {
+      return <div className="subscription-info">
+        <p>
+          {userRole === "superAdmin" ? <><span className="span">Super Admin</span><br /></> : <></>}
+          Sin suscripción <br />
+          <span className="span">Con acceso hasta {`${new Date(finalDate * 1000).toJSON().slice(0, 10)}`}</span>
+        </p>
+      </div>;
+    }
+
+    if (finalDate < today) {
+      if ([0, 5, 6, 8].includes(userLevel)) {
+        return undefined;
+      } else if ([1, 4, 7].includes(userLevel) && finalDate < today - 10 * 24 * 60 * 60) {
+        return undefined;
+      }
+    }
+
+    return result;
+  }
+
   return (
     <ThirdBox>
       <ChangePlanModal
@@ -265,38 +354,22 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
               Suscripción actual
             </p>
             <div className="subscription-info">
-              {(user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || user.level === 7 || user.level === 8 || (user.level === 0 && user.final_date > today)) ? <p >
-                Gonvar+<br />
-                <span className="span">Suscripción
-                  {(user.level === 4 || user.level === 5) && " anual"}
-                  {(user.level === 1 || user.level === 6) && " mensual"}
-                  {(user.level === 7 || user.level === 8) && " cuatrimestral"}
-                </span>
-              </p> :
-                <p>Sin suscripción</p>}
+              {
+                getSubscriptionJSX(user.level, user.final_date, user.role, user.method)
+                // getSubscriptionJSX(1, new Date(2024, 2, 22).getTime() / 1000, 'user', 'conekta')
+              }
             </div>
             {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
-            <p className="text-1">
-              Próximo cargo
-            </p>
+
             {
-              user.role === "superAdmin" ?
-                <div className="subscription-info">
-                  <p><span className="span">Super Admin</span></p>
-                </div>
-                :
-                <div className="subscription-info">
-                  {(((user.level === 1 || user.level === 4 || user.level === 5 || user.level === 6 || user.level === 7 || user.level === 8) && user.subscription === 0) || (user.level === 0 && user.final_date > today && user.subscription === 0)) ? <p >
-                    <span className="span">{formatDateUser()}</span>
-                  </p> :
-                    <p><span className="span">
-                      {(user.subscription === 1 && user.final_date > today)
-                        ? `Haz cancelado tu suscripción, te quedan ${getDays()} días`
-                        : "s/f"}
-                    </span></p>}
-                </div>
+              // generateNextPaymentJSX(user.level, user.role, user.subscription, user.final_date)
+              generateNextPaymentJSX(0, 'superAdmin', 0, new Date(2024, 3, 28).getTime() / 1000)
             }
-            {(!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus") || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0 && today < user.final_date))) && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>}
+            {
+              (!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus")
+                || (conektaUsers.filter((x: any) => x.email === user.email && user.final_date === 1694040000).length > 0 && today < user.final_date)))
+              && <button onClick={() => { setPop(true); }}>Cancelar Suscripción</button>
+            }
             {(!loader && (user.level === 3 && user.plan_name === "Gonvar Plus")) && <button onClick={resumeSubscription}>Reactivar Suscripción</button>}
             {loader && <LoaderContainSpinner />}
           </div>

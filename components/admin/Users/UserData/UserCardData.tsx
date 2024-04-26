@@ -136,7 +136,7 @@ const UserCardData = (props: CardData) => {
       fontSize: '22px'
     };
 
-    if (haveRecurrentSuscription(user.level)) {
+    if (haveRecurrentSuscription(user.level) && !([1, 4, 7].includes(user.level) && user.final_date < (today - (10 * 24 * 60 * 60)))) {
       const fontStyles2: CSSProperties = {
         ...fontStyles,
         textAlign: 'center',
@@ -169,7 +169,12 @@ const UserCardData = (props: CardData) => {
       );
     }
 
-    if (!haveASubscription(user.level, user.final_date)) {
+    console.log({ final_date: new Date(user.final_date * 1000) });
+
+    console.log({ user });
+
+    if (!haveASubscription(user.level, user.final_date)
+      || ([1, 4, 7].includes(user.level) && user.final_date < (today - (10 * 24 * 60 * 60)))) {
       elements.push(
         <TransparentButton
           style={{ width: '100%', maxWidth: '350px' }}
@@ -207,8 +212,8 @@ const UserCardData = (props: CardData) => {
     return `Caso especial, nivel ${level}`;
   }
 
-  const convertToFormalDate = (miliseconds: number) => {
-    const date = new Date(miliseconds * 1000);
+  const convertToFormalDate = (seconds: number) => {
+    const date = new Date(seconds * 1000);
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDate();
@@ -259,6 +264,51 @@ const UserCardData = (props: CardData) => {
     return arrayOfInfoElements;
   }
 
+  const getSubscriptionText = (
+    userLevel: number,
+    finalDate: number,
+    userRole: 'user' | 'admin' | 'superAdmin',
+    method: string
+  ): string => {
+    const today = new Date().getTime() / 1000;
+    const tolerance = 10 * 24 * 60 * 60;
+
+    if (userLevel === 5 && finalDate > today) {
+      return "Anual"
+    } else if (userLevel === 6 && finalDate > today) {
+      return "Mensual";
+    } else if (userLevel === 8 && finalDate > today) {
+      return "Cuatrimestral"
+    }
+
+    if (userLevel === 1 && finalDate > today) {
+      return "Mensual"
+    } else if ((userLevel === 1 && method === 'conekta') && finalDate > today - tolerance) {
+      return "Mensual, reintentando pago";
+    }
+
+
+    if (userLevel === 4 && finalDate > today) {
+      return "Anual";
+    } else if (userLevel === 1 && method === 'conekta' && finalDate > today - tolerance) {
+      return "Anual, reintentando pago";
+    }
+
+    if (userLevel === 7 && finalDate > today) {
+      return "Cuatrimestral";
+    } else if (userLevel === 7 && method === 'conekta' && finalDate > today - tolerance) {
+      return "Cuatrimestral, reintentando pago";
+    }
+
+    console.log({ final_date: new Date(finalDate * 1000), level: userLevel });
+
+    if (userLevel === 0 && finalDate > today) {
+      return `Sin suscripción, con acceso hasta ${`${new Date(finalDate * 1000).toJSON().slice(0, 10)}`}`;
+    }
+
+    return `Sin suscripción`;
+  };
+
   return (
     <Modal show={isVisible} onHide={() => setIsVisible(false)} size="lg">
       <UserContain>
@@ -307,9 +357,7 @@ const UserCardData = (props: CardData) => {
               Suscripción Actual
               <Label>
                 {
-                  (haveASubscription(user.level, user.final_date))
-                    ? getMembershipTextByLevel(user.level)
-                    : "Sin suscripción"
+                  getSubscriptionText(user.level, user.final_date, 'user', user.method)
                 }
               </Label>
             </Info>
@@ -322,7 +370,15 @@ const UserCardData = (props: CardData) => {
             }
           </UserInfo>
           {/* Para agrupar los botones */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+          <div style={
+            {
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              alignItems: 'center',
+              paddingTop: '20px'
+            }
+          }>
             {
               ((canEdit && userLevel === 'admin') || userLevel === 'superAdmin') &&
               generateButtons()
