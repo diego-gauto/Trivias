@@ -26,8 +26,8 @@ export const RetryPayModal = (props: IRetryPayModal) => {
 
   const getNewUserLevel = (level: number) => {
     if ([4, 5].includes(level)) return 4;
-    if ([0, 7, 8].includes(level)) return 7;
     if ([1, 6].includes(level)) return 1;
+    return 7
   }
 
   const pay = () => {
