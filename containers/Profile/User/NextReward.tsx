@@ -188,6 +188,10 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
       </>
       ;
 
+    const getFormattedDate = (d: Date) => {
+      return `${`${d.getDate()}`.padStart(2, '0')}-${`${d.getMonth() + 1}`.padStart(2, '0')}-${d.getFullYear()}`;
+    }
+
     // Activo con días agregados
     // level 0 con final date mayor a hoy
     if (userLevel === 0 && finalDate > today) {
@@ -195,7 +199,7 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
         <p>
           {userRole === "superAdmin" ? <><span className="span">Super Admin</span><br /></> : <></>}
           Sin suscripción <br />
-          <span className="span">Con acceso hasta {`${new Date(finalDate * 1000).toJSON().slice(0, 10)}`}</span>
+          <span className="span">Con acceso hasta {getFormattedDate(new Date(finalDate * 1000))}</span>
         </p>
       </div>;
     }
@@ -356,14 +360,13 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
             <div className="subscription-info">
               {
                 getSubscriptionJSX(user.level, user.final_date, user.role, user.method)
-                // getSubscriptionJSX(1, new Date(2024, 2, 22).getTime() / 1000, 'user', 'conekta')
               }
             </div>
             {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
 
             {
-              // generateNextPaymentJSX(user.level, user.role, user.subscription, user.final_date)
-              generateNextPaymentJSX(0, 'superAdmin', 0, new Date(2024, 3, 28).getTime() / 1000)
+              generateNextPaymentJSX(user.level, user.role, user.subscription, user.final_date)
+              // generateNextPaymentJSX(7, 'user', user.subscription, (new Date(2024, 3, 25)).getTime() / 1000)
             }
             {
               (!loader && ((user.level > 0 && user.plan_name === "Gonvar Plus")
