@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { ModalContainer, RetryPayModalContain } from './RetryPayModal.styled'
-import { IRetryPayModal } from './IRetryPayModal'
-import { useAuth } from '../../../hooks/useAuth';
-import { conektaPm, updateMembership } from '../../api/users';
+import React, { useEffect, useState } from "react";
+
+import { IoClose } from "react-icons/io5";
+
+import { user } from "firebase-functions/v1/auth";
 import router from "next/router";
 
-import { customerOrders, retryPayment } from '../../api/profile';
-import { IoClose } from 'react-icons/io5';
-import { IPm } from '../../RetryPayment/IRetryPayment';
-import { conektaSubscriptionApi } from '../../api/checkout';
-import { createNotification } from '../../api/notifications';
-import { user } from 'firebase-functions/v1/auth';
+import { useAuth } from "../../../hooks/useAuth";
+import { conektaSubscriptionApi } from "../../api/checkout";
+import { customerOrders } from "../../api/profile";
+import { conektaPm, updateMembership } from "../../api/users";
+import { IPm } from "../../RetryPayment/IRetryPayment";
+import { IRetryPayModal } from "./IRetryPayModal";
+import { ModalContainer, RetryPayModalContain } from "./RetryPayModal.styled";
+
 const alert_icon = "/images/RetryPayment/alert-icon.png";
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
@@ -22,18 +24,24 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const [invoice, setInvoice] = useState({} as any);
   const [error, setError] = useState(false);
 
+  const getNewUserLevel = (level: number) => {
+    if ([4, 5].includes(level)) return 4;
+    if ([0, 7, 8].includes(level)) return 7;
+    if ([1, 6].includes(level)) return 1;
+  }
+
   const pay = () => {
     const filter = paymentMethods.filter((x) => x.default)
     const pm = filter[0]
     let plan_id = "";
 
     if (user.level === 0) plan_id = "cuatrimestre";
-    if (user.level === 5 && user.type === 1599) plan_id = "anual";
-    if (user.level === 5 && user.type === 3497) plan_id = "anual_v1_1";
-    if (user.level === 6 && user.type === 149) plan_id = "mensual";
-    if (user.level === 6 && user.type === 249) plan_id = "mensual_v1_1";
-    if (user.level === 6 && user.type === 459) plan_id = "mensual_v1_2";
-    if (user.level === 8) plan_id = "cuatrimestre";
+    if ([4, 5].includes(user.level) && user.type === 1599) plan_id = "anual";
+    if ([4, 5].includes(user.level) && user.type === 3497) plan_id = "anual_v1_1";
+    if ([1, 6].includes(user.level) && user.type === 149) plan_id = "mensual";
+    if ([1, 6].includes(user.level) && user.type === 249) plan_id = "mensual_v1_1";
+    if ([1, 6].includes(user.level) && user.type === 459) plan_id = "mensual_v1_2";
+    if ([7, 8].includes(user.level)) plan_id = "cuatrimestre";
 
     const data = {
       id: pm?.id,
@@ -47,7 +55,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
         const membership = {
           final_date: sub.billing_cycle_end,
           method: "conekta",
-          level: user.level,
+          level: getNewUserLevel(user.level),
           payment_method: sub.card_id,
           plan_id: sub.id,
           plan_name: "Gonvar Plus",
