@@ -74,36 +74,28 @@ const SideBar = ({ show, onHide }: any) => {
         setIndex(4)
       } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Users") {
         setIndex(5)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "HomeWork") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "HomeWork") {
         setIndex(6)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Blog") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Blog") {
         setIndex(7)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Sections") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Sections") {
         setIndex(8)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Comments") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Comments") {
         setIndex(9)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Trivias") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Trivias") {
         setIndex(11)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Cancel") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Cancel") {
         setIndex(10)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Pause") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Pause") {
         setIndex(12)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Forms") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Forms") {
         setIndex(13)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Tickets") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Tickets") {
         setIndex(14)
-      }
-      if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Memberships") {
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "Memberships") {
         setIndex(15)
+      } if (window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1) == "PlansLinks") {
+        setIndex(16)
       }
     }, [])
   } catch (error) {
@@ -151,9 +143,9 @@ const SideBar = ({ show, onHide }: any) => {
       <IoClose className="close-admin-menu" onClick={onHide} />
       <div className="tab" style={{ whiteSpace: "pre" }}>
         {
-          isSuperAdmin || (
+          (isSuperAdmin || (
             isCourses || isLanding || isRewards
-          ) && <Text>Learning Products</Text>
+          )) && <Text>Learning Products</Text>
         }
         <ul>
           {(isSuperAdmin || isCourses) && <Link href="/admin/Courses">
@@ -176,9 +168,9 @@ const SideBar = ({ show, onHide }: any) => {
           </Link>}
         </ul>
         {
-          isSuperAdmin || (
+          (isSuperAdmin || (
             isCoupons || isPay
-          ) && <Text>Market & Sell</Text>
+          )) && <Text>Market & Sell</Text>
         }
         <ul>
           {(isSuperAdmin || isCoupons) && <Link href="/admin/Coupons">
@@ -256,6 +248,15 @@ const SideBar = ({ show, onHide }: any) => {
               onHide()
             }}>Memberships</li>
           </Link>}
+          {
+            (isSuperAdmin || isUsers) &&
+            <Link href="/admin/Plans">
+              <li style={{ color: index == 16 ? "#ffa500" : "#fff" }} onClick={() => {
+                setIndex(16)
+                onHide()
+              }}>Plans links</li>
+            </Link>
+          }
         </ul>
         {isSuperAdmin &&
           <>

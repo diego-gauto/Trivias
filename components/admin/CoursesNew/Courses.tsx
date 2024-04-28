@@ -325,7 +325,7 @@ const Courses = () => {
       <div className="courses-header">
         <h1 className="main-title">Crear Curso</h1>
         {
-          (userAccess.canEdit && userAccess.canCreate && userAccess.canDelete) && <div className="courses-buttons">
+          ((userAccess.canEdit && userAccess.canCreate && userAccess.canDelete) || userLevel === 'superAdmin') && <div className="courses-buttons">
             <Link href="/admin/Teacher">
               <button>Profesores</button>
             </Link>

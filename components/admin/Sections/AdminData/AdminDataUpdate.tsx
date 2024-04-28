@@ -114,35 +114,33 @@ const AdminDataUpdate = ({ admin, setIsVisible, handleClick, courses }: Props) =
               {admin.phone_number === "undefined" ? "N/A" : admin.phone_number}
             </Label>
           </InfoResponsive>
-          {admin.role !== '' &&
-            <InputContain>
-              <InfoResponsive>Cambiar rol</InfoResponsive>
-              {admin.role !== 'admin' &&
-                <IconRoleContain>
-                  <SelectContain key={1}>
-                    <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
-                      {!updatedRole && <>{'superAdmin' === admin.role ? "superAdmin" : "admin"}</>}
-                      {updatedRole && value}
-                      <CaretD2 />
-                    </SelectedRoleContain>
-                    {
-                      open &&
-                      <OptionRoleContain>
-                        <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) updateRole(); }}>
-                          <input
-                            type="radio"
-                            id="Temporada2"
-                            name="category"
-                            value="Rol superAdmin"
-                          />
-                          <Label2>superAdmin</Label2>
-                        </OptionRole>
-                      </OptionRoleContain>
-                    }
-                  </SelectContain>
-                </IconRoleContain>}
-            </InputContain>
-          }
+          <InputContain>
+            <InfoResponsive>Cambiar rol</InfoResponsive>
+            {admin.role !== 'admin' &&
+              <IconRoleContain>
+                <SelectContain key={1}>
+                  <SelectedRoleContain onClick={() => { setOpen(true); if (open) setOpen(false) }}>
+                    {!updatedRole && <>{'superAdmin' === admin.role ? "superAdmin" : "admin"}</>}
+                    {updatedRole && value}
+                    <CaretD2 />
+                  </SelectedRoleContain>
+                  {
+                    open &&
+                    <OptionRoleContain>
+                      <OptionRole onClick={() => { if (confirm("¿Seguro que desea actualizar este usuario a superAdmin?")) updateRole(); }}>
+                        <input
+                          type="radio"
+                          id="Temporada2"
+                          name="category"
+                          value="Rol superAdmin"
+                        />
+                        <Label2>superAdmin</Label2>
+                      </OptionRole>
+                    </OptionRoleContain>
+                  }
+                </SelectContain>
+              </IconRoleContain>}
+          </InputContain>
         </GridInfoContainer>
         {admin.role === 'admin' &&
           <ButtonRoleContain>
