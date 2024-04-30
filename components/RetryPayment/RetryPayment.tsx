@@ -14,7 +14,7 @@ import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/c
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
-import { Month, PayOptions, Year } from "./constants";
+import { Month, PayOptions, PayOptionsForMonthSuscription, Year } from "./constants";
 import { checkEmpty } from "./functions";
 import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
@@ -70,7 +70,6 @@ export const RetryPayment = () => {
           cvc: card.cvc,
         }
       }
-      console.log(tempCard);
 
       window.Conekta.Token.create(
         tempCard,
@@ -93,7 +92,6 @@ export const RetryPayment = () => {
     // })
   }
   const conektaErrorResponseHandler = (response: any) => {
-    console.log(response);
 
     alert("Hay un error en los datos de la tarjeta!")
     setLoaderAdd(false)
@@ -122,7 +120,6 @@ export const RetryPayment = () => {
   const getPaymentMethods = () => {
     setLoader(true);
     let user = userDataAuth.user;
-    console.log(user);
 
     let diff = Math.round((today - user.final_date) / 86400);
 
@@ -143,7 +140,6 @@ export const RetryPayment = () => {
     conektaPm(body).then((res) => {
       const conektaPaymentMethods = res.data.payment_methods.data
       const extractedProperties = conektaPaymentMethods.map(({ id, brand, last4, default: boolean }: IPm) => ({ id, brand, last4, default: boolean }));
-      console.log(extractedProperties);
 
       setPaymentMethods(extractedProperties);
       setLoader(false);
@@ -205,7 +201,16 @@ export const RetryPayment = () => {
           userId: user.user_id
         }
         await updateMembership(membership)
-        window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
+        // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
+        let url = '/pagoexitoso';
+        if (getNewUserLevel(user.level) === 1) {
+          url += 'mensualidad';
+        } else if (getNewUserLevel(user.level) === 4) {
+          url += 'anualidad';
+        } else if (getNewUserLevel(user.level) === 7) {
+          url += 'cuatrimestre';
+        }
+        window.location.href = url;
       } else {
         setLoaderAdd(false)
         setError(true);
@@ -224,6 +229,24 @@ export const RetryPayment = () => {
     })
   }
 
+  type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
+
+  const getFrecuency = (n: number): FrecuencyValue => {
+    if ([0, 7, 8].includes(n)) {
+      return 'cuatrimestral';
+    }
+
+    if ([1, 6].includes(n)) {
+      return 'month';
+    }
+
+    if ([4, 5].includes(n)) {
+      return 'year';
+    }
+
+    return 'cuatrimestral';
+  };
+
   const payWithOxxo = () => {
     setProduct({ ...product, price: user.type })
     const currentDate: any = new Date();
@@ -237,7 +260,7 @@ export const RetryPayment = () => {
       meta: {
         type: 'subscription',
         course_id: 0,
-        frecuency: user.level === 5 ? 'anual' : 'cuatrimestral',
+        frecuency: getFrecuency(user.level),
         duration: 0
       }
     }
@@ -262,7 +285,7 @@ export const RetryPayment = () => {
       meta: {
         type: "subscription",
         course_id: 0,
-        frecuency: user.level === 5 ? 'anual' : 'cuatrimestral',
+        frecuency: getFrecuency(user.level),
         duration: 0
       }
     }
@@ -352,19 +375,30 @@ export const RetryPayment = () => {
             </button>
             <a href='/preview' className={'actives ' + (addPayment ? "fade" : "")}>Ir a mis cursos</a>
             <div className={'add-payment-container ' + (addPayment ? "show-contain" : "")}>
-              <div className='button-container'>
+              <div
+                className='button-container'
+                style={{
+                  justifyContent: [1, 6].includes(user.level) ? 'center' : 'space-between'
+                }}
+              >
                 {
-                  PayOptions.map((pay: IPayOption, index: number) => {
-                    return (
-                      <div className={'box-container ' + (selectedButton === pay.id ? "selected-box" : "")} key={"pay-button" + index} onClick={() => setSelectedButton(pay.id)}>
-                        {selectedButton === pay.id
-                          ? <img src={pay.img_select} />
-                          : <img src={pay.img_unselect} />
+                  ([1, 6].includes(user.level) ? PayOptionsForMonthSuscription : PayOptions)
+                    .map((pay: IPayOption, index: number) => {
+                      return (
+                        <div className={
+                          'box-container ' + (selectedButton === pay.id ? "selected-box" : "")
                         }
-                        {pay.title !== "" && <p>{pay.title}</p>}
-                      </div>
-                    )
-                  })
+                          key={"pay-button" + index}
+                          onClick={() => setSelectedButton(pay.id)}
+                        >
+                          {selectedButton === pay.id
+                            ? <img src={pay.img_select} />
+                            : <img src={pay.img_unselect} />
+                          }
+                          {pay.title !== "" && <p>{pay.title}</p>}
+                        </div>
+                      )
+                    })
                 }
               </div>
               {

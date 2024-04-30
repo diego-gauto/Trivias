@@ -35,6 +35,14 @@ export const PayOptions: IPayOption[] = [
     id: "transfer",
   }
 ]
+export const PayOptionsForMonthSuscription: IPayOption[] = [
+  {
+    title: "Tarjeta de crédito/debito",
+    img_select: card_select,
+    img_unselect: card_unselect,
+    id: "card",
+  }
+]
 const fullYear = new Date().getFullYear();
 const twoDigitYear = parseInt(fullYear.toString().slice(-2));
 export const Year = [
