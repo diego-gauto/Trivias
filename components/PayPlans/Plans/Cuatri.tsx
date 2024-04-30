@@ -53,6 +53,10 @@ const Cuatri = (props: IData) => {
     return user.level === 1;
   }
 
+  const isPaypalUser = () => {
+    return user.method === 'paypal';
+  }
+
   /*
   Mensual => No cambia
   Cuatrimestral => en caso de ser mensual (1 y 6)
@@ -61,7 +65,7 @@ const Cuatri = (props: IData) => {
   const generateButton = (): JSX.Element => {
     const onClickUpdateHandler = () => { setOpen(true) };
 
-    const isAbleToUpdate = user && isActiveUser() && haveMonthSuscription();
+    const isAbleToUpdate = user && isActiveUser() && haveMonthSuscription() && !isPaypalUser;
 
     if (isAbleToUpdate) {
       return (

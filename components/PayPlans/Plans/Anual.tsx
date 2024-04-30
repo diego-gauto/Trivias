@@ -56,6 +56,10 @@ const Anual = (props: IData) => {
     return user.level === 7;
   }
 
+  const isPaypalUser = () => {
+    return user.method === 'paypal';
+  }
+
   /*
   Mensual => No cambia
   Cuatrimestral => en caso de ser mensual (1 y 6)
@@ -64,7 +68,7 @@ const Anual = (props: IData) => {
   const generateButton = (): JSX.Element => {
     const onClickUpdateHandler = () => { setOpen(true) };
 
-    const isAbleToUpdate = user && isActiveUser() && (haveCuatrimestralSuscription() || haveMonthSuscription());
+    const isAbleToUpdate = user && isActiveUser() && (haveCuatrimestralSuscription() || haveMonthSuscription()) && !isPaypalUser;
 
     if (isAbleToUpdate) {
       return (
