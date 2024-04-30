@@ -24,7 +24,7 @@ export interface Role {
   delete?: number;
   view: number;
   user_id: number;
-  courses?: string;
+  courses?: string | null;
   request?: number;
   report?: number;
   download?: number;

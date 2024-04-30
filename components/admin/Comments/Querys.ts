@@ -76,8 +76,19 @@ export interface CommentStructure {
   season_title: string;
 }
 
-export const generateCountAllComments = (courseId: number) => {
-  const where = courseId !== -1 ? ` WHERE course_id = ${courseId}` : '';
+export const generateCountAllComments = (
+  courseId: number,
+  courseIds: number[],
+  isSuperAdmin: boolean
+) => {
+  const condition1 =
+    !isSuperAdmin && courseIds.length > 0
+      ? `course_id IN (${courseIds.join(',')})`
+      : '';
+  const condition2 = courseId !== -1 ? `course_id = ${courseId}` : '';
+  const conditions = [condition1, condition2].filter(c => c.length > 0);
+  const where =
+    conditions.length > 0 ? ` WHERE ${conditions.join(' AND ')}` : '';
   const query = `SELECT COUNT(*) as count FROM comments${where};`;
   return query;
 };
@@ -85,7 +96,9 @@ export const generateCountAllComments = (courseId: number) => {
 export const generateGetAllComments = (
   preferency: Preferency,
   courseId: number,
-  offset: number
+  offset: number,
+  courseIds: number[],
+  isSuperAdmin: boolean
 ) => {
   let responseCondition = '';
   if (preferency === 'with-response') {
@@ -94,12 +107,16 @@ export const generateGetAllComments = (
     responseCondition = 'comment_answer_id IS NULL';
   } else if (preferency === 'all') {
   }
-  const courseIdCondition =
-    courseId !== -1 ? `comment_course_id = ${courseId}` : '';
-  const conditions = [courseIdCondition, responseCondition]
-    .filter(c => c.length > 0)
-    .join(' AND ');
-  const where = conditions.length > 0 ? `WHERE ${conditions}` : '';
+
+  const condition1 = courseId !== -1 ? `course_id = ${courseId}` : '';
+  const condition2 =
+    !isSuperAdmin && courseIds.length > 0
+      ? `course_id in (${courseIds.join(',')})`
+      : '';
+  const conditionArray = [condition1, condition2].filter(c => c.length > 0);
+  const where = `WHERE ${conditionArray.join(' and ')}`;
+  const haveConditions = conditionArray.length > 0;
+
   const query = `SELECT all_comments_and_answers.*,
     l.title  AS lesson_title,
     l.number AS lesson_number,
@@ -125,7 +142,7 @@ export const generateGetAllComments = (
       comment_answer_comment.created_at as 'comment_answer_comment_created_at'
         FROM (
           SELECT * FROM comments 
-          ${courseId !== -1 ? `WHERE course_id = ${courseId}` : ''}
+          ${haveConditions ? where : ''}
           ORDER BY created_at DESC
           LIMIT 100 OFFSET ${offset}
         ) AS comments_2
@@ -152,7 +169,7 @@ export const generateGetAllComments = (
       comment_answer_comment.created_at as 'comment_answer_comment_created_at'
         FROM (
           SELECT * FROM comments 
-          ${courseId !== -1 ? `WHERE course_id = ${courseId}` : ''}
+          ${haveConditions ? where : ''}
           ORDER BY created_at DESC
           LIMIT 100 OFFSET ${offset}
         ) AS comments_2

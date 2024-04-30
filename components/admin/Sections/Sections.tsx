@@ -16,7 +16,7 @@ import { Button } from "../Courses/CourseMain.styled";
 import { IoClose } from "react-icons/io5";
 import { getCoursesApi } from "../../api/lessons";
 import { defaultValues, /*getRolesWithDefaults*/ } from './DefaultValues';
-import { Role } from "../Comments/Comments";
+import { IRole } from "../Comments/Comments";
 
 export type INewUser = {
   name?: string,
