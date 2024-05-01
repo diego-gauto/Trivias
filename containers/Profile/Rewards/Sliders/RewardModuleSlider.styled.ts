@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const SlideContainer = styled.div<{
   type: string;
@@ -45,18 +45,18 @@ export const SlideContainer = styled.div<{
       .span-1 {
         font-weight: 800;
         ${(props) =>
-          (props.type == "points" || props.type == "claim-points") &&
+          (props.type == 'points' || props.type == 'claim-points') &&
           css`
             color: #dd5900;
           `}
         ${(props) =>
-          (props.type == "months" || props.type == "claim-months") &&
+          (props.type == 'months' || props.type == 'claim-months') &&
           css`
             color: #1bb87f;
           `}
           ${(props) =>
-          (props.type == "certificates" ||
-            props.type == "claim-certificates") &&
+          (props.type == 'certificates' ||
+            props.type == 'claim-certificates') &&
           css`
             color: #524af5;
           `}

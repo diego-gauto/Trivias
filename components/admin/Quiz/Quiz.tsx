@@ -1,26 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Title, TitleContain } from '../Courses/Form/Edit.styled';
 import { MdDelete } from 'react-icons/md';
-import { CaretD2, Label2, Option, OptionContain, SelectContain, Selected } from '../Courses/Form/Select/SelectStyles.styled';
-import { Content, FormContainer, InputContainer, QuestionContainer, QuizContainer } from './Quiz.styled';
+import {
+  CaretD2,
+  Label2,
+  Option,
+  OptionContain,
+  SelectContain,
+  Selected,
+} from '../Courses/Form/Select/SelectStyles.styled';
+import {
+  Content,
+  FormContainer,
+  InputContainer,
+  QuestionContainer,
+  QuizContainer,
+} from './Quiz.styled';
 import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
-import { addQuiz, editQuiz, getQuiz } from '../../../store/actions/AdminActions';
+import {
+  addQuiz,
+  editQuiz,
+  getQuiz,
+} from '../../../store/actions/AdminActions';
 import { useRouter } from 'next/router';
 import { LoaderContain } from '../../../containers/Profile/User/User.styled';
 import { deleteQuiz } from '../../../store/actions/courseActions';
 const Quiz = () => {
   const router = useRouter();
   const { courseID, seasonID, lessonID } = router.query;
-  const [mandatory, setMandatory] = useState<boolean>(false)
-  const [openSelect, setOpenSelect] = useState<boolean>(false)
+  const [mandatory, setMandatory] = useState<boolean>(false);
+  const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [loader, setLoader] = useState(false);
   const [question, setQuestion] = useState<any>({
-    question: "",
-    answers: []
-  })
-  const [quill, setQuill] = useState("");
+    question: '',
+    answers: [],
+  });
+  const [quill, setQuill] = useState('');
   const [quiz, setQuiz] = useState<any>({
     questions: [],
     number: '',
@@ -31,105 +48,107 @@ const Quiz = () => {
   const modules = {
     toolbar: {
       container: [
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [{ size: ["small", "normal", "large", "huge"] }, {
-          color: [
-            "red",
-            "blue",
-            "#6717cd",
-          ]
-        }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-          { align: [] }
+          { size: ['small', 'normal', 'large', 'huge'] },
+          {
+            color: ['red', 'blue', '#6717cd'],
+          },
         ],
-        ["clean"]
+        [
+          { list: 'ordered' },
+          { list: 'bullet' },
+          { indent: '-1' },
+          { indent: '+1' },
+          { align: [] },
+        ],
+        ['clean'],
       ],
     },
   };
   const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "size",
-    "color",
-    "list",
-    "bullet",
-    "indent",
-    "align"
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'size',
+    'color',
+    'list',
+    'bullet',
+    'indent',
+    'align',
   ];
 
-  useEffect(() => {
-  }, [quill])
+  useEffect(() => {}, [quill]);
   const addQuestion = () => {
     let tempQuiz: any = quiz;
-    if (question.question !== "") {
-      tempQuiz.questions.push(question)
+    if (question.question !== '') {
+      tempQuiz.questions.push(question);
     }
-    setQuiz({ ...tempQuiz })
-  }
+    setQuiz({ ...tempQuiz });
+  };
   const removeQuestion = (index: number) => {
     let tempQuiz: any = quiz;
-    tempQuiz.questions.splice(index, 1)
-    setQuiz({ ...tempQuiz })
-  }
+    tempQuiz.questions.splice(index, 1);
+    setQuiz({ ...tempQuiz });
+  };
 
   const addAnswer = (index: number) => {
     let tempQuiz: any = quiz;
-    let inpAnswer: any = document.getElementById("answer" + index) as HTMLInputElement;
+    let inpAnswer: any = document.getElementById(
+      'answer' + index,
+    ) as HTMLInputElement;
     if (inpAnswer.value) {
-      tempQuiz.questions[index].answers.push({ answer: inpAnswer.value, status: false });
+      tempQuiz.questions[index].answers.push({
+        answer: inpAnswer.value,
+        status: false,
+      });
     }
-    setQuiz({ ...tempQuiz })
-  }
+    setQuiz({ ...tempQuiz });
+  };
   const changeStatus = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
     tempQuiz.questions[index].answers.forEach((element: any, idx: number) => {
       if (ind == idx) {
         tempQuiz.questions[index].answers[ind].status = true;
-      }
-      else {
+      } else {
         tempQuiz.questions[index].answers[idx].status = false;
       }
     });
-    setQuiz({ ...tempQuiz })
-  }
+    setQuiz({ ...tempQuiz });
+  };
   const removeAnswer = (index: number, ind: number) => {
     let tempQuiz: any = quiz;
-    tempQuiz.questions[index].answers.splice(ind, 1)
-    setQuiz({ ...tempQuiz })
-  }
+    tempQuiz.questions[index].answers.splice(ind, 1);
+    setQuiz({ ...tempQuiz });
+  };
   const submit = () => {
     setLoader(true);
     quiz.mandatory = mandatory;
     if (!lessonID) {
-      if (quiz.title == '' ||
+      if (
+        quiz.title == '' ||
         quiz.number == '' ||
         quiz.passingGrade == '' ||
-        quiz.points == '') {
+        quiz.points == ''
+      ) {
         setLoader(false);
-        alert("Por favor complete todo los campos!");
+        alert('Por favor complete todo los campos!');
       } else {
         addQuiz(quiz, courseID, seasonID).then(() => {
-          alert(
-            "Quiz Creado"
-          )
+          alert('Quiz Creado');
           setLoader(false);
           router.push({
             pathname: `/admin/Edit`,
-            query: { documentID: courseID }
+            query: { documentID: courseID },
           });
-        })
+        });
       }
-    }
-    else {
-      if (quiz.title == '' ||
+    } else {
+      if (
+        quiz.title == '' ||
         quiz.number == '' ||
         quiz.passingGrade == '' ||
         quiz.points == '' ||
@@ -138,238 +157,266 @@ const Quiz = () => {
         !quiz.points
       ) {
         setLoader(false);
-        alert("Por favor complete todo los campos!");
+        alert('Por favor complete todo los campos!');
       } else {
         setLoader(false);
         editQuiz(quiz, courseID, seasonID, lessonID).then(() => {
-          alert(
-            "Quiz Editado"
-          )
+          alert('Quiz Editado');
           setLoader(false);
           router.push({
             pathname: `/admin/Edit`,
-            query: { documentID: courseID }
+            query: { documentID: courseID },
           });
-        })
+        });
       }
     }
-  }
+  };
 
   const deleteActualQuiz = () => {
     deleteQuiz(courseID, seasonID, lessonID).then(() => {
       window.location.href = `/admin/Edit?documentID=${courseID}`;
     });
-  }
+  };
 
   const getQuizes = () => {
     getQuiz(courseID, seasonID, lessonID).then((res: any) => {
-      setMandatory(res.mandatory)
-      setQuiz(res)
-    })
-
-  }
+      setMandatory(res.mandatory);
+      setQuiz(res);
+    });
+  };
   useEffect(() => {
     if (lessonID) {
       getQuizes();
     }
-
-  }, [])
+  }, []);
 
   const editQuestion = (index: number, content: any) => {
     let tempQuiz = quiz;
     tempQuiz.questions[index].question = content;
-  }
+  };
   return (
     <QuizContainer>
       <TitleContain>
-        {
-          !lessonID
-            ? <Title>Nuevo Quiz</Title>
-            : <Title>Editar Quiz</Title>
-        }
-        {
-          !loader
-            ?
-            <div className='button-container'>
-              <button className='button-save' onClick={submit}>{!lessonID ? "Guardar" : "Editar"} Cambios</button>
-              {lessonID &&
-                <button className="button-delete" onClick={deleteActualQuiz}> Eliminar Quiz</button>
-              }
-            </div>
-            : <LoaderContain />
-        }
-
+        {!lessonID ? <Title>Nuevo Quiz</Title> : <Title>Editar Quiz</Title>}
+        {!loader ? (
+          <div className='button-container'>
+            <button className='button-save' onClick={submit}>
+              {!lessonID ? 'Guardar' : 'Editar'} Cambios
+            </button>
+            {lessonID && (
+              <button className='button-delete' onClick={deleteActualQuiz}>
+                {' '}
+                Eliminar Quiz
+              </button>
+            )}
+          </div>
+        ) : (
+          <LoaderContain />
+        )}
       </TitleContain>
       <FormContainer>
         <Content>
           <InputContainer>
-            <label>Número de Lección
-            </label>
+            <label>Número de Lección</label>
             <input
-              placeholder="2"
+              placeholder='2'
               defaultValue={quiz.number}
               onChange={(e: any) => {
                 setQuiz({
-                  ...quiz, number: parseFloat(e.target.value)
-                })
+                  ...quiz,
+                  number: parseFloat(e.target.value),
+                });
               }}
             />
           </InputContainer>
           <InputContainer>
             <label>Nombre del Quiz</label>
             <input
-              placeholder="Nombre del Quiz"
+              placeholder='Nombre del Quiz'
               defaultValue={quiz.title}
               onChange={(e: any) => {
                 setQuiz({
-                  ...quiz, title: e.target.value
-                })
+                  ...quiz,
+                  title: e.target.value,
+                });
               }}
             />
           </InputContainer>
           <InputContainer>
             <label>Calificación Aprobatoria</label>
             <input
-              placeholder="70"
+              placeholder='70'
               defaultValue={quiz.passingGrade}
               onChange={(e: any) => {
                 setQuiz({
-                  ...quiz, passingGrade: parseInt(e.target.value)
-                })
+                  ...quiz,
+                  passingGrade: parseInt(e.target.value),
+                });
               }}
             />
           </InputContainer>
           <InputContainer>
             <label>Obligatorio</label>
             <SelectContain key={3}>
-              <Selected onClick={() => { setOpenSelect(!openSelect) }}>
-                {
-                  mandatory == false ? "Flexible" : "Obligatorio"
-                }
+              <Selected
+                onClick={() => {
+                  setOpenSelect(!openSelect);
+                }}
+              >
+                {mandatory == false ? 'Flexible' : 'Obligatorio'}
                 <CaretD2 />
               </Selected>
-              {
-                openSelect == true &&
+              {openSelect == true && (
                 <OptionContain>
-                  <Option onClick={() => { setOpenSelect(false); setMandatory(false) }}>
-                    <input
-                      type="radio"
-                      id="mandatory"
-                      value="flexible"
-                    />
-                    <Label2 > Flexible</Label2>
+                  <Option
+                    onClick={() => {
+                      setOpenSelect(false);
+                      setMandatory(false);
+                    }}
+                  >
+                    <input type='radio' id='mandatory' value='flexible' />
+                    <Label2> Flexible</Label2>
                   </Option>
-                  <Option onClick={() => { setOpenSelect(false); setMandatory(true) }}>
-                    <input
-                      type="radio"
-                      id="mandatory"
-                      value="Obligatorio"
-                    />
-                    <Label2 >Obligatorio</Label2>
+                  <Option
+                    onClick={() => {
+                      setOpenSelect(false);
+                      setMandatory(true);
+                    }}
+                  >
+                    <input type='radio' id='mandatory' value='Obligatorio' />
+                    <Label2>Obligatorio</Label2>
                   </Option>
                 </OptionContain>
-              }
+              )}
             </SelectContain>
           </InputContainer>
           <InputContainer>
             <label>Puntos</label>
             <input
-              placeholder="100"
+              placeholder='100'
               defaultValue={quiz.points}
               onChange={(e: any) => {
                 setQuiz({
-                  ...quiz, points: parseInt(e.target.value)
-                })
+                  ...quiz,
+                  points: parseInt(e.target.value),
+                });
               }}
             />
           </InputContainer>
         </Content>
         <QuestionContainer>
-          <p className="title">
-            Preguntas
-          </p>
-          <div className="first-container">
-            <div className="input-contain">
+          <p className='title'>Preguntas</p>
+          <div className='first-container'>
+            <div className='input-contain'>
               <label>Pregunta</label>
               <ReactQuill
-                placeholder="Lorem ipsum dolor sit amet, consectetur 
+                placeholder='Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
-            malesuada facilisi vel nunc." theme="snow" id='quill'
-                formats={formats} modules={modules}
-                defaultValue="" onChange={(content, delta, source, editor) => {
-                  setQuill(editor.getText()); setQuestion({
-                    ...question, question: content, answers: []
-                  })
-                }} />
-              <button
-                className="button"
-                onClick={addQuestion}
-              > Crear Pregunta
+            malesuada facilisi vel nunc.'
+                theme='snow'
+                id='quill'
+                formats={formats}
+                modules={modules}
+                defaultValue=''
+                onChange={(content, delta, source, editor) => {
+                  setQuill(editor.getText());
+                  setQuestion({
+                    ...question,
+                    question: content,
+                    answers: [],
+                  });
+                }}
+              />
+              <button className='button' onClick={addQuestion}>
+                {' '}
+                Crear Pregunta
               </button>
             </div>
           </div>
 
-          {
-            quiz.questions.map((question: any, index: any) => {
-              return (
-                <div className="question-content" key={"Preguntas " + index}>
-                  <div className="questions">
-                    <p className="question-title">Pregunta {index + 1}:</p>
-                    <div className="button-contain">
-                      <input type="text" id={"answer" + index} placeholder="Respuesta" />
-                      <button className="button-add" onClick={() => { addAnswer(index) }}>
-                        Agregar Respuesta
-                      </button>
-                      <button className="button-delete" onClick={() => {
+          {quiz.questions.map((question: any, index: any) => {
+            return (
+              <div className='question-content' key={'Preguntas ' + index}>
+                <div className='questions'>
+                  <p className='question-title'>Pregunta {index + 1}:</p>
+                  <div className='button-contain'>
+                    <input
+                      type='text'
+                      id={'answer' + index}
+                      placeholder='Respuesta'
+                    />
+                    <button
+                      className='button-add'
+                      onClick={() => {
+                        addAnswer(index);
+                      }}
+                    >
+                      Agregar Respuesta
+                    </button>
+                    <button
+                      className='button-delete'
+                      onClick={() => {
                         removeQuestion(index);
-                      }}>
-                        Eliminar
-                      </button>
-                    </div>
+                      }}
+                    >
+                      Eliminar
+                    </button>
                   </div>
-                  <p dangerouslySetInnerHTML={{ __html: question.question }} />
-                  <ReactQuill
-                    placeholder="Lorem ipsum dolor sit amet, consectetur 
+                </div>
+                <p dangerouslySetInnerHTML={{ __html: question.question }} />
+                <ReactQuill
+                  placeholder='Lorem ipsum dolor sit amet, consectetur 
             adipiscing elit. Pharetra, cursus sapien ac magna. 
             Consectetur amet eu tincidunt quis. Non habitasse viverra 
-            malesuada facilisi vel nunc." theme="snow" id='quill'
-                    formats={formats} modules={modules}
-                    defaultValue={question.question} onChange={(content, delta, source, editor) => {
-                      editQuestion(index, content)
-                    }} />
-                  {
-                    question.answers.length > 0 &&
-                    <p className="question-title" style={{ fontWeight: "bold" }}>Respuestas</p>
-                  }
+            malesuada facilisi vel nunc.'
+                  theme='snow'
+                  id='quill'
+                  formats={formats}
+                  modules={modules}
+                  defaultValue={question.question}
+                  onChange={(content, delta, source, editor) => {
+                    editQuestion(index, content);
+                  }}
+                />
+                {question.answers.length > 0 && (
+                  <p className='question-title' style={{ fontWeight: 'bold' }}>
+                    Respuestas
+                  </p>
+                )}
 
-                  {question.answers.map((answer: any, ind: any) => {
-                    return (
-                      <div className='answers' key={"answers" + ind}>
-                        <div
-                          className='status' style={{ backgroundColor: answer.status ? "#00d14d" : "#D10000" }}
-                          onClick={() => { changeStatus(index, ind) }}
-                        />
-                        <p> {ind + 1 + ": "}</p>
-                        <p>{answer.answer}</p>
-                        <MdDelete
-                          className="trash" style={{ cursor: "pointer", fontSize: 20 }}
-                          onClick={() => { removeAnswer(index, ind) }}
-                        />
-                      </div>
-
-                    )
-                  })}
-                </div>
-              )
-            })
-          }
-
+                {question.answers.map((answer: any, ind: any) => {
+                  return (
+                    <div className='answers' key={'answers' + ind}>
+                      <div
+                        className='status'
+                        style={{
+                          backgroundColor: answer.status
+                            ? '#00d14d'
+                            : '#D10000',
+                        }}
+                        onClick={() => {
+                          changeStatus(index, ind);
+                        }}
+                      />
+                      <p> {ind + 1 + ': '}</p>
+                      <p>{answer.answer}</p>
+                      <MdDelete
+                        className='trash'
+                        style={{ cursor: 'pointer', fontSize: 20 }}
+                        onClick={() => {
+                          removeAnswer(index, ind);
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </QuestionContainer>
-
       </FormContainer>
     </QuizContainer>
-
-  )
-}
+  );
+};
 export default Quiz;

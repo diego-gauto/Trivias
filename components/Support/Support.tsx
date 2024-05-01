@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { SupportContainer } from './Support.styled';
-import { ImArrowLeft2 } from 'react-icons/im'
+import { ImArrowLeft2 } from 'react-icons/im';
 import Cards from './Cards/Cards';
 import { object_1, object_2, object_3 } from './constants';
 import Link from 'next/link';
@@ -17,10 +17,8 @@ const Support = () => {
     const emailAddress = 'soporte@gonvar.io';
     const mailtoLink = `mailto:${emailAddress}`;
     window.location.href = mailtoLink;
-  }
-  const sendTo = () => {
-
-  }
+  };
+  const sendTo = () => {};
   return (
     <SupportContainer>
       <div className='header-contain'>
@@ -32,23 +30,16 @@ const Support = () => {
             </Link>
           </button>
         </div>
-        <h1 className='title'>CENTRO DE <span>AYUDA</span></h1>
+        <h1 className='title'>
+          CENTRO DE <span>AYUDA</span>
+        </h1>
       </div>
       <div className='option-contain'>
-        <Cards
-          card_data={object_1}
-          handleAction={redirectToWhatsAppChat}
-        />
-        <Cards
-          card_data={object_2}
-          handleAction={openMail}
-        />
-        <Cards
-          card_data={object_3}
-          handleAction={sendTo}
-        />
+        <Cards card_data={object_1} handleAction={redirectToWhatsAppChat} />
+        <Cards card_data={object_2} handleAction={openMail} />
+        <Cards card_data={object_3} handleAction={sendTo} />
       </div>
     </SupportContainer>
-  )
-}
+  );
+};
 export default Support;

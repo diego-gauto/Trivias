@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { ModalContainer } from './ActivityModal.styled';
 import { IoMdClose } from 'react-icons/io';
@@ -15,12 +15,13 @@ const ActivityModal = (props: IActivityModal) => {
       <ModalContainer>
         <div className='title-container'>
           <p className='title'>
-            !Esta lección cuenta con {currentlesson.homework === 1 && "tarea"}{currentlesson.quiz === 1 && "quiz"}!
+            !Esta lección cuenta con {currentlesson.homework === 1 && 'tarea'}
+            {currentlesson.quiz === 1 && 'quiz'}!
           </p>
           <IoMdClose className='close-icon' onClick={onHide} />
         </div>
       </ModalContainer>
     </Modal>
-  )
-}
+  );
+};
 export default ActivityModal;

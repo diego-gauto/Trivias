@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { collection, doc, getDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
+import { collection, doc, getDoc } from 'firebase/firestore';
+import { useRouter } from 'next/router';
 
-import { db } from "../../../firebase/firebaseConfig";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getFormApi } from "../../api/form";
-import styles from "./thankYou.module.css";
+import { db } from '../../../firebase/firebaseConfig';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import { getFormApi } from '../../api/form';
+import styles from './thankYou.module.css';
 
-const watsapOut = "/images/landing_suscription/whatsapp_outline.png";
+const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
 
 interface Answer {
   label: string;
@@ -33,7 +37,7 @@ interface Form {
   };
   optionsArray: Option[];
   redirect: {
-    type: "thankYouPage" | "customLink";
+    type: 'thankYouPage' | 'customLink';
     link: string;
     textButton: string;
   };
@@ -61,38 +65,38 @@ const ThankYouForm = () => {
   console.log(formId);
 
   const validFormIds = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
   ]; // Arreglo de IDs válidos
-  const specialFormIds = ["10", "11", "12", undefined];
+  const specialFormIds = ['10', '11', '12', undefined];
 
   const isLinkToWhatsappGroup = (text: string | undefined): boolean => {
     // Si el texto es undefined, retornar false
-    if (typeof text !== "string" || text.trim() === "") {
+    if (typeof text !== 'string' || text.trim() === '') {
       return false;
     }
 
     // Verificar si el texto comienza con el prefijo correcto
-    if (!text.startsWith("https://chat.whatsapp.com/")) {
+    if (!text.startsWith('https://chat.whatsapp.com/')) {
       return false;
     }
 
     // Extraer el código del grupo de WhatsApp del enlace
-    const groupCode = text.slice("https://chat.whatsapp.com/".length);
+    const groupCode = text.slice('https://chat.whatsapp.com/'.length);
 
     console.log(groupCode);
     // Verificar si el código del grupo tiene la longitud esperada (22 caracteres)
@@ -105,16 +109,16 @@ const ThankYouForm = () => {
       router.push(link);
     } else {
       // Manejar el caso en el que link es undefined
-      console.error("El enlace de redirección es indefinido");
+      console.error('El enlace de redirección es indefinido');
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (typeof formId !== "string" || !validFormIds.includes(formId)) {
+        if (typeof formId !== 'string' || !validFormIds.includes(formId)) {
           // Si formId no está incluido en los IDs válidos, redirigir a página de error
-          router.push("/forms/formnotfound");
+          router.push('/forms/formnotfound');
           return; // Detener la ejecución de fetchData
         }
         const formIdNumber: number = Number(formId);
@@ -132,7 +136,7 @@ const ThankYouForm = () => {
 
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
-          console.log("from Server");
+          console.log('from Server');
           console.log(formTemp);
 
           setForm(formTemp);
@@ -143,7 +147,7 @@ const ThankYouForm = () => {
             const customId = `form_${formId}`;
 
             // Referencia al documento del formulario en Firestore
-            const formDocRef = doc(collection(db, "forms"), customId);
+            const formDocRef = doc(collection(db, 'forms'), customId);
 
             // Obtén los datos del formulario desde Firestore
             const formSnapshot = await getDoc(formDocRef);
@@ -151,23 +155,23 @@ const ThankYouForm = () => {
             if (formSnapshot.exists()) {
               // El documento existe, puedes acceder a los datos
               const formData = formSnapshot.data() as Form;
-              console.log("Datos del formulario recuperados:", formData);
+              console.log('Datos del formulario recuperados:', formData);
 
               setForm(formData);
               setLoading(false);
             } else {
               // El documento no existe
               // redirigir a pagina de error
-              console.log("El formulario no existe en Firebase");
+              console.log('El formulario no existe en Firebase');
             }
           } catch (error) {
-            console.error("Error al recuperar datos desde Firebase:", error);
+            console.error('Error al recuperar datos desde Firebase:', error);
           }
         }
 
         // setLoading(false);
       } catch (error) {
-        console.error("Error al recuperar datos desde el server:", error);
+        console.error('Error al recuperar datos desde el server:', error);
       }
     };
 
@@ -179,7 +183,7 @@ const ThankYouForm = () => {
 
   if (loading) {
     return (
-      <Background style={{ alignItems: "center", justifyContent: "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
@@ -209,7 +213,7 @@ const ThankYouForm = () => {
               onClick={() => redirectToWhatsAppChat()}
             >
               <img src={watsapOut} className={watsapLogo} />
-              <p className="my-1">
+              <p className='my-1'>
                 <b>Unirme</b>
               </p>
             </div>
@@ -219,8 +223,8 @@ const ThankYouForm = () => {
 
       <div className={imgContainer}>
         <img
-          alt="Mujer celebrando ser"
-          src="/images/forms/mujerCelebrando.png"
+          alt='Mujer celebrando ser'
+          src='/images/forms/mujerCelebrando.png'
         />
       </div>
     </div>

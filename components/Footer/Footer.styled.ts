@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const FooterContainer = styled.div`
   z-index: 2;
@@ -122,7 +122,7 @@ export const Column = styled.div`
 `;
 export const FooterText = styled.a`
   font-size: 18px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   margin: 0;
   cursor: pointer;
   color: black;
@@ -161,7 +161,7 @@ export const BottomContainer = styled.div`
 export const BottomText = styled.p`
   font-size: 14px;
   color: white;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   opacity: 0.8;
   @media (max-width: 1023px) {
@@ -205,7 +205,7 @@ export const IGIcon = styled.i`
 `;
 export const TextFinish = styled.p`
   font-size: 12px;
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 600;
   color: #6717cd;
   cursor: pointer;

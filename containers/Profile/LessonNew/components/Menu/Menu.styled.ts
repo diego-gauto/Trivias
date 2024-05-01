@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -106,7 +106,7 @@ export const LessonCard = styled.div`
 
 export const CourseLength = styled.div`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #3f1168;
   margin: 0;
   display: flex;
@@ -124,14 +124,14 @@ export const Circle = styled.div<{ status: string }>`
   border: 2px solid gray;
 
   ${(props) =>
-    props.status === "completed" &&
+    props.status === 'completed' &&
     css`
       border: 2px solid #3f1168;
       background: #3f1168;
     `}
 
   ${(props) =>
-    props.status === "actual" &&
+    props.status === 'actual' &&
     css`
       border: 2px solid #3f1168;
     `}
@@ -144,13 +144,13 @@ export const Line = styled.div<{ status: string }>`
   height: 100%;
 
   ${(props) =>
-    props.status === "completed" &&
+    props.status === 'completed' &&
     css`
       background: #3f1168;
     `}
 
   ${(props) =>
-    props.status === "actual" &&
+    props.status === 'actual' &&
     css`
       background: gray;
     `}
@@ -172,7 +172,7 @@ export const DetailContain = styled.div`
   width: 100%;
   .activity {
     font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
     margin: 0;
     display: flex;
     align-items: center;

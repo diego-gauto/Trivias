@@ -13,7 +13,7 @@ export const Container = styled.div<{ show: boolean }>`
     z-index: 10;
     left: -270px;
     transition: 0.5s ease all;
-    ${props =>
+    ${(props) =>
       props.show &&
       css`
         left: 0;

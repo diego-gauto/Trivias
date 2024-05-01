@@ -1,12 +1,12 @@
-import { Card } from "react-bootstrap";
-import styled from "styled-components";
+import { Card } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const CardContainer = styled(Card)`
   background: #ede7f2;
   border: 0;
   border-radius: 0;
   color: #fff;
-  font-family: "Montserrat", sans-seriff;
+  font-family: 'Montserrat', sans-seriff;
   .course-container {
     display: flex;
     justify-content: space-between;
@@ -200,7 +200,7 @@ export const CardContainer = styled(Card)`
       }
     }
     .video::before {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 0;
       top: 0;

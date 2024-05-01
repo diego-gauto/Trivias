@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ModalCertificate } from '../Certificate.styled';
@@ -17,10 +17,16 @@ const ConfirmationModal = (props: IConfirmationModal) => {
         <AiOutlineClose className='close-icon' onClick={onHide} />
         <p>¿En qué formato lo quieres descargar?</p>
         {/* <button className='png' onClick={() => imageDownload("png")}> Descargar en PNG</button> */}
-        <button className='jpeg' onClick={() => imageDownload("jpeg")}> Descargar como Imagen</button>
-        <button className='pdf' onClick={pdfDownload}> Descargar como PDF</button>
+        <button className='jpeg' onClick={() => imageDownload('jpeg')}>
+          {' '}
+          Descargar como Imagen
+        </button>
+        <button className='pdf' onClick={pdfDownload}>
+          {' '}
+          Descargar como PDF
+        </button>
       </ModalCertificate>
     </Modal>
-  )
-}
+  );
+};
 export default ConfirmationModal;

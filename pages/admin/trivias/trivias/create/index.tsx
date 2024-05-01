@@ -1,134 +1,139 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { createTriviaApi } from "../../../../../components/api/trivias";
-import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
-import styles from "./create.module.css";
+import { createTriviaApi } from '../../../../../components/api/trivias';
+import ITrivia, { ITriviaResult } from '../../../../../interfaces/iTrivias';
+import styles from './create.module.css';
 
 const CreateTrivia = () => {
+  const {
+    container,
+    inputGroup,
+    inputGroupQuestion,
+    inputGroupAnswers,
+    inputGroupResult,
+    button,
+    buttonContainer,
+  } = styles;
 
-  const { container, inputGroup, inputGroupQuestion, inputGroupAnswers, inputGroupResult, button, buttonContainer } = styles
-
-
-  const data =
-  {
-    imgSelector: "",
-    color: "",
-    trans: "",
-    title: "",
+  const data = {
+    imgSelector: '',
+    color: '',
+    trans: '',
+    title: '',
     questions: [
       {
         id: 1,
-        question: "",
-        imgQuestion: "",
+        question: '',
+        imgQuestion: '',
         answers: [
           {
-            text: "",
+            text: '',
             correct: true,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
         ],
       },
       {
         id: 2,
-        question: "",
-        imgQuestion: "",
+        question: '',
+        imgQuestion: '',
         answers: [
           {
-            text: "",
+            text: '',
             correct: true,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
         ],
       },
       {
         id: 3,
-        question: "",
-        imgQuestion: "",
+        question: '',
+        imgQuestion: '',
         answers: [
           {
-            text: "",
+            text: '',
             correct: true,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
         ],
       },
       {
         id: 4,
-        question: "",
-        imgQuestion: "",
+        question: '',
+        imgQuestion: '',
         answers: [
           {
-            text: "",
+            text: '',
             correct: true,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
         ],
       },
       {
         id: 5,
-        question: "",
-        imgQuestion: "",
+        question: '',
+        imgQuestion: '',
         answers: [
           {
-            text: "",
+            text: '',
             correct: true,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
           {
-            text: "",
+            text: '',
             correct: false,
           },
         ],
@@ -136,26 +141,25 @@ const CreateTrivia = () => {
     ],
     result: [
       {
-        title: "",
+        title: '',
         body: ``,
-        img: "",
+        img: '',
         idTemplateBrevo: 0,
       },
       {
-        title: "",
+        title: '',
         body: ``,
-        img: "",
+        img: '',
         idTemplateBrevo: 0,
       },
       {
-        title: "",
+        title: '',
         body: ``,
-        img: "",
+        img: '',
         idTemplateBrevo: 0,
       },
     ],
-  }
-
+  };
 
   const [updatedTrivia, setUpdatedTrivia] = useState<ITrivia | null>(null);
   const [imagePaths, setImagePaths] = useState<{ [key: string]: string }>({});
@@ -167,15 +171,15 @@ const CreateTrivia = () => {
     }
   }, []);
 
-  const isQuestionInput = (name: string) => name.startsWith("question-");
-  const isAnswerInput = (name: string) => name.startsWith("answer-");
+  const isQuestionInput = (name: string) => name.startsWith('question-');
+  const isAnswerInput = (name: string) => name.startsWith('answer-');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     // Verificar si el input corresponde a una imagen de pregunta
-    if (name.startsWith("imgPathQuestion-")) {
-      const questionId = parseInt(name.split("-")[1] || "");
+    if (name.startsWith('imgPathQuestion-')) {
+      const questionId = parseInt(name.split('-')[1] || '');
       setImagePaths((prevImagePaths) => ({
         ...prevImagePaths,
         [name]: value,
@@ -198,19 +202,19 @@ const CreateTrivia = () => {
       });
     }
     // Verificar si el input corresponde a una imagen de selector
-    else if (name.startsWith("imgPathSelector")) {
+    else if (name.startsWith('imgPathSelector')) {
       setImagePaths((prevImagePaths) => ({
         ...prevImagePaths,
         [name]: value,
       }));
       setUpdatedTrivia({
         ...updatedTrivia!,
-        ["imgSelector"]: value,
+        ['imgSelector']: value,
       });
     }
     // Verificar si el input corresponde a una pregunta
     else if (isQuestionInput(name)) {
-      const questionId = parseInt(name.split("-")[1] || "");
+      const questionId = parseInt(name.split('-')[1] || '');
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
 
@@ -232,7 +236,10 @@ const CreateTrivia = () => {
     }
     // Verificar si el input corresponde a una respuesta
     else if (isAnswerInput(name)) {
-      const [questionId, answerIndex] = name.split("-").slice(1).map((part) => parseInt(part));
+      const [questionId, answerIndex] = name
+        .split('-')
+        .slice(1)
+        .map((part) => parseInt(part));
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
 
@@ -271,19 +278,25 @@ const CreateTrivia = () => {
     }
   };
 
-  const handleQuestionChange = (questionId: number, answerIndex: number, isCorrect: boolean) => {
+  const handleQuestionChange = (
+    questionId: number,
+    answerIndex: number,
+    isCorrect: boolean,
+  ) => {
     setUpdatedTrivia((prevState: any) => {
       const updatedQuestions = prevState.questions.map((question: any) => {
         if (question.id === questionId) {
-          const updatedAnswers = question.answers.map((answer: any, index: number) => {
-            if (index === answerIndex) {
-              return {
-                ...answer,
-                correct: isCorrect,
-              };
-            }
-            return answer;
-          });
+          const updatedAnswers = question.answers.map(
+            (answer: any, index: number) => {
+              if (index === answerIndex) {
+                return {
+                  ...answer,
+                  correct: isCorrect,
+                };
+              }
+              return answer;
+            },
+          );
 
           return {
             ...question,
@@ -303,7 +316,7 @@ const CreateTrivia = () => {
   const handleResultChange = (
     resultIndex: number,
     fieldName: keyof ITriviaResult,
-    value: string | number
+    value: string | number,
   ) => {
     setUpdatedTrivia((prevState) => {
       if (!prevState) return null;
@@ -325,7 +338,7 @@ const CreateTrivia = () => {
     });
 
     // Solo actualizamos imagePaths si fieldName es "img"
-    if (fieldName === "img") {
+    if (fieldName === 'img') {
       setImagePaths((prevImagePaths) => {
         const updatedImagePaths = { ...prevImagePaths };
         updatedImagePaths[`imgPathResult-${resultIndex}`] = value.toString();
@@ -334,77 +347,75 @@ const CreateTrivia = () => {
     }
   };
 
-  const handleCancel = () => {
-
-  };
+  const handleCancel = () => {};
 
   const handleCreate = () => {
-    console.log(updatedTrivia)
+    console.log(updatedTrivia);
     createTriviaApi(updatedTrivia)
       .then((result) => {
-        console.log(result)
+        console.log(result);
         if (result === true) {
           // Trivia fue creada exitosamente
-          alert("Trivia creada exitosamente.");
+          alert('Trivia creada exitosamente.');
         } else {
           // Trivia no fue creada
-          alert("Fallo al crear la trivia.");
+          alert('Fallo al crear la trivia.');
         }
       })
       .catch((error) => {
         // Error en la llamada
-        console.log("Error en la llamada a la API:", error);
+        console.log('Error en la llamada a la API:', error);
       });
   };
 
   return (
     <div className={container}>
       <div className={inputGroup}>
-        <label htmlFor="title">Título:</label>
+        <label htmlFor='title'>Título:</label>
         <input
-          type="text"
-          id="title"
-          name="title"
+          type='text'
+          id='title'
+          name='title'
           value={updatedTrivia?.title}
           onChange={handleInputChange}
         />
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="imgPathSelector">Imagen:</label>
+        <label htmlFor='imgPathSelector'>Imagen:</label>
         <input
-          type="text"
-          id="imgPathSelector"
-          name="imgPathSelector"
-          value={imagePaths["imgPathSelector"]}
+          type='text'
+          id='imgPathSelector'
+          name='imgPathSelector'
+          value={imagePaths['imgPathSelector']}
           onChange={handleInputChange}
         />
-        {imagePaths["imgPathSelector"] && (
+        {imagePaths['imgPathSelector'] && (
           <img
-            src={imagePaths["imgPathSelector"]}
-            alt="Imagen 2"
-            style={{ width: "100px" }}
+            src={imagePaths['imgPathSelector']}
+            alt='Imagen 2'
+            style={{ width: '100px' }}
           />
         )}
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="color">Color principal:</label>
+        <label htmlFor='color'>Color principal:</label>
         <input
-          type="text"
-          id="color"
-          name="color"
+          type='text'
+          id='color'
+          name='color'
           value={updatedTrivia?.color}
           onChange={handleInputChange}
         />
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="trans">Color de transparencia:</label>
+        <label htmlFor='trans'>Color de transparencia:</label>
         <input
-          type="text"
-          id="trans"
-          name="trans"
+          type='text'
+          id='trans'
+          name='trans'
           value={updatedTrivia?.trans}
           onChange={handleInputChange}
         />
@@ -412,9 +423,11 @@ const CreateTrivia = () => {
 
       {updatedTrivia?.questions.map((question) => (
         <div key={question.id} className={inputGroupQuestion}>
-          <label htmlFor={`question-${question.id}`}>Pregunta {question.id}:</label>
+          <label htmlFor={`question-${question.id}`}>
+            Pregunta {question.id}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={`question-${question.id}`}
             name={`question-${question.id}`}
             value={question.question}
@@ -423,7 +436,7 @@ const CreateTrivia = () => {
 
           <label htmlFor={`imgPathQuestion-${question.id}`}>Imagen:</label>
           <input
-            type="text"
+            type='text'
             id={`imgPathQuestion-${question.id}`}
             name={`imgPathQuestion-${question.id}`}
             value={imagePaths[`imgPathQuestion-${question.id}`]}
@@ -433,15 +446,17 @@ const CreateTrivia = () => {
             <img
               src={imagePaths[`imgPathQuestion-${question.id}`]}
               alt={imagePaths[`imgPathQuestion-${question.id}`]}
-              style={{ width: "100px" }}
+              style={{ width: '100px' }}
             />
           )}
 
           {question.answers.map((answer, index) => (
             <div key={index} className={inputGroupAnswers}>
-              <label htmlFor={`answer-${question.id}-${index}`}>Respuesta {index + 1}:</label>
+              <label htmlFor={`answer-${question.id}-${index}`}>
+                Respuesta {index + 1}:
+              </label>
               <input
-                type="text"
+                type='text'
                 id={`answer-${question.id}-${index}`}
                 name={`answer-${question.id}-${index}`}
                 value={answer.text}
@@ -449,14 +464,10 @@ const CreateTrivia = () => {
               />
 
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={answer.correct}
                 onChange={(e) =>
-                  handleQuestionChange(
-                    question.id,
-                    index,
-                    e.target.checked
-                  )
+                  handleQuestionChange(question.id, index, e.target.checked)
                 }
               />
             </div>
@@ -466,16 +477,20 @@ const CreateTrivia = () => {
 
       {updatedTrivia?.result.map((result, index) => (
         <div key={index} className={inputGroupResult}>
-          <label htmlFor={`result-title-${index}`}>Título del resultado {index + 1}:</label>
+          <label htmlFor={`result-title-${index}`}>
+            Título del resultado {index + 1}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={`result-title-${index}`}
             name={`result-title-${index}`}
             value={result.title}
             onChange={(e) => handleResultChange(index, 'title', e.target.value)}
           />
 
-          <label htmlFor={`result-body-${index}`}>Cuerpo del resultado {index + 1}:</label>
+          <label htmlFor={`result-body-${index}`}>
+            Cuerpo del resultado {index + 1}:
+          </label>
           <textarea
             id={`result-body-${index}`}
             name={`result-body-${index}`}
@@ -484,9 +499,11 @@ const CreateTrivia = () => {
             onChange={(e) => handleResultChange(index, 'body', e.target.value)}
           />
 
-          <label htmlFor={imagePaths[`imgPathResult-${index}`]}>Imagen del resultado {index + 1}:</label>
+          <label htmlFor={imagePaths[`imgPathResult-${index}`]}>
+            Imagen del resultado {index + 1}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={imagePaths[`imgPathResult-${index}`]}
             name={imagePaths[`imgPathResult-${index}`]}
             value={imagePaths[`imgPathResult-${index}`]}
@@ -496,32 +513,38 @@ const CreateTrivia = () => {
             <img
               src={imagePaths[`imgPathResult-${index}`]}
               alt={imagePaths[`imgPathResult-${index}`]}
-              style={{ width: "100px" }}
+              style={{ width: '100px' }}
             />
           )}
 
-          <label htmlFor={`result-idTemplateBrevo-${index}`}>ID del template Brevo del resultado {index + 1}:</label>
+          <label htmlFor={`result-idTemplateBrevo-${index}`}>
+            ID del template Brevo del resultado {index + 1}:
+          </label>
           <input
-            type="number"
+            type='number'
             id={`result-idTemplateBrevo-${index}`}
             name={`result-idTemplateBrevo-${index}`}
             value={result.idTemplateBrevo}
             onChange={(e) =>
-              handleResultChange(index, 'idTemplateBrevo', parseInt(e.target.value))
+              handleResultChange(
+                index,
+                'idTemplateBrevo',
+                parseInt(e.target.value),
+              )
             }
           />
         </div>
       ))}
       <div className={buttonContainer}>
-
-        <Link href={"/admin/trivias/trivias"}>
+        <Link href={'/admin/trivias/trivias'}>
           <a>
             <button className={button}>Cancelar</button>
           </a>
         </Link>
-        <button className={button} onClick={handleCreate}>Crear Trivia</button>
+        <button className={button} onClick={handleCreate}>
+          Crear Trivia
+        </button>
       </div>
-
     </div>
   );
 };

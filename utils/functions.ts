@@ -177,11 +177,11 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `${user} le dio like a tu comentario.`;
   } else if (notification.type === '5') {
     return `Tu suscripción a Gonvar+ está próxima a renovarse el ${new Date(
-      notification.due_date * 1000
+      notification.due_date * 1000,
     ).toLocaleDateString()}.`;
   } else if (notification.type === '6') {
     return `Tu suscripción anual se renovará el ${new Date(
-      notification.due_date * 1000
+      notification.due_date * 1000,
     ).toLocaleDateString()} de manera automática.`;
   } else if (notification.type === '7') {
     return `${user} no olvides terminar el curso de ${notification.title}, podrás solicitar tu certificado al terminar.`;
@@ -201,7 +201,7 @@ export const returnNotificationMessage = (notification: any, user: any) => {
     return `Tienes tarea pendiente de tu curso ${notification.title}.`;
   } else if (notification.type === '15') {
     return `Tu suscripción cuatrimestral se renovará el ${new Date(
-      notification.due_date * 1000
+      notification.due_date * 1000,
     ).toLocaleDateString()} de manera automática.`;
   } else if (notification.type === '17') {
     return 'Empieza a disfrutar en la mejor academia de Latam con los +65 cursos de uñas, pestañas y maquillaje; incluidos en tu suscripción.';
@@ -270,7 +270,7 @@ export function returnPrice(
   frequency: string,
   type: string,
   coupon: boolean,
-  price: number
+  price: number,
 ) {
   if (trial === 'true' && v === '1') {
     return '149  MXN/mes.';
@@ -306,7 +306,7 @@ export function returnPriceTag(
   type: string,
   coupon: any,
   price: number,
-  nailmasterplusanual: string
+  nailmasterplusanual: string,
 ) {
   let priceTag = '';
   if (trial === 'true' && v === '1') {

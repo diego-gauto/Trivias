@@ -1,8 +1,7 @@
-import TriviasHome from "../../containers/Trivias/TriviasHome/triviasHome";
+import TriviasHome from '../../containers/Trivias/TriviasHome/triviasHome';
 
 const TriviaScreen = () => {
   return (
-
     // <MainContain
     //   style={{
     //     width: "100%",
@@ -12,6 +11,6 @@ const TriviaScreen = () => {
     <TriviasHome />
 
     // </MainContain>
-  )
-}
+  );
+};
 export default TriviaScreen;

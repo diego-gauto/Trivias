@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div<{ open: any }>`
   display: flex;
@@ -210,13 +210,13 @@ export const Title = styled.h1`
   align-items: center;
   font-size: 18px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   margin: 0;
 `;
 export const Episode = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   cursor: pointer;
   margin: 0;
   font-weight: 500 !important;

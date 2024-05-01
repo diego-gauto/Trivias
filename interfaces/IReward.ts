@@ -1,13 +1,13 @@
 export enum rewardType {
-  digital = "Digital",
-  physical = "Físico",
+  digital = 'Digital',
+  physical = 'Físico',
 }
 
 export interface IReward {
   // the reward's id
   id: string;
   // the reward's about text
-  about: string; 
+  about: string;
   // the reward's image path
   path: string;
   // the reward's reference
@@ -21,4 +21,3 @@ export interface IReward {
   // the number of points associated with the reward
   points?: number;
 }
-

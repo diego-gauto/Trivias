@@ -1,11 +1,11 @@
 export const generateGetInvoicesQuery = (
   email: string,
   method: string | undefined,
-  offset: number
+  offset: number,
 ) => {
   const emailCond = email ? `email LIKE '${email}%'` : '';
   const methodCond = method ? `method LIKE '${method}'` : '';
-  const whereConditions = [emailCond, methodCond].filter(c => c !== '');
+  const whereConditions = [emailCond, methodCond].filter((c) => c !== '');
   const where =
     whereConditions.length === 0
       ? ''
@@ -24,11 +24,11 @@ export const generateGetInvoicesQuery = (
 
 export const generateGetInvoicesCountQuery = (
   email: string,
-  method: string | undefined
+  method: string | undefined,
 ) => {
   const emailCond = email ? `email LIKE '${email}%'` : '';
   const methodCond = method ? `method LIKE '${method}'` : '';
-  const whereConditions = [emailCond, methodCond].filter(c => c !== '');
+  const whereConditions = [emailCond, methodCond].filter((c) => c !== '');
   const where =
     whereConditions.length === 0
       ? ''

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const SliderContainer = styled.div`
   position: relative;
   bottom: -650px;

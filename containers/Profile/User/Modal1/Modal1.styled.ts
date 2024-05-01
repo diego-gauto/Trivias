@@ -1,6 +1,6 @@
-import { ModalHeader } from "react-bootstrap";
-import InputMask from "react-input-mask";
-import styled from "styled-components";
+import { ModalHeader } from 'react-bootstrap';
+import InputMask from 'react-input-mask';
+import styled from 'styled-components';
 
 export const ModalContain = styled.div`
   @font-face {
@@ -20,7 +20,7 @@ export const ModalCont = styled.div`
 `;
 export const Title = styled(ModalHeader)`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   border: none;
   padding: 0;
 `;
@@ -46,7 +46,7 @@ export const CardText = styled.p`
   font-weight: 600;
   margin-left: 5px;
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   @media (max-width: 990px) {
     margin-left: 0;
     margin-top: -15px;
@@ -129,11 +129,11 @@ export const InputInfo = styled.div`
 export const AddText = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const ModalInput = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
   border-radius: 20px;
@@ -144,7 +144,7 @@ export const ModalInput = styled.input`
 `;
 export const InputCard = styled(InputMask)`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
   border-radius: 20px;

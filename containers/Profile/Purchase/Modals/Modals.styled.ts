@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import styled from "styled-components";
+import { Modal } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ModalContainer = styled(Modal)`
   @font-face {
@@ -28,7 +28,7 @@ export const OxxoContainer = styled.div`
   gap: 10px;
   padding: 40px;
   background-color: #fff;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
   text-align: center;
 
   h3 {
@@ -76,7 +76,7 @@ export const SpeiContainer = styled.div`
   gap: 10px;
   padding: 40px;
   background-color: #fff;
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
   text-align: center;
   p {
     margin: 0;

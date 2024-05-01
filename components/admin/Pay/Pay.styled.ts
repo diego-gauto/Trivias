@@ -192,26 +192,26 @@ export const Imagecontain = styled.div`
   height: 32px;
 `;
 export const Method = styled('i')<{ brand: any }>`
-  background-image: url(../images/admin/${props => props.brand}.png);
+  background-image: url(../images/admin/${(props) => props.brand}.png);
   background-repeat: no-repeat;
   width: 35px;
   margin: 5px;
   height: 12px;
-  ${props =>
+  ${(props) =>
     props.brand == 'mastercard' &&
     css`
       margin: 2px;
       width: 31px;
       height: 20px;
     `}
-  ${props =>
+  ${(props) =>
     props.brand == 'paypal' &&
     css`
       margin: 2px;
       width: 16px;
       height: 20px;
     `}
-  ${props =>
+  ${(props) =>
     props.brand == 'stripe' &&
     css`
       background-position: center;

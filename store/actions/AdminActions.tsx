@@ -1,31 +1,53 @@
-import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import firebase from "firebase/compat/app";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
-import { deleteObject, getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadString,
+} from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
-import { db } from "../../firebase/firebaseConfig";
+import { db } from '../../firebase/firebaseConfig';
 
-export const createCourse = async (signUpData: { data: any; }) => {
-  const {
-    data,
-  } = signUpData;
+export const createCourse = async (signUpData: { data: any }) => {
+  const { data } = signUpData;
   data.createdAt = new Date();
-  data.reference = `${data.courseTittle}-${uuidv4()}`
+  data.reference = `${data.courseTittle}-${uuidv4()}`;
   data.coursePath = await uploadImage(data.coursePath, data.reference);
-  return db.collection('courses').add(data).then((res) => {
-    db.collection('courses').doc(res.id).update({
-      documentID: res.id
-    });
-  })
-
-    .catch((error: any) => {
-      let docCreationError = new Error(`Error creating user document: ${error}`);
-      console.error(docCreationError);
-      throw (docCreationError);
+  return db
+    .collection('courses')
+    .add(data)
+    .then((res) => {
+      db.collection('courses').doc(res.id).update({
+        documentID: res.id,
+      });
     })
 
-}
+    .catch((error: any) => {
+      let docCreationError = new Error(
+        `Error creating user document: ${error}`,
+      );
+      console.error(docCreationError);
+      throw docCreationError;
+    });
+};
 
 const uploadImage = (image: any, name: any) => {
   const storage = getStorage();
@@ -33,51 +55,55 @@ const uploadImage = (image: any, name: any) => {
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 
-export const updateCourse = async (signUpData: { data: any; }, images: any) => {
-  const {
-    data,
-  } = signUpData;
+export const updateCourse = async (signUpData: { data: any }, images: any) => {
+  const { data } = signUpData;
 
-  let tempCourse: any = JSON.parse(JSON.stringify(data))
+  let tempCourse: any = JSON.parse(JSON.stringify(data));
 
   const storage = getStorage();
   const desertRef = ref(storage, `courses/${tempCourse.reference}`);
-  if (images !== "") {
-    await deleteObject(desertRef).then(async () => {
-      tempCourse.reference = `${tempCourse.courseTittle}-${uuidv4()}`
-    }).catch((error) => {
-      console.log(error)
-    });
+  if (images !== '') {
+    await deleteObject(desertRef)
+      .then(async () => {
+        tempCourse.reference = `${tempCourse.courseTittle}-${uuidv4()}`;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     tempCourse.coursePath = await uploadImage(images, tempCourse.reference);
   }
-  return db.collection('courses').doc(data.documentID).update(tempCourse)
+  return db
+    .collection('courses')
+    .doc(data.documentID)
+    .update(tempCourse)
     .catch((error: any) => {
-      let docCreationError = new Error(`Error updating user document: ${error}`);
+      let docCreationError = new Error(
+        `Error updating user document: ${error}`,
+      );
       console.error(docCreationError);
-      throw (docCreationError);
-    })
+      throw docCreationError;
+    });
+};
 
-}
-
-export const updateRole = async (adminData: { data: object; }, adminID: string) => {
-  const {
-    data,
-  } = adminData;
+export const updateRole = async (
+  adminData: { data: object },
+  adminID: string,
+) => {
+  const { data } = adminData;
   try {
     return await db.collection('users').doc(adminID).update(adminData);
   } catch (error) {
     let docCreationError = new Error(`Error updating user document: ${error}`);
     console.error(docCreationError);
-    throw (docCreationError);
+    throw docCreationError;
   }
-
-}
+};
 
 /*
   const handleChangeResolved = async (id, value) => {
@@ -130,46 +156,42 @@ export const createCourse = (signUpData: { data: any; }) => {
 }
 */
 
-export const signInWithCreds = (signUpData: { credentials: any; }) => {
-  const {
-    credentials,
-  } = signUpData;
+export const signInWithCreds = (signUpData: { credentials: any }) => {
+  const { credentials } = signUpData;
 
   //Una vez inicializado es contextual a las llamadas de firebase
   const auth = getAuth();
 
-  return signInWithEmailAndPassword(auth, credentials.email,
-    credentials.password)
+  return signInWithEmailAndPassword(
+    auth,
+    credentials.email,
+    credentials.password,
+  )
     .then(async (userCredential) => {
       const user = userCredential.user;
-      localStorage.setItem("email", credentials.email);
+      localStorage.setItem('email', credentials.email);
     })
     .catch((error: any) => {
-
       firebase.auth().signOut();
       console.error(error);
       throw error;
     });
-
 };
 
-
 export const accessWithAuthProvider = (provider: any) => {
-
   switch (provider) {
-    case "Google":
+    case 'Google':
       provider = new firebase.auth.GoogleAuthProvider();
       break;
-    case "Facebook":
+    case 'Facebook':
       provider = new firebase.auth.FacebookAuthProvider();
       break;
     default:
-      const error = new Error("Invalid or no auth provider introduced")
+      const error = new Error('Invalid or no auth provider introduced');
       console.error(error);
       throw error;
   }
   const auth = getAuth();
-
 
   var uid: any;
   var displayName: any;
@@ -186,52 +208,52 @@ export const accessWithAuthProvider = (provider: any) => {
       photoURL = response.user.photoURL;
       phoneNumber = response.user.phoneNumber;
 
-      const query_1 = query(collection(db, "users"), where("uid", "==", response.user.uid));
+      const query_1 = query(
+        collection(db, 'users'),
+        where('uid', '==', response.user.uid),
+      );
 
       const querySnapshot = await getDocs(query_1);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         doc1 = doc.data().uid;
       });
-
-    }).then(async () => {
+    })
+    .then(async () => {
       //If user does not exist register a new one
       if (!doc1) {
-
-
         if (photoURL == undefined || photoURL == null) {
-          photoURL = ""
+          photoURL = '';
         }
         //Create the document in Firestore
-        await addDoc(collection(db, "users"), {
-
+        await addDoc(collection(db, 'users'), {
           uid: uid,
           name: displayName,
           email: email,
           photoURL: photoURL,
           provider: provider.providerId,
           phoneNumber: phoneNumber,
-          role: "user", //user, userAdmin, professor
-          plan: "free", //gonvarPlus
+          role: 'user', //user, userAdmin, professor
+          plan: 'free', //gonvarPlus
           score: 0,
-
-
-        }).then(() => {
-          return true;
-
-        }).catch((error: any) => {
-          let docCreationError = new Error(`Error creating user document: ${error}`);
-          console.error(docCreationError);
-          throw (docCreationError);
         })
-
+          .then(() => {
+            return true;
+          })
+          .catch((error: any) => {
+            let docCreationError = new Error(
+              `Error creating user document: ${error}`,
+            );
+            console.error(docCreationError);
+            throw docCreationError;
+          });
       }
-    }).catch((error) => {
+    })
+    .catch((error) => {
       firebase.auth().signOut();
       console.error(error);
-
     });
-}
+};
 
 // Esto sera para admin courses
 
@@ -241,78 +263,112 @@ const uploadImageLesson = (image: any, name: any) => {
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 
 export const addLesson = async (lesson: any, courseID: any, seasonID: any) => {
-  lesson.users = []
-  lesson.imageReference = `${lesson.title}-${uuidv4()}`
+  lesson.users = [];
+  lesson.imageReference = `${lesson.title}-${uuidv4()}`;
   lesson.image = await uploadImageLesson(lesson.image, lesson.imageReference);
   if (lesson.extra.length > 0) {
     lesson.extra.forEach(async (element: any, index: any) => {
-      element.reference = `${uuidv4()}`
+      element.reference = `${uuidv4()}`;
       element.path = await uploadImageLesson(element.path, element.reference);
 
       if (index == lesson.extra.length - 1) {
         const docRef = await addDoc(
-          collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+          collection(db, 'courses', courseID, 'seasons', seasonID, 'lessons'),
           {
-            ...lesson
-          }
+            ...lesson,
+          },
         );
       }
     });
-
   } else {
     const docRef = await addDoc(
-      collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+      collection(db, 'courses', courseID, 'seasons', seasonID, 'lessons'),
       {
-        ...lesson
-      }
+        ...lesson,
+      },
     );
   }
-}
+};
 export const addQuiz = async (quiz: any, courseID: any, seasonID: any) => {
-  quiz.users = []
+  quiz.users = [];
   const docRef = await addDoc(
-    collection(db, "courses", courseID, "seasons", seasonID, "lessons"),
+    collection(db, 'courses', courseID, 'seasons', seasonID, 'lessons'),
     {
-      ...quiz
-    }
+      ...quiz,
+    },
   );
-}
+};
 export const getQuiz = async (courseID: any, seasonID: any, lessonID: any) => {
-  const docRef = await doc(db, "courses", courseID, "seasons", seasonID, "lessons", lessonID);
+  const docRef = await doc(
+    db,
+    'courses',
+    courseID,
+    'seasons',
+    seasonID,
+    'lessons',
+    lessonID,
+  );
   const docSnap = await getDoc(docRef);
   return docSnap.data();
-}
-export const editQuiz = async (quiz: any, courseID: any, seasonID: any, lessonID: any) => {
-  return await db.collection('courses').
-    doc(courseID).collection("seasons").
-    doc(seasonID).collection("lessons").
-    doc(lessonID).update(quiz);
-}
-export const editSeasonName = async (courseID: string, seasonID: string, seasonName: string) => {
-  return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ name: seasonName });
-}
+};
+export const editQuiz = async (
+  quiz: any,
+  courseID: any,
+  seasonID: any,
+  lessonID: any,
+) => {
+  return await db
+    .collection('courses')
+    .doc(courseID)
+    .collection('seasons')
+    .doc(seasonID)
+    .collection('lessons')
+    .doc(lessonID)
+    .update(quiz);
+};
+export const editSeasonName = async (
+  courseID: string,
+  seasonID: string,
+  seasonName: string,
+) => {
+  return await db
+    .collection('courses')
+    .doc(courseID)
+    .collection('seasons')
+    .doc(seasonID)
+    .update({ name: seasonName });
+};
 
-export const editSeasonIndex = async (courseID: string, seasonID: any, index: number) => {
-  return await db.collection('courses').doc(courseID).collection("seasons").doc(seasonID).update({ season: index });
-}
+export const editSeasonIndex = async (
+  courseID: string,
+  seasonID: any,
+  index: number,
+) => {
+  return await db
+    .collection('courses')
+    .doc(courseID)
+    .collection('seasons')
+    .doc(seasonID)
+    .update({ season: index });
+};
 const uploadBlogImage = (image: any, name: any) => {
   const storage = getStorage();
   const storageRef = ref(storage, `blog/${name}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 
 const uploadSubThemeBlogImage = (image: any, name: any) => {
   const storage = getStorage();
@@ -320,112 +376,114 @@ const uploadSubThemeBlogImage = (image: any, name: any) => {
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 export const addBlog = async (blog: any) => {
   blog.createdAt = new Date();
   blog.lastPublished = new Date();
-  blog.reference = `${blog.title}-${uuidv4()}`
+  blog.reference = `${blog.title}-${uuidv4()}`;
   blog.path = await uploadBlogImage(blog.path, blog.reference);
   if (blog.subTopic.length > 0) {
     blog.subTopic.forEach(async (topic: any, index: any) => {
       if (topic.topicPath) {
-        topic.reference = `${topic.topicTitle}-${uuidv4()}`
-        topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
+        topic.reference = `${topic.topicTitle}-${uuidv4()}`;
+        topic.topicPath = await uploadSubThemeBlogImage(
+          topic.topicPath,
+          topic.reference,
+        );
       }
       if (index == blog.subTopic.length - 1) {
-        const docRef = await addDoc(
-          collection(db, "blog"),
-          {
-            ...blog
-          }
-        );
-        console.log('exito')
+        const docRef = await addDoc(collection(db, 'blog'), {
+          ...blog,
+        });
+        console.log('exito');
       }
-    })
+    });
+  } else {
+    const docRef = await addDoc(collection(db, 'blog'), {
+      ...blog,
+    });
   }
-  else {
-    const docRef = await addDoc(
-      collection(db, "blog"),
-      {
-        ...blog
-      }
-    );
-  }
-  return 'exito'
-}
+  return 'exito';
+};
 export const getBlogs = async () => {
-  let data: any = []
-  const docRef = query(collection(db, "blog"));
+  let data: any = [];
+  const docRef = query(collection(db, 'blog'));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
-    data.push({ ...doc.data(), id: doc.id })
+    data.push({ ...doc.data(), id: doc.id });
   });
-  return data
-}
+  return data;
+};
 export const updateBlog = async (blog: any, blogId: any) => {
-  delete blog.lastPublished
+  delete blog.lastPublished;
   blog.lastPublished = new Date();
   console.log(blog);
-  let tempBlog: any = JSON.parse(JSON.stringify(blog))
+  let tempBlog: any = JSON.parse(JSON.stringify(blog));
   if ('format' in tempBlog) {
     tempBlog.image = await uploadBlogImage(tempBlog.path, tempBlog.reference);
-    delete tempBlog.format
+    delete tempBlog.format;
   }
   if (tempBlog.subTopic.length > 0) {
     blog.subTopic.forEach(async (topic: any, index: any) => {
       if ('format' in topic) {
-        topic.reference = `${topic.topicTitle}-${uuidv4()}`
-        topic.topicPath = await uploadSubThemeBlogImage(topic.topicPath, topic.reference);
-        delete topic.topicFormat
+        topic.reference = `${topic.topicTitle}-${uuidv4()}`;
+        topic.topicPath = await uploadSubThemeBlogImage(
+          topic.topicPath,
+          topic.reference,
+        );
+        delete topic.topicFormat;
       }
       if (index == blog.subTopic.length - 1) {
         const docRef = doc(db, 'blog', blogId);
-        delete tempBlog.id
+        delete tempBlog.id;
         await updateDoc(docRef, {
-          ...tempBlog
-        })
+          ...tempBlog,
+        });
       }
-    })
-  }
-  else {
+    });
+  } else {
     const docRef = doc(db, 'blog', blogId);
-    delete tempBlog.id
+    delete tempBlog.id;
     await updateDoc(docRef, {
-      ...tempBlog
-    })
+      ...tempBlog,
+    });
   }
-}
+};
 export const deleteBlog = async (blog: any) => {
   const storage = getStorage();
   const desertRef = ref(storage, `blog/${blog.reference}`);
-  await deleteObject(desertRef).then(async () => {
-    if (blog.subTopic.length > 0) {
-      blog.subTopic.forEach(async (topic: any, index: any) => {
-        if ('reference' in topic) {
-          const subDesertRef = ref(storage, `blog/subTheme/${topic.reference}`);
-          await deleteObject(subDesertRef);
-        }
-        if (index == blog.subTopic.length - 1) {
-          console.log('borrar')
-          await deleteDoc(doc(db, "blog", blog.id));
-          return 'success'
-        }
-        return 'entered'
-      })
-      return 'entered'
-    }
-    else {
-      await deleteDoc(doc(db, "blog", blog.id));
-      return 'success'
-    }
-  }).catch((error) => {
-    console.log(error)
-  });
-}
+  await deleteObject(desertRef)
+    .then(async () => {
+      if (blog.subTopic.length > 0) {
+        blog.subTopic.forEach(async (topic: any, index: any) => {
+          if ('reference' in topic) {
+            const subDesertRef = ref(
+              storage,
+              `blog/subTheme/${topic.reference}`,
+            );
+            await deleteObject(subDesertRef);
+          }
+          if (index == blog.subTopic.length - 1) {
+            console.log('borrar');
+            await deleteDoc(doc(db, 'blog', blog.id));
+            return 'success';
+          }
+          return 'entered';
+        });
+        return 'entered';
+      } else {
+        await deleteDoc(doc(db, 'blog', blog.id));
+        return 'success';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 const uploadLandingUserImage = (image: string, id: number) => {
   const storage = getStorage();
@@ -433,42 +491,42 @@ const uploadLandingUserImage = (image: string, id: number) => {
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 export const updateLandingUserImage = async (image: string, id: number) => {
   const url = await uploadLandingUserImage(image, id);
   return url;
-}
+};
 const uploadLandingImage = (image: string, id: number) => {
   const storage = getStorage();
   const storageRef = ref(storage, `landing/review/image/${id}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 export const updateLandingImage = async (image: string, id: number) => {
   const url = await uploadLandingImage(image, id);
   return url;
-}
+};
 const uploadLandingProductImage = (image: string, id: number) => {
   const storage = getStorage();
   const storageRef = ref(storage, `landing/product/image/${id}`);
   return new Promise((resolve, reject) => {
     uploadString(storageRef, image, 'data_url').then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        resolve(downloadURL)
+        resolve(downloadURL);
       });
     });
   });
-}
+};
 export const updateLandingProductImage = async (image: string, id: number) => {
   const url = await uploadLandingProductImage(image, id);
   return url;
-}
+};

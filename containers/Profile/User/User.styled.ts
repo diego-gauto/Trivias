@@ -1,7 +1,7 @@
-import ReactInputMask from "react-input-mask";
-import PhoneInput from "react-phone-number-input";
+import ReactInputMask from 'react-input-mask';
+import PhoneInput from 'react-phone-number-input';
 
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 
 export const BackgroundProfile = styled.div`
   width: 100%;
@@ -340,7 +340,7 @@ export const LogOut = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 900;
   color: #8e2de2;
@@ -395,7 +395,7 @@ export const AddPay = styled.p`
   margin-top: auto;
   margin-bottom: 0;
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 700;
   color: #6717cd;
   cursor: pointer;
@@ -418,7 +418,7 @@ export const RewardCenterLink = styled(AddPay)`
 export const RewardCenterLinkNoReward = styled(AddPay)``;
 
 export const DataTitle = styled.h1`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 24px;
   margin: 0;
   @media (max-width: 1023px) {
@@ -448,11 +448,11 @@ export const Inputs = styled.div`
 export const EditText = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const EditInput = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 8px;
   border: 1px solid #6717cd;
@@ -476,7 +476,7 @@ export const SaveButton = styled.button`
   padding-block: 10px;
   padding-inline: 25px;
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 30px;
@@ -497,7 +497,7 @@ export const SubscriptionButton = styled.button`
   padding-block: 10px;
   padding-inline: 25px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 600;
   border: 1px solid #6717cd;
@@ -710,7 +710,7 @@ export const ProfileMainContainer = styled.div<{
       flex-direction: column;
       gap: 20px;
       background-color: ${(props) =>
-        props.startEdit == false ? "#dad3e5" : "#e4b6e8"};
+        props.startEdit == false ? '#dad3e5' : '#e4b6e8'};
       padding-top: 160px;
       padding-inline: 40px;
       padding-bottom: 40px;
@@ -803,7 +803,7 @@ export const ProfileMainContainer = styled.div<{
         border-radius: 0 20px 20px 0;
         min-width: 40%;
         padding: 30px;
-        display: ${(props) => props.password == true && "none"};
+        display: ${(props) => props.password == true && 'none'};
       }
       @media (max-width: 600px) {
         padding-block: 30px;
@@ -812,7 +812,7 @@ export const ProfileMainContainer = styled.div<{
         min-width: 45%;
       }
       border-radius: ${(props) =>
-        props.password == false ? "0 0 20px 20px" : "0 0 0 0"};
+        props.password == false ? '0 0 20px 20px' : '0 0 0 0'};
       p {
         margin: 0;
       }
@@ -1279,9 +1279,9 @@ export const PictureContain = styled.div<{
     }
     .progress-circle {
       fill: none;
-      stroke: ${(props) => props.reward == 0 && "url(#gradientLevel)"}
-        ${(props) => props.reward == 1 && "url(#gradientTime)"}
-        ${(props) => props.reward == 2 && "url(#gradientCertificate)"};
+      stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'}
+        ${(props) => props.reward == 1 && 'url(#gradientTime)'}
+        ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
       stroke-width: 20px;
       stroke-dasharray: 755;
       ${(props) =>
@@ -1304,9 +1304,9 @@ export const PictureContain = styled.div<{
       cy: 125px;
       r: 120px;
       @media (max-width: 1023px) {
-        stroke: ${(props) => props.reward == 0 && "url(#gradientLevelResp)"}
-          ${(props) => props.reward == 1 && "url(#gradientTimeResp)"}
-          ${(props) => props.reward == 2 && "url(#gradientCertificateResp)"};
+        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'}
+          ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'}
+          ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
       }
     }
     .progress-background {
@@ -1449,7 +1449,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
           }
         }
         .point-container::before {
-          content: "";
+          content: '';
           position: absolute;
           background-color: transparent;
           border-top-left-radius: 21px;
@@ -1496,7 +1496,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
           props.reward == 1 &&
           css`
             .time-container::before {
-              content: "";
+              content: '';
               position: absolute;
               background-color: transparent;
               border-top-left-radius: 21px;
@@ -1508,7 +1508,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
               box-shadow: -25px 0 0 0 #e6c4ea;
             }
             .time-container::after {
-              content: "";
+              content: '';
               position: absolute;
               background-color: transparent;
               border-top-left-radius: 21px;
@@ -1522,7 +1522,7 @@ export const RewardContainer = styled.div<{ reward: any }>`
           `}
 
         .certificates-container::before {
-          content: "";
+          content: '';
           position: absolute;
           background-color: transparent;
           border-top-left-radius: 21px;
@@ -2223,8 +2223,8 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     background-color: #d2aff0;
     padding: 30px;
     border-radius: ${(props) =>
-      props.add == false ? "20px" : "20px 20px 0 0"};
-    font-family: "Montserrat", sans-serif;
+      props.add == false ? '20px' : '20px 20px 0 0'};
+    font-family: 'Montserrat', sans-serif;
     @media (max-width: 1260px) {
       padding: 20px;
     }
@@ -2515,7 +2515,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
 `;
 export const InputCard = styled(ReactInputMask)`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
   border-radius: 20px;

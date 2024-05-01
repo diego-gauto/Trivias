@@ -1,5 +1,5 @@
-export interface IGradientCanvas{
-  id: string,
-  increasedHeight?: boolean,
-  height?: string,
+export interface IGradientCanvas {
+  id: string;
+  increasedHeight?: boolean;
+  height?: string;
 }

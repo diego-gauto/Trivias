@@ -1,4 +1,4 @@
-export interface IModule5{
+export interface IModule5 {
   reviewsData: Review[];
 }
 

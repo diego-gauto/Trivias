@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 // import { useNavigate } from "react-router-dom";
-import styles from "./card.module.css";
+import styles from './card.module.css';
 
 export default function Card(props: any) {
   // const handleClick = () => {
@@ -17,7 +17,6 @@ export default function Card(props: any) {
     background: `linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, ${props.triviaInfo?.trans} 100%)`,
   };
 
-
   return (
     <Link href={`/trivias/${props.triviaInfo.id}`}>
       <a className={styles.link}>
@@ -26,8 +25,8 @@ export default function Card(props: any) {
           <div className={styles.cardImageAbove} style={cardStyle2}></div>
           <Image
             src={props.triviaInfo?.img}
-            alt={"imagen"}
-            layout="responsive"
+            alt={'imagen'}
+            layout='responsive'
             width={298}
             height={360}
             className={styles.cardImage}

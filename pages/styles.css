@@ -4,7 +4,7 @@
 
 .form-control:focus {
   outline: none !important;
-  border: 2px solid #6717CD !important;
+  border: 2px solid #6717cd !important;
 }
 
 .skeleton-product {
@@ -25,7 +25,7 @@
   z-index: 5000;
 }
 
-.skeleton-product .grey-field>* {
+.skeleton-product .grey-field > * {
   opacity: 0;
 }
 
@@ -45,11 +45,11 @@
 
 @keyframes scale {
   0% {
-    transform: scale(1.0)
+    transform: scale(1);
   }
 
   100% {
-    transform: scale(1.1)
+    transform: scale(1.1);
   }
 }
 
@@ -58,7 +58,11 @@
   height: 209px;
   right: 10px;
   position: absolute;
-  background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
   min-width: 50px;
 }
 
@@ -75,7 +79,7 @@ button,
 input,
 textarea,
 select {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 h1,
@@ -130,7 +134,7 @@ th {
   color: white;
 }
 
-@media screen and (max-width:850px) {
+@media screen and (max-width: 850px) {
   .cs-container .content h1 {
     color: #fff;
     font-size: 30px;
@@ -152,7 +156,7 @@ th {
   border-radius: 0 0 10px 10px;
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width: 1000px) {
   .scroll-container::-webkit-scrollbar {
     display: none !important;
   }
@@ -175,7 +179,7 @@ th {
   border-radius: 10px;
 } */
 .paypal-button.paypal-button-shape-pill {
-  background: #009CDE;
+  background: #009cde;
 }
 
 .modal-content {
@@ -186,12 +190,12 @@ input::-webkit-contacts-auto-fill-button {
   display: none;
 }
 
-input[type="text"]::-webkit-credentials-auto-fill-button {
+input[type='text']::-webkit-credentials-auto-fill-button {
   display: none;
 }
 
 .swiper .swiper-pagination .swiper-pagination-bullet {
-  background: #3F1168;
+  background: #3f1168;
   opacity: 1;
 }
 
@@ -201,7 +205,7 @@ input[type="text"]::-webkit-credentials-auto-fill-button {
 }
 
 .swiper .swiper-pagination .swiper-pagination-bullet-active {
-  background: #E55C00;
+  background: #e55c00;
 }
 
 .custom-dialog {
@@ -213,10 +217,14 @@ input[type="text"]::-webkit-credentials-auto-fill-button {
 }
 
 .ant-space .ant-progress-text {
-  color: #3F1168 !important;
+  color: #3f1168 !important;
 }
 
-.paypal .paypal-buttons .buttons-container .paypal-button-container .paypal-button-tagline {
+.paypal
+  .paypal-buttons
+  .buttons-container
+  .paypal-button-container
+  .paypal-button-tagline {
   display: none;
 }
 
@@ -250,7 +258,7 @@ input[type="text"]::-webkit-credentials-auto-fill-button {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   /*
   p {
     span {

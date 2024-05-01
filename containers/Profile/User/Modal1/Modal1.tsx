@@ -1,14 +1,12 @@
+import { useEffect, useState } from 'react';
 
+import { Modal } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
-import { useEffect, useState } from "react";
+import { httpsCallable } from 'firebase/functions';
 
-import { Modal } from "react-bootstrap";
-import { useMediaQuery } from "react-responsive";
-
-import { httpsCallable } from "firebase/functions";
-
-import { functions } from "../../../../firebase/firebaseConfig";
-import { addPaymentMethod } from "../../../../store/actions/PaymentActions";
+import { functions } from '../../../../firebase/firebaseConfig';
+import { addPaymentMethod } from '../../../../store/actions/PaymentActions';
 import {
   AddText,
   BottomInputs,
@@ -23,38 +21,47 @@ import {
   ModalPay,
   PurpleButton,
   Title,
-} from "./Modal1.styled";
-import { LoaderContain } from "../User.styled";
+} from './Modal1.styled';
+import { LoaderContain } from '../User.styled';
 
 const Modal1 = ({ show, setShow, data, handleClick }: any) => {
-
-  const responsive480 = useMediaQuery({ query: "(max-width: 870px)" });
+  const responsive480 = useMediaQuery({ query: '(max-width: 870px)' });
   const handleClose = () => {
     setShow(false);
-    document.body.style.position = "relative";
-  }
+    document.body.style.position = 'relative';
+  };
 
   const [card, setCard] = useState<any>({
-    holder: '', number: '', cvc: '', exp_month: '', exp_year: ''
+    holder: '',
+    number: '',
+    cvc: '',
+    exp_month: '',
+    exp_year: '',
   });
   const [loader, setLoader] = useState<any>(false);
 
   const addNewCard = async () => {
     let temp_new = {};
     setLoader(!loader);
-    if (Object.keys(card).some(key => card[key] === '')) {
+    if (Object.keys(card).some((key) => card[key] === '')) {
       alert('Por favor acomplete todos los campos!');
       setLoader(false);
     } else {
       const addCard = httpsCallable(functions, 'createPaymentMethodStripe');
       const info = {
         card: card,
-        stripe_id: data.stripeId
-      }
+        stripe_id: data.stripeId,
+      };
       await addCard(info).then(async (res: any) => {
-        if ("raw" in res.data) {
-          alert("Hay un error en los datos de la tarjeta!");
-          setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
+        if ('raw' in res.data) {
+          alert('Hay un error en los datos de la tarjeta!');
+          setCard({
+            holder: '',
+            number: '',
+            cvc: '',
+            exp_month: '',
+            exp_year: '',
+          });
           setLoader(false);
         } else {
           temp_new = {
@@ -64,110 +71,132 @@ const Modal1 = ({ show, setShow, data, handleClick }: any) => {
             cvc: card.cvc,
             holder: card.holder,
             exp_month: parseInt(card.exp_month),
-            exp_year: parseInt(card.exp_year)
-          }
+            exp_year: parseInt(card.exp_year),
+          };
           addPaymentMethod(temp_new, data.id);
           let newCard = {
             cardId: res.data.id,
-            stripeId: data.stripeId
-          }
+            stripeId: data.stripeId,
+          };
           const attach = httpsCallable(functions, 'attachPaymentMethodStripe');
           await attach(newCard).then((res) => {
             setLoader(false);
             handleClick(true);
             handleClose();
-          })
+          });
         }
-      })
+      });
     }
-  }
-  useEffect(() => {
-
-
-  }, [card])
+  };
+  useEffect(() => {}, [card]);
 
   useEffect(() => {
     if (show) {
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      Object.keys(card).forEach(key => {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      Object.keys(card).forEach((key) => {
         card[key] = '';
       });
       setCard(card);
     }
-  }, [show])
+  }, [show]);
 
   return (
     <>
       <ModalContain>
-        <Modal show={show} onHide={handleClose} size="lg" centered>
+        <Modal show={show} onHide={handleClose} size='lg' centered>
           <ModalCont>
-            <Title closeButton>
-              Ingresar Nuevo Método de Pago
-            </Title>
+            <Title closeButton>Ingresar Nuevo Método de Pago</Title>
             <ModalPay>
               <ModalForm>
                 <Inputs>
                   <InputInfo>
-                    <AddText>
-                      Número de la Tarjeta
-                    </AddText>
-                    <InputCard placeholder="XXXX XXXX XXXX XXXX" mask='9999 9999 9999 9999' maskChar={null} onChange={(e: any) => {
-                      setCard((card: any) => ({ ...card, number: e.target.value }));
-                    }}>
-                    </InputCard>
+                    <AddText>Número de la Tarjeta</AddText>
+                    <InputCard
+                      placeholder='XXXX XXXX XXXX XXXX'
+                      mask='9999 9999 9999 9999'
+                      maskChar={null}
+                      onChange={(e: any) => {
+                        setCard((card: any) => ({
+                          ...card,
+                          number: e.target.value,
+                        }));
+                      }}
+                    ></InputCard>
                   </InputInfo>
                   <InputInfo>
-                    <AddText>
-                      Nombre
-                    </AddText>
-                    <ModalInput placeholder="Nombre del propietario" onChange={(e) => {
-                      setCard((card: any) => ({ ...card, holder: e.target.value }));
-                    }} />
+                    <AddText>Nombre</AddText>
+                    <ModalInput
+                      placeholder='Nombre del propietario'
+                      onChange={(e) => {
+                        setCard((card: any) => ({
+                          ...card,
+                          holder: e.target.value,
+                        }));
+                      }}
+                    />
                   </InputInfo>
                   <BottomInputs>
                     <InputInfo>
-                      <AddText>
-                        Fecha de Expiración
-                      </AddText>
-                      <ModalInput placeholder="MM" maxLength={2} onChange={(e) => {
-                        setCard((card: any) => ({ ...card, exp_month: e.target.value }));
-                      }} />
+                      <AddText>Fecha de Expiración</AddText>
+                      <ModalInput
+                        placeholder='MM'
+                        maxLength={2}
+                        onChange={(e) => {
+                          setCard((card: any) => ({
+                            ...card,
+                            exp_month: e.target.value,
+                          }));
+                        }}
+                      />
                     </InputInfo>
                     <InputInfo>
-                      <AddText>
-                        Fecha de Expiración
-                      </AddText>
-                      <ModalInput placeholder="YYYY" maxLength={4} onChange={(e) => {
-                        setCard((card: any) => ({ ...card, exp_year: e.target.value }));
-                      }} />
+                      <AddText>Fecha de Expiración</AddText>
+                      <ModalInput
+                        placeholder='YYYY'
+                        maxLength={4}
+                        onChange={(e) => {
+                          setCard((card: any) => ({
+                            ...card,
+                            exp_year: e.target.value,
+                          }));
+                        }}
+                      />
                     </InputInfo>
                   </BottomInputs>
                   <InputInfo>
-                    <AddText>
-                      CVV
-                    </AddText>
-                    <ModalInput maxLength={4} placeholder="XXX" onChange={(e) => {
-                      setCard((card: any) => ({ ...card, cvc: e.target.value }));
-                    }} />
+                    <AddText>CVV</AddText>
+                    <ModalInput
+                      maxLength={4}
+                      placeholder='XXX'
+                      onChange={(e) => {
+                        setCard((card: any) => ({
+                          ...card,
+                          cvc: e.target.value,
+                        }));
+                      }}
+                    />
                   </InputInfo>
                 </Inputs>
               </ModalForm>
             </ModalPay>
             <ButtonDiv>
-              {!loader ? <PurpleButton onClick={() => {
-                addNewCard();
-              }}>
-                Agregar Método
-              </PurpleButton> :
+              {!loader ? (
+                <PurpleButton
+                  onClick={() => {
+                    addNewCard();
+                  }}
+                >
+                  Agregar Método
+                </PurpleButton>
+              ) : (
                 <LoaderContain />
-              }
-
+              )}
             </ButtonDiv>
           </ModalCont>
         </Modal>
       </ModalContain>
     </>
-  )
-}
+  );
+};
 export default Modal1;

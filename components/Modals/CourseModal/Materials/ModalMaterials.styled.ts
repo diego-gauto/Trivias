@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import styled, { keyframes } from "styled-components";
+import { Modal } from 'react-bootstrap';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;

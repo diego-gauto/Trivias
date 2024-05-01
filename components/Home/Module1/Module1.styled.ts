@@ -1,6 +1,6 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from 'react-bootstrap';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModuleContainer = styled(Container)`
   height: 82.5vh;
@@ -43,14 +43,14 @@ export const ArrowDownIcon = styled.svg`
 `;
 export const ModuleContentWrapper = styled(Row)`
   display: grid;
-  grid-template-areas: "left right";
+  grid-template-areas: 'left right';
   grid-template-columns: 4fr 5fr;
   height: 82.5vh;
   @media only screen and (max-width: 1024px) {
     height: 100vh;
     grid-template-areas:
-      "right"
-      "left";
+      'right'
+      'left';
     grid-template-columns: 1fr;
     grid-template-rows: 35% 65%;
   }

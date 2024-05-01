@@ -20,7 +20,7 @@
 }
 
 .finalVolver div {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -43,7 +43,7 @@
 }
 
 .finalTextos h1 {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 51px;
@@ -56,7 +56,7 @@
   height: 56px;
   width: 80%;
   margin-top: 10px;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
@@ -66,7 +66,7 @@
 }
 
 .finalTextos span {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
@@ -76,13 +76,12 @@
 
 .finalImg {
   width: 43%;
-  background-image: url("/images/trivias/revisa-email.jpg");
+  background-image: url('/images/trivias/revisa-email.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
   padding: 40px 10px 0 0;
   text-align: end;
   min-height: 590px;
-
 }
 
 .link {
@@ -90,33 +89,29 @@
 }
 
 @media screen and (max-width: 1014px) {
-
-
-  .finalImg{
+  .finalImg {
     background-size: cover;
     background-position: center;
   }
-
 }
 
 @media screen and (max-width: 800px) {
-
   .finalContainer {
     display: flex;
     flex-direction: column;
   }
-  
+
   .final {
     width: auto;
     padding: 0 3%;
   }
 
-  .finalImg{
+  .finalImg {
     display: none;
   }
 
   .finalTextos {
-    position:relative;
+    position: relative;
     z-index: 2;
     width: 80%;
     /* height: 40%; */
@@ -140,7 +135,5 @@
     width: 100%;
     text-align: center;
     font-size: 2.5vh;
-
   }
-
 }

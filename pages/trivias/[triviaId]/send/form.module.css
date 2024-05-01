@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
 .formContainer {
   height: 100%;
@@ -29,7 +29,7 @@
 }
 
 .volver div {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -54,7 +54,7 @@
 .textos h1 {
   text-align: center;
   position: relative;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 51px;
@@ -68,13 +68,13 @@
   position: relative;
   margin-top: 3%;
   padding: 0 5%;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
   line-height: 25px;
   color: #520795;
-  max-width:100%
+  max-width: 100%;
 }
 
 .textos h3 span {
@@ -85,12 +85,12 @@
   text-align: center;
   position: relative;
   margin-top: 2%;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: italic;
   font-weight: 500;
   font-size: 17px;
   line-height: 20px;
-  color: #CD42D3;
+  color: #cd42d3;
 }
 
 .inputContainer {
@@ -98,7 +98,7 @@
   height: 165px;
   margin-top: 1%;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -119,7 +119,7 @@
 
 .checkboxContainer label {
   margin-left: 24px;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -132,8 +132,8 @@
   color: #7a7289;
 }
 
-.terminos{
-  font-family: "Montserrat";
+.terminos {
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -145,12 +145,12 @@
   text-decoration: none;
 }
 
-.terminos:hover{
-
-  color: #d24dd3;}
+.terminos:hover {
+  color: #d24dd3;
+}
 
 .btnRecibir {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
@@ -177,7 +177,7 @@
   position: relative;
   width: 40%;
   min-height: 600px;
-  background-image: url("/images/trivias/mailexitoso.png");
+  background-image: url('/images/trivias/mailexitoso.png');
   background-size: 100%;
   background-repeat: no-repeat;
   /*padding: 40px 10px 0 0;*/
@@ -188,42 +188,40 @@
   padding: 40px 10px 0 0;
 }
 
-
-.errorMessageNombre{
+.errorMessageNombre {
   color: red;
   position: relative;
-  top:-8px;
+  top: -8px;
   width: 245px;
 }
 
-.errorMessageApellido{
+.errorMessageApellido {
   color: red;
   position: relative;
-  top:-8px;
+  top: -8px;
   width: 245px;
 }
 
-.errorMessageMail{
+.errorMessageMail {
   color: red;
   position: relative;
-  top:-8px;
+  top: -8px;
   width: 300px;
 }
 
-.errorMessageWA{
+.errorMessageWA {
   color: red;
   position: relative;
-  top:-3px;
+  top: -3px;
   width: 300px;
 }
 
 @media screen and (max-width: 1313px) {
-
   .textos h1 {
     font-size: 45px;
     line-height: 50px;
   }
-  
+
   .textos h3 {
     font-size: 18px;
     line-height: 20px;
@@ -237,21 +235,19 @@
   .inputContainer {
     max-width: 90%;
   }
-
 }
 
 @media screen and (max-width: 1127px) {
-
-    /* .form, .formImg {
+  /* .form, .formImg {
       min-height: 620px;
     } */
 
-  .formImg{
+  .formImg {
     background-size: cover;
     background-position: center center;
   }
 
-  .inputContainer{
+  .inputContainer {
     height: 330px;
     flex-direction: column;
     width: 80%;
@@ -264,32 +260,26 @@
 }
 
 @media screen and (max-width: 800px) {
-
-
   .formImg {
     display: none;
   }
 
-  .form{
+  .form {
     width: 100%;
   }
 
   .textos h3 {
     padding: 0;
   }
-
 }
 
 @media screen and (max-width: 430px) {
-
   .inputContainer {
     width: 90%;
   }
-
 }
 
 @media screen and (max-width: 347px) {
-
   /* .form {
     min-height: 780px;
   } */
@@ -303,11 +293,11 @@
     max-width: 90%;
   }
 
-  .errorMessageMail{
+  .errorMessageMail {
     width: 245px;
   }
-  
-  .errorMessageWA{
+
+  .errorMessageWA {
     width: 245px;
   }
 
@@ -318,5 +308,4 @@
   .btnRecibir {
     max-width: 90%;
   }
-
 }

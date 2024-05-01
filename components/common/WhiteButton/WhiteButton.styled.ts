@@ -1,9 +1,9 @@
-import { Button } from "react-bootstrap";
+import { Button } from 'react-bootstrap';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const WhiteButtonContainer = styled(Button)`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border: 1.5px solid #6717cd;
   border-radius: 100px;
   color: #6717cd;

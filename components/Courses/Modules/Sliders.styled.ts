@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Container } from "react-bootstrap";
+import styled, { css } from 'styled-components';
+import { Container } from 'react-bootstrap';
 
 export const SlideContain = styled.div`
   overflow: scroll;
@@ -42,27 +42,27 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
     font-size: 12px;
     margin: 0;
     ${(props) =>
-      props.level == "Muy Fácil" &&
+      props.level == 'Muy Fácil' &&
       css`
         color: #006ca8;
       `}
     ${(props) =>
-      props.level == "Fácil" &&
+      props.level == 'Fácil' &&
       css`
         color: #8c5098;
       `}
       ${(props) =>
-      props.level == "Intermedio" &&
+      props.level == 'Intermedio' &&
       css`
         color: #ec7501;
       `}
     ${(props) =>
-      props.level == "Avanzado" &&
+      props.level == 'Avanzado' &&
       css`
         color: #149e62;
       `}
       ${(props) =>
-      props.level == "Máster" &&
+      props.level == 'Máster' &&
       css`
         color: #d22978;
       `}
@@ -88,27 +88,27 @@ export const SlideModuleContainer = styled(Container)<{ level: any }>`
       letter-spacing: 2px;
     }
     ${(props) =>
-      props.level == "Muy Fácil" &&
+      props.level == 'Muy Fácil' &&
       css`
         color: #006ca8;
       `}
     ${(props) =>
-      props.level == "Fácil" &&
+      props.level == 'Fácil' &&
       css`
         color: #8c5098;
       `}
       ${(props) =>
-      props.level == "Intermedio" &&
+      props.level == 'Intermedio' &&
       css`
         color: #ec7501;
       `}
     ${(props) =>
-      props.level == "Avanzado" &&
+      props.level == 'Avanzado' &&
       css`
         color: #149e62;
       `}
       ${(props) =>
-      props.level == "Máster" &&
+      props.level == 'Máster' &&
       css`
         color: #d22978;
       `}
@@ -139,7 +139,7 @@ export const Progress = styled.div`
 export const Title = styled.h2`
   color: #3f1168;
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
   padding-left: 60px;
@@ -169,7 +169,7 @@ export const ButtonContain = styled.div`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #6717cd;
   padding-block: 15px;
   padding-inline: 25px;
@@ -216,7 +216,9 @@ export const ImageContent = styled.div`
     display: flex;
     position: absolute;
     justify-content: center;
-    font-family: "Montserrat", sans serif;
+    font-family:
+      'Montserrat',
+      sans serif;
     transform: rotate(-40deg);
     color: white;
     top: 25px;
@@ -255,12 +257,12 @@ export const Arrows = styled.div<{ side: string }>`
     display: none;
   }
   ${(props) =>
-    props.side === "left" &&
+    props.side === 'left' &&
     css`
       left: 10px;
     `}
   ${(props) =>
-    props.side === "right" &&
+    props.side === 'right' &&
     css`
       right: 10px;
     `}

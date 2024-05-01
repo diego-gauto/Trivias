@@ -1,12 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import ReactPlayer from "react-player";
-import { addUserHistory, addUserToLessonApi, updateUserProgressApi } from '../../../../../components/api/lessons';
+import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
+import {
+  addUserHistory,
+  addUserToLessonApi,
+  updateUserProgressApi,
+} from '../../../../../components/api/lessons';
 import { useRouter } from 'next/router';
 import { LESSON_PATH } from '../../../../../constants/paths';
 
-declare let Hls: any
+declare let Hls: any;
 
-const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLesson, openActivityModal }: any) => {
+const Video = ({
+  data,
+  id,
+  course,
+  user,
+  season,
+  lesson,
+  handleComplete,
+  nextLesson,
+  openActivityModal,
+}: any) => {
   const [current, setCurrent] = useState<any>();
   const [duration, setDuration] = useState<any>(0);
   const [menu, setMenu] = useState<boolean>(false);
@@ -22,63 +36,70 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
       let tempLesson = {
         lessonId: data.id,
         userId: user.user_id,
-        points: parseInt(data.points)
-      }
+        points: parseInt(data.points),
+      };
       addUserToLessonApi(tempLesson).then(() => {
         handleComplete();
         if (data.quiz === 0 && data.homework === 0) {
           router.push({
             pathname: LESSON_PATH,
-            query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
-          })
+            query: {
+              id: course.id,
+              season: nextLesson.seasonIndex,
+              lesson: nextLesson.lessonIndex,
+            },
+          });
         } else {
           openActivityModal();
         }
-      })
-    }
-    else {
+      });
+    } else {
       if (data.quiz === 0 && data.homework === 0) {
         router.push({
           pathname: LESSON_PATH,
-          query: { id: course.id, season: nextLesson.seasonIndex, lesson: nextLesson.lessonIndex },
-        })
+          query: {
+            id: course.id,
+            season: nextLesson.seasonIndex,
+            lesson: nextLesson.lessonIndex,
+          },
+        });
       } else {
         openActivityModal();
       }
     }
-  }
+  };
 
   useEffect(() => {
-    setCurrent(data)
-    setQuiz([])
-    if ("mandatory" in data && data) {
-      let tempQuiz: any = []
+    setCurrent(data);
+    setQuiz([]);
+    if ('mandatory' in data && data) {
+      let tempQuiz: any = [];
       data.questions.forEach((element: any) => {
         if (tempQuiz.length <= data.questions.length) {
-          tempQuiz.push([])
+          tempQuiz.push([]);
         }
       });
-      setQuiz(tempQuiz)
+      setQuiz(tempQuiz);
     }
-  }, [data])
+  }, [data]);
 
   const handleDuration = (duration: number) => {
     setDuration(duration);
-  }
+  };
   const handleProgress = async (seconds: number) => {
     let progress = (seconds * 100) / duration;
     let tempProgress = {
       time: progress,
       seconds: seconds,
       lessonId: data.id,
-      userId: user.user_id
-    }
+      userId: user.user_id,
+    };
     if (user) {
       await updateUserProgressApi(tempProgress).then(() => {
         history();
       });
     }
-  }
+  };
 
   const history = () => {
     if (user) {
@@ -86,33 +107,35 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
         courseId: course.id,
         seasonId: course.seasons[season]?.id,
         lessonId: course.seasons[season]?.lessons[lesson].id,
-        userId: user.user_id
-      }
-      addUserHistory(temp)
+        userId: user.user_id,
+      };
+      addUserHistory(temp);
     }
-  }
+  };
 
   const handleViewed = () => {
     if (user) {
-      let index = data.progress.findIndex((x: any) => x.user_id == user.user_id)
+      let index = data.progress.findIndex(
+        (x: any) => x.user_id == user.user_id,
+      );
       if (data.progress[index] && data.progress[index].time >= 99) {
-        return 0
+        return 0;
       } else {
         if (index == -1) {
-          return 0
+          return 0;
         } else {
-          return data.progress[index].seconds
+          return data.progress[index].seconds;
         }
       }
     } else {
-      return 0
+      return 0;
     }
-  }
+  };
 
   useEffect(() => {
     let temp_selected: any = [];
     course?.seasons.forEach((element: any) => {
-      temp_selected.push(false)
+      temp_selected.push(false);
     });
     setSelected(temp_selected);
 
@@ -122,33 +145,33 @@ const Video = ({ data, id, course, user, season, lesson, handleComplete, nextLes
     //     viewed++;
     //   }
     // });
-    setCount(viewed)
-  }, [course])
+    setCount(viewed);
+  }, [course]);
 
   useEffect(() => {
-    setOpen(menu)
-  }, [menu])
+    setOpen(menu);
+  }, [menu]);
 
   return (
     <ReactPlayer
       className='absolute'
-      ref={p => p?.seekTo(handleViewed())}
+      ref={(p) => p?.seekTo(handleViewed())}
       url={data.link}
       playing={true}
       playsinline={true}
       muted={false}
       controls
-      width="100%" height="auto"
-      style={{ position: "relative" }}
+      width='100%'
+      height='auto'
+      style={{ position: 'relative' }}
       onEnded={finishedLesson}
       onDuration={(duration) => {
         handleDuration(duration);
-      }
-      }
+      }}
       onProgress={(state) => {
-        handleProgress(state.playedSeconds)
+        handleProgress(state.playedSeconds);
       }}
     />
-  )
-}
+  );
+};
 export default Video;

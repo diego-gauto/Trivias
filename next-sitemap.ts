@@ -1,7 +1,7 @@
-import { NextConfig } from "next";
+import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  siteUrl: "https://www.gonvar.io/", // Replace with your domain
+  siteUrl: 'https://www.gonvar.io/', // Replace with your domain
   generateRobotsTxt: true, // (optional) Generate robots.txt file
 };
 

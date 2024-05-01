@@ -1,4 +1,4 @@
-import { IReward } from "../../interfaces/IReward";
+import { IReward } from '../../interfaces/IReward';
 
 export interface IRewardModalProps {
   // modal's visibility state

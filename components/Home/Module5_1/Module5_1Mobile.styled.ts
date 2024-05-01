@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import styled from 'styled-components';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
 /*
 @media only screen and (max-width: 1024px) {
@@ -119,7 +119,7 @@ export const BgColorMobile = styled.div`
 export const TittleAMobile = styled.span`
   color: #3f1168;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -135,7 +135,7 @@ export const TittleAMobile = styled.span`
 export const TittleBMobile = styled.span`
   color: #a733e4;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);

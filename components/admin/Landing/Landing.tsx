@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import { getLandingProductApi, getLandingReviewApi } from "../../api/admin";
-import { getLandingInfo } from "../../api/landing";
-import { AdminContain } from "../SideBar.styled";
-import HeroSection from "./HeroSection/HeroSection";
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import { getLandingProductApi, getLandingReviewApi } from '../../api/admin';
+import { getLandingInfo } from '../../api/landing';
+import { AdminContain } from '../SideBar.styled';
+import HeroSection from './HeroSection/HeroSection';
 import {
   AddTitle,
   Container,
@@ -13,12 +17,11 @@ import {
   OptionsContainer,
   OptionBtn,
   OptionBtnOn,
-} from "./Landing.styled";
-import ProductsSection from "./ProductsSection/ProductsSection";
-import ReviewsSection from "./ReviewsSection/ReviewsSection";
+} from './Landing.styled';
+import ProductsSection from './ProductsSection/ProductsSection';
+import ReviewsSection from './ReviewsSection/ReviewsSection';
 
 const Landing = () => {
-
   const [showTab, setShowTab] = useState(1);
   const [data, setData] = useState<any>();
   const [reviews, setReviews] = useState<any>([]);
@@ -34,21 +37,21 @@ const Landing = () => {
   useEffect(() => {
     getLandingReviewApi().then((res) => {
       setReviews(res);
-    })
+    });
     getLandingProductApi().then((res) => {
       setProduct(res);
-    })
+    });
     fetchLandingData();
   }, [setData]);
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
@@ -61,42 +64,57 @@ const Landing = () => {
         <Container>
           <HomePageContain>
             <OptionsContainer>
-              {showTab == 1 ?
-                (
-                  <OptionBtnOn onClick={() => { setShowTab(1); }}>
-                    Hero Page
-                  </OptionBtnOn>
-                ) :
-                (
-                  <OptionBtn onClick={() => { setShowTab(1); }}>
-                    Hero Page
-                  </OptionBtn>
-                )
-              }
-              {showTab == 2 ?
-                (
-                  <OptionBtnOn onClick={() => { setShowTab(2); }}>
-                    Reseñas
-                  </OptionBtnOn>
-                ) :
-                (
-                  <OptionBtn onClick={() => { setShowTab(2); }}>
-                    Reseñas
-                  </OptionBtn>
-                )
-              }
-              {showTab == 3 ?
-                (
-                  <OptionBtnOn onClick={() => { setShowTab(3); }}>
-                    Productos <br /> Destacados
-                  </OptionBtnOn>
-                ) :
-                (
-                  <OptionBtn onClick={() => { setShowTab(3); }}>
-                    Productos <br /> Destacados
-                  </OptionBtn>
-                )
-              }
+              {showTab == 1 ? (
+                <OptionBtnOn
+                  onClick={() => {
+                    setShowTab(1);
+                  }}
+                >
+                  Hero Page
+                </OptionBtnOn>
+              ) : (
+                <OptionBtn
+                  onClick={() => {
+                    setShowTab(1);
+                  }}
+                >
+                  Hero Page
+                </OptionBtn>
+              )}
+              {showTab == 2 ? (
+                <OptionBtnOn
+                  onClick={() => {
+                    setShowTab(2);
+                  }}
+                >
+                  Reseñas
+                </OptionBtnOn>
+              ) : (
+                <OptionBtn
+                  onClick={() => {
+                    setShowTab(2);
+                  }}
+                >
+                  Reseñas
+                </OptionBtn>
+              )}
+              {showTab == 3 ? (
+                <OptionBtnOn
+                  onClick={() => {
+                    setShowTab(3);
+                  }}
+                >
+                  Productos <br /> Destacados
+                </OptionBtnOn>
+              ) : (
+                <OptionBtn
+                  onClick={() => {
+                    setShowTab(3);
+                  }}
+                >
+                  Productos <br /> Destacados
+                </OptionBtn>
+              )}
             </OptionsContainer>
             {showTab == 1 && <HeroSection heroSectionData={data && data} />}
             {showTab == 2 && <ReviewsSection reviewsSectionData={reviews} />}
@@ -104,7 +122,7 @@ const Landing = () => {
           </HomePageContain>
         </Container>
       </GeneralContain>
-    </AdminContain >
-  )
-}
+    </AdminContain>
+  );
+};
 export default Landing;

@@ -1,12 +1,26 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { useAuth } from "./useAuth";
-import { IAdminAssignments, IAdminUsers, IUserFilters } from "../interfaces/IAdmin";
-import { getAdminUsersApi, getComeFromApi, getCountriesApi, getCoursesApi, getMethodsApi } from "../components/api/admin";
-
-
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
+import { useAuth } from './useAuth';
+import {
+  IAdminAssignments,
+  IAdminUsers,
+  IUserFilters,
+} from '../interfaces/IAdmin';
+import {
+  getAdminUsersApi,
+  getComeFromApi,
+  getCountriesApi,
+  getCoursesApi,
+  getMethodsApi,
+} from '../components/api/admin';
 
 interface Props {
-  children?: ReactNode
+  children?: ReactNode;
   // any props that come into the component
 }
 
@@ -17,41 +31,41 @@ export const useAdmin = () => {
 };
 export const AdminsContext = (props: Props) => {
   let initial_filters: IUserFilters = {
-    country: "todos",
-    name: "all_users",
+    country: 'todos',
+    name: 'all_users',
     offset: 0,
     spent: 0,
     spent_max: '',
     spent_min: '',
     level: -1,
     price: -1,
-    method: "todos",
-    membership: "todos",
-    state: "todos",
-    come_from: "todos",
+    method: 'todos',
+    membership: 'todos',
+    state: 'todos',
+    come_from: 'todos',
     courses: 0,
     progress: 0,
     dates_login: {
       valid: 0,
-      date_1: "",
-      date_2: "",
+      date_1: '',
+      date_2: '',
     },
     dates_created: {
       valid: 0,
-      date_1: "",
-      date_2: "",
-    }
-  }
+      date_1: '',
+      date_2: '',
+    },
+  };
   const [userFilters, setUserFilters] = useState<IUserFilters>(initial_filters);
   const [countries, setCountries] = useState([]);
   const [methods, setMethods] = useState([]);
   const [comeFrom, setComeFrom] = useState([]);
   const [users, setUsers] = useState<IAdminUsers[]>([]);
-  const [assignments, setAssignments] = useState<IAdminAssignments[]>([])
+  const [assignments, setAssignments] = useState<IAdminAssignments[]>([]);
   const [userLoader, setUserLoader] = useState<boolean>(true);
   const [assignLoader, setAssignLoader] = useState<boolean>(true);
   const [totalUsers, setTotalUsers] = useState<number>(0);
-  const [totalAssignments, setTotalAssignments] = useState<number>(0)
+  const [totalAssignments, setTotalAssignments] = useState<number>(0);
   const [courses, setCourses] = useState<any>([]);
   const [payCourses, setPayCourses] = useState<any>([]);
   const [permits, setPermits] = useState(false);
@@ -62,53 +76,60 @@ export const AdminsContext = (props: Props) => {
   const { user } = userContext;
   const loadUsers = async () => {
     try {
-      setUserLoader(true)
+      setUserLoader(true);
       const adminUsers = await getAdminUsersApi(userFilters);
       if (adminUsers.data.error) {
-        return
+        return;
       }
       setTotalUsers(adminUsers.data.totalUsers);
-      setUsers(adminUsers.data.users)
-      setUserLoader(false)
+      setUsers(adminUsers.data.users);
+      setUserLoader(false);
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
+  };
   const loadData = async () => {
     try {
       const countries = await getCountriesApi();
-      let tempCountries = countries.filter((val: any) => { return val.country !== "" && val.country !== null });
-      setCountries(tempCountries)
+      let tempCountries = countries.filter((val: any) => {
+        return val.country !== '' && val.country !== null;
+      });
+      setCountries(tempCountries);
       const methods = await getMethodsApi();
-      let tempMethods = methods.filter((val: any) => { return val.method !== "" && val.method !== null });
+      let tempMethods = methods.filter((val: any) => {
+        return val.method !== '' && val.method !== null;
+      });
       setMethods(tempMethods);
       const comeFrom = await getComeFromApi();
-      let tempComeFrom = comeFrom.filter((val: any) => { return val.come_from !== "undefined" && val.come_from !== null });
+      let tempComeFrom = comeFrom.filter((val: any) => {
+        return val.come_from !== 'undefined' && val.come_from !== null;
+      });
       setComeFrom(tempComeFrom);
       const courses = await getCoursesApi();
       setCourses(courses.courses);
       setPayCourses(courses.product_course);
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
+  };
   useEffect(() => {
     loadData();
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if ((user && user.role === "admin") || (user && user.role === "superAdmin")) {
+    if (
+      (user && user.role === 'admin') ||
+      (user && user.role === 'superAdmin')
+    ) {
       loadUsers();
-      if (user && user.role === "superAdmin") {
+      if (user && user.role === 'superAdmin') {
         setPermits(true);
       }
-      if (user && user.role === "admin" && user.roles[4].report === 0) {
+      if (user && user.role === 'admin' && user.roles[4].report === 0) {
         setPermits(true);
       }
     }
-  }, [user, userFilters])
+  }, [user, userFilters]);
 
   const values = {
     countries,
@@ -130,5 +151,7 @@ export const AdminsContext = (props: Props) => {
     setOpenNotification,
   };
 
-  return <AdminContext.Provider value={values}>{children}</AdminContext.Provider>;
+  return (
+    <AdminContext.Provider value={values}>{children}</AdminContext.Provider>
+  );
 };

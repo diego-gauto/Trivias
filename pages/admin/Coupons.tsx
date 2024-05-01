@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Coupons from '../../components/admin/Coupons/Coupons';
 import { MainContain } from '../../screens/Styles.styled';
 const CouponsView = () => {
@@ -6,6 +6,6 @@ const CouponsView = () => {
     <MainContain>
       <Coupons />
     </MainContain>
-  )
-}
+  );
+};
 export default CouponsView;

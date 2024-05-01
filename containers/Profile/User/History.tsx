@@ -1,49 +1,47 @@
 import { DocumentData } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
-import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
+import React, { useEffect, useState } from 'react';
+import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
 import { userInvoices } from '../../../components/api/profile';
 import { getInvoice } from '../../../store/actions/PaymentActions';
 import { getUserInvoices } from '../../../store/actions/ProfileActions';
-import { HistoryContainer } from './User.styled'
+import { HistoryContainer } from './User.styled';
 import { getCourseApi } from '../../../components/api/lessons';
 
 export interface Invoice {
-  id: number
-  amount: number
-  method: string
-  paid_at: string
-  product: string
-  user_id: number
-  formatDate: string
-  finalDate: string
-  status: string
+  id: number;
+  amount: number;
+  method: string;
+  paid_at: string;
+  product: string;
+  user_id: number;
+  formatDate: string;
+  finalDate: string;
+  status: string;
 }
 
 export const History = ({ user, addPayment }: any) => {
   const [option, setOption] = useState(0);
-  const [invoices, setInvoices] = useState<Invoice[]>([])
-  const [allOptions, setAllOptions] = useState([])
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [allOptions, setAllOptions] = useState([]);
   const today = new Date().getTime() / 1000;
   const handleLeft = () => {
     if (option == 0) {
-      setOption(allOptions.length - 1)
-    }
-    else {
+      setOption(allOptions.length - 1);
+    } else {
       setOption(option - 1);
     }
-  }
+  };
   const handleRight = () => {
     if (option == allOptions.length - 1) {
-      setOption(0)
-    }
-    else {
+      setOption(0);
+    } else {
       setOption(option + 1);
     }
-  }
+  };
 
   const getDays = () => {
-    return Math.round((user.final_date - today) / 86400)
-  }
+    return Math.round((user.final_date - today) / 86400);
+  };
 
   const retrieveInvoices = () => {
     userInvoices(user.id).then(async (res) => {
@@ -55,35 +53,42 @@ export const History = ({ user, addPayment }: any) => {
         let tempDay = tempDate.getDate();
         let tempMonth = tempDate.getMonth() + 1;
         let tempYear = tempDate.getFullYear();
-        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+        element.formatDate = `${tempDay}/${tempMonth}/${tempYear}`;
         element.amount = element.amount / 100;
-        if (element.product === "Gonvar Plus" && (element.amount === 149 || element.amount === 1599)) {
+        if (
+          element.product === 'Gonvar Plus' &&
+          (element.amount === 149 || element.amount === 1599)
+        ) {
           let tempFinalDate: any = new Date(element.paid_at).getTime() / 1000;
-          tempDate = new Date((tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) * 1000);
+          tempDate = new Date(
+            (tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) *
+              1000,
+          );
           tempDay = tempDate.getDate();
           tempMonth = tempDate.getMonth() + 1;
           tempYear = tempDate.getFullYear();
           element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
           let date = new Date().getTime() / 1000;
           if (user.final_date > date) {
-            element.status = "Activo"
+            element.status = 'Activo';
           } else {
-            element.status = "Inactivo"
+            element.status = 'Inactivo';
           }
-        }
-        else {
+        } else {
           if (course !== undefined) {
-            let tempFinalDate = (new Date(element.paid_at).getTime() / 1000) + course.duration * 86400
-            tempDate = new Date((tempFinalDate) * 1000);
+            let tempFinalDate =
+              new Date(element.paid_at).getTime() / 1000 +
+              course.duration * 86400;
+            tempDate = new Date(tempFinalDate * 1000);
             tempDay = tempDate.getDate();
             tempMonth = tempDate.getMonth() + 1;
             tempYear = tempDate.getFullYear();
             element.finalDate = `${tempDay}/${tempMonth}/${tempYear}`;
             let date = new Date().getTime() / 1000;
-            if ((tempFinalDate) > date) {
-              element.status = "Activo"
+            if (tempFinalDate > date) {
+              element.status = 'Activo';
             } else {
-              element.status = "Inactivo"
+              element.status = 'Inactivo';
             }
           }
         }
@@ -92,22 +97,21 @@ export const History = ({ user, addPayment }: any) => {
 
       tempInvoice.sort((a: any, b: any) => {
         return a.paid_at < b.paid_at ? 1 : -1;
-      })
+      });
       tempInvoice = tempInvoice.slice(0, 5);
       tempInvoice.forEach((element: any, index: number) => {
         tempOption.push(index);
       });
       setAllOptions(tempOption);
       setInvoices(tempInvoice.slice(0, 5));
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    retrieveInvoices()
+    retrieveInvoices();
   }, []);
 
   const formatAmountNumberToString = (amount: number) => {
-
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -116,24 +120,32 @@ export const History = ({ user, addPayment }: any) => {
       //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
     return formatter.format(amount);
-  }
+  };
 
   return (
     <HistoryContainer addPayment={addPayment}>
-      <div className='title'>
-        Historial de pedidos
-      </div>
+      <div className='title'>Historial de pedidos</div>
       <div className='history-content'>
-        <RiArrowLeftSLine style={{ fontSize: 60, cursor: "pointer" }} onClick={handleLeft} />
+        <RiArrowLeftSLine
+          style={{ fontSize: 60, cursor: 'pointer' }}
+          onClick={handleLeft}
+        />
         <div className='history-data'>
           <div className='history-info'>
             <p>No. Pedido</p>
-            <p className='second-info' style={{ color: "#942ced", fontWeight: "600" }}>{invoices[option]?.id}</p>
+            <p
+              className='second-info'
+              style={{ color: '#942ced', fontWeight: '600' }}
+            >
+              {invoices[option]?.id}
+            </p>
           </div>
           <div className='line' />
           <div className='history-info'>
             <p>Producto</p>
-            <p className='second-info' style={{ wordBreak: "break-word" }}>{invoices[option]?.product}</p>
+            <p className='second-info' style={{ wordBreak: 'break-word' }}>
+              {invoices[option]?.product}
+            </p>
           </div>
           <div className='line' />
           <div className='history-info'>
@@ -143,10 +155,13 @@ export const History = ({ user, addPayment }: any) => {
           <div className='line' />
           <div className='history-info'>
             <p>Monto</p>
-            <p className='second-info'>{invoices[option]?.amount !== undefined ? formatAmountNumberToString(invoices[option]?.amount || 0) : ''}</p>
+            <p className='second-info'>
+              {invoices[option]?.amount !== undefined
+                ? formatAmountNumberToString(invoices[option]?.amount || 0)
+                : ''}
+            </p>
           </div>
-          {
-            /*<div className='line' />
+          {/*<div className='line' />
             <div className='history-info'>
               <p>Expiración</p>
               <p className='second-info'>{invoices[option]?.finalDate}</p>
@@ -155,25 +170,31 @@ export const History = ({ user, addPayment }: any) => {
             <div className='history-info'>
               <p>Estatus</p>
               <p className='second-info'>{invoices[option]?.status}</p>
-            </div>*/
-          }
+            </div>*/}
         </div>
-        <RiArrowRightSLine style={{ fontSize: 60, cursor: "pointer" }} onClick={handleRight} />
+        <RiArrowRightSLine
+          style={{ fontSize: 60, cursor: 'pointer' }}
+          onClick={handleRight}
+        />
       </div>
       <div className='dots'>
-        {
-          allOptions.map((val) => {
-            return (
-              <div
-                key={"optionsHistory " + val}
-                className='option-dot'
-                style={option == val ? { backgroundColor: "#ff6700" } : { backgroundColor: "#3f1168" }}
-                onClick={() => { setOption(val); }}
-              />
-            )
-          })
-        }
+        {allOptions.map((val) => {
+          return (
+            <div
+              key={'optionsHistory ' + val}
+              className='option-dot'
+              style={
+                option == val
+                  ? { backgroundColor: '#ff6700' }
+                  : { backgroundColor: '#3f1168' }
+              }
+              onClick={() => {
+                setOption(val);
+              }}
+            />
+          );
+        })}
       </div>
     </HistoryContainer>
-  )
-}
+  );
+};

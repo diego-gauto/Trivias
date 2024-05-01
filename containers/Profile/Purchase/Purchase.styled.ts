@@ -1093,7 +1093,7 @@ export const PaymentContain = styled.div<{ active: any }>`
     box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7);
     cursor: pointer;
   }
-  ${props =>
+  ${(props) =>
     props.active == true &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -1109,7 +1109,7 @@ export const PaymentDetail = styled.div`
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 `;
 export const PaymentMethod = styled('div')<{ active: any }>`
-  ${props =>
+  ${(props) =>
     props.active == true &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;
@@ -1200,17 +1200,17 @@ export const PayPal = styled.i`
   }
 `;
 export const CardIconResp = styled('i')<{ brand: any }>`
-  ${props =>
+  ${(props) =>
     props.brand == 'visa' &&
     css`
       background-image: url(../images/visa-icon.png);
     `}
-  ${props =>
+  ${(props) =>
     props.brand == 'mastercard' &&
     css`
       background-image: url(../images/mastercard-icon.png);
     `}
-  ${props =>
+  ${(props) =>
     props.brand == 'amex' &&
     css`
       background-image: url(../images/amex-icon.png);
@@ -1260,7 +1260,7 @@ export const NewMethodBox = styled.div<{ active: any; plan: any }>`
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${props =>
+  ${(props) =>
     props.active == true &&
     props.plan == 'stripe' &&
     css`
@@ -1288,7 +1288,7 @@ export const NewMethodBoxPaypal = styled.div<{ plan: any }>`
     padding-block: 18px;
     justify-content: space-between;
   }
-  ${props =>
+  ${(props) =>
     props.plan == 'paypal' &&
     css`
       box-shadow: 0px 0px 10px 1px rgba(103, 23, 205, 0.7) !important;

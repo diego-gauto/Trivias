@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LessonContain = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const LessonContain = styled.div`
 `;
 export const LessonTitle = styled.h1`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 
@@ -36,7 +36,7 @@ export const NewSeasonContain = styled.div`
 export const NewSeason = styled.p`
   font-size: 18px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #6717cd;
   cursor: pointer;
   margin: 0;
@@ -49,7 +49,7 @@ export const TitleContain = styled.div`
 export const Title = styled.h1`
   font-size: 18px;
   font-weight: 500 !important;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const TitleEdit = styled.div`
@@ -73,7 +73,7 @@ export const Button = styled.button`
   gap: 10px;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 10px;
@@ -125,18 +125,18 @@ export const EpisodeContain = styled.div`
 export const EpisodeTitle = styled.p`
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const EpisodeTime = styled.p`
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   opactiy: 0.8;
   margin: 0;
 `;
 export const EpisodeInfo = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   text-align: justify;
   margin: 0;
   white-space: nowrap;
@@ -150,7 +150,7 @@ export const EditEpisode = styled.a`
   color: #6717cd;
   padding-left: 40px;
   text-decoration: none;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   margin: 0;
 `;

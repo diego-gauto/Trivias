@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SuscriptionContain = styled.div`
   width: 100%;
@@ -257,7 +257,7 @@ export const FirstSection = styled.div`
         color: #3f1168;
       }
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         width: var(--progress);
         height: 100%;

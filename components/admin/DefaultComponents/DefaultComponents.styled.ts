@@ -91,7 +91,7 @@ export const DefaultColumn = styled.div<{ gap?: number }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${props =>
+  ${(props) =>
     props.gap &&
     css`
       gap: ${props.gap}px;
@@ -100,7 +100,7 @@ export const DefaultColumn = styled.div<{ gap?: number }>`
 export const DefaultRow = styled.div<{ gap?: number }>`
   display: flex;
   justify-content: space-between;
-  ${props =>
+  ${(props) =>
     props.gap &&
     css`
       gap: ${props.gap}px;

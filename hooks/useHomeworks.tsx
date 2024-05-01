@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, createContext, useState } from "react";
-import { IReducedHomework } from "../interfaces/IHomeworkByUser";
-import { getCourseHomeworksOfUser } from "../components/api/homeworks";
+import { Dispatch, SetStateAction, createContext, useState } from 'react';
+import { IReducedHomework } from '../interfaces/IHomeworkByUser';
+import { getCourseHomeworksOfUser } from '../components/api/homeworks';
 
 interface HomeworksContextValues {
   homeworks: IReducedHomework[] | null;
@@ -12,13 +12,18 @@ interface HomeworksContextValues {
   }) => Promise<void>;
 }
 
-export const HomeworksContext = createContext<HomeworksContextValues>({} as HomeworksContextValues);
+export const HomeworksContext = createContext<HomeworksContextValues>(
+  {} as HomeworksContextValues,
+);
 
 export const HomeworksProvider = ({ children }: any) => {
   const [homeworks, setHomeworks] = useState<IReducedHomework[] | null>(null);
   const [isLoading, setIsHomeworkLoading] = useState(true);
 
-  const loadHomeworks = async (homeworkParams: { user_id: number, course_id: number }) => {
+  const loadHomeworks = async (homeworkParams: {
+    user_id: number;
+    course_id: number;
+  }) => {
     try {
       const response = await getCourseHomeworksOfUser(homeworkParams);
       // console.log(response.data);
@@ -31,11 +36,13 @@ export const HomeworksProvider = ({ children }: any) => {
     } finally {
       setIsHomeworkLoading(false);
     }
-  }
+  };
 
   return (
-    <HomeworksContext.Provider value={{ homeworks, setHomeworks, isLoading, loadHomeworks }}>
+    <HomeworksContext.Provider
+      value={{ homeworks, setHomeworks, isLoading, loadHomeworks }}
+    >
       {children}
     </HomeworksContext.Provider>
   );
-}
+};

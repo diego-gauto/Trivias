@@ -1,11 +1,11 @@
-.optionContainer{
+.optionContainer {
   margin-top: 30px;
 
   @media (max-width: 420px) {
     margin-top: 10px;
   }
 
-  .optionsLabel{
+  .optionsLabel {
     margin-bottom: 10px;
 
     @media (max-width: 839px) {
@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 
-.optionButton input[type="radio"] {
+.optionButton input[type='radio'] {
   position: absolute;
   /* opacity: 0; */
   cursor: pointer;
@@ -46,12 +46,12 @@
   transform: translateY(-50%);
 }
 
-.optionButton input[type="radio"]:checked + .customRadioButton {
+.optionButton input[type='radio']:checked + .customRadioButton {
   background-color: #3f1168; /* Cambia este color al que desees */
   border-color: #3f1168; /* Cambia este color al que desees */
 }
 
-.optionLabel{
+.optionLabel {
   margin-left: 10px;
   cursor: pointer;
 }

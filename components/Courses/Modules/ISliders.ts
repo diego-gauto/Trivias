@@ -1,4 +1,4 @@
-import { IUser } from "../../../interfaces/IUserData";
+import { IUser } from '../../../interfaces/IUserData';
 
 export interface ICourseData {
   slideType: string;

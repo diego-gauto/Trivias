@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const UserContain = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const FilterContain = styled.div`
 
 export const Select = styled.div`
   display: flex;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-size: 14px;
   font-weight: 600;
   border: 1px solid #6717cd;
@@ -53,7 +53,7 @@ export const Select = styled.div`
   }
 `;
 export const SearchInput = styled.input`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-size: 14px;
   border: 1px solid #6717cd;
   border-radius: 0px 10px 10px 0px;
@@ -67,7 +67,7 @@ export const DownloadUserData = styled.div`
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 9px;
@@ -122,7 +122,7 @@ export const UserShow = styled.p`
   cursor: pointer;
   gap: 2px;
   align-items: center;
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-size: 14px;
   margin: 0;
 `;

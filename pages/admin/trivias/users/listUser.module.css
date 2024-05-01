@@ -1,34 +1,34 @@
-.main{
+.main {
   width: 100%;
   padding: 3% 3% 0 3%;
   display: flex;
   flex-direction: column;
 
-  .titles{
+  .titles {
     display: flex;
     flex-direction: column;
 
     width: 100%;
     text-align: center;
     margin-bottom: 2%;
-    font-family: "Montserrat";
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
     line-height: 27px;
     color: #520795;
 
-    .buttonContainer{
+    .buttonContainer {
       display: flex;
       justify-content: space-between;
       margin-bottom: 2%;
 
-      .button{
+      .button {
         width: 300px;
         height: 50px;
         border: 0;
         cursor: pointer;
-        font-family: "Montserrat";
+        font-family: 'Montserrat';
         border-radius: 100px;
         background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
         font-style: normal;
@@ -46,14 +46,14 @@
           display: flex;
           cursor: pointer;
 
-          font-family: "Montserrat";
+          font-family: 'Montserrat';
           font-style: normal;
           font-weight: 700;
           font-size: 22px;
           line-height: 27px;
           color: #520795;
 
-          .volverText{
+          .volverText {
             text-align: center;
             padding: 5px 0 0 8px;
           }
@@ -61,7 +61,7 @@
       }
     }
 
-    .title{
+    .title {
       font-style: normal;
       font-weight: 700;
       font-size: 60px;
@@ -69,22 +69,22 @@
     }
   }
 
-  .selectContainer{
+  .selectContainer {
     display: flex;
     justify-content: space-around;
 
-    font-family: "Montserrat";
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;
     color: #520795;
 
-    .selectGroup{
+    .selectGroup {
       display: flex;
       flex-direction: column;
 
-      .select{
+      .select {
         color: #520795;
         border-radius: 20px;
         border-color: #520795;
@@ -93,10 +93,9 @@
         padding-left: 5px;
       }
 
-      .select:focus{
+      .select:focus {
         border-color: #520795;
       }
-
     }
   }
 
@@ -113,19 +112,17 @@
       cursor: pointer;
       margin: 5px;
 
-      .pageLink{
+      .pageLink {
         text-decoration: none;
         color: #ffffff;
       }
     }
 
-    .active{
+    .active {
       background-color: #520795;
     }
   }
-
 }
-
 
 @media (max-width: 768px) {
   .volver {
@@ -139,7 +136,7 @@
     line-height: 36px; /* Ajustar el espacio entre líneas para dispositivos pequeños */
   }
 
-  .main button{
+  .main button {
     width: 200px;
     height: 40px;
     font-size: 18px;
@@ -147,7 +144,6 @@
 }
 
 @media (max-width: 400px) {
-
   .volver {
     position: absolute;
     top: 100px;
@@ -159,7 +155,7 @@
     line-height: 36px; /* Ajustar el espacio entre líneas para dispositivos pequeños */
   }
 
-  .buttonContainer{
+  .buttonContainer {
     justify-content: center;
   }
 }

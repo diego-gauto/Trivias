@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -136,7 +136,7 @@ export const UnSelected = styled.div`
 `;
 export const Titles = styled.p`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #8e2de2;
   font-weight: 500;
   opacity: 0.7;
@@ -161,7 +161,7 @@ export const Titles = styled.p`
 `;
 export const PositionTitle = styled.p<{ position: any }>`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #8e2de2;
   opacity: 0.7;
   margin: 0;

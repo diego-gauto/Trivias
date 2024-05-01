@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { DocumentData } from "firebase/firestore";
-import Link from "next/link";
-import { LoaderContain } from "../../../containers/Profile/User/User.styled";
-import { deleteWholeCourse, getTeacher } from "../../../store/actions/courseActions";
+import { DocumentData } from 'firebase/firestore';
+import Link from 'next/link';
+import { LoaderContain } from '../../../containers/Profile/User/User.styled';
+import {
+  deleteWholeCourse,
+  getTeacher,
+} from '../../../store/actions/courseActions';
 import {
   ButtonContain,
   ChevD,
@@ -21,21 +24,19 @@ import {
   TextColor,
   TitleContain,
   TransparentButton,
-} from "./AllCourses.styled";
+} from './AllCourses.styled';
 
-export const AllCourses = ({
-  course
-}: DocumentData) => {
+export const AllCourses = ({ course }: DocumentData) => {
   const [professorName, setProfessorName] = useState([]);
   const [open, setOpen] = useState(false);
   const [IsDeleting, setIsDeleting] = useState<boolean>(false);
-  const GonvarImg = "/images/purchase/logo.png";
+  const GonvarImg = '/images/purchase/logo.png';
   const getProffessors = () => {
     getTeacher().then((res) => {
       getSelectedProfessors(res);
       return res;
-    })
-  }
+    });
+  };
   const getSelectedProfessors = (prof: any) => {
     let profName: any = [];
     course.courseProfessor.map((val: any) => {
@@ -43,42 +44,47 @@ export const AllCourses = ({
         if (course.id.includes(val)) {
           profName.push(course);
         }
-      })
-    })
-    setProfessorName(profName)
-  }
+      });
+    });
+    setProfessorName(profName);
+  };
   const deleteCourse = (element: any) => {
     setIsDeleting(true);
-    if (window.confirm("Desea borrar este curso?")) {
+    if (window.confirm('Desea borrar este curso?')) {
       deleteWholeCourse(element).then(() => {
         window.location.reload();
         setIsDeleting(false);
-      })
+      });
     }
-  }
+  };
   useEffect(() => {
     getProffessors();
-  }, [])
+  }, []);
 
   return (
     <MainContainer>
-      <CourseContainer >
-        <TitleContain onClick={() => { setOpen(!open) }}>
+      <CourseContainer>
+        <TitleContain
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
           <CourseName>
-            Curso - {course.courseTittle} {course.courseType == "Mensual" && <img src={GonvarImg} style={{ width: 30 }} />}
+            Curso - {course.courseTittle}{' '}
+            {course.courseType == 'Mensual' && (
+              <img src={GonvarImg} style={{ width: 30 }} />
+            )}
           </CourseName>
-          {
-            open == false &&
-            <ChevD />
-          }
-          {
-            open == true &&
-            <ChevU onClick={() => { setOpen(false) }} />
-          }
-
+          {open == false && <ChevD />}
+          {open == true && (
+            <ChevU
+              onClick={() => {
+                setOpen(false);
+              }}
+            />
+          )}
         </TitleContain>
-        {
-          open == true &&
+        {open == true && (
           <>
             <CourseContent>
               <Column>
@@ -92,9 +98,7 @@ export const AllCourses = ({
                 </Info>
                 <Info>
                   <Label>Objetivos</Label>
-                  <Text>
-                    {course.courseAbout}
-                  </Text>
+                  <Text>{course.courseAbout}</Text>
                 </Info>
                 <Info>
                   <Label>Frase Descriptiva</Label>
@@ -102,43 +106,48 @@ export const AllCourses = ({
                 </Info>
                 <Info>
                   <Label>Color del certificado</Label>
-                  {
-                    course.courseCertificateColor == "" ?
-                      <Text>No hay color</Text>
-                      :
-                      <>
-                        <TextColor color={course.courseCertificateColor}>{course.courseCertificateColor}</TextColor>
-                      </>
-                  }
+                  {course.courseCertificateColor == '' ? (
+                    <Text>No hay color</Text>
+                  ) : (
+                    <>
+                      <TextColor color={course.courseCertificateColor}>
+                        {course.courseCertificateColor}
+                      </TextColor>
+                    </>
+                  )}
                 </Info>
               </Column>
               <Column>
                 <Info>
                   <Label>Instructor(es)</Label>
                   <Text>
-                    {
-                      professorName.map((val: any, index: any) => {
-                        return (
-                          <React.Fragment key={'Show Professors ' + index}>
-                            {val.name}
-                            <br />
-                          </React.Fragment>
-                        )
-                      })
-                    }
+                    {professorName.map((val: any, index: any) => {
+                      return (
+                        <React.Fragment key={'Show Professors ' + index}>
+                          {val.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })}
                   </Text>
                 </Info>
                 <Info>
                   <Label>Categorías</Label>
-                  <Text> {
-                    course.courseCategory.length > 1
+                  <Text>
+                    {' '}
+                    {course.courseCategory.length > 1
                       ? course.courseCategory + ' '
-                      : course.courseCategory
-                  } </Text>
+                      : course.courseCategory}{' '}
+                  </Text>
                 </Info>
                 <Info>
                   <Label>Tareas</Label>
-                  <Text> {course.courseHomeWork == false ? "Flexible" : "Obligatorio"} </Text>
+                  <Text>
+                    {' '}
+                    {course.courseHomeWork == false
+                      ? 'Flexible'
+                      : 'Obligatorio'}{' '}
+                  </Text>
                 </Info>
                 <Info>
                   <Label>Materiales del curso</Label>
@@ -165,20 +174,32 @@ export const AllCourses = ({
               </Column>
             </CourseContent>
             <ButtonContain>
-              <TransparentButton onClick={() => { setOpen(false) }}>Cerrar</TransparentButton>
+              <TransparentButton
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Cerrar
+              </TransparentButton>
               <Link href={`/admin/Edit?documentID=${course.documentID}`}>
                 <PurpleButton>Editar</PurpleButton>
               </Link>
-              {!IsDeleting ? <RedButton onClick={(e) => {
-                deleteCourse(course);
-                e.stopPropagation();
-              }}>Eliminar</RedButton> :
-                <LoaderContain />}
+              {!IsDeleting ? (
+                <RedButton
+                  onClick={(e) => {
+                    deleteCourse(course);
+                    e.stopPropagation();
+                  }}
+                >
+                  Eliminar
+                </RedButton>
+              ) : (
+                <LoaderContain />
+              )}
             </ButtonContain>
           </>
-        }
-
+        )}
       </CourseContainer>
     </MainContainer>
-  )
-}
+  );
+};

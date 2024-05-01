@@ -1,21 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { LESSON_PATH, LOGIN_PATH, PLAN_PATH, PREVIEW_PATH, PURCHASE_PATH } from "../../../constants/paths";
-import { useAuth } from "../../../hooks/useAuth";
-import { MainContainer } from "./Lesson.styled";
-import Video from "./LessonComponents/Video/Video";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import Modules from "./LessonComponents/Modules/Modules";
-import Courses from "./LessonComponents/Courses/Courses";
-import { getCourseApi } from "../../../components/api/lessons";
-import ActivityModal from "./ActivityModal/ActivityModal";
-import { createNotification, getNotifications } from "../../../components/api/notifications";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import {
+  LESSON_PATH,
+  LOGIN_PATH,
+  PLAN_PATH,
+  PREVIEW_PATH,
+  PURCHASE_PATH,
+} from '../../../constants/paths';
+import { useAuth } from '../../../hooks/useAuth';
+import { MainContainer } from './Lesson.styled';
+import Video from './LessonComponents/Video/Video';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import Modules from './LessonComponents/Modules/Modules';
+import Courses from './LessonComponents/Courses/Courses';
+import { getCourseApi } from '../../../components/api/lessons';
+import ActivityModal from './ActivityModal/ActivityModal';
+import {
+  createNotification,
+  getNotifications,
+} from '../../../components/api/notifications';
 
 const Lesson = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState<any>();
-  const router = useRouter()
+  const router = useRouter();
   const { id, season, lesson }: any = router.query;
   const [userData, setUserData] = useState<any>(null);
   const [menu, setMenu] = useState<boolean>(false);
@@ -23,11 +36,11 @@ const Lesson = () => {
   const [show, setShow] = useState<boolean>(false);
   const [firstLesson, setFirstLesson] = useState<boolean>(false);
   const [lastLesson, setLastLesson] = useState<boolean>(false);
-  const [blockForNextSeason, setBlockForNextSeason] = useState<boolean>(false)
+  const [blockForNextSeason, setBlockForNextSeason] = useState<boolean>(false);
   const [previousLesson, setPreviousLesson] = useState<any>({
     lessonIndex: 0,
     seasonIndex: 0,
-  })
+  });
   const [nextLesson, setnextLesson] = useState<any>({
     lessonIndex: 0,
     seasonIndex: 0,
@@ -36,86 +49,101 @@ const Lesson = () => {
     if (course) {
       getCourse();
     }
-
   }, [router]);
 
   const handleComplete = () => {
-    getCourse()
-  }
+    getCourse();
+  };
   const onHide = () => {
-    setShow(false)
-  }
+    setShow(false);
+  };
   const openActivityModal = () => {
     let notification = {
       userId: userDataAuth.user.user_id,
-      type: "14",
+      type: '14',
       notificationId: '',
       courseId: id,
       season: +season,
       lesson: +lesson,
       title: course.title,
-    }
+    };
     getNotifications({ userId: userDataAuth.user.user_id }).then((res) => {
-      if (res.data.filter((x) => x.course_id !== null &&
-        x.type === "14" &&
-        x.course_id === id).length === 0) {
+      if (
+        res.data.filter(
+          (x) => x.course_id !== null && x.type === '14' && x.course_id === id,
+        ).length === 0
+      ) {
         createNotification(notification);
       }
-    })
-    setShow(true)
-  }
+    });
+    setShow(true);
+  };
 
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (id) {
         if (router.asPath === LESSON_PATH) {
-          router.push(PREVIEW_PATH)
-          return
+          router.push(PREVIEW_PATH);
+          return;
         }
         if (userDataAuth.user !== null) {
           let user = userDataAuth.user;
           let today = new Date().getTime() / 1000;
           setUserData(user);
-          getCourseApi(id).then((res) => {
-            if (res !== undefined) {
-              if ((res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id && x.final_date < today).length > 0) ||
-                (res.type === 'Producto' && user.user_courses.filter((x: any) => x.course_id === +id).length === 0)) {
-                router.push({ pathname: PURCHASE_PATH, query: { type: 'course', id: res.id } })
+          getCourseApi(id)
+            .then((res) => {
+              if (res !== undefined) {
+                if (
+                  (res.type === 'Producto' &&
+                    user.user_courses.filter(
+                      (x: any) => x.course_id === +id && x.final_date < today,
+                    ).length > 0) ||
+                  (res.type === 'Producto' &&
+                    user.user_courses.filter((x: any) => x.course_id === +id)
+                      .length === 0)
+                ) {
+                  router.push({
+                    pathname: PURCHASE_PATH,
+                    query: { type: 'course', id: res.id },
+                  });
+                }
+                if (
+                  res.type === 'Mensual' &&
+                  user.final_date < today &&
+                  user.role === 'user'
+                ) {
+                  router.push({
+                    pathname: PURCHASE_PATH,
+                    query: { type: 'subscription', frequency: 'month', v: '2' },
+                  });
+                }
+                setCurrentLesson(res.seasons[season]!.lessons[lesson]);
+                setCourse(res);
+                getDataForNextLesson(res);
+                setIsLoading(false);
               }
-              if (res.type === 'Mensual' && user.final_date < today && user.role === 'user') {
-                router.push({
-                  pathname: PURCHASE_PATH,
-                  query: { type: 'subscription', frequency: 'month', v: '2' }
-                });
+            })
+            .catch((reason) => {
+              if (reason instanceof Error) {
+                console.error(reason.message);
+                console.error(reason.stack);
               }
-              setCurrentLesson(res.seasons[season]!.lessons[lesson]);
-              setCourse(res);
-              getDataForNextLesson(res);
-              setIsLoading(false);
-
-            }
-          }).catch((reason) => {
-            if (reason instanceof Error) {
-              console.error(reason.message);
-              console.error(reason.stack);
-            }
-          });
-          setLoggedIn(true)
+            });
+          setLoggedIn(true);
         } else {
           console.log(id);
           if (+id === 57) {
-            localStorage.setItem("product", id);
-            router.push(LOGIN_PATH)
-          }
-          else {
-            router.push(LOGIN_PATH)
+            localStorage.setItem('product', id);
+            router.push(LOGIN_PATH);
+          } else {
+            router.push(LOGIN_PATH);
           }
         }
       }
-    }, [id])
+    }, [id]);
   } catch (error) {
-    setLoggedIn(false)
+    setLoggedIn(false);
   }
   const getCourse = () => {
     getCourseApi(id).then((res) => {
@@ -125,15 +153,23 @@ const Lesson = () => {
         getDataForNextLesson(res);
         setIsLoading(false);
       }
-    })
-  }
+    });
+  };
   const getDataForNextLesson = (courseData: any) => {
     if (userData) {
       if (courseData.sequential === 1) {
         let tempLesson = courseData.seasons[+season].lessons[+lesson];
-        let checkLesson = tempLesson.users.filter((user: number) => userData.user_id === user);
-        let checkProgress = tempLesson.progress.filter((data: any) => userData.user_id === data.user_id);
-        if ((tempLesson.quiz === 1 || tempLesson.homework === 1) && (checkLesson.length === 0 && checkProgress[0].status === 0)) {
+        let checkLesson = tempLesson.users.filter(
+          (user: number) => userData.user_id === user,
+        );
+        let checkProgress = tempLesson.progress.filter(
+          (data: any) => userData.user_id === data.user_id,
+        );
+        if (
+          (tempLesson.quiz === 1 || tempLesson.homework === 1) &&
+          checkLesson.length === 0 &&
+          checkProgress[0].status === 0
+        ) {
           setBlockForNextSeason(true);
         }
       }
@@ -145,16 +181,14 @@ const Lesson = () => {
         lessonIndex: +lesson + 1,
         seasonIndex: +season,
       });
-    }
-    else {
+    } else {
       if (courseData.seasons[+season + 1]) {
         setLastLesson(false);
         setnextLesson({
           lessonIndex: 0,
           seasonIndex: +season + 1,
         });
-      }
-      else {
+      } else {
         setLastLesson(true);
         setnextLesson({
           lessonIndex: +lesson,
@@ -167,17 +201,15 @@ const Lesson = () => {
       setPreviousLesson({
         lessonIndex: +lesson - 1,
         seasonIndex: +season,
-      })
-    }
-    else {
+      });
+    } else {
       if (courseData.seasons[+season - 1]) {
         setFirstLesson(false);
         setPreviousLesson({
           lessonIndex: courseData.seasons[+season - 1].lessons.length - 1,
           seasonIndex: +season - 1,
         });
-      }
-      else {
+      } else {
         setFirstLesson(true);
         setPreviousLesson({
           lessonIndex: +lesson,
@@ -185,7 +217,7 @@ const Lesson = () => {
         });
       }
     }
-  }
+  };
   // const history = (data: any, user: any) => {
   //   let temp = {
   //     courseId: data.id,
@@ -198,20 +230,32 @@ const Lesson = () => {
 
   const handleClick = () => {
     getCourse();
-  }
+  };
   return (
     <>
-      {isLoading ? <Background style={{ justifyContent: "center", alignItems: "center" }}>
-        <LoaderImage >
-          <LoaderContain />
-        </LoaderImage>
-      </Background> :
+      {isLoading ? (
+        <Background style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <LoaderImage>
+            <LoaderContain />
+          </LoaderImage>
+        </Background>
+      ) : (
         <MainContainer>
-          <div className="left-side">
+          <div className='left-side'>
             <div className='nav-course'>
-              <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+              <img src='/images/Navbar/NavbarLogo2.png' alt='' />
             </div>
-            <Video data={currentlesson} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} nextLesson={nextLesson} openActivityModal={openActivityModal} />
+            <Video
+              data={currentlesson}
+              id={id}
+              course={course}
+              user={userData}
+              season={season}
+              lesson={lesson}
+              handleComplete={handleComplete}
+              nextLesson={nextLesson}
+              openActivityModal={openActivityModal}
+            />
             <Modules
               course={course}
               handleClick={handleClick}
@@ -227,13 +271,26 @@ const Lesson = () => {
               blockForNextSeason={blockForNextSeason}
             />
           </div>
-          <Courses menu={menu} handleClick={handleClick} course={course} data={currentlesson} userData={userData} season={season} lesson={lesson} />
+          <Courses
+            menu={menu}
+            handleClick={handleClick}
+            course={course}
+            data={currentlesson}
+            userData={userData}
+            season={season}
+            lesson={lesson}
+          />
           {/* <FirstContainer>
               <Video comments={currentComments} data={currentlesson} title={course?.courseTittle} id={id} course={course} user={userData} season={season} lesson={lesson} handleComplete={handleComplete} />
             </FirstContainer> */}
-        </MainContainer>}
-      <ActivityModal show={show} onHide={onHide} currentlesson={currentlesson} />
+        </MainContainer>
+      )}
+      <ActivityModal
+        show={show}
+        onHide={onHide}
+        currentlesson={currentlesson}
+      />
     </>
-  )
-}
+  );
+};
 export default Lesson;

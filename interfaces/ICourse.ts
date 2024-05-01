@@ -1,4 +1,4 @@
-import { IMaterialData } from "../components/Modals/CourseModal/Materials/IModalMaterials";
+import { IMaterialData } from '../components/Modals/CourseModal/Materials/IModalMaterials';
 
 export interface ICourse {
   // course id

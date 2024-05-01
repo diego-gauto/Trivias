@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SelectContain = styled.div`
   position: relative;
@@ -12,7 +12,7 @@ export const Selected = styled.div`
   gap: 10px;
   padding-inline: 15px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 5px;
   color: #942ced;
   border-radius: 30px;
@@ -41,7 +41,7 @@ export const OptionContain = styled.div`
   min-width: 300px;
 `;
 export const Input = styled.input`
-  &[type="radio"] {
+  &[type='radio'] {
     display: none;
   }
 `;

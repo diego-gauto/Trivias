@@ -1,5 +1,5 @@
-import { ModalHeader, ModalDialog } from "react-bootstrap";
-import styled from "styled-components";
+import { ModalHeader, ModalDialog } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ModalContain = styled.div`
   @font-face {

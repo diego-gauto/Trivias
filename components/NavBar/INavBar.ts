@@ -1,4 +1,4 @@
-export interface INavBar{
+export interface INavBar {
   /**
    * The title of the navbar
    */

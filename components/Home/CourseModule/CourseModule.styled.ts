@@ -1,12 +1,12 @@
-import { Card } from "react-bootstrap";
-import styled from "styled-components";
+import { Card } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const CardContainer = styled(Card)`
   background: #ede7f2;
   border: 0;
   border-radius: 0;
   color: #ede7f2;
-  font-family: "Montserrat", sans-seriff;
+  font-family: 'Montserrat', sans-seriff;
   .video {
     position: relative;
   }
@@ -23,7 +23,7 @@ export const CardContainer = styled(Card)`
     object-fit: cover;
   }
   .video::before {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 0;
     top: 0;
@@ -129,7 +129,7 @@ export const CardContainer = styled(Card)`
       }
     }
     .video::before {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 0;
       top: 0;

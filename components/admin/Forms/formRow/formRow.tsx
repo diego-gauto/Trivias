@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { FiCopy } from "react-icons/fi";
+import { FiCopy } from 'react-icons/fi';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import style from "./formRow.module.css";
-import { UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
+import style from './formRow.module.css';
+import { UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface Form {
   id: number;
@@ -22,11 +22,16 @@ interface FormRowProps {
   userLevel: UserLevelValue;
 }
 
-
-const FormRow = ({ form, idForm, canEdit, userLevel, canView }: FormRowProps) => {
+const FormRow = ({
+  form,
+  idForm,
+  canEdit,
+  userLevel,
+  canView,
+}: FormRowProps) => {
   const [copied, setCopied] = useState(false);
 
-  const { link, handCursor } = style
+  const { link, handCursor } = style;
 
   const handleCopyLink = () => {
     const baseUrl = window.location.origin;
@@ -48,45 +53,48 @@ const FormRow = ({ form, idForm, canEdit, userLevel, canView }: FormRowProps) =>
   }, [copied]);
 
   return (
-    <tr className="pointer">
+    <tr className='pointer'>
       <td>{form.id}</td>
-      <td onClick={handleCopyLink} title="Copiar ruta">
+      <td onClick={handleCopyLink} title='Copiar ruta'>
         {copied ? 'Copiado' : <FiCopy className={handCursor} />}
       </td>
       <td>
-        {
-          ((canEdit && userLevel === 'admin') || userLevel === 'superAdmin') ?
-            <Link href={`/admin/forms/updateForm?formId=${idForm}`}>
-              <a className={link} title="Editar">{form.name}</a>
-            </Link>
-            :
-            <p className={link} title="Editar">{form.name}</p>
-        }
+        {(canEdit && userLevel === 'admin') || userLevel === 'superAdmin' ? (
+          <Link href={`/admin/forms/updateForm?formId=${idForm}`}>
+            <a className={link} title='Editar'>
+              {form.name}
+            </a>
+          </Link>
+        ) : (
+          <p className={link} title='Editar'>
+            {form.name}
+          </p>
+        )}
       </td>
       <td>{form.createdAt}</td>
       <td>{form.editedAt}</td>
       <td>
-        {
-          ((canView && userLevel === 'admin') || userLevel === 'superAdmin') ?
-            <Link href={`/admin/forms/${idForm}`}>
-              <a className={link}> ver inscritos</a>
-            </Link>
-            :
-            <p className={link}> ver inscritos</p>
-        }
-
+        {(canView && userLevel === 'admin') || userLevel === 'superAdmin' ? (
+          <Link href={`/admin/forms/${idForm}`}>
+            <a className={link}> ver inscritos</a>
+          </Link>
+        ) : (
+          <p className={link}> ver inscritos</p>
+        )}
       </td>
       <td>
-        {
-          ((canView && userLevel === 'admin') || userLevel === 'superAdmin') ?
-            <Link href={`/forms/preview?formId=${idForm}`} passHref>
-              <a className={link} target="_blank" rel="noopener noreferrer"> Previsualizar</a>
-            </Link>
-            : <p className={link}> Previsualizar</p>
-        }
+        {(canView && userLevel === 'admin') || userLevel === 'superAdmin' ? (
+          <Link href={`/forms/preview?formId=${idForm}`} passHref>
+            <a className={link} target='_blank' rel='noopener noreferrer'>
+              {' '}
+              Previsualizar
+            </a>
+          </Link>
+        ) : (
+          <p className={link}> Previsualizar</p>
+        )}
       </td>
     </tr>
-
   );
 };
 

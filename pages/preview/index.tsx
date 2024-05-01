@@ -1,12 +1,10 @@
+import Courses from '../../components/Courses/Courses';
+import { MainContain } from '../../screens/Styles.styled';
 
-
-import Courses from "../../components/Courses/Courses";
-import { MainContain } from "../../screens/Styles.styled";
-
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 type Repo = {
-  data: [],
-}
+  data: [];
+};
 // export const getServerSideProps: GetServerSideProps<{ courses: Repo }> = async ({ req, res }: any) => {
 //   const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
 //   res.setHeader(
@@ -24,6 +22,6 @@ const PreviewScreen = () => {
       {/* <Preview></Preview> */}
       <Courses />
     </MainContain>
-  )
-}
+  );
+};
 export default PreviewScreen;

@@ -15,7 +15,7 @@ export const haveAccess = (
   userLevel: number,
   finalDate: number,
   userRole: 'user' | 'admin' | 'superAdmin',
-  method: MembershipMethodValue
+  method: MembershipMethodValue,
 ) => {
   const today = new Date().getTime() / 1000;
   const tolerance = TOLERANCE_DAYS_COUNT * 24 * 60 * 60;
@@ -47,7 +47,7 @@ export const isNotValidToRetry = (
   userLevel: number,
   finalDate: number,
   userRole: 'user' | 'admin' | 'superAdmin',
-  method: MembershipMethodValue
+  method: MembershipMethodValue,
 ) => {
   const today = new Date().getTime() / 1000;
   const tolerance = TOLERANCE_DAYS_COUNT * 24 * 60 * 60;

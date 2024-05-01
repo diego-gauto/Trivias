@@ -1,7 +1,7 @@
-import { Table } from "react-bootstrap";
+import { Table } from 'react-bootstrap';
 
-import UserFormRow from "../userFormRow/userFormRow";
-import { UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
+import UserFormRow from '../userFormRow/userFormRow';
+import { UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface UserForm {
   id: number;
@@ -22,15 +22,17 @@ interface UserForm {
 interface UserFormListProps {
   usersForm: UserForm[];
   canView: boolean;
-  userLevel: UserLevelValue
+  userLevel: UserLevelValue;
 }
 
-const UserTriviaList = ({ usersForm, canView, userLevel }: UserFormListProps) => {
-
+const UserTriviaList = ({
+  usersForm,
+  canView,
+  userLevel,
+}: UserFormListProps) => {
   return (
-    <div className="table-responsive">
-      {
-        ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+    <div className='table-responsive'>
+      {((canView && userLevel === 'admin') || userLevel === 'superAdmin') && (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -54,8 +56,7 @@ const UserTriviaList = ({ usersForm, canView, userLevel }: UserFormListProps) =>
             ))}
           </tbody>
         </Table>
-      }
-
+      )}
     </div>
   );
 };

@@ -1,47 +1,45 @@
-.failedContainer{
+.failedContainer {
   max-width: 95%;
 }
 
-.failedContainer H1{
-
+.failedContainer H1 {
   margin-top: 5%;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 50px;
   line-height: 55px;
   text-align: center;
 
-  color: #992EEA;
+  color: #992eea;
 }
 
-.failedContainer p{
-
-  margin: 2% 0  13px 0;
-  font-family: "Montserrat";
+.failedContainer p {
+  margin: 2% 0 13px 0;
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
   line-height: 25px;
-  text-align:start;
+  text-align: start;
   color: #520795;
 }
 
-.failedContainer .comienza{
-  color: #992EEA;
+.failedContainer .comienza {
+  color: #992eea;
 }
 
-.failedContainer .width80{
+.failedContainer .width80 {
   max-width: 80%;
 }
 
-.centrado{
+.centrado {
   padding-left: 25%;
   text-decoration: none;
 }
 
 .failedContainer button {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
@@ -66,56 +64,52 @@
 }
 
 @media screen and (max-width: 1080px) {
-
-  .failedContainer .width80{
+  .failedContainer .width80 {
     max-width: 95%;
   }
 }
 
 @media screen and (max-width: 800px) {
-
-  .failedContainer{
+  .failedContainer {
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .failedContainer p{
+  .failedContainer p {
     max-width: 80%;
     text-align: center;
   }
 
-  .failedContainer .width80{
+  .failedContainer .width80 {
     max-width: 80%;
   }
 
-  .failedContainer .comienza{
+  .failedContainer .comienza {
     display: flex;
     text-align: center;
     max-width: 100%;
   }
 
-  .centrado{
+  .centrado {
     padding-left: 0;
     justify-content: center;
   }
 }
 
 @media screen and (max-width: 400px) {
-
-  .failedContainer h1{
+  .failedContainer h1 {
     font-size: 40px;
     line-height: 45px;
     max-width: 90%;
   }
 
-  .failedContainer p{
+  .failedContainer p {
     max-width: 90%;
   }
 
-  .failedContainer .width80{
+  .failedContainer .width80 {
     max-width: 90%;
   }
-
 }

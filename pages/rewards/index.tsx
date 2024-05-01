@@ -1,10 +1,10 @@
-import Rewards from "../../containers/Profile/Rewards/Rewards";
-import { MainContain } from "../../screens/Styles.styled";
+import Rewards from '../../containers/Profile/Rewards/Rewards';
+import { MainContain } from '../../screens/Styles.styled';
 
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 type Repo = {
-  data: [],
-}
+  data: [];
+};
 // export const getServerSideProps: GetServerSideProps<{ rewards: Repo }> = async ({ req, res }: any) => {
 //   const result = await fetch("https://gonvar.inowu.dev/" + "rewards/getRewards");
 //   res.setHeader(
@@ -21,12 +21,13 @@ const Landings = () => {
   return (
     <MainContain
       style={{
-        width: "100%",
-        padding: "0",
-        maxWidth: "100% !important",
-      }}>
+        width: '100%',
+        padding: '0',
+        maxWidth: '100% !important',
+      }}
+    >
       <Rewards></Rewards>
     </MainContain>
-  )
-}
+  );
+};
 export default Landings;

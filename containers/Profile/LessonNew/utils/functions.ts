@@ -1,36 +1,36 @@
 import {
   addUserHistory,
   updateUserProgressApi,
-} from "../../../../components/api/lessons";
-import { LESSON_PATH } from "../../../../constants/paths";
-import { ISeason } from "../../../../interfaces/ICourseNew";
-import { IUserInfoResult } from "../../../../interfaces/IUser";
-import router from "next/router";
+} from '../../../../components/api/lessons';
+import { LESSON_PATH } from '../../../../constants/paths';
+import { ISeason } from '../../../../interfaces/ICourseNew';
+import { IUserInfoResult } from '../../../../interfaces/IUser';
+import router from 'next/router';
 
 export const lessonGuard = (user: IUserInfoResult | null) => {
   if (user !== null) {
     return true;
   } else {
-    router.push({ pathname: "/preview" });
+    router.push({ pathname: '/preview' });
   }
   return false;
 };
 
 export const returnLevel = (level: string) => {
-  if (level === "Muy Fácil") {
-    return "../images/iconoAzul.png";
+  if (level === 'Muy Fácil') {
+    return '../images/iconoAzul.png';
   }
-  if (level === "Fácil") {
-    return "../images/iconoLila.png";
+  if (level === 'Fácil') {
+    return '../images/iconoLila.png';
   }
-  if (level === "Intermedio") {
-    return "../images/iconoNaranja.png";
+  if (level === 'Intermedio') {
+    return '../images/iconoNaranja.png';
   }
-  if (level === "Avanzado") {
-    return "../images/iconoVerde.png";
+  if (level === 'Avanzado') {
+    return '../images/iconoVerde.png';
   }
-  if (level === "Máster") {
-    return "../images/iconoRosa.png";
+  if (level === 'Máster') {
+    return '../images/iconoRosa.png';
   }
   return;
 };
@@ -46,10 +46,10 @@ export const returnProgress = (season: ISeason, userId: number) => {
 };
 
 export const hms = (totalSeconds: any) => {
-  if (typeof totalSeconds == "string") return totalSeconds;
+  if (typeof totalSeconds == 'string') return totalSeconds;
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
-  let result = `${minutes.toString().padStart(1, "0")} min`;
+  let result = `${minutes.toString().padStart(1, '0')} min`;
   if (!!hours) {
     result = `${hours.toString()} hr ${minutes} min`;
   }
@@ -58,7 +58,7 @@ export const hms = (totalSeconds: any) => {
 
 export const goTo = (courseId: number, season: number, lesson: number) => {
   return router.push({
-    pathname: "lessonTemp",
+    pathname: 'lessonTemp',
     query: { id: courseId, season: season, lesson: lesson },
   });
 
@@ -70,14 +70,14 @@ export const returnStatus = (
   lesson: number,
   params: any,
   course: any,
-  userId: number
+  userId: number,
 ) => {
-  let status = "";
+  let status = '';
   if (course.seasons[season].lessons[lesson].users.includes(userId)) {
-    status = "completed";
+    status = 'completed';
   }
   if (season === +params.query.season && lesson === +params.query.lesson) {
-    status = "actual";
+    status = 'actual';
   }
   return status;
 };
@@ -85,7 +85,7 @@ export const returnStatus = (
 export const goToNextLesson = (course: any, season: number, lesson: number) => {
   if (course.seasons[season].lessons[lesson + 1]) {
     return router.push({
-      pathname: "lessonTemp",
+      pathname: 'lessonTemp',
       query: { id: course.id, season: season, lesson: lesson + 1 },
     });
   }
@@ -94,7 +94,7 @@ export const goToNextLesson = (course: any, season: number, lesson: number) => {
     course.seasons[season + 1]
   ) {
     return router.push({
-      pathname: "lessonTemp",
+      pathname: 'lessonTemp',
       query: { id: course.id, season: season + 1, lesson: 0 },
     });
   }
@@ -104,11 +104,11 @@ export const goToNextLesson = (course: any, season: number, lesson: number) => {
 export const goToPreviousLesson = (
   course: any,
   season: number,
-  lesson: number
+  lesson: number,
 ) => {
   if (course.seasons[season].lessons[lesson - 1]) {
     return router.push({
-      pathname: "lessonTemp",
+      pathname: 'lessonTemp',
       query: { id: course.id, season: season, lesson: lesson - 1 },
     });
   }
@@ -117,7 +117,7 @@ export const goToPreviousLesson = (
     course.seasons[season - 1]
   ) {
     return router.push({
-      pathname: "lessonTemp",
+      pathname: 'lessonTemp',
       query: {
         id: course.id,
         season: season - 1,
@@ -131,7 +131,7 @@ export const goToPreviousLesson = (
 export const handleViewed = (user: any, lesson: any) => {
   if (user) {
     let index = lesson.progress.findIndex(
-      (x: any) => x.user_id == user.user_id
+      (x: any) => x.user_id == user.user_id,
     );
     if (lesson.progress[index] && lesson.progress[index].time >= 99) {
       return 0;
@@ -152,7 +152,7 @@ export const handleProgress = async (
   course: any,
   params: any,
   duration: number,
-  seconds: number
+  seconds: number,
 ) => {
   let progress = (seconds * 100) / duration;
   let tempProgress = {
@@ -185,7 +185,7 @@ export const checkLessons = (
   user: any,
   course: any,
   season: number,
-  lesson: number
+  lesson: number,
 ) => {
   if (course.sequential === 0) {
     return true;
@@ -204,12 +204,12 @@ export const checkLessons = (
     let lastLesson = course.seasons[season - 1].lessons.length;
     if (
       course.seasons[season - 1].lessons[lastLesson - 1].users.includes(
-        user.user_id
+        user.user_id,
       ) &&
       (course.seasons[season - 1].lessons[lastLesson - 1].homework === 0 ||
         (course.seasons[season - 1].lessons[lastLesson - 1].homework === 1 &&
           course.seasons[season - 1].lessons[lastLesson - 1].progress.filter(
-            (x: any) => x.user_id === user.user_id && x.status
+            (x: any) => x.user_id === user.user_id && x.status,
           ).length > 0))
     ) {
       return true;
@@ -223,7 +223,7 @@ export const checkLessons = (
     (course.seasons[season].lessons[lesson - 1].homework === 0 ||
       (course.seasons[season].lessons[lesson - 1].homework === 1 &&
         course.seasons[season].lessons[lesson - 1].progress.filter(
-          (x: any) => x.user_id === user.user_id && x.status
+          (x: any) => x.user_id === user.user_id && x.status,
         ).length > 0))
   ) {
     return true;

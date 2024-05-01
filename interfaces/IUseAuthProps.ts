@@ -1,4 +1,4 @@
-import { IUserInfoResult } from "./IUser";
+import { IUserInfoResult } from './IUser';
 
 export interface IUseAuthProps {
   user: IUserInfoResult;

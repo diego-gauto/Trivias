@@ -1,6 +1,6 @@
-import { Table } from "react-bootstrap";
+import { Table } from 'react-bootstrap';
 
-import TriviaRow from "../triviaRow/triviaRow";
+import TriviaRow from '../triviaRow/triviaRow';
 
 interface Trivia {
   id: number;
@@ -16,13 +16,12 @@ interface TriviaListProps {
 }
 
 const TriviaList = ({ trivias, canViewTrivias }: TriviaListProps) => {
-
   if (!canViewTrivias) {
-    return (<></>);
+    return <></>;
   }
 
   return (
-    <div className="mt-2">
+    <div className='mt-2'>
       <Table striped bordered hover>
         <thead>
           <tr>

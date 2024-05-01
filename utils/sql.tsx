@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const sql = () => {
   // const isValidCSVFile = (file: any) => {
@@ -16,7 +16,6 @@ const sql = () => {
   //     let csvData: any = reader.result
   //     let csvRecordsArray = csvData.split(/\r\n|\n/);
 
-
   //     const headersRow = getHeaderArray(csvRecordsArray);
   //     const records = getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
 
@@ -27,7 +26,6 @@ const sql = () => {
   //   reader.onerror = function () {
   //   };
   // }
-
 
   // const getHeaderArray = (csvRecordsArr: any) => {
   //   let headers = (csvRecordsArr[0]).split(',');
@@ -212,21 +210,19 @@ const sql = () => {
   //   )
   // }
 
-
-
   //    SELECT
-  //    user_notification.notification_id, 
-  //    user_id, 
+  //    user_notification.notification_id,
+  //    user_id,
   //    n.type,
   //    n.message,
   //    n.status,
   //    n.created_at,
-  //    'user_notification' AS source_table, 
-  //    NULL AS course_id, 
-  //   NULL AS season, 
+  //    'user_notification' AS source_table,
+  //    NULL AS course_id,
+  //   NULL AS season,
   //   NULL AS lesson,
   //   NULL AS title,
-  //   NULL AS name 
+  //   NULL AS name
   //   FROM user_notification
   //   INNER JOIN notification as n ON n.id = user_notification.notification_id
   // WHERE user_id = ${notification.userId}
@@ -243,7 +239,7 @@ const sql = () => {
   //     homework_notification.season,
   //     homework_notification.lesson,
   //     homework_notification.title,
-  //     NULL AS name 
+  //     NULL AS name
   //     FROM homework_notification
   //     INNER JOIN notification as n ON n.id = homework_notification.notification_id
   //    WHERE user_id = ${ notification.userId }
@@ -322,7 +318,6 @@ const sql = () => {
   //   };
   // }
 
-
   // const getDataRecordsArrayFromCSVFile = (csvRecordsArray: any) => {
   //   let csvArr = [];
   //   for (let i = 1; i < csvRecordsArray.length; i++) {
@@ -371,8 +366,6 @@ const sql = () => {
   //     await delConektaUsers(element.id)
   //   });
   // }
-  return (
-    <div>sql</div>
-  )
-}
+  return <div>sql</div>;
+};
 export default sql;

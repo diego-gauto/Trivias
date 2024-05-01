@@ -1,25 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc } from 'firebase/firestore';
 // import { isValidPhoneNumber } from "react-phone-number-input";
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 // import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
-import { getFormApi } from "../../../components/api/form";
-import { createUserFormApi } from "../../../components/api/userform";
-import Countdown from "../../../components/Forms/countdown/countdown";
-import InputApellido from "../../../components/Forms/inputApellido/inputApellido";
-import InputMail from "../../../components/Forms/inputMail/inputMail";
-import InputNombre from "../../../components/Forms/inputNombre/inputNombre";
-import InputWatsapp from "../../../components/Forms/inputWhatsapp/inputWhatsapp";
-import ModalSuccessUserCreate from "../../../components/Forms/Modals/modalSuccesUserCreate";
-import ModalUserExist from "../../../components/Forms/Modals/modalUserExist";
-import OptionComponent from "../../../components/Forms/option/option";
-import { db } from "../../../firebase/firebaseConfig";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import styles from "./preview.module.css";
+import { getFormApi } from '../../../components/api/form';
+import { createUserFormApi } from '../../../components/api/userform';
+import Countdown from '../../../components/Forms/countdown/countdown';
+import InputApellido from '../../../components/Forms/inputApellido/inputApellido';
+import InputMail from '../../../components/Forms/inputMail/inputMail';
+import InputNombre from '../../../components/Forms/inputNombre/inputNombre';
+import InputWatsapp from '../../../components/Forms/inputWhatsapp/inputWhatsapp';
+import ModalSuccessUserCreate from '../../../components/Forms/Modals/modalSuccesUserCreate';
+import ModalUserExist from '../../../components/Forms/Modals/modalUserExist';
+import OptionComponent from '../../../components/Forms/option/option';
+import { db } from '../../../firebase/firebaseConfig';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import styles from './preview.module.css';
 
 interface Answer {
   label: string;
@@ -44,7 +48,7 @@ interface Form {
   };
   optionsArray: Option[];
   redirect: {
-    type: "thankYouPage" | "customLink";
+    type: 'thankYouPage' | 'customLink';
     link: string;
     textButton: string;
   };
@@ -61,7 +65,7 @@ const Formularios = () => {
 
   const router = useRouter();
 
-  const [form, setForm] = useState<Form | null>()
+  const [form, setForm] = useState<Form | null>();
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -72,21 +76,50 @@ const Formularios = () => {
 
   const errorRef = useRef<HTMLDivElement>(null);
 
-  const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
+  const [isUserCreateModalVisible, setIsUserCreateModalVisible] =
+    useState(false);
   const [isUserExistModalVisible, setIsUserExistModalVisible] = useState(false);
   // const [isUserCreateModalVisible, setIsUserCreateModalVisible] = useState(false);
 
-
-
-
-
-  const { container, formContainer, title, paragraph, logo, lineaAtravesada, inputContainer, names, name, last_name, mail, phone, errorMessageNombre, errorMessageApellido, errorMessageMail, errorMessageMailExist, errorMessageWA, errorOption, image, options, optionContainer, buttonContainer, submitButton } = styles;
+  const {
+    container,
+    formContainer,
+    title,
+    paragraph,
+    logo,
+    lineaAtravesada,
+    inputContainer,
+    names,
+    name,
+    last_name,
+    mail,
+    phone,
+    errorMessageNombre,
+    errorMessageApellido,
+    errorMessageMail,
+    errorMessageMailExist,
+    errorMessageWA,
+    errorOption,
+    image,
+    options,
+    optionContainer,
+    buttonContainer,
+    submitButton,
+  } = styles;
 
   const validationSchema = Yup.object().shape({
-    nombre: Yup.string().required('El nombre es obligatorio').min(3, 'Al menos 3 letras'),
-    apellido: Yup.string().required('El apellido es obligatorio').min(3, 'Al menos 3 letras'),
-    correo: Yup.string().required('El correo es obligatorio').email('El correo no es válido'),
-    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio'),
+    nombre: Yup.string()
+      .required('El nombre es obligatorio')
+      .min(3, 'Al menos 3 letras'),
+    apellido: Yup.string()
+      .required('El apellido es obligatorio')
+      .min(3, 'Al menos 3 letras'),
+    correo: Yup.string()
+      .required('El correo es obligatorio')
+      .email('El correo no es válido'),
+    numeroWhatsApp: Yup.string().required(
+      'El número de WhatsApp es obligatorio',
+    ),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
@@ -102,20 +135,19 @@ const Formularios = () => {
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
-
   });
 
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      correo: "",
-      numeroWhatsApp: "",
-      codigoPais: "",
-      nombrePais: "",
-      option1: "",
-      option2: "",
-      option3: "",
+      nombre: '',
+      apellido: '',
+      correo: '',
+      numeroWhatsApp: '',
+      codigoPais: '',
+      nombrePais: '',
+      option1: '',
+      option2: '',
+      option3: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -124,18 +156,14 @@ const Formularios = () => {
   });
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
-
         if (formId) {
-
           const formIdNumber: number = Number(formId);
           const res = await getFormApi(formIdNumber);
           const formTemp = res[0];
 
           if (formTemp) {
-
             formTemp.img = JSON.parse(formTemp.img);
             formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
             formTemp.redirect = JSON.parse(formTemp.redirect);
@@ -146,7 +174,7 @@ const Formularios = () => {
               const customId = `form_${formId}`; // Reemplaza con tu lógica para obtener el ID del formulario
 
               // Referencia al documento del formulario en Firestore
-              const formDocRef = doc(collection(db, "forms"), customId);
+              const formDocRef = doc(collection(db, 'forms'), customId);
 
               // Obtén los datos del formulario desde Firestore
               const formSnapshot = await getDoc(formDocRef);
@@ -154,7 +182,7 @@ const Formularios = () => {
               if (formSnapshot.exists()) {
                 // El documento existe, puedes acceder a los datos
                 const formData = formSnapshot.data() as Form;
-                console.log("Datos del formulario recuperados:", formData);
+                console.log('Datos del formulario recuperados:', formData);
 
                 setForm(formData);
                 setLoading(false);
@@ -163,16 +191,15 @@ const Formularios = () => {
               } else {
                 // El documento no existe
                 console.log(
-                  "El formulario con ID",
+                  'El formulario con ID',
                   customId,
-                  "no fue encontrado en Firebase."
+                  'no fue encontrado en Firebase.',
                 );
               }
             } catch (error) {
-              console.error("Error al recuperar datos desde Firebase:", error);
+              console.error('Error al recuperar datos desde Firebase:', error);
             }
           }
-
         } else {
           const storedFormData = localStorage.getItem('formData');
           if (storedFormData) {
@@ -181,11 +208,10 @@ const Formularios = () => {
 
           setLoading(false);
         }
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos del formulario:', error);
       }
-
     };
 
     fetchData();
@@ -194,7 +220,7 @@ const Formularios = () => {
   useEffect(() => {
     if (errorMessage) {
       // Hacer desplazamiento al mensaje de error
-      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      errorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [errorMessage]);
 
@@ -215,21 +241,23 @@ const Formularios = () => {
       setErrorMessage(null);
     }
 
-    if (newEmail == originalEmail) setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
-
+    if (newEmail == originalEmail)
+      setErrorMessage('Este correo ya se ha inscrito. Intenta con otro');
   };
 
-
-  const handlePaisChange = (value: any, selectedCountry: any, selectedCode: any) => {
-    formik.setFieldValue("numeroWhatsApp", value);
-    formik.setFieldValue("nombrePais", selectedCountry);
-    formik.setFieldValue("codigoPais", selectedCode)
+  const handlePaisChange = (
+    value: any,
+    selectedCountry: any,
+    selectedCode: any,
+  ) => {
+    formik.setFieldValue('numeroWhatsApp', value);
+    formik.setFieldValue('nombrePais', selectedCountry);
+    formik.setFieldValue('codigoPais', selectedCode);
 
     // const isValid = isValidPhoneNumber(value, selectedCode)
     // console.log(value)
     // console.log(selectedCode)
     // console.log(isValid)
-
   };
 
   const handleNombreBlur = () => {
@@ -254,7 +282,6 @@ const Formularios = () => {
   // };
 
   const handleSubmit = async (values: any) => {
-
     const lowerCaseMail = values.correo.toLowerCase();
 
     const createUserDto = {
@@ -269,32 +296,34 @@ const Formularios = () => {
       option3: values.option3,
     };
 
-    console.log(createUserDto)
+    console.log(createUserDto);
 
     try {
       const res = await createUserFormApi(createUserDto);
       const createUserResult = res.data.result;
-      console.log(createUserResult)
+      console.log(createUserResult);
       // const createUserResult = false;
 
       if (createUserResult) {
-        const link = form?.redirect?.type === 'thankYouPage' ? '/forms/thankyoupage' : form?.redirect?.link || '';
+        const link =
+          form?.redirect?.type === 'thankYouPage'
+            ? '/forms/thankyoupage'
+            : form?.redirect?.link || '';
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
-        console.log("usuario registrado exitosamente")
+        console.log('usuario registrado exitosamente');
       } else {
         //popup el usuario ya esta registrado
         // setIsUserExistModalVisible(true)
-        setOriginalEmail(formik.values.correo)
-        setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
-        console.log("usuario ya registrado")
+        setOriginalEmail(formik.values.correo);
+        setErrorMessage('Este correo ya se ha inscrito. Intenta con otro');
+        console.log('usuario ya registrado');
       }
     } catch (error) {
       //popup hubo un error, intentelo otra vez
-      console.error("Error al crear el usuario", error);
+      console.error('Error al crear el usuario', error);
     }
-
   };
 
   const validarOpciones = () => {
@@ -347,13 +376,12 @@ const Formularios = () => {
       // Si el checkbox está marcado y el formulario es válido, enviar el formulario
       if (formIsValid && optionsAreValid) {
         try {
-          console.log("Formulario con estructura correcta")
-
+          console.log('Formulario con estructura correcta');
         } catch (error) {
-          console.error("Error al enviar el formulario", error);
+          console.error('Error al enviar el formulario', error);
         }
       } else {
-        console.error("Campos no validos")
+        console.error('Campos no validos');
       }
     });
   };
@@ -369,28 +397,33 @@ const Formularios = () => {
       return { __html: html };
     };
 
-    return (
-      <div dangerouslySetInnerHTML={sanitizeHTML(content)} />
-    );
+    return <div dangerouslySetInnerHTML={sanitizeHTML(content)} />;
   };
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
     <div className={container}>
-
-      <img className={logo} src="/images/forms/logoGonvar+.png" alt="logo Gonvar" />
+      <img
+        className={logo}
+        src='/images/forms/logoGonvar+.png'
+        alt='logo Gonvar'
+      />
       <div className={formContainer}>
-        <h2 className={title}>{form?.title && displayContent({ content: form.title })}</h2>
-        <h4 className={paragraph}>{form?.subtitle && displayContent({ content: form.subtitle })}</h4>
+        <h2 className={title}>
+          {form?.title && displayContent({ content: form.title })}
+        </h2>
+        <h4 className={paragraph}>
+          {form?.subtitle && displayContent({ content: form.subtitle })}
+        </h4>
         <div className={lineaAtravesada}></div>
 
         <Countdown />
@@ -398,10 +431,9 @@ const Formularios = () => {
         <form onSubmit={formik.handleSubmit} className={inputContainer}>
           <div className={names}>
             <div className={name}>
-
               <InputNombre
-                label={"Escribe tu nombre"}
-                placeholder={"Carla"}
+                label={'Escribe tu nombre'}
+                placeholder={'Carla'}
                 onChange={handleNombreChange}
                 onBlur={handleNombreBlur}
                 value={formik.values.nombre}
@@ -412,25 +444,24 @@ const Formularios = () => {
             </div>
 
             <div className={last_name}>
-
-
               <InputApellido
-                label={"Escribe tu apellido"}
-                placeholder={"Flores"}
+                label={'Escribe tu apellido'}
+                placeholder={'Flores'}
                 onChange={handleApellidoChange}
                 onBlur={handleApellidoBlur}
                 value={formik.values.apellido}
               />
               {formik.touched.apellido && formik.errors.apellido && (
-                <div className={errorMessageApellido}>{formik.errors.apellido}</div>
+                <div className={errorMessageApellido}>
+                  {formik.errors.apellido}
+                </div>
               )}
-
             </div>
           </div>
           <div ref={errorRef} className={mail}>
             <InputMail
-              label={"Escribe tu correo electrónico"}
-              placeholder={"carlaflores@gmail.com"}
+              label={'Escribe tu correo electrónico'}
+              placeholder={'carlaflores@gmail.com'}
               onChange={handleMailChange}
               onBlur={handleMailBlur}
               value={formik.values.correo}
@@ -444,57 +475,82 @@ const Formularios = () => {
           </div>
           <div className={phone}>
             <InputWatsapp
-              label={"Escribe tu WhatsApp (Selecciona tu país primero)"}
-              placeholder={"1153137872"}
+              label={'Escribe tu WhatsApp (Selecciona tu país primero)'}
+              placeholder={'1153137872'}
               onChange={handlePaisChange}
               onBlur={handlePaisBlur}
               value={formik.values.numeroWhatsApp}
             />
             {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
-              <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
+              <div className={errorMessageWA}>
+                {formik.errors.numeroWhatsApp}
+              </div>
             )}
           </div>
           <div className={image}>
-            {form?.img.isVisible && <img src={form.img.source} alt="iphone" />}
+            {form?.img.isVisible && <img src={form.img.source} alt='iphone' />}
           </div>
           <div className={options}>
             <div className={optionContainer}>
-              <OptionComponent label={form?.optionsArray[0]?.label || ''} options={form?.optionsArray[0]?.options || []} onOptionChange={(value) => handleOptionChange(1, value)} isVisible={!!form?.optionsArray[0]?.isVisible} />
+              <OptionComponent
+                label={form?.optionsArray[0]?.label || ''}
+                options={form?.optionsArray[0]?.options || []}
+                onOptionChange={(value) => handleOptionChange(1, value)}
+                isVisible={!!form?.optionsArray[0]?.isVisible}
+              />
               {formik.touched.option1 && formik.errors.option1 && (
                 <div className={errorOption}>{formik.errors.option1}</div>
               )}
             </div>
 
             <div className={optionContainer}>
-              <OptionComponent label={form?.optionsArray[1]?.label || ''} options={form?.optionsArray[1]?.options || []} onOptionChange={(value) => handleOptionChange(2, value)} isVisible={!!form?.optionsArray[1]?.isVisible} />
+              <OptionComponent
+                label={form?.optionsArray[1]?.label || ''}
+                options={form?.optionsArray[1]?.options || []}
+                onOptionChange={(value) => handleOptionChange(2, value)}
+                isVisible={!!form?.optionsArray[1]?.isVisible}
+              />
               {formik.touched.option2 && formik.errors.option2 && (
                 <div className={errorOption}>{formik.errors.option2}</div>
               )}
             </div>
 
             <div className={optionContainer}>
-              <OptionComponent label={form?.optionsArray[2]?.label || ''} options={form?.optionsArray[2]?.options || []} onOptionChange={(value) => handleOptionChange(3, value)} isVisible={!!form?.optionsArray[2]?.isVisible} />
-              {form?.optionsArray[2]?.isVisible ? (
-                formik.touched.option3 && formik.errors.option3 &&
-                <div className={errorOption}>{formik.errors.option3}</div>
-              ) : null}
+              <OptionComponent
+                label={form?.optionsArray[2]?.label || ''}
+                options={form?.optionsArray[2]?.options || []}
+                onOptionChange={(value) => handleOptionChange(3, value)}
+                isVisible={!!form?.optionsArray[2]?.isVisible}
+              />
+              {form?.optionsArray[2]?.isVisible
+                ? formik.touched.option3 &&
+                  formik.errors.option3 && (
+                    <div className={errorOption}>{formik.errors.option3}</div>
+                  )
+                : null}
             </div>
-
           </div>
           <div className={lineaAtravesada}></div>
 
           <div className={buttonContainer}>
-            <button type="button" className={submitButton} onClick={handleButtonClick}>
-              {form?.redirect.textButton === "" ? "Enviar Solicitud" : form?.redirect.textButton}
+            <button
+              type='button'
+              className={submitButton}
+              onClick={handleButtonClick}
+            >
+              {form?.redirect.textButton === ''
+                ? 'Enviar Solicitud'
+                : form?.redirect.textButton}
             </button>
           </div>
-
-
         </form>
       </div>
-      {isUserCreateModalVisible && <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />}
-      {isUserExistModalVisible && <ModalUserExist closeModal={setIsUserExistModalVisible} />}
-
+      {isUserCreateModalVisible && (
+        <ModalSuccessUserCreate closeModal={setIsUserCreateModalVisible} />
+      )}
+      {isUserExistModalVisible && (
+        <ModalUserExist closeModal={setIsUserExistModalVisible} />
+      )}
     </div>
   );
 };

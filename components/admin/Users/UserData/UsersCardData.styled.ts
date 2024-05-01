@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const UserContain = styled.div`
   z-index: 1000;
@@ -37,7 +37,7 @@ export const FirstBox = styled.div`
   align-items: center;
 `;
 export const Title = styled.h1`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 16px;
   margin: 0;
@@ -87,13 +87,13 @@ export const ColumnContain = styled.div`
 export const Info = styled.p`
   display: flex;
   flex-direction: column;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 0;
   height: 60px;
 `;
 export const Label = styled.label`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 600;
   color: #6717cd;
@@ -108,7 +108,7 @@ export const Courses = styled.div`
   }
 `;
 export const TitleBox = styled.p`
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   font-weight: 600;
   margin: 0;
@@ -136,7 +136,7 @@ export const CourseContain = styled.div`
 export const TransparentButton = styled.button`
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 10px;
@@ -156,7 +156,7 @@ export const TransparentButton2 = styled.button`
   height: 43px;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 9px;
@@ -206,19 +206,19 @@ export const Pay2 = styled.i`
   height: 66px;
 `;
 
-export const CardIconResp = styled("i")<{ brand: any }>`
+export const CardIconResp = styled('i')<{ brand: any }>`
   ${(props) =>
-    props.brand == "visa" &&
+    props.brand == 'visa' &&
     css`
       background-image: url(../images/visa-icon.png);
     `}
   ${(props) =>
-    props.brand == "mastercard" &&
+    props.brand == 'mastercard' &&
     css`
       background-image: url(../images/mastercard-icon.png);
     `}
   ${(props) =>
-    props.brand == "amex" &&
+    props.brand == 'amex' &&
     css`
       background-image: url(../images/amex-icon.png);
     `}
@@ -263,13 +263,13 @@ export const LevelContain = styled.div`
 export const CurrentLevel = styled.p`
   font-size: 24px;
   font-weight: 600;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #6717cd;
   margin: 0;
   z-index: 1;
   line-height: 30px;
 `;
-export const ProgressCircle = styled("circle")<{ progress: number }>`
+export const ProgressCircle = styled('circle')<{ progress: number }>`
   fill: none;
   stroke: url(#gradient2);
   stroke-width: 4px;

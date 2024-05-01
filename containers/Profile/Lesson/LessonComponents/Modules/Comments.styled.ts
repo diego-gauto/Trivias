@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -262,7 +262,7 @@ export const CommentText = styled.div`
 `;
 export const Comment = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 12px;
@@ -293,7 +293,7 @@ export const Pp3 = styled.i`
 export const Button = styled.button`
   display: flex;
   gap: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;

@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { DefaultContainer } from "../DefaultComponents/DefaultComponents.styled";
-import { AdminContain } from "../SideBar.styled";
+import { useState } from 'react';
+import { DefaultContainer } from '../DefaultComponents/DefaultComponents.styled';
+import { AdminContain } from '../SideBar.styled';
 
 interface IGroup {
-  title: string,
-  frequencyLabel: string,
-  frequency: string,
+  title: string;
+  frequencyLabel: string;
+  frequency: string;
   values: {
-    v: number,
-    price: number,
-    selected: boolean
-  }[]
+    v: number;
+    price: number;
+    selected: boolean;
+  }[];
 }
 
 const links: IGroup[] = [
@@ -22,19 +22,19 @@ const links: IGroup[] = [
       {
         price: 149,
         v: 1,
-        selected: false
+        selected: false,
       },
       {
         price: 249,
         v: 2,
-        selected: false
+        selected: false,
       },
       {
         price: 459,
         v: 3,
-        selected: false
-      }
-    ]
+        selected: false,
+      },
+    ],
   },
   {
     title: 'Cuatrimestrales',
@@ -44,9 +44,9 @@ const links: IGroup[] = [
       {
         price: 1599,
         v: 3,
-        selected: false
+        selected: false,
       },
-    ]
+    ],
   },
   {
     title: 'Anuales',
@@ -56,25 +56,22 @@ const links: IGroup[] = [
       {
         price: 1599,
         v: 1,
-        selected: false
+        selected: false,
       },
       {
         price: 3497,
         v: 3,
-        selected: false
+        selected: false,
       },
-    ]
-  }
+    ],
+  },
 ];
 
-const generateLink = (value: {
-  frequency: string,
-  v: number
-}) => {
+const generateLink = (value: { frequency: string; v: number }) => {
   const { origin } = window.location;
   const link = `${origin}/purchase?type=subscription&frequency=${value.frequency}&v=${value.v}`;
   return link;
-}
+};
 
 const changeSelectedValue = (indexX: number, indexY: number) => {
   const newLinks = links.map((group, indexGroupX) => {
@@ -84,100 +81,123 @@ const changeSelectedValue = (indexX: number, indexY: number) => {
         if (indexGroupX === indexX && indexValueY === indexY) {
           return {
             ...value,
-            selected: true
-          }
+            selected: true,
+          };
         }
         return {
-          ...value
-        }
-      })
-    }
+          ...value,
+        };
+      }),
+    };
   });
   console.log({ newLinks });
   return newLinks;
-}
+};
 
 const AdminPlans = () => {
-
-  const [link, setLink] = useState<string>("");
+  const [link, setLink] = useState<string>('');
   const [values, setValues] = useState(links);
 
-  return (<>
-    <AdminContain>
-      <DefaultContainer>
-        <div style={{
-          padding: '25px'
-        }}>
-          <h2 style={{
-            fontWeight: 'bold'
-          }}>Enlaces a planes</h2>
-          <p style={{
-            fontSize: '20px'
-          }}>Da clic en cualquier opción para copiar el enlace</p>
-
-          {
-            // Enlace copiado tras dar clic a los enlaces
-            link === '' ?
-              <p style={{
-                fontSize: '18px',
-                color: '#bb2222',
-                paddingTop: '15px'
+  return (
+    <>
+      <AdminContain>
+        <DefaultContainer>
+          <div
+            style={{
+              padding: '25px',
+            }}
+          >
+            <h2
+              style={{
+                fontWeight: 'bold',
               }}
-              >No se ha copiado ningun enlace aún.</p>
-              :
-              <p style={{
-                fontSize: '18px',
-                paddingTop: '15px'
+            >
+              Enlaces a planes
+            </h2>
+            <p
+              style={{
+                fontSize: '20px',
               }}
-              >
-                El enlace copiado fue el de: <br />
-                <span style={{
-                  fontSize: '18px',
-                  color: '#22bb22',
-                  paddingTop: '15px'
-                }}>
-                  {link}
-                </span>
-              </p>
-          }
+            >
+              Da clic en cualquier opción para copiar el enlace
+            </p>
 
-          {
-            values.map(({ title, frequency, values, frequencyLabel }, indexX) => {
-              return (<>
-                <h3 style={{
-                  paddingTop: '20px'
-                }}>Planes {title}</h3>
-                <ul>
-                  {
-                    values.map(({ price, v, selected }, indexY) => {
-                      const colorValue = selected ? '#22bb22' : 'black';
-                      const bolderOrNot = selected ? 'bolder' : 'inherit';
-                      return (
-                        <li
-                          style={{
-                            fontSize: '22px',
-                            padding: '8px 0px',
-                            color: colorValue,
-                            fontWeight: bolderOrNot,
-                          }}
-                          onClick={() => {
-                            const url = generateLink({ frequency, v });
-                            setLink(url);
-                            setValues(changeSelectedValue(indexX, indexY));
-                            navigator.clipboard.writeText(url);
-                          }}
-                        >Checkout directo a la suscripción {frequencyLabel} de ${price}</li>
-                      )
-                    })
-                  }
-                </ul>
-                <hr />
-              </>);
-            })
-          }
+            {
+              // Enlace copiado tras dar clic a los enlaces
+              link === '' ? (
+                <p
+                  style={{
+                    fontSize: '18px',
+                    color: '#bb2222',
+                    paddingTop: '15px',
+                  }}
+                >
+                  No se ha copiado ningun enlace aún.
+                </p>
+              ) : (
+                <p
+                  style={{
+                    fontSize: '18px',
+                    paddingTop: '15px',
+                  }}
+                >
+                  El enlace copiado fue el de: <br />
+                  <span
+                    style={{
+                      fontSize: '18px',
+                      color: '#22bb22',
+                      paddingTop: '15px',
+                    }}
+                  >
+                    {link}
+                  </span>
+                </p>
+              )
+            }
 
-          {
-            /*
+            {values.map(
+              ({ title, frequency, values, frequencyLabel }, indexX) => {
+                return (
+                  <>
+                    <h3
+                      style={{
+                        paddingTop: '20px',
+                      }}
+                    >
+                      Planes {title}
+                    </h3>
+                    <ul>
+                      {values.map(({ price, v, selected }, indexY) => {
+                        const colorValue = selected ? '#22bb22' : 'black';
+                        const bolderOrNot = selected ? 'bolder' : 'inherit';
+                        return (
+                          <li
+                            style={{
+                              fontSize: '22px',
+                              padding: '8px 0px',
+                              color: colorValue,
+                              fontWeight: bolderOrNot,
+                            }}
+                            onClick={() => {
+                              const url = generateLink({ frequency, v });
+                              setLink(url);
+                              setValues(changeSelectedValue(indexX, indexY));
+                              navigator.clipboard.writeText(url);
+                            }}
+                          >
+                            Checkout directo a la suscripción {frequencyLabel}{' '}
+                            de ${price}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <hr />
+                  </>
+                );
+              },
+            )}
+
+            {/*
             <h3 style={{
             paddingTop: '20px'
           }}>Planes mensuales</h3>
@@ -189,14 +209,12 @@ const AdminPlans = () => {
             }}>Checkout directo a la suscripción mensual de $149</li>
           </ul>
           <hr />
-            */
-          }
-
-        </div>
-      </DefaultContainer>
-    </AdminContain>
-  </>);
-
-}
+            */}
+          </div>
+        </DefaultContainer>
+      </AdminContain>
+    </>
+  );
+};
 
 export default AdminPlans;

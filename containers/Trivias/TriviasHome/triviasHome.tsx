@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { getAllTriviasApi } from "../../../components/api/trivias";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import TriviaSelector from "../TriviaSelector/triviaSelector";
-import styles from "./triviasHome.module.css";
+import { getAllTriviasApi } from '../../../components/api/trivias';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import TriviaSelector from '../TriviaSelector/triviaSelector';
+import styles from './triviasHome.module.css';
 
 interface Trivia {
   id: number;
@@ -52,7 +56,7 @@ const TriviaHome = () => {
     const fetchTrivias = async () => {
       try {
         const triviasData = await getAllTriviasApi();
-        console.log(triviasData)
+        console.log(triviasData);
         setTrivias(triviasData);
         setLoading(false);
         // setTrivias(triviasMock)
@@ -66,12 +70,12 @@ const TriviaHome = () => {
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
@@ -82,7 +86,11 @@ const TriviaHome = () => {
           padding: 0px;
         }
       `}</style>
-      <img className={styles.premio} src="/images/trivias/Icono de premio.svg" alt="" />
+      <img
+        className={styles.premio}
+        src='/images/trivias/Icono de premio.svg'
+        alt=''
+      />
       <h1 className={styles.title}>¡Comienza a jugar!</h1>
       <h3 className={styles.subtitle}>
         ¡Elige tu trivia favorita y gana un premio!

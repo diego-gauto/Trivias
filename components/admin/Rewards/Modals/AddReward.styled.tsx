@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalContain = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const InputContain = styled.div`
@@ -22,7 +22,7 @@ export const InputContain = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
-  select{
+  select {
     padding-block: 10px;
     padding-inline: 20px;
     border-radius: 100px;
@@ -32,17 +32,17 @@ export const InputContain = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   position: relative;
-  &:hover{
-    div{
+  &:hover {
+    div {
       opacity: 1;
     }
   }
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   border: 1px solid #6717cd;
@@ -55,7 +55,7 @@ export const Input = styled.input`
 export const Input2 = styled.div`
   font-size: 14px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   height: 43px;
@@ -77,7 +77,7 @@ export const Input2 = styled.div`
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: justify;
   padding-block: 10px;
   width: 100%;
@@ -101,7 +101,7 @@ export const ButtonContain = styled.div`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: #6717cd;
@@ -116,7 +116,7 @@ export const Button = styled.button`
 `;
 export const ButtonTransparent = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: red;
@@ -128,28 +128,28 @@ export const IconContain = styled.div`
   display: flex;
   position: relative;
   width: 100%;
-  .input-file{
-     font-size: 14px;
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-  padding-inline: 50px 20px;
-  padding-block: 10px;
-  height: 43px;
-  border: 1px solid #6717cd;
-  border-radius: 20px;
-  input::file-selector-button {
-    display: none;
-  }
-  input {
+  .input-file {
+    font-size: 14px;
     width: 100%;
-  }
-  label {
-    color: #6717cd;
-  }
-  outline: none;
-  :focus {
-    border: 2px solid #8e2de2;
-  }
+    font-family: 'Montserrat', sans-serif;
+    padding-inline: 50px 20px;
+    padding-block: 10px;
+    height: 43px;
+    border: 1px solid #6717cd;
+    border-radius: 20px;
+    input::file-selector-button {
+      display: none;
+    }
+    input {
+      width: 100%;
+    }
+    label {
+      color: #6717cd;
+    }
+    outline: none;
+    :focus {
+      border: 2px solid #8e2de2;
+    }
   }
 `;
 export const Folder = styled.i`
@@ -169,7 +169,7 @@ export const Selected = styled.div`
   font-size: 16px;
   padding-left: 20px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 10px;
   border-radius: 100px;
   border: 1px solid #6717cd;
@@ -204,7 +204,7 @@ export const Option = styled.div`
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -215,7 +215,7 @@ export const LabelSelect = styled.label`
   gap: 5px;
   padding-block: 10px;
   padding-inline: 20px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   white-space: nowrap;
 `;

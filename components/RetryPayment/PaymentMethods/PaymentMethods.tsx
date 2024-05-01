@@ -1,7 +1,7 @@
-import React from 'react'
-import { PaymentMethodsContainer } from './PaymentMethods.styled'
+import React from 'react';
+import { PaymentMethodsContainer } from './PaymentMethods.styled';
 import { IPaymentMethods } from './IPaymentMethods';
-const master_card = "/images/RetryPayment/mastercard.png";
+const master_card = '/images/RetryPayment/mastercard.png';
 
 export const PaymentMethods = (props: IPaymentMethods) => {
   const { pm, index, pm_size, changePaymentMethod, handleDelete } = props;
@@ -15,26 +15,37 @@ export const PaymentMethods = (props: IPaymentMethods) => {
       </div>
       <p className='description-2'>Para quitarla, agrega otra forma de pago </p>
       <div className='edit'>
-        {
-          pm_size > 1
-            ?
-            <div className='default'>
-              <div className={'input-radio ' + (pm.default ? "selected-radio" : "")} onClick={() => { changePaymentMethod(pm) }}>
-                <div className='dot' />
-              </div>
-              <p>Predeterminada</p>
+        {pm_size > 1 ? (
+          <div className='default'>
+            <div
+              className={'input-radio ' + (pm.default ? 'selected-radio' : '')}
+              onClick={() => {
+                changePaymentMethod(pm);
+              }}
+            >
+              <div className='dot' />
             </div>
-            : <div style={{ width: 197 }} />
-        }
+            <p>Predeterminada</p>
+          </div>
+        ) : (
+          <div style={{ width: 197 }} />
+        )}
 
         <div className='right'>
-          {
-            !pm.default ?
-              <p className='actives' onClick={() => { handleDelete(pm) }}>Eliminar</p>
-              : <div style={{ width: 80 }} />
-          }
+          {!pm.default ? (
+            <p
+              className='actives'
+              onClick={() => {
+                handleDelete(pm);
+              }}
+            >
+              Eliminar
+            </p>
+          ) : (
+            <div style={{ width: 80 }} />
+          )}
         </div>
       </div>
     </PaymentMethodsContainer>
-  )
-}
+  );
+};

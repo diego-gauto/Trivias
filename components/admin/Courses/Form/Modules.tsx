@@ -1,21 +1,21 @@
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 import { PurpleButton } from '../AllCourses.styled';
 import { ModuleContainer } from './Modules.styled';
 
 const Modules = () => {
   return (
     <ModuleContainer>
-      <Link href="/admin/CourseAttributes">
+      <Link href='/admin/CourseAttributes'>
         <PurpleButton>Categorías</PurpleButton>
       </Link>
-      <Link href="/admin/Materials">
+      <Link href='/admin/Materials'>
         <PurpleButton>Materiales</PurpleButton>
       </Link>
-      <Link href="/admin/Teacher">
+      <Link href='/admin/Teacher'>
         <PurpleButton>Instructores</PurpleButton>
       </Link>
     </ModuleContainer>
-  )
-}
+  );
+};
 export default Modules;

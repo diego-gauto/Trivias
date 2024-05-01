@@ -1,7 +1,10 @@
-import { Table } from "react-bootstrap";
+import { Table } from 'react-bootstrap';
 
-import FormRow from "../formRow/formRow";
-import { Role, UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
+import FormRow from '../formRow/formRow';
+import {
+  Role,
+  UserLevelValue,
+} from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface Form {
   id: number;
@@ -19,9 +22,9 @@ interface FormListProps {
 
 const FormList = ({ forms, canView, userLevel, canEdit }: FormListProps) => {
   return (
-    <div className="table-responsive">
-      {
-        ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') && <Table striped bordered hover>
+    <div className='table-responsive'>
+      {((userLevel === 'admin' && canView) || userLevel === 'superAdmin') && (
+        <Table striped bordered hover>
           <thead>
             <tr>
               <th>Nº de Formulario</th>
@@ -46,7 +49,7 @@ const FormList = ({ forms, canView, userLevel, canEdit }: FormListProps) => {
             ))}
           </tbody>
         </Table>
-      }
+      )}
     </div>
   );
 };

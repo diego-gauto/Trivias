@@ -17,7 +17,7 @@ export const goTo = (user: IUser, type: Suscription) => {
   // debugger;
   if (user && user.id) {
     let complete_nails = user.user_courses.filter(
-      (val: any) => val.course_id === 57 && val.final_date > today
+      (val: any) => val.course_id === 57 && val.final_date > today,
     );
     // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
     // Si una usuaria es de pago recurrente nivel 1, 4, 7

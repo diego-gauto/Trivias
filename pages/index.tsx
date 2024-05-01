@@ -1,33 +1,42 @@
-import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { GonvarPlusModule } from "../components/Home/GonvarPlusModule/GonvarPlusModule";
-import { Module2_1 } from "../components/Home/Module2_1/Module2_1";
-import { Module3_1 } from "../components/Home/Module3_1/Module3_1";
-import { Module4_Carousel } from "../components/Home/Module4_Carousel/Module4_Carousel";
-import { Module5_1 } from "../components/Home/Module5_1/Module5_1";
-import { Module6_1 } from "../components/Home/Module6_1/Module6_1";
-import { CourseModuleContainer } from "../containers/Home/CourseModuleContainer/CourseModuleContainer";
-import { getUserApi } from "../components/api/users";
-import { getLandingCoursesApi } from "../components/api/lessons";
-import { getLandingProductApi, getLandingReviewApi } from "../components/api/admin";
-import WelcomeModal from "../components/WelcomeModal/WelcomeModal";
-import HelmetMetaTags from "../components/HelmetMetaTags/HelmetMetaTags";
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { GonvarPlusModule } from '../components/Home/GonvarPlusModule/GonvarPlusModule';
+import { Module2_1 } from '../components/Home/Module2_1/Module2_1';
+import { Module3_1 } from '../components/Home/Module3_1/Module3_1';
+import { Module4_Carousel } from '../components/Home/Module4_Carousel/Module4_Carousel';
+import { Module5_1 } from '../components/Home/Module5_1/Module5_1';
+import { Module6_1 } from '../components/Home/Module6_1/Module6_1';
+import { CourseModuleContainer } from '../containers/Home/CourseModuleContainer/CourseModuleContainer';
+import { getUserApi } from '../components/api/users';
+import { getLandingCoursesApi } from '../components/api/lessons';
+import {
+  getLandingProductApi,
+  getLandingReviewApi,
+} from '../components/api/admin';
+import WelcomeModal from '../components/WelcomeModal/WelcomeModal';
+import HelmetMetaTags from '../components/HelmetMetaTags/HelmetMetaTags';
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 type Repo = {
-  data: [],
-}
-export const getServerSideProps: GetServerSideProps<{ courses: Repo }> = async ({ req, res }: any) => {
-  const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
+  data: [];
+};
+export const getServerSideProps: GetServerSideProps<{
+  courses: Repo;
+}> = async ({ req, res }: any) => {
+  const result = await fetch(
+    'https://gonvar.inowu.dev/' + 'courses/getCourses',
+  );
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    'public, s-maxage=10, stale-while-revalidate=59',
+  );
   const courses = await result.json();
   return {
-    props: { courses }
-  }
-}
-const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    props: { courses },
+  };
+};
+const Homepage = ({
+  courses,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [loading, setLoading] = useState(true);
   const [courseNailsData, setCourseNailsData] = useState<any>([]);
   const [courseGonvarPlus, setCourseGonvarPlus] = useState<any>([]);
@@ -38,52 +47,56 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  var obj_1: any =
-  {
-    "tituloInicial": "hola",
-    "parrafoInicial": "hola",
-    "parrafoFinal": "hola",
-    "botonPrimario": "hola",
-    "botonSecundario": "hola",
-    "primerCaracteristica": "hola",
-    "segundaCaracteristica": "hola",
-    "terceraCaracteristica": "hola",
+  var obj_1: any = {
+    tituloInicial: 'hola',
+    parrafoInicial: 'hola',
+    parrafoFinal: 'hola',
+    botonPrimario: 'hola',
+    botonSecundario: 'hola',
+    primerCaracteristica: 'hola',
+    segundaCaracteristica: 'hola',
+    terceraCaracteristica: 'hola',
   };
   useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
+    if (localStorage.getItem('email')) {
+      getUserApi(localStorage.getItem('email')).then((res) => {
         setLoggedIn(true);
         setUserData(res);
         getLandingCoursesApi(res.id).then((data) => {
           data.gonvar_courses.forEach((course: any) => {
             course.totalDuration = hms(course.totalDuration);
-          })
+          });
           setCourseGonvarPlus(data.gonvar_courses);
           // data.nails_master.totalDuration = hms(data.nails_master.totalDuration);
-          let nails_revolution = data.gonvar_courses.filter((val: any) => val.id === 57);
-          nails_revolution[0].totalDuration = hms(data.nails_master?.totalDuration);
+          let nails_revolution = data.gonvar_courses.filter(
+            (val: any) => val.id === 57,
+          );
+          nails_revolution[0].totalDuration = hms(
+            data.nails_master?.totalDuration,
+          );
           setCourseNailsData(nails_revolution[0]);
           // console.log(data.nails_master);
           // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
           // setCourseSEPData(data.alineacion_cert);
           setLoading(true);
-        })
-      })
-    }
-    else {
-      setWelcomeModal(true)
+        });
+      });
+    } else {
+      setWelcomeModal(true);
       getLandingCoursesApi(null).then((data) => {
         data.gonvar_courses.forEach((course: any) => {
           course.totalDuration = hms(course.totalDuration);
-        })
+        });
         setCourseGonvarPlus(data.gonvar_courses);
-        let nails_revolution = data.gonvar_courses.filter((val: any) => val.id === 57);
+        let nails_revolution = data.gonvar_courses.filter(
+          (val: any) => val.id === 57,
+        );
         // nails_revolution[0].totalDuration = hms(data.nails_master.totalDuration);
         setCourseNailsData(nails_revolution[0]);
         // data.alineacion_cert.totalDuration = hms(data.alineacion_cert.totalDuration)
         // setCourseSEPData(data.alineacion_cert);
         setLoading(true);
-      })
+      });
     }
     getLandingReviewApi().then((res) => {
       let reviewData: any = [];
@@ -97,11 +110,11 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
           isNew: review.new === 0 ? false : true,
           username: review.user_name,
           usrImgURL: review.user_image,
-        }
-        reviewData.push(tempReview)
+        };
+        reviewData.push(tempReview);
       });
       setReviews(reviewData);
-    })
+    });
     getLandingProductApi().then((res) => {
       let productData: any = [];
       res.forEach((product: any) => {
@@ -115,54 +128,79 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
           title: product.title,
           isNew: product.is_new === 0 ? false : true,
           precio: product.price,
-        }
-        productData.push(tempProduct)
+        };
+        productData.push(tempProduct);
       });
       setProduct(productData);
-    })
+    });
     // fetchLandingData();
   }, []);
 
   const hms = (totalSeconds: any) => {
-    if (typeof totalSeconds == 'string') return totalSeconds
+    if (typeof totalSeconds == 'string') return totalSeconds;
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
-    let result = `${minutes
-      .toString()
-      .padStart(1, '0')} min`;
+    let result = `${minutes.toString().padStart(1, '0')} min`;
     if (!!hours) {
       result = `${hours.toString()} hr ${minutes} min`;
     }
     return result;
-  }
+  };
 
   return (
     <Container
       fluid
       style={{
-        width: "100%",
-        padding: "0",
-        maxWidth: "100% !important",
-        margin: "0 auto",
-        backgroundColor: "#ede7f2",
-        overflow: "hidden",
-      }} id="landing">
-      <Module2_1 title="" features={[]} img="landing/HeroImage" data={obj_1} user={userData} />
+        width: '100%',
+        padding: '0',
+        maxWidth: '100% !important',
+        margin: '0 auto',
+        backgroundColor: '#ede7f2',
+        overflow: 'hidden',
+      }}
+      id='landing'
+    >
+      <Module2_1
+        title=''
+        features={[]}
+        img='landing/HeroImage'
+        data={obj_1}
+        user={userData}
+      />
       <Module3_1 />
       {/* Gonvar Plus Module Card */}
-      <GonvarPlusModule loggedIn={loggedIn} user={userData} courses={courseGonvarPlus} />
-      {courseGonvarPlus &&
-        <Module4_Carousel user={userData} courses={courseGonvarPlus} type={'subscription'} isInfinite={true} title={courseGonvarPlus.title} slideData={
-          courseGonvarPlus
-        } />
-      }
+      <GonvarPlusModule
+        loggedIn={loggedIn}
+        user={userData}
+        courses={courseGonvarPlus}
+      />
+      {courseGonvarPlus && (
+        <Module4_Carousel
+          user={userData}
+          courses={courseGonvarPlus}
+          type={'subscription'}
+          isInfinite={true}
+          title={courseGonvarPlus.title}
+          slideData={courseGonvarPlus}
+        />
+      )}
       {/* Nails Master Module Card */}
-      <CourseModuleContainer courses={courseNailsData} num={1} loggedIn={loggedIn} user={userData} />
-      {courseNailsData &&
-        <Module4_Carousel user={userData} courses={courseNailsData} type={"product"} isInfinite={true} title={courseNailsData.title}
+      <CourseModuleContainer
+        courses={courseNailsData}
+        num={1}
+        loggedIn={loggedIn}
+        user={userData}
+      />
+      {courseNailsData && (
+        <Module4_Carousel
+          user={userData}
+          courses={courseNailsData}
+          type={'product'}
+          isInfinite={true}
+          title={courseNailsData.title}
           slideData={courseNailsData.lessons}
         />
-      }
+      )}
       {/* SEP Module Card */}
       {/* <CourseModuleContainer courses={courseSEPData} num={2} loggedIn={loggedIn} user={userData} />
       {courseSEPData &&
@@ -175,6 +213,6 @@ const Homepage = ({ courses }: InferGetServerSidePropsType<typeof getServerSideP
       <WelcomeModal show={welcomeModal} setShow={setWelcomeModal} />
       {/* <Footer /> */}
     </Container>
-  )
-}
+  );
+};
 export default Homepage;

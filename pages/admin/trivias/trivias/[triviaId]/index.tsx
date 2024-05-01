@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { getTriviaApi, updateTriviaApi } from "../../../../../components/api/trivias";
-import ITrivia, { ITriviaResult } from "../../../../../interfaces/iTrivias";
-import { Background, LoaderContain, LoaderImage } from "../../../../../screens/Login.styled";
-import styles from "./update.module.css";
-import { Role, UserLevelValue } from "../../../../../components/GenericQueries/UserRoles/UserRolesInterfaces";
-import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../../../../components/GenericQueries/UserRoles/UserRolesQueries";
-import { getGenericQueryResponse } from "../../../../../components/api/admin";
+import {
+  getTriviaApi,
+  updateTriviaApi,
+} from '../../../../../components/api/trivias';
+import ITrivia, { ITriviaResult } from '../../../../../interfaces/iTrivias';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../../../screens/Login.styled';
+import styles from './update.module.css';
+import {
+  Role,
+  UserLevelValue,
+} from '../../../../../components/GenericQueries/UserRoles/UserRolesInterfaces';
+import {
+  generateUserIdQuery,
+  generateUserRoleAccessQuery,
+  generateUserRolesLevelQuery,
+} from '../../../../../components/GenericQueries/UserRoles/UserRolesQueries';
+import { getGenericQueryResponse } from '../../../../../components/api/admin';
 
 interface UserAccesssTrivias {
   canViewTrivias: boolean;
@@ -18,20 +32,36 @@ interface UserAccesssTrivias {
 }
 
 const EditableTrivia = () => {
-  const [userAccessTrivias, setUserAccessTrivias] = useState<UserAccesssTrivias>({ canCreateTrivias: false, canEditTrivias: false, canViewTrivias: false });
+  const [userAccessTrivias, setUserAccessTrivias] =
+    useState<UserAccesssTrivias>({
+      canCreateTrivias: false,
+      canEditTrivias: false,
+      canViewTrivias: false,
+    });
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
-  const { container, inputGroup, inputGroupQuestion, inputGroupAnswers, inputGroupResult, button, buttonContainer } = styles;
+  const {
+    container,
+    inputGroup,
+    inputGroupQuestion,
+    inputGroupAnswers,
+    inputGroupResult,
+    button,
+    buttonContainer,
+  } = styles;
   const [loading, setLoading] = useState(true);
-  const { query: { triviaId } } = useRouter();
+  const {
+    query: { triviaId },
+  } = useRouter();
 
   const [updatedTrivia, setUpdatedTrivia] = useState<ITrivia | null>(null);
   const [imagePaths, setImagePaths] = useState<{ [key: string]: string }>({});
 
-  const { canCreateTrivias, canEditTrivias, canViewTrivias } = userAccessTrivias;
+  const { canCreateTrivias, canEditTrivias, canViewTrivias } =
+    userAccessTrivias;
 
   const getUserData = async () => {
     try {
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
       if (email === null) {
         throw new Error('No existe un email establecido para el usuario');
       }
@@ -42,7 +72,7 @@ const EditableTrivia = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const roleTrivias = userRoles.find(role => role.role === 'trivias');
+      const roleTrivias = userRoles.find((role) => role.role === 'trivias');
       setUserAccessTrivias({
         canViewTrivias: roleTrivias?.view === 1,
         canEditTrivias: roleTrivias?.edit === 1,
@@ -58,7 +88,7 @@ const EditableTrivia = () => {
         alert(error.message);
       }
     }
-  }
+  };
 
   useEffect(() => {
     getUserData();
@@ -68,7 +98,7 @@ const EditableTrivia = () => {
   const fetchData = async () => {
     try {
       const res = await getTriviaApi(Number(triviaId));
-      const triviaTemp = res[0]
+      const triviaTemp = res[0];
       // Parsear la cadena JSON en la propiedad "questions"
       triviaTemp.questions = JSON.parse(triviaTemp.questions);
       // Parsear la cadena JSON en la propiedad "result"
@@ -76,9 +106,10 @@ const EditableTrivia = () => {
       if (triviaTemp) {
         setUpdatedTrivia(triviaTemp);
         const initialImagePaths: { [key: string]: string } = {};
-        initialImagePaths["imgPathSelector"] = triviaTemp.imgSelector;
+        initialImagePaths['imgPathSelector'] = triviaTemp.imgSelector;
         triviaTemp.questions.forEach((question: any) => {
-          initialImagePaths[`imgPathQuestion-${question.id}`] = question.imgQuestion;
+          initialImagePaths[`imgPathQuestion-${question.id}`] =
+            question.imgQuestion;
         });
 
         triviaTemp.result.forEach((result: any, index: any) => {
@@ -89,22 +120,20 @@ const EditableTrivia = () => {
       }
 
       setLoading(false);
-
     } catch (error) {
       console.error('Error al obtener la trivia:', error);
     }
-
   };
 
-  const isQuestionInput = (name: string) => name.startsWith("question-");
-  const isAnswerInput = (name: string) => name.startsWith("answer-");
+  const isQuestionInput = (name: string) => name.startsWith('question-');
+  const isAnswerInput = (name: string) => name.startsWith('answer-');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     // Verificar si el input corresponde a una imagen de pregunta
-    if (name.startsWith("imgPathQuestion-")) {
-      const questionId = parseInt(name.split("-")[1] || "");
+    if (name.startsWith('imgPathQuestion-')) {
+      const questionId = parseInt(name.split('-')[1] || '');
       setImagePaths((prevImagePaths) => ({
         ...prevImagePaths,
         [name]: value,
@@ -127,19 +156,19 @@ const EditableTrivia = () => {
       });
     }
     // Verificar si el input corresponde a una imagen de selector
-    else if (name.startsWith("imgPathSelector")) {
+    else if (name.startsWith('imgPathSelector')) {
       setImagePaths((prevImagePaths) => ({
         ...prevImagePaths,
         [name]: value,
       }));
       setUpdatedTrivia({
         ...updatedTrivia!,
-        ["imgSelector"]: value,
+        ['imgSelector']: value,
       });
     }
     // Verificar si el input corresponde a una pregunta
     else if (isQuestionInput(name)) {
-      const questionId = parseInt(name.split("-")[1] || "");
+      const questionId = parseInt(name.split('-')[1] || '');
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
 
@@ -161,7 +190,10 @@ const EditableTrivia = () => {
     }
     // Verificar si el input corresponde a una respuesta
     else if (isAnswerInput(name)) {
-      const [questionId, answerIndex] = name.split("-").slice(1).map((part) => parseInt(part));
+      const [questionId, answerIndex] = name
+        .split('-')
+        .slice(1)
+        .map((part) => parseInt(part));
       setUpdatedTrivia((prevState) => {
         if (!prevState) return null;
 
@@ -200,19 +232,25 @@ const EditableTrivia = () => {
     }
   };
 
-  const handleQuestionChange = (questionId: number, answerIndex: number, isCorrect: boolean) => {
+  const handleQuestionChange = (
+    questionId: number,
+    answerIndex: number,
+    isCorrect: boolean,
+  ) => {
     setUpdatedTrivia((prevState: any) => {
       const updatedQuestions = prevState.questions.map((question: any) => {
         if (question.id === questionId) {
-          const updatedAnswers = question.answers.map((answer: any, index: number) => {
-            if (index === answerIndex) {
-              return {
-                ...answer,
-                correct: isCorrect,
-              };
-            }
-            return answer;
-          });
+          const updatedAnswers = question.answers.map(
+            (answer: any, index: number) => {
+              if (index === answerIndex) {
+                return {
+                  ...answer,
+                  correct: isCorrect,
+                };
+              }
+              return answer;
+            },
+          );
 
           return {
             ...question,
@@ -232,7 +270,7 @@ const EditableTrivia = () => {
   const handleResultChange = (
     resultIndex: number,
     fieldName: keyof ITriviaResult,
-    value: string | number
+    value: string | number,
   ) => {
     setUpdatedTrivia((prevState) => {
       if (!prevState) return null;
@@ -254,7 +292,7 @@ const EditableTrivia = () => {
     });
 
     // Solo actualizamos imagePaths si fieldName es "img"
-    if (fieldName === "img") {
+    if (fieldName === 'img') {
       setImagePaths((prevImagePaths) => {
         const updatedImagePaths = { ...prevImagePaths };
         updatedImagePaths[`imgPathResult-${resultIndex}`] = value.toString();
@@ -265,67 +303,67 @@ const EditableTrivia = () => {
 
   const handleUpdate = () => {
     updateTriviaApi(Number(triviaId), updatedTrivia);
-    console.log(updatedTrivia)
+    console.log(updatedTrivia);
   };
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
     <div className={container}>
       <div className={inputGroup}>
-        <label htmlFor="title">Título:</label>
+        <label htmlFor='title'>Título:</label>
         <input
-          type="text"
-          id="title"
-          name="title"
+          type='text'
+          id='title'
+          name='title'
           value={updatedTrivia?.title}
           onChange={handleInputChange}
         />
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="imgPathSelector">Imagen:</label>
+        <label htmlFor='imgPathSelector'>Imagen:</label>
         <input
-          type="text"
-          id="imgPathSelector"
-          name="imgPathSelector"
-          value={imagePaths["imgPathSelector"]}
+          type='text'
+          id='imgPathSelector'
+          name='imgPathSelector'
+          value={imagePaths['imgPathSelector']}
           onChange={handleInputChange}
         />
-        {imagePaths["imgPathSelector"] && (
+        {imagePaths['imgPathSelector'] && (
           <img
-            src={imagePaths["imgPathSelector"]}
-            alt="Imagen 2"
-            style={{ width: "100px" }}
+            src={imagePaths['imgPathSelector']}
+            alt='Imagen 2'
+            style={{ width: '100px' }}
           />
         )}
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="color">Color principal:</label>
+        <label htmlFor='color'>Color principal:</label>
         <input
-          type="text"
-          id="color"
-          name="color"
+          type='text'
+          id='color'
+          name='color'
           value={updatedTrivia?.color}
           onChange={handleInputChange}
         />
       </div>
 
       <div className={inputGroup}>
-        <label htmlFor="trans">Color de transparencia:</label>
+        <label htmlFor='trans'>Color de transparencia:</label>
         <input
-          type="text"
-          id="trans"
-          name="trans"
+          type='text'
+          id='trans'
+          name='trans'
           value={updatedTrivia?.trans}
           onChange={handleInputChange}
         />
@@ -333,9 +371,11 @@ const EditableTrivia = () => {
 
       {updatedTrivia?.questions.map((question) => (
         <div key={question.id} className={inputGroupQuestion}>
-          <label htmlFor={`question-${question.id}`}>Pregunta {question.id}:</label>
+          <label htmlFor={`question-${question.id}`}>
+            Pregunta {question.id}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={`question-${question.id}`}
             name={`question-${question.id}`}
             value={question.question}
@@ -344,7 +384,7 @@ const EditableTrivia = () => {
 
           <label htmlFor={`imgPathQuestion-${question.id}`}>Imagen:</label>
           <input
-            type="text"
+            type='text'
             id={`imgPathQuestion-${question.id}`}
             name={`imgPathQuestion-${question.id}`}
             value={imagePaths[`imgPathQuestion-${question.id}`]}
@@ -354,15 +394,17 @@ const EditableTrivia = () => {
             <img
               src={imagePaths[`imgPathQuestion-${question.id}`]}
               alt={imagePaths[`imgPathQuestion-${question.id}`]}
-              style={{ width: "100px" }}
+              style={{ width: '100px' }}
             />
           )}
 
           {question.answers.map((answer, index) => (
             <div key={index} className={inputGroupAnswers}>
-              <label htmlFor={`answer-${question.id}-${index}`}>Respuesta {index + 1}:</label>
+              <label htmlFor={`answer-${question.id}-${index}`}>
+                Respuesta {index + 1}:
+              </label>
               <input
-                type="text"
+                type='text'
                 id={`answer-${question.id}-${index}`}
                 name={`answer-${question.id}-${index}`}
                 value={answer.text}
@@ -370,14 +412,10 @@ const EditableTrivia = () => {
               />
 
               <input
-                type="checkbox"
+                type='checkbox'
                 checked={answer.correct}
                 onChange={(e) =>
-                  handleQuestionChange(
-                    question.id,
-                    index,
-                    e.target.checked
-                  )
+                  handleQuestionChange(question.id, index, e.target.checked)
                 }
               />
             </div>
@@ -387,16 +425,20 @@ const EditableTrivia = () => {
 
       {updatedTrivia?.result.map((result, index) => (
         <div key={index} className={inputGroupResult}>
-          <label htmlFor={`result-title-${index}`}>Título del resultado {index + 1}:</label>
+          <label htmlFor={`result-title-${index}`}>
+            Título del resultado {index + 1}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={`result-title-${index}`}
             name={`result-title-${index}`}
             value={result.title}
             onChange={(e) => handleResultChange(index, 'title', e.target.value)}
           />
 
-          <label htmlFor={`result-body-${index}`}>Cuerpo del resultado {index + 1}:</label>
+          <label htmlFor={`result-body-${index}`}>
+            Cuerpo del resultado {index + 1}:
+          </label>
           <textarea
             id={`result-body-${index}`}
             name={`result-body-${index}`}
@@ -405,9 +447,11 @@ const EditableTrivia = () => {
             onChange={(e) => handleResultChange(index, 'body', e.target.value)}
           />
 
-          <label htmlFor={imagePaths[`imgPathResult-${index}`]}>Imagen del resultado {index + 1}:</label>
+          <label htmlFor={imagePaths[`imgPathResult-${index}`]}>
+            Imagen del resultado {index + 1}:
+          </label>
           <input
-            type="text"
+            type='text'
             id={imagePaths[`imgPathResult-${index}`]}
             name={imagePaths[`imgPathResult-${index}`]}
             value={imagePaths[`imgPathResult-${index}`]}
@@ -417,32 +461,40 @@ const EditableTrivia = () => {
             <img
               src={imagePaths[`imgPathResult-${index}`]}
               alt={imagePaths[`imgPathResult-${index}`]}
-              style={{ width: "100px" }}
+              style={{ width: '100px' }}
             />
           )}
 
-          <label htmlFor={`result-idTemplateBrevo-${index}`}>ID del template Brevo del resultado {index + 1}:</label>
+          <label htmlFor={`result-idTemplateBrevo-${index}`}>
+            ID del template Brevo del resultado {index + 1}:
+          </label>
           <input
-            type="number"
+            type='number'
             id={`result-idTemplateBrevo-${index}`}
             name={`result-idTemplateBrevo-${index}`}
             value={result.idTemplateBrevo}
             onChange={(e) =>
-              handleResultChange(index, 'idTemplateBrevo', parseInt(e.target.value))
+              handleResultChange(
+                index,
+                'idTemplateBrevo',
+                parseInt(e.target.value),
+              )
             }
           />
         </div>
       ))}
-      {
-        (canEditTrivias || userLevel === 'superAdmin') && <div className={buttonContainer}>
-          <Link href={"/admin/trivias/trivias"}>
+      {(canEditTrivias || userLevel === 'superAdmin') && (
+        <div className={buttonContainer}>
+          <Link href={'/admin/trivias/trivias'}>
             <a>
               <button className={button}>Cancelar</button>
             </a>
           </Link>
-          <button className={button} onClick={handleUpdate}>Actualizar trivia</button>
+          <button className={button} onClick={handleUpdate}>
+            Actualizar trivia
+          </button>
         </div>
-      }
+      )}
     </div>
   );
 };

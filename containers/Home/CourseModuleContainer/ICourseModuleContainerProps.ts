@@ -1,5 +1,5 @@
-import { ICourse } from "../../../interfaces/ICourse";
-import { IUser } from "../../../interfaces/IUserData";
+import { ICourse } from '../../../interfaces/ICourse';
+import { IUser } from '../../../interfaces/IUserData';
 
 export interface ICourseModuleContainerProps {
   courses: ICourse;

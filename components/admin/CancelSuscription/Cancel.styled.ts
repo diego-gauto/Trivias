@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CancelReview = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const CancelReview = styled.div`
   margin-top: 30px;
   padding: 0;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   .title-contain {
     display: flex;
     h2 {

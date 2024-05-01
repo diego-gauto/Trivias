@@ -1,13 +1,32 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { IoMdExit } from 'react-icons/io';
-import { createCategoryApi, deleteCategoryApi, getCategoriesApi, updateCategoryApi } from '../../api/categories';
+import {
+  createCategoryApi,
+  deleteCategoryApi,
+  getCategoriesApi,
+  updateCategoryApi,
+} from '../../api/categories';
 import { CourseFormContain } from '../Courses/CourseMain.styled';
 import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
 import { AdminContain } from '../SideBar.styled';
-import { Button, ButtonContain, CatContain, CatData, CategoryContain, CatText, CloseIcon, EditCat, EditIcon, FormContain, Input, InputContain, Label, Title, TitleContain } from './Category.styled';
-
-
+import {
+  Button,
+  ButtonContain,
+  CatContain,
+  CatData,
+  CategoryContain,
+  CatText,
+  CloseIcon,
+  EditCat,
+  EditIcon,
+  FormContain,
+  Input,
+  InputContain,
+  Label,
+  Title,
+  TitleContain,
+} from './Category.styled';
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState<boolean>(false);
@@ -15,75 +34,75 @@ const Category = () => {
   const [categories, setCategories] = useState<any>([]);
   const router = useRouter();
   const [category, setCategory] = useState<any>({
-    name: ""
+    name: '',
   });
   const returnToCourses = () => {
     router.push({
-      pathname: "/admin/Courses",
-    })
-  }
+      pathname: '/admin/Courses',
+    });
+  };
   const createCategory = () => {
-    if (Object.keys(category).some(key => category[key] === '')) {
-      alert("Complete todos los campos")
-    }
-    else {
+    if (Object.keys(category).some((key) => category[key] === '')) {
+      alert('Complete todos los campos');
+    } else {
       createCategoryApi(category).then(() => {
-        alert("Categoría Agregada con Exito")
+        alert('Categoría Agregada con Exito');
         getAllCategories();
-      })
+      });
     }
-  }
+  };
   const getAllCategories = () => {
     getCategoriesApi().then((res) => {
       setCategories(res);
-    })
-  }
+    });
+  };
   const Delete = (val: any) => {
-    if (window.confirm("Desea borrar esta categoría: " + val.name)) {
+    if (window.confirm('Desea borrar esta categoría: ' + val.name)) {
       deleteCategoryApi(val).then(() => {
         getAllCategories();
-      })
+      });
     }
-  }
+  };
   const update = (val: any) => {
     updateCategoryApi(val).then(() => {
-      alert("Categoría actualizada")
+      alert('Categoría actualizada');
       getAllCategories();
-    })
-  }
+    });
+  };
   useEffect(() => {
     getAllCategories();
-  }, [])
+  }, []);
 
   return (
     <AdminContain>
-      <IoMdExit className="icon-exit" onClick={returnToCourses} />
+      <IoMdExit className='icon-exit' onClick={returnToCourses} />
       <CourseFormContain>
-        <CategoryContain >
-          <TitleContain onClick={() => { setNewCategory(!newCategory) }}>
-            <Title >
-              Crear Categoría
-            </Title>
-            {
-              !newCategory &&
-              <ButtonNewCourse>+</ButtonNewCourse>
-            }
-            {
-              newCategory &&
-              <ButtonNewCourse onClick={(e) => {
-                setNewCategory(false)
-              }}>-</ButtonNewCourse>
-            }
+        <CategoryContain>
+          <TitleContain
+            onClick={() => {
+              setNewCategory(!newCategory);
+            }}
+          >
+            <Title>Crear Categoría</Title>
+            {!newCategory && <ButtonNewCourse>+</ButtonNewCourse>}
+            {newCategory && (
+              <ButtonNewCourse
+                onClick={(e) => {
+                  setNewCategory(false);
+                }}
+              >
+                -
+              </ButtonNewCourse>
+            )}
           </TitleContain>
-          {
-            newCategory &&
+          {newCategory && (
             <FormContain>
               <InputContain>
                 <Label>Nombre de la Categoría</Label>
                 <Input
-                  placeholder="Uñas-Basico-Acrilico"
+                  placeholder='Uñas-Basico-Acrilico'
                   onChange={(e: any) => {
-                    setCategory({ ...category, name: e.target.value })
+                    setCategory({ ...category, name: e.target.value });
                   }}
                 />
               </InputContain>
@@ -92,66 +111,68 @@ const Category = () => {
                   onClick={() => {
                     createCategory();
                   }}
-                >Guardar</Button>
+                >
+                  Guardar
+                </Button>
               </ButtonContain>
             </FormContain>
-          }
+          )}
         </CategoryContain>
         <CategoryContain>
-          <Title>
-            Categorías
-          </Title>
-          {categories !== null
-            ? <>
-              {
-                categories.map((val: any, i: any) => {
-                  return (
-                    <CatContain key={"Categorias " + i}>
-                      <EditCat>
-                        <CatText>
-                          {val.name}
-                        </CatText>
+          <Title>Categorías</Title>
+          {categories !== null ? (
+            <>
+              {categories.map((val: any, i: any) => {
+                return (
+                  <CatContain key={'Categorias ' + i}>
+                    <EditCat>
+                      <CatText>{val.name}</CatText>
 
-                        {
-                          edit == i &&
-                          <FormContain>
-                            <InputContain style={{ width: 500 }}>
-                              <Input
-                                defaultValue={val.name}
-                                placeholder={"Editar nombre de: " + val.name}
-                                onChange={(e: any) => {
-                                  categories[i].name = e.target.value
-                                }}
-                              />
-                            </InputContain>
-                            <ButtonContain>
-                              <Button
-                                onClick={() => {
-                                  update(val);
-                                }}
-                              >Editar</Button>
-                            </ButtonContain>
-                          </FormContain>
-                        }
-                      </EditCat>
-                      <CatData>
-                        <EditIcon onClick={() => { setEdit(i) }} />
-                        <CloseIcon onClick={() => {
+                      {edit == i && (
+                        <FormContain>
+                          <InputContain style={{ width: 500 }}>
+                            <Input
+                              defaultValue={val.name}
+                              placeholder={'Editar nombre de: ' + val.name}
+                              onChange={(e: any) => {
+                                categories[i].name = e.target.value;
+                              }}
+                            />
+                          </InputContain>
+                          <ButtonContain>
+                            <Button
+                              onClick={() => {
+                                update(val);
+                              }}
+                            >
+                              Editar
+                            </Button>
+                          </ButtonContain>
+                        </FormContain>
+                      )}
+                    </EditCat>
+                    <CatData>
+                      <EditIcon
+                        onClick={() => {
+                          setEdit(i);
+                        }}
+                      />
+                      <CloseIcon
+                        onClick={() => {
                           Delete(val);
-                        }} />
-                      </CatData>
-                    </CatContain>
-                  )
-                })
-              }
+                        }}
+                      />
+                    </CatData>
+                  </CatContain>
+                );
+              })}
             </>
-            :
-            <> Sin Categorías...
-            </>
-          }
+          ) : (
+            <> Sin Categorías...</>
+          )}
         </CategoryContain>
       </CourseFormContain>
     </AdminContain>
-  )
-}
+  );
+};
 export default Category;

@@ -1,4 +1,4 @@
-import { HeroData } from "../../admin/Landing/HeroSection/IHeroSection";
+import { HeroData } from '../../admin/Landing/HeroSection/IHeroSection';
 
 export interface IFirstSectionProps {
   // Dynamic data from Firebase

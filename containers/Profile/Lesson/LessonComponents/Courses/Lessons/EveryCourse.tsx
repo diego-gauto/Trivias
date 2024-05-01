@@ -1,26 +1,42 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
-import { CourseLength, DocIcon, CoursePoints, CourseTitle, CurrentCircle, CurrentCourse, CurrentDivider, DetailContain, Details, DividerComplete, DividerIncomplete, IncompleteCircle, LessonContain, ProgressCircle } from './EveryCourse.styled';
+import React, { useEffect, useState } from 'react';
+import {
+  CourseLength,
+  DocIcon,
+  CoursePoints,
+  CourseTitle,
+  CurrentCircle,
+  CurrentCourse,
+  CurrentDivider,
+  DetailContain,
+  Details,
+  DividerComplete,
+  DividerIncomplete,
+  IncompleteCircle,
+  LessonContain,
+  ProgressCircle,
+} from './EveryCourse.styled';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from '../../../../../../utils/Constants';
+import {
+  DOWNLOAD_MATERIAL,
+  HW_ICON,
+  LOCK_ICON,
+} from '../../../../../../utils/Constants';
 import { LESSON_PATH } from '../../../../../../constants/paths';
 
 const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
-
   const router = useRouter();
 
   const hms = (totalSeconds: any) => {
-    if (typeof totalSeconds == 'string') return totalSeconds
+    if (typeof totalSeconds == 'string') return totalSeconds;
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
-    let result = `${minutes
-      .toString()
-      .padStart(1, '0')} min`;
+    let result = `${minutes.toString().padStart(1, '0')} min`;
     if (!!hours) {
       result = `${hours.toString()} hr ${minutes} min`;
     }
     return result;
-  }
+  };
   const goTo = (lIndex: any, less: any) => {
     let tempIndex;
     let lastIndex;
@@ -28,7 +44,7 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     return router.push({
       pathname: LESSON_PATH,
       query: { id: course.id, season: season, lesson: lIndex },
-    })
+    });
     // if (course.type == "Gratis" || !course.courseHomeWork) {
     //   return router.push({
     //     pathname: LESSON_PATH,
@@ -61,150 +77,193 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
     // }
     // conditionalDiv(less, lIndex);
     // return 'okey';
-  }
+  };
   const conditionalDiv = (less: any, index: number) => {
     let tempIndex;
     let lastIndex;
     let tempPreviousSeason;
-    if (course.type == "Gratis" || course.sequential === 0) {
-      return (<Details style={{ cursor: 'pointer' }} onClick={() => {
-        goTo(index, less)
-      }}>
-        {<CourseTitle active={data?.id == less.id}>
-          {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
-        </CourseTitle>}
-        <DetailContain>
+    if (course.type == 'Gratis' || course.sequential === 0) {
+      return (
+        <Details
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            goTo(index, less);
+          }}
+        >
           {
-            less.homework === 1 &&
-            <div className='activity'>
-              <img src={HW_ICON} />
-              Esta lección tiene una tarea
-            </div>
+            <CourseTitle active={data?.id == less.id}>
+              {'mandatory' in less ? 'Quiz' : `Lección ${index + 1}.`}{' '}
+              {less.title}.
+            </CourseTitle>
           }
-          {
-            less.quiz === 1 &&
-            <div className='activity'>
-              <img src={HW_ICON} />
-              Esta lección tiene un quiz
-            </div>
-          }
-          {
-            less.lesson_material.length > 0 &&
-            <div className='activity'>
-              <img src={DOWNLOAD_MATERIAL} />
-              Esta lección tiene material descargable
-            </div>
-          }
-          {!("mandatory" in less) &&
-            <CourseLength>
-              <AiOutlineClockCircle className='icon' />
-              {hms(less.duration)}
-              {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
-            </CourseLength>}
-          {/* {less.points > 0 && <CoursePoints>
+          <DetailContain>
+            {less.homework === 1 && (
+              <div className='activity'>
+                <img src={HW_ICON} />
+                Esta lección tiene una tarea
+              </div>
+            )}
+            {less.quiz === 1 && (
+              <div className='activity'>
+                <img src={HW_ICON} />
+                Esta lección tiene un quiz
+              </div>
+            )}
+            {less.lesson_material.length > 0 && (
+              <div className='activity'>
+                <img src={DOWNLOAD_MATERIAL} />
+                Esta lección tiene material descargable
+              </div>
+            )}
+            {!('mandatory' in less) && (
+              <CourseLength>
+                <AiOutlineClockCircle className='icon' />
+                {hms(less.duration)}
+                {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
+              </CourseLength>
+            )}
+            {/* {less.points > 0 && <CoursePoints>
             +{less.points} puntos
           </CoursePoints>} */}
-        </DetailContain>
-      </Details>)
+          </DetailContain>
+        </Details>
+      );
     }
     if (userId && index > 0 && lessons[index - 1].progress) {
-      tempIndex = lessons[index - 1].progress.findIndex((x: any) => x.user_id == userId);
+      tempIndex = lessons[index - 1].progress.findIndex(
+        (x: any) => x.user_id == userId,
+      );
     }
 
     if (userId && index == 0 && season > 0) {
-      tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
+      tempPreviousSeason =
+        course.seasons[season - 1].lessons[
+          course.seasons[season - 1].lessons.length - 1
+        ];
       if (tempPreviousSeason.progress) {
-        lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.user_id == userId);
+        lastIndex = tempPreviousSeason.progress.findIndex(
+          (x: any) => x.user_id == userId,
+        );
       }
     }
 
-    if (season == 0 && index == 0 ||
-      season == 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
-      season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
+    if (
+      (season == 0 && index == 0) ||
+      (season == 0 &&
+        index > 0 &&
+        lessons[index - 1].homework === 1 &&
+        'progress' in lessons[index - 1] &&
+        lessons[index - 1].progress[tempIndex] &&
+        lessons[index - 1].progress[tempIndex].status === 1) ||
+      (season == 0 &&
+        index > 0 &&
+        lessons[index - 1].homework === 0 &&
+        'progress' in lessons[index - 1] &&
+        lessons[index - 1].progress[tempIndex]) ||
       // (season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]) && (season == 0 && index > 0 && lessons[index].homework === 0)
-      season > 0 && index == 0 && tempPreviousSeason.homework === 1 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status === 1 ||
-      season > 0 && index == 0 && tempPreviousSeason.homework === 0 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
-      season > 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
-      season > 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]
+      (season > 0 &&
+        index == 0 &&
+        tempPreviousSeason.homework === 1 &&
+        'progress' in tempPreviousSeason &&
+        tempPreviousSeason.progress[lastIndex] &&
+        tempPreviousSeason.progress[lastIndex].status === 1) ||
+      (season > 0 &&
+        index == 0 &&
+        tempPreviousSeason.homework === 0 &&
+        'progress' in tempPreviousSeason &&
+        tempPreviousSeason.progress[lastIndex]) ||
+      (season > 0 &&
+        index > 0 &&
+        lessons[index - 1].homework === 1 &&
+        'progress' in lessons[index - 1] &&
+        lessons[index - 1].progress[tempIndex] &&
+        lessons[index - 1].progress[tempIndex].status === 1) ||
+      (season > 0 &&
+        index > 0 &&
+        lessons[index - 1].homework === 0 &&
+        'progress' in lessons[index - 1] &&
+        lessons[index - 1].progress[tempIndex])
     ) {
-      return (<Details style={{ cursor: 'pointer' }} onClick={() => {
-        goTo(index, less)
-      }}>
-        {<CourseTitle active={data?.id == less.id}>
-          {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
-        </CourseTitle>}
-        <DetailContain>
+      return (
+        <Details
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            goTo(index, less);
+          }}
+        >
           {
-            less.homework === 1 &&
+            <CourseTitle active={data?.id == less.id}>
+              {'mandatory' in less ? 'Quiz' : `Lección ${index + 1}.`}{' '}
+              {less.title}.
+            </CourseTitle>
+          }
+          <DetailContain>
+            {less.homework === 1 && (
+              <div className='activity'>
+                <img src={HW_ICON} />
+                Esta lección tiene una tarea
+              </div>
+            )}
+            {less.quiz === 1 && (
+              <div className='activity'>
+                <img src={HW_ICON} />
+                Esta lección tiene un quiz
+              </div>
+            )}
+            {less.lesson_material.length > 0 && (
+              <div className='activity'>
+                <img src={DOWNLOAD_MATERIAL} />
+                Esta lección tiene material descargable
+              </div>
+            )}
+            <CourseLength>
+              <AiOutlineClockCircle />
+              {hms(less.duration)}
+              {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
+            </CourseLength>
+            {/* {less.points > 0 && <CoursePoints>
+            +{less.points} puntos
+          </CoursePoints>} */}
+          </DetailContain>
+        </Details>
+      );
+    }
+    return (
+      <Details style={{ borderRadius: '5px', cursor: 'auto' }}>
+        <CourseTitle active={data?.id == less.id}>
+          {'mandatory' in less ? 'Quiz' : `Lección ${index + 1}.`} {less.title}.
+        </CourseTitle>
+        <DetailContain>
+          {less.homework === 1 && (
             <div className='activity'>
               <img src={HW_ICON} />
               Esta lección tiene una tarea
             </div>
-          }
-          {
-            less.quiz === 1 &&
+          )}
+          {less.quiz === 1 && (
             <div className='activity'>
               <img src={HW_ICON} />
               Esta lección tiene un quiz
             </div>
-          }
-          {
-            less.lesson_material.length > 0 &&
+          )}
+          {less.lesson_material.length > 0 && (
             <div className='activity'>
               <img src={DOWNLOAD_MATERIAL} />
               Esta lección tiene material descargable
             </div>
-          }
+          )}
           <CourseLength>
             <AiOutlineClockCircle />
             {hms(less.duration)}
             {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
           </CourseLength>
           {/* {less.points > 0 && <CoursePoints>
-            +{less.points} puntos
-          </CoursePoints>} */}
-        </DetailContain>
-      </Details>)
-    }
-    return (<Details
-      style={{ borderRadius: '5px', cursor: 'auto' }}
-    >
-      <CourseTitle active={data?.id == less.id}>
-        {"mandatory" in less ? "Quiz" : `Lección ${index + 1}.`} {less.title}.
-      </CourseTitle>
-      <DetailContain>
-        {
-          less.homework === 1 &&
-          <div className='activity'>
-            <img src={HW_ICON} />
-            Esta lección tiene una tarea
-          </div>
-        }
-        {
-          less.quiz === 1 &&
-          <div className='activity'>
-            <img src={HW_ICON} />
-            Esta lección tiene un quiz
-          </div>
-        }
-        {
-          less.lesson_material.length > 0 &&
-          <div className='activity'>
-            <img src={DOWNLOAD_MATERIAL} />
-            Esta lección tiene material descargable
-          </div>
-        }
-        <CourseLength>
-          <AiOutlineClockCircle />
-          {hms(less.duration)}
-          {/* {less.extra.length > 0 && <DocIcon></DocIcon>} */}
-        </CourseLength>
-        {/* {less.points > 0 && <CoursePoints>
           +{less.points} puntos
         </CoursePoints>} */}
-      </DetailContain>
-    </Details>)
-  }
+        </DetailContain>
+      </Details>
+    );
+  };
   return (
     <>
       {lessons.map((less: any, index: any) => {
@@ -212,103 +271,144 @@ const EveryCourse = ({ lessons, season, data, userId, course }: any) => {
         let lastIndex;
         let tempPreviousSeason;
         if (userId && index > 0 && lessons[index - 1].progress) {
-          tempIndex = lessons[index - 1].progress.findIndex((x: any) => x.user_id == userId);
+          tempIndex = lessons[index - 1].progress.findIndex(
+            (x: any) => x.user_id == userId,
+          );
         }
 
         if (userId && index == 0 && season > 0) {
-          tempPreviousSeason = course.seasons[season - 1].lessons[course.seasons[season - 1].lessons.length - 1];
+          tempPreviousSeason =
+            course.seasons[season - 1].lessons[
+              course.seasons[season - 1].lessons.length - 1
+            ];
           if (tempPreviousSeason.progress) {
-            lastIndex = tempPreviousSeason.progress.findIndex((x: any) => x.user_id == userId);
+            lastIndex = tempPreviousSeason.progress.findIndex(
+              (x: any) => x.user_id == userId,
+            );
           }
         }
 
         return (
-          <LessonContain key={"All lesson " + index}
+          <LessonContain
+            key={'All lesson ' + index}
             style={{
-              borderBottomRightRadius: index == lessons.length - 1 ? "35px" : 0,
-              borderBottomLeftRadius: index == lessons.length - 1 ? "35px" : 0,
+              borderBottomRightRadius: index == lessons.length - 1 ? '35px' : 0,
+              borderBottomLeftRadius: index == lessons.length - 1 ? '35px' : 0,
               maxHeight: index === lessons.length - 1 ? 130 : 100,
-              boxShadow: index == lessons.length - 1 ? "0px 10px 20px -7px rgb(0 0 0 / 35%)" : "none"
+              boxShadow:
+                index == lessons.length - 1
+                  ? '0px 10px 20px -7px rgb(0 0 0 / 35%)'
+                  : 'none',
             }}
           >
-            {
-              course.sequential === 0 &&
+            {course.sequential === 0 && (
               <>
-                {data?.id == less.id &&
+                {data?.id == less.id && (
                   <CurrentCircle>
-                    {index !== (lessons.length - 1) && <DividerIncomplete />}
+                    {index !== lessons.length - 1 && <DividerIncomplete />}
                   </CurrentCircle>
-                }
-                {(data?.id !== less.id && !less.users?.includes(userId)) &&
+                )}
+                {data?.id !== less.id && !less.users?.includes(userId) && (
                   <IncompleteCircle>
-                    {index !== (lessons.length - 1) && <DividerIncomplete />}
+                    {index !== lessons.length - 1 && <DividerIncomplete />}
                   </IncompleteCircle>
-                }
-                {(less.users?.includes(userId) && data?.id !== less.id) &&
+                )}
+                {less.users?.includes(userId) && data?.id !== less.id && (
                   <ProgressCircle>
-                    {(index !== (lessons.length - 1)) && <DividerComplete />}
+                    {index !== lessons.length - 1 && <DividerComplete />}
                   </ProgressCircle>
-                }
+                )}
               </>
-            }
+            )}
 
-            {
-              course.sequential === 1
-              &&
+            {course.sequential === 1 && (
               <>
-                {(data?.id !== less.id && !less.users?.includes(userId)) && !(season == 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
-                  season == 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] ||
-                  season > 0 && index == 0 && tempPreviousSeason.homework === 1 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] && tempPreviousSeason.progress[lastIndex].status === 1 ||
-                  season > 0 && index == 0 && tempPreviousSeason.homework === 0 && "progress" in tempPreviousSeason && tempPreviousSeason.progress[lastIndex] ||
-                  season > 0 && index > 0 && lessons[index - 1].homework === 1 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex] && lessons[index - 1].progress[tempIndex].status === 1 ||
-                  season > 0 && index > 0 && lessons[index - 1].homework === 0 && "progress" in lessons[index - 1] && lessons[index - 1].progress[tempIndex]
-                ) ?
+                {data?.id !== less.id &&
+                !less.users?.includes(userId) &&
+                !(
+                  (season == 0 &&
+                    index > 0 &&
+                    lessons[index - 1].homework === 1 &&
+                    'progress' in lessons[index - 1] &&
+                    lessons[index - 1].progress[tempIndex] &&
+                    lessons[index - 1].progress[tempIndex].status === 1) ||
+                  (season == 0 &&
+                    index > 0 &&
+                    lessons[index - 1].homework === 0 &&
+                    'progress' in lessons[index - 1] &&
+                    lessons[index - 1].progress[tempIndex]) ||
+                  (season > 0 &&
+                    index == 0 &&
+                    tempPreviousSeason.homework === 1 &&
+                    'progress' in tempPreviousSeason &&
+                    tempPreviousSeason.progress[lastIndex] &&
+                    tempPreviousSeason.progress[lastIndex].status === 1) ||
+                  (season > 0 &&
+                    index == 0 &&
+                    tempPreviousSeason.homework === 0 &&
+                    'progress' in tempPreviousSeason &&
+                    tempPreviousSeason.progress[lastIndex]) ||
+                  (season > 0 &&
+                    index > 0 &&
+                    lessons[index - 1].homework === 1 &&
+                    'progress' in lessons[index - 1] &&
+                    lessons[index - 1].progress[tempIndex] &&
+                    lessons[index - 1].progress[tempIndex].status === 1) ||
+                  (season > 0 &&
+                    index > 0 &&
+                    lessons[index - 1].homework === 0 &&
+                    'progress' in lessons[index - 1] &&
+                    lessons[index - 1].progress[tempIndex])
+                ) ? (
                   <>
                     <div className='lock-icon'>
                       <img src={LOCK_ICON} />
-                      {index !== (lessons.length - 1) && <DividerIncomplete />}
+                      {index !== lessons.length - 1 && <DividerIncomplete />}
                     </div>
-                    {data?.id == less.id &&
+                    {data?.id == less.id && (
                       <CurrentCircle>
-                        {index !== (lessons.length - 1) && <DividerIncomplete />}
+                        {index !== lessons.length - 1 && <DividerIncomplete />}
                       </CurrentCircle>
-                    }
-                    {(less.users?.includes(userId) && data?.id !== less.id) &&
+                    )}
+                    {less.users?.includes(userId) && data?.id !== less.id && (
                       <ProgressCircle>
-                        {(index !== (lessons.length - 1)) && <DividerComplete />}
+                        {index !== lessons.length - 1 && <DividerComplete />}
                       </ProgressCircle>
-                    }
+                    )}
                   </>
-                  :
+                ) : (
                   <>
-                    {data?.id == less.id ?
+                    {data?.id == less.id ? (
                       <CurrentCircle>
-                        {index !== (lessons.length - 1) && <DividerIncomplete />}
+                        {index !== lessons.length - 1 && <DividerIncomplete />}
                       </CurrentCircle>
-                      :
+                    ) : (
                       <>
-                        {
-                          !(less.users?.includes(userId) && data?.id !== less.id) &&
+                        {!(
+                          less.users?.includes(userId) && data?.id !== less.id
+                        ) && (
                           <IncompleteCircle>
-                            {index !== (lessons.length - 1) && <DividerIncomplete />}
+                            {index !== lessons.length - 1 && (
+                              <DividerIncomplete />
+                            )}
                           </IncompleteCircle>
-                        }
+                        )}
                       </>
-                    }
-                    {(less.users?.includes(userId) && data?.id !== less.id) &&
+                    )}
+                    {less.users?.includes(userId) && data?.id !== less.id && (
                       <ProgressCircle>
-                        {(index !== (lessons.length - 1)) && <DividerComplete />}
+                        {index !== lessons.length - 1 && <DividerComplete />}
                       </ProgressCircle>
-                    }
+                    )}
                   </>
-                }
+                )}
               </>
-            }
+            )}
             {conditionalDiv(less, index)}
-          </LessonContain >
-        )
+          </LessonContain>
+        );
       })}
     </>
-  )
-}
+  );
+};
 export default EveryCourse;

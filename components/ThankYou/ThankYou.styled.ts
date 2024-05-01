@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ThankYouContainer = styled.div`
   flex-wrap: wrap;

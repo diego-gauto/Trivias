@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import styled from 'styled-components';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
 /*
 @media only screen and (max-width: 1980px) {
@@ -122,7 +122,7 @@ export const TittleAMobile = styled.span`
   @media only screen and (max-width: 390px) {
   }
 
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -131,7 +131,7 @@ export const TittleAMobile = styled.span`
 export const TittleBMobile = styled.span`
   color: #a733e4;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @media only screen and (max-width: 580px) {
     font-size: 32px;
   }
@@ -153,7 +153,7 @@ export const MoreTextMobile = styled.div`
   z-index: 1;
   font-size: 20px;
   text-align: left;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
@@ -208,7 +208,7 @@ export const FooterATextMobile = styled.div`
   }
 
   text-align: left;
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -304,7 +304,7 @@ export const FooterAIconsMobile = styled.div`
     width: 105px;
     bottom: 3%;
   }
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -349,7 +349,7 @@ export const FooterBIconsMobile = styled.div`
     bottom: 0.5%;
   }
 
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -475,7 +475,7 @@ export const FooterEndText1Mobile = styled.span`
     font-size: 10px;
   }
 
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);

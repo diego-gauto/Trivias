@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
-import { deleteProduct, updateRewards, updRewardImage } from "../../../../store/actions/RewardActions";
-import { deleteRewardApi, updateRewardApi } from "../../../api/rewards";
-import { getUserApi } from "../../../api/users";
-import { CloseIcon } from "../../Category/Category.styled";
+import React, { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
+import {
+  deleteProduct,
+  updateRewards,
+  updRewardImage,
+} from '../../../../store/actions/RewardActions';
+import { deleteRewardApi, updateRewardApi } from '../../../api/rewards';
+import { getUserApi } from '../../../api/users';
+import { CloseIcon } from '../../Category/Category.styled';
 
 import {
   Button,
@@ -19,10 +23,10 @@ import {
   ModalContain,
   Title,
   TitleContain,
-} from "./AddReward.styled";
-import { IUserInfoResult } from "../../../../interfaces/IUser";
-import { IoInformationCircleOutline } from "react-icons/io5";
-import { Instructions } from "../functions";
+} from './AddReward.styled';
+import { IUserInfoResult } from '../../../../interfaces/IUser';
+import { IoInformationCircleOutline } from 'react-icons/io5';
+import { Instructions } from '../functions';
 
 const EditReward = ({ show, setShow, handleEvent, data }: any) => {
   const handleClose = () => setShow(false);
@@ -35,203 +39,234 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     published: 'publicado',
     month: 0,
     points: 0,
-    price: 0
+    price: 0,
   });
-  const [image, setImage] = useState<any>("");
+  const [image, setImage] = useState<any>('');
   const [errors, setErrors] = useState<any>({
     title: false,
     about: false,
     image: false,
-    points: false
+    points: false,
   });
   const [userData, setUserData] = useState<IUserInfoResult | null>(null);
   useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
+    if (localStorage.getItem('email')) {
+      getUserApi(localStorage.getItem('email')).then((res) => {
         setUserData(res);
-      })
+      });
     }
-  }, [])
+  }, []);
   const getImage = (file: any) => {
     var reader = new FileReader();
     reader.readAsDataURL(file[0]);
     reader.onload = (_event) => {
-      setReward({ ...reward, image: reader.result })
+      setReward({ ...reward, image: reader.result });
       setImage(reader.result);
     };
-  }
+  };
   const editReward = async () => {
     if (userData === null) {
       return;
     }
-    if (userData.role === "admin" && userData.roles[3].edit === 0) {
-      alert("No tienes permisos para esta acción");
+    if (userData.role === 'admin' && userData.roles[3].edit === 0) {
+      alert('No tienes permisos para esta acción');
       return;
     }
-    if (reward.type === "points") {
+    if (reward.type === 'points') {
       reward.month = 0;
     }
-    if (reward.type == "months") {
+    if (reward.type == 'months') {
       reward.points = 0;
     }
-    if (reward.product_type === "digital") {
+    if (reward.product_type === 'digital') {
       reward.price = 0;
     }
     let tempErrors = {
-      title: reward.title === "" ? true : false,
-      about: reward.about === "" ? true : false,
-      image: reward.image === "" ? true : false,
-      points: reward.type === "points" ? (reward.points === 0 ? true : false) : false,
-    }
-    if (image !== "") {
+      title: reward.title === '' ? true : false,
+      about: reward.about === '' ? true : false,
+      image: reward.image === '' ? true : false,
+      points:
+        reward.type === 'points' ? (reward.points === 0 ? true : false) : false,
+    };
+    if (image !== '') {
       await updRewardImage(image, reward.id).then((res) => {
         reward.image = res;
-      })
+      });
     }
-    setErrors(tempErrors)
+    setErrors(tempErrors);
     let checkErrors = Object.values(tempErrors).includes(true);
     if (!checkErrors) {
       updateRewardApi(reward).then(() => {
         handleClose();
         handleEvent();
-      })
+      });
     }
-  }
+  };
   const deleteReward = (reward: any) => {
     if (userData === null) {
       return;
     }
-    if (userData.role === "admin" && userData.roles[3].delete === 0) {
-      alert("No tienes permisos para esta acción");
+    if (userData.role === 'admin' && userData.roles[3].delete === 0) {
+      alert('No tienes permisos para esta acción');
       return;
     }
-    if (confirm("Desea eliminar esta recompensa?")) {
+    if (confirm('Desea eliminar esta recompensa?')) {
       deleteRewardApi(reward).then((res) => {
         handleClose();
         handleEvent();
-      })
+      });
     }
-  }
+  };
 
   useEffect(() => {
     setReward({ ...data });
-
-  }, [data])
+  }, [data]);
   return (
     <Modal show={show} onHide={handleClose} centered>
       <ModalContain>
         <TitleContain>
           <Title>Editar Recompensa</Title>
-          <CloseIcon onClick={() => { setShow(false) }} />
+          <CloseIcon
+            onClick={() => {
+              setShow(false);
+            }}
+          />
         </TitleContain>
         <InputContain>
           <Label>Nombre de la Recompensa</Label>
           <Input
-            placeholder="Gonvar Nails Leonardo Da Vinci"
+            placeholder='Gonvar Nails Leonardo Da Vinci'
             defaultValue={data.title}
-            style={errors.title ? { border: "1px solid red" } : {}}
+            style={errors.title ? { border: '1px solid red' } : {}}
             onChange={(e: any) => {
-              setReward({ ...reward, title: e.target.value })
+              setReward({ ...reward, title: e.target.value });
             }}
           />
         </InputContain>
         <InputContain>
           <Label>Descripción</Label>
           <InputBig
-            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Tellus ultrices id feugiat cursus velit. Aliquam pulvinar in orci 
           malesuada. Pellentesque aliquam aliquam nulla sodales tortor pretium 
-          aliquet ultricies. Interdum et suspendisse nunc gravida. "
-            style={errors.about ? { border: "1px solid red" } : {}}
+          aliquet ultricies. Interdum et suspendisse nunc gravida. '
+            style={errors.about ? { border: '1px solid red' } : {}}
             defaultValue={data.about}
             onChange={(e: any) => {
-              setReward({ ...reward, about: e.target.value })
+              setReward({ ...reward, about: e.target.value });
             }}
           />
         </InputContain>
         <InputContain>
           <Label>Producto</Label>
-          <select value={reward?.product_type} onChange={(e) => { setReward({ ...reward, product_type: e.target.value }) }}>
-            <option value="fisico">Fisico</option>
-            <option value="digital">Digital</option>
+          <select
+            value={reward?.product_type}
+            onChange={(e) => {
+              setReward({ ...reward, product_type: e.target.value });
+            }}
+          >
+            <option value='fisico'>Fisico</option>
+            <option value='digital'>Digital</option>
           </select>
         </InputContain>
         <InputContain>
           <Label>Tipo</Label>
-          <select value={reward.type} onChange={(e) => { setReward({ ...reward, type: e.target.value }) }}>
-            <option value="points">Puntos</option>
-            <option value="months">Tiempo</option>
+          <select
+            value={reward.type}
+            onChange={(e) => {
+              setReward({ ...reward, type: e.target.value });
+            }}
+          >
+            <option value='points'>Puntos</option>
+            <option value='months'>Tiempo</option>
           </select>
         </InputContain>
         <InputContain>
           <Label>Publicado</Label>
-          <select value={reward.published} onChange={(e) => { setReward({ ...reward, published: e.target.value }) }}>
-            <option value="publicado">Publicado</option>
-            <option value="no-publicado">No Publicado</option>
+          <select
+            value={reward.published}
+            onChange={(e) => {
+              setReward({ ...reward, published: e.target.value });
+            }}
+          >
+            <option value='publicado'>Publicado</option>
+            <option value='no-publicado'>No Publicado</option>
           </select>
         </InputContain>
-        {
-          reward.type == "points" && <InputContain>
-            <Label>Puntos</Label>
-            <Input placeholder="7"
-              defaultValue={data.points}
-              style={errors.points ? { border: "1px solid red" } : {}}
-              onChange={(e: any) => {
-                setReward({ ...reward, points: parseInt(e.target.value) })
-              }} />
-          </InputContain>
-        }
-        {
-          reward.type == "months" &&
+        {reward.type == 'points' && (
           <InputContain>
-            <Label>Meses <IoInformationCircleOutline />
+            <Label>Puntos</Label>
+            <Input
+              placeholder='7'
+              defaultValue={data.points}
+              style={errors.points ? { border: '1px solid red' } : {}}
+              onChange={(e: any) => {
+                setReward({ ...reward, points: parseInt(e.target.value) });
+              }}
+            />
+          </InputContain>
+        )}
+        {reward.type == 'months' && (
+          <InputContain>
+            <Label>
+              Meses <IoInformationCircleOutline />
               <Instructions />
             </Label>
-            <Input placeholder="7"
+            <Input
+              placeholder='7'
               defaultValue={data.month}
-              style={errors.month ? { border: "1px solid red" } : {}}
+              style={errors.month ? { border: '1px solid red' } : {}}
               onChange={(e: any) => {
-                setReward({ ...reward, month: parseInt(e.target.value) })
-              }} />
+                setReward({ ...reward, month: parseInt(e.target.value) });
+              }}
+            />
           </InputContain>
-        }
-        {
-          reward.product_type === "fisico" &&
+        )}
+        {reward.product_type === 'fisico' && (
           <InputContain>
             <Label>Precio</Label>
-            <Input placeholder="7"
+            <Input
+              placeholder='7'
               defaultValue={data.price}
-              style={errors.points ? { border: "1px solid red" } : {}}
+              style={errors.points ? { border: '1px solid red' } : {}}
               onChange={(e: any) => {
-                setReward({ ...reward, price: parseInt(e.target.value) })
-              }} />
+                setReward({ ...reward, price: parseInt(e.target.value) });
+              }}
+            />
           </InputContain>
-        }
+        )}
         <InputContain>
           <Label>Imagen del Producto</Label>
           <IconContain>
             <Folder />
             <input
-              className="input-file"
-              type="file"
-              placeholder="Seleccionar archivo"
-              onChange={(e) => { getImage(e.target.files) }}>
-            </input>
+              className='input-file'
+              type='file'
+              placeholder='Seleccionar archivo'
+              onChange={(e) => {
+                getImage(e.target.files);
+              }}
+            ></input>
           </IconContain>
         </InputContain>
         <ButtonContain>
-          <ButtonTransparent onClick={() => {
-            deleteReward(reward)
-          }}
-          >Eliminar</ButtonTransparent>
+          <ButtonTransparent
+            onClick={() => {
+              deleteReward(reward);
+            }}
+          >
+            Eliminar
+          </ButtonTransparent>
           <Button
             onClick={() => {
               editReward();
             }}
-          >Guardar</Button>
+          >
+            Guardar
+          </Button>
         </ButtonContain>
       </ModalContain>
     </Modal>
-  )
-}
+  );
+};
 export default EditReward;

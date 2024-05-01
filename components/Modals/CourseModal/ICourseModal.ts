@@ -1,6 +1,6 @@
-import { ICourse } from "../../../interfaces/ICourse";
-import { IUser } from "../../../interfaces/IUserData";
-import { IMaterialData } from "./Materials/IModalMaterials";
+import { ICourse } from '../../../interfaces/ICourse';
+import { IUser } from '../../../interfaces/IUserData';
+import { IMaterialData } from './Materials/IModalMaterials';
 
 export interface ICourseModal {
   show: boolean;

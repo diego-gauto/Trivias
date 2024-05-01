@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AboutContain = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ export const NumberText = styled.p`
   text-align: center;
   font-size: 36px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 32px;
@@ -103,13 +103,13 @@ export const PointText = styled.p`
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const LessonTitle = styled.p`
   font-size: 18px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   color: #f8a44c;
   @media (max-width: 1023px) {
@@ -122,7 +122,7 @@ export const LessonTitle = styled.p`
 `;
 export const LessonContent = styled.div`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   p {
     color: #74549c;

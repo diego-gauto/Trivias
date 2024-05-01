@@ -10,7 +10,7 @@
   border-radius: 40px !important;
   border: none !important;
 
-  font-family: "Montserrat" !important;
+  font-family: 'Montserrat' !important;
   font-style: normal !important;
   font-weight: 600 !important;
   font-size: 16px !important;
@@ -23,7 +23,6 @@
 }
 
 .formControl::before {
-
   color: grey !important;
 }
 
@@ -53,7 +52,7 @@
   width: 200px;
   height: 16px;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -68,17 +67,13 @@
 }
 
 @media screen and (max-width: 1127px) {
-
-  .phoneInputGroup{
+  .phoneInputGroup {
     max-width: 100% !important;
     width: 100% !important;
   }
 
   .formControl {
-
-  max-width: 600px !important;
-  width: 100% !important;
-  
+    max-width: 600px !important;
+    width: 100% !important;
   }
-
 }

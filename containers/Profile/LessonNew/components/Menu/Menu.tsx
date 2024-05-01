@@ -1,22 +1,53 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 
-import router, { useRouter } from "next/router";
-import { ArrowUpIcon, Circle, CourseLength, DetailContain, LessonCard, LessonContainer, Line, MainContainer, SeasonCard, SeasonInfo } from "./Menu.styled";
-import { Progress, Space } from "antd";
-import { checkLessons, goTo, hms, returnProgress, returnStatus } from "../../utils/functions";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { DOWNLOAD_MATERIAL, HW_ICON, LOCK_ICON } from "../../../../../utils/Constants";
-import { ILesson, ICourseResponse, ISeason } from "../../../../../interfaces/ICourseNew";
-import { IUserInfoResult } from "../../../../../interfaces/IUser";
-import { getCourseHomeworksOfUser, getHomeworkUserApi } from "../../../../../components/api/homeworks";
-import { IReducedHomework } from "../../../../../interfaces/IHomeworkByUser";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { HiPencil } from "react-icons/hi2";
-import { IUserHomework } from "../../../../../interfaces/IUserHomeworks";
-import { HomeworksContext } from "../../../../../hooks/useHomeworks";
-import { UserQuiz, getUserQuizApi } from "../../../../../components/api/lessons";
-import { getGenericQueryResponse } from "../../../../../components/api/admin";
+import router, { useRouter } from 'next/router';
+import {
+  ArrowUpIcon,
+  Circle,
+  CourseLength,
+  DetailContain,
+  LessonCard,
+  LessonContainer,
+  Line,
+  MainContainer,
+  SeasonCard,
+  SeasonInfo,
+} from './Menu.styled';
+import { Progress, Space } from 'antd';
+import {
+  checkLessons,
+  goTo,
+  hms,
+  returnProgress,
+  returnStatus,
+} from '../../utils/functions';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import {
+  DOWNLOAD_MATERIAL,
+  HW_ICON,
+  LOCK_ICON,
+} from '../../../../../utils/Constants';
+import {
+  ILesson,
+  ICourseResponse,
+  ISeason,
+} from '../../../../../interfaces/ICourseNew';
+import { IUserInfoResult } from '../../../../../interfaces/IUser';
+import {
+  getCourseHomeworksOfUser,
+  getHomeworkUserApi,
+} from '../../../../../components/api/homeworks';
+import { IReducedHomework } from '../../../../../interfaces/IHomeworkByUser';
+import { FaRegCheckCircle } from 'react-icons/fa';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
+import { HiPencil } from 'react-icons/hi2';
+import { IUserHomework } from '../../../../../interfaces/IUserHomeworks';
+import { HomeworksContext } from '../../../../../hooks/useHomeworks';
+import {
+  UserQuiz,
+  getUserQuizApi,
+} from '../../../../../components/api/lessons';
+import { getGenericQueryResponse } from '../../../../../components/api/admin';
 
 interface IMenu {
   course: ICourseResponse;
@@ -24,18 +55,18 @@ interface IMenu {
 }
 
 interface IQuizOfLesson {
-  id: number,
-  passing_grade: number,
-  lessons_id: number,
-  points: number
+  id: number;
+  passing_grade: number;
+  lessons_id: number;
+  points: number;
 }
 
 interface IUserQuiz {
-  id: number
-  grade: number
-  lesson_id: number
-  quiz_id: number
-  user_id: number
+  id: number;
+  grade: number;
+  lesson_id: number;
+  quiz_id: number;
+  user_id: number;
 }
 
 const Menu = (props: IMenu) => {
@@ -50,16 +81,16 @@ const Menu = (props: IMenu) => {
   useEffect(() => {
     let temp_selected: boolean[] = [];
     course.seasons.forEach((_element) => {
-      temp_selected.push(true)
+      temp_selected.push(true);
     });
     setSelected(temp_selected);
-  }, [])
+  }, []);
 
   const toggleHandler = (index: any) => {
-    let temp = [...selected]
+    let temp = [...selected];
     temp[index] = !temp[index];
-    setSelected(temp)
-  }
+    setSelected(temp);
+  };
 
   useEffect(() => {
     loadUserQuizzes();
@@ -67,45 +98,53 @@ const Menu = (props: IMenu) => {
 
   const loadUserQuizzes = async () => {
     try {
-      const selectQuizzesOfCourse =
-        `select q.id, q.passing_grade, q.lessons_id, q.points
+      const selectQuizzesOfCourse = `select q.id, q.passing_grade, q.lessons_id, q.points
        from lessons as l 
        inner join seasons as s on s.id = l.seasons_id  
        inner join courses as c on c.id = s.course_id
        inner join quizzes as q on q.lessons_id = l.id
        where c.id = ${course.id} and l.quiz = 1;`;
-      const quizzesOfCourseResponse = await getGenericQueryResponse(selectQuizzesOfCourse);
+      const quizzesOfCourseResponse = await getGenericQueryResponse(
+        selectQuizzesOfCourse,
+      );
       setCoursesQuizzes(quizzesOfCourseResponse.data.data);
 
-      const selectQuizzesOfUser =
-        `select id, grade, lesson_id, quiz_id, user_id 
+      const selectQuizzesOfUser = `select id, grade, lesson_id, quiz_id, user_id 
         from user_quizzes 
         where user_id = ${user.id};`;
-      const quizzesOfUserResponse = await getGenericQueryResponse(selectQuizzesOfUser);
+      const quizzesOfUserResponse =
+        await getGenericQueryResponse(selectQuizzesOfUser);
       setUserQuizzes(quizzesOfUserResponse.data.data);
       setIsLoadingQuizzes(false);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleGotTo = (season: number, lesson: number) => {
-    if ((course.type === "Mensual" && course.sequential === 0) || course.type === "Gratis") {
-      goTo(course.id, season, lesson)
+    if (
+      (course.type === 'Mensual' && course.sequential === 0) ||
+      course.type === 'Gratis'
+    ) {
+      goTo(course.id, season, lesson);
     }
-    if (course.type === "Mensual" && course.sequential === 1) {
+    if (course.type === 'Mensual' && course.sequential === 1) {
       if (checkLessons(user, course, season, lesson)) {
-        goTo(course.id, season, lesson)
+        goTo(course.id, season, lesson);
       }
     }
-    if (course.type === "Producto" && course.sequential === 1) {
+    if (course.type === 'Producto' && course.sequential === 1) {
       if (checkLessons(user, course, season, lesson)) {
-        goTo(course.id, season, lesson)
+        goTo(course.id, season, lesson);
       }
     }
-  }
+  };
 
-  type Classname = 'activity--in-review' | 'activity--approve' | 'activity--not-approve' | 'activity--default';
+  type Classname =
+    | 'activity--in-review'
+    | 'activity--approve'
+    | 'activity--not-approve'
+    | 'activity--default';
 
   interface IHomeworkLessonParams {
     classname: Classname;
@@ -113,25 +152,54 @@ const Menu = (props: IMenu) => {
     text: string;
   }
 
-  const getIconByClassname = (classname: Classname, color: string, url = HW_ICON) => {
+  const getIconByClassname = (
+    classname: Classname,
+    color: string,
+    url = HW_ICON,
+  ) => {
     switch (classname) {
-      case "activity--approve":
-        return <FaRegCheckCircle style={{ color }} />
-      case "activity--in-review":
-        return <HiPencil style={{ color }} />
-      case "activity--not-approve":
-        return <IoMdCloseCircleOutline style={{ color }} />
+      case 'activity--approve':
+        return <FaRegCheckCircle style={{ color }} />;
+      case 'activity--in-review':
+        return <HiPencil style={{ color }} />;
+      case 'activity--not-approve':
+        return <IoMdCloseCircleOutline style={{ color }} />;
       default:
-        return <img src={url} />
+        return <img src={url} />;
     }
-  }
+  };
 
-  const getPropertiesByStatus = (status: number, approve: number): IHomeworkLessonParams => {
-    if (status === 0) { return { classname: 'activity--in-review', text: 'Tarea en revisión', color: '#7f21cf' } }
-    if (status === 1 && approve === 1) { return { classname: 'activity--approve', text: 'Tarea aprobada', color: '#197569' } }
-    if (status === 1 && approve === 0) { return { classname: 'activity--not-approve', text: 'Tarea rechazada', color: '#d72424' } }
-    return { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' }
-  }
+  const getPropertiesByStatus = (
+    status: number,
+    approve: number,
+  ): IHomeworkLessonParams => {
+    if (status === 0) {
+      return {
+        classname: 'activity--in-review',
+        text: 'Tarea en revisión',
+        color: '#7f21cf',
+      };
+    }
+    if (status === 1 && approve === 1) {
+      return {
+        classname: 'activity--approve',
+        text: 'Tarea aprobada',
+        color: '#197569',
+      };
+    }
+    if (status === 1 && approve === 0) {
+      return {
+        classname: 'activity--not-approve',
+        text: 'Tarea rechazada',
+        color: '#d72424',
+      };
+    }
+    return {
+      classname: 'activity--default',
+      text: 'Esta lección tiene una tarea',
+      color: '#942ced',
+    };
+  };
 
   const getHomeworkText = (lesson: ILesson) => {
     if (homeworks == null) {
@@ -141,8 +209,14 @@ const Menu = (props: IMenu) => {
       return undefined;
     }
     const { id: lessonId } = lesson;
-    const homeworkWithLessonId = homeworks.find((homework) => homework.lesson_id == lessonId);
-    let properties: IHomeworkLessonParams = { classname: 'activity--default', text: 'Esta lección tiene una tarea', color: '#942ced' };
+    const homeworkWithLessonId = homeworks.find(
+      (homework) => homework.lesson_id == lessonId,
+    );
+    let properties: IHomeworkLessonParams = {
+      classname: 'activity--default',
+      text: 'Esta lección tiene una tarea',
+      color: '#942ced',
+    };
     if (homeworkWithLessonId !== undefined) {
       const { status, approved } = homeworkWithLessonId;
       properties = getPropertiesByStatus(status, approved);
@@ -153,8 +227,8 @@ const Menu = (props: IMenu) => {
         {getIconByClassname(classname, color)}
         {text}
       </div>
-    )
-  }
+    );
+  };
 
   const getQuizJSX = (lesson: ILesson): JSX.Element => {
     const { id: lessonId } = lesson;
@@ -162,12 +236,12 @@ const Menu = (props: IMenu) => {
     const texts = {
       default: 'Esta lección tiene un quiz',
       approve: 'Quiz aprobado',
-      notApprobe: 'Quiz no aprobado'
-    }
+      notApprobe: 'Quiz no aprobado',
+    };
 
-    const userQuiz = userQuizzes.find(quiz => quiz.lesson_id === lessonId);
+    const userQuiz = userQuizzes.find((quiz) => quiz.lesson_id === lessonId);
 
-    // En caso de no existir un quiz realizado por el usuario, 
+    // En caso de no existir un quiz realizado por el usuario,
     // indicar que la lección tiene uno
     if (!userQuiz) {
       return (
@@ -175,18 +249,19 @@ const Menu = (props: IMenu) => {
           {getIconByClassname('activity--default', '#7f21cf', HW_ICON)}
           {texts.default}
         </div>
-      )
+      );
     }
 
     // Si existe...
 
-    const lessonQuiz = courseQuizzes.find(quiz => quiz.lessons_id === lessonId);
+    const lessonQuiz = courseQuizzes.find(
+      (quiz) => quiz.lessons_id === lessonId,
+    );
 
     // Esto no debería de ocurrir nunca...
     if (!lessonQuiz) {
-      return (<></>);
+      return <></>;
     }
-
 
     /*
     const generateGradePercent = (lessonId: number) => {
@@ -206,7 +281,7 @@ const Menu = (props: IMenu) => {
           {getIconByClassname('activity--approve', '#197569')}
           {texts.approve}
         </div>
-      )
+      );
     }
 
     // En caso de que no sea un quiz aprobado...
@@ -215,8 +290,8 @@ const Menu = (props: IMenu) => {
         {getIconByClassname('activity--not-approve', '#d72424')}
         {texts.notApprobe}
       </div>
-    )
-  }
+    );
+  };
 
   const getQuizJSXTestCSS = (lesson: ILesson): JSX.Element[] => {
     const { id: lessonId } = lesson;
@@ -224,8 +299,8 @@ const Menu = (props: IMenu) => {
     const texts = {
       default: 'Esta lección tiene un quiz',
       approve: 'Quiz aprobado',
-      notApprobe: 'Quiz no aprobado'
-    }
+      notApprobe: 'Quiz no aprobado',
+    };
 
     return [
       <div className={`activity activity--default`}>
@@ -239,77 +314,122 @@ const Menu = (props: IMenu) => {
       <div className='activity activity--not-approve'>
         {getIconByClassname('activity--not-approve', '#d72424')}
         {texts.notApprobe}
-      </div>
-    ]
-  }
+      </div>,
+    ];
+  };
 
   if (isLoadingQuizzes) {
-    return (<p>Cargando...</p>);
+    return <p>Cargando...</p>;
   }
 
   return (
     <MainContainer>
-      {
-        course.seasons.map((season: ISeason, indexSeason: number) => {
-          return (
-            <SeasonCard key={'lesson_date' + indexSeason}>
-              <SeasonInfo active={selected[indexSeason]} onClick={() => { toggleHandler(indexSeason) }}>
-                <Space wrap>
-                  {
-                    selected[indexSeason] && <Progress
-                      width={60}
-                      strokeWidth={10}
-                      trailColor="#3F1168"
-                      strokeColor="#FF9B00"
-                      type="circle"
-                      percent={Math.ceil((returnProgress(season, user.id) * 100) / course.seasons[indexSeason]!.lessons.length)}
-                    />
-                  }
-                  <div className="seasonDetail">
-                    <h4>{season.name}</h4>
-                    <p>{season.lessons.length > 1 ? `${season.lessons.length} Lecciones` : `${season.lessons.length} Lección`}</p>
-                  </div>
-                </Space>
-                <ArrowUpIcon active={selected[indexSeason]} />
-              </SeasonInfo>
-              {/* 
+      {course.seasons.map((season: ISeason, indexSeason: number) => {
+        return (
+          <SeasonCard key={'lesson_date' + indexSeason}>
+            <SeasonInfo
+              active={selected[indexSeason]}
+              onClick={() => {
+                toggleHandler(indexSeason);
+              }}
+            >
+              <Space wrap>
+                {selected[indexSeason] && (
+                  <Progress
+                    width={60}
+                    strokeWidth={10}
+                    trailColor='#3F1168'
+                    strokeColor='#FF9B00'
+                    type='circle'
+                    percent={Math.ceil(
+                      (returnProgress(season, user.id) * 100) /
+                        course.seasons[indexSeason]!.lessons.length,
+                    )}
+                  />
+                )}
+                <div className='seasonDetail'>
+                  <h4>{season.name}</h4>
+                  <p>
+                    {season.lessons.length > 1
+                      ? `${season.lessons.length} Lecciones`
+                      : `${season.lessons.length} Lección`}
+                  </p>
+                </div>
+              </Space>
+              <ArrowUpIcon active={selected[indexSeason]} />
+            </SeasonInfo>
+            {/* 
                 Lesson
               */}
-              {selected[indexSeason] && <LessonContainer>
+            {selected[indexSeason] && (
+              <LessonContainer>
                 {season.lessons.map((lesson, indexLesson: number) => {
                   return (
-                    <LessonCard onClick={() => { handleGotTo(indexSeason, indexLesson) }} style={{ cursor: checkLessons(user, course, indexSeason, indexLesson) ? "pointer" : "not-allowed" }} key={"lesson_data_sub_" + indexSeason + indexLesson}>
-                      <div className="left">
-                        {checkLessons(user, course, indexSeason, indexLesson) ? <Circle status={returnStatus(indexSeason, indexLesson, params, course, user.id)}>
-                        </Circle> :
-                          <img style={{ width: "10px" }} src={LOCK_ICON} />}
-                        {(season.lessons.length - 1) !== indexLesson && <Line status={returnStatus(indexSeason, indexLesson, params, course, user.id)} />}
+                    <LessonCard
+                      onClick={() => {
+                        handleGotTo(indexSeason, indexLesson);
+                      }}
+                      style={{
+                        cursor: checkLessons(
+                          user,
+                          course,
+                          indexSeason,
+                          indexLesson,
+                        )
+                          ? 'pointer'
+                          : 'not-allowed',
+                      }}
+                      key={'lesson_data_sub_' + indexSeason + indexLesson}
+                    >
+                      <div className='left'>
+                        {checkLessons(
+                          user,
+                          course,
+                          indexSeason,
+                          indexLesson,
+                        ) ? (
+                          <Circle
+                            status={returnStatus(
+                              indexSeason,
+                              indexLesson,
+                              params,
+                              course,
+                              user.id,
+                            )}
+                          ></Circle>
+                        ) : (
+                          <img style={{ width: '10px' }} src={LOCK_ICON} />
+                        )}
+                        {season.lessons.length - 1 !== indexLesson && (
+                          <Line
+                            status={returnStatus(
+                              indexSeason,
+                              indexLesson,
+                              params,
+                              course,
+                              user.id,
+                            )}
+                          />
+                        )}
                       </div>
-                      <div className="right">
+                      <div className='right'>
                         <p>{lesson.title}</p>
                         <DetailContain>
-                          {
-                            getHomeworkText(lesson)
-                          }
-                          {
-                            /*
+                          {getHomeworkText(lesson)}
+                          {/*
                             lesson.quiz === 1 &&
                             <div className='activity'>
                               <img src={HW_ICON} />
                               Esta lección tiene un quiz
                             </div>
-                            */
-                          }
-                          {
-                            lesson.quiz === 1 && getQuizJSX(lesson)
-                          }
-                          {
-                            lesson.lesson_material.length > 0 &&
+                            */}
+                          {lesson.quiz === 1 && getQuizJSX(lesson)}
+                          {lesson.lesson_material.length > 0 && (
                             <div className='activity'>
                               <img src={DOWNLOAD_MATERIAL} />
                               Esta lección tiene material descargable
                             </div>
-                          }
+                          )}
                         </DetailContain>
                         <CourseLength>
                           <AiOutlineClockCircle className='icon' />
@@ -317,14 +437,14 @@ const Menu = (props: IMenu) => {
                         </CourseLength>
                       </div>
                     </LessonCard>
-                  )
+                  );
                 })}
-              </LessonContainer>}
-            </SeasonCard>
-          )
-        })
-      }
+              </LessonContainer>
+            )}
+          </SeasonCard>
+        );
+      })}
     </MainContainer>
-  )
-}
-export default Menu
+  );
+};
+export default Menu;

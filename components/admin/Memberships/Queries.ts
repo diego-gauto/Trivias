@@ -1,7 +1,7 @@
 export const generateMemberhsipsQuery = (
   sd: string,
   fd: string,
-  levels: string
+  levels: string,
 ) => {
   const query = `SELECT users.id,
         users.name,

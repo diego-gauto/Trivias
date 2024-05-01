@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from 'react';
 
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-import { storage } from "../../../../firebase/firebaseConfig";
+import { storage } from '../../../../firebase/firebaseConfig';
 
 interface Answer {
   label: string;
@@ -27,7 +27,7 @@ interface Form {
   };
   optionsArray: Option[];
   redirect: {
-    type: "thankYouPage" | "customLink";
+    type: 'thankYouPage' | 'customLink';
     link: string;
     textButton: string;
   };
@@ -62,7 +62,7 @@ const FileUpload = ({ route, updateFormImg }: FileUploadProps) => {
 
   return (
     <div>
-      <input type="file" onChange={handleChange} />
+      <input type='file' onChange={handleChange} />
     </div>
   );
 };

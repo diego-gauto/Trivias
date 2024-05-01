@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import styled from "styled-components";
+import { Modal } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ModalContainer = styled(Modal)`
   @font-face {
@@ -65,7 +65,7 @@ export const ModalContent = styled.div`
     margin-top: 20px;
     button {
       font-size: 16px;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #6717cd;
       color: white;
       padding-block: 10px;

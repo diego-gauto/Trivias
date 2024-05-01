@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const RewardContain = styled.div`
   display: flex;
@@ -89,17 +89,17 @@ export const Reward = styled.div<{ type: any }>`
   padding-bottom: 10px;
   position: relative;
   ${(props) =>
-    props.type == "points" &&
+    props.type == 'points' &&
     css`
       background: linear-gradient(135deg, #fd8608 30%, #9a2fea 100%);
     `}
   ${(props) =>
-    props.type == "months" &&
+    props.type == 'months' &&
     css`
       background: linear-gradient(135deg, #10c576 50%, #9a2fea 100%);
     `}
  ${(props) =>
-    props.type == "certificates" &&
+    props.type == 'certificates' &&
     css`
       background: linear-gradient(135deg, #167fec 10%, #9a2fea 100%);
     `}

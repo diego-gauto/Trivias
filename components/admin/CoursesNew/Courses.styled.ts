@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 
 export const CourseContainer = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const CourseContainer = styled.div`
   gap: 20px;
   padding: 20px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   .create-course {
     display: flex;
     flex-direction: column;
@@ -250,33 +250,33 @@ export const OptionColor = styled.div<{ color: string }>`
   padding-top: 3px;
   padding-bottom: 3px;
   ${(props) =>
-    props.color == "azul" &&
+    props.color == 'azul' &&
     css`
       background-color: #6778f9;
       border-radius: 10px 10px 0 0;
     `}
   ${(props) =>
-    props.color == "amarillo" &&
+    props.color == 'amarillo' &&
     css`
       background-color: #e2a12d;
     `}
     ${(props) =>
-    props.color == "morado" &&
+    props.color == 'morado' &&
     css`
       background-color: #9900ee;
     `}
     ${(props) =>
-    props.color == "naranja" &&
+    props.color == 'naranja' &&
     css`
       background-color: #f04a18;
     `}
     ${(props) =>
-    props.color == "rosa" &&
+    props.color == 'rosa' &&
     css`
       background-color: #d445d3;
     `}
     ${(props) =>
-    props.color == "verde" &&
+    props.color == 'verde' &&
     css`
       background-color: #03bc80;
       border-radius: 0 0 10px 10px;

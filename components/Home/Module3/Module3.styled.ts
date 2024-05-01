@@ -1,5 +1,5 @@
-import { Col, Row } from "react-bootstrap";
-import styled from "styled-components";
+import { Col, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const RightContainer = styled(Col)`
   @media only screen and (max-width: 1024px) {
@@ -162,7 +162,7 @@ export const SectionRight04 = styled.div`
 `;
 export const Text01 = styled.span`
   width: 100%;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -181,7 +181,7 @@ export const Text01 = styled.span`
   }
 `;
 export const Text02 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   font-size: 36px;
@@ -200,7 +200,7 @@ export const Text02 = styled.span`
   }
 `;
 export const Text03 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -212,7 +212,7 @@ export const Text03 = styled.span`
   color: #ffffff;
 `;
 export const Text04 = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -224,7 +224,7 @@ export const Text04 = styled.span`
   }
 `;
 export const Text05 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -239,7 +239,7 @@ export const Text05 = styled.span`
   }
 `;
 export const Text06 = styled.p`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -275,7 +275,7 @@ export const Text06Sm = styled(Text06)`
   }
 `;
 export const TextNew = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

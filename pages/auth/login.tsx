@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useLogin } from "react-facebook";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useMediaQuery } from "react-responsive";
+import { useLogin } from 'react-facebook';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useMediaQuery } from 'react-responsive';
 
-import Link from "next/link";
-import * as yup from "yup";
+import Link from 'next/link';
+import * as yup from 'yup';
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useGoogleLogin } from "@react-oauth/google";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useGoogleLogin } from '@react-oauth/google';
 
-import AlertModal from "../../components/Modals/AlertModal/AlertModal";
+import AlertModal from '../../components/Modals/AlertModal/AlertModal';
 import {
   conektaCustomer,
   facebookUserInfo,
@@ -19,10 +19,17 @@ import {
   loginWithProviderApi,
   updateLastSignIn,
   updatePastUser,
-} from "../../components/api/auth";
-import ErrorModal from "../../components/Error/ErrorModal";
-import { PLAN_PATH, PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, REWARDS_PATH, SIGNUP_PATH } from "../../constants/paths";
-import { useAuth } from "../../hooks/useAuth";
+} from '../../components/api/auth';
+import ErrorModal from '../../components/Error/ErrorModal';
+import {
+  PLAN_PATH,
+  PREVIEW_PATH,
+  PROFILE_PATH,
+  PURCHASE_PATH,
+  REWARDS_PATH,
+  SIGNUP_PATH,
+} from '../../constants/paths';
+import { useAuth } from '../../hooks/useAuth';
 import {
   Error,
   LoaderContain,
@@ -30,30 +37,31 @@ import {
   LoginBackground,
   PurpleButton2,
   Title,
-} from "../../screens/Login.styled";
-import ModalForgot from "./Modals/ModalForgot";
-import ActiveUserConekta from "./Modals/ActiveUserConekta";
-import { getUsersStripe } from "../../components/api/conekta/test";
-import { IUser } from "../../interfaces/IUserData";
-import ComeFromModal from "../../components/Modals/ComeFromModal/ComeFromModal";
-import { authRedirect } from "../../constants/redirects";
+} from '../../screens/Login.styled';
+import ModalForgot from './Modals/ModalForgot';
+import ActiveUserConekta from './Modals/ActiveUserConekta';
+import { getUsersStripe } from '../../components/api/conekta/test';
+import { IUser } from '../../interfaces/IUserData';
+import ComeFromModal from '../../components/Modals/ComeFromModal/ComeFromModal';
+import { authRedirect } from '../../constants/redirects';
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
   email: yup
     .string()
-    .email("Debe ser un email válido")
-    .required("Campo requerido"),
-  password: yup.string()
+    .email('Debe ser un email válido')
+    .required('Campo requerido'),
+  password: yup
+    .string()
     .required('Password is required')
     .min(6, 'La contraseña debe tener al menos 6 carácteres'),
   confirmPassword: yup
     .string()
     .when('pastUserScreen', {
       is: true,
-      then: yup.string()
+      then: yup.string(),
     })
-    .oneOf([yup.ref("password"), null], "La contraseña no coincide"),
+    .oneOf([yup.ref('password'), null], 'La contraseña no coincide'),
 });
 type FormValues = {
   email: string;
@@ -73,29 +81,29 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [pastUserScreen, setPastUserScreen] = useState(false);
-  const [pastUser, setPastUser] = useState<any>({})
+  const [pastUser, setPastUser] = useState<any>({});
   const [authLoader, setAuthLoader] = useState(false);
   const [show, setShow] = useState<any>(false);
   const [showAlert1, setShowAlert1] = useState<boolean>(false);
   const [showAlert2, setShowAlert2] = useState<boolean>(false);
   const [showUpdateComeFrom, setShowUpdateComeFrom] = useState<boolean>(false);
-  const [alertMsg1, setalertMsg1] = useState<any>()
-  const [alertMsg2, setalertMsg2] = useState()
-  const responsive1023 = useMediaQuery({ query: "(max-width: 1023px)" });
+  const [alertMsg1, setalertMsg1] = useState<any>();
+  const [alertMsg2, setalertMsg2] = useState();
+  const responsive1023 = useMediaQuery({ query: '(max-width: 1023px)' });
   const { login } = useLogin();
   const [user, setUser] = useState<IUser>({
-    name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-    stripeId: "",
+    name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    stripeId: '',
     id: 0,
     user_courses: [],
     level: 0,
     final_date: null,
-    plan_name: "",
-    method: "",
-    role: ""
+    plan_name: '',
+    method: '',
+    role: '',
   } as any);
 
   const togglePassword_1 = () => {
@@ -117,38 +125,37 @@ const Login = () => {
     setShowUpdateComeFrom(false);
     updateSignIn(user);
     localStorage.setItem('email', user.email);
-    authRedirect("login", user)
-  }
+    authRedirect('login', user);
+  };
 
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
-        setLoggedIn(true)
+        setLoggedIn(true);
       } else {
-        setLoggedIn(false)
+        setLoggedIn(false);
       }
-    }, [])
-
+    }, []);
   } catch (error) {
-    setLoggedIn(false)
+    setLoggedIn(false);
   }
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema)
+    resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = async formData => {
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     setAuthLoader(true);
     let signUpData = {
       credentials: {
         email: formData.email,
         password: formData.password,
         newPassword: formData.newPassword,
-        newConfirmPassword: formData.newConfirmPassword
+        newConfirmPassword: formData.newConfirmPassword,
       },
     };
     loginWithProviderApi(signUpData.credentials).then(async (res) => {
@@ -157,18 +164,21 @@ const Login = () => {
           setPastUser(res[0]);
           setPastUserScreen(true);
           setAuthLoader(false);
-          return
+          return;
         }
-        if (res[0].password === signUpData.credentials.password && res[0].provider === 'web') {
+        if (
+          res[0].password === signUpData.credentials.password &&
+          res[0].provider === 'web'
+        ) {
           let body = {
             phone_number: res[0].phone_number,
             country: res[0].country,
             name: res[0].name,
             email: res[0].email,
             userId: res[0].user_id,
-          }
+          };
           if (res[0].conekta_id === null) {
-            await conektaCustomer(body)
+            await conektaCustomer(body);
           }
           if (!res[0].come_from) {
             setUser(res[0]);
@@ -176,18 +186,19 @@ const Login = () => {
           } else if (res[0].come_from === 'null') {
             setUser(res[0]);
             setShowUpdateComeFrom(true);
-          }
-          else if (!res[0].phone_number) {
+          } else if (!res[0].phone_number) {
             setUser(res[0]);
             setShowUpdateComeFrom(true);
-          } else if (`${res[0].phone_number}`.startsWith('52') && !res[0].origin_state) {
+          } else if (
+            `${res[0].phone_number}`.startsWith('52') &&
+            !res[0].origin_state
+          ) {
             setUser(res[0]);
             setShowUpdateComeFrom(true);
-          }
-          else {
+          } else {
             updateSignIn(res[0]);
             localStorage.setItem('email', signUpData.credentials.email);
-            authRedirect("login", res[0])
+            authRedirect('login', res[0]);
           }
         }
         if (res[0].password !== signUpData.credentials.password) {
@@ -197,7 +208,9 @@ const Login = () => {
           setShow(true);
         }
         if (res[0].provider !== 'web') {
-          setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
+          setErrorMsg(
+            `El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`,
+          );
           setError(true);
           setAuthLoader(false);
           setShow(true);
@@ -209,83 +222,83 @@ const Login = () => {
         setAuthLoader(false);
         setShow(true);
       }
-    })
-  }
-  const onSubmit2: SubmitHandler<FormValues> = async formData => {
-    setIsLoading(true)
+    });
+  };
+  const onSubmit2: SubmitHandler<FormValues> = async (formData) => {
+    setIsLoading(true);
     let past_user = {
       password: formData.password,
-      provider: "web",
+      provider: 'web',
       userId: pastUser.id,
-      id: pastUser.id
-    }
+      id: pastUser.id,
+    };
     updateSignIn(past_user);
     updatePastUser(past_user).then((res) => {
       localStorage.setItem('email', pastUser.email);
       window.location.href = PREVIEW_PATH;
-      authRedirect('login', res[0])
-    })
-  }
+      authRedirect('login', res[0]);
+    });
+  };
   const updateSignIn = async (user: any) => {
     let userData = {
       userId: user.id,
       last_sign_in: new Date(),
-    }
-    await updateLastSignIn(userData).then((res) => {
-    });
-  }
+    };
+    await updateLastSignIn(userData).then((res) => {});
+  };
   const [showForgot, setShowForgot] = useState(false);
 
   useEffect(() => {
     if (loggedIn) {
-      setIsLoading(true)
+      setIsLoading(true);
       window.location.href = PREVIEW_PATH;
     }
     setTimeout(() => {
-      setLoginLoader(true)
+      setLoginLoader(true);
     }, 200);
-
-  }, [isLoading])
+  }, [isLoading]);
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     }, 300);
-  }, [])
+  }, []);
 
   const googleLogin = useGoogleLogin({
-    onSuccess: tokenResponse => {
+    onSuccess: (tokenResponse) => {
       setAuthLoader(true);
       googleTokens(tokenResponse.code).then((res) => {
         let user = {
           email: res.email,
-        }
+        };
         loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
-                password: "",
-                provider: "google",
-                userId: res[0].id
-              }
+                password: '',
+                provider: 'google',
+                userId: res[0].id,
+              };
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
                 window.location.href = PREVIEW_PATH;
-                authRedirect('login', res[0])
-              })
+                authRedirect('login', res[0]);
+              });
               setAuthLoader(false);
-              return
+              return;
             }
             if (res[0].provider !== 'google') {
-              setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
+              setErrorMsg(
+                `El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`,
+              );
               setError(true);
               setAuthLoader(false);
               setShow(true);
-              return
+              return;
             }
           }
-          if (res.msg === "Este usuario no existe!") {
+          if (res.msg === 'Este usuario no existe!') {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
             setShow(true);
@@ -296,10 +309,10 @@ const Login = () => {
               country: res[0].country,
               name: res[0].name,
               email: res[0].email,
-              userId: res[0].user_id
-            }
+              userId: res[0].user_id,
+            };
             if (res[0].conekta_id === null) {
-              await conektaCustomer(body)
+              await conektaCustomer(body);
             }
             if (!res[0].come_from) {
               setUser(res[0]);
@@ -307,11 +320,11 @@ const Login = () => {
             } else {
               updateSignIn(res[0]);
               localStorage.setItem('email', user.email);
-              authRedirect('login', res[0])
+              authRedirect('login', res[0]);
             }
           }
-        })
-      })
+        });
+      });
     },
     flow: 'auth-code',
   });
@@ -324,8 +337,8 @@ const Login = () => {
       });
       let userInfo = {
         id: response.authResponse.userID,
-        access_token: response.authResponse.accessToken
-      }
+        access_token: response.authResponse.accessToken,
+      };
       facebookUserInfo(userInfo).then((res) => {
         if (!res) {
           setErrorMsg('Hubo un error en el inicio de sesión!');
@@ -336,33 +349,35 @@ const Login = () => {
         }
         let user = {
           email: res.email,
-        }
+        };
         loginWithProviderApi(user).then(async (res) => {
           if (res[0]) {
             if (res[0].past_user === 'si') {
               let past_user = {
-                password: "",
-                provider: "facebook",
-                userId: res[0].id
-              }
+                password: '',
+                provider: 'facebook',
+                userId: res[0].id,
+              };
               updateSignIn(res[0]);
               updatePastUser(past_user).then((respone) => {
                 localStorage.setItem('email', res[0].email);
-                authRedirect('login', res[0])
+                authRedirect('login', res[0]);
                 window.location.href = PREVIEW_PATH;
-              })
+              });
               setAuthLoader(false);
-              return
+              return;
             }
             if (res[0].provider !== 'facebook') {
-              setErrorMsg(`El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`);
+              setErrorMsg(
+                `El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`,
+              );
               setError(true);
               setAuthLoader(false);
               setShow(true);
-              return
+              return;
             }
           }
-          if (res.msg === "Este usuario no existe!") {
+          if (res.msg === 'Este usuario no existe!') {
             setErrorMsg('Este usuario no existe!');
             setAuthLoader(false);
             setShow(true);
@@ -373,10 +388,10 @@ const Login = () => {
               country: res[0].country,
               name: res[0].name,
               email: res[0].email,
-              userId: res[0].user_id
-            }
+              userId: res[0].user_id,
+            };
             if (res[0].conekta_id === null) {
-              await conektaCustomer(body)
+              await conektaCustomer(body);
             }
             if (!res[0].come_from) {
               setUser(res[0]);
@@ -384,244 +399,287 @@ const Login = () => {
             } else {
               updateSignIn(res[0]);
               localStorage.setItem('email', user.email);
-              authRedirect('login', res[0])
+              authRedirect('login', res[0]);
             }
           }
-        })
-      })
+        });
+      });
     } catch (error: any) {
       setAuthLoader(false);
     }
-  }
+  };
   return (
     <>
       {!isLoading ? (
         <LoginBackground>
-          {!!alertMsg1 &&
-            <AlertModal show={showAlert1} message={alertMsg1} onHide={toggleAlert1} />}
-          {!!alertMsg2 &&
-            <AlertModal show={showAlert2} message={alertMsg2} onHide={toggleAlert2} />}
-          <div className="left-side">
-            <img className="imgUpperHand" src="../images/mano2.png" alt="" />
-            <p>¡Es un placer <br />
+          {!!alertMsg1 && (
+            <AlertModal
+              show={showAlert1}
+              message={alertMsg1}
+              onHide={toggleAlert1}
+            />
+          )}
+          {!!alertMsg2 && (
+            <AlertModal
+              show={showAlert2}
+              message={alertMsg2}
+              onHide={toggleAlert2}
+            />
+          )}
+          <div className='left-side'>
+            <img className='imgUpperHand' src='../images/mano2.png' alt='' />
+            <p>
+              ¡Es un placer <br />
               <span>tenerte de {!responsive1023 && <br />} vuelta!</span>
             </p>
-            <img className="imgBottomHand" src="../images/mano1.png" alt="" />
+            <img className='imgBottomHand' src='../images/mano1.png' alt='' />
           </div>
-          <div className="right-side">
-            <form onSubmit={
-              !pastUserScreen ?
-                handleSubmit(onSubmit)
-                : handleSubmit(onSubmit2)
-            }>
-              <div className="title-contain">
-                <Title style={{ fontSize: 26 }}>
-                  Inicia sesión
-                </Title>
-                <div className="subtext">
-                  <p className="first-sub">
-                    ¡Te damos la bienvenida a <br />nuestra nueva plataforma!
+          <div className='right-side'>
+            <form
+              onSubmit={
+                !pastUserScreen
+                  ? handleSubmit(onSubmit)
+                  : handleSubmit(onSubmit2)
+              }
+            >
+              <div className='title-contain'>
+                <Title style={{ fontSize: 26 }}>Inicia sesión</Title>
+                <div className='subtext'>
+                  <p className='first-sub'>
+                    ¡Te damos la bienvenida a <br />
+                    nuestra nueva plataforma!
                   </p>
-                  <p className="second-sub">
+                  <p className='second-sub'>
                     Siempre estamos mejorando para ti.
                   </p>
                 </div>
               </div>
-              <p className="registerText">
+              <p className='registerText'>
                 ¿No tienes una cuenta?
                 <Link href={SIGNUP_PATH}>
                   <span>&nbsp;Regístrate</span>
                 </Link>
               </p>
 
-              {
-                !pastUserScreen ?
-                  <div className="box">
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Correo <span>electrónico</span></label>
-                        <input
-                          required
-                          type="text"
-                          placeholder="correo@correo.com"
-                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                          {...register("email")}
-                        />
-                      </div>
-                      {
-                        errors.email &&
-                        <Error>
-                          <p>
-                            {errors.email?.message}
-                          </p>
-                        </Error>
-                      }
+              {!pastUserScreen ? (
+                <div className='box'>
+                  <div className='form-row'>
+                    <div className='form-input'>
+                      <label>
+                        Correo <span>electrónico</span>
+                      </label>
+                      <input
+                        required
+                        type='text'
+                        placeholder='correo@correo.com'
+                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                        {...register('email')}
+                      />
                     </div>
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Contraseña</label>
-                        <input
-                          required
-                          type={passwordShown_1 ? "text" : "password"}
-                          placeholder="Contraseña"
-                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                          {...register("password")} />
-                        <div className="eye"
-                          onClick={togglePassword_1}
-                        >{passwordShown_1 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                      </div>
-                      {
-                        errors.password &&
-                        <Error>
-                          <p>
-                            {errors.password?.message}
-                          </p>
-                        </Error>
-                      }
-                    </div>
-                    {error && <Error>
-                      <p>
-                        {errorMsg}
-                      </p>
-                    </Error>}
-
-                    <p className="forgotText">
-                      ¿Olvidaste tu contraseña?
-                      <span onClick={() => { setShowForgot(true) }}>&nbsp;Click aquí</span>
-                    </p>
+                    {errors.email && (
+                      <Error>
+                        <p>{errors.email?.message}</p>
+                      </Error>
+                    )}
                   </div>
-                  :
-                  <div className="box">
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Correo <span>electrónico</span></label>
-                        <input
-                          required
-                          type="text"
-                          value={pastUser.email}
-                          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                          {...register("email")}
-                          disabled={pastUserScreen}
-                        />
+                  <div className='form-row'>
+                    <div className='form-input'>
+                      <label>Contraseña</label>
+                      <input
+                        required
+                        type={passwordShown_1 ? 'text' : 'password'}
+                        placeholder='Contraseña'
+                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                        {...register('password')}
+                      />
+                      <div className='eye' onClick={togglePassword_1}>
+                        {passwordShown_1 ? (
+                          <FaEye></FaEye>
+                        ) : (
+                          <FaEyeSlash></FaEyeSlash>
+                        )}
                       </div>
-                      {
-                        errors.email &&
-                        <Error>
-                          <p>
-                            {errors.email?.message}
-                          </p>
-                        </Error>
-                      }
                     </div>
-                    <div className="line"></div>
-                    <p className="first-paragraph">
-                      Vemos que ya eres parte de <br />la comunidad de Gonvar.
-                    </p>
-                    <p className="second-paragraph">
-                      Para acceder a tu contenido debes crear una contraseña.
-                      <span>
-                        &nbsp; Puedes usar la misma de antes<br /> o pensar en una nueva.
-                      </span>
-                    </p>
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label style={{ fontWeight: 400 }}>Contraseña</label>
-                        <input
-                          required
-                          type={passwordShown_2 ? "text" : "password"}
-                          placeholder="Contraseña"
-                          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                          {...register("password")} />
-                        <div className="eye"
-                          onClick={togglePassword_2}
-                        >{passwordShown_2 ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                      </div>
-                      {
-                        errors.password &&
-                        <Error>
-                          <p>
-                            {errors.password?.message}
-                          </p>
-                        </Error>
-                      }
-                    </div>
-                    <div className="form-row">
-                      <div className="form-input">
-                        <label>Confirmar <span>Contraseña</span></label>
-                        <input
-                          required
-                          type={confirmPassword ? "text" : "password"}
-                          placeholder="Contraseña"
-                          className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                          {...register("confirmPassword")} />
-                        <div className="eye"
-                          onClick={toggleConfirmPassword}
-                        >{confirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
-                      </div>
-                      {
-                        errors.confirmPassword &&
-                        <Error>
-                          <p>
-                            {errors.confirmPassword?.message}
-                          </p>
-                        </Error>
-                      }
-                    </div>
+                    {errors.password && (
+                      <Error>
+                        <p>{errors.password?.message}</p>
+                      </Error>
+                    )}
                   </div>
-              }
-              {
-                !authLoader
-                  ?
-                  <PurpleButton2 type='submit'>
-                    Ingresar
-                  </PurpleButton2>
-                  :
-                  <LoaderImage>
-                    <LoaderContain />
-                  </LoaderImage>
-              }
+                  {error && (
+                    <Error>
+                      <p>{errorMsg}</p>
+                    </Error>
+                  )}
 
-              <div className="social-media-container">
-                <div className="info">
-                  <p style={{ textAlign: "end" }}>O inicia sesión usando <br />
-                    tu cuenta de <span>Google</span> <br />
-                    o de <span>Facebook</span>
+                  <p className='forgotText'>
+                    ¿Olvidaste tu contraseña?
+                    <span
+                      onClick={() => {
+                        setShowForgot(true);
+                      }}
+                    >
+                      &nbsp;Click aquí
+                    </span>
                   </p>
                 </div>
-                <div className="socials">
-                  <img src="../images/googleLogin.png" onClick={() => {
-                    googleLogin();
-                  }} alt="" />
-                  <img src="../images/facebookLogin.png" onClick={() => {
-                    loginWithFacebook();
-                  }} alt="" />
+              ) : (
+                <div className='box'>
+                  <div className='form-row'>
+                    <div className='form-input'>
+                      <label>
+                        Correo <span>electrónico</span>
+                      </label>
+                      <input
+                        required
+                        type='text'
+                        value={pastUser.email}
+                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                        {...register('email')}
+                        disabled={pastUserScreen}
+                      />
+                    </div>
+                    {errors.email && (
+                      <Error>
+                        <p>{errors.email?.message}</p>
+                      </Error>
+                    )}
+                  </div>
+                  <div className='line'></div>
+                  <p className='first-paragraph'>
+                    Vemos que ya eres parte de <br />
+                    la comunidad de Gonvar.
+                  </p>
+                  <p className='second-paragraph'>
+                    Para acceder a tu contenido debes crear una contraseña.
+                    <span>
+                      &nbsp; Puedes usar la misma de antes
+                      <br /> o pensar en una nueva.
+                    </span>
+                  </p>
+                  <div className='form-row'>
+                    <div className='form-input'>
+                      <label style={{ fontWeight: 400 }}>Contraseña</label>
+                      <input
+                        required
+                        type={passwordShown_2 ? 'text' : 'password'}
+                        placeholder='Contraseña'
+                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                        {...register('password')}
+                      />
+                      <div className='eye' onClick={togglePassword_2}>
+                        {passwordShown_2 ? (
+                          <FaEye></FaEye>
+                        ) : (
+                          <FaEyeSlash></FaEyeSlash>
+                        )}
+                      </div>
+                    </div>
+                    {errors.password && (
+                      <Error>
+                        <p>{errors.password?.message}</p>
+                      </Error>
+                    )}
+                  </div>
+                  <div className='form-row'>
+                    <div className='form-input'>
+                      <label>
+                        Confirmar <span>Contraseña</span>
+                      </label>
+                      <input
+                        required
+                        type={confirmPassword ? 'text' : 'password'}
+                        placeholder='Contraseña'
+                        className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                        {...register('confirmPassword')}
+                      />
+                      <div className='eye' onClick={toggleConfirmPassword}>
+                        {confirmPassword ? (
+                          <FaEye></FaEye>
+                        ) : (
+                          <FaEyeSlash></FaEyeSlash>
+                        )}
+                      </div>
+                    </div>
+                    {errors.confirmPassword && (
+                      <Error>
+                        <p>{errors.confirmPassword?.message}</p>
+                      </Error>
+                    )}
+                  </div>
                 </div>
-                <p className="terms">Al iniciar sesión, aceptas los <span>términos, <br />
-                  condiciones y políticas de Gonvar</span></p>
+              )}
+              {!authLoader ? (
+                <PurpleButton2 type='submit'>Ingresar</PurpleButton2>
+              ) : (
+                <LoaderImage>
+                  <LoaderContain />
+                </LoaderImage>
+              )}
+
+              <div className='social-media-container'>
+                <div className='info'>
+                  <p style={{ textAlign: 'end' }}>
+                    O inicia sesión usando <br />
+                    tu cuenta de <span>Google</span> <br />o de{' '}
+                    <span>Facebook</span>
+                  </p>
+                </div>
+                <div className='socials'>
+                  <img
+                    src='../images/googleLogin.png'
+                    onClick={() => {
+                      googleLogin();
+                    }}
+                    alt=''
+                  />
+                  <img
+                    src='../images/facebookLogin.png'
+                    onClick={() => {
+                      loginWithFacebook();
+                    }}
+                    alt=''
+                  />
+                </div>
+                <p className='terms'>
+                  Al iniciar sesión, aceptas los{' '}
+                  <span>
+                    términos, <br />
+                    condiciones y políticas de Gonvar
+                  </span>
+                </p>
               </div>
             </form>
-            <div className="imgResp">
-              <div className="rightArm">
-                <div className="circle" />
-                <img className="imgRight" src="../images/unas_lila.png" alt="" />
+            <div className='imgResp'>
+              <div className='rightArm'>
+                <div className='circle' />
+                <img
+                  className='imgRight'
+                  src='../images/unas_lila.png'
+                  alt=''
+                />
               </div>
-              <img className="imgLeft" src="../images/mano1.png" alt="" />
+              <img className='imgLeft' src='../images/mano1.png' alt='' />
             </div>
           </div>
-        </LoginBackground >
-
+        </LoginBackground>
       ) : (
-
-        <LoginBackground style={{ justifyContent: "center", alignItems: "center" }}>
+        <LoginBackground
+          style={{ justifyContent: 'center', alignItems: 'center' }}
+        >
           <LoaderImage>
             <LoaderContain />
           </LoaderImage>
         </LoginBackground>
       )}
-      <ComeFromModal user={user} show={showUpdateComeFrom} onHide={closeUpdate} />
+      <ComeFromModal
+        user={user}
+        show={showUpdateComeFrom}
+        onHide={closeUpdate}
+      />
       <ModalForgot showForgot={showForgot} setShowForgot={setShowForgot} />
       <ErrorModal show={show} setShow={setShow} error={errorMsg} />
     </>
-  )
-}
+  );
+};
 export default Login;

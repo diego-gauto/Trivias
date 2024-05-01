@@ -1,4 +1,4 @@
-import styles from "./inputApellido.module.css";
+import styles from './inputApellido.module.css';
 
 const InputApellido = (props: any) => {
   const { inputs } = styles;
@@ -6,11 +6,11 @@ const InputApellido = (props: any) => {
 
   return (
     <div className={inputs}>
-      <label htmlFor="nombre">{label}</label>
+      <label htmlFor='nombre'>{label}</label>
       <input
-        type="text"
+        type='text'
         placeholder={placeholder}
-        name="nombre"
+        name='nombre'
         value={value}
         onChange={onChange}
         onBlur={onBlur}
@@ -21,6 +21,3 @@ const InputApellido = (props: any) => {
 };
 
 export default InputApellido;
-
-
-

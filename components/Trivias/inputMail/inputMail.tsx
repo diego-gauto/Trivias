@@ -1,4 +1,4 @@
-import styles from "./inputMail.module.css";
+import styles from './inputMail.module.css';
 
 const InputMail = (props: any) => {
   const { inputs } = styles;
@@ -6,11 +6,11 @@ const InputMail = (props: any) => {
 
   return (
     <div className={inputs}>
-      <label htmlFor="nombre">{label}</label>
+      <label htmlFor='nombre'>{label}</label>
       <input
-        type="text"
+        type='text'
         placeholder={placeholder}
-        name="nombre"
+        name='nombre'
         value={value}
         onChange={onChange}
         onBlur={onBlur}

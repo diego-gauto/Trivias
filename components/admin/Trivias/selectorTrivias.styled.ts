@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const OptionText = styled.div`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 22px;
@@ -43,7 +43,7 @@ export const SelectorTriviasButton = styled.div`
   height: 74px;
   border: 0;
   cursor: pointer;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   font-style: normal;

@@ -1,5 +1,5 @@
-import { ModalHeader } from "react-bootstrap";
-import styled from "styled-components";
+import { ModalHeader } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ModContainer = styled.div`
   @font-face {
@@ -19,7 +19,7 @@ export const Container = styled.div`
 `;
 export const Title = styled(ModalHeader)`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   border: none;
   padding: 0;
@@ -35,14 +35,14 @@ export const InputContain = styled.div`
   gap: 5px;
   label {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #8e2de2;
     font-weight: 600;
     margin: 0;
   }
   input {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding-inline: 20px;
     padding-block: 10px;
     width: 100%;
@@ -54,7 +54,7 @@ export const InputContain = styled.div`
   }
   select {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding-inline: 20px;
     padding-block: 10px;
     width: 100%;
@@ -66,7 +66,7 @@ export const InputContain = styled.div`
   }
   textarea {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-align: justify;
     padding-block: 10px;
     padding-inline: 20px;
@@ -87,13 +87,13 @@ export const ItemContain = styled.div`
 `;
 export const Text = styled.p`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: 0;
 `;
 export const Text2 = styled.p`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #8e2de2;
   font-weight: 600;
   margin: 0;
@@ -104,7 +104,7 @@ export const ButtonContain = styled.div`
   justify-content: center;
   button {
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding-block: 15px;
     padding-inline: 25px;
     background: #6717cd;

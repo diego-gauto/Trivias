@@ -1,4 +1,4 @@
-.beneficiosContainer{
+.beneficiosContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,59 +6,55 @@
   background-color: #ece7f2;
 }
 
-.beneficiosContainer H2{
-  flex:1;
-  margin:0;
-  font-family: "Montserrat";
+.beneficiosContainer H2 {
+  flex: 1;
+  margin: 0;
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 44px;
   line-height: 50px;
   text-align: center;
 
-  color: #992EEA;
+  color: #992eea;
 }
 
-.beneficiosContainer .containerTitle{
+.beneficiosContainer .containerTitle {
   position: relative;
   display: flex;
   align-items: center;
 
+  .titulo {
+  }
 
-
-    .titulo {
-    }
-
-    .img {
-      width: 200px;
-      height: 100%;
-      position: relative;
-      top:-5px
-    }
-    
+  .img {
+    width: 200px;
+    height: 100%;
+    position: relative;
+    top: -5px;
+  }
 }
 
-.beneficiosContainer p{
-
-  margin: 2% 0  13px 0;
-  font-family: "Montserrat";
+.beneficiosContainer p {
+  margin: 2% 0 13px 0;
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
   line-height: 25px;
-  text-align:start;
+  text-align: start;
   color: #520795;
 }
 
-.beneficiosContainer .comienza{
-  color: #992EEA;
+.beneficiosContainer .comienza {
+  color: #992eea;
 }
 
-.beneficiosContainer .width90{
+.beneficiosContainer .width90 {
   max-width: 90%;
 }
 
-.beneficiosContainer .buttonContainer{
+.beneficiosContainer .buttonContainer {
   text-decoration: none;
   display: flex;
   justify-content: space-between;
@@ -67,7 +63,7 @@
 }
 
 .beneficiosContainer button {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
@@ -90,47 +86,43 @@
 }
 
 @media screen and (max-width: 934px) {
-
-  .beneficiosContainer{
+  .beneficiosContainer {
     padding-top: 35px;
   }
 
-  .beneficiosContainer .containerTitle{
+  .beneficiosContainer .containerTitle {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-      .titulo {
-        max-width: 90%;
-      }
-  
-      .img {
-        top: -60px;
-      }
-      
+    .titulo {
+      max-width: 90%;
+    }
+
+    .img {
+      top: -60px;
+    }
   }
 }
 
 @media screen and (max-width: 800px) {
-
-  .beneficiosContainer .width80{
+  .beneficiosContainer .width80 {
     max-width: 100%;
   }
 
-  .centrado{
+  .centrado {
     padding-left: 0;
     display: flex;
-    justify-content: center;  }
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 491px) {
-
-  .beneficiosContainer .containerTitle{
-      .titulo {
-        font-size: 35px;
-        line-height: 40px;
-      }
-      
+  .beneficiosContainer .containerTitle {
+    .titulo {
+      font-size: 35px;
+      line-height: 40px;
+    }
   }
 }

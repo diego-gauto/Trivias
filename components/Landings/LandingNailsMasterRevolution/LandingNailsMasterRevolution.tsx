@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import Countdown from "react-countdown";
+import Countdown from 'react-countdown';
 import {
   BsChevronDown,
   BsChevronLeft,
   BsChevronRight,
   BsChevronUp,
-} from "react-icons/bs";
-import { useMediaQuery } from "react-responsive";
+} from 'react-icons/bs';
+import { useMediaQuery } from 'react-responsive';
 
-import router from "next/router";
-import { Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
+import router from 'next/router';
+import { Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
   NAilS_REVOLUTION_FORM,
@@ -23,12 +23,12 @@ import {
   PREVIEW_PATH,
   PURCHASE_PATH,
   SIGNUP_PATH,
-} from "../../../constants/paths";
-import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
-import { getGenericQueryResponse, getLandingReviewApi } from "../../api/admin";
-import { getUserApi } from "../../api/users";
-import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
-import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
+} from '../../../constants/paths';
+import { downloadFileWithStoragePath } from '../../../store/actions/LandingActions';
+import { getGenericQueryResponse, getLandingReviewApi } from '../../api/admin';
+import { getUserApi } from '../../api/users';
+import { SlideModule_1 } from '../../Home/Module5_1/SlideModule_1/SlideModule_1';
+import MaterialesModal from '../LandingNailsMaster/MaterialesModal';
 import {
   arita_fondo_azul,
   icon_1,
@@ -48,8 +48,8 @@ import {
   TEMARIO_ARRAY_1,
   TEMARIO_ARRAY_2,
   mujer_fondo_azul_2,
-} from "./constants";
-import { ITemario } from "./ILandingNailsMasterRevolution";
+} from './constants';
+import { ITemario } from './ILandingNailsMasterRevolution';
 import {
   EightSection,
   EleventhSection,
@@ -67,39 +67,39 @@ import {
   ThirdSection,
   ThirteenSection,
   TwelveSection,
-} from "./LandingNailsMasterRevolution.styled";
-import { RewardComponent } from "../Components/Reward";
-import { haveAccess } from "../../GlobalFunctions";
+} from './LandingNailsMasterRevolution.styled';
+import { RewardComponent } from '../Components/Reward';
+import { haveAccess } from '../../GlobalFunctions';
 
-const pointWatsap = "/images/landing_suscription/point_at_button.png";
-const watsapOut = "/images/landing_suscription/whatsapp_outline.png";
-const arita = "/images/landing_nails_master/arita-gonvar.png";
-const cert = "/images/landing_nails_master/certificado.png";
-const devices = "/images/landing_nails_master/devices.png";
-const rewards = "/images/landing_suscription/rewardCircle.png";
-const pointReward = "/images/landing_suscription/star.png";
-const pointRewardOut = "/images/landing_suscription/star_outline.png";
-const pincel = "/images/landing_nails_master/pincel.png";
-const adherentes = "/images/landing_nails_master/adherentes.png";
-const monomero = "/images/landing_nails_master/monomero.png";
-const colecciones = "/images/landing_nails_master/colecciones.png";
-const davinci = "/images/landing_nails_master/davinci.png";
-const mas = "/images/landing_nails_master/mas.png";
-const whitePoint = "/images/landing_nails_master/white_star.png";
-const whiteOut = "/images/landing_nails_master/white_outline.png";
-const nailPintura = "/images/landing_nails_master/nail_pintura.png";
-const nailYellow = "/images/landing_nails_master/nail_yellow.png";
-const nailWhite = "/images/landing_nails_master/nail-white.png";
-const linesB = "/images/landing_nails_master/lines-bottom.png";
-const manoBenefits = "/images/landing_nails_master/mano_benefits.png";
-const manuales = "/images/landing_nails_master/manuales.png";
-const manoCosto = "/images/landing_nails_master/mano_costo.png";
-const chica = "/images/landing_nails_master/chica.png";
-const linesL = "/images/landing_nails_master/lines-left.png";
-const linesR = "/images/landing_nails_master/lines-right.png";
-const stars = "/images/landing_nails_master/estrellas.png";
-const linesB2 = "/images/landing_nails_master/lines-bottom2.png";
-const gPlus = "/images/pay_plans/G+.png";
+const pointWatsap = '/images/landing_suscription/point_at_button.png';
+const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
+const arita = '/images/landing_nails_master/arita-gonvar.png';
+const cert = '/images/landing_nails_master/certificado.png';
+const devices = '/images/landing_nails_master/devices.png';
+const rewards = '/images/landing_suscription/rewardCircle.png';
+const pointReward = '/images/landing_suscription/star.png';
+const pointRewardOut = '/images/landing_suscription/star_outline.png';
+const pincel = '/images/landing_nails_master/pincel.png';
+const adherentes = '/images/landing_nails_master/adherentes.png';
+const monomero = '/images/landing_nails_master/monomero.png';
+const colecciones = '/images/landing_nails_master/colecciones.png';
+const davinci = '/images/landing_nails_master/davinci.png';
+const mas = '/images/landing_nails_master/mas.png';
+const whitePoint = '/images/landing_nails_master/white_star.png';
+const whiteOut = '/images/landing_nails_master/white_outline.png';
+const nailPintura = '/images/landing_nails_master/nail_pintura.png';
+const nailYellow = '/images/landing_nails_master/nail_yellow.png';
+const nailWhite = '/images/landing_nails_master/nail-white.png';
+const linesB = '/images/landing_nails_master/lines-bottom.png';
+const manoBenefits = '/images/landing_nails_master/mano_benefits.png';
+const manuales = '/images/landing_nails_master/manuales.png';
+const manoCosto = '/images/landing_nails_master/mano_costo.png';
+const chica = '/images/landing_nails_master/chica.png';
+const linesL = '/images/landing_nails_master/lines-left.png';
+const linesR = '/images/landing_nails_master/lines-right.png';
+const stars = '/images/landing_nails_master/estrellas.png';
+const linesB2 = '/images/landing_nails_master/lines-bottom2.png';
+const gPlus = '/images/pay_plans/G+.png';
 let views = new Map<number, boolean>();
 views.set(1, false);
 views.set(2, false);
@@ -110,7 +110,7 @@ views.set(6, false);
 views.set(7, false);
 views.set(8, false);
 
-type Origin = "facebook" | "google" | "tiktok";
+type Origin = 'facebook' | 'google' | 'tiktok';
 
 interface ILandingNailsRevolution {
   type?: Origin;
@@ -120,10 +120,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   const [ver, setver] = useState(true);
   const [verMat, setverMat] = useState(false);
   const [reviews, setReviews] = useState([]);
-  const responsive850 = useMediaQuery({ query: "(max-width: 850px)" });
-  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
+  const responsive850 = useMediaQuery({ query: '(max-width: 850px)' });
+  const responsive500 = useMediaQuery({ query: '(max-width: 500px)' });
   const [showModules, setShowModules] = useState<boolean>(false);
-  const button_text = "Solicitar beca";
+  const button_text = 'Solicitar beca';
   const toggleModules = () => {
     setShowModules(!showModules);
   };
@@ -167,43 +167,49 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
 
   const handleRedirection = async () => {
     if (type) {
-      if (type === "facebook") {
+      if (type === 'facebook') {
         router.push(NAilS_REVOLUTION_FORM);
       }
-      if (type === "google") {
+      if (type === 'google') {
         router.push(NAilS_REVOLUTION_FORM_GOOGLE);
       }
-      if (type === "tiktok") {
+      if (type === 'tiktok') {
         router.push(NAilS_REVOLUTION_FORM_TT);
       }
       return;
     } else {
-
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
 
       if (email === null) {
-        localStorage.setItem("nailMaster", "true");
+        localStorage.setItem('nailMaster', 'true');
         router.push(SIGNUP_PATH);
         return;
       }
 
       interface IUser {
-        user_id: number
-        level: number
-        role: string
-        method: string
-        final_date: number
+        user_id: number;
+        level: number;
+        role: string;
+        method: string;
+        final_date: number;
       }
 
       try {
         const userIdQuery = `SELECT id FROM users WHERE email LIKE '${email}';`;
         const response = await getGenericQueryResponse(userIdQuery);
-        const userId = response.data.data[0]["id"];
-        const queryUserData = `select user_id, level, role, method, final_date from users as u inner join memberships as m on m.user_id = u.id where user_id = ${userId}; `
+        const userId = response.data.data[0]['id'];
+        const queryUserData = `select user_id, level, role, method, final_date from users as u inner join memberships as m on m.user_id = u.id where user_id = ${userId}; `;
         const responseUserData = await getGenericQueryResponse(queryUserData);
         const user = responseUserData.data.data[0] as IUser;
         console.log({ user });
-        if (haveAccess(user.level, user.final_date, user.role as any, user.method as any)) {
+        if (
+          haveAccess(
+            user.level,
+            user.final_date,
+            user.role as any,
+            user.method as any,
+          )
+        ) {
           router.push(PREVIEW_PATH);
         } else {
           router.push(PLAN_PATH);
@@ -215,34 +221,34 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   };
 
   const redirectToWhatsAppChat = () => {
-    const phoneNumber = "+52 1 55 3893 3134";
-    const formattedPhoneNumber = phoneNumber.replace(/\D/g, "");
+    const phoneNumber = '+52 1 55 3893 3134';
+    const formattedPhoneNumber = phoneNumber.replace(/\D/g, '');
     const url = `https://wa.me/${formattedPhoneNumber}`;
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   };
   const checkProgress = () => {
     const oneDay = 24 * 60 * 60 * 1000;
-    const firstDate = new Date("13/04/2023 23:00:00"); //final
+    const firstDate = new Date('13/04/2023 23:00:00'); //final
     const secondDate = new Date(); //today
     //Fechas pa calar
     // const firstDate = new Date('10/13/2023 23:59:00');
     // const secondDate = new Date('10/09/2023 00:00:00');
     const diffDays = Math.floor(
-      Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
+      Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay),
     );
     let returnValue = {
       x100: 80,
-      texto: "CUPO CASI AGOTADO",
+      texto: 'CUPO CASI AGOTADO',
     };
     return returnValue;
   };
 
-  useEffect(() => { }, [setver]);
+  useEffect(() => {}, [setver]);
 
   return (
     <SuscriptionContain>
       <FirstSection>
-        <div className="mt-3 fechas">
+        <div className='mt-3 fechas'>
           <h4>
             <b>Actualización 2024</b>
             <br />
@@ -253,94 +259,95 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <Countdown
             date={new Date(2024, 4, 6)}
             renderer={(props) => (
-              <div className="countdown">
+              <div className='countdown'>
                 <h2>TIEMPO RESTANTE</h2>
-                <div className="time">
-                  <div className="countdown-block">
-                    <p className="tiempo">
+                <div className='time'>
+                  <div className='countdown-block'>
+                    <p className='tiempo'>
                       {props.days < 10 && 0}
                       {props.days}
                     </p>
-                    <p className="sub">DIAS</p>
+                    <p className='sub'>DIAS</p>
                   </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
+                  <div className='countdown-block'>
+                    <p className='tiempo'>
                       {props.hours < 10 && 0}
                       {props.hours}
                     </p>
-                    <p className="sub">HORAS</p>
+                    <p className='sub'>HORAS</p>
                   </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
+                  <div className='countdown-block'>
+                    <p className='tiempo'>
                       {props.minutes < 10 && 0}
                       {props.minutes}
                     </p>
-                    <p className="sub">MINUTOS</p>
+                    <p className='sub'>MINUTOS</p>
                   </div>
-                  <div className="countdown-block">
-                    <p className="tiempo">
+                  <div className='countdown-block'>
+                    <p className='tiempo'>
                       {props.seconds < 10 && 0}
                       {props.seconds}
                     </p>
-                    <p className="sub">SEGUNDOS</p>
+                    <p className='sub'>SEGUNDOS</p>
                   </div>
                 </div>
               </div>
             )}
           />
-          <div className="progress-container">
+          <div className='progress-container'>
             <div
-              className={`progress-bar ${checkProgress().x100 >= 100 && "full"
-                }`}
+              className={`progress-bar ${
+                checkProgress().x100 >= 100 && 'full'
+              }`}
               style={
                 {
-                  "--progress": checkProgress().x100 + "%",
+                  '--progress': checkProgress().x100 + '%',
                 } as React.CSSProperties
               }
               progress-text={checkProgress().texto}
             />
           </div>
         </div>
-        <img src={nailPintura} className="left-img" />
-        <div className="space">
-          <p className="include-gonvar">
-            <img src={gPlus} alt="Gonvar logo" />
-            <span style={{ fontWeight: "bold", marginLeft: "16px" }}>
+        <img src={nailPintura} className='left-img' />
+        <div className='space'>
+          <p className='include-gonvar'>
+            <img src={gPlus} alt='Gonvar logo' />
+            <span style={{ fontWeight: 'bold', marginLeft: '16px' }}>
               Incluido en Gonvar+
             </span>
           </p>
-          <h2 className="big-text">
+          <h2 className='big-text'>
             <b>Nail's Master </b>
             <br />
-            <b className="blue-gradient">Revolution</b>
+            <b className='blue-gradient'>Revolution</b>
           </h2>
-          <h2 className="subtitle">
+          <h2 className='subtitle'>
             <b>Aprende a aplicar uñas </b>
-            <b className="light-blue">desde cero.</b>
+            <b className='light-blue'>desde cero.</b>
           </h2>
         </div>
 
-        <img src={nailYellow} className="right-img-1" />
-        <img src={nailWhite} className="right-img-2" />
+        <img src={nailYellow} className='right-img-1' />
+        <img src={nailWhite} className='right-img-2' />
 
-        <div className="all-center">
-          <img src={stars} className="stars" />
-          <h3 className="space">
+        <div className='all-center'>
+          <img src={stars} className='stars' />
+          <h3 className='space'>
             <b>(5) 23,738 opiniones</b>
           </h3>
         </div>
-        <h4 className="extra-margin">
+        <h4 className='extra-margin'>
           <b>El curso de aplicación de uñas </b>
-          <b className="light-blue">
+          <b className='light-blue'>
             {responsive850 && <br />}más exitoso de Latinoámerica.
             <br />
             {responsive850 && <br />}
             Más de 70,000 alumnas{responsive850 && <br />}
-          </b>{" "}
+          </b>{' '}
           <b>han aprendido con nosotros.</b>
         </h4>
         <button
-          className="space btn left-right"
+          className='space btn left-right'
           onClick={() => handleRedirection()}
           style={{ marginBottom: 75 }}
         >
@@ -348,73 +355,73 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         </button>
       </FirstSection>
       <SecondSection>
-        <div className="data">
-          <p className="text">
+        <div className='data'>
+          <p className='text'>
             Ahora disponible en tu suscripción Gonvar+ <br />
             Más de 70 cursos de uñas y belleza incluídos.
           </p>
         </div>
-        <div className="info-top">
-          <div className="text">
-            <h2 className="title bold dark-blue">
+        <div className='info-top'>
+          <div className='text'>
+            <h2 className='title bold dark-blue'>
               <b>
                 Conviértete en profesional <br /> con nuestro programa,
               </b>
               <br />
-              <b className="subtitle purple">
+              <b className='subtitle purple'>
                 aprenderás a aplicar uñas de manera:
               </b>
             </h2>
-            <div className="uñas">
-              <div className="uñas-q">
+            <div className='uñas'>
+              <div className='uñas-q'>
                 <div
-                  className={`uñas-q-container ${views.get(5) ? "open" : ""}`}
+                  className={`uñas-q-container ${views.get(5) ? 'open' : ''}`}
                   onClick={() => verQ(5)}
                 >
-                  <div className="q">
+                  <div className='q'>
                     <h2>
                       <b>FUNCIONAL</b>
                     </h2>
                     {!!views.get(5) ? (
-                      <BsChevronUp className="icon" />
+                      <BsChevronUp className='icon' />
                     ) : (
-                      <BsChevronDown className="icon" />
+                      <BsChevronDown className='icon' />
                     )}
                   </div>
-                  <div className="border-top">
+                  <div className='border-top'>
                     <p>
                       <b>✅ Logra aplicaciones </b>
-                      <b className="dark-blue">útiles y cómodas.</b>
+                      <b className='dark-blue'>útiles y cómodas.</b>
                     </p>
                     <p>
                       <b>
                         ✅ Aplicaciones con las que puedas realizar todas tus
-                        actividades de manera sencilla, cómoda y con confianza,{" "}
+                        actividades de manera sencilla, cómoda y con confianza,{' '}
                       </b>
-                      <b className="dark-blue">
+                      <b className='dark-blue'>
                         sin riesgo a estropearlas o romperlas.
                       </b>
                     </p>
                   </div>
                 </div>
                 <div
-                  className={`uñas-q-container ${views.get(7) ? "open" : ""}`}
+                  className={`uñas-q-container ${views.get(7) ? 'open' : ''}`}
                   onClick={() => verQ(7)}
                 >
-                  <div className="q">
+                  <div className='q'>
                     <h2>
                       <b>SEGURA</b>
                     </h2>
                     {!!views.get(7) ? (
-                      <BsChevronUp className="icon" />
+                      <BsChevronUp className='icon' />
                     ) : (
-                      <BsChevronDown className="icon" />
+                      <BsChevronDown className='icon' />
                     )}
                   </div>
-                  <div className="border-top">
+                  <div className='border-top'>
                     <p>
-                      <b className="dark-blue">
-                        ✅ Aprende a realizar un diagnóstico inicial{" "}
+                      <b className='dark-blue'>
+                        ✅ Aprende a realizar un diagnóstico inicial{' '}
                       </b>
                       <b>
                         para determinar si puedes o no realizar una aplicación
@@ -422,20 +429,20 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                       </b>
                     </p>
                     <p>
-                      <b className="dark-blue">
+                      <b className='dark-blue'>
                         ✅ Conoce todas las medidas de higiene y seguridad
                       </b>
                       <b> en tu mesa de aplicación.</b>
                     </p>
                     <p>
-                      <b className="dark-blue">
-                        ✅ Aprende a evitar hongos y enfermedades{" "}
+                      <b className='dark-blue'>
+                        ✅ Aprende a evitar hongos y enfermedades{' '}
                       </b>
                       <b>en las uñas naturales de tus clientas.</b>
                     </p>
                     <p>
                       <b>✅ Aprende los</b>
-                      <b className="dark-blue"> lineamientos de acomodo </b>
+                      <b className='dark-blue'> lineamientos de acomodo </b>
                       <b>
                         de materiales para evitar riesgos de derrame y
                         quemaduras.
@@ -443,9 +450,9 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                       </b>
                     </p>
                     <p>
-                      ✅<b className="dark-blue"> Aprende el uso correcto</b>
+                      ✅<b className='dark-blue'> Aprende el uso correcto</b>
                       <b>
-                        {" "}
+                        {' '}
                         de los materiales químicos y medidas de protección
                         dérmica y respiratoria.
                       </b>
@@ -453,75 +460,75 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                   </div>
                 </div>
               </div>
-              <div className="uñas-q">
+              <div className='uñas-q'>
                 <div
-                  className={`uñas-q-container ${views.get(6) ? "open" : ""}`}
+                  className={`uñas-q-container ${views.get(6) ? 'open' : ''}`}
                   onClick={() => verQ(6)}
                 >
-                  <div className="q">
+                  <div className='q'>
                     <h2>
                       <b>ESTÉTICA</b>
                     </h2>
                     {!!views.get(6) ? (
-                      <BsChevronUp className="icon" />
+                      <BsChevronUp className='icon' />
                     ) : (
-                      <BsChevronDown className="icon" />
+                      <BsChevronDown className='icon' />
                     )}
                   </div>
-                  <div className="border-top">
+                  <div className='border-top'>
                     <p>
                       ✅<b> Logra aplicaciones </b>
-                      <b className="dark-blue">hermosas y detalladas.</b>
+                      <b className='dark-blue'>hermosas y detalladas.</b>
                     </p>
                     <p>
                       ✅
                       <b>
-                        {" "}
-                        Aprende a realizar aplicaciones realmente bellas y con{" "}
+                        {' '}
+                        Aprende a realizar aplicaciones realmente bellas y con{' '}
                       </b>
-                      <b className="dark-blue">lineamientos europeos.</b>
+                      <b className='dark-blue'>lineamientos europeos.</b>
                     </p>
                     <p>
                       ✅
-                      <b className="dark-blue">
-                        {" "}
-                        Conoce y domina las técnicas de limado de competencia,{" "}
+                      <b className='dark-blue'>
+                        {' '}
+                        Conoce y domina las técnicas de limado de competencia,{' '}
                       </b>
                       <b>
                         para lograr aplicaciones con estructuras simétricas y
                         con brillo
                       </b>
-                      <b className="dark-blue"> de alto impacto.</b>
+                      <b className='dark-blue'> de alto impacto.</b>
                     </p>
                   </div>
                 </div>
                 <div
-                  className={`uñas-q-container ${views.get(8) ? "open" : ""}`}
+                  className={`uñas-q-container ${views.get(8) ? 'open' : ''}`}
                   onClick={() => verQ(8)}
                 >
-                  <div className="q">
+                  <div className='q'>
                     <h2>
                       <b>DURADERA</b>
                     </h2>
                     {!!views.get(8) ? (
-                      <BsChevronUp className="icon" />
+                      <BsChevronUp className='icon' />
                     ) : (
-                      <BsChevronDown className="icon" />
+                      <BsChevronDown className='icon' />
                     )}
                   </div>
-                  <div className="border-top">
+                  <div className='border-top'>
                     <p>
                       ✅<b> Logra aplicaciones </b>
-                      <b className="dark-blue">
+                      <b className='dark-blue'>
                         con duración de más de 21 días.
                       </b>
                     </p>
                     <p>
                       ✅<b> Domina el </b>
-                      <b className="dark-blue">cero desprendimiento.</b>
+                      <b className='dark-blue'>cero desprendimiento.</b>
                     </p>
                     <p>
-                      ✅<b className="dark-blue"> Garantiza </b>
+                      ✅<b className='dark-blue'> Garantiza </b>
                       <b>que tus aplicaciones no se quiebren o se caigan.</b>
                     </p>
                   </div>
@@ -529,17 +536,17 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </div>
             </div>
           </div>
-          <img src={mujer_fondo_azul} className="img" />
+          <img src={mujer_fondo_azul} className='img' />
         </div>
-        <h2 className="h1 bold">
+        <h2 className='h1 bold'>
           Aprende desde cero y {responsive850 && <br />}
-          <b className="dark-blue no-bold">vive de tu pasión</b> <br /> por las
+          <b className='dark-blue no-bold'>vive de tu pasión</b> <br /> por las
           uñas acrílicas
         </h2>
-        <div className="info-cards all-center">
-          <div className="card">
-            <div className="adjust" style={{ paddingBlock: 23 }}>
-              <img src={icon_1} className="icon-shop" />
+        <div className='info-cards all-center'>
+          <div className='card'>
+            <div className='adjust' style={{ paddingBlock: 23 }}>
+              <img src={icon_1} className='icon-shop' />
             </div>
             <h4>Revisión y evaluación de prácticas</h4>
             <p>
@@ -547,36 +554,36 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               damos retroalimentación.
             </p>
           </div>
-          <div className="card">
-            <div className="adjust">
-              <img src={icon_2} className="icon-page" />
+          <div className='card'>
+            <div className='adjust'>
+              <img src={icon_2} className='icon-page' />
             </div>
             <h4>Certificado al terminar</h4>
             <p>
               Al finalizar tu curso, obtén un certificado oficial de la marca.
             </p>
           </div>
-          <div className="card">
-            <div className="adjust">
-              <img src={icon_3} className="icon-pc" />
+          <div className='card'>
+            <div className='adjust'>
+              <img src={icon_3} className='icon-pc' />
             </div>
             <h4>Asesorías Ilimitadas</h4>
             <p>Aprende a tu ritmo con nuestras más de 40 lecciones.</p>
           </div>
         </div>
-        <img src={linesB} className="bottom-l" />
+        <img src={linesB} className='bottom-l' />
       </SecondSection>
       <ThirdSection>
-        <div className="video-container">
-          <iframe src="https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1" />
+        <div className='video-container'>
+          <iframe src='https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1' />
         </div>
-        <div className="info-video">
+        <div className='info-video'>
           <h2>
-            <b className="title-text">Podrás acceder a</b>
+            <b className='title-text'>Podrás acceder a</b>
             <br />
-            <b className="big-title blue-gradient">más de 40 clases</b>
+            <b className='big-title blue-gradient'>más de 40 clases</b>
           </h2>
-          <p className="reg-text">
+          <p className='reg-text'>
             Además nuestro equipo estará disponible para ayudarte y resolver
             todas las dudas que tengas.
           </p>
@@ -584,39 +591,39 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <b>Sin limites mientras mantengas tu suscripción Gonvar+ activa.</b>
           </p>
           <button
-            className="btn left-right"
+            className='btn left-right'
             onClick={() => handleRedirection()}
           >
-            {type ? button_text : "Obtener acceso"}
+            {type ? button_text : 'Obtener acceso'}
           </button>
         </div>
       </ThirdSection>
       <FourthSection>
-        <div className="circle corner-left"></div>
-        <div className="image-quote">
+        <div className='circle corner-left'></div>
+        <div className='image-quote'>
           {!responsive850 && (
-            <p className="quote">
+            <p className='quote'>
               <i>
                 "Hago lo que me <br /> apasiona y disfruto <br /> enseñando a
                 otras"
               </i>
             </p>
           )}
-          <img src={arita} className="image" />
+          <img src={arita} className='image' />
         </div>
-        <div className="text">
-          <h2 className="dark-blue bold present">Te presentamos a</h2>
-          <div className="text-container">
-            <div className="header-contain">
-              <h2 className="big-title bold">Arita Gonvar</h2>
+        <div className='text'>
+          <h2 className='dark-blue bold present'>Te presentamos a</h2>
+          <div className='text-container'>
+            <div className='header-contain'>
+              <h2 className='big-title bold'>Arita Gonvar</h2>
             </div>
-            <p className="dark-blue italic">
+            <p className='dark-blue italic'>
               <b>
-                Ella te guiará paso a paso en el programa{" "}
+                Ella te guiará paso a paso en el programa{' '}
                 {responsive850 && <br />} Nails Master Revolution
               </b>
             </p>
-            <div className="sangria">
+            <div className='sangria'>
               <p>
                 <b>Instructora certificada</b> bajo {responsive850 && <br />}
                 estándares de aplicación de {responsive850 && <br />}uñas
@@ -626,8 +633,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <b>
                   Especialista en capacitación{responsive850 && <br />} para
                   principiantes,
-                </b>{" "}
-                estructura {responsive850 && <br />}profesional en escultural{" "}
+                </b>{' '}
+                estructura {responsive850 && <br />}profesional en escultural{' '}
                 {!responsive850 && <br />}y {responsive850 && <br />}máster en
                 técnicas y métodos {responsive850 && <br />}de enseñanza
                 teóricos-prácticos.
@@ -635,14 +642,14 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <p>
                 Creadora de la técnica {responsive850 && <br />}
                 <b>"Cero Desprendimiento en 4 Pasos"</b>
-                {responsive850 && <br />} y co-fundadora de la academia{" "}
+                {responsive850 && <br />} y co-fundadora de la academia{' '}
                 {!responsive850 && <br />}
                 de uñas {responsive850 && <br />}
                 <b>más grande de Latinoamerica.</b>
               </p>
             </div>
             {responsive850 && (
-              <p className="quote-resp">
+              <p className='quote-resp'>
                 <i>
                   "Hago lo que me apasiona <br />y disfruto enseñando a otras"
                 </i>
@@ -650,16 +657,16 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </p>
             )}
             {responsive850 && (
-              <div className="image-container">
-                <img src={arita_fondo_azul} className="image" />
+              <div className='image-container'>
+                <img src={arita_fondo_azul} className='image' />
               </div>
             )}
           </div>
         </div>
-        <div className="circle corner-right"></div>
+        <div className='circle corner-right'></div>
       </FourthSection>
       <Quote>
-        <p className="white">
+        <p className='white'>
           “Hago lo que me apasiona <br />
           y disfruto enseñando a otras”
           <br />
@@ -667,111 +674,111 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         </p>
       </Quote>
       <FifthSection>
-        <h2 className="text-blue">
-          Con <b className="blue">Nails Master Revolution</b> te
-          {responsive850 && <br />} daremos{" "}
-          <b className="blue">
+        <h2 className='text-blue'>
+          Con <b className='blue'>Nails Master Revolution</b> te
+          {responsive850 && <br />} daremos{' '}
+          <b className='blue'>
             beneficios
             {!responsive850 && <br />} exclusivos
-          </b>{" "}
+          </b>{' '}
           y {responsive850 && <br />}tendrás acceso a la comunidad
           {responsive850 && <br />} de {!responsive850 && <br />}estudiantes y
-          profesionales {responsive850 && <br />}de la industria de las uñas{" "}
+          profesionales {responsive850 && <br />}de la industria de las uñas{' '}
           <br />
-          <b className="blue">más grande de Latinoamérica.</b>
+          <b className='blue'>más grande de Latinoamérica.</b>
         </h2>
-        <div className="benefits-info">
-          <h2 className="morado">Beneficios exclusivos</h2>
-          <div className="info-row">
-            <div className="info-content">
-              <img src={icon_calendar} className="icon" />
+        <div className='benefits-info'>
+          <h2 className='morado'>Beneficios exclusivos</h2>
+          <div className='info-row'>
+            <div className='info-content'>
+              <img src={icon_calendar} className='icon' />
               <h5>
                 Acceso a 65 cursos adicionales <br />
                 <b>y beneficios incluídos en Gonvar+</b>
               </h5>
             </div>
-            <div className="info-content info-side">
-              <img src={icon_calendar} className="icon" />
+            <div className='info-content info-side'>
+              <img src={icon_calendar} className='icon' />
               <h5>
                 <b>Instructora certificada</b>
               </h5>
             </div>
           </div>
-          <div className="info-row gray">
-            <div className="info-content">
-              <img src={icon_book_blue} className="icon" />
+          <div className='info-row gray'>
+            <div className='info-content'>
+              <img src={icon_book_blue} className='icon' />
               <h5>
                 Más de 40 lecciones completas,
                 <b>{responsive500 && <br />} actualizadas al 2023</b>
               </h5>
             </div>
-            <div className="info-content info-side">
-              <img src={icon_bookmark} className="icon" />
+            <div className='info-content info-side'>
+              <img src={icon_bookmark} className='icon' />
               <h5>
                 <b>Biblioteca exclusiva</b>
               </h5>
             </div>
           </div>
-          <div className="info-row">
-            <div className="info-content">
-              <img src={icon_file_blue} className="icon" />
+          <div className='info-row'>
+            <div className='info-content'>
+              <img src={icon_file_blue} className='icon' />
               <h5>
-                Revisión de prácticas y{" "}
+                Revisión de prácticas y{' '}
                 <b>{responsive500 && <br />} asesorías ilimitadas</b>
               </h5>
             </div>
-            <div className="info-content info-side">
-              <img src={icon_checkmark} className="icon" />
+            <div className='info-content info-side'>
+              <img src={icon_checkmark} className='icon' />
               <h5>
                 <b>Soporte prioritario</b> a dudas de tus clases
               </h5>
             </div>
           </div>
-          <div className="info-row gray">
-            <div className="info-content">
-              <img src={icon_graph} className="icon" />
+          <div className='info-row gray'>
+            <div className='info-content'>
+              <img src={icon_graph} className='icon' />
               <h5>
                 <b>Curso definitivo</b> con las técnicas
                 {responsive500 && <br />} más solicitadas
               </h5>
             </div>
-            <div className="info-content info-side">
-              <img src={icon_bulb} className="icon" />
+            <div className='info-content info-side'>
+              <img src={icon_bulb} className='icon' />
               <h5>
-                Programa enfocado {responsive500 && <br />}al{" "}
+                Programa enfocado {responsive500 && <br />}al{' '}
                 <b>Emprendimiento</b>
               </h5>
             </div>
           </div>
-          <div className="info-row">
-            <div className="info-content">
-              <img src={icon_3} className="icon" />
+          <div className='info-row'>
+            <div className='info-content'>
+              <img src={icon_3} className='icon' />
               <h5>
-                <b>Certificado oficial</b> al terminar el{" "}
-                {responsive500 && <br />}curso, con folio único verificado{" "}
+                <b>Certificado oficial</b> al terminar el{' '}
+                {responsive500 && <br />}curso, con folio único verificado{' '}
                 {responsive500 && <br />}(FUV)
               </h5>
             </div>
-            <div className="info-content info-side">
-              <img src={icon_clock} className="icon" />
+            <div className='info-content info-side'>
+              <img src={icon_clock} className='icon' />
               <h5>
                 <b>Horarios flexible,</b> nuestro{responsive500 && <br />} curso
                 es 100% online
               </h5>
             </div>
           </div>
-          <img src={manoBenefits} className="back-hands" />
+          <img src={manoBenefits} className='back-hands' />
         </div>
       </FifthSection>
       <SixthSection>
-        <h2 className="white h1">
+        <h2 className='white h1'>
           <b>
-            Todo lo que <span className="light-blue">incluye</span> este{" "}
+            Todo lo que <span className='light-blue'>incluye</span> este{' '}
             {responsive850 && <br />}increíble programa
           </b>
         </h2>
         {!responsive850 ? (
-          <p className="h4">
+          <p className='h4'>
             <b>
               Para complementar tu aprendizaje, al inscribirte a Nails
               MasterRevolution <br />
@@ -780,114 +787,114 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             </b>
           </p>
         ) : (
-          <p className="h4">
+          <p className='h4'>
             Para complementar tu aprendizaje, <br />
             al inscribirte a Nails MasterRevolution
             <br />
             <b>
-              {" "}
+              {' '}
               obtendrás cuadernillos, manuales y textos
               <br />
-            </b>{" "}
+            </b>{' '}
             que te ayudarán en tu carrera de Nail Artist.
           </p>
         )}
-        <div className="program-course">
-          <div className="course-container">
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+        <div className='program-course'>
+          <div className='course-container'>
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Curso {responsive850 && "Nails Master Revolution"}
-                {responsive850 ? <br /> : " | "}
-                <span className="light-blue"> Costo real: $2,399.00 MXN</span>
+                Curso {responsive850 && 'Nails Master Revolution'}
+                {responsive850 ? <br /> : ' | '}
+                <span className='light-blue'> Costo real: $2,399.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
                 <b>Certificado</b> físico y digital (no incluye envío)
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $490.00 MXN</span>
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $490.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                <b>Comunidad exclusiva</b> en What'sApp{" "}
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $239.00 MXN</span>
+                <b>Comunidad exclusiva</b> en What'sApp{' '}
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $239.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Manual <b>La Perla Perfecta</b> {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $297.00 MXN</span>
+                Manual <b>La Perla Perfecta</b> {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $297.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Manual <b>Química del Producto nivel básico</b>{" "}
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $497.00 MXN</span>
+                Manual <b>Química del Producto nivel básico</b>{' '}
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $497.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Revista Gonvar: <b>10 diseños increibles</b>{" "}
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $649.00 MXN</span>
+                Revista Gonvar: <b>10 diseños increibles</b>{' '}
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $649.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Manual <b>Obtén tus primeros clientes</b>{" "}
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $649.00 MXN</span>
+                Manual <b>Obtén tus primeros clientes</b>{' '}
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $649.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_book} className="icon" />
+            <div className='course-detail'>
+              <img src={icon_book} className='icon' />
               <p>
-                Manual <b>Los secretos del gel semipermanente</b>{" "}
-                {responsive850 ? <br /> : " |"}
-                <span className="light-blue"> Costo real: $649.00 MXN</span>
+                Manual <b>Los secretos del gel semipermanente</b>{' '}
+                {responsive850 ? <br /> : ' |'}
+                <span className='light-blue'> Costo real: $649.00 MXN</span>
               </p>
             </div>
-            <div className="course-detail">
-              <img src={icon_file} className="icon" />
-              <div className="d-block text-start">
+            <div className='course-detail'>
+              <img src={icon_file} className='icon' />
+              <div className='d-block text-start'>
                 <p>
-                  Manual{" "}
+                  Manual{' '}
                   <b>
                     Cómo obtener un documento oficial que respalde mi vocación.
-                  </b>{" "}
+                  </b>{' '}
                   <br />
-                  <span className="light-blue"> Costo real: $850.00 MXN</span>
+                  <span className='light-blue'> Costo real: $850.00 MXN</span>
                 </p>
               </div>
             </div>
           </div>
-          <img src={manuales} className="ghost" />
+          <img src={manuales} className='ghost' />
         </div>
       </SixthSection>
       <SeventhSection>
-        <div className="cost-body">
-          <div className="cost-info">
-            <img src={manoCosto} className="left-img" />
-            <img src={mujer_fondo_azul_2} className="chica-resp" />
-            <div className="center">
-              <h2 className="red h2">
+        <div className='cost-body'>
+          <div className='cost-info'>
+            <img src={manoCosto} className='left-img' />
+            <img src={mujer_fondo_azul_2} className='chica-resp' />
+            <div className='center'>
+              <h2 className='red h2'>
                 Costo total real: {responsive850 && <br />}
                 <del>$6,719.00 MXN</del>
               </h2>
-              <h2 className="dark-blue h1">
-                <b>Precio de Lanzamiento {!responsive850 && "con beca"}</b>
+              <h2 className='dark-blue h1'>
+                <b>Precio de Lanzamiento {!responsive850 && 'con beca'}</b>
               </h2>
-              <h2 className="green h1">Sólo $1,599.00 MXN</h2>
+              <h2 className='green h1'>Sólo $1,599.00 MXN</h2>
               {/* <p className="">Válido para las primeras 500 personas</p> */}
               <h2>
                 <b>
@@ -896,7 +903,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 </b>
               </h2>
               <button
-                className="btn right-left"
+                className='btn right-left'
                 onClick={() => handleRedirection()}
               >
                 {type ? (
@@ -909,122 +916,122 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 )}
               </button>
             </div>
-            <img src={chica} className="right-img" />
+            <img src={chica} className='right-img' />
           </div>
         </div>
       </SeventhSection>
       <EightSection>
-        <img src={linesL} className="left-l" />
-        <div className="left-side">
-          <h2 className="light-blue h1">Certificado oficial</h2>
+        <img src={linesL} className='left-l' />
+        <div className='left-side'>
+          <h2 className='light-blue h1'>Certificado oficial</h2>
           {!responsive850 ? (
             <h2>
-              En Gonvar cada uno de nuestros certificados cuenta con{" "}
-              <b className="light-blue">
+              En Gonvar cada uno de nuestros certificados cuenta con{' '}
+              <b className='light-blue'>
                 FUV
                 <i>(Folio único verificado) </i>
-              </b>{" "}
+              </b>{' '}
               que autentifica y valida que tomaste el curso con nosotros.
             </h2>
           ) : (
-            <h2 className="text-certificate">
+            <h2 className='text-certificate'>
               En Gonvar cada uno de nuestros <br />
-              certificados cuenta con{" "}
-              <b className="light-blue">
+              certificados cuenta con{' '}
+              <b className='light-blue'>
                 FUV
                 <i>
-                  {" "}
+                  {' '}
                   (Folio <br />
-                  único verificado){" "}
+                  único verificado){' '}
                 </i>
-              </b>{" "}
+              </b>{' '}
               <b>
-                {" "}
+                {' '}
                 que autentifica y <br />
-                valida{" "}
+                valida{' '}
               </b>
               que tomaste el curso con <br />
               nosotros.
             </h2>
           )}
         </div>
-        {responsive850 && <img src={cert} className="float-bottom" />}
-        <div className="right-side">
-          <img src={cert} className="float-bottom" />
+        {responsive850 && <img src={cert} className='float-bottom' />}
+        <div className='right-side'>
+          <img src={cert} className='float-bottom' />
         </div>
-        <img src={linesR} className="right-l" />
+        <img src={linesR} className='right-l' />
       </EightSection>
 
       <NinthSection>
-        <div className="all-center title">
-          <img src={rewards} className="me-3" />
-          <h2 className="h1">
+        <div className='all-center title'>
+          <img src={rewards} className='me-3' />
+          <h2 className='h1'>
             CENTRO DE {responsive500 && <br />}
             <b>RECOMPENSAS</b>
           </h2>
         </div>
-        <div className="rewards-container all-center">
+        <div className='rewards-container all-center'>
           {!responsive850 ? (
-            <div className="points-rewards">
-              <div className="display-row">
-                <div className="card card-style">
+            <div className='points-rewards'>
+              <div className='display-row'>
+                <div className='card card-style'>
                   <img src={pincel} />
-                  <div className="points">Necesitas 1000 pts</div>
+                  <div className='points'>Necesitas 1000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={adherentes} />
-                  <div className="points">Necesitas 3000 pts</div>
+                  <div className='points'>Necesitas 3000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={monomero} />
-                  <div className="points">Necesitas 4000 pts</div>
+                  <div className='points'>Necesitas 4000 pts</div>
                 </div>
               </div>
-              <div className="display-row">
-                <div className="card card-style">
+              <div className='display-row'>
+                <div className='card card-style'>
                   <img src={colecciones} />
-                  <div className="points">Necesitas 6000 pts</div>
+                  <div className='points'>Necesitas 6000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={davinci} />
-                  <div className="points">Necesitas 15,000 pts</div>
+                  <div className='points'>Necesitas 15,000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={mas} />
-                  <div className="points">Y mucho más...</div>
+                  <div className='points'>Y mucho más...</div>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="points-rewards">
-              <div className="display-row">
-                <div className="card card-style">
+            <div className='points-rewards'>
+              <div className='display-row'>
+                <div className='card card-style'>
                   <img src={pincel} />
-                  <div className="points">Necesitas 1000 pts</div>
+                  <div className='points'>Necesitas 1000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={adherentes} />
-                  <div className="points">Necesitas 3000 pts</div>
+                  <div className='points'>Necesitas 3000 pts</div>
                 </div>
               </div>
-              <div className="display-row">
-                <div className="card card-style">
+              <div className='display-row'>
+                <div className='card card-style'>
                   <img src={monomero} />
-                  <div className="points">Necesitas 4000 pts</div>
+                  <div className='points'>Necesitas 4000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={colecciones} />
-                  <div className="points">Necesitas 6000 pts</div>
+                  <div className='points'>Necesitas 6000 pts</div>
                 </div>
               </div>
-              <div className="display-row">
-                <div className="card card-style">
+              <div className='display-row'>
+                <div className='card card-style'>
                   <img src={davinci} />
-                  <div className="points">Necesitas 15,000 pts</div>
+                  <div className='points'>Necesitas 15,000 pts</div>
                 </div>
-                <div className="card card-style">
+                <div className='card card-style'>
                   <img src={mas} />
-                  <div className="points">Y mucho más...</div>
+                  <div className='points'>Y mucho más...</div>
                 </div>
               </div>
             </div>
@@ -1034,29 +1041,29 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       </NinthSection>
       <TenthSection>
         {!responsive850 ? (
-          <h2 className="h1 bold">
-            Conoce las <span className="light-blue">experiencias</span> de
+          <h2 className='h1 bold'>
+            Conoce las <span className='light-blue'>experiencias</span> de
             nuestras alumnas
           </h2>
         ) : (
-          <h2 className="h1 bold">
-            Más de <span className="light-blue">45,000</span>
+          <h2 className='h1 bold'>
+            Más de <span className='light-blue'>45,000</span>
             <br /> alumnas
           </h2>
         )}
 
-        <div className="experiences-container">
-          <div className="next swiper-prev">
-            <BsChevronLeft className="icon" />
+        <div className='experiences-container'>
+          <div className='next swiper-prev'>
+            <BsChevronLeft className='icon' />
           </div>
           <Swiper
-            className="experiences"
+            className='experiences'
             slidesPerView={3}
             spaceBetween={30}
             loop={true}
             navigation={{
-              nextEl: ".swiper-next",
-              prevEl: ".swiper-prev",
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
             }}
             modules={[Navigation]}
           >
@@ -1064,8 +1071,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               reviews.map((review: any, index: any) => {
                 return (
                   <SwiperSlide
-                    id={"slide" + index}
-                    key={review.username + "_ID"}
+                    id={'slide' + index}
+                    key={review.username + '_ID'}
                   >
                     <SlideModule_1
                       index={index}
@@ -1083,13 +1090,13 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           </Swiper>
 
           <Swiper
-            className="experiences resp"
+            className='experiences resp'
             slidesPerView={1}
             loop={true}
             spaceBetween={30}
             navigation={{
-              nextEl: ".swiper-next",
-              prevEl: ".swiper-prev",
+              nextEl: '.swiper-next',
+              prevEl: '.swiper-prev',
             }}
             modules={[Navigation]}
           >
@@ -1097,8 +1104,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               reviews.map((review: any, index: any) => {
                 return (
                   <SwiperSlide
-                    id={"slide" + index}
-                    key={review.username + "_ID"}
+                    id={'slide' + index}
+                    key={review.username + '_ID'}
                   >
                     <SlideModule_1
                       index={index}
@@ -1114,39 +1121,39 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 );
               })}
           </Swiper>
-          <div className="next swiper-next">
-            <BsChevronRight className="icon" />
+          <div className='next swiper-next'>
+            <BsChevronRight className='icon' />
           </div>
         </div>
       </TenthSection>
       <EleventhSection>
-        <img src={linesB} className="up-l" />
-        <h2 className="title-ppal bold">TEMARIO</h2>
+        <img src={linesB} className='up-l' />
+        <h2 className='title-ppal bold'>TEMARIO</h2>
         <h4>
-          Conoce todo lo que aprenderás {responsive850 && <br />}en{" "}
+          Conoce todo lo que aprenderás {responsive850 && <br />}en{' '}
           <b>Nail Master Revolution</b>
         </h4>
         <div
           className={
-            "subject-container " + (!showModules ? "resp-class" : "un-resp")
+            'subject-container ' + (!showModules ? 'resp-class' : 'un-resp')
           }
         >
-          <div className="side side-right">
+          <div className='side side-right'>
             {TEMARIO_ARRAY_1.map((temario: ITemario, index: number) => {
               return (
-                <div className="subject" key={"Temario_1_" + index}>
-                  <h3 className="title">
+                <div className='subject' key={'Temario_1_' + index}>
+                  <h3 className='title'>
                     <b>
-                      <span className="p-pink">Módulo {temario.number} </span>
+                      <span className='p-pink'>Módulo {temario.number} </span>
                       {temario.title}
                     </b>
                   </h3>
                   {temario.content.map((contenido: string, idx: number) => {
                     return (
-                      <h5 key={"contenido_1_" + idx}>
-                        <b className="p-pink no-bold">
-                          {!responsive850 ? `Lección ${idx + 1}.` : ""}
-                        </b>{" "}
+                      <h5 key={'contenido_1_' + idx}>
+                        <b className='p-pink no-bold'>
+                          {!responsive850 ? `Lección ${idx + 1}.` : ''}
+                        </b>{' '}
                         {contenido}
                       </h5>
                     );
@@ -1155,22 +1162,22 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               );
             })}
           </div>
-          <div className="side">
+          <div className='side'>
             {TEMARIO_ARRAY_2.map((temario: ITemario, index: number) => {
               return (
-                <div className="subject" key={"Temario_2_" + index}>
-                  <h3 className="title">
+                <div className='subject' key={'Temario_2_' + index}>
+                  <h3 className='title'>
                     <b>
-                      <span className="p-pink">Módulo {temario.number} </span>
+                      <span className='p-pink'>Módulo {temario.number} </span>
                       {temario.title}
                     </b>
                   </h3>
                   {temario.content.map((contenido: string, idx: number) => {
                     return (
-                      <h5 key={"contenido_2_" + idx}>
-                        <b className="p-pink no-bold">
-                          {!responsive850 ? `Lección ${idx + 1}.` : ""}
-                        </b>{" "}
+                      <h5 key={'contenido_2_' + idx}>
+                        <b className='p-pink no-bold'>
+                          {!responsive850 ? `Lección ${idx + 1}.` : ''}
+                        </b>{' '}
                         {contenido}
                       </h5>
                     );
@@ -1180,68 +1187,68 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             })}
           </div>
         </div>
-        <div className="line" />
-        <p className="h6" onClick={toggleModules}>
+        <div className='line' />
+        <p className='h6' onClick={toggleModules}>
           {responsive850 &&
-            (!showModules ? "Ver todos los módulos" : "Cerrar módulos")}
+            (!showModules ? 'Ver todos los módulos' : 'Cerrar módulos')}
         </p>
-        <button className="btn right-left" onClick={() => setverMat(true)}>
+        <button className='btn right-left' onClick={() => setverMat(true)}>
           Consulta tu lista de materiales a utilizar
         </button>
         {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
-        <img src={linesB2} className="down-l" />
+        <img src={linesB2} className='down-l' />
       </EleventhSection>
       <TwelveSection>
-        <h2 className="big-title bold">
+        <h2 className='big-title bold'>
           Disfruta tus clases <br />
-          <b className="light-blue no-bold">
+          <b className='light-blue no-bold'>
             desde cualquier{responsive500 && <br />} dispositivo
           </b>
         </h2>
-        <img src={devices} className="py-2 devices" />
+        <img src={devices} className='py-2 devices' />
       </TwelveSection>
-      <ThirteenSection className="all-center">
-        <div className="text-end">
-          <h2 className="">¿Tienes alguna duda?</h2>
-          <h2 className="dark-blue bold">
+      <ThirteenSection className='all-center'>
+        <div className='text-end'>
+          <h2 className=''>¿Tienes alguna duda?</h2>
+          <h2 className='dark-blue bold'>
             Nuestro equipo <br /> está para ayudarte.
           </h2>
         </div>
-        <div className="dudas-img">
-          <img src={pointWatsap} className="point" />
+        <div className='dudas-img'>
+          <img src={pointWatsap} className='point' />
           <div
-            className="watsap-button all-center"
+            className='watsap-button all-center'
             onClick={() => redirectToWhatsAppChat()}
           >
-            <img src={watsapOut} className="me-3" />
-            <p className="my-1">
+            <img src={watsapOut} className='me-3' />
+            <p className='my-1'>
               Contacta con
               <br /> un agente
             </p>
           </div>
         </div>
       </ThirteenSection>
-      <FourteenSection className="spacing">
-        <h2 className="dark-blue big-title">
+      <FourteenSection className='spacing'>
+        <h2 className='dark-blue big-title'>
           Preguntas {responsive850 && <br />}Frecuentes
         </h2>
-        <div className="faq">
-          <div className="all-center">
+        <div className='faq'>
+          <div className='all-center'>
             <div
-              className={`q-container ${views.get(1) ? "max" : "min"}`}
+              className={`q-container ${views.get(1) ? 'max' : 'min'}`}
               onClick={() => verQ(1)}
             >
-              <div className={`q ${views.get(1) && "open-q"}`}>
+              <div className={`q ${views.get(1) && 'open-q'}`}>
                 <p className={`title bolder`}>¿Entregan reconocimiento?</p>
                 {views.get(1) ? (
-                  <BsChevronUp className="icon" />
+                  <BsChevronUp className='icon' />
                 ) : (
-                  <BsChevronDown className="icon" />
+                  <BsChevronDown className='icon' />
                 )}
               </div>
 
-              <div className="border-top">
-                <p className="a">
+              <div className='border-top'>
+                <p className='a'>
                   ¡Claro!
                   <br />
                   Cada curso terminado, con prácticas aprobadas, te brinda un
@@ -1251,23 +1258,23 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </div>
             </div>
           </div>
-          <div className="all-center">
+          <div className='all-center'>
             <div
-              className={`q-container ${views.get(2) ? "max" : "min"}`}
+              className={`q-container ${views.get(2) ? 'max' : 'min'}`}
               onClick={() => verQ(2)}
             >
-              <div className={`q ${views.get(2) && "open-q"}`}>
+              <div className={`q ${views.get(2) && 'open-q'}`}>
                 <p className={`title bolder`}>
                   ¿Qué métodos de pago puedo usar para pagar mi suscripción?
                 </p>
                 {views.get(2) ? (
-                  <BsChevronUp className="icon" />
+                  <BsChevronUp className='icon' />
                 ) : (
-                  <BsChevronDown className="icon" />
+                  <BsChevronDown className='icon' />
                 )}
               </div>
-              <div className="border-top">
-                <p className="a">
+              <div className='border-top'>
+                <p className='a'>
                   Nuestros métodos de pago son súper cómodos.
                   <br />
                   Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta
@@ -1275,7 +1282,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                   <i>(El cobro se realiza de manera automática mes con mes).</i>
                   <br />
                   Si prefieres pagar en transferencia, depósito en Oxxo o
-                  Paypal, está disponible la anualidad o el plan cuatrimestral,{" "}
+                  Paypal, está disponible la anualidad o el plan cuatrimestral,{' '}
                   <i>
                     (Pagando anualidad no se realiza ningún cobro adicional por
                     un año).
@@ -1284,24 +1291,24 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </div>
             </div>
           </div>
-          <div className="all-center">
+          <div className='all-center'>
             <div
-              className={`q-container ${views.get(3) ? "max" : "min"}`}
+              className={`q-container ${views.get(3) ? 'max' : 'min'}`}
               onClick={() => verQ(3)}
             >
-              <div className={`q ${views.get(3) && "open-q"}`}>
+              <div className={`q ${views.get(3) && 'open-q'}`}>
                 <p className={`title bolder`}>
                   ¿Puedo cancelar en cualquier momento?
                 </p>
                 {views.get(3) ? (
-                  <BsChevronUp className="icon" />
+                  <BsChevronUp className='icon' />
                 ) : (
-                  <BsChevronDown className="icon" />
+                  <BsChevronDown className='icon' />
                 )}
               </div>
 
-              <div className="border-top">
-                <p className="a">
+              <div className='border-top'>
+                <p className='a'>
                   Así es, tú eliges libremente cuánto tiempo deseas aprender y
                   gozar de todos nuestros beneficios.
                   <br />
@@ -1311,24 +1318,24 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               </div>
             </div>
           </div>
-          <div className="all-center">
+          <div className='all-center'>
             <div
-              className={`q-container ${views.get(4) ? "max" : "min"}`}
+              className={`q-container ${views.get(4) ? 'max' : 'min'}`}
               onClick={() => verQ(4)}
             >
-              <div className={`q ${views.get(4) && "open-q"}`}>
+              <div className={`q ${views.get(4) && 'open-q'}`}>
                 <p className={`title bolder`}>
                   ¿Puedo inscribirme desde cualquier país?
                 </p>
                 {views.get(4) ? (
-                  <BsChevronUp className="icon" />
+                  <BsChevronUp className='icon' />
                 ) : (
-                  <BsChevronDown className="icon" />
+                  <BsChevronDown className='icon' />
                 )}
               </div>
 
-              <div className="border-top">
-                <p className="a">
+              <div className='border-top'>
+                <p className='a'>
                   Si, nuestra plataforma está diseñada para poder utilizarse
                   desde cualquier lugar del mundo que cuente con acceso a
                   internet y puedes disfrutar desde un celular, tableta

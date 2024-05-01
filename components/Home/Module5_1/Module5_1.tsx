@@ -1,7 +1,7 @@
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
 import {
   ContainerMain,
@@ -15,12 +15,11 @@ import {
   BgColor,
   PeopleContainer,
   GeneralContainer,
-} from "./Module5_1.styled";
+} from './Module5_1.styled';
 import {
   ContainerMainMobile,
   SliderSectionTitleMobile,
   SliderContainerMobile,
-
   TittleAMobile,
   TittleBMobile,
   LinesMobile,
@@ -29,25 +28,23 @@ import {
   PeopleContainerMobile,
   GeneralContainerMobile,
   SwiperContainer,
-} from "./Module5_1Mobile.styled";
+} from './Module5_1Mobile.styled';
 
+import IMG1 from './MediaSources/Lineas.png';
+import IMG4 from './MediaSources/Personas2.png';
+import IMG3 from './MediaSources/LineMobile.png';
 
-import IMG1 from "./MediaSources/Lineas.png";
-import IMG4 from "./MediaSources/Personas2.png";
-import IMG3 from "./MediaSources/LineMobile.png";
-
-import "swiper/css/navigation";
+import 'swiper/css/navigation';
 //import { Navigation } from "swiper";
-import { IModule5_1 } from "./IModule5_1";
-import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
-import { SlideModule_1 } from "./SlideModule_1/SlideModule_1";
-import { ref } from "yup";
-import swiper from "swiper";
+import { IModule5_1 } from './IModule5_1';
+import { downloadFileWithStoragePath } from '../../../store/actions/LandingActions';
+import { SlideModule_1 } from './SlideModule_1/SlideModule_1';
+import { ref } from 'yup';
+import swiper from 'swiper';
 SwiperCore.use([Autoplay]);
 
 export const Module5_1 = (props: IModule5_1) => {
-
-  const swiperRef2 = useRef<any>(null)
+  const swiperRef2 = useRef<any>(null);
 
   const { slideData } = props;
   var slideDataArr = [];
@@ -55,21 +52,13 @@ export const Module5_1 = (props: IModule5_1) => {
 
   const onMouseEnter = () => {
     try {
-
       swiperRef2?.current?.swiper.autoplay.stop();
-    } catch (error) {
-
-    }
-
+    } catch (error) {}
   };
   const onMouseLeave = () => {
     try {
-
       swiperRef2?.current?.swiper.autoplay.start();
-    } catch (error) {
-
-    }
-
+    } catch (error) {}
   };
   const settings = {
     loop: true,
@@ -109,19 +98,21 @@ export const Module5_1 = (props: IModule5_1) => {
       420: {
         slidesPerView: 1.5,
         spaceBetween: 30,
-      }
-    }
+      },
+    },
   };
 
   const sliderData = slideDataArr?.map((element, index) => {
     return (
-      <SwiperSlide id={"slide" + index} key={element.username + "_ID"}
+      <SwiperSlide
+        id={'slide' + index}
+        key={element.username + '_ID'}
 
-      // onPointerEnter={() => {
-      //   console.log(document.getElementById("slide" + index));
-      // }}
+        // onPointerEnter={() => {
+        //   console.log(document.getElementById("slide" + index));
+        // }}
       >
-        <SliderItemLink >
+        <SliderItemLink>
           <SlideModule_1
             index={index}
             isNew={element.isNew}
@@ -134,61 +125,57 @@ export const Module5_1 = (props: IModule5_1) => {
           />
         </SliderItemLink>
       </SwiperSlide>
-    )
-  })
+    );
+  });
 
   return (
     <>
-      <GeneralContainer
-        fluid id="WebView"
-      >
-        <ContainerMain  >
+      <GeneralContainer fluid id='WebView'>
+        <ContainerMain>
           <SliderContainer>
-
             <Lines style={{ backgroundImage: `url(${IMG1.src})` }}></Lines>
             <SliderSectionTitle>
-              <TittleA>Experiencias de nuestras </TittleA><TittleB> #AlumnasGonvar</TittleB>
-
+              <TittleA>Experiencias de nuestras </TittleA>
+              <TittleB> #AlumnasGonvar</TittleB>
             </SliderSectionTitle>
-            <div
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }}
+            <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              <Swiper
+                style={{ paddingTop: '50px', paddingBottom: '50px' }}
                 {...settings}
-                ref={swiperRef2}>
+                ref={swiperRef2}
+              >
                 {sliderData}
               </Swiper>
             </div>
           </SliderContainer>
-        </ContainerMain >
-      </GeneralContainer >
+        </ContainerMain>
+      </GeneralContainer>
 
-      <GeneralContainerMobile
-        fluid
-        style={{ padding: 0 }} id="MobileView"
-      >
-        <ContainerMainMobile  >
+      <GeneralContainerMobile fluid style={{ padding: 0 }} id='MobileView'>
+        <ContainerMainMobile>
           <SliderContainerMobile>
-
-            <LinesMobile style={{ backgroundImage: `url(${IMG3.src})` }}></LinesMobile>
+            <LinesMobile
+              style={{ backgroundImage: `url(${IMG3.src})` }}
+            ></LinesMobile>
             <SliderSectionTitleMobile>
-              <TittleAMobile>Experiencias de nuestras </TittleAMobile><TittleBMobile> #AlumnasGonvar</TittleBMobile>
-
+              <TittleAMobile>Experiencias de nuestras </TittleAMobile>
+              <TittleBMobile> #AlumnasGonvar</TittleBMobile>
             </SliderSectionTitleMobile>
 
             <SwiperContainer
-
               onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}>
-              <Swiper style={{ paddingTop: "50px", paddingBottom: "50px" }}
+              onMouseLeave={onMouseLeave}
+            >
+              <Swiper
+                style={{ paddingTop: '50px', paddingBottom: '50px' }}
                 {...settings}
               >
                 {sliderData}
               </Swiper>
             </SwiperContainer>
           </SliderContainerMobile>
-        </ContainerMainMobile >
-      </GeneralContainerMobile >
+        </ContainerMainMobile>
+      </GeneralContainerMobile>
     </>
-  )
-}
+  );
+};
