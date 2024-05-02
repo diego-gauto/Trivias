@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const LessonContain = styled.div`
   display: flex;
@@ -57,7 +57,7 @@ export const IncompleteCircle = styled.div`
 `;
 export const CourseTitle = styled.p<{ active: boolean }>`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   color: #3f1168;
   ${(props) =>
@@ -69,7 +69,7 @@ export const CourseTitle = styled.p<{ active: boolean }>`
 export const CurrentCourse = styled.p`
   font-size: 14px;
   font-weight: 600;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
 `;
 export const Details = styled.div`
@@ -84,7 +84,7 @@ export const DetailContain = styled.div`
   width: 100%;
   .activity {
     font-size: 14px;
-    font-family: "Raleway", sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: #d244d1;
     margin: 0;
     display: flex;
@@ -98,7 +98,7 @@ export const DetailContain = styled.div`
 
 export const CourseLength = styled.div`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #3f1168;
   margin: 0;
   display: flex;
@@ -110,7 +110,7 @@ export const CourseLength = styled.div`
 `;
 export const CoursePoints = styled.p`
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #3f1168;
   margin: 0;
 `;

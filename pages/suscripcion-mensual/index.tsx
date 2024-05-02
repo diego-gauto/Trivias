@@ -1,12 +1,12 @@
-import { renderToString } from "react-dom/server";
+import { renderToString } from 'react-dom/server';
 
-import LandingSuscription from "../../components/Landings/LandingSuscription/LandingSuscription";
-import { MainContain } from "../../screens/Styles.styled";
+import LandingSuscription from '../../components/Landings/LandingSuscription/LandingSuscription';
+import { MainContain } from '../../screens/Styles.styled';
 
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 type Repo = {
-  data: [],
-}
+  data: [];
+};
 //: GetServerSideProps<{ mensual: Repo }>
 export const getServerSideProps = async ({ req, res }: any) => {
   // const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
@@ -17,28 +17,35 @@ export const getServerSideProps = async ({ req, res }: any) => {
   //     return x
   //   }
   // })
-  const html = [renderToString(<LandingSuscription price={"$249 MXN/mes"} type={"mensual"} />)]
+  const html = [
+    renderToString(
+      <LandingSuscription price={'$249 MXN/mes'} type={'mensual'} />,
+    ),
+  ];
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+    'public, s-maxage=10, stale-while-revalidate=59',
+  );
   let mensual = html;
   return {
-    props: { mensual }
-  }
-}
-const termsConditions = ({ mensual }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const price = "$459 MXN/mes"
-  const type = "mensual"
+    props: { mensual },
+  };
+};
+const termsConditions = ({
+  mensual,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const price = '$459 MXN/mes';
+  const type = 'mensual';
   return (
     <MainContain
       style={{
-        width: "100%",
-        padding: "0",
-        maxWidth: "100% !important",
-      }}>
+        width: '100%',
+        padding: '0',
+        maxWidth: '100% !important',
+      }}
+    >
       <LandingSuscription price={price} type={type} />
     </MainContain>
-  )
-}
+  );
+};
 export default termsConditions;

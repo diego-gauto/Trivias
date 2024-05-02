@@ -1,17 +1,28 @@
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent } from 'react';
 
-import select from "antd/es/select";
-import Link from "next/link";
-import Papa from "papaparse";
+import select from 'antd/es/select';
+import Link from 'next/link';
+import Papa from 'papaparse';
 
-import UserTriviaList from "../../../../components/admin/Trivias/userTriviaList/userTriviaList";
-import { getAllTriviasApi } from "../../../../components/api/trivias";
-import { getAllUsersApi } from "../../../../components/api/usertrivia";
-import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
-import styles from "./listUser.module.css";
-import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../../../components/GenericQueries/UserRoles/UserRolesQueries";
-import { getGenericQueryResponse } from "../../../../components/api/admin";
-import { Role, UserLevelValue } from "../../../../components/GenericQueries/UserRoles/UserRolesInterfaces";
+import UserTriviaList from '../../../../components/admin/Trivias/userTriviaList/userTriviaList';
+import { getAllTriviasApi } from '../../../../components/api/trivias';
+import { getAllUsersApi } from '../../../../components/api/usertrivia';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../../screens/Login.styled';
+import styles from './listUser.module.css';
+import {
+  generateUserIdQuery,
+  generateUserRoleAccessQuery,
+  generateUserRolesLevelQuery,
+} from '../../../../components/GenericQueries/UserRoles/UserRolesQueries';
+import { getGenericQueryResponse } from '../../../../components/api/admin';
+import {
+  Role,
+  UserLevelValue,
+} from '../../../../components/GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface UserTrivia {
   id: number;
@@ -37,13 +48,17 @@ interface UserAccesssTriviasList {
 
 const UsersTrivias = () => {
   const [userTrivias, setUserTrivias] = useState<UserTrivia[]>([]);
-  const [trivias, setTrivias] = useState<Trivia[]>([])
+  const [trivias, setTrivias] = useState<Trivia[]>([]);
   const [selectedTrivia, setSelectedTrivia] = useState<string | null>(null);
   const [selectedResult, setSelectedResult] = useState<string | null>(null);
-  const [selectedIsUser, setSelectedIsUser] = useState<string | null>(""); // Nuevo estado
+  const [selectedIsUser, setSelectedIsUser] = useState<string | null>(''); // Nuevo estado
   const [loading, setLoading] = useState(true);
 
-  const [userAccessTriviasList, setUserAccessTriviasList] = useState<UserAccesssTriviasList>({ canDownloadTriviasList: false, canViewTriviasList: false });
+  const [userAccessTriviasList, setUserAccessTriviasList] =
+    useState<UserAccesssTriviasList>({
+      canDownloadTriviasList: false,
+      canViewTriviasList: false,
+    });
 
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 25;
@@ -54,13 +69,29 @@ const UsersTrivias = () => {
   const numbers = [...Array(npage + 1).keys()].slice(1);
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
-  const { main, buttonContainer, volver, volverText, link, titles, title, selectContainer, selectGroup, select, button, pagination, pageItem, pageLink, active } = styles
+  const {
+    main,
+    buttonContainer,
+    volver,
+    volverText,
+    link,
+    titles,
+    title,
+    selectContainer,
+    selectGroup,
+    select,
+    button,
+    pagination,
+    pageItem,
+    pageLink,
+    active,
+  } = styles;
 
   const { canDownloadTriviasList, canViewTriviasList } = userAccessTriviasList;
 
   const getUserData = async () => {
     try {
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
       if (email === null) {
         throw new Error('No existe un email establecido para el usuario');
       }
@@ -71,7 +102,9 @@ const UsersTrivias = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const roleTriviasList = userRoles.find(role => role.role === 'trivias_list');
+      const roleTriviasList = userRoles.find(
+        (role) => role.role === 'trivias_list',
+      );
       setUserAccessTriviasList({
         canDownloadTriviasList: roleTriviasList?.download === 1,
         canViewTriviasList: roleTriviasList?.view === 1,
@@ -86,7 +119,7 @@ const UsersTrivias = () => {
         alert(error.message);
       }
     }
-  }
+  };
 
   const downloadCsv = () => {
     const csv = Papa.unparse(userTrivias);
@@ -135,23 +168,28 @@ const UsersTrivias = () => {
         // Filtra los usuarios según la trivia seleccionada
         const filteredUsers = allUsers.filter((user: any) => {
           // Verificar si se ha seleccionado una opción de usuario
-          if (selectedIsUser === "1" || selectedIsUser === "0") {
+          if (selectedIsUser === '1' || selectedIsUser === '0') {
             // Verificar si el usuario coincide con la opción seleccionada
             if (user.isUser === Number(selectedIsUser)) {
               // Resto de la lógica de filtrado para trivia y resultado
               if (selectedTrivia && selectedResult) {
                 return user.trivias.some(
                   (trivia: any) =>
-                    trivia.numeroTrivia === selectedTrivia && trivia.resultado === selectedResult
+                    trivia.numeroTrivia === selectedTrivia &&
+                    trivia.resultado === selectedResult,
                 );
               }
 
               if (selectedTrivia) {
-                return user.trivias.some((trivia: any) => trivia.numeroTrivia === selectedTrivia);
+                return user.trivias.some(
+                  (trivia: any) => trivia.numeroTrivia === selectedTrivia,
+                );
               }
 
               if (selectedResult) {
-                return user.trivias.some((trivia: any) => trivia.resultado === selectedResult);
+                return user.trivias.some(
+                  (trivia: any) => trivia.resultado === selectedResult,
+                );
               }
 
               // Si no se seleccionó trivia ni resultado, regresa true para incluir el usuario
@@ -162,16 +200,21 @@ const UsersTrivias = () => {
             if (selectedTrivia && selectedResult) {
               return user.trivias.some(
                 (trivia: any) =>
-                  trivia.numeroTrivia === selectedTrivia && trivia.resultado === selectedResult
+                  trivia.numeroTrivia === selectedTrivia &&
+                  trivia.resultado === selectedResult,
               );
             }
 
             if (selectedTrivia) {
-              return user.trivias.some((trivia: any) => trivia.numeroTrivia === selectedTrivia);
+              return user.trivias.some(
+                (trivia: any) => trivia.numeroTrivia === selectedTrivia,
+              );
             }
 
             if (selectedResult) {
-              return user.trivias.some((trivia: any) => trivia.resultado === selectedResult);
+              return user.trivias.some(
+                (trivia: any) => trivia.resultado === selectedResult,
+              );
             }
 
             // Si no se seleccionó ninguna opción de filtro, regresa true para incluir el usuario
@@ -205,51 +248,55 @@ const UsersTrivias = () => {
   };
 
   const prevPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
+      setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
-  const changeCurrentPage = (e: MouseEvent<HTMLAnchorElement>, page: number) => {
-    e.preventDefault()
-    setCurrentPage(page)
-  }
+  const changeCurrentPage = (
+    e: MouseEvent<HTMLAnchorElement>,
+    page: number,
+  ) => {
+    e.preventDefault();
+    setCurrentPage(page);
+  };
 
   const nextPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     }
-  }
-
+  };
 
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
     <div className={main}>
       <div className={titles}>
         <div className={buttonContainer}>
-          <Link href={"/admin/Trivias"}>
+          <Link href={'/admin/Trivias'}>
             <a className={link}>
               <div className={volver}>
-                <img src="/images/trivias/icono . retroceder.svg" alt="" />
+                <img src='/images/trivias/icono . retroceder.svg' alt='' />
                 <div className={volverText}> Volver</div>
               </div>
             </a>
           </Link>
-          {
-            ((canDownloadTriviasList && userLevel === 'admin')
-              || userLevel === 'superAdmin') && <button className={button} onClick={downloadCsv} >Descargar CSV</button>
-          }
+          {((canDownloadTriviasList && userLevel === 'admin') ||
+            userLevel === 'superAdmin') && (
+            <button className={button} onClick={downloadCsv}>
+              Descargar CSV
+            </button>
+          )}
         </div>
         <h2 className={title}>Listados de usuarios</h2>
         <h3>Total de usuarios: {userTrivias.length}</h3>
@@ -257,9 +304,14 @@ const UsersTrivias = () => {
 
       <div className={selectContainer}>
         <div className={selectGroup}>
-          <label htmlFor="triviaSelect">Seleccionar Trivia: </label>
-          <select className={select} id="triviaSelect" onChange={handleTriviaChange} value={selectedTrivia || ''}>
-            <option value="">Todas las trivias</option>
+          <label htmlFor='triviaSelect'>Seleccionar Trivia: </label>
+          <select
+            className={select}
+            id='triviaSelect'
+            onChange={handleTriviaChange}
+            value={selectedTrivia || ''}
+          >
+            <option value=''>Todas las trivias</option>
             {trivias.map((trivia) => (
               <option key={trivia.id} value={String(trivia.id)}>
                 {trivia.title}
@@ -269,34 +321,37 @@ const UsersTrivias = () => {
         </div>
 
         <div className={selectGroup}>
-          <label htmlFor="resultSelect">Seleccionar Nivel de Resultado: </label>
-          <select className={select} id="resultSelect" onChange={handleResultChange} value={selectedResult || ''}>
-            <option value="">Todos los niveles</option>
-            <option value="0">5 respuestas correctas</option>
-            <option value="1">3 ó 4 respuestas correctas</option>
-            <option value="2">0, 1 ó 2 respuestas correctas</option>
+          <label htmlFor='resultSelect'>Seleccionar Nivel de Resultado: </label>
+          <select
+            className={select}
+            id='resultSelect'
+            onChange={handleResultChange}
+            value={selectedResult || ''}
+          >
+            <option value=''>Todos los niveles</option>
+            <option value='0'>5 respuestas correctas</option>
+            <option value='1'>3 ó 4 respuestas correctas</option>
+            <option value='2'>0, 1 ó 2 respuestas correctas</option>
           </select>
         </div>
 
         <div className={selectGroup}>
-          <label htmlFor="isUserSelect">Seleccionar Usuarios:</label>
+          <label htmlFor='isUserSelect'>Seleccionar Usuarios:</label>
           <select
             className={select}
-            id="isUserSelect"
+            id='isUserSelect'
             onChange={handleIsUserChange}
-            value={selectedIsUser || ""}
+            value={selectedIsUser || ''}
           >
-            <option value="">Todos los usuarios</option>
-            <option value="1">Usuarios existentes</option>
-            <option value="0">Usuarios no existentes</option>
+            <option value=''>Todos los usuarios</option>
+            <option value='1'>Usuarios existentes</option>
+            <option value='0'>Usuarios no existentes</option>
           </select>
         </div>
-
       </div>
       <UserTriviaList usersTrivia={users} />
       <nav>
         <ul className={pagination}>
-
           {npage <= 5 ? (
             // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
             numbers.map((number, index) => (
@@ -304,7 +359,11 @@ const UsersTrivias = () => {
                 className={`${pageItem} ${currentPage === number ? active : ''}`}
                 key={index}
               >
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, number)}>
+                <a
+                  href=''
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, number)}
+                >
                   {number}
                 </a>
               </li>
@@ -313,23 +372,35 @@ const UsersTrivias = () => {
             // Si hay más de 5 páginas, muestra controles para la primera, anterior, actual, siguiente y última página
             <>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, 1)}>Primera</a>
+                <a
+                  href=''
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, 1)}
+                >
+                  Primera
+                </a>
               </li>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => prevPage(e)}>Anterior</a>
+                <a href='' className={pageLink} onClick={(e) => prevPage(e)}>
+                  Anterior
+                </a>
               </li>
 
               <li className={`${pageItem} ${active}`}>
-                <span className={pageLink}>
-                  {currentPage}
-                </span>
+                <span className={pageLink}>{currentPage}</span>
               </li>
 
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={nextPage}>Siguiente</a>
+                <a href='' className={pageLink} onClick={nextPage}>
+                  Siguiente
+                </a>
               </li>
               <li className={pageItem}>
-                <a href="" className={pageLink} onClick={(e) => changeCurrentPage(e, npage)}>
+                <a
+                  href=''
+                  className={pageLink}
+                  onClick={(e) => changeCurrentPage(e, npage)}
+                >
                   Última
                 </a>
               </li>
@@ -339,5 +410,5 @@ const UsersTrivias = () => {
       </nav>
     </div>
   );
-}
+};
 export default UsersTrivias;

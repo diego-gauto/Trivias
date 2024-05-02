@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
-import { httpsCallable } from "firebase/functions";
-import Link from "next/link";
-import Stripe from "stripe";
-import * as yup from "yup";
+import { httpsCallable } from 'firebase/functions';
+import Link from 'next/link';
+import Stripe from 'stripe';
+import * as yup from 'yup';
 
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import GradientCanvas from "../../components/GradientCanvas/GradientCanvas";
-import { SIGNUP_PATH } from "../../constants/paths";
-import { MEMBERSHIP_METHOD_DEFAULT, MEMBERSHIP_PLAN_NAME_DEFAULT } from "../../constants/user";
-import { functions } from "../../firebase/firebaseConfig";
+import GradientCanvas from '../../components/GradientCanvas/GradientCanvas';
+import { SIGNUP_PATH } from '../../constants/paths';
+import {
+  MEMBERSHIP_METHOD_DEFAULT,
+  MEMBERSHIP_PLAN_NAME_DEFAULT,
+} from '../../constants/user';
+import { functions } from '../../firebase/firebaseConfig';
 import {
   AllButtons,
   Background,
@@ -30,30 +33,30 @@ import {
   TextInput,
   TextInput_2,
   Title,
-} from "../../screens/Login.styled";
+} from '../../screens/Login.styled';
 import {
   FormInput,
   RegisterButton,
   RegisterPastUserBox,
-} from "../../screens/RegisterPastUser.styled";
-import { signUpWithCreds } from "../../store/actions/AuthActions";
-import { IMembership } from "../../store/types/AuthActionTypes";
-import { IStripeUserData } from "../../interfaces/IStripeUserData";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+} from '../../screens/RegisterPastUser.styled';
+import { signUpWithCreds } from '../../store/actions/AuthActions';
+import { IMembership } from '../../store/types/AuthActionTypes';
+import { IStripeUserData } from '../../interfaces/IStripeUserData';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const formSchema = yup.object().shape({
   name: yup
     .string()
-    .min(6, "El nombre debe ser de al menos 6 caracteres")
-    .required("Campo requerido"),
+    .min(6, 'El nombre debe ser de al menos 6 caracteres')
+    .required('Campo requerido'),
   password: yup
     .string()
-    .required("Campo requerido")
-    .min(6, "La contraseña debe tener al menos 6 carácteres"),
+    .required('Campo requerido')
+    .min(6, 'La contraseña debe tener al menos 6 carácteres'),
   confirmPassword: yup
     .string()
-    .required("Campo requerido")
-    .oneOf([yup.ref("password"), null], "La contraseña no coincide"),
+    .required('Campo requerido')
+    .oneOf([yup.ref('password'), null], 'La contraseña no coincide'),
 });
 
 type FormValues = {
@@ -67,30 +70,35 @@ const RegisterPastUser = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema)
+    resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FormValues> = async formData => {
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     if (!isValidPhoneNumber(phoneNumber)) {
-      setPhoneNumberError("El número no es válido")
+      setPhoneNumberError('El número no es válido');
       return;
     }
-    setIsLoading(true)
-    const getStripeUserData = httpsCallable<{ customerEmail: string }, IStripeUserData | null>(functions, "getStripeUserData");
-    const { data: stripeUserData } = await getStripeUserData({ customerEmail: localStorage.getItem("pastUserEmail")! });
+    setIsLoading(true);
+    const getStripeUserData = httpsCallable<
+      { customerEmail: string },
+      IStripeUserData | null
+    >(functions, 'getStripeUserData');
+    const { data: stripeUserData } = await getStripeUserData({
+      customerEmail: localStorage.getItem('pastUserEmail')!,
+    });
 
     const signUpData: { credentials: object; membership?: IMembership } = {
       credentials: {
         name: formData.name,
-        email: localStorage.getItem("pastUserEmail"),
+        email: localStorage.getItem('pastUserEmail'),
         password: formData.password,
         phoneInput: phoneNumber,
       },
@@ -106,12 +114,15 @@ const RegisterPastUser = () => {
         planId: stripeUserData.plan.id,
         planName: MEMBERSHIP_PLAN_NAME_DEFAULT,
         startDate: stripeUserData.current_period_start,
-      }
+      };
     }
 
-    const redirectURL = await signUpWithCreds(signUpData, stripeUserData?.paymentMethods);
+    const redirectURL = await signUpWithCreds(
+      signUpData,
+      stripeUserData?.paymentMethods,
+    );
     window.location.href = redirectURL;
-  }
+  };
 
   if (isLoading) {
     return (
@@ -120,114 +131,111 @@ const RegisterPastUser = () => {
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
   return (
     <Background>
       <RegisterPastUserBox>
-        <form
-          onSubmit={(e) => handleSubmit(onSubmit)(e)}
-        >
-          <Title>
-            Es un gusto verte de nuevo
-          </Title>
-          <Text3 >
-            Hemos detectado que ya estabas con nosotros desde antes de nuestro nuevo look.
-            Configura algunos datos de tu vieja cuenta para entrar de nuevo.
+        <form onSubmit={(e) => handleSubmit(onSubmit)(e)}>
+          <Title>Es un gusto verte de nuevo</Title>
+          <Text3>
+            Hemos detectado que ya estabas con nosotros desde antes de nuestro
+            nuevo look. Configura algunos datos de tu vieja cuenta para entrar
+            de nuevo.
           </Text3>
           <FormInput>
-            <Text2>
-              Nombre de Usuario
-            </Text2>
+            <Text2>Nombre de Usuario</Text2>
             <TextInput
-              type="text"
-              placeholder="John Doe"
+              type='text'
+              placeholder='John Doe'
               className={`form-control ${errors.name && 'is-invalid'}`}
-              {...register("name")}
+              {...register('name')}
             />
-            <div className="invalid-feedback">
-              {errors.name?.message}
-            </div>
+            <div className='invalid-feedback'>{errors.name?.message}</div>
           </FormInput>
           <FormInput>
-            <Text2>
-              Contraseña
-            </Text2>
+            <Text2>Contraseña</Text2>
             <PasswordBox>
               <div>
                 <TextInput_2
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Contraseña"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Contraseña'
                   className={`form-control ${errors.password && 'is-invalid'}`}
-                  {...register("password")}
+                  {...register('password')}
                 />
-                <div style={{ 'cursor': 'pointer' }}
-                  onClick={() => { setShowPassword(!showPassword) }}
-                >{showPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                >
+                  {showPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+                </div>
               </div>
-              <div className="invalid-feedback" style={{ display: "block" }}>
+              <div className='invalid-feedback' style={{ display: 'block' }}>
                 {errors.password?.message}
               </div>
             </PasswordBox>
           </FormInput>
           <FormInput>
-            <Text2>
-              Confirmar Contraseña
-            </Text2>
+            <Text2>Confirmar Contraseña</Text2>
             <PasswordBox>
               <div>
                 <TextInput_2
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirma la contraseña"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder='Confirma la contraseña'
                   className={`form-control ${errors.confirmPassword && 'is-invalid'}`}
-                  {...register("confirmPassword")}
+                  {...register('confirmPassword')}
                 />
-                <div style={{ 'cursor': 'pointer' }}
-                  onClick={() => { setShowConfirmPassword(!showConfirmPassword) }}
-                >{showConfirmPassword ? <FaEye ></FaEye> : <FaEyeSlash></FaEyeSlash>}</div>
+                <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    setShowConfirmPassword(!showConfirmPassword);
+                  }}
+                >
+                  {showConfirmPassword ? (
+                    <FaEye></FaEye>
+                  ) : (
+                    <FaEyeSlash></FaEyeSlash>
+                  )}
+                </div>
               </div>
-              <div className="invalid-feedback" style={{ display: "block" }}>
+              <div className='invalid-feedback' style={{ display: 'block' }}>
                 {errors.confirmPassword?.message}
               </div>
             </PasswordBox>
           </FormInput>
           <FormInput>
-            <Text2>
-              Teléfono
-            </Text2>
+            <Text2>Teléfono</Text2>
             <InputPhone
               onChange={(value: string) => setPhoneNumber(value)}
               limitMaxLength
               international
-              defaultCountry="MX"
+              defaultCountry='MX'
               countryCallingCodeEditable={false}
-              id="input_1"
+              id='input_1'
               className={`form-control ${phoneNumberError && 'is-invalid'}`}
             />
             <LineIcon />
-            <div className="invalid-feedback" style={{ display: "block" }}>
+            <div className='invalid-feedback' style={{ display: 'block' }}>
               {phoneNumberError}
             </div>
           </FormInput>
           <AllButtons>
-            <RegisterButton type="submit">
-              Acceder
-            </RegisterButton>
+            <RegisterButton type='submit'>Acceder</RegisterButton>
           </AllButtons>
         </form>
-        <Text3 >
+        <Text3>
           ¿Es tu primera vez con nosotros? &nbsp;
           <Link href={SIGNUP_PATH}>
-            <LinkText >
-              Registrate
-            </LinkText>
+            <LinkText>Registrate</LinkText>
           </Link>
         </Text3>
       </RegisterPastUserBox>
-      <GradientCanvas id="gradient-canvas" />
-    </Background >
-  )
-}
+      <GradientCanvas id='gradient-canvas' />
+    </Background>
+  );
+};
 
 export default RegisterPastUser;

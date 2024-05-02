@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
-export const NavContainer = styled("div")<{ pathname: any; color: any }>`
+export const NavContainer = styled('div')<{ pathname: any; color: any }>`
   z-index: 10;
   display: flex;
   width: 100%;
@@ -15,7 +15,7 @@ export const NavContainer = styled("div")<{ pathname: any; color: any }>`
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
   ${(props) =>
-    props.pathname == "/" &&
+    props.pathname == '/' &&
     css`
       position: fixed;
       background-color: #dad3e5;
@@ -71,11 +71,11 @@ export const LogoContain = styled.div`
     display: none;
   }
 `;
-export const NavText = styled("a")<{ pathname: any; color: any }>`
+export const NavText = styled('a')<{ pathname: any; color: any }>`
   color: white;
   text-decoration: none;
   font-size: 16px;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   position: relative;
   @font-face {
     font-family: MONTSERRAT-BOLD;
@@ -94,7 +94,7 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
     font-size: 14px;
   }
   ${(props) =>
-    props.pathname !== "/" &&
+    props.pathname !== '/' &&
     css`
       color: #3f1168;
       &:hover {
@@ -104,7 +104,7 @@ export const NavText = styled("a")<{ pathname: any; color: any }>`
     `}
   ${(props) =>
     props.color == 0 &&
-    props.pathname == "/" &&
+    props.pathname == '/' &&
     css`
       color: #3f1168;
       &:hover {
@@ -117,7 +117,7 @@ export const HamburgerMenu = styled.img`
   height: 37px;
 `;
 
-export const FloatingMenu = styled("ul")<{ isOpen: boolean }>`
+export const FloatingMenu = styled('ul')<{ isOpen: boolean }>`
   max-height: 0;
   padding: 0;
   transition: 0.05s linear;
@@ -166,14 +166,14 @@ export const FloatingMenuItem = styled.li`
   text-align: center;
   font-size: 14px;
   margin-top: 10px;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
   }
 `;
 
-export const ShopDeco = styled("div")<{ color: any }>`
+export const ShopDeco = styled('div')<{ color: any }>`
   color: white;
   border: 1px solid #3f1168;
   border-radius: 100px;
@@ -181,7 +181,7 @@ export const ShopDeco = styled("div")<{ color: any }>`
   padding: 10px 20px;
   text-decoration: none;
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   margin: 0;
   font-weight: 500;
@@ -212,7 +212,7 @@ export const PurpleButton = styled.button`
   padding-inline: 25px;
   font-size: 15px;
 
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
@@ -373,7 +373,7 @@ export const LogoS_2 = styled.i`
 export const TextA = styled.a`
   color: #3f1168 !important;
   margin-right: 15px;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
@@ -511,7 +511,7 @@ export const MenuIcon = styled.i`
 `;
 export const Points = styled.p`
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 600;
   margin: 0;
   position: absolute;
@@ -545,7 +545,7 @@ export const TagsResp = styled.div`
     color: black;
     text-decoration: none;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     margin: 0;
     &:hover {
@@ -573,7 +573,7 @@ export const HBList = styled.li`
   cursor: pointer;
   gap: 10px;
   font-size: 16px;
-  font-family: "Montserrat", sans-seriff;
+  font-family: 'Montserrat', sans-seriff;
   a {
     display: flex;
     text-decoration: none;

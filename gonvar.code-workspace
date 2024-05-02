@@ -2,43 +2,43 @@
   "folders": [
     {
       "path": "src",
-      "name": "App"
+      "name": "App",
     },
     {
       "path": "public",
-      "name": "Public"
+      "name": "Public",
     },
     {
       "path": ".",
-      "name": "Project Root"
-    }
+      "name": "Project Root",
+    },
   ],
   "settings": {
     "eslint.alwaysShowStatus": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll": true
+      "source.fixAll": true,
     },
     "eslint.validate": [
       "javascript",
       "typescript",
       "javascriptreact",
-      "typescriptreact"
+      "typescriptreact",
     ],
     "files.exclude": {
       "**/build": true,
       "**/node_modules": true,
       "**/public": true,
-      "**/src": true
+      "**/src": true,
     },
-    "importSorter.generalConfiguration.configurationFilePath": "../import-sorter.json"
+    "importSorter.generalConfiguration.configurationFilePath": "../import-sorter.json",
   },
   "extensions": {
     "recommendations": [
       "mikestead.dotenv",
       "esbenp.prettier-vscode",
-      "mike-co.import-sorter"
-    ]
-  }
+      "mike-co.import-sorter",
+    ],
+  },
 }

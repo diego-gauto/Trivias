@@ -1,6 +1,6 @@
-import Assignments from "../../components/admin/Assignments/Assignments";
-import HomeWork from "../../components/admin/HomeWork/HomeWork";
-import { MainContain } from "../../screens/Styles.styled";
+import Assignments from '../../components/admin/Assignments/Assignments';
+import HomeWork from '../../components/admin/HomeWork/HomeWork';
+import { MainContain } from '../../screens/Styles.styled';
 
 const homeWorksView = () => {
   return (
@@ -8,6 +8,6 @@ const homeWorksView = () => {
       <HomeWork />
       {/* <Assignments /> */}
     </MainContain>
-  )
-}
+  );
+};
 export default homeWorksView;

@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import style from "./triviaRow.module.css";
+import style from './triviaRow.module.css';
 
 interface Trivia {
   id: number;
@@ -12,18 +12,14 @@ interface Trivia {
 
 interface TriviaRowProps {
   trivia: Trivia;
-  idTrivia: Number
+  idTrivia: Number;
 }
 
 const TriviaRow = ({ trivia, idTrivia }: TriviaRowProps) => {
-
-  const { link } = style
-
+  const { link } = style;
 
   return (
-
-    <tr className="pointer">
-
+    <tr className='pointer'>
       <td>{trivia.id}</td>
       <td>
         <Link href={`/admin/trivias/trivias/${idTrivia}`}>
@@ -31,7 +27,6 @@ const TriviaRow = ({ trivia, idTrivia }: TriviaRowProps) => {
         </Link>
       </td>
     </tr>
-
   );
 };
 

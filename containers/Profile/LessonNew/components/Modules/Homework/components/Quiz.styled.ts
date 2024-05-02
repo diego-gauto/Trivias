@@ -486,19 +486,19 @@ export const QuizStatus = styled.div<{
   display: flex;
   align-items: center;
   gap: 30px;
-  border-left: 5px solid ${props => props.color};
-  background: ${props => props.rgb};
+  border-left: 5px solid ${(props) => props.color};
+  background: ${(props) => props.rgb};
   padding-inline: 30px;
   padding-block: 20px;
   width: 550px;
   border-radius: 0px 20px 20px 0px;
   .icon {
     font-size: 80px;
-    color: ${props => props.icon};
+    color: ${(props) => props.icon};
   }
   p {
     margin: 0;
-    color: ${props => props.text};
+    color: ${(props) => props.text};
   }
   .right-data {
     display: flex;

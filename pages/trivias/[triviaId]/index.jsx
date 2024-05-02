@@ -1,25 +1,32 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import {getAllTriviasApi, getTriviaApi} from "../../../components/api/trivias"
-import Trivia from "../../../components/Trivias/trivia/trivia";
-import Result from "../../../components/Trivias/result/result";
-import Banner from "../../../components/Trivias/banner/banner";
-import TriviaSelector from "../../../containers/Trivias/TriviaSelector/triviaSelector";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import {
+  getAllTriviasApi,
+  getTriviaApi,
+} from '../../../components/api/trivias';
+import Trivia from '../../../components/Trivias/trivia/trivia';
+import Result from '../../../components/Trivias/result/result';
+import Banner from '../../../components/Trivias/banner/banner';
+import TriviaSelector from '../../../containers/Trivias/TriviaSelector/triviaSelector';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
 
-import styles from "./index.module.css";
+import styles from './index.module.css';
 
 function Trivias() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [correct, setCorrect] = useState(0);
-  const [trivia, setTrivia] = useState({})
-  const [trivias, setTrivias] = useState([])
+  const [trivia, setTrivia] = useState({});
+  const [trivias, setTrivias] = useState([]);
   const [loading, setLoading] = useState(true);
   const {
     query: { triviaId },
   } = useRouter();
-  const triviaIdNumber = Number(triviaId)
+  const triviaIdNumber = Number(triviaId);
   const router = useRouter();
 
   const RESULT_DIC = {
@@ -31,22 +38,21 @@ function Trivias() {
     0: 2,
   };
 
-
   useEffect(() => {
-
     const fetchData = async () => {
       try {
-
-        const triviasRes = await getAllTriviasApi()
+        const triviasRes = await getAllTriviasApi();
         if (triviasRes) {
-          const triviasFilter = triviasRes.filter(trivia => trivia.id !== triviaIdNumber)
+          const triviasFilter = triviasRes.filter(
+            (trivia) => trivia.id !== triviaIdNumber,
+          );
           // let prevTrivia = trivia;
           setTrivias(triviasFilter);
         }
 
         const res = await getTriviaApi(triviaIdNumber);
 
-        const triviaTemp = res[0]
+        const triviaTemp = res[0];
 
         // Parsear la cadena JSON en la propiedad "questions"
         triviaTemp.questions = JSON.parse(triviaTemp.questions);
@@ -58,17 +64,15 @@ function Trivias() {
           // let prevTrivia = trivia;
           setTrivia(triviaTemp);
         }
-        setQuestionNumber(1)
-        setCorrect(0)
+        setQuestionNumber(1);
+        setCorrect(0);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener los datos de la trivia:', error);
       }
-
     };
 
     fetchData();
-
   }, [triviaIdNumber]);
 
   useEffect(() => {
@@ -77,26 +81,24 @@ function Trivias() {
     }
   }, [questionNumber]);
 
-
   if (loading) {
     return (
-      <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
       </Background>
-    )
+    );
   }
 
-  console.log(trivia?.result[RESULT_DIC[correct]])
-  console.log(RESULT_DIC[correct])
-  console.log(correct)
-  console.log(triviaIdNumber)
+  console.log(trivia?.result[RESULT_DIC[correct]]);
+  console.log(RESULT_DIC[correct]);
+  console.log(correct);
+  console.log(triviaIdNumber);
 
   return (
     <div className={styles.app}>
-          {
-      questionNumber > 5 ? (
+      {questionNumber > 5 ? (
         <Result
           resultInfo={trivia?.result[RESULT_DIC[correct]]}
           result={RESULT_DIC[correct]}
@@ -113,18 +115,23 @@ function Trivias() {
             />
           </div>
           <div className={styles.publicity}>
-            <img src={trivia?.questions[questionNumber - 1]?.imgQuestion} alt="" />
+            <img
+              src={trivia?.questions[questionNumber - 1]?.imgQuestion}
+              alt=''
+            />
           </div>
         </div>
-      )
-     }
+      )}
       <Banner />
 
-      <h3 className={styles.subtitle} style={{ marginTop: 2 + "rem" }}>
+      <h3 className={styles.subtitle} style={{ marginTop: 2 + 'rem' }}>
         Más cuestionarios
       </h3>
       <div className={styles.triviaSelectorContainer}>
-        <TriviaSelector trivias={trivias} setQuestionNumber={setQuestionNumber}/>
+        <TriviaSelector
+          trivias={trivias}
+          setQuestionNumber={setQuestionNumber}
+        />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
   top: 10px;
   left: 5%;
   right: 5%;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 38px;
@@ -41,7 +41,7 @@
   right: 5%;
   top: 40px;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
   font-size: 22px;
@@ -60,7 +60,7 @@
   right: 5%;
   top: 50px;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 27px;
@@ -91,7 +91,7 @@
   flex-direction: column;
   justify-content: center;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 17px;
@@ -111,7 +111,7 @@
   flex-direction: column;
   justify-content: center;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
   font-size: 17px;
@@ -123,7 +123,7 @@
 }
 
 .button {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
@@ -173,12 +173,12 @@
 }
 
 @media screen and (max-width: 1130px) {
-
   .answers {
     top: 65px;
   }
 
-  .answer, .active{
+  .answer,
+  .active {
     height: 60px;
   }
 
@@ -188,12 +188,12 @@
 }
 
 @media screen and (max-width: 942px) {
-
   .answers {
     top: 70px;
   }
 
-  .answer, .active{
+  .answer,
+  .active {
     height: 65px;
   }
 
@@ -203,7 +203,6 @@
 }
 
 @media screen and (max-width: 880px) {
-
   .button {
     margin-top: 30px;
     width: 90%;
@@ -211,34 +210,29 @@
 }
 
 @media screen and (max-width: 817px) {
-
   .answer {
-
     height: 63px;
   }
 
-  .active{
+  .active {
     height: 63px;
   }
-
 }
 
 @media screen and (max-width: 500px) {
-
-  .answer, .active{
+  .answer,
+  .active {
     height: 80px;
     font-size: 15px;
-    line-height: 17px;  
+    line-height: 17px;
   }
 
   /* .button {
     top: 65px;
   } */
-
 }
 
 @media screen and (max-width: 455px) {
-
   .trivia_title {
     top: 20px;
     font-weight: 700;
@@ -247,13 +241,12 @@
   }
 
   .progressBarContainer {
-
     top: 30px;
   }
 
   .pregunta {
     top: 50px;
-  
+
     font-weight: 800;
     font-size: 18px;
     line-height: 24px;
@@ -262,7 +255,7 @@
 
   .question {
     top: 60px;
-  
+
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
@@ -272,13 +265,10 @@
     font-size: 14px;
     line-height: 17px;
   } */
-
 }
 
 @media screen and (max-width: 324px) {
-
   .button {
     top: 55px;
   }
-
 }

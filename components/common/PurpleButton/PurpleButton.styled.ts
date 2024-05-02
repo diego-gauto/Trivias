@@ -1,9 +1,9 @@
-import { Button } from "react-bootstrap";
+import { Button } from 'react-bootstrap';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PurpleButtonContainer = styled(Button)`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;

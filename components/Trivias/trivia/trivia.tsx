@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import ProgressBar from "../progressBar/progressBar";
-import styles from "./trivia.module.css";
+import ProgressBar from '../progressBar/progressBar';
+import styles from './trivia.module.css';
 
 const {
   trivia,
@@ -13,7 +13,7 @@ const {
   answers,
   button,
   active,
-  popup
+  popup,
 } = styles;
 
 export default function Trivia({
@@ -33,15 +33,13 @@ export default function Trivia({
     if (isButtonDisabled) {
       setShowPopup(true);
     }
-    console.log("adentro del boton")
+    console.log('adentro del boton');
   };
 
   const handleMouseLeave = () => {
     setShowPopup(false);
-    console.log("saliendo del boton")
-
+    console.log('saliendo del boton');
   };
-
 
   useEffect(() => {
     setQuestionTrivia(data[questionNumber - 1]);
@@ -64,13 +62,13 @@ export default function Trivia({
 
   const isButtonDisabled = selectedAnswer === null;
 
-  console.log(showPopup)
+  console.log(showPopup);
 
   return (
     <div className={trivia}>
       <div className={trivia_title}>{triviaTitle}</div>
       <div className={progressBarContainer}>
-        {" "}
+        {' '}
         <ProgressBar value={questionNumber - 1} />
       </div>
       <div className={pregunta}>Pregunta {questionNumber}/5</div>
@@ -87,11 +85,18 @@ export default function Trivia({
         ))}
       </div>
       <button
-        className={`${button} ${isButtonDisabled ? styles.disabled : ""}`}
+        className={`${button} ${isButtonDisabled ? styles.disabled : ''}`}
         onClick={() => handleClickButton()}
-        onMouseEnter={() => { console.log("onMouseEnter"); handleMouseEnter() }}
-        onMouseLeave={() => { console.log("onMouseLeave"); handleMouseLeave() }}
-        disabled={isButtonDisabled}>
+        onMouseEnter={() => {
+          console.log('onMouseEnter');
+          handleMouseEnter();
+        }}
+        onMouseLeave={() => {
+          console.log('onMouseLeave');
+          handleMouseLeave();
+        }}
+        disabled={isButtonDisabled}
+      >
         Próxima pregunta
       </button>
       {showPopup && isButtonDisabled && (

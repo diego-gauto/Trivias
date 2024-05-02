@@ -4,7 +4,7 @@ export interface IPm {
   default: boolean;
   id: string;
 }
-export type TPayOptionId = "card" | "transfer" | "oxxo" | "paypal";
+export type TPayOptionId = 'card' | 'transfer' | 'oxxo' | 'paypal';
 export interface IPayOption {
   title: string;
   img_select: string;
@@ -18,4 +18,4 @@ export interface ICard {
   exp_month: string;
   exp_year: string;
 }
-export type TKey = "holder" | "number" | "cvc" | "exp_month" | "exp_year";
+export type TKey = 'holder' | 'number' | 'cvc' | 'exp_month' | 'exp_year';

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 .countdown {
   width: 100%;
   display: flex;
@@ -25,49 +25,49 @@
 }
 
 .countdown .box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100px;
-	width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
   margin-top: 10px;
 }
 
 .countdown .valor {
-	font-size: 40px;
-	font-weight: 600;
-	background-color: #520795;
-	color: white;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 8px;
-	width: 100px;
-	height: 100px;
-	position: relative;
-	box-shadow: -2px 0px 5px 1px #232423ad;
+  font-size: 40px;
+  font-weight: 600;
+  background-color: #520795;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  box-shadow: -2px 0px 5px 1px #232423ad;
 }
 
 .countdown .etiqueta {
-	font-size: 13px;
-	letter-spacing: 2px;
-	margin-top: 5px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 
 @media screen and (max-width: 550px) {
-	/* .countdown .content {
+  /* .countdown .content {
 		gap: 30px;
 	} */
-	.countdown .valor {
-		font-size: 30px;
-		width: 70px;
-		height: 50px;
-	}
-	.countdown .box {
-		margin-top: 5px;
-	}
+  .countdown .valor {
+    font-size: 30px;
+    width: 70px;
+    height: 50px;
+  }
+  .countdown .box {
+    margin-top: 5px;
+  }
 
   .countdown .etiqueta {
     font-size: 11px;

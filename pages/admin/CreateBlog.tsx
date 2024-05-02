@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import CreateBlog from '../../components/admin/Blog/createBlog/CreateBlog';
 import { MainContain } from '../../screens/Styles.styled';
 const CreateBlogView = () => {
@@ -6,6 +6,6 @@ const CreateBlogView = () => {
     <MainContain>
       <CreateBlog />
     </MainContain>
-  )
-}
+  );
+};
 export default CreateBlogView;

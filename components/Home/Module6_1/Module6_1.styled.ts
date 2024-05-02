@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import styled from 'styled-components';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
 export const SliderContainer = styled.div`
   position: relative;
@@ -99,7 +99,7 @@ export const PeopleContainer = styled.div`
 export const TittleA = styled.span`
   color: #3f1168;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -108,7 +108,7 @@ export const TittleA = styled.span`
 export const TittleB = styled.span`
   color: #a733e4;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -123,7 +123,7 @@ export const MoreText = styled.div`
   bottom: 0;
   text-align: right;
   font-size: 18px;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   margin-bottom: 3%;
   @font-face {
     font-family: MONTSERRAT-BOLD;
@@ -180,7 +180,7 @@ export const FooterAText = styled.div`
   }
 
   text-align: left;
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -240,7 +240,7 @@ export const FooterAIcons = styled.div`
 
   text-align: left;
   font-size: 24px;
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -368,7 +368,7 @@ export const FooterEndText1 = styled.span`
   color: #ede7f2;
   font-weight: 100;
   font-size: 24px;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);

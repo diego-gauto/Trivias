@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { ITriviaResult } from "../../../interfaces/iTrivias";
-import ConfettiComponent from "../confetti/confettiComponent";
-import Reclamar from "../reclamar/reclamar";
-import styles from "./result.module.css";
+import { ITriviaResult } from '../../../interfaces/iTrivias';
+import ConfettiComponent from '../confetti/confettiComponent';
+import Reclamar from '../reclamar/reclamar';
+import styles from './result.module.css';
 
 const Result = (props: any) => {
-  console.log(props)
+  console.log(props);
   const [resultInfo, setResultInfo] = useState<ITriviaResult>({
-    title: "",
-    body: "",
-    img: "",
+    title: '',
+    body: '',
+    img: '',
     idTemplateBrevo: 0,
-  })
+  });
   const { title, body, img, idTemplateBrevo } = props.resultInfo;
   const { resultContainer, resultado, resultText, resultImg, share } = styles;
 
@@ -58,10 +58,13 @@ const Result = (props: any) => {
             <h2>Tu resultado:</h2>
             <h1>{title}</h1>
             <p>{body}</p>
-            <h3>Haz click en Ver regalo para recibir una sorpresa y tus resultados completos</h3>
+            <h3>
+              Haz click en Ver regalo para recibir una sorpresa y tus resultados
+              completos
+            </h3>
           </div>
           <div className={resultImg}>
-            <img src={img} alt="" />
+            <img src={img} alt='' />
           </div>
         </div>
         <div className={share}>

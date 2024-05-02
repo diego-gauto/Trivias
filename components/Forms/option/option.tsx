@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import styles from "./option.module.css";
+import styles from './option.module.css';
 
 interface Answer {
   label: string;
@@ -12,7 +12,6 @@ interface OptionComponentProps {
   options: Answer[];
   onOptionChange: (value: string) => void;
   isVisible: boolean; // Nueva prop para controlar la visibilidad
-
 }
 
 interface OptionComponentState {
@@ -23,15 +22,26 @@ interface DisplayContentProps {
   content: string;
 }
 
-const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOptionChange, isVisible }) => {
+const OptionComponent: React.FC<OptionComponentProps> = ({
+  label,
+  options,
+  onOptionChange,
+  isVisible,
+}) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const { optionContainer, optionsLabel, optionButton, optionLabel, customRadioButton } = styles
+  const {
+    optionContainer,
+    optionsLabel,
+    optionButton,
+    optionLabel,
+    customRadioButton,
+  } = styles;
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const optionValue = event.target.value
+    const optionValue = event.target.value;
     setSelectedOption(optionValue);
-    onOptionChange(optionValue)
+    onOptionChange(optionValue);
   };
 
   const handleCustomButtonClick = (option: Answer) => {
@@ -45,9 +55,7 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
       return { __html: html };
     };
 
-    return (
-      <div dangerouslySetInnerHTML={sanitizeHTML(content)} />
-    );
+    return <div dangerouslySetInnerHTML={sanitizeHTML(content)} />;
   };
 
   if (!isVisible) {
@@ -56,11 +64,13 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
 
   return (
     <div className={optionContainer}>
-      <label className={optionsLabel}>{displayContent({ content: label })}</label>
+      <label className={optionsLabel}>
+        {displayContent({ content: label })}
+      </label>
       {options.map((option, index) => (
         <div className={optionButton} key={index}>
           <input
-            type="radio"
+            type='radio'
             id={option.value}
             name={`${label}-options`}
             value={option.value}
@@ -73,7 +83,11 @@ const OptionComponent: React.FC<OptionComponentProps> = ({ label, options, onOpt
             role="button"
             tabIndex={0}>
           </span> */}
-          <label className={optionLabel} htmlFor={option.value} onClick={() => handleCustomButtonClick(option)}>
+          <label
+            className={optionLabel}
+            htmlFor={option.value}
+            onClick={() => handleCustomButtonClick(option)}
+          >
             {/* {option.split("111").map((line, idx) => (
               <span key={idx}>
                 {line}

@@ -4,56 +4,50 @@
   flex-direction: column;
   max-width: 222px;
 
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   text-align: center;
 
-  color: #520795; 
-
+  color: #520795;
 
   .cardImage {
-
     max-width: auto;
     max-height: 268px;
     border-radius: 40px;
-  
   }
 
-  .cardTitle{
-    color:#D244D1;
+  .cardTitle {
+    color: #d244d1;
     margin-top: 30px;
     font-weight: 600;
     font-size: 22px;
     line-height: 25px;
   }
 
-  .cardDescription{
+  .cardDescription {
     color: #520795;
     font-weight: 500;
-
   }
 
-  .cardExtra{
+  .cardExtra {
     text-align: center;
     font-style: italic;
     font-size: 18px;
     font-weight: 500;
   }
-
 }
 
 @media screen and (max-width: 510px) {
-
   .cardContainer {
     max-width: 100%;
     flex-direction: row;
     margin-bottom: 5%;
     align-items: center;
 
-    .cardText{
+    .cardText {
       padding: 0 1%;
 
-      .cardTitle{
+      .cardTitle {
         margin-top: 20px;
       }
     }
@@ -61,26 +55,24 @@
 }
 
 @media screen and (max-width: 420px) {
-
   .cardContainer {
     max-width: 100%;
     max-height: 100%;
     margin-bottom: 0;
 
-    .cardImage{
+    .cardImage {
       max-width: auto;
       max-height: 80%;
     }
 
-    .cardText{
+    .cardText {
       max-width: 80%;
       max-height: auto;
 
-      .cardTitle{
+      .cardTitle {
         font-size: 18px;
         line-height: 20px;
       }
     }
-  
   }
 }

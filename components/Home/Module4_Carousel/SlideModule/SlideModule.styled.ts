@@ -1,6 +1,6 @@
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const SlideModuleContainer = styled(Container)`
   padding: 0;
@@ -132,7 +132,7 @@ export const NewTag = styled.div`
 `;
 
 export const TextNew = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -148,7 +148,7 @@ export const TextNew = styled.span`
   }
 `;
 export const Text01 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -159,7 +159,7 @@ export const Text01 = styled.span`
   }
 `;
 export const Text01_p = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-weight: 700;
   font-size: 14px;
   color: #a733e4;
@@ -175,7 +175,7 @@ export const Text01_p = styled.span`
   // }
 `;
 export const Text02 = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -187,7 +187,7 @@ export const Text02 = styled.span`
   }
 `;
 export const Text02_p = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-weight: 700;
   font-size: 14px;
   color: #3f1168;
@@ -207,7 +207,7 @@ export const Text03 = styled.span<{ level: any }>`
     font-family: Montserrat;
     src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
-  font-family: "Raleway";
+  font-family: 'Raleway';
   display: flex;
   align-items: center;
 
@@ -220,27 +220,27 @@ export const Text03 = styled.span<{ level: any }>`
     letter-spacing: 2.5px;
   }
   ${(props) =>
-    props.level == "Muy Fácil" &&
+    props.level == 'Muy Fácil' &&
     css`
       color: #006ca8;
     `}
   ${(props) =>
-    props.level == "Fácil" &&
+    props.level == 'Fácil' &&
     css`
       color: #8c5098;
     `}
       ${(props) =>
-    props.level == "Intermedio" &&
+    props.level == 'Intermedio' &&
     css`
       color: #ec7501;
     `}
     ${(props) =>
-    props.level == "Avanzado" &&
+    props.level == 'Avanzado' &&
     css`
       color: #149e62;
     `}
       ${(props) =>
-    props.level == "Máster" &&
+    props.level == 'Máster' &&
     css`
       color: #d22978;
     `}

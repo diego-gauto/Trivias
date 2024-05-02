@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   background: #f8e4cc;
@@ -31,27 +31,27 @@ export const TextColor = styled.h6<{ level: any }>`
   letter-spacing: 2.5px;
   font-size: 14px;
   ${(props) =>
-    props.level == "Muy Fácil" &&
+    props.level == 'Muy Fácil' &&
     css`
       color: #006ca8;
     `}
   ${(props) =>
-    props.level == "Fácil" &&
+    props.level == 'Fácil' &&
     css`
       color: #8c5098;
     `}
       ${(props) =>
-    props.level == "Intermedio" &&
+    props.level == 'Intermedio' &&
     css`
       color: #ec7501;
     `}
     ${(props) =>
-    props.level == "Avanzado" &&
+    props.level == 'Avanzado' &&
     css`
       color: #149e62;
     `}
       ${(props) =>
-    props.level == "Máster" &&
+    props.level == 'Máster' &&
     css`
       color: #d22978;
     `}

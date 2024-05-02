@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Selected = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const Selected = styled.div`
   font-size: 14px;
   padding-left: 20px;
   height: 43px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 10px;
   border-radius: 30px;
   border: 1px solid #6717cd;
@@ -42,40 +42,40 @@ export const Option = styled.div`
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
 `;
 export const OptionColor = styled.div<{ color: string }>`
   ${(props) =>
-    props.color == "azul" &&
+    props.color == 'azul' &&
     css`
       background-color: #6778f9;
       border-radius: 10px 10px 0 0;
     `}
   ${(props) =>
-    props.color == "amarillo" &&
+    props.color == 'amarillo' &&
     css`
       background-color: #e2a12d;
     `}
     ${(props) =>
-    props.color == "morado" &&
+    props.color == 'morado' &&
     css`
       background-color: #9900ee;
     `}
     ${(props) =>
-    props.color == "naranja" &&
+    props.color == 'naranja' &&
     css`
       background-color: #f04a18;
     `}
     ${(props) =>
-    props.color == "rosa" &&
+    props.color == 'rosa' &&
     css`
       background-color: #d445d3;
     `}
     ${(props) =>
-    props.color == "verde" &&
+    props.color == 'verde' &&
     css`
       background-color: #03bc80;
       border-radius: 0 0 10px 10px;
@@ -91,7 +91,7 @@ export const OptionColor = styled.div<{ color: string }>`
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -108,7 +108,7 @@ export const OptionCat = styled.div<{ category: string; marked: string }>`
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -140,7 +140,7 @@ export const OptionProfessor = styled.div<{
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -157,7 +157,7 @@ export const OptionMat = styled.div<{ material: string; marked: string }>`
     }
   }
   input {
-    &[type="radio"] {
+    &[type='radio'] {
       display: none;
     }
   }
@@ -182,7 +182,7 @@ export const Label2 = styled.label`
   max-width: 95%;
   overflow: hidden;
   padding-inline: 20px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   white-space: nowrap;
   &:hover {

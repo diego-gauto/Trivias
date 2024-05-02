@@ -1,88 +1,88 @@
-.successContainer{
+.successContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 95%;
   height: auto;
 
-    .title{
-        margin: 0;
-        font-family: "Montserrat";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 50px;
-        line-height: 55px;
-        text-align: center;
-      
-        color: #520795;   
-    }
+  .title {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 55px;
+    text-align: center;
 
-    .ganaste{
-      max-width: 90%;
-      margin: 5px 0;
-      font-family: "Montserrat";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 23px;
-      text-align:start;
-      color: #520795;
+    color: #520795;
+  }
 
-      .span{
-        font-weight: 600;
-        color: #CD42D3;
-      }
-    }
+  .ganaste {
+    max-width: 90%;
+    margin: 5px 0;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: start;
+    color: #520795;
 
-    .red{
-      color:#FF1616;
-      font-size: 20px;
+    .span {
       font-weight: 600;
-      text-align:center;
-      margin: 0;
-
-      .tachado{
-        text-decoration: line-through;
-      }
+      color: #cd42d3;
     }
+  }
 
-    .green{
-      color:#16A854;
-      font-size: 38px;
-      font-weight: 600;
-      text-align:center;
-      margin: 0;
-    }
+  .red {
+    color: #ff1616;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
 
-    .acceso{
-      color:#16A854;
-      font-size: 16px;
-      font-style: italic;
-      font-weight: 500;
-      text-align:center;
-      margin: 0;
-      position: relative;
-      top:-8px;
+    .tachado {
+      text-decoration: line-through;
     }
+  }
 
-    .recomendamos{
-      color:#520795;
-      font-size: 14px;
-      font-weight: 500;
-      text-align:start;
-      margin: 5px 0 10px 0;
-    }
+  .green {
+    color: #16a854;
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+  }
 
-    .revisa{
-      color:#520795;
-      font-size: 13px;
-      font-weight: 500;
-      text-align:start;
-      width: 90%;
-    }
+  .acceso {
+    color: #16a854;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: -8px;
+  }
+
+  .recomendamos {
+    color: #520795;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: start;
+    margin: 5px 0 10px 0;
+  }
+
+  .revisa {
+    color: #520795;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: start;
+    width: 90%;
+  }
 }
 
-.successContainer .buttonContainer{
+.successContainer .buttonContainer {
   text-decoration: none;
   display: flex;
   justify-content: space-around;
@@ -91,7 +91,7 @@
 }
 
 .buttonContainer button {
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
@@ -113,14 +113,13 @@
 }
 
 @media screen and (max-width: 1190px) {
-
-  .successContainer .buttonContainer{
+  .successContainer .buttonContainer {
     justify-content: center;
     width: 100%;
     padding-bottom: 2%;
   }
 
-  .successContainer .buttonContainer{
+  .successContainer .buttonContainer {
     flex-direction: column;
     align-items: center;
   }
@@ -131,8 +130,7 @@
 }
 
 @media screen and (max-width: 950px) {
-
-  .successContainer .buttonContainer{
+  .successContainer .buttonContainer {
     flex-direction: column;
     align-items: center;
   }
@@ -143,55 +141,53 @@
 }
 
 @media screen and (max-width: 800px) {
-
-  .successContainer{
+  .successContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 100%;
   }
 
-  .successContainer .width80{
+  .successContainer .width80 {
     max-width: 100%;
   }
 
-  .successContainer .ganaste{
-    max-width: 100%;
-    padding: 0 2%;
-    text-align: center;
-  }
-
-  .successContainer .recomendamos{
+  .successContainer .ganaste {
     max-width: 100%;
     padding: 0 2%;
     text-align: center;
   }
 
-  .successContainer .revisa{
+  .successContainer .recomendamos {
+    max-width: 100%;
+    padding: 0 2%;
+    text-align: center;
+  }
+
+  .successContainer .revisa {
     width: 90%;
     padding: 0 2%;
     text-align: center;
   }
 
-  .centrado{
+  .centrado {
     padding-left: 0;
     display: flex;
     justify-content: center;
   }
 
-    .successContainer .buttonContainer{
-      flex-direction: row;
-      align-items: center;
-    }
-  
-    .buttonContainer a {
-      margin: 1% 2%; /* Agregar espacio entre los botones */
-    }
+  .successContainer .buttonContainer {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .buttonContainer a {
+    margin: 1% 2%; /* Agregar espacio entre los botones */
+  }
 }
 
 @media screen and (max-width: 550px) {
-
-  .successContainer .buttonContainer{
+  .successContainer .buttonContainer {
     flex-direction: column;
     align-items: center;
   }
@@ -202,23 +198,21 @@
 }
 
 @media screen and (max-width: 371px) {
-
-  .successContainer{
-
-    .red{
+  .successContainer {
+    .red {
       padding: 0 10%;
     }
 
-    .green{
+    .green {
       font-size: 30px;
     }
 
-    .title{
+    .title {
       font-size: 42px;
       line-height: 45px;
     }
 
-    .ganaste{
+    .ganaste {
       max-width: 100%;
       font-size: 15px;
       line-height: 20px;

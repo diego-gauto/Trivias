@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { useCourse } from '../../../../../hooks/useLesson';
 import { HamburgerContainer, RightSide } from '../../LessonNew.styled';
 import Top from '../Top/Top';
@@ -21,14 +21,21 @@ const RightComponent = ({ course, context }: RightComponentProps) => {
   return (
     <div className='right-side'>
       <div className='nav-course'>
-        <img src="/images/Navbar/NavbarLogo2.png" alt="" />
+        <img src='/images/Navbar/NavbarLogo2.png' alt='' />
         <HamburgerContainer>
-          {!open ? <GiHamburgerMenu onClick={() => {
-            setOpen(!open)
-          }}></GiHamburgerMenu> :
-            <AiOutlineClose onClick={() => {
-              setOpen(!open)
-            }}></AiOutlineClose>}
+          {!open ? (
+            <GiHamburgerMenu
+              onClick={() => {
+                setOpen(!open);
+              }}
+            ></GiHamburgerMenu>
+          ) : (
+            <AiOutlineClose
+              onClick={() => {
+                setOpen(!open);
+              }}
+            ></AiOutlineClose>
+          )}
           <p>Lecciones</p>
         </HamburgerContainer>
       </div>
@@ -38,7 +45,6 @@ const RightComponent = ({ course, context }: RightComponentProps) => {
         <Menu course={course} user={context.user as IUserInfoResult} />
       </RightSide>
     </div>
-
-  )
-}
+  );
+};
 export default RightComponent;

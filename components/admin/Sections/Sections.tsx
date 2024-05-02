@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { AdminContain, Table } from "../SideBar.styled";
-import AdminDataUpdate from "./AdminData/AdminDataUpdate";
+import { useEffect, useState } from 'react';
+import { AdminContain, Table } from '../SideBar.styled';
+import AdminDataUpdate from './AdminData/AdminDataUpdate';
 import {
   Container,
   GeneralContain,
@@ -10,25 +10,31 @@ import {
   TitleBox,
   TitleContain,
   ModalContain,
-} from "./Sections.styled";
-import { Admin, getAdmins, getGenericQueryResponse, getUserByEmailApi, updateUserRoleApi } from "../../api/admin";
-import { Button } from "../Courses/CourseMain.styled";
-import { IoClose } from "react-icons/io5";
-import { getCoursesApi } from "../../api/lessons";
-import { defaultValues, /*getRolesWithDefaults*/ } from './DefaultValues';
-import { IRole } from "../Comments/Comments";
+} from './Sections.styled';
+import {
+  Admin,
+  getAdmins,
+  getGenericQueryResponse,
+  getUserByEmailApi,
+  updateUserRoleApi,
+} from '../../api/admin';
+import { Button } from '../Courses/CourseMain.styled';
+import { IoClose } from 'react-icons/io5';
+import { getCoursesApi } from '../../api/lessons';
+import { defaultValues /*getRolesWithDefaults*/ } from './DefaultValues';
+import { IRole } from '../Comments/Comments';
 
 export type INewUser = {
-  name?: string,
-  email?: string,
-  phoneNumber?: number,
+  name?: string;
+  email?: string;
+  phoneNumber?: number;
   created_at?: {
-    seconds: number,
-    nanoseconds: number
-  },
-  score?: string,
-  role?: string,
-  id?: string,
+    seconds: number;
+    nanoseconds: number;
+  };
+  score?: string;
+  role?: string;
+  id?: string;
   adminType?: {
     general: boolean;
     pay: boolean;
@@ -40,7 +46,7 @@ export type INewUser = {
     superAdmin: boolean;
     blogs: boolean;
     assignments: boolean;
-  }
+  };
 };
 
 const Sections = () => {
@@ -48,10 +54,12 @@ const Sections = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [selectedAdmin, setSelectedAdmin] = useState<Admin>({} as Admin);
   const [newMember, setNewMember] = useState<boolean>(false);
-  const [member, setMember] = useState<any>("");
+  const [member, setMember] = useState<any>('');
   const [find, setFind] = useState<boolean>(false);
   const [user, setUser] = useState<any>({});
-  const [courses, setCourses] = useState<{ id: number, title: string, published: boolean }[]>([]);
+  const [courses, setCourses] = useState<
+    { id: number; title: string; published: boolean }[]
+  >([]);
   const [displayValue, setDisplayValue] = useState<string>('none');
   const [topValue, setTopValue] = useState<string>('-100%');
 
@@ -59,12 +67,14 @@ const Sections = () => {
     try {
       const query = `select id, title, published from courses order by title;`;
       const response = await getGenericQueryResponse(query);
-      const coursesData = response.data.data.map(c => { return { ...c, published: c.published === 1 } });
+      const coursesData = response.data.data.map((c) => {
+        return { ...c, published: c.published === 1 };
+      });
       setCourses(coursesData);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const editRole = async (user: Admin): Promise<void> => {
     // setIsVisible(true);
@@ -75,12 +85,12 @@ const Sections = () => {
   useEffect(() => {
     retrieveAdmin();
     getAllCourses();
-  }, [])
+  }, []);
 
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime();
-    return new Date(tempDate).toLocaleDateString("es-MX")
-  }
+    return new Date(tempDate).toLocaleDateString('es-MX');
+  };
 
   const retrieveAdmin = async () => {
     try {
@@ -88,10 +98,10 @@ const Sections = () => {
       const admins = res.data.admins;
       const getRolesWithDefaults = (
         currentValues: any[],
-        userId: number
+        userId: number,
       ): any[] => {
-        const dvRoles = defaultValues.map(dv => dv.role);
-        const cvRoles = currentValues.map(cv => cv.role);
+        const dvRoles = defaultValues.map((dv) => dv.role);
+        const cvRoles = currentValues.map((cv) => cv.role);
         const result = dvRoles.map((dvRole, dvIndex) => {
           const indexOfRole = cvRoles.indexOf(dvRole);
           if (indexOfRole !== -1) {
@@ -100,49 +110,53 @@ const Sections = () => {
           return defaultValues[dvIndex];
         });
 
-        return result.filter(v => v !== undefined).map(v => { return { ...v, user_id: userId } });
+        return result
+          .filter((v) => v !== undefined)
+          .map((v) => {
+            return { ...v, user_id: userId };
+          });
       };
 
       const newAdmins = admins.map((admin) => {
         return {
           ...admin,
-          adminTypes: getRolesWithDefaults(admin.adminTypes, admin.user_id)
-        }
+          adminTypes: getRolesWithDefaults(admin.adminTypes, admin.user_id),
+        };
       });
       setUsers(newAdmins);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const handleClick = () => {
     retrieveAdmin();
-  }
+  };
 
   const search = () => {
-    if (member !== "") {
+    if (member !== '') {
       let temp = {
-        email: member
-      }
+        email: member,
+      };
       getUserByEmailApi(temp).then((res) => {
-        setMember("");
+        setMember('');
         setUser(res.data.user);
         setFind(true);
-      })
+      });
     }
-  }
+  };
 
   const updateRole = () => {
     let temp = {
-      userId: user[0].id
-    }
+      userId: user[0].id,
+    };
     updateUserRoleApi(temp).then(() => {
-      setMember("");
+      setMember('');
       setFind(false);
       setNewMember(false);
       retrieveAdmin();
-    })
-  }
+    });
+  };
 
   const setModalVisible = (show: boolean) => {
     if (show) {
@@ -154,7 +168,7 @@ const Sections = () => {
       setTopValue('-100%');
       setIsVisible(false);
     }
-  }
+  };
 
   return (
     <AdminContain>
@@ -165,9 +179,15 @@ const Sections = () => {
         <Container>
           <TitleContain>
             <GonvarTitle>Lista de administradores</GonvarTitle>
-            <Button onClick={() => { setNewMember(true); }}>Nuevo miembro</Button>
+            <Button
+              onClick={() => {
+                setNewMember(true);
+              }}
+            >
+              Nuevo miembro
+            </Button>
           </TitleContain>
-          <Table id="Users">
+          <Table id='Users'>
             <tbody style={{ display: 'inline-table', width: '100%' }}>
               <tr>
                 <th>Administrador</th>
@@ -181,46 +201,76 @@ const Sections = () => {
                 users.map((user, index): any => {
                   return (
                     <tr key={index} onClick={() => editRole(user)}>
-                      <td >
-                        {user.name}
-                      </td>
-                      <td >{user.email}</td>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
                       <td>{formatDate(user.created_at)}</td>
-                      {user.role === 'superAdmin' ? (<td>superAdmin</td>) : (<td>admin</td>)}
-                      {user.role === 'superAdmin' ? (<td >Visualizar</td>) : (<td >Editar</td>)}
+                      {user.role === 'superAdmin' ? (
+                        <td>superAdmin</td>
+                      ) : (
+                        <td>admin</td>
+                      )}
+                      {user.role === 'superAdmin' ? (
+                        <td>Visualizar</td>
+                      ) : (
+                        <td>Editar</td>
+                      )}
                     </tr>
-                  )
+                  );
                 })
               ) : (
                 <td>Sin administradores</td>
               )}
-
             </tbody>
           </Table>
         </Container>
-        <ModalContain className="modal" style={{ display: `${displayValue}`, top: `${topValue}` }}>
-          {
-            isVisible &&
-            <AdminDataUpdate admin={selectedAdmin} setIsVisible={setModalVisible} handleClick={handleClick} courses={courses} />
-          }
+        <ModalContain
+          className='modal'
+          style={{ display: `${displayValue}`, top: `${topValue}` }}
+        >
+          {isVisible && (
+            <AdminDataUpdate
+              admin={selectedAdmin}
+              setIsVisible={setModalVisible}
+              handleClick={handleClick}
+              courses={courses}
+            />
+          )}
         </ModalContain>
       </GeneralContain>
-      {newMember && <NewUser>
-        <IoClose onClick={() => { setNewMember(false); setMember(""); setFind(false); setUser({}) }} />
-        <div className="filter">
-          <input defaultValue={member} type="text" placeholder="Buscar por email" onChange={(e) => setMember(e.target.value)} />
-          <Button onClick={search}>Buscar</Button>
-        </div>
-        {(find && user.length > 0) && <div className="column">
-          <p>{user[0].name}</p>
-          <p>{user[0].email}</p>
-          <Button onClick={updateRole}>Hacer miembro</Button>
-        </div>}
-        {(find && user.length === 0) && <div className="column">
-          <p>No se encontró un usuario</p>
-        </div>}
-      </NewUser>}
+      {newMember && (
+        <NewUser>
+          <IoClose
+            onClick={() => {
+              setNewMember(false);
+              setMember('');
+              setFind(false);
+              setUser({});
+            }}
+          />
+          <div className='filter'>
+            <input
+              defaultValue={member}
+              type='text'
+              placeholder='Buscar por email'
+              onChange={(e) => setMember(e.target.value)}
+            />
+            <Button onClick={search}>Buscar</Button>
+          </div>
+          {find && user.length > 0 && (
+            <div className='column'>
+              <p>{user[0].name}</p>
+              <p>{user[0].email}</p>
+              <Button onClick={updateRole}>Hacer miembro</Button>
+            </div>
+          )}
+          {find && user.length === 0 && (
+            <div className='column'>
+              <p>No se encontró un usuario</p>
+            </div>
+          )}
+        </NewUser>
+      )}
     </AdminContain>
-  )
-}
+  );
+};
 export default Sections;

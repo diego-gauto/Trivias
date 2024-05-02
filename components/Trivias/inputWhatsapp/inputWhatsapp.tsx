@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import PhoneInput from "react-phone-input-2";
-import es from "react-phone-input-2/lang/es.json";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from 'react-phone-input-2';
+import es from 'react-phone-input-2/lang/es.json';
+import 'react-phone-input-2/lib/style.css';
 
-import styles from "./inputWhatsapp.module.css";
+import styles from './inputWhatsapp.module.css';
 
 const InputPais = (props: any) => {
-  const [country, setCountry] = useState("mx");
-  const [countryName, setCountryName] = useState("");
-  const [value, setValue] = useState("");
+  const [country, setCountry] = useState('mx');
+  const [countryName, setCountryName] = useState('');
+  const [value, setValue] = useState('');
 
-  const { label, formControl, flagDropdown, flagButton, PhoneInputGroup } = styles;
+  const { label, formControl, flagDropdown, flagButton, PhoneInputGroup } =
+    styles;
 
   const handleChange = (value: any, selectedCountry: any) => {
     setCountry(selectedCountry.countryCode);
 
-    const selectedCountryName = (es as Record<string, string>)[selectedCountry.countryCode];
+    const selectedCountryName = (es as Record<string, string>)[
+      selectedCountry.countryCode
+    ];
     if (selectedCountryName) {
       setCountryName(selectedCountryName);
     }

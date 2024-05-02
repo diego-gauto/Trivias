@@ -1,5 +1,5 @@
-import { Col, Row, Container } from "react-bootstrap";
-import styled from "styled-components";
+import { Col, Row, Container } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ColorContainer = styled.div`
   background-color: #e2a6e5;
@@ -35,7 +35,7 @@ export const Tittle = styled.h3`
   background: linear-gradient(to right, #942ced, #d244d1);
   -webkit-text-fill-color: transparent;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -55,7 +55,7 @@ export const Tittle = styled.h3`
 export const Subtittle_1 = styled.span`
   color: #3f1168;
   font-size: 28px;
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -75,7 +75,7 @@ export const Subtittle_1 = styled.span`
 export const Subtittle_2 = styled.span`
   color: #942ced;
   font-size: 28px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -225,7 +225,7 @@ export const TittleMobile = styled.h3`
   -webkit-text-fill-color: transparent;
 
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -242,7 +242,7 @@ export const TittleMobile = styled.h3`
 export const Subtittle_1Mobile = styled.span`
   color: #3f1168;
   font-size: 28px;
-  font-family: "MONTSERRAT-MEDIUM" !important;
+  font-family: 'MONTSERRAT-MEDIUM' !important;
   @font-face {
     font-family: MONTSERRAT-MEDIUM;
     src: url(../fonts/MONTSERRAT-MEDIUM.ttf);
@@ -266,7 +266,7 @@ export const Subtittle_1Mobile = styled.span`
 export const Subtittle_2Mobile = styled.span`
   color: #942ced;
   font-size: 28px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);

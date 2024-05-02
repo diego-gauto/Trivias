@@ -1,20 +1,28 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import { ISlideModule } from "./ISlideModule";
-import React, { Component, useEffect, useState } from "react";
+import { Container, Col, Row, Button, Image } from 'react-bootstrap';
+import { ISlideModule } from './ISlideModule';
+import React, { Component, useEffect, useState } from 'react';
 
-import { ContainerMain, NewTag, SlideImg, Text01, Text02, TextNew, TextSectionWrapper } from "./SlideModule.styled";
+import {
+  ContainerMain,
+  NewTag,
+  SlideImg,
+  Text01,
+  Text02,
+  TextNew,
+  TextSectionWrapper,
+} from './SlideModule.styled';
 
 export const SlideModule = (props: ISlideModule) => {
   const { isNew, title, subtitle, imgURL } = props;
-  const [img, setImg] = useState("")
+  const [img, setImg] = useState('');
 
   const awaitImg = async () => {
-    const resolvedImg = await imgURL
-    setImg(resolvedImg)
-  }
+    const resolvedImg = await imgURL;
+    setImg(resolvedImg);
+  };
   useEffect(() => {
-    awaitImg()
-  }, [])
+    awaitImg();
+  }, []);
 
   return (
     <Container>
@@ -22,15 +30,13 @@ export const SlideModule = (props: ISlideModule) => {
         <Col>
           <Row>
             <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-
-              {
-                isNew ?
-                  <NewTag>
-                    <TextNew>Nuevo</TextNew>
-                  </NewTag>
-                  : <></>
-              }
-
+              {isNew ? (
+                <NewTag>
+                  <TextNew>Nuevo</TextNew>
+                </NewTag>
+              ) : (
+                <></>
+              )}
             </SlideImg>
           </Row>
 
@@ -43,7 +49,7 @@ export const SlideModule = (props: ISlideModule) => {
             </Row>
           </TextSectionWrapper>
         </Col>
-      </ContainerMain >
-    </Container >
-  )
-}
+      </ContainerMain>
+    </Container>
+  );
+};

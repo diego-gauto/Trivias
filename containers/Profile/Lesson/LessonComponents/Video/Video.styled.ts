@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styled from "styled-components";
+import Image from 'next/image';
+import styled from 'styled-components';
 
 export const Segment = styled.div`
   display: flex;
@@ -74,7 +74,7 @@ export const VideoContain = styled.div`
 `;
 export const Title = styled.h1`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 1023px) {
     font-size: 20px;

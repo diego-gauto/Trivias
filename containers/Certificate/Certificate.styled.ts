@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div<{ color: any }>`
   display: flex;
@@ -34,34 +34,34 @@ export const MainContainer = styled.div<{ color: any }>`
     width: 850px;
     height: 600px;
     ${(props) =>
-      props.color == "azul" &&
+      props.color == 'azul' &&
       css`
-        background-image: url("../images/Certificates/cert-blue.jpg");
+        background-image: url('../images/Certificates/cert-blue.jpg');
       `}
     ${(props) =>
-      props.color == "amarillo" &&
+      props.color == 'amarillo' &&
       css`
-        background-image: url("../images/Certificates/cert-yellow.jpg");
+        background-image: url('../images/Certificates/cert-yellow.jpg');
       `}
        ${(props) =>
-      props.color == "morado" &&
+      props.color == 'morado' &&
       css`
-        background-image: url("../images/Certificates/cert-purple.jpg");
+        background-image: url('../images/Certificates/cert-purple.jpg');
       `}
        ${(props) =>
-      props.color == "naranja" &&
+      props.color == 'naranja' &&
       css`
-        background-image: url("../images/Certificates/cert-orange.jpg");
+        background-image: url('../images/Certificates/cert-orange.jpg');
       `}
        ${(props) =>
-      props.color == "rosa" &&
+      props.color == 'rosa' &&
       css`
-        background-image: url("../images/Certificates/cert-pink.jpg");
+        background-image: url('../images/Certificates/cert-pink.jpg');
       `}
        ${(props) =>
-      props.color == "verde" &&
+      props.color == 'verde' &&
       css`
-        background-image: url("../images/Certificates/cert-green.jpg");
+        background-image: url('../images/Certificates/cert-green.jpg');
       `}
     background-repeat: no-repeat;
     background-size: 100%;

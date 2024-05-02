@@ -1,4 +1,4 @@
-import styles from "./notfound.module.css";
+import styles from './notfound.module.css';
 
 const NotFoundForm = () => {
   const { container, textContainer, title, subtitle, paragraph, imgContainer } =
@@ -16,7 +16,7 @@ const NotFoundForm = () => {
       </div>
 
       <div className={imgContainer}>
-        <img alt="Mujer duda" src="/images/forms/notfound.png" />
+        <img alt='Mujer duda' src='/images/forms/notfound.png' />
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
+import { Modal } from 'react-bootstrap';
+import { IoClose } from 'react-icons/io5';
 
-
-import { Modal } from "react-bootstrap";
-import { IoClose } from "react-icons/io5";
-
-import { AlertModalContain } from "./AlertModal.styled";
+import { AlertModalContain } from './AlertModal.styled';
 
 interface IModal {
   show: boolean;
@@ -13,14 +11,12 @@ interface IModal {
 const AlertModal = (props: IModal) => {
   const { show, onHide, message } = props;
   return (
-    <Modal show={show} onHide={onHide} centered >
+    <Modal show={show} onHide={onHide} centered>
       <AlertModalContain>
-        <p>
-          {message}
-        </p>
+        <p>{message}</p>
         <IoClose className='close-icon' onClick={onHide} />
       </AlertModalContain>
     </Modal>
-  )
-}
+  );
+};
 export default AlertModal;

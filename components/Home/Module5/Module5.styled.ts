@@ -1,6 +1,6 @@
-import Image from "next/image";
-import styled from "styled-components";
-import { Col, Row } from "react-bootstrap";
+import Image from 'next/image';
+import styled from 'styled-components';
+import { Col, Row } from 'react-bootstrap';
 
 export const Container = styled.div`
   background-image: url(../images/background.png);
@@ -31,7 +31,7 @@ export const MasonryBox = styled.div`
   justify-content: center;
 `;
 export const MasonryTitle = styled.h2`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 36px;
   @media only screen and (max-width: 1024px) {
     text-align: center;
@@ -144,7 +144,7 @@ export const MasonryCardAlignB = styled.div`
   }
 `;
 export const CardTitle = styled.h2`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
 `;
 export const DecoImage = styled(Image)`

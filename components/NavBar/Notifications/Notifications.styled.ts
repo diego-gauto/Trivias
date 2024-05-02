@@ -16,7 +16,7 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   gap: 20px;
   display: flex;
   flex-direction: column;
-  ${props =>
+  ${(props) =>
     props.not &&
     css`
       overflow: auto;
@@ -92,7 +92,7 @@ export const NotificationData = styled.div<{
         margin: auto;
       }
     }
-    ${props =>
+    ${(props) =>
       (props.status === 1 || props.newStatus) &&
       css`
         background-color: white;

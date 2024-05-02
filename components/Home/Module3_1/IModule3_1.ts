@@ -1,3 +1,1 @@
-export interface IModule3{ 
-  
-}
+export interface IModule3 {}

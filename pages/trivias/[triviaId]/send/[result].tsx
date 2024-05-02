@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { isValidPhoneNumber } from "react-phone-number-input";
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
-import { useFormik } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
+import { useFormik } from 'formik';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
-import { getUserApi } from "../../../../components/api/users";
-import { emailTrivia, userTrivia } from "../../../../components/api/usertrivia";
-import InputMail from "../../../../components/Trivias/inputMail/inputMail";
-import InputNombre from "../../../../components/Trivias/inputNombre/inputNombre";
-import InputWatsapp from "../../../../components/Trivias/inputWhatsapp/inputWhatsapp";
-import styles from "./form.module.css";
+import { getUserApi } from '../../../../components/api/users';
+import { emailTrivia, userTrivia } from '../../../../components/api/usertrivia';
+import InputMail from '../../../../components/Trivias/inputMail/inputMail';
+import InputNombre from '../../../../components/Trivias/inputNombre/inputNombre';
+import InputWatsapp from '../../../../components/Trivias/inputWhatsapp/inputWhatsapp';
+import styles from './form.module.css';
 
 const Form = () => {
   const {
@@ -25,7 +25,6 @@ const Form = () => {
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-
 
   const {
     formContainer,
@@ -49,31 +48,38 @@ const Form = () => {
     bold,
     ital,
     nota,
-    ganaste
+    ganaste,
   } = styles;
 
   const validationSchema = Yup.object().shape({
-    nombre: Yup.string().required('El nombre es obligatorio').min(3, 'El nombre debe tener al menos 3 letras'),
-    apellido: Yup.string().required('El apellido es obligatorio').min(3, 'El apellido debe tener al menos 3 letras'),
-    correo: Yup.string().required('El correo electrónico es obligatorio').email('El correo electrónico no es válido'),
-    numeroWhatsApp: Yup.string().required('El número de WhatsApp es obligatorio')
+    nombre: Yup.string()
+      .required('El nombre es obligatorio')
+      .min(3, 'El nombre debe tener al menos 3 letras'),
+    apellido: Yup.string()
+      .required('El apellido es obligatorio')
+      .min(3, 'El apellido debe tener al menos 3 letras'),
+    correo: Yup.string()
+      .required('El correo electrónico es obligatorio')
+      .email('El correo electrónico no es válido'),
+    numeroWhatsApp: Yup.string().required(
+      'El número de WhatsApp es obligatorio',
+    ),
   });
 
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      correo: "",
-      numeroWhatsApp: "",
-      codigoPais: "",
-      nombrePais: ""
+      nombre: '',
+      apellido: '',
+      correo: '',
+      numeroWhatsApp: '',
+      codigoPais: '',
+      nombrePais: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       await handleSubmit(values);
     },
   });
-
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
@@ -87,17 +93,19 @@ const Form = () => {
     formik.setFieldValue('correo', event.target.value);
   };
 
+  const handlePaisChange = (
+    value: any,
+    selectedCountry: any,
+    selectedCode: any,
+  ) => {
+    formik.setFieldValue('numeroWhatsApp', value);
+    formik.setFieldValue('nombrePais', selectedCountry);
+    formik.setFieldValue('codigoPais', selectedCode);
 
-  const handlePaisChange = (value: any, selectedCountry: any, selectedCode: any) => {
-    formik.setFieldValue("numeroWhatsApp", value);
-    formik.setFieldValue("nombrePais", selectedCountry);
-    formik.setFieldValue("codigoPais", selectedCode)
-
-    const isValid = isValidPhoneNumber(value, selectedCode)
-    console.log(value)
-    console.log(selectedCode)
-    console.log(isValid)
-
+    const isValid = isValidPhoneNumber(value, selectedCode);
+    console.log(value);
+    console.log(selectedCode);
+    console.log(isValid);
   };
 
   const handleCheckboxChange = () => {
@@ -122,11 +130,10 @@ const Form = () => {
 
   const handleRedirect = (createUserSuccess: boolean) => {
     router.push(`/trivias/final?createUserSuccess=${createUserSuccess}`);
-    console.log("entro")
+    console.log('entro');
   };
 
   const handleSubmit = async (values: any) => {
-
     const lowerCaseMail = values.correo.toLowerCase();
 
     const createUserDto = {
@@ -140,7 +147,7 @@ const Form = () => {
       resultadoTrivia: result,
     };
 
-    console.log(createUserDto)
+    console.log(createUserDto);
 
     let createUserSuccess = false;
 
@@ -152,8 +159,8 @@ const Form = () => {
         createUserSuccess = true;
         const sendEmailDto = {
           to: lowerCaseMail,
-          username: values.nombre + " " + values.apellido,
-          subject: "Prueba 2",
+          username: values.nombre + ' ' + values.apellido,
+          subject: 'Prueba 2',
           idTemplateBrevo: Number(br),
         };
 
@@ -161,17 +168,17 @@ const Form = () => {
 
         console.log(sendEmailResponse);
       } else {
-        console.log("El usuario ya jugó a esta trivia");
+        console.log('El usuario ya jugó a esta trivia');
       }
     } catch (error) {
-      console.error("Error al crear el usuario", error);
+      console.error('Error al crear el usuario', error);
     }
 
     handleRedirect(createUserSuccess);
   };
 
   const handleButtonClick = () => {
-    console.log("button clicked")
+    console.log('button clicked');
     // Marcar todos los campos como "touched"
     formik.setTouched({
       nombre: true,
@@ -193,19 +200,19 @@ const Form = () => {
         try {
           formik.handleSubmit();
         } catch (error) {
-          console.error("Error al enviar el formulario", error);
+          console.error('Error al enviar el formulario', error);
         }
       }
     });
   };
 
   useEffect(() => {
-    if (localStorage.getItem("email")) {
-      getUserApi(localStorage.getItem("email")).then((res) => {
+    if (localStorage.getItem('email')) {
+      getUserApi(localStorage.getItem('email')).then((res) => {
         setUserData(res);
-        formik.setFieldValue("nombre", res.name);
-        formik.setFieldValue("apellido", res.last_name);
-        formik.setFieldValue("correo", res.email);
+        formik.setFieldValue('nombre', res.name);
+        formik.setFieldValue('apellido', res.last_name);
+        formik.setFieldValue('correo', res.email);
         setUserDataLoaded(true);
       });
     }
@@ -221,24 +228,31 @@ const Form = () => {
       `}</style>
       <div className={formContainer}>
         <div className={form}>
-          <Link href={"/trivias"}>
+          <Link href={'/trivias'}>
             <a className={link}>
               <div className={volver}>
-                <img src="/images/trivias/icono . retroceder.svg" alt="" />
+                <img src='/images/trivias/icono . retroceder.svg' alt='' />
                 <div> Volver</div>
               </div>
             </a>
           </Link>
           <div className={textos}>
             <h1>¡Completa el formulario!</h1>
-            <h3>Una vez que envíes el formulario, <span>te llegará un correo</span> con tus resultados completos y además te daremos acceso a <span>más de 63 cursos en línea por un precio especial.</span></h3>
-            <p>Podrás reclamar tu acceso haciendo click en el botón de abajo.</p>
+            <h3>
+              Una vez que envíes el formulario,{' '}
+              <span>te llegará un correo</span> con tus resultados completos y
+              además te daremos acceso a{' '}
+              <span>más de 63 cursos en línea por un precio especial.</span>
+            </h3>
+            <p>
+              Podrás reclamar tu acceso haciendo click en el botón de abajo.
+            </p>
           </div>
           <form onSubmit={formik.handleSubmit} className={inputContainer}>
             <div>
               <InputNombre
-                label={"Nombre"}
-                placeholder={userDataLoaded ? userData.name : "Carla"}
+                label={'Nombre'}
+                placeholder={userDataLoaded ? userData.name : 'Carla'}
                 onChange={handleNombreChange}
                 onBlur={handleNombreBlur}
                 value={formik.values.nombre}
@@ -249,24 +263,26 @@ const Form = () => {
               )}
             </div>
             <div>
-
               <InputNombre
-                label={"Apellido"}
-                placeholder={userDataLoaded ? userData.last_name : "Flores"}
+                label={'Apellido'}
+                placeholder={userDataLoaded ? userData.last_name : 'Flores'}
                 onChange={handleApellidoChange}
                 onBlur={handleApellidoBlur}
                 value={formik.values.apellido}
                 disabled={userDataLoaded}
               />
               {formik.touched.apellido && formik.errors.apellido && (
-                <div className={errorMessageApellido}>{formik.errors.apellido}</div>
+                <div className={errorMessageApellido}>
+                  {formik.errors.apellido}
+                </div>
               )}
             </div>
             <div>
-
               <InputMail
-                label={"Correo Electrónico"}
-                placeholder={userDataLoaded ? userData.email : "carlaflores@gmail.com"}
+                label={'Correo Electrónico'}
+                placeholder={
+                  userDataLoaded ? userData.email : 'carlaflores@gmail.com'
+                }
                 onChange={handleMailChange}
                 onBlur={handleMailBlur}
                 value={formik.values.correo}
@@ -277,29 +293,51 @@ const Form = () => {
               )}
             </div>
             <div>
-
               <InputWatsapp
-                label={"Número de WhatsApp"}
-                placeholder={"1153137872"}
+                label={'Número de WhatsApp'}
+                placeholder={'1153137872'}
                 onChange={handlePaisChange}
                 onBlur={handlePaisBlur}
                 value={formik.values.numeroWhatsApp}
               />
-              {formik.touched.numeroWhatsApp && formik.errors.numeroWhatsApp && (
-                <div className={errorMessageWA}>{formik.errors.numeroWhatsApp}</div>
-              )}
+              {formik.touched.numeroWhatsApp &&
+                formik.errors.numeroWhatsApp && (
+                  <div className={errorMessageWA}>
+                    {formik.errors.numeroWhatsApp}
+                  </div>
+                )}
             </div>
           </form>
           <div className={checkboxContainer}>
             <input
-              type="checkbox"
-              name="checkbox"
+              type='checkbox'
+              name='checkbox'
               checked={isChecked}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="checkbox">
-              He leído y acepto los{" "}
-              <span><Link href={"https://www.gonvar.io/terms-condition"}><a className={terminos} target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></Link> y <Link href={"https://www.gonvar.io/politica-privacidad"}><a className={terminos} target="_blank" rel="noopener noreferrer">Políticas de privacidad</a></Link></span>
+            <label htmlFor='checkbox'>
+              He leído y acepto los{' '}
+              <span>
+                <Link href={'https://www.gonvar.io/terms-condition'}>
+                  <a
+                    className={terminos}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Términos y Condiciones
+                  </a>
+                </Link>{' '}
+                y{' '}
+                <Link href={'https://www.gonvar.io/politica-privacidad'}>
+                  <a
+                    className={terminos}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Políticas de privacidad
+                  </a>
+                </Link>
+              </span>
             </label>
           </div>
           <button
@@ -311,13 +349,11 @@ const Form = () => {
           </button>
         </div>
         <div className={formImg}>
-          <img src="/images/trivias/logo gonvar blanco.svg" alt="" />
+          <img src='/images/trivias/logo gonvar blanco.svg' alt='' />
         </div>
-      </div >
+      </div>
     </>
   );
 };
 
 export default Form;
-
-

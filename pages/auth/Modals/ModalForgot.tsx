@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Modal } from "react-bootstrap";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Modal } from 'react-bootstrap';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { message } from "antd";
-import * as yup from "yup";
+import { message } from 'antd';
+import * as yup from 'yup';
 
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import AlertModal from "../../../components/Modals/AlertModal/AlertModal";
-import { sendEmailPassword } from "../../../components/api/auth";
+import AlertModal from '../../../components/Modals/AlertModal/AlertModal';
+import { sendEmailPassword } from '../../../components/api/auth';
 import {
   ButtonContain,
   EmailContain,
@@ -17,93 +17,102 @@ import {
   Text2,
   TextInput,
   Title,
-} from "../../../screens/ModalForgot.styled";
+} from '../../../screens/ModalForgot.styled';
 
 const ModalForgot = ({ showForgot, setShowForgot }: any) => {
   const handleClose = () => setShowForgot(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showAlert, setshowAlert] = useState(false)
-  const [alertMsg, setalertMsg] = useState()
+  const [showAlert, setshowAlert] = useState(false);
+  const [alertMsg, setalertMsg] = useState();
 
   const toggleAlert = () => {
-    setshowAlert(false)
-  }
+    setshowAlert(false);
+  };
 
   const formSchema2 = yup.object().shape({
     email: yup
       .string()
-      .email("Debe ser un email válido")
-      .required("Campo requerido"),
+      .email('Debe ser un email válido')
+      .required('Campo requerido'),
   });
 
   type FormValues = {
     email: string;
   };
 
-  const onSubmit: SubmitHandler<FormValues> = async formData => {
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     let resetData = {
       email: formData.email,
-      idTemplateBrevo: 13
+      idTemplateBrevo: 13,
     };
 
-    setIsLoading(true)
+    setIsLoading(true);
     await sendEmailPassword(resetData).then((res) => {
       if (res.data.msg) {
-        setalertMsg(res.data.msg)
+        setalertMsg(res.data.msg);
         if (res.status === 200) {
-          setshowAlert(true)
+          setshowAlert(true);
         }
         if (res.status === 202) {
-          localStorage.setItem("reset", "true");
-          setshowAlert(true)
+          localStorage.setItem('reset', 'true');
+          setshowAlert(true);
         }
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    })
+    });
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema2)
+    resolver: yupResolver(formSchema2),
   });
 
   return (
-    <Modal show={showForgot} onHide={handleClose} centered className="forgot-modal-component">
-      {!!alertMsg && <div onClick={() => handleClose()}>
-        <AlertModal show={showAlert} onHide={toggleAlert} message={alertMsg} />
-      </div>}
+    <Modal
+      show={showForgot}
+      onHide={handleClose}
+      centered
+      className='forgot-modal-component'
+    >
+      {!!alertMsg && (
+        <div onClick={() => handleClose()}>
+          <AlertModal
+            show={showAlert}
+            onHide={toggleAlert}
+            message={alertMsg}
+          />
+        </div>
+      )}
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <Title>
-          Reestablecer contraseña
-        </Title>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Title>Reestablecer contraseña</Title>
         <EmailContain>
-          <Text2>
-            Ingresar correo electrónico
-          </Text2>
+          <Text2>Ingresar correo electrónico</Text2>
           <TextInput
-            placeholder="correo@correo.com"
+            placeholder='correo@correo.com'
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            {...register("email")}
-            type="email"
+            {...register('email')}
+            type='email'
             required
           />
           <MessageContainer>
-            <div className="invalid-feedback">
-              {errors.email?.message}
-            </div>
+            <div className='invalid-feedback'>{errors.email?.message}</div>
           </MessageContainer>
         </EmailContain>
         <ButtonContain>
-          <button onClick={() => { onSubmit }}>Confirmar</button>
+          <button
+            onClick={() => {
+              onSubmit;
+            }}
+          >
+            Confirmar
+          </button>
         </ButtonContain>
       </form>
     </Modal>
-  )
-}
+  );
+};
 export default ModalForgot;

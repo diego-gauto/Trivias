@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { LoginBox, Box2, PurpleButton2 } from "./Login.styled";
+import styled from 'styled-components';
+import { LoginBox, Box2, PurpleButton2 } from './Login.styled';
 
 export const RegisterPastUserBox = styled(LoginBox)`
   max-width: 750px;

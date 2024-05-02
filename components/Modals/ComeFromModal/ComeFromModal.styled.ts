@@ -214,34 +214,34 @@ export const PictureContain = styled.div<{
     }
     .progress-circle {
       fill: none;
-      stroke: ${props => props.reward == 0 && 'url(#gradientLevel)'}
-        ${props => props.reward == 1 && 'url(#gradientTime)'}
-        ${props => props.reward == 2 && 'url(#gradientCertificate)'};
+      stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'}
+        ${(props) => props.reward == 1 && 'url(#gradientTime)'}
+        ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
       stroke-width: 20px;
       stroke-dasharray: 755;
-      ${props =>
+      ${(props) =>
         props.reward == 0 &&
         css<{ progress: number }>`
-          stroke-dashoffset: ${props => props.progress};
+          stroke-dashoffset: ${(props) => props.progress};
         `}
-      ${props =>
+      ${(props) =>
         props.reward == 1 &&
         css<{ timeProgress: number }>`
-          stroke-dashoffset: ${props => props.timeProgress};
+          stroke-dashoffset: ${(props) => props.timeProgress};
         `}
-        ${props =>
+        ${(props) =>
         props.reward == 2 &&
         css<{ certificateProgress: number }>`
-          stroke-dashoffset: ${props => props.certificateProgress};
+          stroke-dashoffset: ${(props) => props.certificateProgress};
         `}
       stroke-linecap: round;
       cx: 125px;
       cy: 125px;
       r: 120px;
       @media (max-width: 1023px) {
-        stroke: ${props => props.reward == 0 && 'url(#gradientLevelResp)'}
-          ${props => props.reward == 1 && 'url(#gradientTimeResp)'}
-          ${props => props.reward == 2 && 'url(#gradientCertificateResp)'};
+        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'}
+          ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'}
+          ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
       }
     }
     .progress-background {
@@ -261,7 +261,7 @@ export const ProfileIcon = styled.img<{ edit: any }>`
   border-radius: 50%;
   width: 100%;
   height: auto;
-  ${props =>
+  ${(props) =>
     props.edit == true &&
     css`
       z-index: 2;
@@ -340,7 +340,7 @@ export const ProfileMainContainer = styled.div<{
       display: flex;
       flex-direction: column;
       gap: 20px;
-      background-color: ${props =>
+      background-color: ${(props) =>
         props.startEdit == false ? '#dad3e5' : '#e4b6e8'};
       padding-top: 160px;
       padding-inline: 40px;
@@ -434,7 +434,7 @@ export const ProfileMainContainer = styled.div<{
         border-radius: 0 20px 20px 0;
         min-width: 40%;
         padding: 30px;
-        display: ${props => props.password == true && 'none'};
+        display: ${(props) => props.password == true && 'none'};
       }
       @media (max-width: 600px) {
         padding-block: 30px;
@@ -442,7 +442,7 @@ export const ProfileMainContainer = styled.div<{
         gap: 6px;
         min-width: 45%;
       }
-      border-radius: ${props =>
+      border-radius: ${(props) =>
         props.password == false ? '0 0 20px 20px' : '0 0 0 0'};
       p {
         margin: 0;

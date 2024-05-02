@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SlideImg = styled.div`
   border-radius: 40px;
@@ -156,7 +156,7 @@ export const DisabledMask = styled.div`
 export const GeneralContainer = styled.div``;
 
 export const TextNew = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -172,7 +172,7 @@ export const TextNew = styled.span`
   }
 `;
 export const Text01 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-weight: 700;
   font-size: 14px;
   color: #6b4e2f;
@@ -188,7 +188,7 @@ export const Text01 = styled.span`
 `;
 export const Text02 = styled.p`
   text-align: left !important;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   width: 80%;
   margin-left: 10%;
   position: relative;
@@ -213,7 +213,7 @@ export const Text02 = styled.p`
 export const DateText = styled.p`
   margin: 0;
   color: #ac8c57;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 12px;

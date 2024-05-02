@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CourseFormContain = styled.div`
   display: flex;
@@ -10,7 +10,7 @@ export const CourseFormContain = styled.div`
 `;
 export const Title = styled.h1`
   font-size: 36px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`
@@ -20,7 +20,7 @@ export const ButtonContain = styled.div`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: #6717cd;
@@ -54,11 +54,11 @@ export const InputContain2 = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   width: 100%;
@@ -70,7 +70,7 @@ export const Input = styled.input`
 `;
 export const InputIcon = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   width: 100%;
@@ -82,7 +82,7 @@ export const InputIcon = styled.input`
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: justify;
   padding-block: 10px;
   width: 100%;

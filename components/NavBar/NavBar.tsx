@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { useFacebook } from "react-facebook";
-import { useMediaQuery } from "react-responsive";
+import { useFacebook } from 'react-facebook';
+import { useMediaQuery } from 'react-responsive';
 
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import { googleLogout } from "@react-oauth/google";
+import { googleLogout } from '@react-oauth/google';
 
 import {
   BLOGS_PATH,
@@ -18,11 +18,14 @@ import {
   REWARDS_PATH,
   SIGNUP_PAST_USER_PATH,
   SIGNUP_PATH,
-} from "../../constants/paths";
-import { useAuth } from "../../hooks/useAuth";
-import { conektaCustomer } from "../api/auth";
-import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
-import { customerOrders, updateMembership } from "../api/profile";
+} from '../../constants/paths';
+import { useAuth } from '../../hooks/useAuth';
+import { conektaCustomer } from '../api/auth';
+import {
+  getNotifications,
+  updateAllNotificationStatusApi,
+} from '../api/notifications';
+import { customerOrders, updateMembership } from '../api/profile';
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -45,38 +48,39 @@ import {
   TagsResp,
   UserContain,
   UserImage,
-} from "./NavBar.styled";
-import { SlBell } from "react-icons/sl";
-import Notifications from "./Notifications/Notifications";
-import { NotificationContainer } from "./Notifications/Notifications.styled";
-import { RetryPayModal } from "../Modals/RetryPayModal/RetryPayModal";
+} from './NavBar.styled';
+import { SlBell } from 'react-icons/sl';
+import Notifications from './Notifications/Notifications';
+import { NotificationContainer } from './Notifications/Notifications.styled';
+import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
 
 interface NotificationByUser {
-  notification_id: number
-  user_id: number
-  type: string
-  status: number
-  created_at: string
-  source_table: string
-  course_id?: number
-  season?: number
-  lesson?: number
-  title?: string
-  score?: number
-  user_comment_id?: number
-  user_like_id?: number
-  amount?: number
-  product_name?: string
-  reward_id?: number
-  due_date?: number
+  notification_id: number;
+  user_id: number;
+  type: string;
+  status: number;
+  created_at: string;
+  source_table: string;
+  course_id?: number;
+  season?: number;
+  lesson?: number;
+  title?: string;
+  score?: number;
+  user_comment_id?: number;
+  user_like_id?: number;
+  amount?: number;
+  product_name?: string;
+  reward_id?: number;
+  due_date?: number;
 }
 
 const NavBar = () => {
-  const responsive400 = useMediaQuery({ query: "(max-width: 400px)" });
+  const responsive400 = useMediaQuery({ query: '(max-width: 400px)' });
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
-  const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] = useState(false);
+  const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] =
+    useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
@@ -94,7 +98,10 @@ const NavBar = () => {
     }
     const { target } = event;
     const targetElement = target as HTMLElement;
-    if (targetElement.classList.contains('bell-contain') || targetElement.classList.contains('bell')) {
+    if (
+      targetElement.classList.contains('bell-contain') ||
+      targetElement.classList.contains('bell')
+    ) {
       return;
     }
     const parent = (target as HTMLElement).parentElement;
@@ -104,14 +111,17 @@ const NavBar = () => {
 
     const targetObject = {
       target: event.target,
-      current: modalNotificationsRef.current
-    }
+      current: modalNotificationsRef.current,
+    };
 
     if (targetObject.target != null && targetObject.current != null) {
-      if ((targetObject.target as HTMLDivElement).id === targetObject.current.id) {
+      if (
+        (targetObject.target as HTMLDivElement).id === targetObject.current.id
+      ) {
         return;
       }
-      const parent1 = (targetObject.target as HTMLDivElement).parentNode as HTMLDivElement;
+      const parent1 = (targetObject.target as HTMLDivElement)
+        .parentNode as HTMLDivElement;
       if (parent1 != null) {
         if (parent1.id === targetObject.current.id) {
           return;
@@ -156,27 +166,30 @@ const NavBar = () => {
       }
     }
 
-    if (modalNotificationsRef.current && !modalNotificationsRef.current.contains(event.target)) {
+    if (
+      modalNotificationsRef.current &&
+      !modalNotificationsRef.current.contains(event.target)
+    ) {
       if (!openNotification) {
         setOpenNotification(openNotification);
       }
     }
-  }
+  };
 
   const toggleIngresarOptionsMenu = () => {
     setIngresarOpetionsMenuIsOpen(!ingresarOptionsMenuIsOpen);
     setNewHamburgerMenuIsOpen(false);
-  }
+  };
 
   const toggleNewHamburgerMenuIsOpen = () => {
     setNewHamburgerMenuIsOpen(!newHamburgerMenuIsOpen);
     setIngresarOpetionsMenuIsOpen(false);
-  }
+  };
   const openNotifications = () => {
     setOpenNotification(!openNotification);
-  }
+  };
   function closeHamburgerMenu() {
-    setHamburger(false)
+    setHamburger(false);
   }
 
   useEffect(() => {
@@ -187,7 +200,7 @@ const NavBar = () => {
   }, []);
 
   // COLOR NAVBAR
-  const [color, setColor] = useState<any>(0)
+  const [color, setColor] = useState<any>(0);
   const router = useRouter();
   let { pathname }: any = router;
   var position = pathname.substring(0, 6);
@@ -196,8 +209,8 @@ const NavBar = () => {
     try {
       let data = {
         userId: userId,
-        conekta_id: userDataAuth.user.conekta_id
-      }
+        conekta_id: userDataAuth.user.conekta_id,
+      };
       const res = await getNotifications(data);
       let tempCounter = 0;
       res.data.forEach((notification) => {
@@ -212,26 +225,23 @@ const NavBar = () => {
         console.table(error);
       }
     }
-  }
+  };
   const ChangeNav = () => {
     if (['/', ''].includes(pathname) && window.scrollY >= 900) {
-      setColor(1)
+      setColor(1);
+    } else {
+      setColor(0);
     }
-    else {
-      setColor(0)
-    }
-  }
+  };
   useEffect(() => {
     window.addEventListener('scroll', ChangeNav);
-  },
-    [pathname],
-  );
+  }, [pathname]);
 
   const closeNavbar = () => {
     setHamburger(false);
     setIngresarOpetionsMenuIsOpen(false);
     setNewHamburgerMenuIsOpen(false);
-  }
+  };
   try {
     var userDataAuth: any = useAuth();
 
@@ -239,18 +249,20 @@ const NavBar = () => {
       if (userDataAuth.user !== null) {
         if (userDataAuth.user.conekta_id === null) {
           let body = {
-            phone_number: "5211111111",
+            phone_number: '5211111111',
             name: userDataAuth.user.name,
             email: userDataAuth.user.email,
-            userId: userDataAuth.user.user_id
-          }
-          conektaCustomer(body)
-        };
+            userId: userDataAuth.user.user_id,
+          };
+          conektaCustomer(body);
+        }
 
         let today = new Date().getTime() / 1000;
-        userNotifications(userDataAuth.user.user_id)
+        userNotifications(userDataAuth.user.user_id);
         if (userDataAuth.user.level === 2) {
-          let course = userDataAuth.user.user_courses.filter((x: any) => x.course_id === 30);
+          let course = userDataAuth.user.user_courses.filter(
+            (x: any) => x.course_id === 30,
+          );
           if (today > course[0].final_date) {
             var day = new Date();
             var nextYear = new Date();
@@ -258,11 +270,13 @@ const NavBar = () => {
             let data = {
               final_date: nextYear.getTime() / 1000,
               start_date: today,
-              user_id: userDataAuth.user.user_id
-            }
+              user_id: userDataAuth.user.user_id,
+            };
             updateMembership(data).then((res) => {
-              alert("Por favor refresque la pagina, su plan anual se acaba de activar!");
-            })
+              alert(
+                'Por favor refresque la pagina, su plan anual se acaba de activar!',
+              );
+            });
           }
         }
 
@@ -277,39 +291,50 @@ const NavBar = () => {
         //   })
         // }
         let diff = Math.round((today - userDataAuth.user.final_date) / 86400);
-        const haveNoRecurrentSubscription = ([0, 5, 6, 8].includes(userDataAuth.user.level));
-        const haveRecurrentSubscription = ([1, 4, 7].includes(userDataAuth.user.level) && userDataAuth.user.method === 'conekta');
-        const withTolerance = userDataAuth.user.final_date < today - 10 * 24 * 60 * 60;
+        const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(
+          userDataAuth.user.level,
+        );
+        const haveRecurrentSubscription =
+          [1, 4, 7].includes(userDataAuth.user.level) &&
+          userDataAuth.user.method === 'conekta';
+        const withTolerance =
+          userDataAuth.user.final_date < today - 10 * 24 * 60 * 60;
         const withoutTolerance = userDataAuth.user.final_date < today;
-        if (diff < 90
-          // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0)) 
-          && ((haveNoRecurrentSubscription && withoutTolerance) || (haveRecurrentSubscription && withTolerance))
-          && pathname !== "/reintentar-pago") {
+        const isSuperAdmin = userDataAuth.user.role === 'superAdmin';
+
+        if (
+          diff < 90 &&
+          // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0))
+          ((haveNoRecurrentSubscription && withoutTolerance) ||
+            (haveRecurrentSubscription && withTolerance)) &&
+          pathname !== '/reintentar-pago' &&
+          !isSuperAdmin
+        ) {
           setShow(true);
           setWithSubscription(false);
         }
 
         setUserData(userDataAuth.user);
-        if (userDataAuth.user.role === 'admin' || userDataAuth.user.role === 'superAdmin') {
+        if (
+          userDataAuth.user.role === 'admin' ||
+          userDataAuth.user.role === 'superAdmin'
+        ) {
           setIsAdmin(true);
         }
         setLoggedIn(true);
       } else {
-        if (pathname === "/thankyou") {
-          router.push("/")
+        if (pathname === '/thankyou') {
+          router.push('/');
         }
       }
-    }, [userDataAuth])
-
+    }, [userDataAuth]);
   } catch (error) {
     setLoggedIn(false);
   }
   const sendAdminTo = () => {
-
     if (userData.role === 'superAdmin') {
-      router.push('/admin/Courses')
-    }
-    else {
+      router.push('/admin/Courses');
+    } else {
       let counter: number = 0;
       let route: string = '/';
       userData.roles.map((role: any) => {
@@ -317,240 +342,316 @@ const NavBar = () => {
           if (role.view !== 0) {
             counter++;
             if (role.role === 'course') {
-              route = 'Courses'
+              route = 'Courses';
             }
             if (role.role === 'coupons') {
-              route = 'Coupons'
+              route = 'Coupons';
             }
             if (role.role === 'blogs') {
-              route = 'Blog'
+              route = 'Blog';
             }
             if (role.role === 'rewards') {
-              route = 'Rewards'
+              route = 'Rewards';
             }
             if (role.role === 'users') {
-              route = 'Users'
+              route = 'Users';
             }
             if (role.role === 'landing') {
-              route = 'Landing'
+              route = 'Landing';
             }
             if (role.role === 'payments') {
-              route = 'Pago'
+              route = 'Pago';
             }
             if (role.role === 'homeworks') {
-              route = 'HomeWork'
+              route = 'HomeWork';
             }
             if (role.role === 'comments') {
-              route = 'Comments'
+              route = 'Comments';
             }
           }
         }
       });
       if (route !== '/') {
-        router.push('/admin/' + route)
+        router.push('/admin/' + route);
       }
     }
-
-  }
+  };
   const updateNotificationStatus = () => {
     let data = {
-      userId: userData.user_id
-    }
+      userId: userData.user_id,
+    };
     updateAllNotificationStatusApi(data).then(() => {
       setUnReadNotification(0);
       userNotifications(data.userId);
-    })
-  }
+    });
+  };
   const logoutFunc = () => {
     localStorage.clear();
-    if (userData.provider === "web") {
-      window.location.href = "/";
+    if (userData.provider === 'web') {
+      window.location.href = '/';
     }
-    if (userData.provider === "google") {
+    if (userData.provider === 'google') {
       googleLogout();
-      window.location.href = "/";
+      window.location.href = '/';
     }
-    if (userData.provider === "facebook") {
+    if (userData.provider === 'facebook') {
       api?.logout();
-      window.location.href = "/";
+      window.location.href = '/';
     }
   };
 
   // COLOR NAVBAR
   return (
     <NavContainer pathname={pathname} color={color}>
-      {firstTime && <RetryPayModal show={show} onHide={() => { setShow(false); setFirstTime(false); }} withSubscription={withSubscription} />}
-      {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && <div className="bg-transparent" onClick={(e) => { closeNavbar(); e.preventDefault(); }}></div>}
+      {firstTime && (
+        <RetryPayModal
+          show={show}
+          onHide={() => {
+            setShow(false);
+            setFirstTime(false);
+          }}
+          withSubscription={withSubscription}
+        />
+      )}
+      {(hamburger || ingresarOptionsMenuIsOpen || newHamburgerMenuIsOpen) && (
+        <div
+          className='bg-transparent'
+          onClick={(e) => {
+            closeNavbar();
+            e.preventDefault();
+          }}
+        ></div>
+      )}
       <LogoContain>
-        {
-          pathname == "/" ?
-            <>
-              {
-                color == 0 &&
-                <Link href="/">
-                  <Logo style={{
-                    width: "130px", height: "30px",
-                  }} src="/images/Navbar/gonvar_purple.png" />
-                </Link>
-              }
-              {
-                color == 1 &&
-                <Link href="/">
-                  <Logo style={{
-                    width: "130px", height: "30px",
-                  }} src="/images/Navbar/gonvar_white.png" />
-                </Link>
-              }
-            </>
-            :
-            <Link href="/">
-              <Logo style={{
-                width: "130px", height: "30px",
-              }} src="/images/Navbar/gonvar_purple.png" />
-            </Link>
-        }
+        {pathname == '/' ? (
+          <>
+            {color == 0 && (
+              <Link href='/'>
+                <Logo
+                  style={{
+                    width: '130px',
+                    height: '30px',
+                  }}
+                  src='/images/Navbar/gonvar_purple.png'
+                />
+              </Link>
+            )}
+            {color == 1 && (
+              <Link href='/'>
+                <Logo
+                  style={{
+                    width: '130px',
+                    height: '30px',
+                  }}
+                  src='/images/Navbar/gonvar_white.png'
+                />
+              </Link>
+            )}
+          </>
+        ) : (
+          <Link href='/'>
+            <Logo
+              style={{
+                width: '130px',
+                height: '30px',
+              }}
+              src='/images/Navbar/gonvar_purple.png'
+            />
+          </Link>
+        )}
       </LogoContain>
       <NavTags>
-        <Link href="/trivias">
-          <NavText pathname={pathname} color={color} title="trivia"
-            style={pathname == "/trivias" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+        <Link href='/trivias'>
+          <NavText
+            pathname={pathname}
+            color={color}
+            title='trivia'
+            style={
+              pathname == '/trivias'
+                ? { fontWeight: 600, opacity: 1 }
+                : { fontWeight: '' }
+            }
+          >
             Trivias
           </NavText>
         </Link>
         <Link href={PLAN_PATH}>
-          <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname === PLAN_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+          <NavText
+            pathname={pathname}
+            color={color}
+            title='Inicio'
+            style={
+              pathname === PLAN_PATH
+                ? { fontWeight: 600, opacity: 1 }
+                : { fontWeight: '' }
+            }
+          >
             Planes
           </NavText>
         </Link>
         <Link href={PREVIEW_PATH}>
-          <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname === PREVIEW_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+          <NavText
+            pathname={pathname}
+            color={color}
+            title='Inicio'
+            style={
+              pathname === PREVIEW_PATH
+                ? { fontWeight: 600, opacity: 1 }
+                : { fontWeight: '' }
+            }
+          >
             Cursos
           </NavText>
         </Link>
-        <NavText pathname={pathname} color={color} title="Tienda" target="_blank" href="Https://gonvarnails.mx">
+        <NavText
+          pathname={pathname}
+          color={color}
+          title='Tienda'
+          target='_blank'
+          href='Https://gonvarnails.mx'
+        >
           Tienda
         </NavText>
-        {
-          (loggedIn && isAdmin) &&
-          <NavText pathname={pathname} color={color} title="Admin"
+        {loggedIn && isAdmin && (
+          <NavText
+            pathname={pathname}
+            color={color}
+            title='Admin'
             onClick={sendAdminTo}
-            style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
+            style={
+              position == '/admin'
+                ? { fontWeight: 600, opacity: 1 }
+                : { fontWeight: '' }
+            }
           >
             admin
           </NavText>
-        }
+        )}
         <Link href={BLOGS_PATH}>
-          <NavText pathname={pathname} color={color} title="Inicio"
-            style={pathname === BLOGS_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+          <NavText
+            pathname={pathname}
+            color={color}
+            title='Inicio'
+            style={
+              pathname === BLOGS_PATH
+                ? { fontWeight: 600, opacity: 1 }
+                : { fontWeight: '' }
+            }
+          >
             Blog
           </NavText>
         </Link>
-        {
-          loggedIn &&
+        {loggedIn && (
           <UserContain color={color}>
             <Link href={REWARDS_PATH}>
-              <div className="rewards-circle">
-                <div className="inside" />
-                <HoverText className="hover-text">Recompensas</HoverText>
+              <div className='rewards-circle'>
+                <div className='inside' />
+                <HoverText className='hover-text'>Recompensas</HoverText>
               </div>
             </Link>
-            <div className="bell-contain">
-              <SlBell className="bell" onClick={openNotifications} />
-              {
-                unReadNotification > 0 &&
-                <p className="notifications" onClick={openNotifications} >
+            <div className='bell-contain'>
+              <SlBell className='bell' onClick={openNotifications} />
+              {unReadNotification > 0 && (
+                <p className='notifications' onClick={openNotifications}>
                   {unReadNotification}
                 </p>
-              }
+              )}
               <NotificationContainer
                 ref={modalNotificationsRef}
-                id="notification-container"
-                style={
-                  {
-                    height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
-                  }
-                }
+                id='notification-container'
+                style={{
+                  height:
+                    notifications.length === 0
+                      ? 'fit-content'
+                      : 'calc(100vh - 150px)',
+                }}
                 not={openNotification}
               >
                 <div className='title-container'>
-                  <h1 className='title'>
-                    Notificaciones
-                  </h1>
+                  <h1 className='title'>Notificaciones</h1>
                 </div>
-                <div className="all-notifications">
-                  {
-                    notifications.length === 0 ?
-                      <div style={{ paddingLeft: '20px' }}>
-                        <p>Actualmente no hay notificaciones</p>
-                      </div>
-                      :
-                      notifications.map((notification, index) => {
-                        return (
-                          <Notifications
-                            notification={notification}
-                            user={userData}
-                            openNotifications={openNotifications}
-                            unReadNotification={unReadNotification}
-                            setUnReadNotification={setUnReadNotification}
-                            key={"Notifications_" + index}
-                          />
-                        )
-                      })
-                  }
+                <div className='all-notifications'>
+                  {notifications.length === 0 ? (
+                    <div style={{ paddingLeft: '20px' }}>
+                      <p>Actualmente no hay notificaciones</p>
+                    </div>
+                  ) : (
+                    notifications.map((notification, index) => {
+                      return (
+                        <Notifications
+                          notification={notification}
+                          user={userData}
+                          openNotifications={openNotifications}
+                          unReadNotification={unReadNotification}
+                          setUnReadNotification={setUnReadNotification}
+                          key={'Notifications_' + index}
+                        />
+                      );
+                    })
+                  )}
                 </div>
-                {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
-                  Marcar todas como leído
-                </p>}
+                {notifications.length > 0 && (
+                  <p
+                    className='read-all-tag'
+                    onClick={updateNotificationStatus}
+                  >
+                    Marcar todas como leído
+                  </p>
+                )}
               </NotificationContainer>
-              {
-                !openNotification &&
-                <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
-              }
+              {!openNotification && (
+                <HoverText className='hover-text' style={{ top: 39 }}>
+                  Notificaciones
+                </HoverText>
+              )}
             </div>
             <Link href={PROFILE_PATH}>
-              < UserImage>
-                {
-                  userData && userData.photo
-                    ?
-                    <img src={userData.photo} />
-                    :
-                    <img src={DEFAULT_USER_IMG} />
-                }
-                <HoverText className="hover-text" style={{ top: 43 }}>Perfil</HoverText>
+              <UserImage>
+                {userData && userData.photo ? (
+                  <img src={userData.photo} />
+                ) : (
+                  <img src={DEFAULT_USER_IMG} />
+                )}
+                <HoverText className='hover-text' style={{ top: 43 }}>
+                  Perfil
+                </HoverText>
               </UserImage>
             </Link>
           </UserContain>
-        }
-        {!loggedIn &&
+        )}
+        {!loggedIn && (
           <>
             <Link href={LOGIN_PATH}>
               <ShopDeco color={color}>
-                <NavText pathname={pathname} color={color} title="Iniciar Sesion"
-                  style={pathname === LOGIN_PATH || pathname === SIGNUP_PAST_USER_PATH ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}
+                <NavText
+                  pathname={pathname}
+                  color={color}
+                  title='Iniciar Sesion'
+                  style={
+                    pathname === LOGIN_PATH ||
+                      pathname === SIGNUP_PAST_USER_PATH
+                      ? { fontWeight: 600, opacity: 1 }
+                      : { fontWeight: '' }
+                  }
                 >
                   Iniciar Sesión
                 </NavText>
               </ShopDeco>
             </Link>
             <Link href={SIGNUP_PATH}>
-              <PurpleButton>
-                Registrarse
-              </PurpleButton>
+              <PurpleButton>Registrarse</PurpleButton>
             </Link>
           </>
-        }
+        )}
       </NavTags>
       <NavResponsive>
-        {
-          !loggedIn &&
+        {!loggedIn && (
           <>
-            <Link href="/">
+            <Link href='/'>
               <LogoS />
             </Link>
             <TagsResp>
-              <div style={{ margin: "auto 20px" }}>
+              <div style={{ margin: 'auto 20px' }}>
                 <PurpleButton onClick={toggleIngresarOptionsMenu}>
                   Ingresar
                 </PurpleButton>
@@ -567,14 +668,14 @@ const NavBar = () => {
                   </FloatingMenuItem>
                 </Link>
               </IngresarOptionsList>
-              <div className="hamburguer-contain">
-                <p className="title">Menu</p>
+              <div className='hamburguer-contain'>
+                <p className='title'>Menu</p>
                 <HamburgerMenu
-                  src="/images/Navbar/menu2.png"
+                  src='/images/Navbar/menu2.png'
                   onClick={toggleNewHamburgerMenuIsOpen}
                 />
                 <HamburgerMenuOptionsList isOpen={newHamburgerMenuIsOpen}>
-                  <Link href="/trivias" >
+                  <Link href='/trivias'>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Trivias
                     </FloatingMenuItem>
@@ -594,7 +695,7 @@ const NavBar = () => {
                       Blogs
                     </FloatingMenuItem>
                   </Link>
-                  <a href="https://gonvarnails.mx/" target="_blank">
+                  <a href='https://gonvarnails.mx/' target='_blank'>
                     <FloatingMenuItem onClick={toggleNewHamburgerMenuIsOpen}>
                       Tienda
                     </FloatingMenuItem>
@@ -603,37 +704,40 @@ const NavBar = () => {
               </div>
             </TagsResp>
           </>
-        }
-        {
-          loggedIn &&
+        )}
+        {loggedIn && (
           <>
-            <div id="hola" style={{
-              display: "flex",
-              width: "auto",
-              height: "100%",
-              marginLeft: !responsive400 ? "35px" : "0px"
-            }}>
-              <Link href="/">
+            <div
+              id='hola'
+              style={{
+                display: 'flex',
+                width: 'auto',
+                height: '100%',
+                marginLeft: !responsive400 ? '35px' : '0px',
+              }}
+            >
+              <Link href='/'>
                 <LogoS_2 />
               </Link>
             </div>
             <UserContain color={color}>
               <Link href={REWARDS_PATH}>
-                <div className="hamburguer-contain">
-                  <p className="title" style={{ bottom: -37 }}>Recompensas</p>
-                  <div className="rewards-circle" onClick={closeHamburgerMenu}>
-                    <div className="inside" />
+                <div className='hamburguer-contain'>
+                  <p className='title' style={{ bottom: -37 }}>
+                    Recompensas
+                  </p>
+                  <div className='rewards-circle' onClick={closeHamburgerMenu}>
+                    <div className='inside' />
                   </div>
                 </div>
               </Link>
-              <div className="bell-contain">
-                <SlBell className="bell" onClick={openNotifications} />
-                {
-                  unReadNotification > 0 &&
-                  <p className="notifications" onClick={openNotifications} >
+              <div className='bell-contain'>
+                <SlBell className='bell' onClick={openNotifications} />
+                {unReadNotification > 0 && (
+                  <p className='notifications' onClick={openNotifications}>
                     {unReadNotification}
                   </p>
-                }
+                )}
                 {/* <NotificationContainer not={openNotification}>
                   <div className='title-container'>
                     <h1 className='title'>
@@ -669,116 +773,168 @@ const NavBar = () => {
                         <div className="empty-notifications">Sin Notificaciones!</div>
                     }
                   </div>
-                </NotificationContainer> */
-                }
+                </NotificationContainer> */}
                 <NotificationContainer
                   ref={modalNotificationsRef}
-                  id="notification-container"
-                  style={
-                    {
-                      height: notifications.length === 0 ? 'fit-content' : 'calc(100vh - 150px)'
-                    }
-                  }
+                  id='notification-container'
+                  style={{
+                    height:
+                      notifications.length === 0
+                        ? 'fit-content'
+                        : 'calc(100vh - 150px)',
+                  }}
                   not={openNotification}
                 >
                   <div className='title-container'>
-                    <h1 className='title'>
-                      Notificaciones
-                    </h1>
+                    <h1 className='title'>Notificaciones</h1>
                   </div>
-                  <div className="all-notifications">
-                    {
-                      notifications.length === 0 ?
-                        <div style={{ paddingLeft: '20px' }}>
-                          <p>Actualmente no hay notificaciones</p>
-                        </div>
-                        :
-                        notifications.map((not: any, index: number) => {
-                          return (
-                            <Notifications
-                              notification={not}
-                              user={userData}
-                              openNotifications={openNotifications}
-                              unReadNotification={unReadNotification}
-                              setUnReadNotification={setUnReadNotification}
-                              key={"Notifications_" + index}
-                            />
-                          )
-                        })
-                    }
+                  <div className='all-notifications'>
+                    {notifications.length === 0 ? (
+                      <div style={{ paddingLeft: '20px' }}>
+                        <p>Actualmente no hay notificaciones</p>
+                      </div>
+                    ) : (
+                      notifications.map((not: any, index: number) => {
+                        return (
+                          <Notifications
+                            notification={not}
+                            user={userData}
+                            openNotifications={openNotifications}
+                            unReadNotification={unReadNotification}
+                            setUnReadNotification={setUnReadNotification}
+                            key={'Notifications_' + index}
+                          />
+                        );
+                      })
+                    )}
                   </div>
-                  {notifications.length > 0 && <p className='read-all-tag' onClick={updateNotificationStatus}>
-                    Marcar todas como leído
-                  </p>}
+                  {notifications.length > 0 && (
+                    <p
+                      className='read-all-tag'
+                      onClick={updateNotificationStatus}
+                    >
+                      Marcar todas como leído
+                    </p>
+                  )}
                 </NotificationContainer>
-                {
-                  !openNotification &&
-                  <HoverText className="hover-text" style={{ top: 39 }}>Notificaciones</HoverText>
-                }
+                {!openNotification && (
+                  <HoverText className='hover-text' style={{ top: 39 }}>
+                    Notificaciones
+                  </HoverText>
+                )}
               </div>
-              <div className="hamburguer-contain">
-                <p className="title">Menu</p>
-                < UserImage onClick={() => { setHamburger(!hamburger) }}>
-                  {
-                    userData && userData.photo
-                      ? <img src={userData.photo} />
-                      : <img src={DEFAULT_USER_IMG} />
-                  }
+              <div className='hamburguer-contain'>
+                <p className='title'>Menu</p>
+                <UserImage
+                  onClick={() => {
+                    setHamburger(!hamburger);
+                  }}
+                >
+                  {userData && userData.photo ? (
+                    <img src={userData.photo} />
+                  ) : (
+                    <img src={DEFAULT_USER_IMG} />
+                  )}
                 </UserImage>
               </div>
             </UserContain>
 
-            <HamburgerContain onClick={() => { closeHamburgerMenu() }} className="menu-pane" hamburger={hamburger} admin={isAdmin}>
-              <HBMenu className="menu-hamburger">
-                <Link href={PROFILE_PATH} >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PROFILE_PATH ? { fontWeight: 600 } : {}}>
+            <HamburgerContain
+              onClick={() => {
+                closeHamburgerMenu();
+              }}
+              className='menu-pane'
+              hamburger={hamburger}
+              admin={isAdmin}
+            >
+              <HBMenu className='menu-hamburger'>
+                <Link href={PROFILE_PATH}>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                    style={pathname === PROFILE_PATH ? { fontWeight: 600 } : {}}
+                  >
                     Mi Perfil
                   </HBList>
                 </Link>
-                {
-                  (loggedIn && isAdmin) &&
+                {loggedIn && isAdmin && (
                   <a>
-                    <HBList onClick={sendAdminTo}
-                      style={position == "/admin" ? { fontWeight: 600, opacity: 1 } : { fontWeight: '' }}>
+                    <HBList
+                      onClick={sendAdminTo}
+                      style={
+                        position == '/admin'
+                          ? { fontWeight: 600, opacity: 1 }
+                          : { fontWeight: '' }
+                      }
+                    >
                       admin
                     </HBList>
                   </a>
-                }
-                <Link href="/trivias" >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname == "/trivias" ? { fontWeight: 600 } : {}}>
+                )}
+                <Link href='/trivias'>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                    style={pathname == '/trivias' ? { fontWeight: 600 } : {}}
+                  >
                     Trivias
                   </HBList>
                 </Link>
-                <Link href={PLAN_PATH} >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PLAN_PATH ? { fontWeight: 600 } : {}}>
+                <Link href={PLAN_PATH}>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                    style={pathname === PLAN_PATH ? { fontWeight: 600 } : {}}
+                  >
                     Planes
                   </HBList>
                 </Link>
-                <Link href={PREVIEW_PATH} >
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === PREVIEW_PATH ? { fontWeight: 600 } : {}}>
+                <Link href={PREVIEW_PATH}>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                    style={pathname === PREVIEW_PATH ? { fontWeight: 600 } : {}}
+                  >
                     Cursos
                   </HBList>
                 </Link>
-                <a href="Https://gonvarnails.mx" target="_blank">
-                  <HBList onClick={() => { closeHamburgerMenu() }}>
+                <a href='Https://gonvarnails.mx' target='_blank'>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                  >
                     Tienda
                   </HBList>
                 </a>
                 <Link href={BLOGS_PATH}>
-                  <HBList onClick={() => { closeHamburgerMenu() }} style={pathname === BLOGS_PATH ? { fontWeight: 600 } : {}}>
+                  <HBList
+                    onClick={() => {
+                      closeHamburgerMenu();
+                    }}
+                    style={pathname === BLOGS_PATH ? { fontWeight: 600 } : {}}
+                  >
                     Blog
                   </HBList>
                 </Link>
-                <HBList onClick={() => { closeHamburgerMenu(); logoutFunc(); }}>
+                <HBList
+                  onClick={() => {
+                    closeHamburgerMenu();
+                    logoutFunc();
+                  }}
+                >
                   Cerrar Sesion
                 </HBList>
               </HBMenu>
             </HamburgerContain>
           </>
-        }
+        )}
       </NavResponsive>
-    </NavContainer >
-
-  )
-}
+    </NavContainer>
+  );
+};
 export default NavBar;

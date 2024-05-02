@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const HomeWorkContain = styled.div`
   display: flex;
@@ -567,7 +567,7 @@ export const TaskTitle = styled.p`
 `;
 export const TaskText = styled.p`
   font-size: 14px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   text-align: justify;
   @media (max-width: 1023px) {
@@ -582,7 +582,7 @@ export const ReviewButton = styled.button`
   cursor: auto !important;
   display: flex;
   gap: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;
@@ -597,7 +597,7 @@ export const ReviewButton = styled.button`
 export const UploadButton = styled.button`
   display: flex;
   gap: 10px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
   padding-block: 15px;

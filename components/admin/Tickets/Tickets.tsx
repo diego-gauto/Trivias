@@ -1,12 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { AdminContain } from '../SideBar.styled';
-import { AdminTable, DefaultColumn, DefaultContainer } from '../DefaultComponents/DefaultComponents.styled';
+import {
+  AdminTable,
+  DefaultColumn,
+  DefaultContainer,
+} from '../DefaultComponents/DefaultComponents.styled';
 import Pagination from '../../Pagination/Pagination';
 import { ProfileContain, Profile } from '../Pay/Pay.styled';
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
 import { getAdminMassiveLotteryApi } from '../../api/notifications';
-import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
-import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
+import {
+  Role,
+  UserLevelValue,
+} from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import {
+  generateUserIdQuery,
+  generateUserRoleAccessQuery,
+  generateUserRolesLevelQuery,
+} from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { getGenericQueryResponse } from '../../api/admin';
 
 interface TicketRowData {
@@ -15,7 +30,7 @@ interface TicketRowData {
   email: string;
   phone_number: string;
   ticket_value: number;
-};
+}
 
 interface UserAccesss {
   canView: boolean;
@@ -29,11 +44,11 @@ const jsonToCsv = (items: any) => {
   const rowItems = items.map((row: any) =>
     header
       .map((fieldName) => JSON.stringify(row[fieldName], replacer))
-      .join(',')
+      .join(','),
   );
   const csv = [headerString, ...rowItems].join('\r\n');
   return csv;
-}
+};
 
 const generateFilename = (name: string) => {
   const today = new Date();
@@ -45,7 +60,7 @@ const generateFilename = (name: string) => {
   const seconds = today.getSeconds();
 
   return `${name}-${year}-${month + 1}-${day} ${hour}-${minutes}-${seconds}`;
-}
+};
 
 type FilterValue = 'NAME' | 'TICKET_NUMBER';
 
@@ -59,13 +74,16 @@ const Tickets = () => {
   const [filteredData, setFilteredData] = useState<TicketRowData[]>([]);
   const [selectedOption, setSelectedOption] = useState<FilterValue>('NAME');
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
-  const [userAccessTrivias, setUserAccessTrivias] = useState<UserAccesss>({ canDownload: false, canView: false });
+  const [userAccessTrivias, setUserAccessTrivias] = useState<UserAccesss>({
+    canDownload: false,
+    canView: false,
+  });
 
   const { canView, canDownload } = userAccessTrivias;
 
   const getUserData = async () => {
     try {
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
       if (email === null) {
         throw new Error('No existe un email establecido para el usuario');
       }
@@ -76,7 +94,7 @@ const Tickets = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const role = userRoles.find(role => role.role === 'tickets_list');
+      const role = userRoles.find((role) => role.role === 'tickets_list');
       setUserAccessTrivias({
         canView: role?.view === 1,
         canDownload: role?.download === 1,
@@ -91,7 +109,7 @@ const Tickets = () => {
         alert(error.message);
       }
     }
-  }
+  };
 
   useEffect(() => {
     getUserData();
@@ -100,7 +118,7 @@ const Tickets = () => {
 
   const downloadListCSVHandler = () => {
     const csv = jsonToCsv(data);
-    const fileName = "sorteo-gonvar";
+    const fileName = 'sorteo-gonvar';
     const fileNameResult = generateFilename(fileName);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
@@ -113,7 +131,7 @@ const Tickets = () => {
       link.click();
       document.body.removeChild(link);
     }
-  }
+  };
 
   const getData = async () => {
     try {
@@ -129,29 +147,34 @@ const Tickets = () => {
         console.error(error.stack);
       }
     }
-  }
+  };
 
   const changePage = (page: number) => {
     setOffset(page * 100);
-  }
+  };
 
-  const handleInputSearchChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputSearchChangeValue = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setTextFilter(e.target.value);
     const newFilterValue = e.target.value;
     changePage(0);
     if (selectedOption === 'NAME') {
-      const result = data.filter(row => `${row.email}`.toLowerCase()
-        .includes(newFilterValue.toLowerCase()));
+      const result = data.filter((row) =>
+        `${row.email}`.toLowerCase().includes(newFilterValue.toLowerCase()),
+      );
       setFilteredData(result);
     } else if (selectedOption === 'TICKET_NUMBER') {
-      const result = data.filter(row => row.ticket_value === parseInt(newFilterValue));
+      const result = data.filter(
+        (row) => row.ticket_value === parseInt(newFilterValue),
+      );
       if (newFilterValue === '') {
         setFilteredData(data);
       } else {
         setFilteredData(result);
       }
     }
-  }
+  };
 
   return (
     <AdminContain>
@@ -163,21 +186,23 @@ const Tickets = () => {
                 <h2 className='title'>Sorteos</h2>
               </div>
             </DefaultColumn>
-            {
-              ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+            {((canView && userLevel === 'admin') ||
+              userLevel === 'superAdmin') && (
               <Pagination
                 changePage={changePage}
-                currentPage={(offset / 100)}
+                currentPage={offset / 100}
                 totalPage={Math.ceil(filteredData.length / 100)}
               />
-            }
+            )}
           </div>
-          {
-            ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
+          {((canView && userLevel === 'admin') ||
+            userLevel === 'superAdmin') && (
             <div className='bottom-header'>
               <div>
                 <p className='title-filter'>Usuarios activos: {totalUsers}</p>
-                <p className='title-filter'>Cantidad total de boletos: {totalTickets}</p>
+                <p className='title-filter'>
+                  Cantidad total de boletos: {totalTickets}
+                </p>
               </div>
               <form>
                 <div className='search-input-tickets'>
@@ -186,58 +211,86 @@ const Tickets = () => {
                     <input
                       style={{ fontSize: '18px', paddingLeft: '50px' }}
                       className='search-input'
-                      placeholder="Buscar"
+                      placeholder='Buscar'
                       onChange={handleInputSearchChangeValue}
-                      type={"text"}
+                      type={'text'}
                       value={textFilter}
                     />
                   </div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px', gap: '5px' }}>
-                  <div className="option" style={{ fontSize: '18px' }}>
-                    <input id='radio-name' type="radio" checked={selectedOption === 'NAME'} value={'NAME'} onChange={() => {
-                      setSelectedOption('NAME');
-                      setTextFilter('');
-                    }}
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginTop: '10px',
+                    gap: '5px',
+                  }}
+                >
+                  <div className='option' style={{ fontSize: '18px' }}>
+                    <input
+                      id='radio-name'
+                      type='radio'
+                      checked={selectedOption === 'NAME'}
+                      value={'NAME'}
+                      onChange={() => {
+                        setSelectedOption('NAME');
+                        setTextFilter('');
+                      }}
                     />
                     <label htmlFor='radio-name'>Por correo eléctronico</label>
                   </div>
-                  <div className="option" style={{ fontSize: '18px' }}>
-                    <input id='radio-ticket-number' type="radio" checked={selectedOption === 'TICKET_NUMBER'} value={'TICKET_NUMBER'} onChange={() => {
-                      setSelectedOption('TICKET_NUMBER');
-                      setTextFilter('');
-                    }} />
-                    <label htmlFor='radio-ticket-number'>Por número de boleto</label>
+                  <div className='option' style={{ fontSize: '18px' }}>
+                    <input
+                      id='radio-ticket-number'
+                      type='radio'
+                      checked={selectedOption === 'TICKET_NUMBER'}
+                      value={'TICKET_NUMBER'}
+                      onChange={() => {
+                        setSelectedOption('TICKET_NUMBER');
+                        setTextFilter('');
+                      }}
+                    />
+                    <label htmlFor='radio-ticket-number'>
+                      Por número de boleto
+                    </label>
                   </div>
                 </div>
               </form>
-              {
-                ((canDownload && userLevel === 'admin') || userLevel === 'superAdmin') &&
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              {((canDownload && userLevel === 'admin') ||
+                userLevel === 'superAdmin') && (
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
                   <button
-                    type="button"
+                    type='button'
                     style={{ height: 'fit-content', fontSize: '20px' }}
                     className='button button-purple'
                     onClick={downloadListCSVHandler}
-                  >Descargar listado</button>
+                  >
+                    Descargar listado
+                  </button>
                 </div>
-              }
+              )}
             </div>
-          }
-
+          )}
         </div>
-        {
-          !isLoadingData &&
-          <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+        {!isLoadingData && (
+          <Background
+            style={{ alignItems: 'center', justifyContent: 'center' }}
+          >
             <LoaderImage>
               <LoaderContain />
             </LoaderImage>
           </Background>
-        }
+        )}
         <div className='table-contain'>
-          {
-            ((canView && userLevel === 'admin') || userLevel === 'superAdmin') &&
-            <AdminTable id="Users">
+          {((canView && userLevel === 'admin') ||
+            userLevel === 'superAdmin') && (
+            <AdminTable id='Users'>
               <tbody style={{ display: 'inline-table', width: '100%' }}>
                 <tr>
                   <th>Boleto</th>
@@ -245,9 +298,11 @@ const Tickets = () => {
                   <th>Correo Electrónico</th>
                   <th>Telefono</th>
                 </tr>
-                {
-                  isLoadingData &&
-                  filteredData.filter((_, index) => index >= offset && index < (offset + 100))
+                {isLoadingData &&
+                  filteredData
+                    .filter(
+                      (_, index) => index >= offset && index < offset + 100,
+                    )
                     .map((user, index) => {
                       return (
                         <tr key={index}>
@@ -261,16 +316,14 @@ const Tickets = () => {
                           <td>{user.email}</td>
                           <td>{user.phone_number}</td>
                         </tr>
-                      )
-                    })
-                }
+                      );
+                    })}
               </tbody>
             </AdminTable>
-          }
-
+          )}
         </div>
       </DefaultContainer>
-    </AdminContain >
-  )
-}
+    </AdminContain>
+  );
+};
 export default Tickets;

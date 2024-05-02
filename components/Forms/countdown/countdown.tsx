@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import styles from "./countdown.module.css";
+import styles from './countdown.module.css';
 
 const COUNTDOWN_TARGET = new Date();
 COUNTDOWN_TARGET.setMinutes(COUNTDOWN_TARGET.getMinutes() + 7);
@@ -16,8 +16,7 @@ const getTimeLeft = () => {
 };
 
 const Countdown = () => {
-
-  const { countdown, content, box, valor, etiqueta } = styles
+  const { countdown, content, box, valor, etiqueta } = styles;
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft());
 
   useEffect(() => {
@@ -39,7 +38,9 @@ const Countdown = () => {
 
   return (
     <div className={countdown}>
-      <h2>Cuentas con 7 minutos para <b>enviar tu solicitud</b></h2>
+      <h2>
+        Cuentas con 7 minutos para <b>enviar tu solicitud</b>
+      </h2>
       <div className={content}>
         {Object.entries(timeLeft).map((el) => {
           const label = el[0];

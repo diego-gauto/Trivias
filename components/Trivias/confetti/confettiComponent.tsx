@@ -1,6 +1,6 @@
-import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
-import React, { useState, useEffect } from "react";
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
+import React, { useState, useEffect } from 'react';
 
 const ConfettiComponent = () => {
   const [showConfetti, setShowConfetti] = useState(true);

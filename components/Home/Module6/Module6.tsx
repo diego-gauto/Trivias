@@ -1,7 +1,7 @@
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
 import {
   ContainerMain,
@@ -9,11 +9,11 @@ import {
   SliderSectionTitle,
   SliderContainer,
   SliderItemLink,
-} from "./Module6.styled";
-import GradientCanvas from "../../GradientCanvas/GradientCanvas"
-import { IModule6 } from "./IModule6";
-import { SlideModule } from "./SlideModule/SlideModule";
-import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+} from './Module6.styled';
+import GradientCanvas from '../../GradientCanvas/GradientCanvas';
+import { IModule6 } from './IModule6';
+import { SlideModule } from './SlideModule/SlideModule';
+import { downloadFileWithStoragePath } from '../../../store/actions/LandingActions';
 SwiperCore.use([Autoplay]);
 export const Module6 = (props: IModule6) => {
   const swiperRef = useRef<SwiperCore>();
@@ -52,13 +52,17 @@ export const Module6 = (props: IModule6) => {
       1024: {
         slidesPerView: 4,
         spaceBetween: 30,
-      }
-    }
+      },
+    },
   };
   const sliderData = slideDataArr?.map((element) => {
     return (
-      <SwiperSlide key={element.title + "_ID"}>
-        <SliderItemLink href={element.clickURL} target="_blank" rel="noopener noreferrer">
+      <SwiperSlide key={element.title + '_ID'}>
+        <SliderItemLink
+          href={element.clickURL}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <SlideModule
             isNew={element.isNew}
             title={element.title}
@@ -67,8 +71,8 @@ export const Module6 = (props: IModule6) => {
           />
         </SliderItemLink>
       </SwiperSlide>
-    )
-  })
+    );
+  });
   return (
     <Container
       fluid
@@ -76,7 +80,7 @@ export const Module6 = (props: IModule6) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <ContainerMain id="MainSliderCentered">
+      <ContainerMain id='MainSliderCentered'>
         <SliderContainer>
           <SliderSectionTitle>Visita nuestra tienda</SliderSectionTitle>
           <Swiper {...settings} onInit={onInit}>
@@ -84,9 +88,9 @@ export const Module6 = (props: IModule6) => {
           </Swiper>
         </SliderContainer>
         <SliderContainerChild>
-          <GradientCanvas id="gradient-canvas2" />
+          <GradientCanvas id='gradient-canvas2' />
         </SliderContainerChild>
-      </ContainerMain >
-    </Container >
-  )
-}
+      </ContainerMain>
+    </Container>
+  );
+};

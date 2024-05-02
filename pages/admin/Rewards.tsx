@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Rewards from '../../components/admin/Rewards/Rewards';
 import { MainContain } from '../../screens/Styles.styled';
 const RewardsView = () => {
@@ -6,6 +6,6 @@ const RewardsView = () => {
     <MainContain>
       <Rewards />
     </MainContain>
-  )
-}
+  );
+};
 export default RewardsView;

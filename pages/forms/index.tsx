@@ -1,25 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { useMediaQuery } from "react-responsive";
+import { useMediaQuery } from 'react-responsive';
 
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc } from 'firebase/firestore';
 // import { isValidPhoneNumber } from "react-phone-number-input";
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
 // import Link from "next/link";
-import { useRouter } from "next/router";
-import * as Yup from "yup";
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
-import { getFormApi } from "../../components/api/form";
-import { createUserFormApi } from "../../components/api/userform";
-import Countdown from "../../components/Forms/countdown/countdown";
-import InputApellido from "../../components/Forms/inputApellido/inputApellido";
-import InputMail from "../../components/Forms/inputMail/inputMail";
-import InputNombre from "../../components/Forms/inputNombre/inputNombre";
-import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
-import OptionComponent from "../../components/Forms/option/option";
-import { db } from "../../firebase/firebaseConfig";
-import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
-import styles from "./formulario.module.css";
+import { getFormApi } from '../../components/api/form';
+import { createUserFormApi } from '../../components/api/userform';
+import Countdown from '../../components/Forms/countdown/countdown';
+import InputApellido from '../../components/Forms/inputApellido/inputApellido';
+import InputMail from '../../components/Forms/inputMail/inputMail';
+import InputNombre from '../../components/Forms/inputNombre/inputNombre';
+import InputWatsapp from '../../components/Forms/inputWhatsapp/inputWhatsapp';
+import OptionComponent from '../../components/Forms/option/option';
+import { db } from '../../firebase/firebaseConfig';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../screens/Login.styled';
+import styles from './formulario.module.css';
 
 interface Answer {
   label: string;
@@ -44,7 +48,7 @@ interface Form {
   };
   optionsArray: Option[];
   redirect: {
-    type: "thankYouPage" | "customLink";
+    type: 'thankYouPage' | 'customLink';
     link: string;
     textButton: string;
   };
@@ -59,24 +63,24 @@ const Formularios = () => {
   let formId: string | undefined = router.query.formId as string | undefined;
   console.log(formId);
   const validFormIds = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
   ]; // Arreglo de IDs válidos
-  const specialFormIds = ["10", "11", "12", undefined];
+  const specialFormIds = ['10', '11', '12', undefined];
 
   // const form10: Form = {
   //   name: "campaña 11 Febrero 2024 Facebook",
@@ -136,7 +140,7 @@ const Formularios = () => {
   //   },
   // };
 
-  const responsive500 = useMediaQuery({ query: "(max-width: 500px)" });
+  const responsive500 = useMediaQuery({ query: '(max-width: 500px)' });
   // const router = useRouter();
 
   const [form, setForm] = useState<Form | null>();
@@ -179,45 +183,45 @@ const Formularios = () => {
 
   const validationSchema = Yup.object().shape({
     nombre: Yup.string()
-      .required("El nombre es obligatorio")
-      .min(3, "Al menos 3 letras"),
+      .required('El nombre es obligatorio')
+      .min(3, 'Al menos 3 letras'),
     apellido: Yup.string()
-      .required("El apellido es obligatorio")
-      .min(3, "Al menos 3 letras"),
+      .required('El apellido es obligatorio')
+      .min(3, 'Al menos 3 letras'),
     correo: Yup.string()
-      .required("El correo es obligatorio")
-      .email("El correo no es válido"),
+      .required('El correo es obligatorio')
+      .email('El correo no es válido'),
     numeroWhatsApp: Yup.string().required(
-      "El número de WhatsApp es obligatorio"
+      'El número de WhatsApp es obligatorio',
     ),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
-        ? Yup.string().required("Debes seleccionar alguna de las opciones")
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
     option2: Yup.lazy(() => {
       return form?.optionsArray[1]?.isVisible
-        ? Yup.string().required("Debes seleccionar alguna de las opciones")
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
     option3: Yup.lazy(() => {
       return form?.optionsArray[2]?.isVisible
-        ? Yup.string().required("Debes seleccionar alguna de las opciones")
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
   });
 
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      correo: "",
-      numeroWhatsApp: "",
-      codigoPais: "",
-      nombrePais: "",
-      option1: "",
-      option2: "",
-      option3: "",
+      nombre: '',
+      apellido: '',
+      correo: '',
+      numeroWhatsApp: '',
+      codigoPais: '',
+      nombrePais: '',
+      option1: '',
+      option2: '',
+      option3: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -228,9 +232,9 @@ const Formularios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (typeof formId !== "string" || !validFormIds.includes(formId)) {
+        if (typeof formId !== 'string' || !validFormIds.includes(formId)) {
           // Si formId no está incluido en los IDs válidos, redirigir a página de error
-          router.push("/forms/formnotfound");
+          router.push('/forms/formnotfound');
           return; // Detener la ejecución de fetchData
         }
         const formIdNumber: number = Number(formId);
@@ -248,7 +252,7 @@ const Formularios = () => {
 
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
-          console.log("from Server");
+          console.log('from Server');
           console.log(formTemp);
 
           setForm(formTemp);
@@ -259,7 +263,7 @@ const Formularios = () => {
             const customId = `form_${formId}`;
 
             // Referencia al documento del formulario en Firestore
-            const formDocRef = doc(collection(db, "forms"), customId);
+            const formDocRef = doc(collection(db, 'forms'), customId);
 
             // Obtén los datos del formulario desde Firestore
             const formSnapshot = await getDoc(formDocRef);
@@ -267,23 +271,23 @@ const Formularios = () => {
             if (formSnapshot.exists()) {
               // El documento existe, puedes acceder a los datos
               const formData = formSnapshot.data() as Form;
-              console.log("Datos del formulario recuperados:", formData);
+              console.log('Datos del formulario recuperados:', formData);
 
               setForm(formData);
               setLoading(false);
             } else {
               // El documento no existe
               // redirigir a pagina de error
-              console.log("El formulario no existe en Firebase");
+              console.log('El formulario no existe en Firebase');
             }
           } catch (error) {
-            console.error("Error al recuperar datos desde Firebase:", error);
+            console.error('Error al recuperar datos desde Firebase:', error);
           }
         }
 
         // setLoading(false);
       } catch (error) {
-        console.error("Error al recuperar datos desde el server:", error);
+        console.error('Error al recuperar datos desde el server:', error);
       }
     };
 
@@ -296,21 +300,21 @@ const Formularios = () => {
   useEffect(() => {
     if (errorMessage) {
       // Hacer desplazamiento al mensaje de error
-      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      errorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [errorMessage]);
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    formik.setFieldValue("nombre", event.target.value);
+    formik.setFieldValue('nombre', event.target.value);
   };
 
   const handleApellidoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    formik.setFieldValue("apellido", event.target.value);
+    formik.setFieldValue('apellido', event.target.value);
   };
 
   const handleMailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value.trim().toLowerCase();
-    formik.setFieldValue("correo", newEmail);
+    formik.setFieldValue('correo', newEmail);
 
     // Restablecer el mensaje de error si el correo electrónico cambia
     if (errorMessage && newEmail !== originalEmail) {
@@ -318,33 +322,33 @@ const Formularios = () => {
     }
 
     if (newEmail == originalEmail)
-      setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
+      setErrorMessage('Este correo ya se ha inscrito. Intenta con otro');
   };
 
   const handlePaisChange = (
     value: any,
     selectedCountry: any,
-    selectedCode: any
+    selectedCode: any,
   ) => {
-    formik.setFieldValue("numeroWhatsApp", value);
-    formik.setFieldValue("nombrePais", selectedCountry);
-    formik.setFieldValue("codigoPais", selectedCode);
+    formik.setFieldValue('numeroWhatsApp', value);
+    formik.setFieldValue('nombrePais', selectedCountry);
+    formik.setFieldValue('codigoPais', selectedCode);
   };
 
   const handleNombreBlur = () => {
-    formik.setFieldTouched("nombre", true);
+    formik.setFieldTouched('nombre', true);
   };
 
   const handleApellidoBlur = () => {
-    formik.setFieldTouched("apellido", true);
+    formik.setFieldTouched('apellido', true);
   };
 
   const handleMailBlur = () => {
-    formik.setFieldTouched("correo", true);
+    formik.setFieldTouched('correo', true);
   };
 
   const handlePaisBlur = () => {
-    formik.setFieldTouched("numeroWhatsApp", true);
+    formik.setFieldTouched('numeroWhatsApp', true);
   };
 
   const handleSubmit = async (values: any) => {
@@ -376,21 +380,21 @@ const Formularios = () => {
         //   form?.redirect?.type === "thankYouPage"
         //     ? "/forms/thankyoupage"
         //     : form?.redirect?.link || "";
-        const link = "forms/thankyoupage?formId=" + formId;
+        const link = 'forms/thankyoupage?formId=' + formId;
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
-        console.log("usuario registrado exitosamente");
+        console.log('usuario registrado exitosamente');
       } else {
         //popup el usuario ya esta registrado
         // setIsUserExistModalVisible(true)
         setOriginalEmail(formik.values.correo);
-        setErrorMessage("Este correo ya se ha inscrito. Intenta con otro");
-        console.log("usuario ya registrado");
+        setErrorMessage('Este correo ya se ha inscrito. Intenta con otro');
+        console.log('usuario ya registrado');
       }
     } catch (error) {
       //popup hubo un error, intentelo otra vez
-      console.error("Error al crear el usuario", error);
+      console.error('Error al crear el usuario', error);
     }
   };
 
@@ -399,19 +403,19 @@ const Formularios = () => {
 
     // Validar option1
     if (!formik.values.option1 && form?.optionsArray[0]?.isVisible) {
-      formik.setFieldError("option1", "Debes seleccionar una de las opciones");
+      formik.setFieldError('option1', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
 
     // Validar option2
     if (!formik.values.option2 && form?.optionsArray[1]?.isVisible) {
-      formik.setFieldError("option2", "Debes seleccionar una de las opciones");
+      formik.setFieldError('option2', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
 
     // Validar option3
     if (!formik.values.option3 && form?.optionsArray[2]?.isVisible) {
-      formik.setFieldError("option3", "Debes seleccionar una de las opciones");
+      formik.setFieldError('option3', 'Debes seleccionar una de las opciones');
       opcionesValidas = false;
     }
 
@@ -446,12 +450,12 @@ const Formularios = () => {
         try {
           formik.handleSubmit();
         } catch (error) {
-          console.error("Error al enviar el formulario", error);
+          console.error('Error al enviar el formulario', error);
         }
       } else {
-        console.error("Campos no validos");
-        console.log("form valid", formIsValid);
-        console.log("options valid", optionsAreValid);
+        console.error('Campos no validos');
+        console.log('form valid', formIsValid);
+        console.log('options valid', optionsAreValid);
       }
     });
   };
@@ -472,7 +476,7 @@ const Formularios = () => {
 
   if (loading) {
     return (
-      <Background style={{ alignItems: "center", justifyContent: "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
@@ -484,8 +488,8 @@ const Formularios = () => {
     <div className={container}>
       <img
         className={logo}
-        src="/images/forms/logoGonvar+.png"
-        alt="logo Gonvar"
+        src='/images/forms/logoGonvar+.png'
+        alt='logo Gonvar'
         style={responsive500 ? { maxWidth: 320 } : {}}
       />
       <div className={formContainer}>
@@ -503,8 +507,8 @@ const Formularios = () => {
           <div className={names}>
             <div className={name}>
               <InputNombre
-                label={"Escribe tu nombre"}
-                placeholder={"Carla"}
+                label={'Escribe tu nombre'}
+                placeholder={'Carla'}
                 onChange={handleNombreChange}
                 onBlur={handleNombreBlur}
                 value={formik.values.nombre}
@@ -516,8 +520,8 @@ const Formularios = () => {
 
             <div className={last_name}>
               <InputApellido
-                label={"Escribe tu apellido"}
-                placeholder={"Flores"}
+                label={'Escribe tu apellido'}
+                placeholder={'Flores'}
                 onChange={handleApellidoChange}
                 onBlur={handleApellidoBlur}
                 value={formik.values.apellido}
@@ -531,8 +535,8 @@ const Formularios = () => {
           </div>
           <div ref={errorRef} className={mail}>
             <InputMail
-              label={"Escribe tu correo electrónico"}
-              placeholder={"carlaflores@gmail.com"}
+              label={'Escribe tu correo electrónico'}
+              placeholder={'carlaflores@gmail.com'}
               onChange={handleMailChange}
               onBlur={handleMailBlur}
               value={formik.values.correo}
@@ -546,8 +550,8 @@ const Formularios = () => {
           </div>
           <div className={phone}>
             <InputWatsapp
-              label={"Escribe tu WhatsApp (Selecciona tu país primero)"}
-              placeholder={"1153137872"}
+              label={'Escribe tu WhatsApp (Selecciona tu país primero)'}
+              placeholder={'1153137872'}
               onChange={handlePaisChange}
               onBlur={handlePaisBlur}
               value={formik.values.numeroWhatsApp}
@@ -559,13 +563,13 @@ const Formularios = () => {
             )}
           </div>
           <div className={image}>
-            {form?.img.isVisible && <img src={form.img.source} alt="iphone" />}
+            {form?.img.isVisible && <img src={form.img.source} alt='iphone' />}
           </div>
 
           <div className={options}>
             <div className={optionContainer}>
               <OptionComponent
-                label={form?.optionsArray[0]?.label || ""}
+                label={form?.optionsArray[0]?.label || ''}
                 options={form?.optionsArray[0]?.options || []}
                 onOptionChange={(value) => handleOptionChange(1, value)}
                 isVisible={!!form?.optionsArray[0]?.isVisible}
@@ -577,7 +581,7 @@ const Formularios = () => {
 
             <div className={optionContainer}>
               <OptionComponent
-                label={form?.optionsArray[1]?.label || ""}
+                label={form?.optionsArray[1]?.label || ''}
                 options={form?.optionsArray[1]?.options || []}
                 onOptionChange={(value) => handleOptionChange(2, value)}
                 isVisible={!!form?.optionsArray[1]?.isVisible}
@@ -589,16 +593,16 @@ const Formularios = () => {
 
             <div className={optionContainer}>
               <OptionComponent
-                label={form?.optionsArray[2]?.label || ""}
+                label={form?.optionsArray[2]?.label || ''}
                 options={form?.optionsArray[2]?.options || []}
                 onOptionChange={(value) => handleOptionChange(3, value)}
                 isVisible={!!form?.optionsArray[2]?.isVisible}
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                formik.errors.option3 && (
-                  <div className={errorOption}>{formik.errors.option3}</div>
-                )
+                  formik.errors.option3 && (
+                    <div className={errorOption}>{formik.errors.option3}</div>
+                  )
                 : null}
             </div>
           </div>
@@ -614,12 +618,12 @@ const Formularios = () => {
 
           <div className={buttonContainer}>
             <button
-              type="button"
+              type='button'
               className={submitButton}
               onClick={handleButtonClick}
             >
-              {form?.redirect.textButton === ""
-                ? "Enviar Solicitud"
+              {form?.redirect.textButton === ''
+                ? 'Enviar Solicitud'
                 : form?.redirect.textButton}
             </button>
           </div>

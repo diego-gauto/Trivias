@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
 .container {
   width: 100%;
   height: 670px;
   display: flex;
-  background-image: url("/images/forms/thankyou.png");
+  background-image: url('/images/forms/thankyou.png');
   background-size: cover;
   background-position: center center; /* Centra la imagen */
 
@@ -21,7 +21,7 @@
   width: 60%;
   padding: 200px 0 0 10%;
 
-  font-family: "Montserrat", Helvetica;
+  font-family: 'Montserrat', Helvetica;
   color: #3f1168;
 
   @media (max-width: 800px) {

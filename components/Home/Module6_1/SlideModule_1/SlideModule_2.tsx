@@ -1,21 +1,24 @@
-import { Container, Col, Row, Button, Image } from "react-bootstrap";
-import { ISlideModule_2 } from "./ISlideModule_2";
-import React, { Component, useEffect, useState } from "react";
+import { Container, Col, Row, Button, Image } from 'react-bootstrap';
+import { ISlideModule_2 } from './ISlideModule_2';
+import React, { Component, useEffect, useState } from 'react';
 
 import {
-  ContainerMain, NewTag, SlideImg,
-  Text01, Text02, TextNew,
+  ContainerMain,
+  NewTag,
+  SlideImg,
+  Text01,
+  Text02,
+  TextNew,
   UserDataContainer,
   GeneralContainer,
   Text03,
   Text04,
   CompraRapida,
-} from "./SlideModule_2.styled";
-import { Line } from "../Module6_1.styled";
-import Link from "next/link";
+} from './SlideModule_2.styled';
+import { Line } from '../Module6_1.styled';
+import Link from 'next/link';
 
 export const SlideModule_1 = (props: ISlideModule_2) => {
-
   const {
     isNew,
     title,
@@ -27,54 +30,49 @@ export const SlideModule_1 = (props: ISlideModule_2) => {
     disponible,
     currency,
   } = props;
-  const [img, setImg] = useState("")
+  const [img, setImg] = useState('');
 
   const awaitImg = async () => {
-    const resolvedImg = await imgURL
-    setImg(resolvedImg)
-  }
-
-
+    const resolvedImg = await imgURL;
+    setImg(resolvedImg);
+  };
 
   useEffect(() => {
-    awaitImg()
-  }, [])
-
-
+    awaitImg();
+  }, []);
 
   return (
-    <ContainerMain id="shop-container">
+    <ContainerMain id='shop-container'>
       <SlideImg style={{ backgroundImage: 'url(' + img + ')' }}>
-        {
-          isNew ?
-            <NewTag>
-              <TextNew>Nuevo</TextNew>
-            </NewTag>
-            : <></>
-        }
+        {isNew ? (
+          <NewTag>
+            <TextNew>Nuevo</TextNew>
+          </NewTag>
+        ) : (
+          <></>
+        )}
         {/*  {
           compraRapida ?
             <CompraRapida>Compra rápida</CompraRapida>
             : <></>
         } */}
-        <Link href={clickURL} >
-          <CompraRapida className="compra">Compra rápida</CompraRapida>
+        <Link href={clickURL}>
+          <CompraRapida className='compra'>Compra rápida</CompraRapida>
         </Link>
         <Line></Line>
       </SlideImg>
       <UserDataContainer>
-
         <Text02>{title} </Text02>
-        {
-          disponible ? <>
-            <Text01   >$ {precio}.00 </Text01> <Text03   >{currency} </Text03>
+        {disponible ? (
+          <>
+            <Text01>$ {precio}.00 </Text01> <Text03>{currency} </Text03>
           </>
-            :
-            <>
-              <Text04   >Agotado</Text04>
-            </>
-        }
+        ) : (
+          <>
+            <Text04>Agotado</Text04>
+          </>
+        )}
       </UserDataContainer>
-    </ContainerMain >
-  )
-}
+    </ContainerMain>
+  );
+};

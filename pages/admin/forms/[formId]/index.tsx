@@ -1,17 +1,28 @@
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent } from 'react';
 
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Papa from "papaparse";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Papa from 'papaparse';
 
-import UserFormList from "../../../../components/admin/Forms/userFormList/userFormList";
+import UserFormList from '../../../../components/admin/Forms/userFormList/userFormList';
 // import { getAllTriviasApi } from "../../../../components/api/trivias";
-import { getUsersByFormApi } from "../../../../components/api/userform";
-import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
-import styles from "./listUser.module.css";
-import { Role, UserLevelValue } from "../../../../components/GenericQueries/UserRoles/UserRolesInterfaces";
-import { getGenericQueryResponse } from "../../../../components/api/admin";
-import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../../../components/GenericQueries/UserRoles/UserRolesQueries";
+import { getUsersByFormApi } from '../../../../components/api/userform';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../../screens/Login.styled';
+import styles from './listUser.module.css';
+import {
+  Role,
+  UserLevelValue,
+} from '../../../../components/GenericQueries/UserRoles/UserRolesInterfaces';
+import { getGenericQueryResponse } from '../../../../components/api/admin';
+import {
+  generateUserIdQuery,
+  generateUserRoleAccessQuery,
+  generateUserRolesLevelQuery,
+} from '../../../../components/GenericQueries/UserRoles/UserRolesQueries';
 
 interface UserForm {
   id: number;
@@ -37,7 +48,10 @@ interface UserAccesss {
 const UsersForms = () => {
   const [usersForms, setUsersForms] = useState<UserForm[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userAccess, setUserAccess] = useState<UserAccesss>({ canDownload: false, canView: false });
+  const [userAccess, setUserAccess] = useState<UserAccesss>({
+    canDownload: false,
+    canView: false,
+  });
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
   const { canDownload, canView } = userAccess;
@@ -66,17 +80,16 @@ const UsersForms = () => {
     pageItem,
     pageLink,
     active,
-    custom_table
+    custom_table,
   } = styles;
 
   const {
     query: { formId },
   } = useRouter();
 
-
   const getUserData = async () => {
     try {
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
       if (email === null) {
         throw new Error('No existe un email establecido para el usuario');
       }
@@ -87,7 +100,7 @@ const UsersForms = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const role = userRoles.find(role => role.role === 'forms_list');
+      const role = userRoles.find((role) => role.role === 'forms_list');
       setUserAccess({
         canView: role?.view === 1,
         canDownload: role?.download === 1,
@@ -102,16 +115,16 @@ const UsersForms = () => {
         alert(error.message);
       }
     }
-  }
+  };
 
   const downloadCsv = () => {
     const csv = Papa.unparse(usersForms);
 
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.setAttribute("href", url);
-    link.setAttribute("download", "usersForms.csv");
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'usersForms.csv');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -130,12 +143,12 @@ const UsersForms = () => {
       console.log(usersData);
 
       const formatDate = (date: Date): string => {
-        const day = date.getDate().toString().padStart(2, "0");
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
-        const hours = date.getHours().toString().padStart(2, "0");
-        const minutes = date.getMinutes().toString().padStart(2, "0");
-        const seconds = date.getSeconds().toString().padStart(2, "0");
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const seconds = date.getSeconds().toString().padStart(2, '0');
 
         return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
       };
@@ -145,14 +158,14 @@ const UsersForms = () => {
           ...user,
           id: index + 1,
           fecha: formatDate(new Date(user.fecha)),
-          isUser: user.user_id ? "Si" : "No",
+          isUser: user.user_id ? 'Si' : 'No',
         };
       });
       setUsersForms(mappedUsers);
       console.log(mappedUsers);
       setLoading(false);
     } catch (error) {
-      console.error("Error al obtener las trivias:", error);
+      console.error('Error al obtener las trivias:', error);
     }
   };
 
@@ -165,7 +178,7 @@ const UsersForms = () => {
 
   const changeCurrentPage = (
     e: MouseEvent<HTMLAnchorElement>,
-    page: number
+    page: number,
   ) => {
     e.preventDefault();
     setCurrentPage(page);
@@ -180,7 +193,7 @@ const UsersForms = () => {
 
   if (loading) {
     return (
-      <Background style={{ alignItems: "center", justifyContent: "center" }}>
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
         <LoaderImage>
           <LoaderContain />
         </LoaderImage>
@@ -192,27 +205,26 @@ const UsersForms = () => {
     <div className={main}>
       <div className={titles}>
         <div className={buttonContainer}>
-          <Link href={"/admin/Forms"}>
+          <Link href={'/admin/Forms'}>
             <a className={link}>
               <div className={volver}>
-                <img src="/images/trivias/icono . retroceder.svg" alt="" />
+                <img src='/images/trivias/icono . retroceder.svg' alt='' />
                 <div className={volverText}> Volver</div>
               </div>
             </a>
           </Link>
-          {
-            ((canDownload && userLevel === 'admin') || userLevel === 'superAdmin') &&
+          {((canDownload && userLevel === 'admin') ||
+            userLevel === 'superAdmin') && (
             <button className={button} onClick={downloadCsv}>
               Descargar CSV
             </button>
-          }
+          )}
         </div>
         <h2 className={title}>Listados de usuarios</h2>
         <h3>Total de usuarios: {usersForms.length}</h3>
       </div>
 
       <div className={custom_table}>
-
         <UserFormList
           usersForm={users}
           canView={canView}
@@ -220,20 +232,20 @@ const UsersForms = () => {
         />
       </div>
 
-      {
-        ((userLevel === 'admin' && canView) || userLevel === 'superAdmin') &&
+      {((userLevel === 'admin' && canView) || userLevel === 'superAdmin') && (
         <nav>
           <ul className={pagination}>
             {npage <= 5 ? (
               // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
               numbers.map((number, index) => (
                 <li
-                  className={`${pageItem} ${currentPage === number ? active : ""
-                    }`}
+                  className={`${pageItem} ${
+                    currentPage === number ? active : ''
+                  }`}
                   key={index}
                 >
                   <a
-                    href=""
+                    href=''
                     className={pageLink}
                     onClick={(e) => changeCurrentPage(e, number)}
                   >
@@ -246,7 +258,7 @@ const UsersForms = () => {
               <>
                 <li className={pageItem}>
                   <a
-                    href=""
+                    href=''
                     className={pageLink}
                     onClick={(e) => changeCurrentPage(e, 1)}
                   >
@@ -254,7 +266,7 @@ const UsersForms = () => {
                   </a>
                 </li>
                 <li className={pageItem}>
-                  <a href="" className={pageLink} onClick={(e) => prevPage(e)}>
+                  <a href='' className={pageLink} onClick={(e) => prevPage(e)}>
                     Anterior
                   </a>
                 </li>
@@ -264,13 +276,13 @@ const UsersForms = () => {
                 </li>
 
                 <li className={pageItem}>
-                  <a href="" className={pageLink} onClick={nextPage}>
+                  <a href='' className={pageLink} onClick={nextPage}>
                     Siguiente
                   </a>
                 </li>
                 <li className={pageItem}>
                   <a
-                    href=""
+                    href=''
                     className={pageLink}
                     onClick={(e) => changeCurrentPage(e, npage)}
                   >
@@ -281,7 +293,7 @@ const UsersForms = () => {
             )}
           </ul>
         </nav>
-      }
+      )}
     </div>
   );
 };

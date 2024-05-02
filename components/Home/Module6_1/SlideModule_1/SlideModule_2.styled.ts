@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CompraRapida = styled.div`
   font-weight: 100;
@@ -13,7 +13,7 @@ export const CompraRapida = styled.div`
   border-radius: 50px;
   padding: 15px 20px 15px;
   display: block;
-  font-family: "MONTSERRAT-BOLD" !important;
+  font-family: 'MONTSERRAT-BOLD' !important;
   @font-face {
     font-family: MONTSERRAT-BOLD;
     src: url(../fonts/MONTSERRAT-BOLD.ttf);
@@ -112,7 +112,7 @@ export const GeneralContainer = styled.div`
 `;
 
 export const TextNew = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -128,7 +128,7 @@ export const TextNew = styled.span`
   }
 `;
 export const Text01 = styled.span`
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -151,7 +151,7 @@ export const Text01 = styled.span`
   }
 `;
 export const Text02 = styled.p`
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);

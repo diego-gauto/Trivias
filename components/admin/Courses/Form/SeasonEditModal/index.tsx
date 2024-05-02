@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
-import { Modal } from "react-bootstrap";
-import { IProps } from "./IProps";
-import { Button } from "../Lessons.styled";
-import { Input, Label } from "../CourseForm_Create.styled";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { editSeasonName } from "../../../../../store/actions/AdminActions";
+import React, { useEffect } from 'react';
+import { Modal } from 'react-bootstrap';
+import { IProps } from './IProps';
+import { Button } from '../Lessons.styled';
+import { Input, Label } from '../CourseForm_Create.styled';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { editSeasonName } from '../../../../../store/actions/AdminActions';
 
 const formSchema = yup.object().shape({
-  seasonName: yup
-    .string()
-    .required("Campo requerido"),
+  seasonName: yup.string().required('Campo requerido'),
 });
 
 type FormValues = {
@@ -19,12 +17,7 @@ type FormValues = {
 };
 
 const SeasonEditModal = (props: IProps) => {
-  const {
-    courseID,
-    seasonID,
-    currentName,
-    onClose,
-  } = props;
+  const { courseID, seasonID, currentName, onClose } = props;
 
   const {
     register,
@@ -32,17 +25,17 @@ const SeasonEditModal = (props: IProps) => {
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: yupResolver(formSchema)
+    resolver: yupResolver(formSchema),
   });
 
   useEffect(() => {
     reset({ seasonName: currentName });
   }, []);
 
-  const onSubmit: SubmitHandler<FormValues> = async formData => {
+  const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     await editSeasonName(courseID, seasonID, formData.seasonName);
     onClose();
-  }
+  };
 
   return (
     <Modal show>
@@ -54,24 +47,22 @@ const SeasonEditModal = (props: IProps) => {
         <Modal.Body>
           <Label>Nombre</Label>
           <Input
-            placeholder="Nombre del curso"
-            type="text"
+            placeholder='Nombre del curso'
+            type='text'
             className={`form-control ${errors.seasonName && 'is-invalid'}`}
-            {...register("seasonName")}
+            {...register('seasonName')}
           />
-          <div className="invalid-feedback">
-            {errors.seasonName?.message}
-          </div>
+          <div className='invalid-feedback'>{errors.seasonName?.message}</div>
         </Modal.Body>
 
         <Modal.Footer>
           {/* @ts-expect-error */}
           <Button onClick={onClose}>Cancelar</Button>
-          <Button type="submit">Guardar</Button>
+          <Button type='submit'>Guardar</Button>
         </Modal.Footer>
       </form>
-    </Modal >
-  )
-}
+    </Modal>
+  );
+};
 
 export default SeasonEditModal;

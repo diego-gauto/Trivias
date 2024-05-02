@@ -1,6 +1,4 @@
-
-
-import { Modal } from "react-bootstrap";
+import { Modal } from 'react-bootstrap';
 
 import {
   ButtonsDiv,
@@ -12,7 +10,7 @@ import {
   TextContainer,
   Title,
   TransparentButton,
-} from "./Modal3.styled";
+} from './Modal3.styled';
 
 const ModalFinish = ({ show, setShow, user }: any) => {
   let tempDate;
@@ -22,10 +20,10 @@ const ModalFinish = ({ show, setShow, user }: any) => {
   let formatDate;
   if (user) {
     tempDate = new Date(user.membership.finalDate * 1000);
-    tempDay = tempDate.getDate()
+    tempDay = tempDate.getDate();
     tempMonth = tempDate.getUTCMonth() + 1;
-    tempYear = tempDate.getFullYear()
-    formatDate = `${tempDay}/${tempMonth}/${tempYear}`
+    tempYear = tempDate.getFullYear();
+    formatDate = `${tempDay}/${tempMonth}/${tempYear}`;
   }
 
   const handleClose = () => setShow(false);
@@ -34,33 +32,25 @@ const ModalFinish = ({ show, setShow, user }: any) => {
     <Modal3Contain>
       <Modal show={show} onHide={handleClose} centered>
         <Container>
-          <Title closeButton>
-            Tu Sucripción
-          </Title>
+          <Title closeButton>Tu Sucripción</Title>
           <TextContainer>
-            <Text>
-              Tu suscripción será terminada.
-            </Text>
-            <Text>
-              Seguiras teniendo acceso hasta la fecha de renovación.
-            </Text>
+            <Text>Tu suscripción será terminada.</Text>
+            <Text>Seguiras teniendo acceso hasta la fecha de renovación.</Text>
           </TextContainer>
-          <Expire>
-            {formatDate}
-          </Expire>
+          <Expire>{formatDate}</Expire>
           <ButtonsDiv>
-            <TransparentButton onClick={() => {
-              setShow(false)
-            }}>
+            <TransparentButton
+              onClick={() => {
+                setShow(false);
+              }}
+            >
               Regresar
             </TransparentButton>
-            <PurpleButton onClick={handleClose}>
-              Continuar
-            </PurpleButton>
+            <PurpleButton onClick={handleClose}>Continuar</PurpleButton>
           </ButtonsDiv>
         </Container>
       </Modal>
     </Modal3Contain>
-  )
-}
+  );
+};
 export default ModalFinish;

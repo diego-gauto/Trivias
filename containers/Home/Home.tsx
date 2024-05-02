@@ -1,4 +1,4 @@
-import Landings from "../../pages/index";
+import Landings from '../../pages/index';
 /**
  * The home page.
  *
@@ -9,9 +9,11 @@ import Landings from "../../pages/index";
 //Module 4: Carrusel de lecciones particulares del curso
 export const HomeContainer = () => {
   let courses: any = [];
-  return <>
-    <Landings courses={courses} />
-  </>
+  return (
+    <>
+      <Landings courses={courses} />
+    </>
+  );
 };
 
 export default HomeContainer;

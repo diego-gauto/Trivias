@@ -1,18 +1,29 @@
 import {
-  collection, doc, getDocs, getFirestore, query, setDoc, addDoc, where, onSnapshot, updateDoc, orderBy, Timestamp,
-} from "firebase/firestore";
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  addDoc,
+  where,
+  onSnapshot,
+  updateDoc,
+  orderBy,
+  Timestamp,
+} from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 
 export const addPaymentMethod = async (paymentMethod: any, userId: any) => {
-  delete paymentMethod.status
+  delete paymentMethod.status;
   const docRef = await addDoc(
-    collection(db, "users", userId, "paymentMethods"),
+    collection(db, 'users', userId, 'paymentMethods'),
     {
-      ...paymentMethod
-    }
+      ...paymentMethod,
+    },
   );
-  return 'exito'
-}
+  return 'exito';
+};
 export const updateUserPlan = async (plan: any, userId: any) => {
   const docRef = doc(db, 'users', userId);
   await updateDoc(docRef, {
@@ -23,48 +34,41 @@ export const updateUserPlan = async (plan: any, userId: any) => {
       paymentMethod: plan.paymentMethod,
       planId: plan.id,
       planName: plan.name,
-      startDate: new Date().getTime() / 1000
-    }
-  })
-  return 'exito'
-}
+      startDate: new Date().getTime() / 1000,
+    },
+  });
+  return 'exito';
+};
 
 export const getPaymentmethods = async (userId: any) => {
-  let data: any = []
-  const docRef = collection(db, 'users', userId, "paymentMethods");
+  let data: any = [];
+  const docRef = collection(db, 'users', userId, 'paymentMethods');
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
-    data.push({ ...doc.data(), id: doc.id })
+    data.push({ ...doc.data(), id: doc.id });
   });
-  return data
-}
+  return data;
+};
 
 export const addCourseUser = async (course: any, userId: any) => {
-  const docRef = await setDoc(
-    doc(db, "users", userId, "courses", course.id),
-    {
-      finalDate: course.duration
-    }
-  );
-}
-
+  const docRef = await setDoc(doc(db, 'users', userId, 'courses', course.id), {
+    finalDate: course.duration,
+  });
+};
 
 export const addInvoice = async (invoice: any) => {
-  const docRef = await addDoc(
-    collection(db, "invoice"),
-    {
-      ...invoice
-    }
-  );
+  const docRef = await addDoc(collection(db, 'invoice'), {
+    ...invoice,
+  });
   return docRef.id;
-}
+};
 
 export const getInvoice = async () => {
-  let data: any = []
-  const docRef = query(collection(db, "invoice"), orderBy("paidAt", "desc"));
+  let data: any = [];
+  const docRef = query(collection(db, 'invoice'), orderBy('paidAt', 'desc'));
   const querySnapshot = await getDocs(docRef);
   querySnapshot.forEach((doc) => {
-    data.push(doc.data())
+    data.push(doc.data());
   });
-  return data
-}
+  return data;
+};

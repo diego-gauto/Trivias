@@ -1,6 +1,6 @@
 export const generateCommentsByCourseIdQuery = (
   courseId: number | undefined,
-  offset: number
+  offset: number,
 ) => {
   const where = `WHERE  s.course_id = ${courseId}`;
   return `SELECT co.*,
@@ -24,7 +24,7 @@ export const generateCommentsByCourseIdQuery = (
 };
 
 export const generateCommentsByCourseIdCountQuery = (
-  courseId: number | undefined
+  courseId: number | undefined,
 ) => {
   const where = `WHERE course_id = ${courseId}`;
   return `SELECT count(*) as count FROM comments ${courseId ? where : ''};`;
@@ -79,14 +79,14 @@ export interface CommentStructure {
 export const generateCountAllComments = (
   courseId: number,
   courseIds: number[],
-  isSuperAdmin: boolean
+  isSuperAdmin: boolean,
 ) => {
   const condition1 =
     !isSuperAdmin && courseIds.length > 0
       ? `course_id IN (${courseIds.join(',')})`
       : '';
   const condition2 = courseId !== -1 ? `course_id = ${courseId}` : '';
-  const conditions = [condition1, condition2].filter(c => c.length > 0);
+  const conditions = [condition1, condition2].filter((c) => c.length > 0);
   const where =
     conditions.length > 0 ? ` WHERE ${conditions.join(' AND ')}` : '';
   const query = `SELECT COUNT(*) as count FROM comments${where};`;
@@ -98,7 +98,7 @@ export const generateGetAllComments = (
   courseId: number,
   offset: number,
   courseIds: number[],
-  isSuperAdmin: boolean
+  isSuperAdmin: boolean,
 ) => {
   let responseCondition = '';
   if (preferency === 'with-response') {
@@ -113,7 +113,7 @@ export const generateGetAllComments = (
     !isSuperAdmin && courseIds.length > 0
       ? `course_id in (${courseIds.join(',')})`
       : '';
-  const conditionArray = [condition1, condition2].filter(c => c.length > 0);
+  const conditionArray = [condition1, condition2].filter((c) => c.length > 0);
   const where = `WHERE ${conditionArray.join(' and ')}`;
   const haveConditions = conditionArray.length > 0;
 

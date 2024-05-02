@@ -11,7 +11,7 @@
     width: 100%;
     text-align: center;
     margin-bottom: 2%;
-    font-family: "Montserrat";
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
@@ -28,7 +28,7 @@
         height: 50px;
         border: 0;
         cursor: pointer;
-        font-family: "Montserrat";
+        font-family: 'Montserrat';
         border-radius: 100px;
         background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
         font-style: normal;
@@ -46,7 +46,7 @@
           display: flex;
           cursor: pointer;
 
-          font-family: "Montserrat";
+          font-family: 'Montserrat';
           font-style: normal;
           font-weight: 700;
           font-size: 22px;
@@ -73,7 +73,7 @@
     display: flex;
     justify-content: space-around;
 
-    font-family: "Montserrat";
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -124,37 +124,32 @@
   }
 }
 
-.custom_table{
-  width:  100%;
+.custom_table {
+  width: 100%;
 }
 
 @media (max-width: 1500px) {
-  .main{
-
-    .titles{
-      width:  95%;
+  .main {
+    .titles {
+      width: 95%;
     }
 
-    .custom_table{
-      width:  95%;
+    .custom_table {
+      width: 95%;
     }
   }
-
 }
 
-
 @media (max-width: 1300px) {
-  .main{
-
-    .titles{
+  .main {
+    .titles {
       width: 100%;
     }
 
-    .custom_table{
-      width:  100%;
+    .custom_table {
+      width: 100%;
     }
   }
-
 }
 
 @media (max-width: 768px) {

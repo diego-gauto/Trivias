@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 export const CoursesContain = styled.div`
   display: flex;
@@ -184,7 +184,7 @@ export const Container = styled.div`
 `;
 export const Title = styled.h3`
   font-size: 36px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: 44px;
   font-weight: 600;
   color: #3f1168;
@@ -195,7 +195,7 @@ export const Title = styled.h3`
 `;
 export const SubText = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #3f1168;
   font-weight: 500;
   margin: 0;

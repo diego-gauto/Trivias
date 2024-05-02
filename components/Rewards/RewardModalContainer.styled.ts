@@ -1,20 +1,20 @@
-import { Modal } from "react-bootstrap";
+import { Modal } from 'react-bootstrap';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RewardModalContainer = styled(Modal)`
-  @font-face{
-    font-family:Montserrat;
-    src:url(../fonts/Montserrat-VariableFont_wght.ttf);
+  @font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
   }
   .modal-header {
-    font-family:Montserrat;
+    font-family: Montserrat;
     border-bottom: 0px;
   }
   .btn-close {
     opacity: 1;
   }
-  .modal-title{
+  .modal-title {
     font-size: 18px;
   }
   .modal-body {
@@ -28,7 +28,7 @@ export const RewardModalContainer = styled(Modal)`
     font-size: 14px;
   }
   .warning {
-    color: #6717CD;
+    color: #6717cd;
     font-weight: 700;
     font-size: 14px;
   }
@@ -45,18 +45,18 @@ export const RewardModalContainer = styled(Modal)`
     border-radius: 100px;
   }
   .claim-btn {
-    border: 1px solid #6717CD;
-    background: #FFFFFF;
-    color: #6717CD; 
+    border: 1px solid #6717cd;
+    background: #ffffff;
+    color: #6717cd;
     margin-right: 10px;
     // margin-bottom: 10px;
   }
   .close-btn {
-    background: #6717CD;
+    background: #6717cd;
   }
   .points {
     font-family: 'Montserrat';
-    color: #6717CD;
+    color: #6717cd;
     font-size: 16px;
     font-weight: 600;
   }
@@ -71,7 +71,7 @@ export const RewardModalContainer = styled(Modal)`
     font-size: 14px;
     margin-right: 10px;
   }
-  @media(max-width: 992px) {
+  @media (max-width: 992px) {
     .div-button {
       text-align: center;
     }
@@ -84,7 +84,7 @@ export const AlertIcon = styled.label`
   width: 20px;
   height: 20px;
   margin-right: 7.25px;
-  @media(max-width: 870px) {
+  @media (max-width: 870px) {
     width: 20px;
     height: 19.5px;
   }

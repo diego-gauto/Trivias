@@ -1,6 +1,6 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModuleContainer = styled(Container)`
   @media only screen and (max-width: 1024px) {
@@ -112,7 +112,7 @@ export const IconText = styled.p`
   width: 100%;
 `;
 export const IconText_B = styled.label`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -132,7 +132,7 @@ export const TitleTextContainer = styled.div`
   }
 `;
 export const TitleCenter = styled.p`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   font-size: 24px;

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import styled from 'styled-components';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
 export const SliderContainer = styled.div`
   position: relative;
@@ -87,7 +87,7 @@ export const BgColor = styled.div`
 export const TittleA = styled.span`
   color: #3f1168;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);
@@ -96,7 +96,7 @@ export const TittleA = styled.span`
 export const TittleB = styled.span`
   color: #a733e4;
   font-size: 38px;
-  font-family: "Montserrat-ExtraBold" !important;
+  font-family: 'Montserrat-ExtraBold' !important;
   @font-face {
     font-family: Montserrat-ExtraBold;
     src: url(../fonts/Montserrat-ExtraBold.ttf);

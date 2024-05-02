@@ -120,18 +120,18 @@ export const Button = styled.div<{ status: any; approved: any }>`
   padding: 10px;
   color: white;
   border-radius: 100px;
-  ${props =>
+  ${(props) =>
     props.status === 0 &&
     css`
       background: #9534eb;
     `}
-  ${props =>
+  ${(props) =>
     props.status === 1 &&
     props.approved === 1 &&
     css`
       background: #33c600;
     `}
-      ${props =>
+      ${(props) =>
     props.status === 1 &&
     props.approved === 0 &&
     css`

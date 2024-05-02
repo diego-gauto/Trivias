@@ -1,5 +1,3 @@
-
-
 interface UserTrivia {
   id: number;
   nombre: string;
@@ -15,20 +13,15 @@ interface TriviaRowProps {
 }
 
 const UserTriviaRow = ({ user }: TriviaRowProps) => {
-
-
   return (
-
     <tr>
       <td>{user.nombre}</td>
       <td>{user.apellido}</td>
       <td>{user.mail}</td>
       <td>{user.numeroWhatsapp}</td>
       <td>{user.pais}</td>
-      <td>{user.isUser ? "Si" : "No"}</td>
-
+      <td>{user.isUser ? 'Si' : 'No'}</td>
     </tr>
-
   );
 };
 

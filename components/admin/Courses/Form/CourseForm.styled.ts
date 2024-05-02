@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CourseFormContain = styled.div`
   display: flex;
@@ -22,13 +22,13 @@ export const ButtonContain2 = styled.div`
   flex-direction: column;
   gap: 10px;
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   width: 100%;
   border-radius: 20px;
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: #6717cd;
@@ -54,7 +54,7 @@ export const IconContain = styled.div`
   position: relative;
   .inp-file {
     font-size: 14px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding-inline: 20px;
     padding-block: 10px;
     width: 100%;
@@ -78,11 +78,11 @@ export const TagContain = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   width: 100%;
@@ -94,7 +94,7 @@ export const Input = styled.input`
 `;
 export const InputIcon = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 50px 20px;
   padding-block: 10px;
   width: 100%;
@@ -106,7 +106,7 @@ export const InputIcon = styled.input`
 `;
 export const InputBig = styled.textarea`
   font-size: 12px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-align: justify;
   padding-block: 10px;
   width: 100%;
@@ -124,7 +124,7 @@ export const InputBig = styled.textarea`
 `;
 export const Select = styled.select`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   width: 100%;
   padding: 10px 0 10px 20px;
   border: 1px solid #6717cd;
@@ -135,13 +135,13 @@ export const Select = styled.select`
 `;
 export const TagTitle = styled.p`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #6717cd;
   margin: 0;
 `;
 export const TagLabel = styled.label`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   display: block;
   position: relative;
@@ -184,7 +184,7 @@ export const TagLabel = styled.label`
       border-radius: 50%;
       background: transparent;
       border: 2px solid white;
-      content: "";
+      content: '';
       position: absolute;
       display: none;
     }

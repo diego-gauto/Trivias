@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styled from "styled-components";
+import Image from 'next/image';
+import styled from 'styled-components';
 
 export const CourseContain = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ export const Container = styled.div`
 export const NewText = styled.div`
   color: white;
   font-size: 12px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   padding-block: 5px;
   padding-inline: 20px;
   width: max-content;
@@ -55,14 +55,14 @@ export const Title = styled.h1`
   font-size: 36px;
   opacity: 0.9;
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const Subtitle = styled.p`
   font-size: 24px;
   opacity: 0.9;
   color: white;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 

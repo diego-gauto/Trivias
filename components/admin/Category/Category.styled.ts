@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CategoryContain = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const TitleContain = styled.div`
 `;
 export const Title = styled.h1`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const FormContain = styled.div`
@@ -57,11 +57,11 @@ export const InputContain = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   color: #6717cd;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 `;
 export const Input = styled.input`
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-inline: 20px;
   padding-block: 10px;
   border: 1px solid #6717cd;
@@ -73,7 +73,7 @@ export const Input = styled.input`
 `;
 export const Button = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding-block: 15px;
   padding-inline: 25px;
   background: #6717cd;
@@ -101,7 +101,7 @@ export const CatContain = styled.div`
 `;
 export const CatText = styled.p`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   color: #6717cd;
   white-space: nowrap;

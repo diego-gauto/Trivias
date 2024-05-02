@@ -1,22 +1,22 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getAllFormsApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/form")
+    .get('https://gonvar.inowu.dev/form')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const getFormApi = async (idForm: number) => {
   return axios
-    .get("https://gonvar.inowu.dev/form/" + `${idForm}`)
+    .get('https://gonvar.inowu.dev/form/' + `${idForm}`)
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
@@ -26,34 +26,34 @@ export const getFormApi = async (idForm: number) => {
 
 export const createFormApi = async (form: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/form", form)
+    .post('https://gonvar.inowu.dev/form', form)
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const updateFormApi = async (idForm: number, form: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/form/" + `${idForm}`, form)
+    .put('https://gonvar.inowu.dev/form/' + `${idForm}`, form)
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const deleteFormApi = async (idForm: number, form: any) => {
   return axios
-    .delete("https://gonvar.inowu.dev/form/" + `${idForm}`, form)
+    .delete('https://gonvar.inowu.dev/form/' + `${idForm}`, form)
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };

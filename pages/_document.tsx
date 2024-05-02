@@ -1,6 +1,6 @@
-import Document, { Head, Html, Main, NextScript } from "next/document";
-import Script from "next/script";
-import { appConfig } from "../utils/appConfig";
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+import Script from 'next/script';
+import { appConfig } from '../utils/appConfig';
 import router from 'next/router';
 /**
  * Document class
@@ -11,42 +11,78 @@ class MyDocument extends Document {
     return (
       <Html lang={appConfig.locale}>
         <Head>
-          <meta property="og:image" content={"https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2"} />
-          <link rel="icon" href="/images/32px.png" />
-          <meta name="google-site-verification" content="ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw" />
-          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet"></link>
-          <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet"></link>
-          <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="csrf_token" content="" />
-          <meta property="type" content="website" />
-          <meta name="msapplication-TileColor" content="#ffffff" />
-          <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-          <meta property="fb:app_id" content="804211551373021" />
-          <meta property="title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta property="og:title" content={"Academia de Belleza Online | Gonvar"} />
-          <meta name="description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:description" content={"Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!"} />
-          <meta property="og:url" content={"https://gonvar.io"} />
-          <meta name="theme-color" content="#ffffff" />
-          <meta name="_token" content="" />
-          <meta name="robots" content="noodp" />
-          <meta property="og:locale" content="es_MX" />
-          <meta property="og:type" content="website" />
+          <meta
+            property='og:image'
+            content={
+              'https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/200x200-px.png?alt=media&token=7e24eec7-1117-4ab2-ab0a-7a2acbaf0fa2'
+            }
+          />
+          <link rel='icon' href='/images/32px.png' />
+          <meta
+            name='google-site-verification'
+            content='ktKaEDz-5AbCakVSsWi0RPJmOVR7eKyxZOFVUirS3xw'
+          />
+          <link
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap'
+            rel='stylesheet'
+          ></link>
+          <link
+            href='https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap'
+            rel='stylesheet'
+          ></link>
+          <script src='https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js'></script>
+          <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+          <meta name='csrf_token' content='' />
+          <meta property='type' content='website' />
+          <meta name='msapplication-TileColor' content='#ffffff' />
+          <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
+          <meta property='fb:app_id' content='804211551373021' />
+          <meta
+            property='title'
+            content={'Academia de Belleza Online | Gonvar'}
+          />
+          <meta
+            property='og:title'
+            content={'Academia de Belleza Online | Gonvar'}
+          />
+          <meta
+            name='description'
+            content={
+              'Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!'
+            }
+          />
+          <meta
+            property='og:description'
+            content={
+              'Descubre la academia de belleza para convertirte en un experto. Aprende técnicas y tendencias con los profesionales del sector. ¡Inscríbete ya!'
+            }
+          />
+          <meta property='og:url' content={'https://gonvar.io'} />
+          <meta name='theme-color' content='#ffffff' />
+          <meta name='_token' content='' />
+          <meta name='robots' content='noodp' />
+          <meta property='og:locale' content='es_MX' />
+          <meta property='og:type' content='website' />
           <noscript>
-            <img height="1" width="1" style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=804211551373021&ev=PageView&noscript=1"
+            <img
+              height='1'
+              width='1'
+              style={{ display: 'none' }}
+              src='https://www.facebook.com/tr?id=804211551373021&ev=PageView&noscript=1'
             />
           </noscript>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK"></script>
+          <script
+            async
+            src='https://www.googletagmanager.com/gtag/js?id=G-8N2X594YBK'
+          ></script>
           <script
             dangerouslySetInnerHTML={{
               __html: `  window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-8N2X594YBK');`
-            }}>
-          </script>
+              gtag('config', 'G-8N2X594YBK');`,
+            }}
+          ></script>
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -98,13 +134,21 @@ class MyDocument extends Document {
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-M4DJNFW');`
+        })(window,document,'script','dataLayer','GTM-M4DJNFW');`,
             }}
-          >
-          </script>
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M4DJNFW"
-            height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
-          <script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
+          ></script>
+          <noscript>
+            <iframe
+              src='https://www.googletagmanager.com/ns.html?id=GTM-M4DJNFW'
+              height='0'
+              width='0'
+              style={{ display: 'none', visibility: 'hidden' }}
+            ></iframe>
+          </noscript>
+          <script
+            type='text/javascript'
+            src='https://cdn.conekta.io/js/latest/conekta.js'
+          ></script>
         </Head>
         <body>
           <Main />

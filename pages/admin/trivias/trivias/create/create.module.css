@@ -1,74 +1,74 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 2%;
 }
 
-.inputGroup{
+.inputGroup {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
 
-.inputGroup input{
+.inputGroup input {
   width: 40%;
 }
 
-.inputGroupQuestion{
+.inputGroupQuestion {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
 
-.inputGroupQuestion input{
+.inputGroupQuestion input {
   width: 80%;
   margin-bottom: 10px;
 }
 
-.inputGroupAnswers{
+.inputGroupAnswers {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
 }
 
-.inputGroupAnswers label{
+.inputGroupAnswers label {
   width: 15%;
 }
 
-.inputGroupAnswers input{
+.inputGroupAnswers input {
   width: 70%;
 }
 
-div.inputGroupAnswers input[type="checkbox"] {
+div.inputGroupAnswers input[type='checkbox'] {
   width: 15%;
 }
 
-.inputGroupResult{
+.inputGroupResult {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-.inputGroupResult input{
+.inputGroupResult input {
   margin-bottom: 10px;
 }
 
-.inputGroupResult textarea{
+.inputGroupResult textarea {
   margin-bottom: 10px;
 }
 
-.buttonContainer{
+.buttonContainer {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
-.button{
+.button {
   width: 300px;
   height: 50px;
   border: 0;
   cursor: pointer;
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   font-style: normal;

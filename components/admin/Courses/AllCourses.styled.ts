@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -74,32 +74,32 @@ export const TextColor = styled.p<{ color: string }>`
   margin: 0;
   text-align: justify;
   ${(props) =>
-    props.color == "azul" &&
+    props.color == 'azul' &&
     css`
       background-color: #6778f9;
     `}
   ${(props) =>
-    props.color == "amarillo" &&
+    props.color == 'amarillo' &&
     css`
       background-color: #e2a12d;
     `}
     ${(props) =>
-    props.color == "morado" &&
+    props.color == 'morado' &&
     css`
       background-color: #9900ee;
     `}
     ${(props) =>
-    props.color == "naranja" &&
+    props.color == 'naranja' &&
     css`
       background-color: #f04a18;
     `}
     ${(props) =>
-    props.color == "rosa" &&
+    props.color == 'rosa' &&
     css`
       background-color: #d445d3;
     `}
     ${(props) =>
-    props.color == "verde" &&
+    props.color == 'verde' &&
     css`
       background-color: #03bc80;
     `}
@@ -108,7 +108,7 @@ export const Label = styled.label`
   font-size: 16px;
   color: #6717cd;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 `;
 export const ButtonContain = styled.div`
@@ -118,7 +118,7 @@ export const ButtonContain = styled.div`
 `;
 export const TransparentButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: transparent;
   color: #6717cd;
   padding-block: 10px;
@@ -132,7 +132,7 @@ export const TransparentButton = styled.button`
 `;
 export const PurpleButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #6717cd;
   color: white;
   padding-block: 10px;
@@ -147,7 +147,7 @@ export const PurpleButton = styled.button`
 `;
 export const RedButton = styled.button`
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #dc3545;
   color: white;
   padding-block: 10px;

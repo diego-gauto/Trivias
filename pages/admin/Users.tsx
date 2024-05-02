@@ -1,6 +1,6 @@
-import UsersList from "../../components/admin/Users/UsersList";
-import Users from "../../components/admin/UsersNew/Users";
-import { MainContain } from "../../screens/Styles.styled";
+import UsersList from '../../components/admin/Users/UsersList';
+import Users from '../../components/admin/UsersNew/Users';
+import { MainContain } from '../../screens/Styles.styled';
 
 const UsersView = () => {
   return (
@@ -8,6 +8,6 @@ const UsersView = () => {
       {/* <UsersList /> */}
       <Users />
     </MainContain>
-  )
-}
+  );
+};
 export default UsersView;

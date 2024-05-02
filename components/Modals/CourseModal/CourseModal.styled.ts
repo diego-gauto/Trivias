@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import styled, { css } from "styled-components";
+import { Modal } from 'react-bootstrap';
+import styled, { css } from 'styled-components';
 
 export const ModalContain = styled.div`
   @font-face {
@@ -182,7 +182,7 @@ export const CourseContain = styled.div<{ level: any }>`
           transition: opacity 0.3s;
         }
         .tooltiptext::after {
-          content: "";
+          content: '';
           position: absolute;
           top: 100%;
           left: 50%;
@@ -312,27 +312,27 @@ export const CourseContain = styled.div<{ level: any }>`
         }
       }
       ${(props) =>
-        props.level == "Muy Fácil" &&
+        props.level == 'Muy Fácil' &&
         css`
           color: #006ca8;
         `}
       ${(props) =>
-        props.level == "Fácil" &&
+        props.level == 'Fácil' &&
         css`
           color: #8c5098;
         `}
       ${(props) =>
-        props.level == "Intermedio" &&
+        props.level == 'Intermedio' &&
         css`
           color: #ec7501;
         `}
     ${(props) =>
-        props.level == "Avanzado" &&
+        props.level == 'Avanzado' &&
         css`
           color: #149e62;
         `}
       ${(props) =>
-        props.level == "Máster" &&
+        props.level == 'Máster' &&
         css`
           color: #d22978;
         `}
@@ -466,7 +466,7 @@ export const CourseContain = styled.div<{ level: any }>`
           transition: opacity 0.3s;
         }
         .tooltiptext::after {
-          content: "";
+          content: '';
           position: absolute;
           top: 100%;
           left: 50%;
@@ -493,7 +493,7 @@ export const Cross = styled.p`
   color: #3f1168;
   justify-content: flex-end;
   font-size: 36px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   cursor: pointer;
   margin: 0;
   @media (max-width: 1023px) {
@@ -502,7 +502,7 @@ export const Cross = styled.p`
 `;
 export const Description = styled.p`
   font-size: 18px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 990px) {
     font-size: 14px;
@@ -529,7 +529,7 @@ export const EpisodeInfo = styled.div`
   justify-content: center;
 `;
 export const EpisodeTime = styled.p`
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   @media (max-width: 990px) {
     font-size: 14px;
@@ -538,7 +538,7 @@ export const EpisodeTime = styled.p`
 export const EpisodeTitle = styled.p`
   font-size: 20px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   @media (max-width: 990px) {
     font-size: 16px;
@@ -579,7 +579,7 @@ export const LessonContain = styled.div`
 `;
 export const LessonTitle = styled.p`
   font-size: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   font-weight: 600;
   color: #3f1168;
@@ -659,7 +659,7 @@ export const TextContainer = styled.div`
     gap: 5px;
     align-items: center;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     justify-content: center;
     padding-inline: 15px;
@@ -691,7 +691,7 @@ export const VideoContain = styled.div`
   gap: 20px;
 `;
 export const InformationIcon = styled.label`
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   display: inline-block;
   font-size: 8px;
   font-weight: 500;

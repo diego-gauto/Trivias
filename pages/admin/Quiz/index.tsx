@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Quiz from '../../../components/admin/Quiz/Quiz';
 import { MainContain } from '../../../screens/Styles.styled';
 const Quizes = () => {
@@ -6,6 +6,6 @@ const Quizes = () => {
     <MainContain>
       <Quiz></Quiz>
     </MainContain>
-  )
-}
+  );
+};
 export default Quizes;

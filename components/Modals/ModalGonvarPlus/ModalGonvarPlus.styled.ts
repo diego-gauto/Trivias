@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import styled from "styled-components";
+import { Modal } from 'react-bootstrap';
+import styled from 'styled-components';
 
 export const ModalContainer = styled(Modal)`
   padding-right: 0px !important;

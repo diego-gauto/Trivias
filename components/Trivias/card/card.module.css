@@ -57,57 +57,48 @@
 }
 
 @media screen and (max-width: 785px) {
-
   .cardContainer {
     width: 200px;
     height: 230px;
   }
 
   .cardImageUnder {
-
     width: 200px;
     height: 213px;
     border-radius: 20px;
   }
-  
-  .cardImageAbove {
 
+  .cardImageAbove {
     width: 200px;
     height: 194px;
     border-radius: 0px 0px 20px 20px;
   }
 
   .cardText {
-
     font-size: 17px;
     bottom: 65px;
   }
-
 }
 
 @media screen and (max-width: 500px) {
-
   .cardContainer {
     width: 160px;
     height: 222px;
   }
 
   .cardImageUnder {
-
     width: 160px;
     height: 170px;
     border-radius: 16px;
   }
-  
-  .cardImageAbove {
 
+  .cardImageAbove {
     width: 160px;
     height: 155px;
     border-radius: 0px 0px 16px 16px;
   }
 
   .cardText {
-
     font-size: 12px;
     bottom: 40px;
   }
@@ -115,34 +106,28 @@
   .link {
     height: 240px;
   }
-
 }
 
 @media screen and (max-width: 350px) {
-
   .cardContainer {
     width: 144px;
     height: 200px;
   }
 
   .cardImageUnder {
-
     width: 144px;
     height: 153px;
     border-radius: 14px;
   }
-  
-  .cardImageAbove {
 
+  .cardImageAbove {
     width: 144px;
     height: 140px;
     border-radius: 0px 0px 14px 14px;
   }
 
   .cardText {
-
     font-size: 11px;
     bottom: 35px;
   }
-
 }

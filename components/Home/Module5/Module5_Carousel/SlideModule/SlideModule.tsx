@@ -1,29 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { CardTitle, MasonryCard, MasonryImage, MasonryItem } from './SlideModule.styled'
-import { ISlideModule } from './ISlideModule'
+import React, { useEffect, useState } from 'react';
+import {
+  CardTitle,
+  MasonryCard,
+  MasonryImage,
+  MasonryItem,
+} from './SlideModule.styled';
+import { ISlideModule } from './ISlideModule';
 
 const SlideModule = (props: ISlideModule) => {
-  const { title, imgURL } = props
-  const [img, setImg] = useState("")
+  const { title, imgURL } = props;
+  const [img, setImg] = useState('');
 
   const awaitImg = async () => {
-    const resolvedImg = await imgURL
-    setImg(resolvedImg)
-  }
+    const resolvedImg = await imgURL;
+    setImg(resolvedImg);
+  };
   useEffect(() => {
-    awaitImg()
-  }, [])
+    awaitImg();
+  }, []);
 
   return (
     <MasonryItem>
       <MasonryCard>
-        <CardTitle>
-          {title}
-        </CardTitle>
+        <CardTitle>{title}</CardTitle>
         <MasonryImage src={img} />
       </MasonryCard>
     </MasonryItem>
-  )
-}
+  );
+};
 
-export default SlideModule
+export default SlideModule;

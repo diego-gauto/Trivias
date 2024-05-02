@@ -1,18 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const QuizContainer = styled.div`
   display: flex;
   flex-direction: Column;
   gap: 20px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   .button-container {
     display: flex;
     align-items: center;
     gap: 10px;
     .button-save {
       font-size: 16px;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #6717cd;
       color: white;
       padding-block: 10px;
@@ -27,7 +27,7 @@ export const QuizContainer = styled.div`
     }
     .button-delete {
       font-size: 16px;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #e34141;
       color: white;
       padding-block: 10px;
@@ -98,12 +98,12 @@ export const QuestionContainer = styled.div`
       label {
         font-size: 14px;
         color: #6717cd;
-        font-family: "Montserrat", sans-serif;
+        font-family: 'Montserrat', sans-serif;
       }
     }
     .button {
       font-size: 16px;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #6717cd;
       color: white;
       padding-block: 10px;
@@ -188,7 +188,7 @@ export const QuestionContainer = styled.div`
         }
         .button-add {
           font-size: 16px;
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           background: transparent;
           color: #6717cd;
           padding-block: 8px;
@@ -202,7 +202,7 @@ export const QuestionContainer = styled.div`
         }
         .button-delete {
           font-size: 16px;
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           background: #e34141;
           color: white;
           padding-block: 8px;

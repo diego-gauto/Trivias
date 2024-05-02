@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const LessonContainer = styled.div`
   display: flex;
@@ -231,7 +231,7 @@ export const LessonContainer = styled.div`
         }
         .input-textarea {
           font-size: 14px;
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           text-align: justify;
           padding-block: 10px;
           padding-inline: 20px;

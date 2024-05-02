@@ -1,4 +1,4 @@
-import { IPm } from "../IRetryPayment";
+import { IPm } from '../IRetryPayment';
 
 export interface IPaymentMethods {
   pm: IPm;

@@ -1,83 +1,96 @@
-import axios from "axios";
+import axios from 'axios';
 
-type RoleValue = "course" | "coupons" | "blogs" | "rewards" | "users" | "landing" | "payments" | "homeworks" | "comments" | "trivias" | "trivias_list" | "forms" | "forms_list" | "tickets_list" | "memberships_list";
+type RoleValue =
+  | 'course'
+  | 'coupons'
+  | 'blogs'
+  | 'rewards'
+  | 'users'
+  | 'landing'
+  | 'payments'
+  | 'homeworks'
+  | 'comments'
+  | 'trivias'
+  | 'trivias_list'
+  | 'forms'
+  | 'forms_list'
+  | 'tickets_list'
+  | 'memberships_list';
 
 export interface Admin {
-  user_id: number
-  name: string
-  email: string
-  score: number
-  created_at: string
-  phone_number: string
-  role: string
-  plan_name: any
-  final_date: number
-  level: number
-  adminTypes: AdminType[]
+  user_id: number;
+  name: string;
+  email: string;
+  score: number;
+  created_at: string;
+  phone_number: string;
+  role: string;
+  plan_name: any;
+  final_date: number;
+  level: number;
+  adminTypes: AdminType[];
 }
 
 export interface AdminType {
-  id: number
-  role: RoleValue
-  source_table: string
-  create?: number
-  edit?: number
-  delete?: number
-  view: number
-  user_id: number
-  courses?: string
-  request?: number
-  report?: number
-  download?: number
+  id: number;
+  role: RoleValue;
+  source_table: string;
+  create?: number;
+  edit?: number;
+  delete?: number;
+  view: number;
+  user_id: number;
+  courses?: string;
+  request?: number;
+  report?: number;
+  download?: number;
 }
 
 export const getAdmins = async () => {
-  return axios
-    .get<{
-      admins: Admin[]
-    }>("https://gonvar.inowu.dev/" + "admin/admins");
+  return axios.get<{
+    admins: Admin[];
+  }>('https://gonvar.inowu.dev/' + 'admin/admins');
 };
 
 export const updateAdminRole = async (userId: string) => {
-  let user = { id: userId }
+  let user = { id: userId };
   return axios
-    .put("https://gonvar.inowu.dev/" + "admin/update-role", user)
+    .put('https://gonvar.inowu.dev/' + 'admin/update-role', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const updateAdminAccessApi = async (data: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "admin/update-access", data)
+    .put('https://gonvar.inowu.dev/' + 'admin/update-access', data)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 // Coupons
 export interface ICoupon {
-  id: number
-  code: string
-  discount: number
-  name: string
-  status: number
-  type: string
-  users: any[]
+  id: number;
+  code: string;
+  discount: number;
+  name: string;
+  status: number;
+  type: string;
+  users: any[];
 }
 export const retrieveCoupons = async () => {
-  return axios
-    .get<{
-      coupons: ICoupon[]
-    }>("https://gonvar.inowu.dev/" + "admin/coupons");
+  return axios.get<{
+    coupons: ICoupon[];
+  }>('https://gonvar.inowu.dev/' + 'admin/coupons');
   /*.then((res) => {
     return res
   })
@@ -89,101 +102,112 @@ export const retrieveCoupons = async () => {
 
 export const addCouponApi = async (coupon: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/coupons-create", coupon)
+    .post('https://gonvar.inowu.dev/' + 'admin/coupons-create', coupon)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const deleteCouponApi = async (coupon: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/coupons-delete", coupon)
+    .post('https://gonvar.inowu.dev/' + 'admin/coupons-delete', coupon)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const updateCouponStatusApi = async (coupon: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/coupons-update-status", coupon)
+    .post('https://gonvar.inowu.dev/' + 'admin/coupons-update-status', coupon)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 //Invoice
 
 interface InvoicesAxiosReponse {
-  invoices: Invoice[],
-  count: number
+  invoices: Invoice[];
+  count: number;
 }
 
 export interface Invoice {
-  id: number
-  amount: number
-  method: string
-  paid_at: string
-  product: string
-  user_id: number
-  name: string
-  email: string
+  id: number;
+  amount: number;
+  method: string;
+  paid_at: string;
+  product: string;
+  user_id: number;
+  name: string;
+  email: string;
 }
 
 export const getInvoicesApi = async () => {
-  return axios
-    .get<InvoicesAxiosReponse>("https://gonvar.inowu.dev/" + "admin/invoices");
+  return axios.get<InvoicesAxiosReponse>(
+    'https://gonvar.inowu.dev/' + 'admin/invoices',
+  );
 };
 
-export const getInvoicesWithOffsetTestApi = async (body: { offset: number }) => {
-  return axios
-    .post<InvoicesAxiosReponse>("https://gonvar.inowu.dev/" + "admin/invoices", body);
+export const getInvoicesWithOffsetTestApi = async (body: {
+  offset: number;
+}) => {
+  return axios.post<InvoicesAxiosReponse>(
+    'https://gonvar.inowu.dev/' + 'admin/invoices',
+    body,
+  );
 };
 
 //Users
 
 export const getPartialUsers = async (first: number, second: number) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/partial-users/" + first + "/" + second)
+    .get(
+      'https://gonvar.inowu.dev/' +
+        'admin/partial-users/' +
+        first +
+        '/' +
+        second,
+    )
     .then((res) => {
-      return res.data.users
+      return res.data.users;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getAdminUsersApi = async (filters: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/admin-users", filters)
+    .post('https://gonvar.inowu.dev/' + 'admin/admin-users', filters)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const usersForExcelApi = async (filters: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/admin-users-excel", filters)
+    .post('https://gonvar.inowu.dev/' + 'admin/admin-users-excel', filters)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getAllUsers = async (
@@ -206,31 +230,49 @@ export const getAllUsers = async (
   membership: string,
 ) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/partial-users-demo/"
-      + limit
-      + "/" + offset
-      + "/" + name
-      + "/" + spent
-      + "/" + level
-      + "/" + method
-      + "/" + state
-      + "/" + country
-      + "/" + date_create_start
-      + "/" + date_create_1
-      + "/" + date_create_2
-      + "/" + date_login_start
-      + "/" + last_login_1
-      + "/" + last_login_2
-      + "/" + course_id
-      + "/" + course_progress
-      + "/" + membership
+    .get(
+      'https://gonvar.inowu.dev/' +
+        'admin/partial-users-demo/' +
+        limit +
+        '/' +
+        offset +
+        '/' +
+        name +
+        '/' +
+        spent +
+        '/' +
+        level +
+        '/' +
+        method +
+        '/' +
+        state +
+        '/' +
+        country +
+        '/' +
+        date_create_start +
+        '/' +
+        date_create_1 +
+        '/' +
+        date_create_2 +
+        '/' +
+        date_login_start +
+        '/' +
+        last_login_1 +
+        '/' +
+        last_login_2 +
+        '/' +
+        course_id +
+        '/' +
+        course_progress +
+        '/' +
+        membership,
     )
     .then((res) => {
-      return res.data.users
+      return res.data.users;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const userForExcel = async (
@@ -251,338 +293,370 @@ export const userForExcel = async (
   membership: string,
 ) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/excel-list/"
-      + name
-      + "/" + spent
-      + "/" + level
-      + "/" + method
-      + "/" + state
-      + "/" + country
-      + "/" + date_create_start
-      + "/" + date_create_1
-      + "/" + date_create_2
-      + "/" + date_login_start
-      + "/" + last_login_1
-      + "/" + last_login_2
-      + "/" + course_id
-      + "/" + course_progress
-      + "/" + membership
+    .get(
+      'https://gonvar.inowu.dev/' +
+        'admin/excel-list/' +
+        name +
+        '/' +
+        spent +
+        '/' +
+        level +
+        '/' +
+        method +
+        '/' +
+        state +
+        '/' +
+        country +
+        '/' +
+        date_create_start +
+        '/' +
+        date_create_1 +
+        '/' +
+        date_create_2 +
+        '/' +
+        date_login_start +
+        '/' +
+        last_login_1 +
+        '/' +
+        last_login_2 +
+        '/' +
+        course_id +
+        '/' +
+        course_progress +
+        '/' +
+        membership,
     )
     .then((res) => {
-      return res.data.sendUsers
+      return res.data.sendUsers;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getProgressForUsers = async (user_id: number) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/course-users/" + user_id)
+    .get('https://gonvar.inowu.dev/' + 'admin/course-users/' + user_id)
     .then((res) => {
-      return res.data.users
+      return res.data.users;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getCountriesApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/get-countries")
+    .get('https://gonvar.inowu.dev/' + 'admin/get-countries')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getMethodsApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/get-methods")
+    .get('https://gonvar.inowu.dev/' + 'admin/get-methods')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getComeFromApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/get-comefrom")
+    .get('https://gonvar.inowu.dev/' + 'admin/get-comefrom')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getCoursesApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/admin-courses")
+    .get('https://gonvar.inowu.dev/' + 'admin/admin-courses')
     .then((res) => {
-      return res.data
+      return res.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getLessonFromUserApi = async (userId: any) => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "admin/" + userId)
+    .get('https://gonvar.inowu.dev/' + 'admin/' + userId)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const updateUserInfoApi = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/user-update-info", user)
+    .post('https://gonvar.inowu.dev/' + 'admin/user-update-info', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const updateCourseMembershipApi = async (user: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "users/update-user-courses", user)
+    .put('https://gonvar.inowu.dev/' + 'users/update-user-courses', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const addCourseMembershipApi = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "users/add-user-courses", user)
+    .post('https://gonvar.inowu.dev/' + 'users/add-user-courses', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const getUserByEmailApi = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/user", user)
+    .post('https://gonvar.inowu.dev/' + 'admin/user', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const updateUserRoleApi = async (user: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "admin/update-role-user", user)
+    .put('https://gonvar.inowu.dev/' + 'admin/update-role-user', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getLandingReviewApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "landing/getLandingReview")
+    .get('https://gonvar.inowu.dev/' + 'landing/getLandingReview')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const createLandingReviewApi = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "landing/add-landing-review", user)
+    .post('https://gonvar.inowu.dev/' + 'landing/add-landing-review', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const updateLandingReviewApi = async (user: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "landing/update-landing-review", user)
+    .put('https://gonvar.inowu.dev/' + 'landing/update-landing-review', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const getLandingProductApi = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "landing/getLandingProducts")
+    .get('https://gonvar.inowu.dev/' + 'landing/getLandingProducts')
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const createLandingProductApi = async (user: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "landing/add-landing-product", user)
+    .post('https://gonvar.inowu.dev/' + 'landing/add-landing-product', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const updateLandingProductApi = async (user: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "landing/update-landing-product", user)
+    .put('https://gonvar.inowu.dev/' + 'landing/update-landing-product', user)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
-
 export interface Comment {
-  id: number
-  comment: string
-  created_at: string
-  user_id: number
-  lessons_id: number
-  course_id: number
-  lesson_title: string
-  lesson_number: number
-  season_number: number
-  course_title: string
-  season_title: string
-  answers: Answer[]
-  formatDate: string
+  id: number;
+  comment: string;
+  created_at: string;
+  user_id: number;
+  lessons_id: number;
+  course_id: number;
+  lesson_title: string;
+  lesson_number: number;
+  season_number: number;
+  course_title: string;
+  season_title: string;
+  answers: Answer[];
+  formatDate: string;
 }
 
 export interface Answer {
-  id: number
-  comment: string
-  created_at: string
-  comments_id: number
-  user_id: number
-  course_id: number
-  comments: CommentOfAnswer[]
+  id: number;
+  comment: string;
+  created_at: string;
+  comments_id: number;
+  user_id: number;
+  course_id: number;
+  comments: CommentOfAnswer[];
 }
 
 export interface CommentOfAnswer {
-  id: number
-  comment: string
-  comment_answers_id: number
-  user_id: number
-  created_at: string
+  id: number;
+  comment: string;
+  comment_answers_id: number;
+  user_id: number;
+  created_at: string;
 }
 
 export const getComments = async () => {
-  return axios
-    .get<{ comments: Comment[] }>("https://gonvar.inowu.dev/" + "admin/" + "all/comments");
+  return axios.get<{ comments: Comment[] }>(
+    'https://gonvar.inowu.dev/' + 'admin/' + 'all/comments',
+  );
 };
 
 export const deleteCommentAnswers = async (answer: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/" + "delete-comment-answers", answer)
+    .post(
+      'https://gonvar.inowu.dev/' + 'admin/' + 'delete-comment-answers',
+      answer,
+    )
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const deleteCommentToAnswers = async (answer: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/" + "delete-comment-answers-comment", answer)
+    .post(
+      'https://gonvar.inowu.dev/' + 'admin/' + 'delete-comment-answers-comment',
+      answer,
+    )
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
 export const deleteThisComment = async (comment: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/" + "delete-comment", comment)
+    .post('https://gonvar.inowu.dev/' + 'admin/' + 'delete-comment', comment)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 export const cancelReview = async (review: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/create-cancel-review", review)
+    .post('https://gonvar.inowu.dev/' + 'admin/create-cancel-review', review)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
-export const getCancelReviewApi = async (limit: number, offset: number, date: string, date_1: string, date_2: string) => {
+export const getCancelReviewApi = async (
+  limit: number,
+  offset: number,
+  date: string,
+  date_1: string,
+  date_2: string,
+) => {
   let body = {
     limit: limit,
     offset: offset,
     date_status: date,
     date_1: date_1,
     date_2: date_2,
-  }
+  };
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/cancel/reviews", body)
+    .post('https://gonvar.inowu.dev/' + 'admin/cancel/reviews', body)
     .then((res) => {
-      return res.data
+      return res.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
-export const cancelReviewExcel = async (date: string, date_1: string, date_2: string) => {
+export const cancelReviewExcel = async (
+  date: string,
+  date_1: string,
+  date_2: string,
+) => {
   let body = {
     date_status: date,
     date_1: date_1,
     date_2: date_2,
-  }
+  };
   return axios
-    .post("https://gonvar.inowu.dev/" + "admin/cancel-excel/reviews", body)
+    .post('https://gonvar.inowu.dev/' + 'admin/cancel-excel/reviews', body)
     .then((res) => {
-      return res.data.data
+      return res.data.data;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
 };
 
@@ -598,26 +672,35 @@ interface MembershipCloseToEnding {
   datediff: number;
 }
 
-export const getCloseToEndingMembershipUsers = async (levels: number[], startDate: Date, finalDate: Date) => {
+export const getCloseToEndingMembershipUsers = async (
+  levels: number[],
+  startDate: Date,
+  finalDate: Date,
+) => {
   /*Niveles
   Cuatrimestre -> 8
   Mensual -> 6
   Anual -> 5*/
   const body = {
-    "levels": levels,
-    "start_date": `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`,
-    "final_date": `${finalDate.getFullYear()}-${finalDate.getMonth() + 1}-${finalDate.getDate()}`
-  }
-  return axios
-    .post<{ data: MembershipCloseToEnding[] }>("https://gonvar.inowu.dev/" + "admin/get-close-to-ending-membership-users", body)
-}
+    levels: levels,
+    start_date: `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`,
+    final_date: `${finalDate.getFullYear()}-${finalDate.getMonth() + 1}-${finalDate.getDate()}`,
+  };
+  return axios.post<{ data: MembershipCloseToEnding[] }>(
+    'https://gonvar.inowu.dev/' + 'admin/get-close-to-ending-membership-users',
+    body,
+  );
+};
 
 export const getGenericQueryResponse = async (query: string) => {
   const body = {
-    query
-  }
-  return axios.post<{ data: any[], query: string }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
-}
+    query,
+  };
+  return axios.post<{ data: any[]; query: string }>(
+    'https://gonvar.inowu.dev/' + 'admin/generic-mysql-query',
+    body,
+  );
+};
 
 interface InsertSQLResult {
   fieldCount: number;
@@ -630,7 +713,10 @@ interface InsertSQLResult {
 
 export const postGenericQueryResponse = async (query: string) => {
   const body = {
-    query
-  }
-  return axios.post<{ data: InsertSQLResult }>("https://gonvar.inowu.dev/" + "admin/generic-mysql-query", body);
-}
+    query,
+  };
+  return axios.post<{ data: InsertSQLResult }>(
+    'https://gonvar.inowu.dev/' + 'admin/generic-mysql-query',
+    body,
+  );
+};

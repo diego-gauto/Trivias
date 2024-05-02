@@ -1,8 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import CsvDownloader from "react-csv-downloader";
-import { Container, Profile, ProfileContain, Title, TitleContain } from "../Pay/Pay.styled";
-import { AdminContain, AdminLoader, Table } from "../SideBar.styled";
-import UserCardData from "./UserData/UserCardData";
+import React, { useEffect, useRef, useState } from 'react';
+import CsvDownloader from 'react-csv-downloader';
+import {
+  Container,
+  Profile,
+  ProfileContain,
+  Title,
+  TitleContain,
+} from '../Pay/Pay.styled';
+import { AdminContain, AdminLoader, Table } from '../SideBar.styled';
+import UserCardData from './UserData/UserCardData';
 import {
   DownloadUserData,
   EditIcon,
@@ -13,17 +19,34 @@ import {
   Select,
   UserContain,
   UserShow,
-} from "./UsersList.styled";
-import EditUserModal from "./EditUserModal";
-import { getCoursesApi } from "../../api/lessons";
-import { getAllUsers, getCountriesApi, getGenericQueryResponse, getLessonFromUserApi, userForExcel } from "../../api/admin";
-import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
-import UserFilters from "./UserFilters/UserFilters";
-import { useAuth } from "../../../hooks/useAuth";
-import { FormatDateForBack } from "../../../utils/functions";
-import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from "../../GenericQueries/UserRoles/UserRolesQueries";
-import { Role, UserLevelValue } from "../../GenericQueries/UserRoles/UserRolesInterfaces";
+} from './UsersList.styled';
+import EditUserModal from './EditUserModal';
+import { getCoursesApi } from '../../api/lessons';
+import {
+  getAllUsers,
+  getCountriesApi,
+  getGenericQueryResponse,
+  getLessonFromUserApi,
+  userForExcel,
+} from '../../api/admin';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
+import {
+  Background,
+  LoaderContain,
+  LoaderImage,
+} from '../../../screens/Login.styled';
+import UserFilters from './UserFilters/UserFilters';
+import { useAuth } from '../../../hooks/useAuth';
+import { FormatDateForBack } from '../../../utils/functions';
+import {
+  generateUserIdQuery,
+  generateUserRoleAccessQuery,
+  generateUserRolesLevelQuery,
+} from '../../GenericQueries/UserRoles/UserRolesQueries';
+import {
+  Role,
+  UserLevelValue,
+} from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 export interface SelectedUser {
   id?: string;
@@ -32,7 +55,7 @@ export interface SelectedUser {
   score: number;
   uid?: string;
   created_at: string;
-};
+}
 export interface UserData {
   id?: any;
   role: string;
@@ -51,16 +74,16 @@ export interface UserData {
     planName: string;
     startDate: number;
   };
-};
+}
 export interface Users {
   id: string;
   name: string;
   email: string;
   score: number;
-  created_at: { seconds: number }
+  created_at: { seconds: number };
   phoneNumber?: number;
   role: string;
-};
+}
 
 interface UserAccesss {
   canView: boolean;
@@ -82,13 +105,25 @@ const UsersList = () => {
   const [maxPages, setMaxPages] = useState<number>(0);
   const [totalUsers, setTotalUsers] = useState<number>(0);
   const [showFilters, setShowFilters] = useState<boolean>(false);
-  const [filterValue, setFilterValue] = useState<string>("");
+  const [filterValue, setFilterValue] = useState<string>('');
   const [countries, setCountries] = useState<any>([]);
   const [selectFilters, setSelectFilters] = useState<boolean>(false);
-  const [userAccess, setUserAccess] = useState<UserAccesss>({ canView: false, canEdit: false, canReport: false });
+  const [userAccess, setUserAccess] = useState<UserAccesss>({
+    canView: false,
+    canEdit: false,
+    canReport: false,
+  });
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
   const [filters, setFilters] = useState<any>([
-    'todos', 'todos', 'todos', -1, 'todos', 'todos', 'todos', -1, 0
+    'todos',
+    'todos',
+    'todos',
+    -1,
+    'todos',
+    'todos',
+    'todos',
+    -1,
+    0,
   ]);
   const [dates, setDates] = useState<any>([[], []]);
 
@@ -98,13 +133,12 @@ const UsersList = () => {
 
   const { canEdit, canReport, canView } = userAccess;
 
-
   let usersPerPage: number = 100;
   let today = new Date().getTime() / 1000;
 
   const getUserData = async () => {
     try {
-      const email = localStorage.getItem("email");
+      const email = localStorage.getItem('email');
       if (email === null) {
         throw new Error('No existe un email establecido para el usuario');
       }
@@ -115,7 +149,7 @@ const UsersList = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const role = userRoles.find(role => role.role === 'users');
+      const role = userRoles.find((role) => role.role === 'users');
       setUserAccess({
         canView: role?.view === 1,
         canReport: role?.report === 1,
@@ -131,7 +165,7 @@ const UsersList = () => {
         alert(error.message);
       }
     }
-  }
+  };
 
   useEffect(() => {
     getUserData();
@@ -151,38 +185,78 @@ const UsersList = () => {
       user.user_courses = res.data.data;
       setSelectedUser(user);
       setLoadCard(true);
-    })
+    });
     setIsVisible(true);
   };
   const updateDate = (date: any) => {
-    setCreateDate(date)
-  }
+    setCreateDate(date);
+  };
   const updateLoginDate = (date: any) => {
-    setLoginDate(date)
-  }
-  const filteredData = async (filters: any, date: any, text_value: string, page: number) => {
+    setLoginDate(date);
+  };
+  const filteredData = async (
+    filters: any,
+    date: any,
+    text_value: string,
+    page: number,
+  ) => {
     console.log(filters);
     let tempUsers: any = [];
     setLoader(false);
-    if (text_value === "") {
-      getAllUsers(usersPerPage, page * 100, 'all_users', filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8], filters[0]).then((res) => {
+    if (text_value === '') {
+      getAllUsers(
+        usersPerPage,
+        page * 100,
+        'all_users',
+        filters[3],
+        -1,
+        filters[5],
+        filters[1],
+        filters[6],
+        filters[2],
+        FormatDateForBack(date[0][0]),
+        FormatDateForBack(date[0][1]),
+        filters[4],
+        FormatDateForBack(date[1][0]),
+        FormatDateForBack(date[1][1]),
+        filters[7],
+        filters[8],
+        filters[0],
+      ).then((res) => {
         setUsers(res);
         tempUsers = res;
         setLoader(true);
-      })
-    }
-    else {
-      getAllUsers(usersPerPage, page * 100, text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8], filters[0]).then((res) => {
+      });
+    } else {
+      getAllUsers(
+        usersPerPage,
+        page * 100,
+        text_value,
+        filters[3],
+        -1,
+        filters[5],
+        filters[1],
+        filters[6],
+        filters[2],
+        FormatDateForBack(date[0][0]),
+        FormatDateForBack(date[0][1]),
+        filters[4],
+        FormatDateForBack(date[1][0]),
+        FormatDateForBack(date[1][1]),
+        filters[7],
+        filters[8],
+        filters[0],
+      ).then((res) => {
         setUsers(res);
         tempUsers = res;
         setLoader(true);
-      })
+      });
     }
     setDates(date);
     setFilters(filters);
     getMaxUsers(filters, date, text_value);
-    return tempUsers
-  }
+    return tempUsers;
+  };
 
   const filterUsersByValue = (value: string): any => {
     filteredData(filters, dates, value, pageIndex);
@@ -192,27 +266,27 @@ const UsersList = () => {
   const filter = (value: string) => {
     let tempAllUsers = allUsers;
     let userFilter: any = [];
-    if (value === "all") {
+    if (value === 'all') {
       userFilter = tempAllUsers.sort((a: any, b: any) => {
         return b.id - a.id;
       });
     }
-    if (value === "suscription") {
+    if (value === 'suscription') {
       userFilter = tempAllUsers.sort((a: any, b: any) => {
         return b.level - a.level;
       });
     }
-    if (value === "name") {
+    if (value === 'name') {
       userFilter = tempAllUsers.sort((a: any, b: any) => {
         return a.name.localeCompare(b.name);
       });
     }
-    if (value === "spend") {
+    if (value === 'spend') {
       userFilter = tempAllUsers.sort((a: any, b: any) => {
         return b.spent - a.spent;
       });
     }
-  }
+  };
   const getCoures = () => {
     let tempCourses: Array<any> = [];
     getCoursesApi().then((res) => {
@@ -223,83 +297,133 @@ const UsersList = () => {
           element.seasons.forEach((season: any) => {
             season.lessons.forEach((lesson: any) => {
               counter++;
-            })
+            });
           });
           element.totalLessons = counter;
-          tempCourses.push(element)
+          tempCourses.push(element);
         }
       });
-      setCourses(tempCourses)
-    })
-  }
+      setCourses(tempCourses);
+    });
+  };
   const getNextUsers = (direction: string) => {
     let tempPage = 0;
-    if (direction === "backward") {
+    if (direction === 'backward') {
       if (pageIndex !== 0) {
         tempPage = pageIndex - 1;
-        setPageIndex(tempPage)
+        setPageIndex(tempPage);
       }
     }
-    if (direction === "forward") {
+    if (direction === 'forward') {
       if (pageIndex !== maxPages - 1) {
         tempPage = pageIndex + 1;
-        setPageIndex(tempPage)
+        setPageIndex(tempPage);
       }
     }
-    if (direction === "first") {
+    if (direction === 'first') {
       tempPage = 0;
-      setPageIndex(tempPage)
+      setPageIndex(tempPage);
     }
-    if (direction === "last") {
+    if (direction === 'last') {
       tempPage = maxPages - 1;
       setPageIndex(tempPage);
     }
     filteredData(filters, dates, filterValue, tempPage);
-  }
+  };
   const activeCourses = (user_courses: any) => {
-    let countCourses: number = 0
+    let countCourses: number = 0;
     user_courses.map((x: any) => {
       if (x.final_date > today) {
         countCourses++;
       }
-    })
-    return "Activo " + countCourses
-  }
+    });
+    return 'Activo ' + countCourses;
+  };
   const getMaxUsers = (filters: any, date: any, text_value: any) => {
     console.log(filters);
-    userForExcel(text_value === "" ? "all_users" : text_value, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(date[0][0]), FormatDateForBack(date[0][1]), filters[4], FormatDateForBack(date[1][0]), FormatDateForBack(date[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
+    userForExcel(
+      text_value === '' ? 'all_users' : text_value,
+      filters[3],
+      -1,
+      filters[5],
+      filters[1],
+      filters[6],
+      filters[2],
+      FormatDateForBack(date[0][0]),
+      FormatDateForBack(date[0][1]),
+      filters[4],
+      FormatDateForBack(date[1][0]),
+      FormatDateForBack(date[1][1]),
+      filters[7],
+      filters[8],
+      filters[0],
+    ).then(async (res) => {
       setTotalUsers(res.length);
       setMaxPages(Math.ceil(res.length / usersPerPage));
-    })
-  }
+    });
+  };
   const getUsers = async () => {
-    let demoDate = '14-01-2022 00:00:00'
-    let demoDate2 = '14-07-2023 00:00:00'
-    getAllUsers(usersPerPage, pageIndex, 'all_users', 0, -1, 'todos', 'todos', 'todos', 'todos', demoDate, demoDate2, 'todos', demoDate, demoDate2, -1, 0, 'todos').then((res) => {
+    let demoDate = '14-01-2022 00:00:00';
+    let demoDate2 = '14-07-2023 00:00:00';
+    getAllUsers(
+      usersPerPage,
+      pageIndex,
+      'all_users',
+      0,
+      -1,
+      'todos',
+      'todos',
+      'todos',
+      'todos',
+      demoDate,
+      demoDate2,
+      'todos',
+      demoDate,
+      demoDate2,
+      -1,
+      0,
+      'todos',
+    ).then((res) => {
       setUsers(res);
       setLoader(true);
-    })
-  }
+    });
+  };
   useEffect(() => {
     getUsers();
     getMaxUsers(filters, dates, filterValue);
     getCountriesApi().then((res) => {
       setCountries(res);
-    })
+    });
     getCoures();
   }, []);
 
   const formatDate = (value: any) => {
     let tempDate = new Date(value).getTime() + 50400000;
-    return new Date(tempDate).toLocaleDateString("es-MX")
-  }
+    return new Date(tempDate).toLocaleDateString('es-MX');
+  };
 
   const handleClick = () => {
     filteredData(filters, dates, filterValue, pageIndex);
-  }
+  };
   const Gonvar: any = async () => {
     let sendUsers: any = [];
-    await userForExcel(filterValue === "" ? "all_users" : filterValue, filters[3], -1, filters[5], filters[1], filters[6], filters[2], FormatDateForBack(dates[0][0]), FormatDateForBack(dates[0][1]), filters[4], FormatDateForBack(dates[1][0]), FormatDateForBack(dates[1][1]), filters[7], filters[8], filters[0]).then(async (res) => {
+    await userForExcel(
+      filterValue === '' ? 'all_users' : filterValue,
+      filters[3],
+      -1,
+      filters[5],
+      filters[1],
+      filters[6],
+      filters[2],
+      FormatDateForBack(dates[0][0]),
+      FormatDateForBack(dates[0][1]),
+      filters[4],
+      FormatDateForBack(dates[1][0]),
+      FormatDateForBack(dates[1][1]),
+      filters[7],
+      filters[8],
+      filters[0],
+    ).then(async (res) => {
       await res.map(async (user: any) => {
         sendUsers.push({
           nombre: user.nombre,
@@ -310,12 +434,12 @@ const UsersList = () => {
           conekta_id: user.conekta_id,
           final_date: user.final_date,
           level: user.level,
-          id: user.user_id
-        })
-      })
-    })
-    return sendUsers
-  }
+          id: user.user_id,
+        });
+      });
+    });
+    return sendUsers;
+  };
 
   return (
     <AdminContain>
@@ -324,57 +448,88 @@ const UsersList = () => {
           <TitleContain>
             <Title>Usuarios - {totalUsers}</Title>
             <FilterContain>
-              <div className="filter-contain">
+              <div className='filter-contain'>
                 <button onClick={() => setShowFilters(!showFilters)}>
                   Filtros
                 </button>
                 <Select>
-                  <select defaultValue={"Todos"} onChange={(e: any) => { filter(e.target.value) }}>
-                    <option value={"all"}>Todos</option>
-                    <option value={"suscription"}>Suscripción</option>
-                    <option value={"name"}>Nombre</option>
-                    <option value={"spend"}>Amount spend</option>
+                  <select
+                    defaultValue={'Todos'}
+                    onChange={(e: any) => {
+                      filter(e.target.value);
+                    }}
+                  >
+                    <option value={'all'}>Todos</option>
+                    <option value={'suscription'}>Suscripción</option>
+                    <option value={'name'}>Nombre</option>
+                    <option value={'spend'}>Amount spend</option>
                   </select>
                 </Select>
                 <SearchContain>
-                  <div className="hidden">
-
-                  </div>
+                  <div className='hidden'></div>
                   <SearchIcon />
                   <SearchInput
-                    placeholder="Buscar un Usuario"
-                    type={"text"}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => filterUsersByValue(e.target.value)}
+                    placeholder='Buscar un Usuario'
+                    type={'text'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      filterUsersByValue(e.target.value)
+                    }
                   />
                 </SearchContain>
               </div>
-              {((userLevel === 'admin' && canReport) || userLevel === "superAdmin")
-                && <CsvDownloader
-                  filename="usersData"
-                  extension=".csv"
-                  separator=","
-                  wrapColumnChar=""
+              {((userLevel === 'admin' && canReport) ||
+                userLevel === 'superAdmin') && (
+                <CsvDownloader
+                  filename='usersData'
+                  extension='.csv'
+                  separator=','
+                  wrapColumnChar=''
                   datas={Gonvar}
                 >
                   <DownloadUserData>
                     <p>Descargar lista de usuarios</p>
                   </DownloadUserData>
-                </CsvDownloader>}
+                </CsvDownloader>
+              )}
             </FilterContain>
           </TitleContain>
-          <div className="pages">
-            <div className="index">
-              <AiFillCaretLeft className="arrows" onClick={() => { getNextUsers("backward") }} />
-              <p className="default-number" onClick={() => { getNextUsers("first") }}>1</p>
-              <p className="current-number">{pageIndex + 1}</p>
-              <p className="default-number" onClick={() => { getNextUsers("last") }}>{maxPages}</p>
-              <AiFillCaretRight className="arrows" onClick={() => { getNextUsers("forward") }} />
+          <div className='pages'>
+            <div className='index'>
+              <AiFillCaretLeft
+                className='arrows'
+                onClick={() => {
+                  getNextUsers('backward');
+                }}
+              />
+              <p
+                className='default-number'
+                onClick={() => {
+                  getNextUsers('first');
+                }}
+              >
+                1
+              </p>
+              <p className='current-number'>{pageIndex + 1}</p>
+              <p
+                className='default-number'
+                onClick={() => {
+                  getNextUsers('last');
+                }}
+              >
+                {maxPages}
+              </p>
+              <AiFillCaretRight
+                className='arrows'
+                onClick={() => {
+                  getNextUsers('forward');
+                }}
+              />
             </div>
-            <div className="max-pages">
-              <p className="max-number">Paginas: {maxPages}</p>
+            <div className='max-pages'>
+              <p className='max-number'>Paginas: {maxPages}</p>
             </div>
           </div>
-          <Table id="Users">
+          <Table id='Users'>
             <tbody>
               <tr>
                 <th>Usuario</th>
@@ -388,48 +543,57 @@ const UsersList = () => {
               {/* TABLAS */}
               {
                 <>
-                  {
-                    loader &&
+                  {loader && (
                     <>
-                      {
-                        users.length > 0 && (
-                          users.map((user: any, index: number) => {
-                            return (
-                              <tr key={index}>
-                                <td style={{ fontWeight: 600 }}>
-                                  <ProfileContain>
-                                    <Profile />
-                                    {user.name}
-                                  </ProfileContain>
-                                </td>
-                                <td >{user.email}</td>
-                                <td>{formatDate(user.created_at)}</td>
-                                <td>{activeCourses(user.user_courses)}</td>
-                                <td>MXN${user.spent}</td>
-                                {/* <td>{user.score} puntos</td> */}
-                                <td onClick={() => openUserCardData(user)}><UserShow><EditIcon />Visualizar Usuario</UserShow></td>
-                                <td onClick={() => { setShow(true); setUser(user) }}>Editar Usuario</td>
-                              </tr>
-                            )
-                          }))
-                      }
+                      {users.length > 0 &&
+                        users.map((user: any, index: number) => {
+                          return (
+                            <tr key={index}>
+                              <td style={{ fontWeight: 600 }}>
+                                <ProfileContain>
+                                  <Profile />
+                                  {user.name}
+                                </ProfileContain>
+                              </td>
+                              <td>{user.email}</td>
+                              <td>{formatDate(user.created_at)}</td>
+                              <td>{activeCourses(user.user_courses)}</td>
+                              <td>MXN${user.spent}</td>
+                              {/* <td>{user.score} puntos</td> */}
+                              <td onClick={() => openUserCardData(user)}>
+                                <UserShow>
+                                  <EditIcon />
+                                  Visualizar Usuario
+                                </UserShow>
+                              </td>
+                              <td
+                                onClick={() => {
+                                  setShow(true);
+                                  setUser(user);
+                                }}
+                              >
+                                Editar Usuario
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </>
-                  }
+                  )}
                 </>
               }
             </tbody>
           </Table>
-          {
-            !loader &&
-            <Background style={{ "alignItems": "center", "justifyContent": "center" }}>
+          {!loader && (
+            <Background
+              style={{ alignItems: 'center', justifyContent: 'center' }}
+            >
               <LoaderImage>
                 <LoaderContain />
               </LoaderImage>
             </Background>
-          }
+          )}
         </Container>
-        {
-          isVisible &&
+        {isVisible && (
           <UserCardData
             currentUser={selectedUser}
             isVisible={isVisible}
@@ -439,7 +603,7 @@ const UsersList = () => {
             canEdit={canEdit}
             userLevel={userLevel}
           />
-        }
+        )}
       </UserContain>
       <UserFilters
         countries={countries}
@@ -456,8 +620,13 @@ const UsersList = () => {
         setCreateDate={updateDate}
         setSelectFilters={setSelectFilters}
       />
-      <EditUserModal show={show} setShow={setShow} user={user} handleClick={handleClick} />
-    </AdminContain >
-  )
-}
+      <EditUserModal
+        show={show}
+        setShow={setShow}
+        user={user}
+        handleClick={handleClick}
+      />
+    </AdminContain>
+  );
+};
 export default UsersList;

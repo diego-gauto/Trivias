@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PauseContainer = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const PauseContainer = styled.div`
   gap: 10px;
   padding: 20px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   .title-contain {
     display: flex;
     h2 {

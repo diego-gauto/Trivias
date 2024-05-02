@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   display: flex;
@@ -25,23 +25,25 @@ export const ProgressContain = styled.div`
   position: relative;
   width: 100%;
 `;
-export const ProgressBar = styled.div<{progress:any}>`
+export const ProgressBar = styled.div<{ progress: any }>`
   display: flex;
   height: 10px;
-  background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+  background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
   position: absolute;
   border-radius: 20px;
   width: 0%;
-  ${props => props.progress && css`
-  width: ${props.progress}%;
-  transition: 1s ease all;
-  `}
+  ${(props) =>
+    props.progress &&
+    css`
+      width: ${props.progress}%;
+      transition: 1s ease all;
+    `}
 `;
 export const ProgressBar2 = styled.div`
   display: flex;
   height: 10px;
   background-color: gray;
-  position:absolute;
+  position: absolute;
   border-radius: 20px;
   width: 100%;
 `;
@@ -52,11 +54,11 @@ export const SeasonContain = styled.div`
 `;
 export const ContainText = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 5px;
 `;
 export const SeasonText = styled.p`
-  color: #8E2DE2;
+  color: #8e2de2;
   font-size: 16px;
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SlideImg = styled.div`
   width: 350px;
@@ -34,7 +34,7 @@ export const NewTag = styled.div`
 `;
 export const ContainerMain = styled.div``;
 export const TextNew = styled.span`
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -50,7 +50,7 @@ export const TextNew = styled.span`
   }
 `;
 export const Text01 = styled.span`
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -67,7 +67,7 @@ export const Text01 = styled.span`
 `;
 export const Text02 = styled.span`
   text-align: center;
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 100;
   font-size: 14px;

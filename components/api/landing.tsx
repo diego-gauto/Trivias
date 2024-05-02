@@ -1,35 +1,35 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getLandingInfo = async () => {
   return axios
-    .get("https://gonvar.inowu.dev/" + "landing/landing-info")
+    .get('https://gonvar.inowu.dev/' + 'landing/landing-info')
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
-}
+};
 export const updLandingInfo = async (info: any) => {
   return axios
-    .put("https://gonvar.inowu.dev/" + "landing/update-landing-info", info)
+    .put('https://gonvar.inowu.dev/' + 'landing/update-landing-info', info)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
-}
+};
 export const createLandingInfo = async (info: any) => {
   return axios
-    .post("https://gonvar.inowu.dev/" + "landing/create-landing-info", info)
+    .post('https://gonvar.inowu.dev/' + 'landing/create-landing-info', info)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((error) => {
       console.log(error);
-      return error
+      return error;
     });
-}
+};

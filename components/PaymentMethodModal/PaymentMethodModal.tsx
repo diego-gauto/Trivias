@@ -1,9 +1,7 @@
-
-
-import { Modal } from "react-bootstrap";
-import { IoClose } from "react-icons/io5";
-import { PaymentMethodModalContain } from "./PaymentMethodModal.styled";
-import router from "next/router";
+import { Modal } from 'react-bootstrap';
+import { IoClose } from 'react-icons/io5';
+import { PaymentMethodModalContain } from './PaymentMethodModal.styled';
+import router from 'next/router';
 
 interface IModal {
   show: boolean;
@@ -16,27 +14,32 @@ const PaymentMethodModal = (props: IModal) => {
 
   const cancelSubscription = async () => {
     router.push({
-      pathname: "/cancel-suscription"
+      pathname: '/cancel-suscription',
     });
-  }
+  };
 
   return (
-    <Modal show={show} onHide={onHide} centered >
+    <Modal show={show} onHide={onHide} centered>
       <PaymentMethodModalContain>
         <h2>Ingresa un nuevo método de pago para continuar.</h2>
         <p>
-          No  pierdas la oportunidad de seguir aprendiendo <br />
+          No pierdas la oportunidad de seguir aprendiendo <br />
           y convertirte en una experta en belleza, <br />
-          <span className="light">por favor agrega un nuevo método de pago para continuar.</span> <br /><br />
+          <span className='light'>
+            por favor agrega un nuevo método de pago para continuar.
+          </span>{' '}
+          <br />
+          <br />
           También puedes cancelar tu suscripción, solo recuerda que <br />
-          con esta acción <span className="dark">perderás todos tus avances y beneficios.</span>
+          con esta acción{' '}
+          <span className='dark'>perderás todos tus avances y beneficios.</span>
         </p>
-        <div className="button-section">
+        <div className='button-section'>
           <button onClick={newCard}>Añadir nuevo método de pago</button>
           <button onClick={cancelSubscription}>Perder mis Beneficios </button>
         </div>
       </PaymentMethodModalContain>
     </Modal>
-  )
-}
+  );
+};
 export default PaymentMethodModal;
