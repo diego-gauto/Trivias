@@ -300,12 +300,15 @@ const NavBar = () => {
         const withTolerance =
           userDataAuth.user.final_date < today - 10 * 24 * 60 * 60;
         const withoutTolerance = userDataAuth.user.final_date < today;
+        const isSuperAdmin = userDataAuth.user.role === 'superAdmin';
+
         if (
           diff < 90 &&
           // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0))
           ((haveNoRecurrentSubscription && withoutTolerance) ||
             (haveRecurrentSubscription && withTolerance)) &&
-          pathname !== '/reintentar-pago'
+          pathname !== '/reintentar-pago' &&
+          !isSuperAdmin
         ) {
           setShow(true);
           setWithSubscription(false);
@@ -626,7 +629,7 @@ const NavBar = () => {
                   title='Iniciar Sesion'
                   style={
                     pathname === LOGIN_PATH ||
-                    pathname === SIGNUP_PAST_USER_PATH
+                      pathname === SIGNUP_PAST_USER_PATH
                       ? { fontWeight: 600, opacity: 1 }
                       : { fontWeight: '' }
                   }
