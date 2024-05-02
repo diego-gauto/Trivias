@@ -171,19 +171,22 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
     const today = new Date().getTime() / 1000;
     const result =
       <>
-        <p className="text-1">
-          Próximo cargo
-        </p>
-        <div className="subscription-info">
-          {(([1, 4, 5, 6, 7, 8].includes(userLevel) && userSubscription === 0)
-            || (userLevel === 0 && finalDate > today && userSubscription === 0)) ? <p >
-            <span className="span">{formatDateUser()}</span>
-          </p> :
-            <p><span className="span">
-              {(user.subscription === 1 && finalDate > today)
-                ? `Haz cancelado tu suscripción, te quedan ${getDays()} días`
-                : "s/f"}
-            </span></p>}
+        <p className='text-1'>Próximo cargo</p>
+        <div className='subscription-info'>
+          {([1, 4, 5, 6, 7, 8].includes(userLevel) && userSubscription === 0) ||
+            (userLevel === 0 && finalDate > today && userSubscription === 0) ? (
+            <p>
+              <span className='span'>{formatDateUser()}</span>
+            </p>
+          ) : (
+            <p>
+              <span className='span'>
+                {user.subscription === 1 && finalDate > today
+                  ? `Haz cancelado tu suscripción, te quedan ${getDays()} días`
+                  : 's/f'}
+              </span>
+            </p>
+          )}
         </div>
       </>
       ;
@@ -365,7 +368,12 @@ const NextReward = ({ timeLevel, reward, lastTimeReward, setReward, user }: any)
             {user.level === 1 && <button className="purple-button" onClick={() => { setOpen(true) }}>Cambiar a anualidad</button>}
 
             {
-              generateNextPaymentJSX(user.level, user.role, user.subscription, user.final_date)
+              generateNextPaymentJSX(
+                user.level,
+                user.role,
+                user.subscription,
+                user.final_date,
+              )
               // generateNextPaymentJSX(7, 'user', user.subscription, (new Date(2024, 3, 25)).getTime() / 1000)
             }
             {
