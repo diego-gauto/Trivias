@@ -46,6 +46,7 @@ export interface IUserWithMembership {
   last_name: string;
   last_sign_in: string;
   photo: string;
+  role: string;
   final_date: number;
   start_date: number;
   email: string;

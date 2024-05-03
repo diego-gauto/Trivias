@@ -629,7 +629,7 @@ const NavBar = () => {
                   title='Iniciar Sesion'
                   style={
                     pathname === LOGIN_PATH ||
-                      pathname === SIGNUP_PAST_USER_PATH
+                    pathname === SIGNUP_PAST_USER_PATH
                       ? { fontWeight: 600, opacity: 1 }
                       : { fontWeight: '' }
                   }
