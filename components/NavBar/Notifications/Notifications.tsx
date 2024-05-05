@@ -45,6 +45,7 @@ interface NotificationsProps {
   openNotifications: () => void;
   unReadNotification: number;
   setUnReadNotification: React.Dispatch<React.SetStateAction<number>>;
+  setOpenNotification: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Notifications = (props: NotificationsProps) => {
@@ -56,6 +57,7 @@ const Notifications = (props: NotificationsProps) => {
     unReadNotification,
     setUnReadNotification,
     user,
+    setOpenNotification,
   } = props;
   const [newStatus, setNewStatus] = useState<boolean>(
     notification?.status === 0 ? false : true,
@@ -64,6 +66,7 @@ const Notifications = (props: NotificationsProps) => {
   const [name, setName] = useState('');
 
   const ClickNotification = () => {
+    // pending-lesson-tab-focus
     if (
       notification.type === '1' ||
       notification.type === '2' ||
@@ -72,6 +75,21 @@ const Notifications = (props: NotificationsProps) => {
       notification.type === '10' ||
       notification.type === '14'
     ) {
+      // Si el tipo de notificación es de tipo '4' (respuesta a comentario) se establece
+      // el valor del indice del tap de comentarios, tambien es el valor 4
+      if (['3', '4'].includes(notification.type)) {
+        localStorage.setItem('pending-lesson-tab-focus', '4');
+        // Aquí debería estar el id del comentario al que se le dio like o se comento....
+        const { type, user_like_id, user_comment_id } = notification;
+        const data = {
+          is_like: user_like_id !== undefined,
+          is_comment: user_comment_id !== undefined,
+          other_user_id: user_comment_id || user_like_id,
+        };
+        console.log({ notification });
+        localStorage.setItem('pending-comment-focus', JSON.stringify(data));
+      }
+
       router.push({
         pathname: LESSON_PATH,
         query: {
@@ -102,6 +120,8 @@ const Notifications = (props: NotificationsProps) => {
         setUnReadNotification(unReadNotification - 1);
       });
     }
+
+    setOpenNotification(false);
   };
 
   useEffect(() => {

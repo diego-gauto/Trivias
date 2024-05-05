@@ -585,6 +585,7 @@ const NavBar = () => {
                           unReadNotification={unReadNotification}
                           setUnReadNotification={setUnReadNotification}
                           key={'Notifications_' + index}
+                          setOpenNotification={setOpenNotification}
                         />
                       );
                     })
@@ -803,6 +804,7 @@ const NavBar = () => {
                             unReadNotification={unReadNotification}
                             setUnReadNotification={setUnReadNotification}
                             key={'Notifications_' + index}
+                            setOpenNotification={setOpenNotification}
                           />
                         );
                       })

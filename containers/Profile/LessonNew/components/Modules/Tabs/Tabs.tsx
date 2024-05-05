@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { BsPlayBtn } from 'react-icons/bs';
 import { IoPlaySkipBackSharp, IoPlaySkipForwardSharp } from 'react-icons/io5';
@@ -26,6 +26,9 @@ const ModuleTabs = (props: IModule) => {
   const [firstLesson, setFirstLesson] = useState(false);
   const [lastLesson, setLastLesson] = useState(false);
 
+  const commentsTapRef = useRef<HTMLParagraphElement>(null);
+  const quizTapRef = useRef(null);
+
   useEffect(() => {
     if (+season === 0 && +lesson === 0) {
       setFirstLesson(true);
@@ -47,6 +50,19 @@ const ModuleTabs = (props: IModule) => {
     }
   }, [season, lesson]);
 
+  useEffect(() => {
+    const pendingTabFocusIndex = localStorage.getItem(
+      'pending-lesson-tab-focus',
+    );
+    if (pendingTabFocusIndex === null) {
+      return;
+    }
+
+    localStorage.removeItem('pending-lesson-tab-focus');
+
+    changeValue(parseInt(pendingTabFocusIndex));
+  }, []);
+
   return (
     <div className='tab-container'>
       <div className='tabs'>
@@ -64,6 +80,7 @@ const ModuleTabs = (props: IModule) => {
           onClick={() => {
             changeValue(3);
           }}
+          ref={quizTapRef}
         >
           <SlNotebook></SlNotebook>
           Evaluación
@@ -73,6 +90,7 @@ const ModuleTabs = (props: IModule) => {
           onClick={() => {
             changeValue(4);
           }}
+          ref={commentsTapRef}
         >
           <TfiCommentAlt></TfiCommentAlt>
           Comentarios

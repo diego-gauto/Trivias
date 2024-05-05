@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { FaHeart } from 'react-icons/fa';
 import { FiHeart } from 'react-icons/fi';
@@ -171,7 +171,63 @@ const Comments = (props: IComments) => {
       setResponses(temp);
       setLastComments(tempComments);
       setCurrentComments(res.data.data);
+      generateHrefClickEvent(res.data.data);
     });
+  };
+
+  const generateHrefClickEvent = (comments: any) => {
+    const array = getCommentsByUserId(user.user_id, comments);
+
+    const pendingCommentFocusData = localStorage.getItem(
+      'pending-comment-focus',
+    );
+    if (pendingCommentFocusData == null) {
+      return;
+    }
+    const focusData = JSON.parse(pendingCommentFocusData);
+    localStorage.removeItem('pending-comment-focus');
+    let commentResult: any = undefined;
+    if (focusData.is_like || focusData.is_comment) {
+      if (focusData.is_like) {
+        commentResult = array.find((element) =>
+          element.like_user_ids.includes(focusData.other_user_id),
+        );
+      } else {
+        commentResult = array.find(
+          (element) => element.user_id === focusData.other_user_id,
+        );
+      }
+
+      if (!commentResult) {
+        return;
+      }
+      setTimeout(() => {
+        createAElementAndClick(user.user_id, commentResult.id);
+      }, 1000);
+    }
+  };
+
+  const getCommentsByUserId = (userId: number, currentComments: Comment[]) => {
+    // comment-${comment.user_id}
+    // id={`comment-${comment.user_id}-${comment.comment_id}`}
+    console.log({ currentComments });
+    const commentsOfUser = currentComments.map(
+      ({ comment_id, user_id, likes }) => {
+        return {
+          id: comment_id,
+          user_id: user_id,
+          like_user_ids: [...likes.map((l) => l.user_id)],
+        };
+      },
+    );
+    return commentsOfUser.filter((c) => c.user_id === userId);
+  };
+
+  const createAElementAndClick = (userId: number, commentId: number) => {
+    const a = document.createElement('a');
+    // id={`comment-${comment.user_id}-${comment.comment_id}`}
+    a.setAttribute('href', `#comment-${userId}-${commentId}`);
+    a.click();
   };
 
   const like = (comment: Comment) => {
@@ -404,7 +460,12 @@ const Comments = (props: IComments) => {
         <div className='line-m'></div>
         {currentComments.map((comment, index) => {
           return (
-            <div className='comment-container' key={'comments-' + index}>
+            <div
+              className='comment-container'
+              key={`comment-${comment.comment_id}`}
+              id={`comment-${comment.user_id}-${comment.comment_id}`}
+            // comment-${comment.user_id}-${comment.comment_id}
+            >
               <div className='top'>
                 <Profile
                   src={comment.photo ? comment.photo : DEFAULT_USER_IMG}
@@ -472,7 +533,11 @@ const Comments = (props: IComments) => {
               </div>
               {comment.answers.map((answer, idx) => {
                 return (
-                  <div className='answer-container' key={'Comments ' + idx}>
+                  <div
+                    className='answer-container'
+                    key={'Comments ' + idx}
+                    id={`answer-${answer.comment_user_id}-${answer.commentA_id}`}
+                  >
                     <div className='top'>
                       <Profile
                         src={answer.photo ? answer.photo : DEFAULT_USER_IMG}
@@ -545,6 +610,8 @@ const Comments = (props: IComments) => {
                         <div
                           className='answer-container'
                           key={'Comments ' + idx}
+                          id={`lastanswer-${answer_comment.comment_user_id}-${answer_comment.commentToAnswer_id}`}
+                        // `answer-${answer.comment_user_id}-${answer.commentA_id}`
                         >
                           <div className='top'>
                             <Profile
