@@ -471,18 +471,18 @@ const LandingSuscription = (props: ILandingSuscription) => {
             </>
           ) : (
             <>
-              <img src='images\landing_suscription\portada_lash_master.jpg' />
-              <p className='title'>Lash Master</p>
+              <img src='images\landing_suscription\portada_manicura_rusa.jpg' />
+              <p className='title'>Manicura Rusa y uso de Drill</p>
               <p className='p-pink'>
                 Ahora ya disponible en tu suscripción Gonvar+.
               </p>
               <p className='p-pink'>
-                Los cursos de aplicación de {responsive650 && <br />}{' '}
-                extensiones de pestañas desde 0 a Profesional.
+                Los cursos de uso de drill,{responsive650 && <br />}{' '}
+                desde 0 a Profesional.
               </p>
               <p className='p-pink'>
-                Técnica Clásica y Abanicos tecnologicos incluidos.{' '}
-                {responsive650 && <br />} Diseños y efectos.
+                Manicura rusa, esmaltado perfecto{' '}
+                {responsive650 && <br />} y nivelación con rubber.
               </p>
             </>
           )}
