@@ -166,7 +166,7 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
             <EditText>Fecha: (respetar formato "2021-08-10")</EditText>
             <EditInputResponsive
               onChange={(e) => updateState(e, 'date', num)}
-              value={review.date}
+              value={`${review.date}`.slice(0, 10)}
               placeholder='2021-08-10'
             />
           </InputsResponsive>
@@ -217,6 +217,8 @@ const ReviewsSection = (props: IReviewsSectionProps) => {
       return getReviewElement(review, i);
     },
   );
+
+  console.log({ array: [...chunk1, ...chunk2, ...chunk3] });
 
   return (
     <ProfileData style={{ boxShadow: 'none', background: 'none' }}>
