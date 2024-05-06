@@ -1,34 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import {
-  BsChevronDown,
-  BsChevronLeft,
-  BsChevronRight,
-  BsChevronUp,
-} from 'react-icons/bs';
-import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
-import { useMediaQuery } from 'react-responsive';
+import Countdown from "react-countdown";
+import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { useMediaQuery } from "react-responsive";
 
-import router from 'next/router';
-import { Navigation } from 'swiper';
-import 'swiper/css';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import router from "next/router";
+import { Navigation } from "swiper";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   Landing_Facebook,
   PREVIEW_PATH,
   PURCHASE_PATH,
   SIGNUP_PATH,
-} from '../../../constants/paths';
-import { downloadFileWithStoragePath } from '../../../store/actions/LandingActions';
-import { getLandingReviewApi } from '../../api/admin';
-import { getAllCourseDataApi } from '../../api/lessons';
-import { getUserApi } from '../../api/users';
-import { SlideModule_1 } from '../../Home/Module5_1/SlideModule_1/SlideModule_1';
-import { SuscriptionContain } from './LandingSuscription.styled';
-import { RewardComponent } from '../Components/Reward';
-import { ICourse } from '../../Courses/Modules/ISliders';
-import Countdown from 'react-countdown';
+} from "../../../constants/paths";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+import { getLandingReviewApi } from "../../api/admin";
+import { getAllCourseDataApi } from "../../api/lessons";
+import { getUserApi } from "../../api/users";
+import { ICourse } from "../../Courses/Modules/ISliders";
+import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
+import { RewardComponent } from "../Components/Reward";
+import { SuscriptionContain } from "./LandingSuscription.styled";
 
 const cursoBackground = '/images/landing_suscription/Rectangle 684.png';
 const gonvar = '/images/landing_suscription/gonvar cuad 1.png';
@@ -187,7 +182,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
     window.open(url, '_blank');
   };
 
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   const handleRedirection = async () => {
     if (isFacebook) {
@@ -243,11 +238,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
       router.push(Landing_Facebook);
     } else {
       if (origin === 'facebook' && type === 'cuatrimestral') {
-        router.push('https://www.gonvar.io/forms?formId=10');
+        router.push('https://www.gonvar.io/forms?formId=16');
       } else if (origin === 'google' && type === 'cuatrimestral') {
         router.push('https://www.gonvar.io/forms?formId=14');
       } else if (origin === 'tiktok' && type === 'cuatrimestral') {
-        router.push('https://www.gonvar.io/forms?formId=12');
+        router.push('https://www.gonvar.io/forms?formId=16');
       } else if (localStorage.getItem('email')) {
         const user = await getUserApi(localStorage.getItem('email'));
         // tiene que ser activo, y no tiene que ser nivel 0
@@ -307,10 +302,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Desde el 16 de Marzo al 6 de Mayo
+            Desde el 6 de Mayo al 11 de Mayo
           </h4>
           <Countdown
-            date={new Date(2024, 4, 6)}
+            date={new Date(2024, 4, 12)}
             renderer={(props) => (
               <div className='countdown' style={{ marginTop: '0' }}>
                 <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
@@ -357,9 +352,8 @@ const LandingSuscription = (props: ILandingSuscription) => {
           />
           <div className='progress-container'>
             <div
-              className={`progress-bar ${
-                checkProgress().x100 >= 100 && 'full'
-              }`}
+              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'
+                }`}
               style={
                 {
                   '--progress': checkProgress().x100 + '%',

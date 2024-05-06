@@ -1,29 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc } from "firebase/firestore";
 // import { isValidPhoneNumber } from "react-phone-number-input";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 // import Link from "next/link";
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
+import { useRouter } from "next/router";
+import * as Yup from "yup";
 
-import { getFormApi } from '../../components/api/form';
-import { createUserFormApi } from '../../components/api/userform';
-import Countdown from '../../components/Forms/countdown/countdown';
-import InputApellido from '../../components/Forms/inputApellido/inputApellido';
-import InputMail from '../../components/Forms/inputMail/inputMail';
-import InputNombre from '../../components/Forms/inputNombre/inputNombre';
-import InputWatsapp from '../../components/Forms/inputWhatsapp/inputWhatsapp';
-import OptionComponent from '../../components/Forms/option/option';
-import { db } from '../../firebase/firebaseConfig';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../screens/Login.styled';
-import styles from './formulario.module.css';
+import { getFormApi } from "../../components/api/form";
+import { createUserFormApi } from "../../components/api/userform";
+import Countdown from "../../components/Forms/countdown/countdown";
+import InputApellido from "../../components/Forms/inputApellido/inputApellido";
+import InputMail from "../../components/Forms/inputMail/inputMail";
+import InputNombre from "../../components/Forms/inputNombre/inputNombre";
+import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
+import OptionComponent from "../../components/Forms/option/option";
+import { db } from "../../firebase/firebaseConfig";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
+import styles from "./formulario.module.css";
 
 interface Answer {
   label: string;
@@ -79,6 +75,8 @@ const Formularios = () => {
     '14',
     '15',
     '16',
+    '17',
+    '18',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
@@ -600,9 +598,9 @@ const Formularios = () => {
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                  formik.errors.option3 && (
-                    <div className={errorOption}>{formik.errors.option3}</div>
-                  )
+                formik.errors.option3 && (
+                  <div className={errorOption}>{formik.errors.option3}</div>
+                )
                 : null}
             </div>
           </div>

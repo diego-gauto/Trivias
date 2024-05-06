@@ -1,19 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Countdown from 'react-countdown';
-import {
-  BsChevronDown,
-  BsChevronLeft,
-  BsChevronRight,
-  BsChevronUp,
-} from 'react-icons/bs';
-import { useMediaQuery } from 'react-responsive';
+import Countdown from "react-countdown";
+import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
+import { useMediaQuery } from "react-responsive";
 
-import router from 'next/router';
-import { Navigation } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import router from "next/router";
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   NAilS_REVOLUTION_FORM,
@@ -21,14 +16,14 @@ import {
   NAilS_REVOLUTION_FORM_TT,
   PLAN_PATH,
   PREVIEW_PATH,
-  PURCHASE_PATH,
   SIGNUP_PATH,
-} from '../../../constants/paths';
-import { downloadFileWithStoragePath } from '../../../store/actions/LandingActions';
-import { getGenericQueryResponse, getLandingReviewApi } from '../../api/admin';
-import { getUserApi } from '../../api/users';
-import { SlideModule_1 } from '../../Home/Module5_1/SlideModule_1/SlideModule_1';
-import MaterialesModal from '../LandingNailsMaster/MaterialesModal';
+} from "../../../constants/paths";
+import { downloadFileWithStoragePath } from "../../../store/actions/LandingActions";
+import { getGenericQueryResponse, getLandingReviewApi } from "../../api/admin";
+import { haveAccess } from "../../GlobalFunctions";
+import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
+import { RewardComponent } from "../Components/Reward";
+import MaterialesModal from "../LandingNailsMaster/MaterialesModal";
 import {
   arita_fondo_azul,
   icon_1,
@@ -45,11 +40,11 @@ import {
   icon_file_blue,
   icon_graph,
   mujer_fondo_azul,
+  mujer_fondo_azul_2,
   TEMARIO_ARRAY_1,
   TEMARIO_ARRAY_2,
-  mujer_fondo_azul_2,
-} from './constants';
-import { ITemario } from './ILandingNailsMasterRevolution';
+} from "./constants";
+import { ITemario } from "./ILandingNailsMasterRevolution";
 import {
   EightSection,
   EleventhSection,
@@ -67,9 +62,7 @@ import {
   ThirdSection,
   ThirteenSection,
   TwelveSection,
-} from './LandingNailsMasterRevolution.styled';
-import { RewardComponent } from '../Components/Reward';
-import { haveAccess } from '../../GlobalFunctions';
+} from "./LandingNailsMasterRevolution.styled";
 
 const pointWatsap = '/images/landing_suscription/point_at_button.png';
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -243,7 +236,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
     return returnValue;
   };
 
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   return (
     <SuscriptionContain>
@@ -254,10 +247,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <br />
             Inscripciones sólo desde el
             <br />
-            16 de Marzo al 6 de Mayo
+            6 de Mayo al 11 de Mayo
           </h4>
           <Countdown
-            date={new Date(2024, 4, 6)}
+            date={new Date(2024, 4, 12)}
             renderer={(props) => (
               <div className='countdown'>
                 <h2>TIEMPO RESTANTE</h2>
@@ -296,9 +289,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           />
           <div className='progress-container'>
             <div
-              className={`progress-bar ${
-                checkProgress().x100 >= 100 && 'full'
-              }`}
+              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'
+                }`}
               style={
                 {
                   '--progress': checkProgress().x100 + '%',

@@ -1,16 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { collection, doc, getDoc } from 'firebase/firestore';
-import { useRouter } from 'next/router';
+import { collection, doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
-import { db } from '../../../firebase/firebaseConfig';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../screens/Login.styled';
-import { getFormApi } from '../../api/form';
-import styles from './thankYou.module.css';
+import { db } from "../../../firebase/firebaseConfig";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { getFormApi } from "../../api/form";
+import styles from "./thankYou.module.css";
 
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
 
@@ -81,6 +77,8 @@ const ThankYouForm = () => {
     '14',
     '15',
     '16',
+    '17',
+    '18',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
