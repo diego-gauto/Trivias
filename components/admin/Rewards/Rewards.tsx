@@ -80,7 +80,7 @@ const Rewards = () => {
       const role = userRoles.find((role) => role.role === 'rewards');
       setUserAccess({
         canView: role?.view === 1,
-        canEdit: /* role?.edit === 1 */ false,
+        canEdit: role?.edit === 1,
         canDelete: role?.delete === 1,
         canCreate: role?.create === 1,
         canRequest: role?.request === 1,
@@ -184,15 +184,15 @@ const Rewards = () => {
         <div className='top-buttons'>
           {((canCreate && userLevel === 'admin') ||
             userLevel === 'superAdmin') && (
-            <button
-              className='add'
-              onClick={() => {
-                setShowAddReward(true);
-              }}
-            >
-              Agregar Recompensa
-            </button>
-          )}
+              <button
+                className='add'
+                onClick={() => {
+                  setShowAddReward(true);
+                }}
+              >
+                Agregar Recompensa
+              </button>
+            )}
           {checkRewardType3 && (
             <CsvDownloader
               filename={'lista_mes_' + currentMonth}
@@ -215,7 +215,7 @@ const Rewards = () => {
                   src={reward.image}
                   alt={`${reward.title}`}
                   onClick={() => {
-                    if (canEdit) {
+                    if (canEdit || userLevel === 'superAdmin') {
                       setReward(reward);
                       setShowEditModal(true);
                     } else {
@@ -233,47 +233,47 @@ const Rewards = () => {
         </div>
         {((canRequest && userLevel === 'admin') ||
           userLevel === 'superAdmin') && (
-          <>
-            <p className='title'>Solicitudes</p>
-            <div className='request-container'>
-              <div className='row-titles'>
-                <p>Nombre</p>
-                <p>Telefono</p>
-                <p>Correo</p>
-                <p>Producto</p>
-                <p>Fecha</p>
-                <p>Status</p>
+            <>
+              <p className='title'>Solicitudes</p>
+              <div className='request-container'>
+                <div className='row-titles'>
+                  <p>Nombre</p>
+                  <p>Telefono</p>
+                  <p>Correo</p>
+                  <p>Producto</p>
+                  <p>Fecha</p>
+                  <p>Status</p>
+                </div>
+                {requests.map((request, index) => {
+                  return (
+                    <div className='tr' key={'RequestTable ' + index}>
+                      <p>{request.name}</p>
+                      <p>
+                        {request.phone_number !== 'undefined'
+                          ? request.phone_number
+                          : 'Sin telefono'}
+                      </p>
+                      <p>{request.email}</p>
+                      <p>{request.title}</p>
+                      <p>{formatDate(request.created_at)}</p>
+                      <p
+                        style={{
+                          background: request.status ? '#33c600' : '#e70000',
+                          color: '#fff',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          confirmRequest(request);
+                        }}
+                      >
+                        {request.status ? 'Reclamada' : 'No reclamada'}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
-              {requests.map((request, index) => {
-                return (
-                  <div className='tr' key={'RequestTable ' + index}>
-                    <p>{request.name}</p>
-                    <p>
-                      {request.phone_number !== 'undefined'
-                        ? request.phone_number
-                        : 'Sin telefono'}
-                    </p>
-                    <p>{request.email}</p>
-                    <p>{request.title}</p>
-                    <p>{formatDate(request.created_at)}</p>
-                    <p
-                      style={{
-                        background: request.status ? '#33c600' : '#e70000',
-                        color: '#fff',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        confirmRequest(request);
-                      }}
-                    >
-                      {request.status ? 'Reclamada' : 'No reclamada'}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
+            </>
+          )}
       </RewardContain>
       <AddReward
         show={showAddReward}
