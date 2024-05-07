@@ -98,6 +98,7 @@
     width: 800px;
     right: 60px;
     bottom: 0;
+    z-index: 1;
   }
 }
 
@@ -144,6 +145,7 @@
 
     @media (max-width: 719px) {
       margin: 0 auto;
+      z-index: 2;
     }
   }
 }
