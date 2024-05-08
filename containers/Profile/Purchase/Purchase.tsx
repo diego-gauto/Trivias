@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { AiFillLock } from 'react-icons/ai';
-import { FaArrowRight, FaCheck } from 'react-icons/fa';
-import InputMask from 'react-input-mask';
+import { AiFillLock } from "react-icons/ai";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
+import InputMask from "react-input-mask";
 
-import router, { useRouter } from 'next/router';
+import router, { useRouter } from "next/router";
 
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-import { retrieveCoupons } from '../../../components/api/admin';
+import { retrieveCoupons } from "../../../components/api/admin";
 import {
   addUserCouponApi,
   conektaOxxoApi,
@@ -17,38 +17,20 @@ import {
   conektaSubscriptionApi,
   createInvoiceApi,
   getCourseForCheckoutApi,
-} from '../../../components/api/checkout';
-import {
-  conektaPm,
-  getUserApi,
-  updateMembership,
-  updateUser,
-} from '../../../components/api/users';
-import ErrorModal from '../../../components/Error/ErrorModal';
-import {
-  LESSON_PATH,
-  LOGIN_PATH,
-  PREVIEW_PATH,
-} from '../../../constants/paths';
-import {
-  BackgroundLoader,
-  LoaderContain,
-  LoaderImage,
-} from '../../../screens/Login.styled';
-import ModalError from './Modal1/ModalError';
-import { Container, LoaderContainSpinner } from './Purchase.styled';
-import OxxoModal from './Modals/Oxxo';
-import SpeiModal from './Modals/Spei';
-import { createNotification } from '../../../components/api/notifications';
-import { getUsersStripe } from '../../../components/api/conekta/test';
-import ActiveUserConekta from '../../../pages/auth/Modals/ActiveUserConekta';
-import { SOCIALS_ARRAY } from '../../../constants/arrays';
-import { returnPrice, returnPriceTag } from '../../../utils/functions';
-import { IUserInfoResult } from '../../../interfaces/IUser';
-import {
-  haveAccess,
-  MembershipMethodValue,
-} from '../../../components/GlobalFunctions';
+} from "../../../components/api/checkout";
+import { createNotification } from "../../../components/api/notifications";
+import { conektaPm, getUserApi, updateMembership } from "../../../components/api/users";
+import ErrorModal from "../../../components/Error/ErrorModal";
+import { haveAccess, MembershipMethodValue } from "../../../components/GlobalFunctions";
+import { LESSON_PATH, PREVIEW_PATH } from "../../../constants/paths";
+import { IUserInfoResult } from "../../../interfaces/IUser";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { returnPrice, returnPriceTag } from "../../../utils/functions";
+import ModalError from "./Modal1/ModalError";
+import OxxoModal from "./Modals/Oxxo";
+import SpeiModal from "./Modals/Spei";
+import { Container, LoaderContainSpinner } from "./Purchase.styled";
+
 declare let window: any;
 const Purchase = () => {
   const [userData, setUserData] = useState<IUserInfoResult>(
@@ -543,6 +525,7 @@ const Purchase = () => {
                   : frequency === 'anual'
                     ? 4
                     : 7,
+              type: product.price,
             });
             /*
             const QUERY = `UPDATE memberships SET 
@@ -1068,7 +1051,7 @@ const Purchase = () => {
                   {loader && <LoaderContainSpinner />}
                 </div>
                 {!trial && (
-                  <div className='paypal' onClick={() => {}}>
+                  <div className='paypal' onClick={() => { }}>
                     {!paypal && (
                       <PayPalScriptProvider
                         deferLoading={paypal}
@@ -1131,43 +1114,43 @@ const Purchase = () => {
                         )}
                         {(type == 'course' ||
                           nailmasterplusanual === 'true') && (
-                          <PayPalButtons
-                            style={{
-                              color: 'blue',
-                              tagline: false,
-                              layout: 'horizontal',
-                              shape: 'pill',
-                              height: 50,
-                            }}
-                            createOrder={(data, actions) => {
-                              let price = product.price;
-                              if (coupon) {
-                                if (coupon.type == 'amount') {
-                                  price = price - coupon.discount;
-                                } else {
-                                  price =
-                                    price - (coupon.discount / 100) * price;
+                            <PayPalButtons
+                              style={{
+                                color: 'blue',
+                                tagline: false,
+                                layout: 'horizontal',
+                                shape: 'pill',
+                                height: 50,
+                              }}
+                              createOrder={(data, actions) => {
+                                let price = product.price;
+                                if (coupon) {
+                                  if (coupon.type == 'amount') {
+                                    price = price - coupon.discount;
+                                  } else {
+                                    price =
+                                      price - (coupon.discount / 100) * price;
+                                  }
                                 }
-                              }
-                              return actions.order.create({
-                                purchase_units: [
-                                  {
-                                    amount: {
-                                      value: price,
+                                return actions.order.create({
+                                  purchase_units: [
+                                    {
+                                      amount: {
+                                        value: price,
+                                      },
                                     },
-                                  },
-                                ],
-                              });
-                            }}
-                            onApprove={(data, actions: any) => {
-                              return actions.order
-                                .capture()
-                                .then((details: any) => {
-                                  setPlan({ method: 'paypal' });
+                                  ],
                                 });
-                            }}
-                          />
-                        )}
+                              }}
+                              onApprove={(data, actions: any) => {
+                                return actions.order
+                                  .capture()
+                                  .then((details: any) => {
+                                    setPlan({ method: 'paypal' });
+                                  });
+                              }}
+                            />
+                          )}
                       </PayPalScriptProvider>
                     )}
                     <i>
@@ -1179,13 +1162,13 @@ const Purchase = () => {
                 {((type === 'subscription' &&
                   (frequency === 'anual' || frequency === 'cuatrimestral')) ||
                   type === 'course') && (
-                  <img src='/images/purchase/oxxo.svg' onClick={payWithOxxo} />
-                )}
+                    <img src='/images/purchase/oxxo.svg' onClick={payWithOxxo} />
+                  )}
                 {((type === 'subscription' &&
                   (frequency === 'anual' || frequency === 'cuatrimestral')) ||
                   type === 'course') && (
-                  <img src='/images/purchase/spei.svg' onClick={payWitSpei} />
-                )}
+                    <img src='/images/purchase/spei.svg' onClick={payWitSpei} />
+                  )}
               </div>
             </div>
             <div className='right-section'>
@@ -1707,7 +1690,7 @@ const Purchase = () => {
                     {loader && <LoaderContainSpinner />}
                   </div>
                   {!trial && (
-                    <div className='paypal' onClick={() => {}}>
+                    <div className='paypal' onClick={() => { }}>
                       {!paypal && (
                         <PayPalScriptProvider
                           deferLoading={paypal}
@@ -1770,43 +1753,43 @@ const Purchase = () => {
                           )}
                           {(type == 'course' ||
                             nailmasterplusanual === 'true') && (
-                            <PayPalButtons
-                              style={{
-                                color: 'blue',
-                                tagline: false,
-                                layout: 'horizontal',
-                                shape: 'pill',
-                                height: 50,
-                              }}
-                              createOrder={(data, actions) => {
-                                let price = product.price;
-                                if (coupon) {
-                                  if (coupon.type == 'amount') {
-                                    price = price - coupon.discount;
-                                  } else {
-                                    price =
-                                      price - (coupon.discount / 100) * price;
+                              <PayPalButtons
+                                style={{
+                                  color: 'blue',
+                                  tagline: false,
+                                  layout: 'horizontal',
+                                  shape: 'pill',
+                                  height: 50,
+                                }}
+                                createOrder={(data, actions) => {
+                                  let price = product.price;
+                                  if (coupon) {
+                                    if (coupon.type == 'amount') {
+                                      price = price - coupon.discount;
+                                    } else {
+                                      price =
+                                        price - (coupon.discount / 100) * price;
+                                    }
                                   }
-                                }
-                                return actions.order.create({
-                                  purchase_units: [
-                                    {
-                                      amount: {
-                                        value: price,
+                                  return actions.order.create({
+                                    purchase_units: [
+                                      {
+                                        amount: {
+                                          value: price,
+                                        },
                                       },
-                                    },
-                                  ],
-                                });
-                              }}
-                              onApprove={(data, actions: any) => {
-                                return actions.order
-                                  .capture()
-                                  .then((details: any) => {
-                                    setPlan({ method: 'paypal' });
+                                    ],
                                   });
-                              }}
-                            />
-                          )}
+                                }}
+                                onApprove={(data, actions: any) => {
+                                  return actions.order
+                                    .capture()
+                                    .then((details: any) => {
+                                      setPlan({ method: 'paypal' });
+                                    });
+                                }}
+                              />
+                            )}
                         </PayPalScriptProvider>
                       )}
                       <i>
@@ -1818,16 +1801,16 @@ const Purchase = () => {
                   {((type === 'subscription' &&
                     (frequency === 'anual' || frequency === 'cuatrimestral')) ||
                     type === 'course') && (
-                    <img
-                      src='/images/purchase/oxxo.svg'
-                      onClick={payWithOxxo}
-                    />
-                  )}
+                      <img
+                        src='/images/purchase/oxxo.svg'
+                        onClick={payWithOxxo}
+                      />
+                    )}
                   {((type === 'subscription' &&
                     (frequency === 'anual' || frequency === 'cuatrimestral')) ||
                     type === 'course') && (
-                    <img src='/images/purchase/spei.svg' onClick={payWitSpei} />
-                  )}
+                      <img src='/images/purchase/spei.svg' onClick={payWitSpei} />
+                    )}
                 </div>
               </div>
               <div className='box'>
