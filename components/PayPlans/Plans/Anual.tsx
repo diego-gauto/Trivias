@@ -1,19 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from "react";
 
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
-import router from 'next/router';
+import router from "next/router";
 
-import {
-  ANUAL_FORM,
-  PREVIEW_PATH,
-  PURCHASE_PATH,
-  SIGNUP_PATH,
-} from '../../../constants/paths';
-import { IUser } from '../../../interfaces/IUserData';
-import { PlanStyles } from './Plans.styled';
-import ChangePlanModal from '../../Modals/ChangePlanModal/ChangePlanModal';
-import { goTo } from './functions';
+import { IUser } from "../../../interfaces/IUserData";
+import ChangePlanModal from "../../Modals/ChangePlanModal/ChangePlanModal";
+import { goTo } from "./functions";
+import { PlanStyles } from "./Plans.styled";
 
 const gPlus = '/images/pay_plans/G+.png';
 let views = new Map<number, boolean>();
@@ -79,7 +73,7 @@ const Anual = (props: IData) => {
       user &&
       isActiveUser() &&
       (haveCuatrimestralSuscription() || haveMonthSuscription()) &&
-      !isPaypalUser;
+      !isPaypalUser();
 
     if (isAbleToUpdate) {
       return (
