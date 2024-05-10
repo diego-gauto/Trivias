@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { FaChevronDown } from 'react-icons/fa';
-import InputMask from 'react-input-mask';
+import { FaChevronDown } from "react-icons/fa";
+import InputMask from "react-input-mask";
 
-import router from 'next/router';
+import router from "next/router";
 
-import { PLAN_PATH, PREVIEW_PATH } from '../../constants/paths';
-import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
-import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
-import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
-import { useAuth } from '../../hooks/useAuth';
-import {
-  conektaOxxoApi,
-  conektaSpeiApi,
-  conektaSubscriptionApi,
-} from '../api/checkout';
-import {
-  detachPaymentMethodConekta,
-  setDefaultPaymentMethodConekta,
-} from '../api/profile';
-import { conektaPm, updateMembership } from '../api/users';
-import { haveAccess } from '../GlobalFunctions';
-import {
-  Month,
-  PayOptions,
-  PayOptionsForMonthSuscription,
-  Year,
-} from './constants';
-import { checkEmpty } from './functions';
-import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
-import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { RetryPaymentContainer } from './RetryPayment.styled';
+import { PLAN_PATH, PREVIEW_PATH } from "../../constants/paths";
+import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
+import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
+import { useAuth } from "../../hooks/useAuth";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
+import { conektaPm, updateMembership } from "../api/users";
+import { haveAccess } from "../GlobalFunctions";
+import { Month, PayOptions, PayOptionsForMonthSuscription, Year } from "./constants";
+import { checkEmpty } from "./functions";
+import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
+import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
+import { RetryPaymentContainer } from "./RetryPayment.styled";
 
 declare let window: any;
 
@@ -307,7 +295,7 @@ export const RetryPayment = () => {
       conekta_id: user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: 'Gonvar Plus',
-      price: product.price * 100,
+      price: user.type * 100,
       meta: {
         type: 'subscription',
         course_id: 0,
