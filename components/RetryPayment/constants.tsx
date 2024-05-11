@@ -58,3 +58,43 @@ export const Year = [
   twoDigitYear + 9,
 ];
 export const Month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+export const PayOptionsPurchase: IPayOption[] = [
+  {
+    title: 'Tarjeta de crédito/debito',
+    img_select: card_select,
+    img_unselect: card_unselect,
+    id: 'card',
+  },
+  {
+    title: "",
+    img_select: paypal_s,
+    img_unselect: paypal_uns,
+    id: "paypal",
+  },
+  {
+    title: '',
+    img_select: oxxo_select,
+    img_unselect: oxxo_unselect,
+    id: 'oxxo',
+  },
+  {
+    title: 'Transferencia',
+    img_select: moneda_select,
+    img_unselect: moneda_unselect,
+    id: 'transfer',
+  },
+];
+export const PayOptionsPurchaseForMonthSuscription: IPayOption[] = [
+  {
+    title: 'Tarjeta de crédito/debito',
+    img_select: card_select,
+    img_unselect: card_unselect,
+    id: 'card',
+  }, {
+    title: "",
+    img_select: paypal_s,
+    img_unselect: paypal_uns,
+    id: "paypal",
+  },
+];
