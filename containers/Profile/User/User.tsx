@@ -126,7 +126,7 @@ const User = () => {
           755 -
           ((monthProgress - monthRewardCompleted[0].month) /
             (monthFilter[0].month - monthRewardCompleted[0].month)) *
-            755;
+          755;
       }
     } else {
       progressMonth = 0;
@@ -156,7 +156,7 @@ const User = () => {
           755 -
           ((user.score - pointRewardCompleted[0].points) /
             (pointsFilter[0].points - pointRewardCompleted[0].points)) *
-            755;
+          755;
       }
     } else {
       progressPoints = 0;
@@ -274,13 +274,13 @@ const User = () => {
           reward={reward}
           setReward={setReward}
           timeLevel={timeLevel}
-          monthProgress={monthProgress}
-          prize={pointsRewards}
-          prizeSize={pointsRewardSize}
-          timePrize={timePrize}
-          timePrizeSize={timePrizeSize}
-          nextCertificate={nextCertificate}
-          handleClick={handleClick}
+          // monthProgress={monthProgress}
+          //prize={pointsRewards}
+          //prizeSize={pointsRewardSize}
+          //timePrize={timePrize}
+          //timePrizeSize={timePrizeSize}
+          //nextCertificate={nextCertificate}
+          //handleClick={handleClick}
           lastTimeReward={lastTimeReward}
         />
         <ThirdBox>

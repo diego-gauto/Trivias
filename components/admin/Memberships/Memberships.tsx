@@ -34,6 +34,7 @@ interface Memberships {
   email: string;
   phone_number: string;
   method: string;
+  type: number;
   final_date: string;
   level: number;
   datediff: number;
@@ -260,6 +261,7 @@ const Memberships = () => {
         final_date: number;
         level: number;
         method: string;
+        type: number;
       }
 
       const data = response2.data.data as IMembership[];
@@ -276,11 +278,11 @@ const Memberships = () => {
             fd.getMinutes(),
             fd.getSeconds(),
           ).getTime() -
-            new Date(
-              new Date().getFullYear(),
-              new Date().getMonth(),
-              new Date().getDate() + 1,
-            ).getTime(),
+          new Date(
+            new Date().getFullYear(),
+            new Date().getMonth(),
+            new Date().getDate() + 1,
+          ).getTime(),
         ).getTime();
 
         const todayTime = new Date().getTime();
@@ -350,140 +352,126 @@ const Memberships = () => {
                 <h2 className='title'>Membresias por finalizar</h2>
                 {((userLevel === 'admin' && canView) ||
                   userLevel === 'superAdmin') && (
-                  <span
-                    style={{
-                      fontSize: '18px',
-                      fontWeight: 'bold',
-                      textAlign: 'right',
-                    }}
-                  >
-                    Cantidad de usuarios: {data.length}
-                  </span>
-                )}
+                    <span
+                      style={{
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        textAlign: 'right',
+                      }}
+                    >
+                      Cantidad de usuarios: {data.length}
+                    </span>
+                  )}
               </div>
             </DefaultColumn>
             {((userLevel === 'admin' && canView) ||
               userLevel === 'superAdmin') && (
-              <Pagination
-                changePage={changePage}
-                currentPage={offset / 100}
-                totalPage={Math.ceil(filteredData.length / 100)}
-              />
-            )}
+                <Pagination
+                  changePage={changePage}
+                  currentPage={offset / 100}
+                  totalPage={Math.ceil(filteredData.length / 100)}
+                />
+              )}
           </div>
           {((userLevel === 'admin' && canView) ||
             userLevel === 'superAdmin') && (
-            <div className='bottom-header'>
-              <div>
-                <label
-                  style={{
-                    fontSize: '20px',
-                  }}
-                  htmlFor='memberships-filter'
-                >
-                  Filtro de membresía
-                </label>
-                <select
-                  ref={memberFilterHTMLSelect}
-                  style={{
-                    width: '100%',
-                    height: '40px',
-                  }}
-                  name='memberships-filter'
-                  id='memberships-filter'
-                >
-                  <option value='TODOS'>Todos</option>
-                  <option value='MENSUAL'>Mensual</option>
-                  <option value='CUATRIMESTRAL'>Cuatrimestral</option>
-                  <option value='ANUAL'>Anual</option>
-                </select>
-              </div>
-              <form>
+              <div className='bottom-header'>
                 <div>
                   <label
                     style={{
                       fontSize: '20px',
                     }}
-                    htmlFor='start-date-input'
+                    htmlFor='memberships-filter'
                   >
-                    Inicio
+                    Filtro de membresía
                   </label>
-                  <input
+                  <select
+                    ref={memberFilterHTMLSelect}
                     style={{
                       width: '100%',
-                      borderRadius: '20px',
                       height: '40px',
-                      padding: '15px',
-                      border: 'solid 1px #6717cd',
                     }}
-                    type='date'
-                    name='start-date'
-                    id='start-date-input'
-                    min={today}
-                    value={startDate.toJSON().slice(0, 10)}
-                    onChange={(e) => {
-                      setStartDate(new Date(e.target.value));
-                    }}
-                  />
-                  <label
-                    style={{
-                      fontSize: '20px',
-                    }}
-                    htmlFor='start-date-input'
+                    name='memberships-filter'
+                    id='memberships-filter'
                   >
-                    Fin
-                  </label>
-                  <input
-                    style={{
-                      width: '100%',
-                      borderRadius: '20px',
-                      height: '40px',
-                      padding: '15px',
-                      border: 'solid 1px #6717cd',
-                    }}
-                    type='date'
-                    name='final-date'
-                    id='final-date-input'
-                    min={today}
-                    value={finalDate.toJSON().slice(0, 10)}
-                    onChange={(e) => {
-                      setFinalDate(new Date(e.target.value));
-                    }}
-                  />
+                    <option value='TODOS'>Todos</option>
+                    <option value='MENSUAL'>Mensual</option>
+                    <option value='CUATRIMESTRAL'>Cuatrimestral</option>
+                    <option value='ANUAL'>Anual</option>
+                  </select>
                 </div>
+                <form>
+                  <div>
+                    <label
+                      style={{
+                        fontSize: '20px',
+                      }}
+                      htmlFor='start-date-input'
+                    >
+                      Inicio
+                    </label>
+                    <input
+                      style={{
+                        width: '100%',
+                        borderRadius: '20px',
+                        height: '40px',
+                        padding: '15px',
+                        border: 'solid 1px #6717cd',
+                      }}
+                      type='date'
+                      name='start-date'
+                      id='start-date-input'
+                      min={today}
+                      value={startDate.toJSON().slice(0, 10)}
+                      onChange={(e) => {
+                        setStartDate(new Date(e.target.value));
+                      }}
+                    />
+                    <label
+                      style={{
+                        fontSize: '20px',
+                      }}
+                      htmlFor='start-date-input'
+                    >
+                      Fin
+                    </label>
+                    <input
+                      style={{
+                        width: '100%',
+                        borderRadius: '20px',
+                        height: '40px',
+                        padding: '15px',
+                        border: 'solid 1px #6717cd',
+                      }}
+                      type='date'
+                      name='final-date'
+                      id='final-date-input'
+                      min={today}
+                      value={finalDate.toJSON().slice(0, 10)}
+                      onChange={(e) => {
+                        setFinalDate(new Date(e.target.value));
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginTop: '10px',
+                      gap: '5px',
+                    }}
+                  ></div>
+                </form>
                 <div
                   style={{
                     display: 'flex',
+                    gap: '35px',
+                    padding: '15px 0',
                     flexDirection: 'column',
-                    marginTop: '10px',
-                    gap: '5px',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                   }}
-                ></div>
-              </form>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '35px',
-                  padding: '15px 0',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <button
-                  type='button'
-                  style={{
-                    height: 'fit-content',
-                    width: '100%',
-                    fontSize: '20px',
-                  }}
-                  className='button button-purple'
-                  onClick={filterMembershipsHandler}
                 >
-                  Filtrar
-                </button>
-                {((canDownload && userLevel === 'admin') ||
-                  userLevel === 'superAdmin') && (
                   <button
                     type='button'
                     style={{
@@ -492,14 +480,28 @@ const Memberships = () => {
                       fontSize: '20px',
                     }}
                     className='button button-purple'
-                    onClick={downloadListCSVHandler}
+                    onClick={filterMembershipsHandler}
                   >
-                    Descargar listado
+                    Filtrar
                   </button>
-                )}
+                  {((canDownload && userLevel === 'admin') ||
+                    userLevel === 'superAdmin') && (
+                      <button
+                        type='button'
+                        style={{
+                          height: 'fit-content',
+                          width: '100%',
+                          fontSize: '20px',
+                        }}
+                        className='button button-purple'
+                        onClick={downloadListCSVHandler}
+                      >
+                        Descargar listado
+                      </button>
+                    )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
         {!isLoadingData && (
           <Background
@@ -522,6 +524,7 @@ const Memberships = () => {
                     <th>Telefono</th>
                     <th>Suscripción</th>
                     <th>Método</th>
+                    <th>Precio</th>
                     <th>Fecha de terminación</th>
                     <th>Dias faltantes</th>
                   </tr>
@@ -546,6 +549,7 @@ const Memberships = () => {
                               {getTextSusctiptionByLevel(membership.level)}
                             </td>
                             <td>{membership.method}</td>
+                            <td>{Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(membership.type)}</td>
                             <td>{membership.final_date}</td>
                             <td>{membership.datediff}</td>
                           </tr>

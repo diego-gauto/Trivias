@@ -10,7 +10,8 @@ export const generateMemberhsipsQuery = (
         users.phone_number,
         memberships.final_date,
         memberships.level,
-        memberships.method
+        memberships.method,
+        memberships.type
     FROM   users
         INNER JOIN memberships
                 ON users.id = memberships.user_id

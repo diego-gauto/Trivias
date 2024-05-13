@@ -43,7 +43,7 @@ type UserRole = 'user' | 'admin' | 'superAdmin';
 
 type UserSubscription = 0 | 1;
 
-const NextReward = (props: any) => {
+const NextReward = (props: Props) => {
   const { timeLevel, reward, lastTimeReward, setReward, user } = props;
 
   const responsive1023 = useMediaQuery({ query: '(max-width: 1023px)' });
@@ -351,7 +351,7 @@ const NextReward = (props: any) => {
         <p className='text-1'>Próximo cargo</p>
         <div className='subscription-info'>
           {([1, 4, 5, 6, 7, 8].includes(userLevel) && userSubscription === 0) ||
-          (userLevel === 0 && finalDate > today && userSubscription === 0) ? (
+            (userLevel === 0 && finalDate > today && userSubscription === 0) ? (
             <p>
               <span className='span'>{formatDateUser()}</span>
             </p>
@@ -398,6 +398,26 @@ const NextReward = (props: any) => {
 
     return result;
   };
+
+  const isConektaUser = (method: string) => {
+    return method === 'conekta';
+  }
+
+  const isActiveSubscription = (finalDate: number) => {
+    return finalDate > Math.floor(new Date().getTime() / 1000);
+  }
+
+  const haveRecurrentSuscription = (level: number) => {
+    return [1, 4, 7].includes(level);
+  };
+
+  const isAbleToUpdateToCuatri = () => {
+
+  }
+
+  const isAbleToUpdateToAnual = () => {
+
+  }
 
   return (
     <ThirdBox>
@@ -649,16 +669,34 @@ const NextReward = (props: any) => {
               )
               // generateNextPaymentJSX(7, 'user', user.subscription, (new Date(2024, 3, 25)).getTime() / 1000)
             }
-            {user.level === 1 && (
-              <button
-                className='purple-button'
-                onClick={() => {
-                  setOpen(true);
-                }}
-              >
-                Cambiar a anualidad
-              </button>
-            )}
+            {(
+              isActiveSubscription(user.final_date) &&
+              isConektaUser(user.method) &&
+              [1, 7].includes(user.level)
+            ) && (
+                <button
+                  className='purple-button'
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Cambiar a anualidad
+                </button>
+              )}
+            {(
+              isActiveSubscription(user.final_date) &&
+              isConektaUser(user.method) &&
+              user.level === 1
+            ) && (
+                <button
+                  className='purple-button'
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Cambiar a cuatrimestral
+                </button>
+              )}
             {!loader &&
               ((user.level > 0 && user.plan_name === 'Gonvar Plus') ||
                 (conektaUsers.filter(
