@@ -211,7 +211,7 @@ const Comments = () => {
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
-      const role = userRoles.find((role) => role.role === 'blogs');
+      const role = userRoles.find((role) => role.role === 'comments');
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
@@ -519,7 +519,6 @@ const Comments = () => {
       const res = await getGenericQueryResponse(query);
 
       if ('superAdmin' === userLevel) {
-        console.log({ data: res.data.data });
         setCourses(res.data.data);
       } else if (userLevel === 'admin') {
         interface ICourse {
@@ -531,6 +530,7 @@ const Comments = () => {
         const filteredCourses = allCourses.filter(({ id }) =>
           courseIdsList.includes(id),
         );
+        console.log({ filteredCourses });
         setCourses(filteredCourses);
       }
     } catch (error) {

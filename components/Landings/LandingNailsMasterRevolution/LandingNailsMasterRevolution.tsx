@@ -247,10 +247,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <br />
             Inscripciones sólo desde el
             <br />
-            6 de Mayo al 11 de Mayo
+            6 de Mayo al 31 de Mayo
           </h4>
           <Countdown
-            date={new Date(2024, 4, 12)}
+            date={new Date(2024, 4, 31, 23, 59, 59)}
             renderer={(props) => (
               <div className='countdown'>
                 <h2>TIEMPO RESTANTE</h2>
@@ -685,7 +685,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <div className='info-content'>
               <img src={icon_calendar} className='icon' />
               <h5>
-                Acceso a 65 cursos adicionales <br />
+                Acceso a 70 cursos adicionales <br />
                 <b>y beneficios incluídos en Gonvar+</b>
               </h5>
             </div>

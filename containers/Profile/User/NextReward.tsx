@@ -54,7 +54,8 @@ const NextReward = (props: Props) => {
   const [pop, setPop] = useState<any>(false);
   const today = new Date().getTime() / 1000;
   const [conektaUsers, setConketaUsers] = useState<any>([]);
-  const [open, setOpen] = useState(false);
+  const [openCuatriModal, setOpenCuatriModal] = useState(false);
+  const [openAnualModal, setOpenAnualModal] = useState(false);
 
   const getRewards = async () => {
     let tempPointsObj: any = { obtained: [], blocked: [] };
@@ -422,12 +423,20 @@ const NextReward = (props: Props) => {
   return (
     <ThirdBox>
       <ChangePlanModal
-        show={open}
+        show={openCuatriModal}
         onHide={() => {
-          setOpen(false);
+          setOpenCuatriModal(false);
         }}
         user={user as any}
         planOption='cuatrimestre'
+      />
+      <ChangePlanModal
+        show={openAnualModal}
+        onHide={() => {
+          setOpenAnualModal(false);
+        }}
+        user={user as any}
+        planOption='anual_v1_1'
       />
       {pop && (
         <div className='dimScreen animate__animated animate__slideInUp'>
@@ -672,29 +681,35 @@ const NextReward = (props: Props) => {
             {(
               isActiveSubscription(user.final_date) &&
               isConektaUser(user.method) &&
-              [1, 7].includes(user.level)
+              user.level === 1
             ) && (
                 <button
                   className='purple-button'
+                  style={{
+                    fontSize: '14px'
+                  }}
                   onClick={() => {
-                    setOpen(true);
+                    setOpenCuatriModal(true);
                   }}
                 >
-                  Cambiar a anualidad
+                  Cambiar a cuatrimestral
                 </button>
               )}
             {(
               isActiveSubscription(user.final_date) &&
               isConektaUser(user.method) &&
-              user.level === 1
+              [1, 7].includes(user.level)
             ) && (
                 <button
                   className='purple-button'
+                  style={{
+                    fontSize: '14px'
+                  }}
                   onClick={() => {
-                    setOpen(true);
+                    setOpenAnualModal(true);
                   }}
                 >
-                  Cambiar a cuatrimestral
+                  Cambiar a anualidad
                 </button>
               )}
             {!loader &&

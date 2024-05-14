@@ -98,8 +98,8 @@ const ChangePlanModal = (props: IModal) => {
           {!loading ? (
             <button className='left' onClick={update}>
               {planOption === 'anual_v1_1'
-                ? 'Comprar a Anualidad'
-                : 'Comprar a Cuatrimestralidad'}
+                ? 'Cambiar a plan Anual'
+                : 'Cambiar a plan Cuatrimestral'}
             </button>
           ) : (
             <LoaderContainSpinner />

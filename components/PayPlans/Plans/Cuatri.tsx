@@ -137,7 +137,7 @@ const Cuatri = (props: IData) => {
           <div className='black-background tip m-2' onClick={() => verQ(1)}>
             <div className='tip-q mb-1'>
               <p className='white m-0'>
-                Más de 65 cursos y 400 clases de uñas y belleza en linea
+                Más de 70 cursos y 400 clases de uñas y belleza en linea
               </p>
               {views.get(1) ? (
                 <BsChevronUp className='tip-icon-special back-white' />

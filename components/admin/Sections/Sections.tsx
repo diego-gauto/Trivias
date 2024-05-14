@@ -123,6 +123,7 @@ const Sections = () => {
           adminTypes: getRolesWithDefaults(admin.adminTypes, admin.user_id),
         };
       });
+      console.log(newAdmins.filter(a => a.user_id === 49913));
       setUsers(newAdmins);
     } catch (error) {
       console.error(error);
