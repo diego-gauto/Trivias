@@ -236,13 +236,15 @@ const Comments = () => {
 
   useEffect(() => {
     getUserData2();
-    getCoursesForAdmin();
     getAdminUserIds();
     getCountOfComments();
   }, []);
 
   useEffect(() => {
     getCoursesForAdmin();
+  }, [userLevel])
+
+  useEffect(() => {
     retrievComments();
   }, [offset, selectedCourseId]);
 
@@ -267,8 +269,6 @@ const Comments = () => {
       );
       // const countQuery = generateCountAllComments(selectedCourseId, [10, 11, 12], false);
       const countResponse = await getGenericQueryResponse(countQuery);
-
-      console.log({ a: countResponse.data });
 
       const count = countResponse.data.data[0]['count'] as number;
       setCount(count);
@@ -449,7 +449,6 @@ const Comments = () => {
         const filteredCourses = allCourses.filter(({ id }) =>
           courseIdsList.includes(id),
         );
-        console.log({ filteredCourses });
         setCourses(filteredCourses);
       }
     } catch (error) {
