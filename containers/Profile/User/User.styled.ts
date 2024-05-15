@@ -733,7 +733,7 @@ export const ProfileMainContainer = styled.div<{
         label {
           font-size: 18px;
           font-weight: 600;
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           color: #441a6f;
         }
         input {
@@ -1018,7 +1018,7 @@ export const ProfileMainContainer = styled.div<{
         label {
           font-size: 16px;
           font-weight: 600;
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
           color: #441a6f;
           @media (max-width: 800px) {
             font-size: 14px;
@@ -1152,46 +1152,47 @@ export const ProfileMainContainer = styled.div<{
             width: 180px;
           }
         }
-        .data-contain{
+        .data-contain {
           p {
-              font-size: 14px;
-        }
-      }
-    }
-  }
-  @media (max-width: 500px) {
-    .profile-container {
-      .user-info-up {
-        .btn-edit {
-          font-size: 12px;
-        }
-        .input-contain {
-          input {
-            width: 150px;
-            font-size: 12px;
-          }
-          label {
             font-size: 14px;
           }
         }
-        .name-text {
-          font-size: 22px;
-          line-height: 20px;
-        }
-        .data-contain{
-          p {
+      }
+    }
+    @media (max-width: 500px) {
+      .profile-container {
+        .user-info-up {
+          .btn-edit {
             font-size: 12px;
+          }
+          .input-contain {
+            input {
+              width: 150px;
+              font-size: 12px;
+            }
+            label {
+              font-size: 14px;
+            }
+          }
+          .name-text {
+            font-size: 22px;
+            line-height: 20px;
+          }
+          .data-contain {
+            p {
+              font-size: 12px;
+            }
           }
         }
       }
     }
-  }
-  @media (max-width: 400px) {
-    .profile-container {
-      .user-info-up {
-        .input-contain {
-          input {
-            width: 120px;
+    @media (max-width: 400px) {
+      .profile-container {
+        .user-info-up {
+          .input-contain {
+            input {
+              width: 120px;
+            }
           }
         }
       }
@@ -1216,108 +1217,112 @@ export const PictureContain = styled.div<{
     top: 0;
     left: 0;
     transform: none;
-  }
-  .picture {
-    display: none;
-    input::file-selector-button {
+    .picture {
       display: none;
+      input::file-selector-button {
+        display: none;
+      }
     }
-  }
-  .edit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    cursor: pointer;
-    .edit-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 40px;
-      width: 70px;
-      height: 70px;
-      border: 2px solid white;
-      border-radius: 50%;
-    }
-    .message {
-      top: 20px;
-      left: 55px;
+    .edit {
       position: absolute;
-      padding-inline: 10px;
-      padding-block: 5px;
-      background-color: #dad3e5;
-      border-radius: 100px;
-      box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
-      p {
-        font-size: 10px;
-        margin: 0;
-        white-space: nowrap;
-        color: #3f1168;
-        font-weight: 600;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      cursor: pointer;
+      .edit-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 40px;
+        width: 70px;
+        height: 70px;
+        border: 2px solid white;
+        border-radius: 50%;
+      }
+      .message {
+        top: 20px;
+        left: 55px;
+        position: absolute;
+        padding-inline: 10px;
+        padding-block: 5px;
+        background-color: #dad3e5;
+        border-radius: 100px;
+        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+        p {
+          font-size: 10px;
+          margin: 0;
+          white-space: nowrap;
+          color: #3f1168;
+          font-weight: 600;
+        }
       }
     }
-  }
-  .circle-level {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    width: 250px;
-    height: 250px;
-    svg {
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      stroke-dasharray: 755;
-      z-index: 1;
-      transform: rotate(-90deg);
-      border-radius: 50%;
-    }
-    .progress-circle {
-      fill: none;
-      stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'}
-        ${(props) => props.reward == 1 && 'url(#gradientTime)'}
-        ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
-      stroke-width: 20px;
-      stroke-dasharray: 755;
-      ${(props) =>
-        props.reward == 0 &&
-        css<{ progress: number }>`
-          stroke-dashoffset: ${(props) => props.progress};
-        `}
-      ${(props) =>
-        props.reward == 1 &&
-        css<{ timeProgress: number }>`
-          stroke-dashoffset: ${(props) => props.timeProgress};
-        `}
+    .circle-level {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      width: 250px;
+      height: 250px;
+      svg {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        stroke-dasharray: 755;
+        z-index: 1;
+        transform: rotate(-90deg);
+        border-radius: 50%;
+      }
+      .progress-circle {
+        fill: none;
+        /*
+        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'}
+          ${(props) => props.reward == 1 && 'url(#gradientTime)'}
+          ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
+        */
+        stroke-width: 20px;
+        stroke-dasharray: 755;
         ${(props) =>
-        props.reward == 2 &&
-        css<{ certificateProgress: number }>`
-          stroke-dashoffset: ${(props) => props.certificateProgress};
-        `}
+          props.reward == 0 &&
+          css<{ progress: number }>`
+            stroke-dashoffset: ${(props) => props.progress};
+          `}
+        ${(props) =>
+          props.reward == 1 &&
+          css<{ timeProgress: number }>`
+            stroke-dashoffset: ${(props) => props.timeProgress};
+          `}
+        ${(props) =>
+          props.reward == 2 &&
+          css<{ certificateProgress: number }>`
+            stroke-dashoffset: ${(props) => props.certificateProgress};
+          `}
       stroke-linecap: round;
-      cx: 125px;
-      cy: 125px;
-      r: 120px;
-      @media (max-width: 1023px) {
-        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'}
-          ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'}
-          ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
+        cx: 125px;
+        cy: 125px;
+        r: 120px;
+        @media (max-width: 1023px) {
+          /*
+          stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'}
+            ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'}
+            ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
+          */
+        }
       }
-    }
-    .progress-background {
-      fill: none;
-      stroke: #3f1168;
-      stroke-width: 18px;
-      stroke-dasharray: 755;
-      stroke-dashoffset: 0;
-      cx: 125px;
-      cy: 125px;
-      r: 120px;
+      .progress-background {
+        fill: none;
+        stroke: #3f1168;
+        stroke-width: 18px;
+        stroke-dasharray: 755;
+        stroke-dashoffset: 0;
+        cx: 125px;
+        cy: 125px;
+        r: 120px;
+      }
     }
   }
 `;

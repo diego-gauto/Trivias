@@ -236,9 +236,9 @@ const Comments = () => {
 
   useEffect(() => {
     getUserData2();
-    getCountOfComments();
     getCoursesForAdmin();
     getAdminUserIds();
+    getCountOfComments();
   }, []);
 
   useEffect(() => {
@@ -257,20 +257,7 @@ const Comments = () => {
   const changePage = (page: number) => {
     setOffset(page * 50);
   };
-  /*
-    const getUserData = async () => {
-      try {
-        if (localStorage.getItem("email")) {
-          const user = await getUserApi(localStorage.getItem("email"));
-          setUser(user);
-        } else {
-          throw new Error(`No existe un email con el cual buscar la información del usuario en localStorage`);
-        }
-      } catch (error) {
-        throw error;
-      }
-    }
-  */
+
   const getCountOfComments = async () => {
     try {
       const countQuery = generateCountAllComments(
@@ -281,78 +268,10 @@ const Comments = () => {
       // const countQuery = generateCountAllComments(selectedCourseId, [10, 11, 12], false);
       const countResponse = await getGenericQueryResponse(countQuery);
 
+      console.log({ a: countResponse.data });
+
       const count = countResponse.data.data[0]['count'] as number;
       setCount(count);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const retrievCommentsNew = async () => {
-    try {
-      await getCountOfComments();
-      const courseId = selectedCourseId === -1 ? undefined : selectedCourseId;
-      const queryMainComments = generateCommentsByCourseIdQuery(
-        courseId,
-        offset,
-      );
-      const response = await getGenericQueryResponse(queryMainComments);
-
-      interface TempComment {
-        id: number;
-        comment: string;
-        created_at: string;
-        user_id: number;
-        lessons_id: number;
-        course_id: number;
-        course_title: string;
-        lesson_title: string;
-        lesson_number: number;
-        season_number: number;
-        season_title: string;
-      }
-
-      interface TempAnswer {
-        id: number;
-        comment: string;
-        created_at: string;
-        comments_id: number;
-        user_id: number;
-        course_id: number;
-      }
-
-      const comments = response.data.data as TempComment[];
-
-      let finalCommentsResult: Comment[] = [];
-      finalCommentsResult = await Promise.all(
-        comments.map(async (comment, indexComment) => {
-          const queryAnswers = generateAnswersByCommentIdQuery(comment.id);
-          const responseAnswer = await getGenericQueryResponse(queryAnswers);
-          const answers = responseAnswer.data.data as TempAnswer[];
-
-          const finalAnswers = await Promise.all(
-            answers.map(async (answer, indexAnswer) => {
-              const queryAnswersOfAnswer =
-                generateAnswersOfAnswersByAnswerIdQuery(answer.id);
-              const answersOfAnswerResponse =
-                await getGenericQueryResponse(queryAnswersOfAnswer);
-              const answersOfAnswer = answersOfAnswerResponse.data
-                .data as CommentOfAnswer[];
-              return {
-                ...answer,
-                comments: answersOfAnswer,
-              };
-            }),
-          );
-          return {
-            ...comment,
-            formatDate: formatDate(comment.created_at),
-            answers: finalAnswers,
-          };
-        }),
-      );
-
-      setComments(finalCommentsResult);
     } catch (error) {
       console.error(error);
     }

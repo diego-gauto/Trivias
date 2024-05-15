@@ -713,12 +713,11 @@ const NextReward = (props: Props) => {
                 </button>
               )}
             {!loader &&
-              ((user.level > 0 && user.plan_name === 'Gonvar Plus') ||
-                (conektaUsers.filter(
-                  (x: any) =>
-                    x.email === user.email && user.final_date === 1694040000,
-                ).length > 0 &&
-                  today < user.final_date)) && (
+              (user.final_date > today ||
+                ([1, 4, 7].includes(user.level)
+                  && user.method === 'conekta'
+                  && user.final_date > today - 10 * 24 * 60 * 60))
+              && (
                 <button
                   onClick={() => {
                     setPop(true);
