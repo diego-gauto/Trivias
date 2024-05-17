@@ -130,7 +130,7 @@ export const ThirdBox = styled.div`
   font-weight: 500;
   font-size: large;
   line-height: 90%;
-  max-heigth: 100%;
+  max-height: 100%;
   .dialog {
     padding: 15%;
     max-width: 65%;
@@ -1212,7 +1212,71 @@ export const PictureContain = styled.div<{
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
-  @media (max-width: 1023px) {
+  .circle-level {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 250px;
+    height: 250px;
+    svg {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      stroke-dasharray: 755;
+      z-index: 1;
+      transform: rotate(-90deg);
+      border-radius: 50%;
+    }
+    .progress-circle {
+      fill: none;
+
+      stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'};
+      ${(props) => props.reward == 1 && 'url(#gradientTime)'};
+      ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
+
+      stroke-width: 20px;
+      stroke-dasharray: 755;
+      ${(props) =>
+        props.reward == 0 &&
+        css<{ progress: number }>`
+          stroke-dashoffset: ${(props) => props.progress};
+        `}
+      ${(props) =>
+        props.reward == 1 &&
+        css<{ timeProgress: number }>`
+          stroke-dashoffset: ${(props) => props.timeProgress};
+        `}
+        ${(props) =>
+        props.reward == 2 &&
+        css<{ certificateProgress: number }>`
+          stroke-dashoffset: ${(props) => props.certificateProgress};
+        `}
+      stroke-linecap: round;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+      @media (max-width: 1023px) {
+        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'};
+        ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'};
+        ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
+      }
+    }
+    .progress-background {
+      fill: none;
+      stroke: #3f1168;
+      stroke-width: 18px;
+      stroke-dasharray: 755;
+      stroke-dashoffset: 0;
+      cx: 125px;
+      cy: 125px;
+      r: 120px;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
     position: relative;
     top: 0;
     left: 0;
@@ -1279,11 +1343,11 @@ export const PictureContain = styled.div<{
       }
       .progress-circle {
         fill: none;
-        /*
-        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'}
-          ${(props) => props.reward == 1 && 'url(#gradientTime)'}
-          ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
-        */
+
+        stroke: ${(props) => props.reward == 0 && 'url(#gradientLevel)'};
+        ${(props) => props.reward == 1 && 'url(#gradientTime)'};
+        ${(props) => props.reward == 2 && 'url(#gradientCertificate)'};
+
         stroke-width: 20px;
         stroke-dasharray: 755;
         ${(props) =>
@@ -1306,11 +1370,9 @@ export const PictureContain = styled.div<{
         cy: 125px;
         r: 120px;
         @media (max-width: 1023px) {
-          /*
-          stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'}
-            ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'}
-            ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
-          */
+          stroke: ${(props) => props.reward == 0 && 'url(#gradientLevelResp)'};
+          ${(props) => props.reward == 1 && 'url(#gradientTimeResp)'};
+          ${(props) => props.reward == 2 && 'url(#gradientCertificateResp)'};
         }
       }
       .progress-background {
@@ -2012,6 +2074,7 @@ export const SubscriptionContainer = styled.div`
       background: linear-gradient(to right, #942ced, #f9901b, #942ced);
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
+      background-clip: text;
       width: fit-content;
     }
     .second-text {

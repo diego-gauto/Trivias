@@ -7,15 +7,17 @@ import ModuleTabs from './Tabs/Tabs';
 import HomeWork from './Homework/Homework';
 import Comments from './Comment/Comments';
 import Help from './Help/Help';
+import ActivityModal from '../../ActivityModal/ActivityModal';
 
 interface IModules {
   lesson: any;
   course: any;
-  position: number;
-  setPosition: (position: number) => void;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Modules = (props: IModules) => {
-  const { lesson, course, position, setPosition } = props;
+  const { lesson, course, show, setShow } = props;
+  const [position, setPosition] = useState<number>(1);
   const { admin }: any = router.query;
   // const [position, setPosition] = useState(1)
   const changePosition = (value: number) => {
@@ -48,6 +50,14 @@ const Modules = (props: IModules) => {
       ) : (
         <About lesson={lesson} course={course} />
       )}
+      <ActivityModal
+        show={show}
+        setShow={() => {
+          setShow(false);
+        }}
+        lesson={lesson}
+        changeValue={setPosition}
+      />
     </MainContainer>
   );
 };
