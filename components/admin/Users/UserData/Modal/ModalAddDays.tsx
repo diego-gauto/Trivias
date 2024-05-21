@@ -44,9 +44,10 @@ interface Props {
   user: IUserWithMembership;
   show: boolean;
   setShow: (value: boolean) => void;
+  adminUserId: number;
 }
 
-const ModalAddDays = ({ show, setShow, user }: Props) => {
+const ModalAddDays = ({ show, setShow, user, adminUserId }: Props) => {
   const handleClose = () => setShow(false);
   const [days, setDays] = useState(0);
   const today = new Date().getTime() / 1000;
@@ -65,7 +66,11 @@ const ModalAddDays = ({ show, setShow, user }: Props) => {
       tempFinalDate = today + days * 86400;
       user.final_date = tempFinalDate;
     }
-    updateMembershipDaysApi({ final_date: user.final_date, id: user.id }).then(
+    updateMembershipDaysApi({
+      final_date: user.final_date,
+      id: user.id,
+      admin_update_id: adminUserId
+    }).then(
       (res: any) => {
         alert(
           `Se ${days === 1 ? 'agregó' : 'agregaron'}: ${days} ${days === 1 ? 'día' : 'días'} del usuario ${user.name}`,
@@ -84,7 +89,11 @@ const ModalAddDays = ({ show, setShow, user }: Props) => {
     tempFinalDate = user.final_date - days * 86400;
     user.final_date = tempFinalDate;
 
-    updateMembershipDaysApi({ final_date: user.final_date, id: user.id }).then(
+    updateMembershipDaysApi({
+      final_date: user.final_date,
+      id: user.id,
+      admin_update_id: adminUserId
+    }).then(
       (res: any) => {
         alert(
           `Se ${days === 1 ? 'eliminó' : 'eliminaron'}: ${days} ${days === 1 ? 'día' : 'días'} del usuario ${user.name}`,

@@ -24,7 +24,6 @@ import ErrorModal from '../../../Error/ErrorModal';
 import { AdminLoader } from '../../SideBar.styled';
 import { Modal } from 'react-bootstrap';
 import { getLessonFromUserApi } from '../../../api/admin';
-import { user } from 'firebase-functions/v1/auth';
 import { UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface CardData {
@@ -35,6 +34,7 @@ interface CardData {
   openUserCardData: any;
   canEdit: boolean;
   userLevel: UserLevelValue;
+  adminUserId: number;
 }
 
 export interface IUserWithMembership {
@@ -68,6 +68,7 @@ const UserCardData = (props: CardData) => {
     isVisible,
     canEdit,
     userLevel,
+    adminUserId
   } = props;
   const [show, setShow] = useState(false);
   const [showAddDays, setShowAddDays] = useState(false);
@@ -415,11 +416,17 @@ const UserCardData = (props: CardData) => {
           handleCourse={handleCourse}
           openUserCardData={openUserCardData}
         />
-        <ModalAddDays show={showAddDays} setShow={setShowAddDays} user={user} />
+        <ModalAddDays
+          show={showAddDays}
+          setShow={setShowAddDays}
+          user={user}
+          adminUserId={adminUserId}
+        />
         <ModalAddSubscriptionPlan
           show={showAddSubscriptionPlan}
           setShow={setShowAddSubscriptionPlan}
           user={user}
+          adminUserId={adminUserId}
         />
         <ModalRemoveSubscription
           show={showRemoveSuscription}

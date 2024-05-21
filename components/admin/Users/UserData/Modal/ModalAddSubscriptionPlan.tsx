@@ -1,6 +1,6 @@
 import { CSSProperties, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { updateMembershipPlanApi } from '../../../../api/users';
+import { IUpdateMembershipPlanApi, updateMembershipPlanApi } from '../../../../api/users';
 
 import { CloseIcon } from '../UsersCardData.styled';
 import {
@@ -37,11 +37,12 @@ interface Props {
   user: IUserWithMembership;
   show: boolean;
   setShow: (value: boolean) => void;
+  adminUserId: number;
 }
 
 type SuscriptionOption = 'Month' | 'Cuatri' | 'Annual' | 'None';
 
-const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
+const ModalAddSubscriptionPlan = ({ show, setShow, user, adminUserId }: Props) => {
   const [suscription, setSuscription] = useState<SuscriptionOption>('None');
   const [price, setPrice] = useState<number>(0);
   const handleClose = () => setShow(false);
@@ -50,41 +51,22 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user }: Props) => {
     if (suscription === 'None') {
       return;
     }
-    let body = {};
-    if (suscription === 'Month') {
-      //mensual
-      body = {
+
+    const generateBody = (suscription: SuscriptionOption, price: number): IUpdateMembershipPlanApi => {
+      const level = suscription === 'Month' ? 6 : (suscription === 'Annual' ? 5 : 8);
+      const days = suscription === 'Month' ? 30 : (suscription === 'Annual' ? 365 : 120);
+      return {
         user_final_date: user.final_date,
         start_date: user.start_date,
-        level: 6,
+        level,
         id: user.id,
-        days: 30,
-        type: `${price}00`,
-      };
+        days,
+        type: price * 100,
+        admin_update_id: adminUserId
+      }
     }
-    if (suscription === 'Annual') {
-      //anual
-      body = {
-        user_final_date: user.final_date,
-        start_date: user.start_date,
-        level: 5,
-        id: user.id,
-        days: 365,
-        type: `${price}00`,
-      };
-    }
-    if (suscription === 'Cuatri') {
-      //cuatrimestral
-      body = {
-        user_final_date: user.final_date,
-        start_date: user.start_date,
-        level: 8,
-        id: user.id,
-        days: 120,
-        type: `${price}00`,
-      };
-    }
-    console.log(body);
+
+    let body = generateBody(suscription, price);
     const suscriptionTypeString =
       suscription === 'Month'
         ? 'Mensual'

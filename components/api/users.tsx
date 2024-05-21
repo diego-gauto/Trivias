@@ -76,7 +76,12 @@ export const updateScorePastUser = async (progress: any) => {
       return error;
     });
 };
-export const updateMembershipDaysApi = async (user: any) => {
+interface IUpdateMembershipDaysApi {
+  final_date: number,
+  admin_update_id: number,
+  id: number
+}
+export const updateMembershipDaysApi = async (user: IUpdateMembershipDaysApi) => {
   return axios
     .put('https://gonvar.inowu.dev/' + 'admin/updateMembership', user)
     .then((res) => {
@@ -87,7 +92,17 @@ export const updateMembershipDaysApi = async (user: any) => {
       return error;
     });
 };
-export const updateMembershipPlanApi = async (body: any) => {
+
+export interface IUpdateMembershipPlanApi {
+  id: number,
+  start_date: number,
+  user_final_date: number,
+  level: number,
+  type: number,
+  admin_update_id: number,
+  days: number
+}
+export const updateMembershipPlanApi = async (body: IUpdateMembershipPlanApi) => {
   return axios
     .put('https://gonvar.inowu.dev/' + 'admin/updateMembershipPlan', body)
     .then((res) => {
@@ -185,7 +200,7 @@ export const cancelPaypal = async (user: any) => {
           return axios
             .post(
               'https://gonvar.inowu.dev/' +
-                'subscriptions/paypal-canceled-subscription',
+              'subscriptions/paypal-canceled-subscription',
               user,
             )
             .then((res) => {
