@@ -113,6 +113,7 @@ const UsersList = () => {
     canEdit: false,
     canReport: false,
   });
+  const [adminUserId, setAdminUserId] = useState<number>(-1);
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
   const [filters, setFilters] = useState<any>([
     'todos',
@@ -145,6 +146,7 @@ const UsersList = () => {
       const userIdQuery = generateUserIdQuery(email);
       const userIdResponse = await getGenericQueryResponse(userIdQuery);
       const userId = userIdResponse.data.data[0]['id'];
+      setAdminUserId(userId);
       // Roles request
       const userRolesQuery = generateUserRoleAccessQuery(userId);
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
@@ -479,18 +481,18 @@ const UsersList = () => {
               </div>
               {((userLevel === 'admin' && canReport) ||
                 userLevel === 'superAdmin') && (
-                <CsvDownloader
-                  filename='usersData'
-                  extension='.csv'
-                  separator=','
-                  wrapColumnChar=''
-                  datas={Gonvar}
-                >
-                  <DownloadUserData>
-                    <p>Descargar lista de usuarios</p>
-                  </DownloadUserData>
-                </CsvDownloader>
-              )}
+                  <CsvDownloader
+                    filename='usersData'
+                    extension='.csv'
+                    separator=','
+                    wrapColumnChar=''
+                    datas={Gonvar}
+                  >
+                    <DownloadUserData>
+                      <p>Descargar lista de usuarios</p>
+                    </DownloadUserData>
+                  </CsvDownloader>
+                )}
             </FilterContain>
           </TitleContain>
           <div className='pages'>
@@ -602,6 +604,7 @@ const UsersList = () => {
             openUserCardData={openUserCardData}
             canEdit={canEdit}
             userLevel={userLevel}
+            adminUserId={adminUserId}
           />
         )}
       </UserContain>
