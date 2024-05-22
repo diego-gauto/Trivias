@@ -405,7 +405,7 @@ const UserCardData = (props: CardData) => {
               </Label>
             </Info>
             {
-              (user.method === 'admin') &&
+              (user.admin_update_id !== null || user.admin_update_id !== undefined) &&
               <Info>
                 Admin responsable
                 <Label>
