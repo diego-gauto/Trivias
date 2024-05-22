@@ -5,7 +5,7 @@ import InputMask from "react-input-mask";
 
 import router from "next/router";
 
-import { PLAN_PATH, PREVIEW_PATH } from "../../constants/paths";
+import { LOGIN_PATH, PLAN_PATH, PREVIEW_PATH } from "../../constants/paths";
 import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
 import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
@@ -159,7 +159,20 @@ export const RetryPayment = () => {
     return 7;
   };
 
+  const isUserSesionActive = () => {
+    const email = localStorage.getItem('email');
+    if (email === null) {
+      return false;
+    }
+    return true;
+  }
+
   useEffect(() => {
+    if (!isUserSesionActive()) {
+      localStorage.setItem('retryPayment', 'true');
+      router.push({ pathname: LOGIN_PATH });
+    }
+
     if (userDataAuth.user) {
       getPaymentMethods();
     } else {
