@@ -23,7 +23,7 @@ import {
 import ErrorModal from '../../../Error/ErrorModal';
 import { AdminLoader } from '../../SideBar.styled';
 import { Modal } from 'react-bootstrap';
-import { getLessonFromUserApi } from '../../../api/admin';
+import { getGenericQueryResponse, getLessonFromUserApi } from '../../../api/admin';
 import { UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 interface CardData {
@@ -57,6 +57,11 @@ export interface IUserWithMembership {
   spent: number;
   method: string;
   user_courses: any[];
+  admin_update_id?: number;
+}
+
+const getAdminUserInfoQuery = (userId: number) => {
+  return `select concat(name, ' ', last_name) as name from users where id = ${userId}`;
 }
 
 const UserCardData = (props: CardData) => {
@@ -77,6 +82,7 @@ const UserCardData = (props: CardData) => {
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState<boolean>(false);
   const [user, setUser] = useState<IUserWithMembership>(currentUser);
+  const [updateAdminName, setUpdateAdminName] = useState<string | undefined>(undefined);
   const GonvarImg = '/images/purchase/logo.png';
   let today = new Date().getTime() / 1000;
   const handleCourse = () => {
@@ -109,9 +115,21 @@ const UserCardData = (props: CardData) => {
     setUser(user);
     setLoader(true);
   };
+  const getAdminUpdateApi = async () => {
+    try {
+      const query = getAdminUserInfoQuery(adminUserId);
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data;
+      const result = data.length > 0 ? data[0]['name'] : undefined;
+      setUpdateAdminName(result || 'Desconocido');
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     if (currentUser) {
       getData();
+      getAdminUpdateApi();
     }
   }, [currentUser]);
 
@@ -232,7 +250,7 @@ const UserCardData = (props: CardData) => {
       return text;
     }
 
-    return `Caso especial, nivel ${level}`;
+    return `Caso especial, nivel ${level} `;
   };
 
   const convertToFormalDate = (seconds: number) => {
@@ -256,10 +274,8 @@ const UserCardData = (props: CardData) => {
       'Diciembre',
     ];
 
-    return `${day} de ${monthsOfYear[month]} de ${year}`;
+    return `${day} de ${monthsOfYear[month]} de ${year} `;
   };
-
-  console.log(user);
 
   const getSubscriptionJSXElementByUserValues = (): JSX.Element[] => {
     if (!haveASubscription(user.level, user.final_date)) {
@@ -335,7 +351,7 @@ const UserCardData = (props: CardData) => {
     console.log({ final_date: new Date(finalDate * 1000), level: userLevel });
 
     if (userLevel === 0 && finalDate > today) {
-      return `Sin suscripción, con acceso hasta ${`${new Date(finalDate * 1000).toJSON().slice(0, 10)}`}`;
+      return `Sin suscripción, con acceso hasta ${`${new Date(finalDate * 1000).toJSON().slice(0, 10)}`} `;
     }
 
     return `Sin suscripción`;
@@ -388,6 +404,15 @@ const UserCardData = (props: CardData) => {
                 )}
               </Label>
             </Info>
+            {
+              (user.method === 'admin') &&
+              <Info>
+                Admin responsable
+                <Label>
+                  {updateAdminName}
+                </Label>
+              </Info>
+            }
             {getSubscriptionJSXElementByUserValues()}
             {haveASubscription(user.level, user.final_date) && (
               <img src={GonvarImg} className='img-gonvar' />
