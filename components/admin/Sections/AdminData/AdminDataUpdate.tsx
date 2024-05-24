@@ -31,6 +31,7 @@ type Props = {
   setIsVisible: (open: boolean) => void;
   handleClick: any;
   courses: { id: number; title: string; published: boolean }[];
+  forms: { id: number; name: string; }[];
 };
 
 const AdminDataUpdate = ({
@@ -38,6 +39,7 @@ const AdminDataUpdate = ({
   setIsVisible,
   handleClick,
   courses,
+  forms
 }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -169,6 +171,7 @@ const AdminDataUpdate = ({
             admin={admin}
             refresh={refresh}
             courses={courses}
+            forms={forms}
           />
         )}
       </>

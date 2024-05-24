@@ -37,6 +37,7 @@ type RoleProps = {
   show: boolean;
   refresh: any;
   courses: { id: number; title: string; published: boolean }[];
+  forms: { id: number; name: string; }[];
 };
 
 type TaskValue =
@@ -55,7 +56,7 @@ interface AdminRole {
   courses?: string[];
 }
 
-const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
+const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) => {
   const handleClose = () => setShow(false);
   const [roles, setRoles] = useState<AdminRole[]>([
     {
@@ -168,8 +169,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
   const [loading, setLoading] = useState(true);
   const [homeworksCourseIds, setHomeworksCourseIds] = useState<number[]>([]);
   const [commentsCourseIds, setCommentsCourseIds] = useState<number[]>([]);
+  const [formIds, setFormIds] = useState<number[]>([]);
   const [popUpComments, setPopUpComments] = useState<boolean>(false);
   const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
+  const [popUpForms, setPopUpForms] = useState<boolean>(false);
 
   useEffect(() => {
     const temp: AdminRole[] = [];
@@ -267,6 +270,20 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
     }
   };
 
+  const handleMultipleFormsIds = (formId: number) => {
+    let temp = [...formIds];
+    if (formIds.includes(formId)) {
+      const index = formIds.indexOf(formId);
+      if (index > -1) {
+        temp.splice(index, 1);
+        setFormIds(temp);
+      }
+    } else {
+      temp.push(formId);
+      setFormIds(temp);
+    }
+  };
+
   const updateAdminType = async () => {
     // debugger;
     admin.adminTypes.forEach((element) => {
@@ -298,6 +315,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
         element.courses = commentsCourseIds
           .filter((id) => !Number.isNaN(id))
           .join(', ');
+      } else if (element.role === 'forms') {
+        element.forms = formIds
+          .filter((id) => !Number.isNaN(id))
+          .join(', ');
       }
     });
 
@@ -318,6 +339,12 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
       alert('Error al intentar actualizar los permisos');
     }
   };
+
+  const selectAllFormChecks = () => {
+    const result = forms.map(({ id }) => id);
+    setFormIds(result);
+    console.log({ result });
+  }
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -369,6 +396,46 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
               </div>
             );
           })}
+        </ModalCustom>
+      </Modal>
+      <Modal
+        show={popUpForms}
+        onHide={() => {
+          setPopUpForms(false);
+        }}
+        centered
+      >
+        <ModalCustom>
+          <h2>Formularios</h2>
+          {forms.map((form, index: number) => {
+            return (
+              <div className='flex' key={'form' + index}>
+                <p>{form.name}</p>
+                <input
+                  defaultChecked={formIds.includes(form.id)}
+                  type='checkbox'
+                  onChange={(e) => {
+                    handleMultipleFormsIds(form.id);
+                  }}
+                />
+              </div>
+            );
+          })}
+          {
+            // Continuar pronto
+            false &&
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '10px',
+                paddingBlock: '10px'
+              }}
+            >
+              <UpdateButton onClick={selectAllFormChecks}>Agregar todos</UpdateButton>
+              <UpdateButton onClick={updateAdminType}>Remover todos</UpdateButton>
+            </div>
+          }
         </ModalCustom>
       </Modal>
       <ModalContain>
@@ -428,6 +495,20 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses }: RoleProps) => {
                             Ver cursos
                           </p>
                         )}
+                      {
+                        forms.length > 0 &&
+                        ['forms'].includes(role.name) &&
+                        (
+                          <p
+                            className='open-courses'
+                            onClick={() => {
+                              setPopUpForms(true);
+                            }}
+                          >
+                            Ver formularios
+                          </p>
+                        )
+                      }
                     </div>
                   );
                 })}

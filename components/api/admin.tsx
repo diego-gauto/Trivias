@@ -44,6 +44,7 @@ export interface AdminType {
   request?: number;
   report?: number;
   download?: number;
+  forms?: string;
 }
 
 export const getAdmins = async () => {
@@ -175,10 +176,10 @@ export const getPartialUsers = async (first: number, second: number) => {
   return axios
     .get(
       'https://gonvar.inowu.dev/' +
-        'admin/partial-users/' +
-        first +
-        '/' +
-        second,
+      'admin/partial-users/' +
+      first +
+      '/' +
+      second,
     )
     .then((res) => {
       return res.data.users;
@@ -232,40 +233,40 @@ export const getAllUsers = async (
   return axios
     .get(
       'https://gonvar.inowu.dev/' +
-        'admin/partial-users-demo/' +
-        limit +
-        '/' +
-        offset +
-        '/' +
-        name +
-        '/' +
-        spent +
-        '/' +
-        level +
-        '/' +
-        method +
-        '/' +
-        state +
-        '/' +
-        country +
-        '/' +
-        date_create_start +
-        '/' +
-        date_create_1 +
-        '/' +
-        date_create_2 +
-        '/' +
-        date_login_start +
-        '/' +
-        last_login_1 +
-        '/' +
-        last_login_2 +
-        '/' +
-        course_id +
-        '/' +
-        course_progress +
-        '/' +
-        membership,
+      'admin/partial-users-demo/' +
+      limit +
+      '/' +
+      offset +
+      '/' +
+      name +
+      '/' +
+      spent +
+      '/' +
+      level +
+      '/' +
+      method +
+      '/' +
+      state +
+      '/' +
+      country +
+      '/' +
+      date_create_start +
+      '/' +
+      date_create_1 +
+      '/' +
+      date_create_2 +
+      '/' +
+      date_login_start +
+      '/' +
+      last_login_1 +
+      '/' +
+      last_login_2 +
+      '/' +
+      course_id +
+      '/' +
+      course_progress +
+      '/' +
+      membership,
     )
     .then((res) => {
       return res.data.users;
@@ -295,36 +296,36 @@ export const userForExcel = async (
   return axios
     .get(
       'https://gonvar.inowu.dev/' +
-        'admin/excel-list/' +
-        name +
-        '/' +
-        spent +
-        '/' +
-        level +
-        '/' +
-        method +
-        '/' +
-        state +
-        '/' +
-        country +
-        '/' +
-        date_create_start +
-        '/' +
-        date_create_1 +
-        '/' +
-        date_create_2 +
-        '/' +
-        date_login_start +
-        '/' +
-        last_login_1 +
-        '/' +
-        last_login_2 +
-        '/' +
-        course_id +
-        '/' +
-        course_progress +
-        '/' +
-        membership,
+      'admin/excel-list/' +
+      name +
+      '/' +
+      spent +
+      '/' +
+      level +
+      '/' +
+      method +
+      '/' +
+      state +
+      '/' +
+      country +
+      '/' +
+      date_create_start +
+      '/' +
+      date_create_1 +
+      '/' +
+      date_create_2 +
+      '/' +
+      date_login_start +
+      '/' +
+      last_login_1 +
+      '/' +
+      last_login_2 +
+      '/' +
+      course_id +
+      '/' +
+      course_progress +
+      '/' +
+      membership,
     )
     .then((res) => {
       return res.data.sendUsers;

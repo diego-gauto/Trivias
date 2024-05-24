@@ -60,6 +60,9 @@ const Sections = () => {
   const [courses, setCourses] = useState<
     { id: number; title: string; published: boolean }[]
   >([]);
+  const [forms, setForms] = useState<
+    { id: number; name: string; }[]
+  >([]);
   const [displayValue, setDisplayValue] = useState<string>('none');
   const [topValue, setTopValue] = useState<string>('-100%');
 
@@ -76,6 +79,19 @@ const Sections = () => {
     }
   };
 
+  const getAllForms = async () => {
+    try {
+      const query = `select id, name from forms;`;
+      const response = await getGenericQueryResponse(query);
+      const formsData = response.data.data.map((form) => {
+        return { ...form };
+      });
+      setForms(formsData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const editRole = async (user: Admin): Promise<void> => {
     // setIsVisible(true);
     setModalVisible(true);
@@ -85,6 +101,7 @@ const Sections = () => {
   useEffect(() => {
     retrieveAdmin();
     getAllCourses();
+    getAllForms();
   }, []);
 
   const formatDate = (value: any) => {
@@ -234,6 +251,7 @@ const Sections = () => {
               setIsVisible={setModalVisible}
               handleClick={handleClick}
               courses={courses}
+              forms={forms}
             />
           )}
         </ModalContain>
