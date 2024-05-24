@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import router from 'next/router';
+import Link from "next/link";
+import router from "next/router";
 
-import SliderCourses from '../../../components/Trivias/sliderCourses/sliderCourses';
-import { PURCHASE_PATH } from '../../../constants/paths';
-import styles from './success.module.css';
+import SliderCourses from "../../../components/Trivias/sliderCourses/sliderCourses";
+import { PURCHASE_PATH } from "../../../constants/paths";
+import styles from "./success.module.css";
 
 const Success = () => {
   const {
@@ -24,7 +24,7 @@ const Success = () => {
     localStorage.setItem('plan', 'true');
     router.push({
       pathname: PURCHASE_PATH,
-      query: { type: 'subscription', frequency: 'anual', v: '1' },
+      query: { type: 'subscription', frequency: 'anual', v: '3' },
     });
   };
 
