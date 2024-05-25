@@ -242,15 +242,6 @@ const NextReward = (props: Props) => {
     const today = new Date().getTime() / 1000;
     const tolerance = 10 * 24 * 60 * 60;
 
-    console.log({
-      user: {
-        userLevel,
-        finalDate: new Date(finalDate * 1000),
-        userRole,
-        method,
-      },
-    });
-
     if (userLevel === 5 && finalDate > today) {
       return (
         <p>

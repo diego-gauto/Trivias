@@ -21,6 +21,8 @@ import {
 } from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { getGenericQueryResponse } from '../../api/admin';
 
+type UserRole = 'admin' | 'superAdmin' | 'user';
+
 interface Form {
   id: number;
   name: string;
@@ -32,6 +34,7 @@ interface UserAccesss {
   canView: boolean;
   canEdit: boolean;
   canCreate: boolean;
+  formIdList: number[];
 }
 
 const SelectorForms = () => {
@@ -42,10 +45,19 @@ const SelectorForms = () => {
     canView: false,
     canCreate: false,
     canEdit: false,
+    formIdList: []
   });
   const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
 
-  const { canCreate, canEdit, canView } = userAccess;
+  const { canCreate, canEdit, canView, formIdList } = userAccess;
+
+  const getFormsByUserRole = (userRole: UserRole, formIdList: number[]) => {
+    if (userRole === 'superAdmin') {
+      return forms;
+    }
+
+    return forms.filter(({ id }) => formIdList.includes(id));
+  }
 
   const getUserData = async () => {
     try {
@@ -61,11 +73,11 @@ const SelectorForms = () => {
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
       const role = userRoles.find((role) => role.role === 'forms');
-      console.log({ role });
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
         canCreate: role?.create === 1,
+        formIdList: role?.forms ? role.forms.split(', ').map(id => parseInt(id)) : []
       });
       // Role level
       const userLevelQuery = generateUserRolesLevelQuery(userId);
@@ -115,15 +127,15 @@ const SelectorForms = () => {
       <div className={buttonContainer}>
         {((canCreate && userLevel === 'admin') ||
           userLevel === 'superAdmin') && (
-          <Link href='/admin/forms/createForm'>
-            <a>
-              <button>Crear Nuevo Formulario</button>
-            </a>
-          </Link>
-        )}
+            <Link href='/admin/forms/createForm'>
+              <a>
+                <button>Crear Nuevo Formulario</button>
+              </a>
+            </Link>
+          )}
       </div>
       <FormList
-        forms={forms}
+        forms={getFormsByUserRole(userLevel, formIdList)}
         canView={canView}
         userLevel={userLevel}
         canEdit={canEdit}

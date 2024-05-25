@@ -54,6 +54,7 @@ interface AdminRole {
   name: string;
   tasks: { active: boolean; task: TaskValue }[];
   courses?: string[];
+  forms?: string[]
 }
 
 const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) => {
@@ -146,6 +147,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         { active: false, task: 'Crear' },
         { active: false, task: 'Editar' },
       ],
+      forms: []
     },
     {
       role: 'Listado de Formularios',
@@ -215,6 +217,9 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
           ?.split(',')
           .map((courseId) => parseInt(courseId));
         setCommentsCourseIds(newValue || []);
+      } else if (element.role === 'forms') {
+        const newValue = element.forms?.split(',').map((formId) => parseInt(formId));
+        setFormIds(newValue || []);
       }
       temp.push(role);
     });

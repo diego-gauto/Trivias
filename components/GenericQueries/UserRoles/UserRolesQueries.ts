@@ -15,7 +15,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_courses
     WHERE user_id = ${userId}
 
@@ -32,7 +33,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms
     FROM admin_coupons
     WHERE user_id = ${userId}
 
@@ -49,7 +51,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms
     FROM admin_blogs
     WHERE user_id = ${userId}
 
@@ -66,7 +69,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       admin_rewards.request AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_rewards
     WHERE user_id = ${userId}
 
@@ -83,7 +87,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       admin_users.report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_users
     WHERE user_id = ${userId}
 
@@ -100,7 +105,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_landing
     WHERE user_id = ${userId}
 
@@ -117,7 +123,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_payments
     WHERE user_id = ${userId}
 
@@ -134,7 +141,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       admin_homeworks.courses AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_homeworks
     WHERE user_id = ${userId}
 
@@ -151,7 +159,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       admin_comments.courses AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_comments
     WHERE user_id = ${userId}
 
@@ -168,7 +177,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      NULL AS forms 
     FROM admin_trivias
     WHERE user_id = ${userId}
 
@@ -185,7 +195,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      admin_trivias_list.download
+      admin_trivias_list.download,
+      NULL AS forms 
     FROM admin_trivias_list
     WHERE user_id = ${userId}
 
@@ -202,7 +213,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      NULL AS download
+      NULL AS download,
+      admin_forms.forms 
     FROM admin_forms
     WHERE user_id = ${userId}
 
@@ -219,7 +231,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      admin_forms_list.download
+      admin_forms_list.download,
+      NULL AS forms 
     FROM admin_forms_list
     WHERE user_id = ${userId}
 
@@ -236,7 +249,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      admin_tickets_list.download
+      admin_tickets_list.download,
+      NULL AS forms 
     FROM admin_tickets_list
     WHERE user_id = ${userId}
 
@@ -253,7 +267,8 @@ export const generateUserRoleAccessQuery = (userId: number) => {
       NULL AS courses,
       NULL AS request,
       NULL AS report,
-      admin_memberships_list.download
+      admin_memberships_list.download,
+      NULL AS forms 
     FROM admin_memberships_list
     WHERE user_id = ${userId}`;
   return query;

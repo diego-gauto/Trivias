@@ -28,6 +28,7 @@ export interface Role {
   request?: number;
   report?: number;
   download?: number;
+  forms?: string | null;
 }
 
 export type UserLevelValue = 'admin' | 'superAdmin' | 'user';
