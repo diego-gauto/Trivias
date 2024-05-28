@@ -149,6 +149,7 @@ const PaymentMethod = ({ data, pm, handleClick, newCard, addPayment }: any) => {
           default: boolean,
         }),
       );
+      console.log({ extractedProperties });
       setPaymentMethods(extractedProperties);
       setDeleteLoad(false);
     });
