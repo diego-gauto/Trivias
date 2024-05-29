@@ -208,7 +208,7 @@ const Purchase = () => {
       if (searchParams.get('type') === 'course') {
         localStorage.setItem('course', `${idC}`);
       }
-      window.location.href = '/auth/Register';
+      window.location.href = '/auth/register';
       setLoggedIn(false);
     }
   }, []);

@@ -67,7 +67,7 @@ export const FirstSection = (props: IFirstSectionProps) => {
               <div className='grey-field'>
                 <PurpleButton
                   text={data?.botonPrimario}
-                  onClick={() => router.push('/auth/Register')}
+                  onClick={() => router.push('/auth/register')}
                 />
               </div>
             </Col>

@@ -117,7 +117,7 @@ const UserCardData = (props: CardData) => {
   };
   const getAdminUpdateApi = async () => {
     try {
-      const query = getAdminUserInfoQuery(adminUserId);
+      const query = getAdminUserInfoQuery(user.admin_update_id || 0);
       const response = await getGenericQueryResponse(query);
       const data = response.data.data;
       const result = data.length > 0 ? data[0]['name'] : undefined;
@@ -405,7 +405,8 @@ const UserCardData = (props: CardData) => {
               </Label>
             </Info>
             {
-              (user.admin_update_id !== null || user.admin_update_id !== undefined) &&
+              ((user.admin_update_id !== null || user.admin_update_id !== undefined) &&
+                (user.method === 'admin')) &&
               <Info>
                 Admin responsable
                 <Label>
