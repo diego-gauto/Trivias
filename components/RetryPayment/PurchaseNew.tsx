@@ -1140,6 +1140,14 @@ export const PurchaseNew = () => {
               <>
                 <div className='card-container'>
                   <div className='left-side'>
+                    <div>
+                      <img
+                        style={{
+                          width: '75%'
+                        }}
+                        src="/images/purchase/tarjetas_gonvar_purchasenew.png"
+                        alt="card alternatives" />
+                    </div>
                     <div className='input-container'>
                       <label>Número de la tarjeta</label>
                       <InputMask
