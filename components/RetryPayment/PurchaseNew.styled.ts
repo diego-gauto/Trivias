@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 export const PurchaseNewContainer = styled.div`
+  /*
+  Buen comentario
+  */
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
   padding-block: 30px;
   background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
@@ -64,16 +69,22 @@ export const PurchaseNewContainer = styled.div`
     background-color: #9a1aff;
   }
   button:disabled.type3 {
-    background-color: red;
+    background-color: rgb(148 44 237 / 80%);
   }
   button:disabled {
-    background-color: red;
+    background-color: rgb(148 44 237 / 80%);
   }
   button.oxxo {
     background-color: #d8363e;
   }
   button.spei {
     background-color: #36d86d;
+  }
+  .paypal-disable {
+    background-image: url('/images/purchase/paypal-white-text.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 75px 25px;
   }
   .input-container {
     display: flex;
@@ -276,6 +287,265 @@ export const PurchaseNewContainer = styled.div`
       }
     }
   }
+  .security-info {
+    width: calc(100% - 45px);
+    font-size: 14px;
+    text-align: start;
+    .top {
+      display: flex;
+      align-items: flex-end;
+      svg {
+        width: 30px;
+        height: 30px;
+        color: #3f1168;
+      }
+      p {
+        font-size: 20px;
+        font-weight: bold;
+        span {
+          color: #942ced;
+        }
+      }
+    }
+  }
+  .steps {
+    margin: 0 20px 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .left-info {
+      position: absolute;
+      bottom: -70px;
+      left: -86px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      @media (max-width: 520px) {
+        left: -43px;
+      }
+      p {
+        color: #a18cc4;
+        font-size: 28px;
+        font-weight: bold;
+        @media (max-width: 520px) {
+          font-size: 14px;
+        }
+      }
+      .rect {
+        height: 50px;
+        background: #a18cc4;
+        width: 2px;
+      }
+      .lower {
+        font-size: 18px;
+        font-weight: 500;
+        @media (max-width: 520px) {
+          font-size: 14px;
+        }
+      }
+    }
+    .right-info {
+      position: absolute;
+      bottom: -70px;
+      right: -70px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      @media (max-width: 520px) {
+        right: -53px;
+      }
+      p {
+        color: #942ced;
+        font-size: 28px;
+        font-weight: bold;
+        @media (max-width: 520px) {
+          font-size: 14px;
+        }
+      }
+      .rect {
+        height: 50px;
+        background: #942ced;
+        width: 2px;
+      }
+      .lower {
+        color: #3f1168;
+        font-size: 18px;
+        font-weight: 500;
+        @media (max-width: 520px) {
+          font-size: 14px;
+        }
+      }
+    }
+    .circle {
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: #9900ed;
+      border-radius: 50%;
+    }
+    .circle-no-fill {
+      position: relative;
+      z-index: 0;
+      left: -1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid #9900ed;
+      border-radius: 50%;
+    }
+    .line {
+      z-index: 1;
+      width: 250px;
+      border: 1.5px solid #9900ed;
+      border-left: none;
+      border-right: 1px solid #ede7f2;
+      height: 5px;
+      @media (max-width: 520px) {
+        width: 170px;
+      }
+    }
+  }
+  .right-section {
+    .box {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: rgb(148 44 237 / 30%);
+      border-radius: 20px;
+      padding: 40px 20px;
+      .title {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: #3f1168;
+        span {
+          color: #942ced;
+        }
+        sub {
+          font-style: italic;
+          font-size: 14px;
+          color: #6611c2;
+          font-weight: 400;
+        }
+      }
+      .subtitle {
+        color: #6611c2;
+        font-size: 20px;
+        font-weight: 500;
+        font: small-caption;
+        letter-spacing: 2px;
+      }
+      .info {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 10px;
+        p {
+          color: #8161aa;
+          font-size: 14px;
+          span {
+            color: #8161aa;
+            font-weight: bold;
+          }
+        }
+        img {
+          height: 70%;
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+
+      .coupon-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: fit-content;
+        margin-left: auto;
+        img {
+          margin: 0;
+        }
+        a {
+          color: #942ced;
+          font-size: 17px;
+          font-weight: bold;
+        }
+        p {
+          text-align: end;
+        }
+        .coupon {
+          position: relative;
+          margin-block: 20px;
+          input {
+            color: #6611c2;
+            padding: 5px 10px;
+            font-size: 15px;
+            outline: none;
+            border: 1.5px solid #942ced;
+            border-radius: 20px;
+            &::placeholder {
+              font-size: 13px;
+              color: #942ced;
+            }
+          }
+          button {
+            width: 48px;
+            position: absolute;
+            height: 100%;
+            background: #942ced;
+            right: 0;
+            border: none;
+            border-radius: 20px;
+          }
+        }
+        .line {
+          border: 1.5px solid #3f1168;
+          width: 100%;
+        }
+      }
+      .price-container {
+        margin-top: auto;
+        .total {
+          text-align: end;
+          font-size: 28px;
+          font-weight: bold;
+          color: #e55c00;
+          span {
+            font-weight: 400;
+            color: #e55c00;
+          }
+        }
+      }
+      .bg {
+        background: #ffdd67;
+        width: 25%;
+        border-top-right-radius: 100%;
+        height: 150px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: 20px;
+      }
+      .image {
+        position: absolute;
+        bottom: 0;
+        left: -71px;
+        max-height: 350px;
+        @media (max-width: 1400px) {
+          max-height: 300px;
+        }
+        @media (max-width: 1280px) {
+          max-height: 270px;
+        }
+      }
+    }
+  }
   @media (max-width: 1300px) {
     button {
       padding-block: 10px;
@@ -340,7 +610,9 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   @media (max-width: 750px) {
+    padding: 10px;
     .complete-contain {
+      margin: 5px;
       width: 100%;
       flex-direction: column;
       background-color: white;
@@ -383,6 +655,7 @@ export const PurchaseNewContainer = styled.div`
       width: 320px;
     }
     .complete-contain {
+      margin: 5px;
       .main-container {
         .add-payment-container {
           gap: 15px;

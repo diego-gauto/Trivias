@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { FaChevronDown } from 'react-icons/fa';
+import { FaArrowRight, FaCheck, FaChevronDown } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
 
 import router from 'next/router';
@@ -41,7 +41,8 @@ import { createNotification } from '../api/notifications';
 import { IUserInfoResult } from '../../interfaces/IUser';
 import { retrieveCoupons } from '../api/admin';
 import ErrorModal from '../Error/ErrorModal';
-
+import { AiFillLock } from 'react-icons/ai';
+import { returnPriceTag } from '../../utils/functions';
 
 declare let window: any;
 
@@ -164,9 +165,7 @@ export const PurchaseNew = () => {
   const [payment, setPayment] = useState(false);
   const [defaultCard, setDefaultCard] = useState<any>({});
   const [cards, setCards] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [show, setShow] = useState<any>(false);
+  const [code, setCode] = useState('');
   const [terms, setTerms] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState<any>('');
@@ -265,7 +264,6 @@ export const PurchaseNew = () => {
         }
         setUserData(res);
         setCards(extractedProperties);
-        setIsLoading(false);
       });
     } else {
       const searchParams = new URLSearchParams(window.location.search);
@@ -295,7 +293,7 @@ export const PurchaseNew = () => {
       if (searchParams.get('type') === 'course') {
         localStorage.setItem('course', `${idC}`);
       }
-      window.location.href = '/auth/Register';
+      window.location.href = '/auth/register';
     }
   }, []);
 
@@ -935,7 +933,6 @@ export const PurchaseNew = () => {
         setErrorMsg(
           'Por favor de aceptar los terminos y condiciones para poder continuar!',
         );
-        setShow(true);
         setLoader(false);
         return;
       }
@@ -1007,6 +1004,39 @@ export const PurchaseNew = () => {
       />
       <div className='complete-contain'>
         <div className='main-container'>
+          {
+            true &&
+            <div className='steps'>
+              <div className='circle'>
+                <FaCheck style={{ color: 'white' }}></FaCheck>
+              </div>
+              <div
+                className='line'
+                style={{
+                  backgroundColor: 'none',
+                  border: '',
+                }}
+              ></div>
+              <div className='circle-no-fill'></div>
+              <div className='left-info'>
+                <p>Paso 1</p>
+                <div className='rect'></div>
+                <p className='lower'>
+                  Configuración <br />
+                  de la cuenta
+                </p>
+              </div>
+              <div className='right-info'>
+                <p>Paso 2</p>
+                <div className='rect'></div>
+                <p className='lower'>
+                  Proceso <br />
+                  de pago
+                </p>
+              </div>
+            </div>
+          }
+          {/*
           <h2>Suscripción Gonvar+ {getSubscriptionTypeTitle(frequency)}</h2>
           <p
             style={{
@@ -1026,7 +1056,17 @@ export const PurchaseNew = () => {
                 }).format(getPriceByParams(type, frequency, v))
               } MXN
             </span>
-          </p>
+          </p>*/
+          }
+          <div className='security-info'>
+            <div className='top'>
+              <AiFillLock></AiFillLock>
+              <p>
+                Pago <span>100% seguro</span>
+              </p>
+            </div>
+            <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
+          </div>
           <p className='description' style={{ textAlign: 'left' }}>
             Seleccione cualquiera de los métodos de pago disponibles
           </p>
@@ -1204,7 +1244,7 @@ export const PurchaseNew = () => {
                   </div>
                 </div>
                 <p className='description-text'>
-                  Presionando en el botón "Pagar" estás dando tu
+                  Presionando en el botón "Confirmar compra" estás dando tu
                   consentimiento para que Gonvar automáticamente continúe con
                   tu suscripción &nbsp;
                   {returnFrecuency()} y te cobremos {returnPrice()}
@@ -1217,7 +1257,9 @@ export const PurchaseNew = () => {
                   "Cancelar suscripción"
                 </p>
                 <div style={{
-                  paddingInline: '10px'
+                  paddingInline: '10px',
+                  display: 'flex',
+                  justifyContent: 'center'
                 }}>
                   <input
                     type="checkbox"
@@ -1255,7 +1297,7 @@ export const PurchaseNew = () => {
                   <button
                     className='type3'
                     style={{
-                      display: !terms ? 'none' : 'block'
+                      opacity: !terms ? '0.8' : '1'
                     }}
                     /*
                     onClick={() => {
@@ -1263,10 +1305,14 @@ export const PurchaseNew = () => {
                       setOption(1);
                     }}
                     */
-                    onClick={handleConfirm}
+                    onClick={() => {
+                      if (terms) {
+                        handleConfirm();
+                      }
+                    }}
                     disabled={!terms}
                   >
-                    Pagar
+                    Confirmar compra
                   </button>
                 )}
               </>
@@ -1304,7 +1350,9 @@ export const PurchaseNew = () => {
                     Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.
                   </p>
                   <div style={{
-                    paddingInline: '10px'
+                    paddingInline: '10px',
+                    display: 'flex',
+                    justifyContent: 'center'
                   }}>
                     <input
                       type="checkbox"
@@ -1326,9 +1374,25 @@ export const PurchaseNew = () => {
                       Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
                     </label>
                   </div>
-
                   {
-                    terms && <PayPalScriptProvider
+                    !terms &&
+                    <button
+                      style={{
+                        borderRadius: '25px',
+                        width: '150px',
+                        height: '50px',
+                        backgroundColor: '#549FD1',
+                        marginBottom: '6px'
+                      }}
+                      className='paypal-disable'
+                      disabled
+                    >
+
+                    </button>
+                  }
+                  {
+                    terms &&
+                    <PayPalScriptProvider
                       deferLoading={paypal}
                       options={{
                         'client-id':
@@ -1360,9 +1424,7 @@ export const PurchaseNew = () => {
                             }
                           }
                           onApprove={
-
                             async (data: any, actions) => {
-
                               let today = new Date().getTime() / 1000;
                               let finalDate = 0;
                               finalDate =
@@ -1386,8 +1448,6 @@ export const PurchaseNew = () => {
                                       : 7,
                                 type: product.price,
                               });
-
-
                               // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                               window.location.href = getRouteByFrequency(
                                 frequency,
@@ -1403,6 +1463,62 @@ export const PurchaseNew = () => {
                 </>
               )}
           </div>
+        </div>
+      </div>
+      <div className='right-section'>
+        <div className='box'>
+          <p className='title'>¿Qué estás adquiriendo?</p>
+          <div>
+            {type == 'subscription' ? (
+              <p className='title'>
+                Suscripción{' '}
+                <span>
+                  Gonvar+{' '}
+                  {(frequency === 'month' || trial === 'true') &&
+                    'Mensual'}{' '}
+                  {frequency === 'anual' && 'Anual'}{' '}
+                  {frequency === 'cuatrimestral' && 'Cuatrimestral'}
+                </span>{' '}
+              </p>
+            ) : (
+              <p className='title' style={{ textAlign: 'initial' }}>
+                Curso <span>{product.title}</span>
+              </p>
+            )}
+          </div>
+          <div className='info'>
+            <p>
+              Obtén decenas de cursos y clases de decoración y aplicación
+              de uñas por{' '}
+              <span>
+                $
+                {returnPrice()}
+              </span>
+              <br />
+            </p>
+          </div>
+          <div className='price-container'>
+            <p
+              className='title'
+              style={{ lineHeight: '25px', textAlign: 'end' }}
+            >
+              Total<span> a pagar</span>
+            </p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: returnPriceTag(
+                  trial,
+                  v,
+                  frequency,
+                  type,
+                  coupon,
+                  product.price,
+                  nailmasterplusanual,
+                ),
+              }}
+            ></p>
+          </div>
+          <div className='bg'></div>
         </div>
       </div>
     </PurchaseNewContainer>
