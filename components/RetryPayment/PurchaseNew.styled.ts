@@ -4,10 +4,16 @@ export const PurchaseNewContainer = styled.div`
   /*
   Buen comentario
   */
-  display: flex;
+  /*
+    display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 20px;
+  */
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 250px);
+  justify-content: space-between;
   gap: 20px;
   width: 100%;
   padding-block: 30px;
@@ -113,9 +119,10 @@ export const PurchaseNewContainer = styled.div`
     display: flex;
     justify-content: center;
     width: auto;
+    max-width: 650px;
     padding-inline: 20px;
     background-color: #fff;
-    padding-block: 60px;
+    padding-block: 40px;
     border-radius: 40px;
     .main-container {
       display: flex;
@@ -204,6 +211,8 @@ export const PurchaseNewContainer = styled.div`
           display: flex;
           gap: 30px;
           width: 100%;
+          flex-wrap: wrap;
+          justify-content: center;
           margin-inline: 40px;
           .left-side {
             display: flex;
@@ -288,7 +297,7 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   .security-info {
-    width: calc(100% - 45px);
+    width: 100%;
     font-size: 14px;
     text-align: start;
     .top {
@@ -325,7 +334,7 @@ export const PurchaseNewContainer = styled.div`
       }
       p {
         color: #a18cc4;
-        font-size: 28px;
+        font-size: 18px;
         font-weight: bold;
         @media (max-width: 520px) {
           font-size: 14px;
@@ -337,7 +346,7 @@ export const PurchaseNewContainer = styled.div`
         width: 2px;
       }
       .lower {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 500;
         @media (max-width: 520px) {
           font-size: 14px;
@@ -356,7 +365,7 @@ export const PurchaseNewContainer = styled.div`
       }
       p {
         color: #942ced;
-        font-size: 28px;
+        font-size: 18px;
         font-weight: bold;
         @media (max-width: 520px) {
           font-size: 14px;
@@ -369,7 +378,7 @@ export const PurchaseNewContainer = styled.div`
       }
       .lower {
         color: #3f1168;
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 500;
         @media (max-width: 520px) {
           font-size: 14px;
@@ -400,7 +409,7 @@ export const PurchaseNewContainer = styled.div`
     }
     .line {
       z-index: 1;
-      width: 250px;
+      width: 125px;
       border: 1.5px solid #9900ed;
       border-left: none;
       border-right: 1px solid #ede7f2;
@@ -411,8 +420,17 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   .right-section {
+    position: relative;
+    display: none;
+  }
+  .right-section-mobile {
+    position: fixed;
+    right: 10px;
+    width: 260px;
+  }
+  .right-section,
+  .right-section-mobile {
     .box {
-      position: relative;
       height: 100%;
       width: 100%;
       display: flex;
@@ -423,7 +441,7 @@ export const PurchaseNewContainer = styled.div`
       padding: 40px 20px;
       .title {
         text-align: center;
-        font-size: 22px;
+        font-size: 16px;
         font-weight: bold;
         color: #3f1168;
         span {
@@ -513,7 +531,7 @@ export const PurchaseNewContainer = styled.div`
         margin-top: auto;
         .total {
           text-align: end;
-          font-size: 28px;
+          font-size: 22px;
           font-weight: bold;
           color: #e55c00;
           span {
@@ -560,9 +578,13 @@ export const PurchaseNewContainer = styled.div`
     }
     .complete-contain {
       padding-block: 30px;
+      align-self: flex-start;
+      margin-left: 15px;
+      margin-right: 15px;
+      max-width: 650px;
       .main-container {
         gap: 15px;
-        width: unset;
+        width: 100%;
         .description {
           font-size: 1rem;
           br {
@@ -594,8 +616,6 @@ export const PurchaseNewContainer = styled.div`
         .add-payment-container {
           gap: 30px;
           .card-container {
-            // align-items: center;
-            // flex-direction: column;
             .right-side {
               width: fit-content;
             }
@@ -611,6 +631,11 @@ export const PurchaseNewContainer = styled.div`
   }
   @media (max-width: 750px) {
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     .complete-contain {
       margin: 5px;
       width: 100%;
@@ -629,14 +654,143 @@ export const PurchaseNewContainer = styled.div`
           }
         }
       }
+      .right-section-mobile {
+        position: fixed;
+        top: 10px;
+        .box {
+          .title {
+            font-size: 16px;
+            span {
+              color: #942ced;
+            }
+            sub {
+              font-style: italic;
+              font-size: 14px;
+              color: #6611c2;
+              font-weight: 400;
+            }
+          }
+          .subtitle {
+            color: #6611c2;
+            font-size: 20px;
+            font-weight: 500;
+            font: small-caption;
+            letter-spacing: 2px;
+          }
+          .info {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+            p {
+              color: #8161aa;
+              font-size: 14px;
+              span {
+                color: #8161aa;
+                font-weight: bold;
+              }
+            }
+            img {
+              height: 70%;
+              width: 100%;
+              border-radius: 10px;
+            }
+          }
+
+          .coupon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: fit-content;
+            margin-left: auto;
+            img {
+              margin: 0;
+            }
+            a {
+              color: #942ced;
+              font-size: 17px;
+              font-weight: bold;
+            }
+            p {
+              text-align: end;
+            }
+            .coupon {
+              position: relative;
+              margin-block: 20px;
+              input {
+                color: #6611c2;
+                padding: 5px 10px;
+                font-size: 15px;
+                outline: none;
+                border: 1.5px solid #942ced;
+                border-radius: 20px;
+                &::placeholder {
+                  font-size: 13px;
+                  color: #942ced;
+                }
+              }
+              button {
+                width: 48px;
+                position: absolute;
+                height: 100%;
+                background: #942ced;
+                right: 0;
+                border: none;
+                border-radius: 20px;
+              }
+            }
+            .line {
+              border: 1.5px solid #3f1168;
+              width: 100%;
+            }
+          }
+          .price-container {
+            margin-top: auto;
+            .total {
+              text-align: end;
+              font-size: 28px;
+              font-weight: bold;
+              color: #e55c00;
+              span {
+                font-weight: 400;
+                color: #e55c00;
+              }
+            }
+          }
+          .bg {
+            background: #ffdd67;
+            width: 25%;
+            border-top-right-radius: 100%;
+            height: 150px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            border-bottom-left-radius: 20px;
+          }
+          .image {
+            position: absolute;
+            bottom: 0;
+            left: -71px;
+            max-height: 350px;
+            @media (max-width: 1400px) {
+              max-height: 300px;
+            }
+            @media (max-width: 1280px) {
+              max-height: 270px;
+            }
+          }
+        }
+      }
+    }
+    .right-section {
+      display: block;
     }
   }
   @media (max-width: 600px) {
-    .card-container {
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     .button-container {
       grid-template-columns: 1fr;
       align-items: center;
@@ -651,6 +805,11 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   @media (max-width: 480px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     .edit {
       width: 320px;
     }

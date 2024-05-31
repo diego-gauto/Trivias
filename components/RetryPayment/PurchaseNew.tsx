@@ -1002,6 +1002,7 @@ export const PurchaseNew = () => {
         product={product}
         bank_ref={bank_ref}
       />
+
       <div className='complete-contain'>
         <div className='main-container'>
           {
@@ -1138,16 +1139,16 @@ export const PurchaseNew = () => {
             </div>
             {selectedButton === 'card' && (
               <>
+                <div>
+                  <img
+                    style={{
+                      width: '75%'
+                    }}
+                    src="/images/purchase/tarjetas_gonvar_purchasenew.png"
+                    alt="card alternatives" />
+                </div>
                 <div className='card-container'>
                   <div className='left-side'>
-                    <div>
-                      <img
-                        style={{
-                          width: '75%'
-                        }}
-                        src="/images/purchase/tarjetas_gonvar_purchasenew.png"
-                        alt="card alternatives" />
-                    </div>
                     <div className='input-container'>
                       <label>Número de la tarjeta</label>
                       <InputMask
@@ -1474,6 +1475,62 @@ export const PurchaseNew = () => {
         </div>
       </div>
       <div className='right-section'>
+        <div className='box'>
+          <p className='title'>¿Qué estás adquiriendo?</p>
+          <div>
+            {type == 'subscription' ? (
+              <p className='title'>
+                Suscripción{' '}
+                <span>
+                  Gonvar+{' '}
+                  {(frequency === 'month' || trial === 'true') &&
+                    'Mensual'}{' '}
+                  {frequency === 'anual' && 'Anual'}{' '}
+                  {frequency === 'cuatrimestral' && 'Cuatrimestral'}
+                </span>{' '}
+              </p>
+            ) : (
+              <p className='title' style={{ textAlign: 'initial' }}>
+                Curso <span>{product.title}</span>
+              </p>
+            )}
+          </div>
+          <div className='info'>
+            <p>
+              Obtén decenas de cursos y clases de decoración y aplicación
+              de uñas por{' '}
+              <span>
+                $
+                {returnPrice()}
+              </span>
+              <br />
+            </p>
+          </div>
+          <div className='price-container'>
+            <p
+              className='title'
+              style={{ lineHeight: '25px', textAlign: 'end' }}
+            >
+              Total<span> a pagar</span>
+            </p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: returnPriceTag(
+                  trial,
+                  v,
+                  frequency,
+                  type,
+                  coupon,
+                  product.price,
+                  nailmasterplusanual,
+                ),
+              }}
+            ></p>
+          </div>
+          <div className='bg'></div>
+        </div>
+      </div>
+      <div className='right-section-mobile'>
         <div className='box'>
           <p className='title'>¿Qué estás adquiriendo?</p>
           <div>
