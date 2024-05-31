@@ -152,7 +152,7 @@ const Login = () => {
     setAuthLoader(true);
     let signUpData = {
       credentials: {
-        email: formData.email,
+        email: formData.email.trim(),
         password: formData.password,
         newPassword: formData.newPassword,
         newConfirmPassword: formData.newConfirmPassword,
@@ -244,7 +244,7 @@ const Login = () => {
       userId: user.id,
       last_sign_in: new Date(),
     };
-    await updateLastSignIn(userData).then((res) => {});
+    await updateLastSignIn(userData).then((res) => { });
   };
   const [showForgot, setShowForgot] = useState(false);
 
