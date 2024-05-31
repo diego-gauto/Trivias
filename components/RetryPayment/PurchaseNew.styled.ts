@@ -11,9 +11,8 @@ export const PurchaseNewContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   */
-  display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 250px);
-  justify-content: space-between;
+  display: flex;
+  justify-content: center;
   gap: 20px;
   width: 100%;
   padding-block: 30px;
@@ -124,6 +123,8 @@ export const PurchaseNewContainer = styled.div`
     background-color: #fff;
     padding-block: 40px;
     border-radius: 40px;
+    margin-right: 80px;
+    align-self: center;
     .main-container {
       display: flex;
       flex-direction: column;
@@ -580,8 +581,8 @@ export const PurchaseNewContainer = styled.div`
       padding-block: 30px;
       align-self: flex-start;
       margin-left: 15px;
-      margin-right: 15px;
-      max-width: 650px;
+      margin-right: 150px;
+      max-width: 450px;
       .main-container {
         gap: 15px;
         width: 100%;
@@ -644,6 +645,7 @@ export const PurchaseNewContainer = styled.div`
       padding-inline: 20px;
       padding-block: 20px;
       margin: 10px;
+      align-self: center;
       .main-container {
         .description {
           width: 350px;
@@ -844,6 +846,158 @@ export const PurchaseNewContainer = styled.div`
             }
           }
         }
+      }
+    }
+  }
+`;
+
+export const SubscriptionInfoContainer = styled.div`
+  background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
+
+  .right-section-mobile {
+    .box {
+      height: calc(100% - 215px);
+      min-height: 510px;
+      max-height: 600px;
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: #dfbffa;
+      border-radius: 20px;
+      padding: 40px 20px;
+      position: fixed;
+      top: 95px;
+      right: 20px;
+      .title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: #3f1168;
+        span {
+          color: #942ced;
+        }
+        sub {
+          font-style: italic;
+          font-size: 14px;
+          color: #6611c2;
+          font-weight: 400;
+        }
+      }
+      .subtitle {
+        color: #6611c2;
+        font-size: 20px;
+        font-weight: 500;
+        font: small-caption;
+        letter-spacing: 2px;
+      }
+      .info {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 10px;
+        p {
+          color: #8161aa;
+          font-size: 14px;
+          span {
+            color: #8161aa;
+            font-weight: bold;
+          }
+        }
+        img {
+          height: 70%;
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+
+      .coupon-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: fit-content;
+        margin-left: auto;
+        img {
+          margin: 0;
+        }
+        a {
+          color: #942ced;
+          font-size: 17px;
+          font-weight: bold;
+        }
+        p {
+          text-align: end;
+        }
+        .coupon {
+          position: relative;
+          margin-block: 20px;
+          input {
+            color: #6611c2;
+            padding: 5px 10px;
+            font-size: 15px;
+            outline: none;
+            border: 1.5px solid #942ced;
+            border-radius: 20px;
+            &::placeholder {
+              font-size: 13px;
+              color: #942ced;
+            }
+          }
+          button {
+            width: 48px;
+            position: absolute;
+            height: 100%;
+            background: #942ced;
+            right: 0;
+            border: none;
+            border-radius: 20px;
+          }
+        }
+        .line {
+          border: 1.5px solid #3f1168;
+          width: 100%;
+        }
+      }
+      .price-container {
+        margin-top: auto;
+        .total {
+          text-align: end;
+          font-size: 22px;
+          font-weight: bold;
+          color: #e55c00;
+          span {
+            font-weight: 400;
+            color: #e55c00;
+          }
+        }
+      }
+      .bg {
+        background: #ffdd67;
+        width: 25%;
+        border-top-right-radius: 100%;
+        height: 150px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: 20px;
+      }
+      .image {
+        position: absolute;
+        bottom: 0;
+        left: -71px;
+        max-height: 350px;
+        @media (max-width: 1400px) {
+          max-height: 300px;
+        }
+        @media (max-width: 1280px) {
+          max-height: 270px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 750px) {
+    .right-section-mobile {
+      display: none;
+      .box {
       }
     }
   }

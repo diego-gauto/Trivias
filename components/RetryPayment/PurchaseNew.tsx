@@ -34,7 +34,7 @@ import {
 import { checkEmpty } from './functions';
 import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { PurchaseNewContainer } from './PurchaseNew.styled';
+import { PurchaseNewContainer, SubscriptionInfoContainer } from './PurchaseNew.styled';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import ModalError from '../../containers/Profile/Purchase/Modal1/ModalError';
 import { createNotification } from '../api/notifications';
@@ -984,60 +984,61 @@ export const PurchaseNew = () => {
   }
 
   return (
-    <PurchaseNewContainer>
-      <ErrorModal show={showModalError} setShow={setShowModalError} error={errorMsg} />
-      <OxxoModal
-        show={oxxoIsActive}
-        setShow={setOxxoIsActive}
-        user={user}
-        product={product}
-        barcode={barcode}
-        reference={reference}
-        expires_at={expiresAt}
-      />
-      <SpeiModal
-        show={speiIsActive}
-        setShow={setSpeiIsActive}
-        user={user}
-        product={product}
-        bank_ref={bank_ref}
-      />
+    <>
+      <PurchaseNewContainer>
+        <ErrorModal show={showModalError} setShow={setShowModalError} error={errorMsg} />
+        <OxxoModal
+          show={oxxoIsActive}
+          setShow={setOxxoIsActive}
+          user={user}
+          product={product}
+          barcode={barcode}
+          reference={reference}
+          expires_at={expiresAt}
+        />
+        <SpeiModal
+          show={speiIsActive}
+          setShow={setSpeiIsActive}
+          user={user}
+          product={product}
+          bank_ref={bank_ref}
+        />
 
-      <div className='complete-contain'>
-        <div className='main-container'>
-          {
-            true &&
-            <div className='steps'>
-              <div className='circle'>
-                <FaCheck style={{ color: 'white' }}></FaCheck>
+        <div className='complete-contain'>
+          <div className='main-container'>
+            {
+              true &&
+              <div className='steps'>
+                <div className='circle'>
+                  <FaCheck style={{ color: 'white' }}></FaCheck>
+                </div>
+                <div
+                  className='line'
+                  style={{
+                    backgroundColor: 'none',
+                    border: '',
+                  }}
+                ></div>
+                <div className='circle-no-fill'></div>
+                <div className='left-info'>
+                  <p>Paso 1</p>
+                  <div className='rect'></div>
+                  <p className='lower'>
+                    Configuración <br />
+                    de la cuenta
+                  </p>
+                </div>
+                <div className='right-info'>
+                  <p>Paso 2</p>
+                  <div className='rect'></div>
+                  <p className='lower'>
+                    Proceso <br />
+                    de pago
+                  </p>
+                </div>
               </div>
-              <div
-                className='line'
-                style={{
-                  backgroundColor: 'none',
-                  border: '',
-                }}
-              ></div>
-              <div className='circle-no-fill'></div>
-              <div className='left-info'>
-                <p>Paso 1</p>
-                <div className='rect'></div>
-                <p className='lower'>
-                  Configuración <br />
-                  de la cuenta
-                </p>
-              </div>
-              <div className='right-info'>
-                <p>Paso 2</p>
-                <div className='rect'></div>
-                <p className='lower'>
-                  Proceso <br />
-                  de pago
-                </p>
-              </div>
-            </div>
-          }
-          {/*
+            }
+            {/*
           <h2>Suscripción Gonvar+ {getSubscriptionTypeTitle(frequency)}</h2>
           <p
             style={{
@@ -1058,305 +1059,212 @@ export const PurchaseNew = () => {
               } MXN
             </span>
           </p>*/
-          }
-          <div className='security-info'>
-            <div className='top'>
-              <AiFillLock></AiFillLock>
-              <p>
-                Pago <span>100% seguro</span>
-              </p>
-            </div>
-            <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
-          </div>
-          <p className='description' style={{ textAlign: 'left' }}>
-            Seleccione cualquiera de los métodos de pago disponibles
-          </p>
-          {paymentMethods.length > 0 && (
-            <div className='payment-container'>
-              {!loader ? (
-                paymentMethods.map((pm: IPm, index: number) => {
-                  return (
-                    <PaymentMethods
-                      pm={pm}
-                      index={index}
-                      pm_size={paymentMethods.length}
-                      changePaymentMethod={changePaymentMethod}
-                      key={'pm-' + index}
-                      handleDelete={detachPayment}
-                    />
-                  );
-                })
-              ) : (
-                <LoaderContainSpinner />
-              )}
-            </div>
-          )}
-          {
-            paymentMethods.length > 0 &&
-            <button className='type2' onClick={handleAddpayment}>
-              Agregar método de pago
-              <FaChevronDown className={addPayment ? 'rotate' : ''} />
-            </button>
-          }
-          <div
-            className={
-              getCSSClassByUserSituation()
             }
-          >
-            <div
-              className='button-container'
-              style={{
-                justifyContent: [1, 6].includes(user.level)
-                  ? 'center'
-                  : 'space-between',
-              }}
-            >
-              {([1, 6].includes(user.level)
-                ? PayOptionsPurchaseForMonthSuscription
-                : PayOptionsPurchase
-              ).map((pay: IPayOption, index: number) => {
-                return (
-                  <div
-                    className={
-                      'box-container ' +
-                      (selectedButton === pay.id ? 'selected-box' : '')
-                    }
-                    key={'pay-button' + index}
-                    onClick={() => {
-                      setSelectedButton(pay.id);
-                      setTerms(false);
-                    }}
-                  >
-                    {selectedButton === pay.id ? (
-                      <img src={pay.img_select} />
-                    ) : (
-                      <img src={pay.img_unselect} />
-                    )}
-                    {pay.title !== '' && <p>{pay.title}</p>}
-                  </div>
-                );
-              })}
-            </div>
-            {selectedButton === 'card' && (
-              <>
-                <div>
-                  <img
-                    style={{
-                      width: '75%'
-                    }}
-                    src="/images/purchase/tarjetas_gonvar_purchasenew.png"
-                    alt="card alternatives" />
-                </div>
-                <div className='card-container'>
-                  <div className='left-side'>
-                    <div className='input-container'>
-                      <label>Número de la tarjeta</label>
-                      <InputMask
-                        placeholder='**** **** **** ****'
-                        mask={
-                          card.number.startsWith(37)
-                            ? '9999 9999 9999 999'
-                            : '9999 9999 9999 9999'
-                        }
-                        maskChar={'*'}
-                        value={card.number}
-                        onChange={(e) =>
-                          changeElement('number', e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className='input-container'>
-                      <label>Nombre</label>
-                      <input
-                        value={card.holder}
-                        placeholder='Nombre del propetario'
-                        onChange={(e) =>
-                          changeElement('holder', e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className='inputs-column'>
-                      <div className='input-container'>
-                        <label>Mes</label>
-                        <select
-                          value={card.exp_month}
-                          onChange={(e) =>
-                            changeElement('exp_month', e.target.value)
-                          }
-                        >
-                          <option disabled value={'MM'}>
-                            MM
-                          </option>
-                          {Month.map((month: number, index: number) => {
-                            return (
-                              <option key={'mes-' + index} value={month}>
-                                {month}
-                              </option>
-                            );
-                          })}
-                        </select>
-                      </div>
-                      <div className='input-container'>
-                        <label>Año</label>
-                        <select
-                          value={card.exp_year}
-                          onChange={(e) =>
-                            changeElement('exp_year', e.target.value)
-                          }
-                        >
-                          <option disabled value={'AA'}>
-                            AA
-                          </option>
-                          {Year.map((year: number, index: number) => {
-                            return (
-                              <option key={'year-' + index} value={year}>
-                                {year}
-                              </option>
-                            );
-                          })}
-                        </select>
-                      </div>
-                      <div className='input-container'>
-                        <label>CVV</label>
-                        <input
-                          placeholder='***'
-                          type='password'
-                          value={card.cvc}
-                          onChange={(e) =>
-                            changeElement('cvc', e.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='right-side'>
-                    <div
-                      className={
-                        'card-img ' +
-                        (checkEmpty(card) ? 'background-checked ' : '')
-                      }
-                    >
-                      <div className='square' />
-                      <p className='number'>{card.number}</p>
-                      <div className='last-data'>
-                        <p>{card.holder}</p>
-                        {(card.exp_month !== '' || card.exp_year !== '') && (
-                          <div className='date'>
-                            <p>mes/año</p>
-                            <p>
-                              {card.exp_month}/{card.exp_year}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className='description-text'>
-                  Presionando en el botón "Confirmar compra" estás dando tu
-                  consentimiento para que Gonvar automáticamente continúe con
-                  tu suscripción &nbsp;
-                  {returnFrecuency()} y te cobremos {returnPrice()}
-                  en el medio de pago que estás agregando hasta que tu decidas
-                  cancelarla.
-                  <br />
-                  <br />
-                  Puedes cancelar la suscripción en cualquier momento. Para
-                  hacerlo, dirígite a tu perfil y presiona en el botón
-                  "Cancelar suscripción"
+            <div className='security-info'>
+              <div className='top'>
+                <AiFillLock></AiFillLock>
+                <p>
+                  Pago <span>100% seguro</span>
                 </p>
-                <div style={{
-                  paddingInline: '10px',
-                  display: 'flex',
-                  justifyContent: 'center'
-                }}>
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="terms"
-                    checked={terms}
-                    onChange={(e) => setTerms(e.target.checked)}
-                    style={{
-                      width: '16px',
-                      height: '16px'
-                    }}
-                  />
-                  <label
-                    htmlFor="terms"
-                    style={{
-                      paddingLeft: '10px'
-                    }}
-                  >
-                    Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
-                  </label>
-                </div>
-                {error && option === 1 && (
-                  <p
-                    className='description-text'
-                    style={{ color: 'red', textAlign: 'left' }}
-                  >
-                    No hemos podido procesar tu pago, puedes reintentar tu{' '}
-                    <br />
-                    pago nuevamente o probar con otro método de pago.
-                  </p>
-                )}
-                {loaderAdd ? (
-                  <LoaderContainSpinner />
-                ) : (
-                  <button
-                    className='type3'
-                    style={{
-                      opacity: !terms ? '0.8' : '1'
-                    }}
-                    /*
-                    onClick={() => {
-                      addNewCard();
-                      setOption(1);
-                    }}
-                    */
-                    onClick={() => {
-                      if (terms) {
-                        handleConfirm();
-                      }
-                    }}
-                    disabled={!terms}
-                  >
-                    Confirmar compra
-                  </button>
-                )}
-              </>
-            )}
-            {selectedButton === 'oxxo' && (
-              <div>
-                <p className='description-text mb-5'>
-                  Presiona el botón de generar ficha de pago oxxo para
-                  visualizarla y poder descargarla. Una vez que abones en una
-                  tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
-                  continuación podrás comenzar con tus cursos
-                </p>
-                <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
-                  Genera ficha de pago OXXO
-                </button>
               </div>
-            )}
-            {selectedButton === 'transfer' && (
-              <div>
-                <p className='description-text mb-5'>
-                  Presiona el botón de generar ficha de transferencia para
-                  visualizarla y poder descargarla. Una vez que realices la
-                  transferencia tardaremos máximo 48hs en procesar tu pago y a
-                  continuación podrás comenzar con tus cursos
-                </p>
-                <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
-                  Genera ficha para transferencia
-                </button>
+              <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
+            </div>
+            <p className='description' style={{ textAlign: 'left' }}>
+              Seleccione cualquiera de los métodos de pago disponibles
+            </p>
+            {paymentMethods.length > 0 && (
+              <div className='payment-container'>
+                {!loader ? (
+                  paymentMethods.map((pm: IPm, index: number) => {
+                    return (
+                      <PaymentMethods
+                        pm={pm}
+                        index={index}
+                        pm_size={paymentMethods.length}
+                        changePaymentMethod={changePaymentMethod}
+                        key={'pm-' + index}
+                        handleDelete={detachPayment}
+                      />
+                    );
+                  })
+                ) : (
+                  <LoaderContainSpinner />
+                )}
               </div>
             )}
             {
-              selectedButton === 'paypal' && (
+              paymentMethods.length > 0 &&
+              <button className='type2' onClick={handleAddpayment}>
+                Agregar método de pago
+                <FaChevronDown className={addPayment ? 'rotate' : ''} />
+              </button>
+            }
+            <div
+              className={
+                getCSSClassByUserSituation()
+              }
+            >
+              <div
+                className='button-container'
+                style={{
+                  justifyContent: [1, 6].includes(user.level)
+                    ? 'center'
+                    : 'space-between',
+                }}
+              >
+                {([1, 6].includes(user.level)
+                  ? PayOptionsPurchaseForMonthSuscription
+                  : PayOptionsPurchase
+                ).map((pay: IPayOption, index: number) => {
+                  return (
+                    <div
+                      className={
+                        'box-container ' +
+                        (selectedButton === pay.id ? 'selected-box' : '')
+                      }
+                      key={'pay-button' + index}
+                      onClick={() => {
+                        setSelectedButton(pay.id);
+                        setTerms(false);
+                      }}
+                    >
+                      {selectedButton === pay.id ? (
+                        <img src={pay.img_select} />
+                      ) : (
+                        <img src={pay.img_unselect} />
+                      )}
+                      {pay.title !== '' && <p>{pay.title}</p>}
+                    </div>
+                  );
+                })}
+              </div>
+              {selectedButton === 'card' && (
                 <>
+                  <div>
+                    <img
+                      style={{
+                        width: '75%'
+                      }}
+                      src="/images/purchase/tarjetas_gonvar_purchasenew.png"
+                      alt="card alternatives" />
+                  </div>
+                  <div className='card-container'>
+                    <div className='left-side'>
+                      <div className='input-container'>
+                        <label>Número de la tarjeta</label>
+                        <InputMask
+                          placeholder='**** **** **** ****'
+                          mask={
+                            card.number.startsWith(37)
+                              ? '9999 9999 9999 999'
+                              : '9999 9999 9999 9999'
+                          }
+                          maskChar={'*'}
+                          value={card.number}
+                          onChange={(e) =>
+                            changeElement('number', e.target.value)
+                          }
+                        />
+                      </div>
+                      <div className='input-container'>
+                        <label>Nombre</label>
+                        <input
+                          value={card.holder}
+                          placeholder='Nombre del propetario'
+                          onChange={(e) =>
+                            changeElement('holder', e.target.value)
+                          }
+                        />
+                      </div>
+                      <div className='inputs-column'>
+                        <div className='input-container'>
+                          <label>Mes</label>
+                          <select
+                            value={card.exp_month}
+                            onChange={(e) =>
+                              changeElement('exp_month', e.target.value)
+                            }
+                          >
+                            <option disabled value={'MM'}>
+                              MM
+                            </option>
+                            {Month.map((month: number, index: number) => {
+                              return (
+                                <option key={'mes-' + index} value={month}>
+                                  {month}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                        <div className='input-container'>
+                          <label>Año</label>
+                          <select
+                            value={card.exp_year}
+                            onChange={(e) =>
+                              changeElement('exp_year', e.target.value)
+                            }
+                          >
+                            <option disabled value={'AA'}>
+                              AA
+                            </option>
+                            {Year.map((year: number, index: number) => {
+                              return (
+                                <option key={'year-' + index} value={year}>
+                                  {year}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                        <div className='input-container'>
+                          <label>CVV</label>
+                          <input
+                            placeholder='***'
+                            type='password'
+                            value={card.cvc}
+                            onChange={(e) =>
+                              changeElement('cvc', e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className='right-side'>
+                      <div
+                        className={
+                          'card-img ' +
+                          (checkEmpty(card) ? 'background-checked ' : '')
+                        }
+                      >
+                        <div className='square' />
+                        <p className='number'>{card.number}</p>
+                        <div className='last-data'>
+                          <p>{card.holder}</p>
+                          {(card.exp_month !== '' || card.exp_year !== '') && (
+                            <div className='date'>
+                              <p>mes/año</p>
+                              <p>
+                                {card.exp_month}/{card.exp_year}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <p className='description-text'>
-                    Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.
+                    Presionando en el botón "Confirmar compra" estás dando tu
+                    consentimiento para que Gonvar automáticamente continúe con
+                    tu suscripción &nbsp;
+                    {returnFrecuency()} y te cobremos {returnPrice()}
+                    en el medio de pago que estás agregando hasta que tu decidas
+                    cancelarla.
+                    <br />
+                    <br />
+                    Puedes cancelar la suscripción en cualquier momento. Para
+                    hacerlo, dirígite a tu perfil y presiona en el botón
+                    "Cancelar suscripción"
                   </p>
                   <div style={{
                     paddingInline: '10px',
@@ -1383,209 +1291,305 @@ export const PurchaseNew = () => {
                       Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
                     </label>
                   </div>
-                  {
-                    !terms &&
+                  {error && option === 1 && (
+                    <p
+                      className='description-text'
+                      style={{ color: 'red', textAlign: 'left' }}
+                    >
+                      No hemos podido procesar tu pago, puedes reintentar tu{' '}
+                      <br />
+                      pago nuevamente o probar con otro método de pago.
+                    </p>
+                  )}
+                  {loaderAdd ? (
+                    <LoaderContainSpinner />
+                  ) : (
                     <button
+                      className='type3'
                       style={{
-                        borderRadius: '25px',
-                        width: '150px',
-                        height: '50px',
-                        backgroundColor: '#549FD1',
-                        marginBottom: '6px'
+                        opacity: !terms ? '0.8' : '1'
                       }}
-                      className='paypal-disable'
-                      disabled
+                      /*
+                      onClick={() => {
+                        addNewCard();
+                        setOption(1);
+                      }}
+                      */
+                      onClick={() => {
+                        if (terms) {
+                          handleConfirm();
+                        }
+                      }}
+                      disabled={!terms}
                     >
-
+                      Confirmar compra
                     </button>
-                  }
-                  {
-                    terms &&
-                    <PayPalScriptProvider
-                      deferLoading={paypal}
-                      options={{
-                        'client-id':
-                          'ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz',
-                        currency: 'MXN',
-                        vault: true,
-                      }}
-                    >
-                      <div style={{
-                        width: '50%',
-                        display: 'flex',
-                        justifyContent: 'center'
-                      }}>
-                        <PayPalButtons
-                          style={{
-                            color: 'blue',
-                            tagline: false,
-                            layout: 'horizontal',
-                            shape: 'pill',
-                            height: 50,
-                          }}
-                          createSubscription={
-                            (data, actions) => {
-                              setPlan({ method: 'paypal' });
-                              return actions.subscription.create({
-                                plan_id: returnPricePaypal(),
-                              });
-
-                            }
-                          }
-                          onApprove={
-                            async (data: any, actions) => {
-                              let today = new Date().getTime() / 1000;
-                              let finalDate = 0;
-                              finalDate =
-                                today + frequency === 'month'
-                                  ? 2592000
-                                  : frequency === 'anual'
-                                    ? 31536000
-                                    : 10368000;
-                              await updateMembership({
-                                method: 'paypal',
-                                final_date: finalDate,
-                                plan_id: data.subscriptionID,
-                                plan_name: product.title,
-                                start_date: new Date().getTime() / 1000,
-                                userId: userData.user_id,
-                                level:
-                                  frequency === 'month' || trial === 'true'
-                                    ? 1
-                                    : frequency === 'anual'
-                                      ? 4
-                                      : 7,
-                                type: product.price,
-                              });
-                              // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-                              window.location.href = getRouteByFrequency(
-                                frequency,
-                                true,
-                              );
-                              return data;
-                            }
-                          }
-                        />
-                      </div>
-                    </PayPalScriptProvider>
-                  }
+                  )}
                 </>
               )}
+              {selectedButton === 'oxxo' && (
+                <div>
+                  <p className='description-text mb-5'>
+                    Presiona el botón de generar ficha de pago oxxo para
+                    visualizarla y poder descargarla. Una vez que abones en una
+                    tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
+                    continuación podrás comenzar con tus cursos
+                  </p>
+                  <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
+                    Genera ficha de pago OXXO
+                  </button>
+                </div>
+              )}
+              {selectedButton === 'transfer' && (
+                <div>
+                  <p className='description-text mb-5'>
+                    Presiona el botón de generar ficha de transferencia para
+                    visualizarla y poder descargarla. Una vez que realices la
+                    transferencia tardaremos máximo 48hs en procesar tu pago y a
+                    continuación podrás comenzar con tus cursos
+                  </p>
+                  <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
+                    Genera ficha para transferencia
+                  </button>
+                </div>
+              )}
+              {
+                selectedButton === 'paypal' && (
+                  <>
+                    <p className='description-text'>
+                      Para seguir con este método de compra, deberás iniciar sesión con tu cuenta de PayPal.
+                    </p>
+                    <div style={{
+                      paddingInline: '10px',
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="terms"
+                        checked={terms}
+                        onChange={(e) => setTerms(e.target.checked)}
+                        style={{
+                          width: '16px',
+                          height: '16px'
+                        }}
+                      />
+                      <label
+                        htmlFor="terms"
+                        style={{
+                          paddingLeft: '10px'
+                        }}
+                      >
+                        Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
+                      </label>
+                    </div>
+                    {
+                      !terms &&
+                      <button
+                        style={{
+                          borderRadius: '25px',
+                          width: '150px',
+                          height: '50px',
+                          backgroundColor: '#549FD1',
+                          marginBottom: '6px'
+                        }}
+                        className='paypal-disable'
+                        disabled
+                      >
+
+                      </button>
+                    }
+                    {
+                      terms &&
+                      <PayPalScriptProvider
+                        deferLoading={paypal}
+                        options={{
+                          'client-id':
+                            'ATu3hpVYAX9Jq288cIdG2ZU0WftbBjcKGt0cwEe7naroEao2JgBfBmpQXGaxSwDgUEP4mc4l8JNJjBbz',
+                          currency: 'MXN',
+                          vault: true,
+                        }}
+                      >
+                        <div style={{
+                          width: '50%',
+                          display: 'flex',
+                          justifyContent: 'center'
+                        }}>
+                          <PayPalButtons
+                            style={{
+                              color: 'blue',
+                              tagline: false,
+                              layout: 'horizontal',
+                              shape: 'pill',
+                              height: 50,
+                            }}
+                            createSubscription={
+                              (data, actions) => {
+                                setPlan({ method: 'paypal' });
+                                return actions.subscription.create({
+                                  plan_id: returnPricePaypal(),
+                                });
+
+                              }
+                            }
+                            onApprove={
+                              async (data: any, actions) => {
+                                let today = new Date().getTime() / 1000;
+                                let finalDate = 0;
+                                finalDate =
+                                  today + frequency === 'month'
+                                    ? 2592000
+                                    : frequency === 'anual'
+                                      ? 31536000
+                                      : 10368000;
+                                await updateMembership({
+                                  method: 'paypal',
+                                  final_date: finalDate,
+                                  plan_id: data.subscriptionID,
+                                  plan_name: product.title,
+                                  start_date: new Date().getTime() / 1000,
+                                  userId: userData.user_id,
+                                  level:
+                                    frequency === 'month' || trial === 'true'
+                                      ? 1
+                                      : frequency === 'anual'
+                                        ? 4
+                                        : 7,
+                                  type: product.price,
+                                });
+                                // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+                                window.location.href = getRouteByFrequency(
+                                  frequency,
+                                  true,
+                                );
+                                return data;
+                              }
+                            }
+                          />
+                        </div>
+                      </PayPalScriptProvider>
+                    }
+                  </>
+                )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className='right-section'>
-        <div className='box'>
-          <p className='title'>¿Qué estás adquiriendo?</p>
-          <div>
-            {type == 'subscription' ? (
-              <p className='title'>
-                Suscripción{' '}
+        <div className='right-section'>
+          <div className='box'>
+            <p className='title'>¿Qué estás adquiriendo?</p>
+            <div>
+              {type == 'subscription' ? (
+                <p className='title'>
+                  Suscripción{' '}
+                  <span>
+                    Gonvar+{' '}
+                    {(frequency === 'month' || trial === 'true') &&
+                      'Mensual'}{' '}
+                    {frequency === 'anual' && 'Anual'}{' '}
+                    {frequency === 'cuatrimestral' && 'Cuatrimestral'}
+                  </span>{' '}
+                </p>
+              ) : (
+                <p className='title' style={{ textAlign: 'initial' }}>
+                  Curso <span>{product.title}</span>
+                </p>
+              )}
+            </div>
+            <div className='info'>
+              <p>
+                Obtén decenas de cursos y clases de decoración y aplicación
+                de uñas por{' '}
                 <span>
-                  Gonvar+{' '}
-                  {(frequency === 'month' || trial === 'true') &&
-                    'Mensual'}{' '}
-                  {frequency === 'anual' && 'Anual'}{' '}
-                  {frequency === 'cuatrimestral' && 'Cuatrimestral'}
-                </span>{' '}
+                  $
+                  {returnPrice()}
+                </span>
+                <br />
               </p>
-            ) : (
-              <p className='title' style={{ textAlign: 'initial' }}>
-                Curso <span>{product.title}</span>
+            </div>
+            <div className='price-container'>
+              <p
+                className='title'
+                style={{ lineHeight: '25px', textAlign: 'end' }}
+              >
+                Total<span> a pagar</span>
               </p>
-            )}
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: returnPriceTag(
+                    trial,
+                    v,
+                    frequency,
+                    type,
+                    coupon,
+                    product.price,
+                    nailmasterplusanual,
+                  ),
+                }}
+              ></p>
+            </div>
+            <div className='bg'></div>
           </div>
-          <div className='info'>
-            <p>
-              Obtén decenas de cursos y clases de decoración y aplicación
-              de uñas por{' '}
-              <span>
-                $
-                {returnPrice()}
-              </span>
-              <br />
-            </p>
-          </div>
-          <div className='price-container'>
-            <p
-              className='title'
-              style={{ lineHeight: '25px', textAlign: 'end' }}
-            >
-              Total<span> a pagar</span>
-            </p>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: returnPriceTag(
-                  trial,
-                  v,
-                  frequency,
-                  type,
-                  coupon,
-                  product.price,
-                  nailmasterplusanual,
-                ),
-              }}
-            ></p>
-          </div>
-          <div className='bg'></div>
         </div>
-      </div>
-      <div className='right-section-mobile'>
-        <div className='box'>
-          <p className='title'>¿Qué estás adquiriendo?</p>
-          <div>
-            {type == 'subscription' ? (
-              <p className='title'>
-                Suscripción{' '}
+      </PurchaseNewContainer>
+      <SubscriptionInfoContainer>
+        <div className='right-section-mobile'>
+          <div className='box'>
+            <p className='title'>¿Qué estás adquiriendo?</p>
+            <div>
+              {type == 'subscription' ? (
+                <p className='title'>
+                  Suscripción{' '}
+                  <span>
+                    Gonvar+{' '}
+                    {(frequency === 'month' || trial === 'true') &&
+                      'Mensual'}{' '}
+                    {frequency === 'anual' && 'Anual'}{' '}
+                    {frequency === 'cuatrimestral' && 'Cuatrimestral'}
+                  </span>{' '}
+                </p>
+              ) : (
+                <p className='title' style={{ textAlign: 'initial' }}>
+                  Curso <span>{product.title}</span>
+                </p>
+              )}
+            </div>
+            <div className='info'>
+              <p>
+                Obtén decenas de cursos y clases de decoración y aplicación
+                de uñas por{' '}
                 <span>
-                  Gonvar+{' '}
-                  {(frequency === 'month' || trial === 'true') &&
-                    'Mensual'}{' '}
-                  {frequency === 'anual' && 'Anual'}{' '}
-                  {frequency === 'cuatrimestral' && 'Cuatrimestral'}
-                </span>{' '}
+                  $
+                  {returnPrice()}
+                </span>
+                <br />
               </p>
-            ) : (
-              <p className='title' style={{ textAlign: 'initial' }}>
-                Curso <span>{product.title}</span>
+            </div>
+            <div className='price-container'>
+              <p
+                className='title'
+                style={{ lineHeight: '25px', textAlign: 'end' }}
+              >
+                Total<span> a pagar</span>
               </p>
-            )}
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: returnPriceTag(
+                    trial,
+                    v,
+                    frequency,
+                    type,
+                    coupon,
+                    product.price,
+                    nailmasterplusanual,
+                  ),
+                }}
+              ></p>
+            </div>
+            <div className='bg'></div>
           </div>
-          <div className='info'>
-            <p>
-              Obtén decenas de cursos y clases de decoración y aplicación
-              de uñas por{' '}
-              <span>
-                $
-                {returnPrice()}
-              </span>
-              <br />
-            </p>
-          </div>
-          <div className='price-container'>
-            <p
-              className='title'
-              style={{ lineHeight: '25px', textAlign: 'end' }}
-            >
-              Total<span> a pagar</span>
-            </p>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: returnPriceTag(
-                  trial,
-                  v,
-                  frequency,
-                  type,
-                  coupon,
-                  product.price,
-                  nailmasterplusanual,
-                ),
-              }}
-            ></p>
-          </div>
-          <div className='bg'></div>
         </div>
-      </div>
-    </PurchaseNewContainer>
+      </SubscriptionInfoContainer>
+    </>
   );
 };
