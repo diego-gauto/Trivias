@@ -142,7 +142,7 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user, adminUserId }: Props) =
 
   const generatePricesByOption = () => {
     const pricesMounth = [459, 249, 149];
-    const pricesCuatri = [1599];
+    const pricesCuatri = [1599, 999];
     const pricesAnnual = [3497, 1599];
 
     let prices: number[] = [];
