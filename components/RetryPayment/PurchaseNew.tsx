@@ -1006,60 +1006,35 @@ export const PurchaseNew = () => {
 
         <div className='complete-contain'>
           <div className='main-container'>
-            {
-              true &&
-              <div className='steps'>
-                <div className='circle'>
-                  <FaCheck style={{ color: 'white' }}></FaCheck>
-                </div>
-                <div
-                  className='line'
-                  style={{
-                    backgroundColor: 'none',
-                    border: '',
-                  }}
-                ></div>
-                <div className='circle-no-fill'></div>
-                <div className='left-info'>
-                  <p>Paso 1</p>
-                  <div className='rect'></div>
-                  <p className='lower'>
-                    Configuración <br />
-                    de la cuenta
-                  </p>
-                </div>
-                <div className='right-info'>
-                  <p>Paso 2</p>
-                  <div className='rect'></div>
-                  <p className='lower'>
-                    Proceso <br />
-                    de pago
-                  </p>
-                </div>
+            <div className='steps'>
+              <div className='circle'>
+                <FaCheck style={{ color: 'white' }}></FaCheck>
               </div>
-            }
-            {/*
-          <h2>Suscripción Gonvar+ {getSubscriptionTypeTitle(frequency)}</h2>
-          <p
-            style={{
-              fontSize: '24px',
-              fontWeight: '600'
-            }}
-          >
-            Total a pagar: <span
-              style={{
-                fontSize: '26px',
-                color: 'orange'
-              }}
-            >
-              {
-                Intl.NumberFormat('es-MX', {
-                  style: 'currency', currency: 'MXN'
-                }).format(getPriceByParams(type, frequency, v))
-              } MXN
-            </span>
-          </p>*/
-            }
+              <div
+                className='line'
+                style={{
+                  backgroundColor: 'none',
+                  border: '',
+                }}
+              ></div>
+              <div className='circle-no-fill'></div>
+              <div className='left-info'>
+                <p>Paso 1</p>
+                <div className='rect'></div>
+                <p className='lower'>
+                  Configuración <br />
+                  de la cuenta
+                </p>
+              </div>
+              <div className='right-info'>
+                <p>Paso 2</p>
+                <div className='rect'></div>
+                <p className='lower'>
+                  Proceso <br />
+                  de pago
+                </p>
+              </div>
+            </div>
             <div className='security-info'>
               <div className='top'>
                 <AiFillLock></AiFillLock>
@@ -1073,24 +1048,35 @@ export const PurchaseNew = () => {
               Seleccione cualquiera de los métodos de pago disponibles
             </p>
             {paymentMethods.length > 0 && (
-              <div className='payment-container'>
-                {!loader ? (
-                  paymentMethods.map((pm: IPm, index: number) => {
-                    return (
-                      <PaymentMethods
-                        pm={pm}
-                        index={index}
-                        pm_size={paymentMethods.length}
-                        changePaymentMethod={changePaymentMethod}
-                        key={'pm-' + index}
-                        handleDelete={detachPayment}
-                      />
-                    );
-                  })
-                ) : (
-                  <LoaderContainSpinner />
-                )}
-              </div>
+              <>
+                <div className='payment-container'>
+                  {!loader ? (
+                    paymentMethods.map((pm: IPm, index: number) => {
+                      return (
+                        <PaymentMethods
+                          pm={pm}
+                          index={index}
+                          pm_size={paymentMethods.length}
+                          changePaymentMethod={changePaymentMethod}
+                          key={'pm-' + index}
+                          handleDelete={detachPayment}
+                        />
+                      );
+                    })
+                  ) : (
+                    <LoaderContainSpinner />
+                  )}
+                </div>
+                <button
+                  className={addPayment ? 'fade' : ''}
+                  onClick={() => {
+                    pay();
+                    setOption(0);
+                  }}
+                >
+                  Reintentar pago
+                </button>
+              </>
             )}
             {
               paymentMethods.length > 0 &&
@@ -1498,12 +1484,9 @@ export const PurchaseNew = () => {
             </div>
             <div className='info'>
               <p>
-                Obtén decenas de cursos y clases de decoración y aplicación
-                de uñas por{' '}
-                <span>
-                  $
-                  {returnPrice()}
-                </span>
+                {
+                  `La suscripción que te permite ver más de 70 cursos de uñas y belleza en línea. Accede hoy mismo por sólo $${returnPrice()}`
+                }
                 <br />
               </p>
             </div>
@@ -1556,12 +1539,9 @@ export const PurchaseNew = () => {
             </div>
             <div className='info'>
               <p>
-                Obtén decenas de cursos y clases de decoración y aplicación
-                de uñas por{' '}
-                <span>
-                  $
-                  {returnPrice()}
-                </span>
+                {
+                  `La suscripción que te permite ver más de 70 cursos de uñas y belleza en línea. Accede hoy mismo por sólo $${returnPrice()}`
+                }
                 <br />
               </p>
             </div>

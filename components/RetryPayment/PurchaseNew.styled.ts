@@ -117,7 +117,7 @@ export const PurchaseNewContainer = styled.div`
   .complete-contain {
     display: flex;
     justify-content: center;
-    width: auto;
+    width: calc(100% - 240px);
     max-width: 650px;
     padding-inline: 20px;
     background-color: #fff;
@@ -212,7 +212,6 @@ export const PurchaseNewContainer = styled.div`
           display: flex;
           gap: 30px;
           width: 100%;
-          flex-wrap: wrap;
           justify-content: center;
           margin-inline: 40px;
           .left-side {
@@ -582,7 +581,6 @@ export const PurchaseNewContainer = styled.div`
       align-self: flex-start;
       margin-left: 15px;
       margin-right: 150px;
-      max-width: 450px;
       .main-container {
         gap: 15px;
         width: 100%;
@@ -785,6 +783,9 @@ export const PurchaseNewContainer = styled.div`
     }
     .right-section {
       display: block;
+    }
+    .card-container {
+      flex-wrap: wrap;
     }
   }
   @media (max-width: 600px) {
@@ -998,6 +999,21 @@ export const SubscriptionInfoContainer = styled.div`
     .right-section-mobile {
       display: none;
       .box {
+      }
+    }
+  }
+  @media screen and (max-width: 8300px) {
+    /*
+    .complete-contain .main-container .add-payment-container .card-container
+    */
+
+    .complete-contain {
+      .main-container {
+        .add-payment-container {
+          .card-container {
+            flex-wrap: wrap;
+          }
+        }
       }
     }
   }
