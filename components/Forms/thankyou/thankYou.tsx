@@ -54,6 +54,7 @@ const ThankYouForm = () => {
     allCenter,
     watsapLogo,
     whatsappContainer,
+    linkButton
   } = styles;
 
   const router = useRouter();
@@ -105,6 +106,16 @@ const ThankYouForm = () => {
     const link = form?.redirect.link;
     if (link) {
       router.push(link);
+    } else {
+      // Manejar el caso en el que link es undefined
+      console.error('El enlace de redirección es indefinido');
+    }
+  };
+
+  const redirectToLanding = () => {
+    const link = "/suscripcion-cuatrimestral";
+    if (link) {
+      window.open(link, '_blank');
     } else {
       // Manejar el caso en el que link es undefined
       console.error('El enlace de redirección es indefinido');
@@ -217,6 +228,17 @@ const ThankYouForm = () => {
             </div>
           </div>
         )}
+        <p className={paragraph}>
+          Revisa todo lo que incluye la carrera de uñas
+        </p>
+        <div
+          className={`${linkButton} ${allCenter}`}
+          onClick={() => redirectToLanding()}
+        >
+          <p>
+            <b>Conoce Gonvar+</b>
+          </p>
+        </div>
       </div>
 
       <div className={imgContainer}>

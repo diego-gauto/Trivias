@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  padding: 200px 0 0 15%;
+  padding: 100px 0 0 15%;
 
   font-family: 'Montserrat', Helvetica;
   color: #3f1168;
@@ -31,9 +31,9 @@
     justify-content: center;
     text-align: start;
     width: 100%;
-    padding: 0;
+    padding: 30px 0 0 0;
     position: relative;
-    top: 100px;
+    top: 50px;
   }
 
   .title {
@@ -84,20 +84,18 @@
 }
 
 .imgContainer img {
-  height: auto;
-  width: 850px;
+  height: 100%;
   position: relative;
   right: 330px;
-  bottom: -32px;
 
   @media (max-width: 719px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 800px;
-    right: 60px;
-    bottom: 0;
+    width: 500px;
+    right: 40px;
+    bottom: 30px;
     z-index: 1;
   }
 }
@@ -105,6 +103,7 @@
 .whatsappContainer {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 
   font-family: 'Montserrat', Helvetica;
   color: #3f1168;
@@ -141,12 +140,18 @@
     font-size: 18px;
     background-color: #28af25;
 
-    margin: 0 0 0 30px;
+    margin: -10px 0 0 30px;
 
     @media (max-width: 719px) {
-      margin: 0 auto;
+      margin: -10px auto 0 auto;
       z-index: 2;
     }
+  }
+
+  .watsapButton:hover {
+    transform: scale(1.03);
+    -webkit-transition: 0.5s ease all;
+    transition: 0.5s ease all;
   }
 }
 
@@ -159,4 +164,30 @@
 .watsapLogo {
   width: 25px;
   height: auto;
+}
+
+.linkButton {
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  border: none;
+  padding: 15px 20px 0 20px;
+
+  border-radius: 50px;
+  font-size: 18px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  margin: -10px 0 0 30px;
+
+  @media (max-width: 719px) {
+    margin: -10px auto 0 auto;
+    z-index: 2;
+  }
+}
+
+.linkButton:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
 }
