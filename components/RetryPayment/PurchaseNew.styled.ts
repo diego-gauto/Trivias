@@ -429,10 +429,10 @@ export const PurchaseNewContainer = styled.div`
       */
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 5px;
       background: rgb(148 44 237 / 30%);
       border-radius: 20px;
-      padding: 40px 20px;
+      padding: 20px 20px;
       .title {
         text-align: center;
         font-size: 16px;
@@ -460,7 +460,7 @@ export const PurchaseNewContainer = styled.div`
         grid-template-columns: auto auto;
         grid-gap: 10px;
         p {
-          color: #8161aa;
+          color: black;
           font-size: 14px;
           span {
             color: #8161aa;
@@ -528,6 +528,7 @@ export const PurchaseNewContainer = styled.div`
           font-size: 22px;
           font-weight: bold;
           color: #e55c00;
+          margin: 0;
           span {
             font-weight: 400;
             color: #e55c00;
@@ -538,7 +539,7 @@ export const PurchaseNewContainer = styled.div`
         background: #ffdd67;
         width: 25%;
         border-top-right-radius: 100%;
-        height: 150px;
+        height: 120px;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -564,8 +565,8 @@ export const PurchaseNewContainer = styled.div`
   }
   @media (max-width: 1300px) {
     .right-section {
-      padding-inline: 20px;
-      padding-block: 20px;
+      padding-inline: 5px;
+      padding-block: 5px;
       .box {
         width: 100%;
         /* max-width: 295px; */
@@ -576,10 +577,10 @@ export const PurchaseNewContainer = styled.div`
       */
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 5px;
         background: rgb(148 44 237 / 30%);
         border-radius: 20px;
-        padding: 40px 20px;
+        padding: 20px 20px;
       }
     }
     button {
@@ -754,7 +755,7 @@ export const PurchaseNewContainer = styled.div`
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
       position: fixed; /* Fija la posición */
-      top: 25%;
+      top: 20%;
       left: 62%;
       max-width: 295px;
     }
