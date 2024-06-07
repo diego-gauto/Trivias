@@ -1,21 +1,15 @@
 import styled from 'styled-components';
 
 export const PurchaseNewContainer = styled.div`
-  /*
-  Buen comentario
-  */
-  /*
-    display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  */
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   padding-block: 30px;
+  padding-inline: 15px;
   background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
   min-height: 82vh;
   .actives {
@@ -117,13 +111,12 @@ export const PurchaseNewContainer = styled.div`
   .complete-contain {
     display: flex;
     justify-content: center;
-    width: calc(100% - 240px);
+    width: 100%;
     max-width: 650px;
     padding-inline: 20px;
     background-color: #fff;
     padding-block: 40px;
     border-radius: 40px;
-    margin-right: 80px;
     align-self: center;
     .main-container {
       display: flex;
@@ -174,7 +167,6 @@ export const PurchaseNewContainer = styled.div`
         }
         .button-container {
           display: grid;
-          /*justify-content: space-between;*/
           grid-template-columns: 1fr 1fr;
           width: 100%;
           gap: 20px;
@@ -214,6 +206,7 @@ export const PurchaseNewContainer = styled.div`
           width: 100%;
           justify-content: center;
           margin-inline: 40px;
+          flex-wrap: nowrap;
           .left-side {
             display: flex;
             flex-direction: column;
@@ -420,19 +413,20 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   .right-section {
-    position: relative;
-    display: none;
-  }
-  .right-section-mobile {
-    position: fixed;
-    right: 10px;
-    width: 260px;
-  }
-  .right-section,
-  .right-section-mobile {
+    display: flex;
+    justify-content: center;
+    padding-inline: 20px;
+    padding-block: 20px;
+    width: 100%;
     .box {
-      height: 100%;
       width: 100%;
+      max-width: 450px;
+      /* max-width: 295px; */
+      position: relative;
+      /*
+      top: 95px;
+      right: 20px;
+      */
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -564,7 +558,30 @@ export const PurchaseNewContainer = styled.div`
       }
     }
   }
+  .white-space {
+    visibility: hidden;
+    min-width: 300px;
+  }
   @media (max-width: 1300px) {
+    .right-section {
+      padding-inline: 20px;
+      padding-block: 20px;
+      .box {
+        width: 100%;
+        /* max-width: 295px; */
+        position: relative;
+        /*
+      top: 95px;
+      right: 20px;
+      */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: rgb(148 44 237 / 30%);
+        border-radius: 20px;
+        padding: 40px 20px;
+      }
+    }
     button {
       padding-block: 10px;
       padding-inline: 30px;
@@ -578,9 +595,9 @@ export const PurchaseNewContainer = styled.div`
     }
     .complete-contain {
       padding-block: 30px;
-      align-self: flex-start;
+      align-self: center;
       margin-left: 15px;
-      margin-right: 150px;
+      max-width: 450px;
       .main-container {
         gap: 15px;
         width: 100%;
@@ -615,6 +632,7 @@ export const PurchaseNewContainer = styled.div`
         .add-payment-container {
           gap: 30px;
           .card-container {
+            flex-wrap: wrap;
             .right-side {
               width: fit-content;
             }
@@ -629,12 +647,6 @@ export const PurchaseNewContainer = styled.div`
     }
   }
   @media (max-width: 750px) {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
     .complete-contain {
       margin: 5px;
       width: 100%;
@@ -654,146 +666,9 @@ export const PurchaseNewContainer = styled.div`
           }
         }
       }
-      .right-section-mobile {
-        position: fixed;
-        top: 10px;
-        .box {
-          .title {
-            font-size: 16px;
-            span {
-              color: #942ced;
-            }
-            sub {
-              font-style: italic;
-              font-size: 14px;
-              color: #6611c2;
-              font-weight: 400;
-            }
-          }
-          .subtitle {
-            color: #6611c2;
-            font-size: 20px;
-            font-weight: 500;
-            font: small-caption;
-            letter-spacing: 2px;
-          }
-          .info {
-            display: grid;
-            grid-template-columns: auto auto;
-            grid-gap: 10px;
-            p {
-              color: #8161aa;
-              font-size: 14px;
-              span {
-                color: #8161aa;
-                font-weight: bold;
-              }
-            }
-            img {
-              height: 70%;
-              width: 100%;
-              border-radius: 10px;
-            }
-          }
-
-          .coupon-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            width: fit-content;
-            margin-left: auto;
-            img {
-              margin: 0;
-            }
-            a {
-              color: #942ced;
-              font-size: 17px;
-              font-weight: bold;
-            }
-            p {
-              text-align: end;
-            }
-            .coupon {
-              position: relative;
-              margin-block: 20px;
-              input {
-                color: #6611c2;
-                padding: 5px 10px;
-                font-size: 15px;
-                outline: none;
-                border: 1.5px solid #942ced;
-                border-radius: 20px;
-                &::placeholder {
-                  font-size: 13px;
-                  color: #942ced;
-                }
-              }
-              button {
-                width: 48px;
-                position: absolute;
-                height: 100%;
-                background: #942ced;
-                right: 0;
-                border: none;
-                border-radius: 20px;
-              }
-            }
-            .line {
-              border: 1.5px solid #3f1168;
-              width: 100%;
-            }
-          }
-          .price-container {
-            margin-top: auto;
-            .total {
-              text-align: end;
-              font-size: 28px;
-              font-weight: bold;
-              color: #e55c00;
-              span {
-                font-weight: 400;
-                color: #e55c00;
-              }
-            }
-          }
-          .bg {
-            background: #ffdd67;
-            width: 25%;
-            border-top-right-radius: 100%;
-            height: 150px;
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            border-bottom-left-radius: 20px;
-          }
-          .image {
-            position: absolute;
-            bottom: 0;
-            left: -71px;
-            max-height: 350px;
-            @media (max-width: 1400px) {
-              max-height: 300px;
-            }
-            @media (max-width: 1280px) {
-              max-height: 270px;
-            }
-          }
-        }
-      }
-    }
-    .right-section {
-      display: block;
-    }
-    .card-container {
-      flex-wrap: wrap;
     }
   }
   @media (max-width: 600px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
     .button-container {
       grid-template-columns: 1fr;
       align-items: center;
@@ -806,13 +681,17 @@ export const PurchaseNewContainer = styled.div`
         }
       }
     }
+    .complete-contain {
+      .main-container {
+        .add-payment-container {
+          .card-container {
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
   }
   @media (max-width: 480px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
     .edit {
       width: 320px;
     }
@@ -833,6 +712,7 @@ export const PurchaseNewContainer = styled.div`
           }
           .card-container {
             gap: 15px;
+            flex-wrap: wrap;
             .left-side {
               width: 90%;
               align-items: center;
@@ -850,171 +730,51 @@ export const PurchaseNewContainer = styled.div`
       }
     }
   }
-`;
-
-export const SubscriptionInfoContainer = styled.div`
-  background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
-
-  .right-section-mobile {
-    .box {
-      height: calc(100% - 215px);
-      min-height: 510px;
-      max-height: 600px;
-      width: 180px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background-color: #dfbffa;
-      border-radius: 20px;
-      padding: 40px 20px;
-      position: fixed;
-      top: 95px;
-      right: 20px;
-      .title {
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        color: #3f1168;
-        span {
-          color: #942ced;
-        }
-        sub {
-          font-style: italic;
-          font-size: 14px;
-          color: #6611c2;
-          font-weight: 400;
-        }
-      }
-      .subtitle {
-        color: #6611c2;
-        font-size: 20px;
-        font-weight: 500;
-        font: small-caption;
-        letter-spacing: 2px;
-      }
-      .info {
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-gap: 10px;
-        p {
-          color: #8161aa;
-          font-size: 14px;
-          span {
-            color: #8161aa;
-            font-weight: bold;
-          }
-        }
-        img {
-          height: 70%;
-          width: 100%;
-          border-radius: 10px;
-        }
-      }
-
-      .coupon-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        width: fit-content;
-        margin-left: auto;
-        img {
-          margin: 0;
-        }
-        a {
-          color: #942ced;
-          font-size: 17px;
-          font-weight: bold;
-        }
-        p {
-          text-align: end;
-        }
-        .coupon {
-          position: relative;
-          margin-block: 20px;
-          input {
-            color: #6611c2;
-            padding: 5px 10px;
-            font-size: 15px;
-            outline: none;
-            border: 1.5px solid #942ced;
-            border-radius: 20px;
-            &::placeholder {
-              font-size: 13px;
-              color: #942ced;
-            }
-          }
-          button {
-            width: 48px;
-            position: absolute;
-            height: 100%;
-            background: #942ced;
-            right: 0;
-            border: none;
-            border-radius: 20px;
-          }
-        }
-        .line {
-          border: 1.5px solid #3f1168;
-          width: 100%;
-        }
-      }
-      .price-container {
-        margin-top: auto;
-        .total {
-          text-align: end;
-          font-size: 22px;
-          font-weight: bold;
-          color: #e55c00;
-          span {
-            font-weight: 400;
-            color: #e55c00;
-          }
-        }
-      }
-      .bg {
-        background: #ffdd67;
-        width: 25%;
-        border-top-right-radius: 100%;
-        height: 150px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        border-bottom-left-radius: 20px;
-      }
-      .image {
-        position: absolute;
-        bottom: 0;
-        left: -71px;
-        max-height: 350px;
-        @media (max-width: 1400px) {
-          max-height: 300px;
-        }
-        @media (max-width: 1280px) {
-          max-height: 270px;
-        }
-      }
-    }
-  }
-  @media screen and (max-width: 750px) {
-    .right-section-mobile {
-      display: none;
-      .box {
-      }
-    }
-  }
-  @media screen and (max-width: 8300px) {
-    /*
-    .complete-contain .main-container .add-payment-container .card-container
-    */
-
+  @media only screen and (max-width: 767px) {
     .complete-contain {
-      .main-container {
-        .add-payment-container {
-          .card-container {
-            flex-wrap: wrap;
-          }
-        }
-      }
+      order: 1; /* Cambia el orden de la primera tarjeta */
+      align-self: center;
+    }
+    .right-section {
+      order: 2; /* Cambia el orden de la segunda tarjeta */
+    }
+  }
+
+  /* Dispositivos tablet */
+  @media only screen and (min-width: 768px) and (max-width: 1301px) {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    justify-content: center;
+    position: relative;
+    .complete-contain {
+      order: 1; /* Cambia el orden de la primera tarjeta */
+      align-self: center; /* Centra verticalmente */
+      justify-self: end;
+    }
+    .right-section {
+      order: 2; /* Cambia el orden de la segunda tarjeta */
+      position: fixed; /* Fija la posición */
+      top: 25%;
+      left: 62%;
+      max-width: 295px;
+    }
+  }
+
+  /* Dispositivos de escritorio */
+  @media only screen and (min-width: 1300px) {
+    flex-direction: row;
+    justify-content: center;
+    .complete-contain {
+      order: 1; /* Cambia el orden de la primera tarjeta */
+      align-self: center; /* Centra verticalmente */
+      margin-right: 50px;
+    }
+    .right-section {
+      order: 2; /* Cambia el orden de la segunda tarjeta */
+      position: fixed; /* Fija la posición */
+      max-width: 372px;
+      top: 25%;
+      left: 72.5%;
     }
   }
 `;

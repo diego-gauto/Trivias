@@ -34,7 +34,7 @@ import {
 import { checkEmpty } from './functions';
 import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { PurchaseNewContainer, SubscriptionInfoContainer } from './PurchaseNew.styled';
+import { PurchaseNewContainer } from './PurchaseNew.styled';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import ModalError from '../../containers/Profile/Purchase/Modal1/ModalError';
 import { createNotification } from '../api/notifications';
@@ -43,86 +43,16 @@ import { retrieveCoupons } from '../api/admin';
 import ErrorModal from '../Error/ErrorModal';
 import { AiFillLock } from 'react-icons/ai';
 import { returnPriceTag } from '../../utils/functions';
+import { getPriceByParams, getTitle, getDuration, getSubscription } from './PurchaseNewFunctions';
 
 declare let window: any;
-
-// ?type=subscription&frequency=cuatrimestral&v=3
-
-/*
-query: { type: 'subscription', frequency, v: '3' },
-const frequency = type === 'M' ? 'month' : type === 'C' ? 'cuatrimestral' : 'anual';
-*/
-
-const getPriceByParams = (type: string, frequency: string, v: string) => {
-  let tempPrice = 0;
-  if (frequency === 'month' && v === '1') tempPrice = 149;
-  if (frequency === 'month' && v === '2') tempPrice = 249;
-  if (frequency === 'month' && v === '3') tempPrice = 459;
-  if (frequency === 'anual' && v === '1') tempPrice = 1599;
-  if (frequency === 'anual' && v === '2') tempPrice = 1599;
-  if (frequency === 'anual' && v === '3') tempPrice = 3497;
-  if (frequency === 'cuatrimestral' && v === '3') tempPrice = 1599;
-  if (type === 'course') tempPrice = 1599;
-  return tempPrice;
-}
-/*
-select distinct product from invoices;
-Gonvar Plus
-Nails Master 2.0
-Alineación Certificación SEP
-Nails Master Revolution
-Gonvar Plus Cuatri
-Gonvar Plus Anual
-Gonvar Plus Mensual
-*/
-const getTitle = (frequency: string) => {
-  if (frequency === 'month') {
-    return 'Gonvar Plus Mensual';
-  } else if (frequency === 'cuatrimestral') {
-    return 'Gonvar Plus Cuatri';
-  } else if (frequency === 'anual') {
-    return 'Gonvar Plus Anual';
-  }
-
-  return 'Gonvar Plus';
-}
-
-const getDuration = (frequency: string) => {
-  if (frequency === 'month') {
-    return 30;
-  } else if (frequency === 'cuatrimestral') {
-    return 120;
-  } else if (frequency === 'anual') {
-    return 365;
-  }
-
-  return 0;
-}
-
-const getSubscription = (type: string, frequency: string, v: string): Subscription => {
-  return {
-    price: getPriceByParams(type, frequency, v),
-    title: getTitle(frequency),
-    duration: getDuration(frequency),
-  }
-}
-
 interface Subscription {
   price: number,
   title: string,
   duration: any,
 }
 
-const getSubscriptionTypeTitle = (frequency: string) => {
-  if (frequency === 'month') {
-    return 'Mensual';
-  } else if (frequency === 'cuatrimestral') {
-    return 'Cuatrimestral';
-  } else if (frequency === 'anual') {
-    return 'Anual';
-  }
-  return '';
-}
+type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
 
 export const PurchaseNew = () => {
   // type, id, trial, frequency, nailmasterplusanual, v
@@ -172,9 +102,6 @@ export const PurchaseNew = () => {
 
   const courseId = new URLSearchParams(window.location.search);
   let idC = courseId.get('id');
-  /*
-  
-  */
 
   const [showModalError, setShowModalError] = useState<any>(false);
 
@@ -347,31 +274,6 @@ export const PurchaseNew = () => {
     }
   };
 
-  const addNewCard = async () => {
-    setLoaderAdd(!loaderAdd);
-    let c: any = card;
-    if (Object.keys(card).some((key: any) => c[key] === '')) {
-      alert('Por favor acomplete todos los campos!');
-      setLoaderAdd(false);
-    } else {
-      let tempCard = {
-        card: {
-          number: card.number.replaceAll(' ', '').replace(/\*/g, ''),
-          name: card.holder,
-          exp_month: card.exp_month,
-          exp_year: card.exp_year,
-          cvc: card.cvc,
-        },
-      };
-
-      window.Conekta.Token.create(
-        tempCard,
-        conektaSuccessResponseHandler,
-        conektaErrorResponseHandler,
-        'web',
-      );
-    }
-  };
   const conektaSuccessResponseHandler = (token: any) => {
     let user = userDataAuth.user;
     let tokenId = token.id;
@@ -536,24 +438,6 @@ export const PurchaseNew = () => {
         const msg = 'pago-rechazado';
       }
     });
-  };
-
-  type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
-
-  const getFrecuency = (n: number): FrecuencyValue => {
-    if ([0, 7, 8].includes(n)) {
-      return 'cuatrimestral';
-    }
-
-    if ([1, 6].includes(n)) {
-      return 'month';
-    }
-
-    if ([4, 5].includes(n)) {
-      return 'year';
-    }
-
-    return 'cuatrimestral';
   };
 
   const payWithOxxo = () => {
@@ -978,7 +862,6 @@ export const PurchaseNew = () => {
     }
     return 'add-payment-container ' + (addPayment ? 'show-contain' : '');
   }
-
   if (!user) {
     return <div />;
   }
@@ -1074,7 +957,7 @@ export const PurchaseNew = () => {
                     setOption(0);
                   }}
                 >
-                  Reintentar pago
+                  Confirmar compra
                 </button>
               </>
             )}
@@ -1461,7 +1344,7 @@ export const PurchaseNew = () => {
             </div>
           </div>
         </div>
-        <div className='right-section'>
+        <div className={`right-section`}>
           <div className='box'>
             <p className='title'>¿Qué estás adquiriendo?</p>
             <div>
@@ -1515,61 +1398,6 @@ export const PurchaseNew = () => {
           </div>
         </div>
       </PurchaseNewContainer>
-      <SubscriptionInfoContainer>
-        <div className='right-section-mobile'>
-          <div className='box'>
-            <p className='title'>¿Qué estás adquiriendo?</p>
-            <div>
-              {type == 'subscription' ? (
-                <p className='title'>
-                  Suscripción{' '}
-                  <span>
-                    Gonvar+{' '}
-                    {(frequency === 'month' || trial === 'true') &&
-                      'Mensual'}{' '}
-                    {frequency === 'anual' && 'Anual'}{' '}
-                    {frequency === 'cuatrimestral' && 'Cuatrimestral'}
-                  </span>{' '}
-                </p>
-              ) : (
-                <p className='title' style={{ textAlign: 'initial' }}>
-                  Curso <span>{product.title}</span>
-                </p>
-              )}
-            </div>
-            <div className='info'>
-              <p>
-                {
-                  `La suscripción que te permite ver más de 70 cursos de uñas y belleza en línea. Accede hoy mismo por sólo $${returnPrice()}`
-                }
-                <br />
-              </p>
-            </div>
-            <div className='price-container'>
-              <p
-                className='title'
-                style={{ lineHeight: '25px', textAlign: 'end' }}
-              >
-                Total<span> a pagar</span>
-              </p>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: returnPriceTag(
-                    trial,
-                    v,
-                    frequency,
-                    type,
-                    coupon,
-                    product.price,
-                    nailmasterplusanual,
-                  ),
-                }}
-              ></p>
-            </div>
-            <div className='bg'></div>
-          </div>
-        </div>
-      </SubscriptionInfoContainer>
     </>
   );
 };
