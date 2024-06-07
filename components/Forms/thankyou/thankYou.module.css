@@ -46,7 +46,7 @@
     max-width: 500px;
 
     @media (max-width: 420px) {
-      font-size: 40px;
+      font-size: 35px;
       font-weight: 600;
       max-width: 400px;
     }
@@ -63,9 +63,9 @@
       padding: 0 10px;
       text-align: start;
 
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
-      line-height: 25px;
+      line-height: 20px;
     }
   }
 
@@ -77,8 +77,8 @@
 
     @media (max-width: 719px) {
       padding: 0 10px;
-      font-size: 18px;
-      line-height: 20px;
+      font-size: 16px;
+      line-height: 18px;
     }
   }
 
@@ -91,6 +91,8 @@
     @media (max-width: 719px) {
       max-width: 600px;
       padding: 0 10px;
+      font-size: 13px;
+      line-height: 15px;
     }
   }
 
@@ -149,21 +151,21 @@
       padding: 0 10px;
       max-width: 600px;
 
-      font-size: 18px;
-      line-height: 20px;
+      font-size: 16px;
+      line-height: 18px;
     }
   }
 
   .watsapButton {
     cursor: pointer;
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 30px;
     border: none;
-    padding: 0 45px;
+    padding: 0 30px;
 
     border-radius: 50px;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 15px;
     background-color: #28af25;
 
     margin: -10px 0 0 30px;
@@ -188,19 +190,19 @@
 }
 
 .watsapLogo {
-  width: 25px;
+  width: 18px;
   height: auto;
 }
 
 .linkButton {
   cursor: pointer;
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: 30px;
   border: none;
-  padding: 15px 20px 0 20px;
+  padding: 15px 10px 0 10px;
 
   border-radius: 50px;
-  font-size: 18px;
+  font-size: 15px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
   color: #ede7f2;
   margin: -10px 0 20px 30px;

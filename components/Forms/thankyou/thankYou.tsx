@@ -248,7 +248,7 @@ const ThankYouForm = () => {
         <div className={contact}>
           <p>Recuerda que nuestros medios de contacto oficiales son:</p>
           <p>
-            Whats app: <b>+52 55 3893 3134</b><br />
+            Whatsapp: <b>+52 55 3893 3134</b><br />
             📞 <b>+1 656-218-5379</b><br />
             📞 <b>+1 334-560-1678</b><br />
             📞 <b>55 38 933 134</b><br />
