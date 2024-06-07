@@ -105,7 +105,7 @@ const ThankYouForm = () => {
   const redirectToWhatsAppChat = () => {
     const link = form?.redirect.link;
     if (link) {
-      router.push(link);
+      window.open(link, '_blank');
     } else {
       // Manejar el caso en el que link es undefined
       console.error('El enlace de redirección es indefinido');
@@ -228,9 +228,14 @@ const ThankYouForm = () => {
             </div>
           </div>
         )}
-        <p className={paragraph}>
-          Revisa todo lo que incluye la carrera de uñas
-        </p>
+        <>
+          <p className={paragraph}>
+            <b>{isLinkToWhatsappGroup(form?.redirect.link) ? "3er" : "2do"} Paso</b>
+            <br />
+            Revisa todo lo que incluye la carrera de uñas a la que deseas inscribir
+          </p>
+        </>
+
         <div
           className={`${linkButton} ${allCenter}`}
           onClick={() => redirectToLanding()}
