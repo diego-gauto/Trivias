@@ -14,7 +14,7 @@
   }
 
   @media (max-width: 719px) {
-    height: 850px;
+    height: 740px;
     flex-direction: column;
     justify-content: flex-start;
   }
