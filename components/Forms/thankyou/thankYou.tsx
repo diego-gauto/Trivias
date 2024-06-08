@@ -233,7 +233,7 @@ const ThankYouForm = () => {
           <p className={paragraph}>
             <b>{isLinkToWhatsappGroup(form?.redirect.link) ? "3er" : "2do"} Paso</b>
             <br />
-            Revisa todo lo que incluye la carrera de uñas a la que deseas inscribir
+            Revisa todo lo que incluye la carrera de uñas a la que te deseas inscribir
           </p>
         </>
 
