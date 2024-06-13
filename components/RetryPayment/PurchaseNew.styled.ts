@@ -433,6 +433,11 @@ export const PurchaseNewContainer = styled.div`
       background: rgb(148 44 237 / 30%);
       border-radius: 20px;
       padding: 20px 20px;
+      .gonvar-subscription-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
       .title {
         text-align: center;
         font-size: 16px;
@@ -457,8 +462,10 @@ export const PurchaseNewContainer = styled.div`
       }
       .info {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr;
         grid-gap: 10px;
+        align-items: center;
+        margin-bottom: 40px;
         p {
           color: black;
           font-size: 14px;
@@ -468,9 +475,20 @@ export const PurchaseNewContainer = styled.div`
           }
         }
         img {
-          height: 70%;
-          width: 100%;
+          width: 70%;
           border-radius: 10px;
+          justify-self: center;
+        }
+        @media screen and (max-width: 758px) {
+          grid-template-columns: 1fr;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 100px;
+          img {
+            width: 70%;
+            border-radius: 10px;
+            justify-self: center;
+          }
         }
       }
 
@@ -548,13 +566,13 @@ export const PurchaseNewContainer = styled.div`
       .image {
         position: absolute;
         bottom: 0;
-        left: -71px;
-        max-height: 350px;
-        @media (max-width: 1400px) {
-          max-height: 300px;
+        left: 0;
+        max-width: 50%;
+        @media (max-width: 768px) {
+          max-height: 40%;
         }
-        @media (max-width: 1280px) {
-          max-height: 270px;
+        @media (max-width: 1300px) {
+          max-height: 100%;
         }
       }
     }
@@ -768,14 +786,19 @@ export const PurchaseNewContainer = styled.div`
     .complete-contain {
       order: 1; /* Cambia el orden de la primera tarjeta */
       align-self: center; /* Centra verticalmente */
-      margin-right: 50px;
+      margin-right: 200px;
     }
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
       position: fixed; /* Fija la posición */
-      max-width: 372px;
-      top: 25%;
-      left: 72.5%;
+      max-width: 432px;
+      top: 15%;
+      left: 67%;
+    }
+    .info {
+      grid-template-columns: 3fr 2fr;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
     }
   }
 `;

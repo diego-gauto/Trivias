@@ -1347,7 +1347,11 @@ export const PurchaseNew = () => {
         <div className={`right-section`}>
           <div className='box'>
             <p className='title'>¿Qué estás adquiriendo?</p>
-            <div>
+            <p className="subtitle">PRODUCTOS</p>
+            <div className='gonvar-subscription-container'>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img src="/images/purchase/logo.png" alt="Gonvar Logo" style={{ margin: '0px' }} />
+              </div>
               {type == 'subscription' ? (
                 <p className='title'>
                   Suscripción{' '}
@@ -1372,6 +1376,7 @@ export const PurchaseNew = () => {
                 }
                 <br />
               </p>
+              <img src="/images/purchase/chica_banner.png" alt="Chica volteando de espaldas" />
             </div>
             <div className='price-container'>
               <p
@@ -1395,6 +1400,7 @@ export const PurchaseNew = () => {
               ></p>
             </div>
             <div className='bg'></div>
+            <img className="image" src="/images/purchase/neworange.png" alt="" />
           </div>
         </div>
       </PurchaseNewContainer>
