@@ -38,6 +38,7 @@
     "jspdf": "^2.5.1",
     "jwt-decode": "^3.1.2",
     "libphonenumber-js": "^1.10.34",
+    "lightweight-charts": "^4.1.5",
     "loadsh": "^0.0.4",
     "next": "12.1.0",
     "next-sitemap": "^4.1.8",
