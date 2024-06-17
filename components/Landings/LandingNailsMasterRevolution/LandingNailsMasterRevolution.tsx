@@ -81,9 +81,9 @@ const davinci = '/images/landing_nails_master/davinci.png';
 const mas = '/images/landing_nails_master/mas.png';
 const whitePoint = '/images/landing_nails_master/white_star.png';
 const whiteOut = '/images/landing_nails_master/white_outline.png';
-const nailPintura = '/images/landing_nails_master/nail_pintura.png';
-const nailYellow = '/images/landing_nails_master/nail_yellow.png';
-const nailWhite = '/images/landing_nails_master/nail-white.png';
+const nailPintura = '/images/landing_nails_master/curso-de-uñas-01.png';
+const nailYellow = '/images/landing_nails_master/curso-de-uñas-02.png';
+const nailWhite = '/images/landing_nails_master/curso-de-uñas-03.png';
 const linesB = '/images/landing_nails_master/lines-bottom.png';
 const manoBenefits = '/images/landing_nails_master/mano_benefits.png';
 const manuales = '/images/landing_nails_master/manuales.png';
@@ -91,7 +91,7 @@ const manoCosto = '/images/landing_nails_master/mano_costo.png';
 const chica = '/images/landing_nails_master/chica.png';
 const linesL = '/images/landing_nails_master/lines-left.png';
 const linesR = '/images/landing_nails_master/lines-right.png';
-const stars = '/images/landing_nails_master/estrellas.png';
+const stars = '/images/landing_nails_master/curso-de-uñas-04.png';
 const linesB2 = '/images/landing_nails_master/lines-bottom2.png';
 const gPlus = '/images/pay_plans/G+.png';
 let views = new Map<number, boolean>();
@@ -309,7 +309,12 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               />
             </div>
           </div>
-          <img src={nailPintura} className='left-img' />
+          <img
+            src={nailPintura}
+            className='left-img'
+            alt="curso-de-uñas-1"
+            title="Curso de uñas 1"
+          />
           <div className='space'>
             <p className='include-gonvar'>
               <img src={gPlus} alt='Gonvar logo' />
@@ -336,11 +341,25 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             </h2>
           </div>
 
-          <img src={nailYellow} className='right-img-1' />
-          <img src={nailWhite} className='right-img-2' />
+          <img
+            src={nailYellow}
+            className='right-img-1'
+            alt="curso-de-uñas-2"
+            title="Curso de uñas 2"
+          />
+          <img
+            src={nailWhite}
+            className='right-img-2'
+            alt="curso-de-uñas-03"
+            title="Curso de uñas 3"
+          />
 
           <div className='all-center'>
-            <img src={stars} className='stars' />
+            <img
+              src={stars}
+              className='stars'
+              alt="curso-de-uñas-4"
+              title="Curso de uñas 4" />
             <h3 className='space'>
               <b>(5) 23,738 opiniones</b>
             </h3>
