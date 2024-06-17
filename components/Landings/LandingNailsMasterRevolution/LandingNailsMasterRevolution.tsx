@@ -63,6 +63,7 @@ import {
   ThirteenSection,
   TwelveSection,
 } from "./LandingNailsMasterRevolution.styled";
+import Head from "next/head";
 
 const pointWatsap = '/images/landing_suscription/point_at_button.png';
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -239,1106 +240,1140 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
   useEffect(() => { }, [setver]);
 
   return (
-    <SuscriptionContain>
-      <FirstSection>
-        <div className='mt-3 fechas'>
-          <h4>
-            <b>Actualización 2024</b>
-            <br />
-            Inscripciones sólo desde el
-            <br />
-            6 de Mayo al 30 de Junio
-          </h4>
-          <Countdown
-            date={new Date(2024, 5, 30, 23, 59, 59)}
-            renderer={(props) => (
-              <div className='countdown'>
-                <h2>TIEMPO RESTANTE</h2>
-                <div className='time'>
-                  <div className='countdown-block'>
-                    <p className='tiempo'>
-                      {props.days < 10 && 0}
-                      {props.days}
-                    </p>
-                    <p className='sub'>DIAS</p>
-                  </div>
-                  <div className='countdown-block'>
-                    <p className='tiempo'>
-                      {props.hours < 10 && 0}
-                      {props.hours}
-                    </p>
-                    <p className='sub'>HORAS</p>
-                  </div>
-                  <div className='countdown-block'>
-                    <p className='tiempo'>
-                      {props.minutes < 10 && 0}
-                      {props.minutes}
-                    </p>
-                    <p className='sub'>MINUTOS</p>
-                  </div>
-                  <div className='countdown-block'>
-                    <p className='tiempo'>
-                      {props.seconds < 10 && 0}
-                      {props.seconds}
-                    </p>
-                    <p className='sub'>SEGUNDOS</p>
+    <>
+      <Head>
+        <title>Curso de Uñas: Conviértete en un Experto con Nail Master Revolution</title>
+        <meta
+          name="description"
+          content="Inscríbete en el mejor curso de uñas online Nail Master Revolution. Aprende técnicas avanzadas y conviértete en un profesional del nail art. ¡Empieza hoy!"
+        />
+      </Head>
+      <SuscriptionContain>
+        <FirstSection>
+          <div className='mt-3 fechas'>
+            <h4>
+              <b>Actualización 2024</b>
+              <br />
+              Inscripciones sólo desde el
+              <br />
+              6 de Mayo al 30 de Junio
+            </h4>
+            <Countdown
+              date={new Date(2024, 5, 30, 23, 59, 59)}
+              renderer={(props) => (
+                <div className='countdown'>
+                  <h2>TIEMPO RESTANTE</h2>
+                  <div className='time'>
+                    <div className='countdown-block'>
+                      <p className='tiempo'>
+                        {props.days < 10 && 0}
+                        {props.days}
+                      </p>
+                      <p className='sub'>DIAS</p>
+                    </div>
+                    <div className='countdown-block'>
+                      <p className='tiempo'>
+                        {props.hours < 10 && 0}
+                        {props.hours}
+                      </p>
+                      <p className='sub'>HORAS</p>
+                    </div>
+                    <div className='countdown-block'>
+                      <p className='tiempo'>
+                        {props.minutes < 10 && 0}
+                        {props.minutes}
+                      </p>
+                      <p className='sub'>MINUTOS</p>
+                    </div>
+                    <div className='countdown-block'>
+                      <p className='tiempo'>
+                        {props.seconds < 10 && 0}
+                        {props.seconds}
+                      </p>
+                      <p className='sub'>SEGUNDOS</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          />
-          <div className='progress-container'>
-            <div
-              className={`progress-bar ${checkProgress().x100 >= 100 && 'full'
-                }`}
-              style={
-                {
-                  '--progress': checkProgress().x100 + '%',
-                } as React.CSSProperties
-              }
-              progress-text={checkProgress().texto}
+              )}
             />
+            <div className='progress-container'>
+              <div
+                className={`progress-bar ${checkProgress().x100 >= 100 && 'full'
+                  }`}
+                style={
+                  {
+                    '--progress': checkProgress().x100 + '%',
+                  } as React.CSSProperties
+                }
+                progress-text={checkProgress().texto}
+              />
+            </div>
           </div>
-        </div>
-        <img src={nailPintura} className='left-img' />
-        <div className='space'>
-          <p className='include-gonvar'>
-            <img src={gPlus} alt='Gonvar logo' />
-            <span style={{ fontWeight: 'bold', marginLeft: '16px' }}>
-              Incluido en Gonvar+
-            </span>
-          </p>
-          <h2 className='big-text'>
-            <b>Nail's Master </b>
-            <br />
-            <b className='blue-gradient'>Revolution</b>
-          </h2>
-          <h2 className='subtitle'>
-            <b>Aprende a aplicar uñas </b>
-            <b className='light-blue'>desde cero.</b>
-          </h2>
-        </div>
-
-        <img src={nailYellow} className='right-img-1' />
-        <img src={nailWhite} className='right-img-2' />
-
-        <div className='all-center'>
-          <img src={stars} className='stars' />
-          <h3 className='space'>
-            <b>(5) 23,738 opiniones</b>
-          </h3>
-        </div>
-        <h4 className='extra-margin'>
-          <b>El curso de aplicación de uñas </b>
-          <b className='light-blue'>
-            {responsive850 && <br />}más exitoso de Latinoámerica.
-            <br />
-            {responsive850 && <br />}
-            Más de 70,000 alumnas{responsive850 && <br />}
-          </b>{' '}
-          <b>han aprendido con nosotros.</b>
-        </h4>
-        <button
-          className='space btn left-right'
-          onClick={() => handleRedirection()}
-          style={{ marginBottom: 75 }}
-        >
-          {type ? button_text : <>Comienza ahora</>}
-        </button>
-      </FirstSection>
-      <SecondSection>
-        <div className='data'>
-          <p className='text'>
-            Ahora disponible en tu suscripción Gonvar+ <br />
-            Más de 70 cursos de uñas y belleza incluídos.
-          </p>
-        </div>
-        <div className='info-top'>
-          <div className='text'>
-            <h2 className='title bold dark-blue'>
-              <b>
-                Conviértete en profesional <br /> con nuestro programa,
-              </b>
+          <img src={nailPintura} className='left-img' />
+          <div className='space'>
+            <p className='include-gonvar'>
+              <img src={gPlus} alt='Gonvar logo' />
+              <span style={{
+                fontWeight: 'bold',
+                marginLeft: '16px'
+              }}>
+                Incluido en Gonvar+
+              </span>
+            </p>
+            <h1 className='big-text'>
+              <p
+                style={{
+                  fontSize: '20px'
+                }}
+              >Curso de uñas</p>
+              <b>Nail's Master </b>
               <br />
-              <b className='subtitle purple'>
-                aprenderás a aplicar uñas de manera:
-              </b>
+              <b className='blue-gradient'>Revolution</b>
+            </h1>
+            <h2 className='subtitle'>
+              <b>Aprende a aplicar uñas </b>
+              <b className='light-blue'>desde cero.</b>
             </h2>
-            <div className='uñas'>
-              <div className='uñas-q'>
-                <div
-                  className={`uñas-q-container ${views.get(5) ? 'open' : ''}`}
-                  onClick={() => verQ(5)}
-                >
-                  <div className='q'>
-                    <h2>
-                      <b>FUNCIONAL</b>
-                    </h2>
-                    {!!views.get(5) ? (
-                      <BsChevronUp className='icon' />
-                    ) : (
-                      <BsChevronDown className='icon' />
-                    )}
-                  </div>
-                  <div className='border-top'>
-                    <p>
-                      <b>✅ Logra aplicaciones </b>
-                      <b className='dark-blue'>útiles y cómodas.</b>
-                    </p>
-                    <p>
-                      <b>
-                        ✅ Aplicaciones con las que puedas realizar todas tus
-                        actividades de manera sencilla, cómoda y con confianza,{' '}
-                      </b>
-                      <b className='dark-blue'>
-                        sin riesgo a estropearlas o romperlas.
-                      </b>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className={`uñas-q-container ${views.get(7) ? 'open' : ''}`}
-                  onClick={() => verQ(7)}
-                >
-                  <div className='q'>
-                    <h2>
-                      <b>SEGURA</b>
-                    </h2>
-                    {!!views.get(7) ? (
-                      <BsChevronUp className='icon' />
-                    ) : (
-                      <BsChevronDown className='icon' />
-                    )}
-                  </div>
-                  <div className='border-top'>
-                    <p>
-                      <b className='dark-blue'>
-                        ✅ Aprende a realizar un diagnóstico inicial{' '}
-                      </b>
-                      <b>
-                        para determinar si puedes o no realizar una aplicación
-                        de uñas en sistema artificial.
-                      </b>
-                    </p>
-                    <p>
-                      <b className='dark-blue'>
-                        ✅ Conoce todas las medidas de higiene y seguridad
-                      </b>
-                      <b> en tu mesa de aplicación.</b>
-                    </p>
-                    <p>
-                      <b className='dark-blue'>
-                        ✅ Aprende a evitar hongos y enfermedades{' '}
-                      </b>
-                      <b>en las uñas naturales de tus clientas.</b>
-                    </p>
-                    <p>
-                      <b>✅ Aprende los</b>
-                      <b className='dark-blue'> lineamientos de acomodo </b>
-                      <b>
-                        de materiales para evitar riesgos de derrame y
-                        quemaduras.
-                        <i>(Prevención de accidentes)</i>
-                      </b>
-                    </p>
-                    <p>
-                      ✅<b className='dark-blue'> Aprende el uso correcto</b>
-                      <b>
-                        {' '}
-                        de los materiales químicos y medidas de protección
-                        dérmica y respiratoria.
-                      </b>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className='uñas-q'>
-                <div
-                  className={`uñas-q-container ${views.get(6) ? 'open' : ''}`}
-                  onClick={() => verQ(6)}
-                >
-                  <div className='q'>
-                    <h2>
-                      <b>ESTÉTICA</b>
-                    </h2>
-                    {!!views.get(6) ? (
-                      <BsChevronUp className='icon' />
-                    ) : (
-                      <BsChevronDown className='icon' />
-                    )}
-                  </div>
-                  <div className='border-top'>
-                    <p>
-                      ✅<b> Logra aplicaciones </b>
-                      <b className='dark-blue'>hermosas y detalladas.</b>
-                    </p>
-                    <p>
-                      ✅
-                      <b>
-                        {' '}
-                        Aprende a realizar aplicaciones realmente bellas y con{' '}
-                      </b>
-                      <b className='dark-blue'>lineamientos europeos.</b>
-                    </p>
-                    <p>
-                      ✅
-                      <b className='dark-blue'>
-                        {' '}
-                        Conoce y domina las técnicas de limado de competencia,{' '}
-                      </b>
-                      <b>
-                        para lograr aplicaciones con estructuras simétricas y
-                        con brillo
-                      </b>
-                      <b className='dark-blue'> de alto impacto.</b>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className={`uñas-q-container ${views.get(8) ? 'open' : ''}`}
-                  onClick={() => verQ(8)}
-                >
-                  <div className='q'>
-                    <h2>
-                      <b>DURADERA</b>
-                    </h2>
-                    {!!views.get(8) ? (
-                      <BsChevronUp className='icon' />
-                    ) : (
-                      <BsChevronDown className='icon' />
-                    )}
-                  </div>
-                  <div className='border-top'>
-                    <p>
-                      ✅<b> Logra aplicaciones </b>
-                      <b className='dark-blue'>
-                        con duración de más de 21 días.
-                      </b>
-                    </p>
-                    <p>
-                      ✅<b> Domina el </b>
-                      <b className='dark-blue'>cero desprendimiento.</b>
-                    </p>
-                    <p>
-                      ✅<b className='dark-blue'> Garantiza </b>
-                      <b>que tus aplicaciones no se quiebren o se caigan.</b>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-          <img src={mujer_fondo_azul} className='img' />
-        </div>
-        <h2 className='h1 bold'>
-          Aprende desde cero y {responsive850 && <br />}
-          <b className='dark-blue no-bold'>vive de tu pasión</b> <br /> por las
-          uñas acrílicas
-        </h2>
-        <div className='info-cards all-center'>
-          <div className='card'>
-            <div className='adjust' style={{ paddingBlock: 23 }}>
-              <img src={icon_1} className='icon-shop' />
-            </div>
-            <h4>Revisión y evaluación de prácticas</h4>
-            <p>
-              Revisamos de manera individual cada una de tus prácticas y te
-              damos retroalimentación.
-            </p>
+
+          <img src={nailYellow} className='right-img-1' />
+          <img src={nailWhite} className='right-img-2' />
+
+          <div className='all-center'>
+            <img src={stars} className='stars' />
+            <h3 className='space'>
+              <b>(5) 23,738 opiniones</b>
+            </h3>
           </div>
-          <div className='card'>
-            <div className='adjust'>
-              <img src={icon_2} className='icon-page' />
-            </div>
-            <h4>Certificado al terminar</h4>
-            <p>
-              Al finalizar tu curso, obtén un certificado oficial de la marca.
-            </p>
-          </div>
-          <div className='card'>
-            <div className='adjust'>
-              <img src={icon_3} className='icon-pc' />
-            </div>
-            <h4>Asesorías Ilimitadas</h4>
-            <p>Aprende a tu ritmo con nuestras más de 40 lecciones.</p>
-          </div>
-        </div>
-        <img src={linesB} className='bottom-l' />
-      </SecondSection>
-      <ThirdSection>
-        <div className='video-container'>
-          <iframe src='https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1' />
-        </div>
-        <div className='info-video'>
-          <h2>
-            <b className='title-text'>Podrás acceder a</b>
-            <br />
-            <b className='big-title blue-gradient'>más de 40 clases</b>
-          </h2>
-          <p className='reg-text'>
-            Además nuestro equipo estará disponible para ayudarte y resolver
-            todas las dudas que tengas.
-          </p>
-          <p>
-            <b>Sin limites mientras mantengas tu suscripción Gonvar+ activa.</b>
-          </p>
-          <button
-            className='btn left-right'
-            onClick={() => handleRedirection()}
-          >
-            {type ? button_text : 'Obtener acceso'}
-          </button>
-        </div>
-      </ThirdSection>
-      <FourthSection>
-        <div className='circle corner-left'></div>
-        <div className='image-quote'>
-          {!responsive850 && (
-            <p className='quote'>
-              <i>
-                "Hago lo que me <br /> apasiona y disfruto <br /> enseñando a
-                otras"
-              </i>
-            </p>
-          )}
-          <img src={arita} className='image' />
-        </div>
-        <div className='text'>
-          <h2 className='dark-blue bold present'>Te presentamos a</h2>
-          <div className='text-container'>
-            <div className='header-contain'>
-              <h2 className='big-title bold'>Arita Gonvar</h2>
-            </div>
-            <p className='dark-blue italic'>
-              <b>
-                Ella te guiará paso a paso en el programa{' '}
-                {responsive850 && <br />} Nails Master Revolution
-              </b>
-            </p>
-            <div className='sangria'>
-              <p>
-                <b>Instructora certificada</b> bajo {responsive850 && <br />}
-                estándares de aplicación de {responsive850 && <br />}uñas
-                artificiales por {responsive850 && <br />}competencia.
-              </p>
-              <p>
-                <b>
-                  Especialista en capacitación{responsive850 && <br />} para
-                  principiantes,
-                </b>{' '}
-                estructura {responsive850 && <br />}profesional en escultural{' '}
-                {!responsive850 && <br />}y {responsive850 && <br />}máster en
-                técnicas y métodos {responsive850 && <br />}de enseñanza
-                teóricos-prácticos.
-              </p>
-              <p>
-                Creadora de la técnica {responsive850 && <br />}
-                <b>"Cero Desprendimiento en 4 Pasos"</b>
-                {responsive850 && <br />} y co-fundadora de la academia{' '}
-                {!responsive850 && <br />}
-                de uñas {responsive850 && <br />}
-                <b>más grande de Latinoamerica.</b>
-              </p>
-            </div>
-            {responsive850 && (
-              <p className='quote-resp'>
-                <i>
-                  "Hago lo que me apasiona <br />y disfruto enseñando a otras"
-                </i>
-                <br /> <span>-Arita Gonvar</span>
-              </p>
-            )}
-            {responsive850 && (
-              <div className='image-container'>
-                <img src={arita_fondo_azul} className='image' />
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='circle corner-right'></div>
-      </FourthSection>
-      <Quote>
-        <p className='white'>
-          “Hago lo que me apasiona <br />
-          y disfruto enseñando a otras”
-          <br />
-          <span>-Arita Gonvar</span>
-        </p>
-      </Quote>
-      <FifthSection>
-        <h2 className='text-blue'>
-          Con <b className='blue'>Nails Master Revolution</b> te
-          {responsive850 && <br />} daremos{' '}
-          <b className='blue'>
-            beneficios
-            {!responsive850 && <br />} exclusivos
-          </b>{' '}
-          y {responsive850 && <br />}tendrás acceso a la comunidad
-          {responsive850 && <br />} de {!responsive850 && <br />}estudiantes y
-          profesionales {responsive850 && <br />}de la industria de las uñas{' '}
-          <br />
-          <b className='blue'>más grande de Latinoamérica.</b>
-        </h2>
-        <div className='benefits-info'>
-          <h2 className='morado'>Beneficios exclusivos</h2>
-          <div className='info-row'>
-            <div className='info-content'>
-              <img src={icon_calendar} className='icon' />
-              <h5>
-                Acceso a 70 cursos adicionales <br />
-                <b>y beneficios incluídos en Gonvar+</b>
-              </h5>
-            </div>
-            <div className='info-content info-side'>
-              <img src={icon_calendar} className='icon' />
-              <h5>
-                <b>Instructora certificada</b>
-              </h5>
-            </div>
-          </div>
-          <div className='info-row gray'>
-            <div className='info-content'>
-              <img src={icon_book_blue} className='icon' />
-              <h5>
-                Más de 40 lecciones completas,
-                <b>{responsive500 && <br />} actualizadas al 2023</b>
-              </h5>
-            </div>
-            <div className='info-content info-side'>
-              <img src={icon_bookmark} className='icon' />
-              <h5>
-                <b>Biblioteca exclusiva</b>
-              </h5>
-            </div>
-          </div>
-          <div className='info-row'>
-            <div className='info-content'>
-              <img src={icon_file_blue} className='icon' />
-              <h5>
-                Revisión de prácticas y{' '}
-                <b>{responsive500 && <br />} asesorías ilimitadas</b>
-              </h5>
-            </div>
-            <div className='info-content info-side'>
-              <img src={icon_checkmark} className='icon' />
-              <h5>
-                <b>Soporte prioritario</b> a dudas de tus clases
-              </h5>
-            </div>
-          </div>
-          <div className='info-row gray'>
-            <div className='info-content'>
-              <img src={icon_graph} className='icon' />
-              <h5>
-                <b>Curso definitivo</b> con las técnicas
-                {responsive500 && <br />} más solicitadas
-              </h5>
-            </div>
-            <div className='info-content info-side'>
-              <img src={icon_bulb} className='icon' />
-              <h5>
-                Programa enfocado {responsive500 && <br />}al{' '}
-                <b>Emprendimiento</b>
-              </h5>
-            </div>
-          </div>
-          <div className='info-row'>
-            <div className='info-content'>
-              <img src={icon_3} className='icon' />
-              <h5>
-                <b>Certificado oficial</b> al terminar el{' '}
-                {responsive500 && <br />}curso, con folio único verificado{' '}
-                {responsive500 && <br />}(FUV)
-              </h5>
-            </div>
-            <div className='info-content info-side'>
-              <img src={icon_clock} className='icon' />
-              <h5>
-                <b>Horarios flexible,</b> nuestro{responsive500 && <br />} curso
-                es 100% online
-              </h5>
-            </div>
-          </div>
-          <img src={manoBenefits} className='back-hands' />
-        </div>
-      </FifthSection>
-      <SixthSection>
-        <h2 className='white h1'>
-          <b>
-            Todo lo que <span className='light-blue'>incluye</span> este{' '}
-            {responsive850 && <br />}increíble programa
-          </b>
-        </h2>
-        {!responsive850 ? (
-          <p className='h4'>
-            <b>
-              Para complementar tu aprendizaje, al inscribirte a Nails
-              MasterRevolution <br />
-              obtendrás cuadernillos, manuales y textos que te ayudarán en tu
-              carrera de Nail Artist.
-            </b>
-          </p>
-        ) : (
-          <p className='h4'>
-            Para complementar tu aprendizaje, <br />
-            al inscribirte a Nails MasterRevolution
-            <br />
-            <b>
-              {' '}
-              obtendrás cuadernillos, manuales y textos
+          <h4 className='extra-margin'>
+            <b>El curso de aplicación de uñas </b>
+            <b className='light-blue'>
+              {responsive850 && <br />}más exitoso de Latinoámerica.
               <br />
+              {responsive850 && <br />}
+              Más de 70,000 alumnas{responsive850 && <br />}
             </b>{' '}
-            que te ayudarán en tu carrera de Nail Artist.
-          </p>
-        )}
-        <div className='program-course'>
-          <div className='course-container'>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Curso {responsive850 && 'Nails Master Revolution'}
-                {responsive850 ? <br /> : ' | '}
-                <span className='light-blue'> Costo real: $2,399.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                <b>Certificado</b> físico y digital (no incluye envío)
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $490.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                <b>Comunidad exclusiva</b> en What'sApp{' '}
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $239.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Manual <b>La Perla Perfecta</b> {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $297.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Manual <b>Química del Producto nivel básico</b>{' '}
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $497.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Revista Gonvar: <b>10 diseños increibles</b>{' '}
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $649.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Manual <b>Obtén tus primeros clientes</b>{' '}
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $649.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_book} className='icon' />
-              <p>
-                Manual <b>Los secretos del gel semipermanente</b>{' '}
-                {responsive850 ? <br /> : ' |'}
-                <span className='light-blue'> Costo real: $649.00 MXN</span>
-              </p>
-            </div>
-            <div className='course-detail'>
-              <img src={icon_file} className='icon' />
-              <div className='d-block text-start'>
-                <p>
-                  Manual{' '}
-                  <b>
-                    Cómo obtener un documento oficial que respalde mi vocación.
-                  </b>{' '}
-                  <br />
-                  <span className='light-blue'> Costo real: $850.00 MXN</span>
-                </p>
-              </div>
-            </div>
+            <b>han aprendido con nosotros.</b>
+          </h4>
+          <button
+            className='space btn left-right'
+            onClick={() => handleRedirection()}
+            style={{ marginBottom: 75 }}
+          >
+            {type ? button_text : <>Comienza ahora</>}
+          </button>
+        </FirstSection>
+        <SecondSection>
+          <div className='data'>
+            <p className='text'>
+              Ahora disponible en tu suscripción Gonvar+ <br />
+              Más de 70 cursos de uñas y belleza incluídos.
+            </p>
           </div>
-          <img src={manuales} className='ghost' />
-        </div>
-      </SixthSection>
-      <SeventhSection>
-        <div className='cost-body'>
-          <div className='cost-info'>
-            <img src={manoCosto} className='left-img' />
-            <img src={mujer_fondo_azul_2} className='chica-resp' />
-            <div className='center'>
-              <h2 className='red h2'>
-                Costo total real: {responsive850 && <br />}
-                <del>$6,719.00 MXN</del>
-              </h2>
-              <h2 className='dark-blue h1'>
-                <b>Precio de Lanzamiento {!responsive850 && 'con beca'}</b>
-              </h2>
-              <h2 className='green h1'>Sólo $1,599.00 MXN</h2>
-              {/* <p className="">Válido para las primeras 500 personas</p> */}
-              <h2>
+          <div className='info-top'>
+            <div className='text'>
+              <h2 className='title bold dark-blue'>
                 <b>
-                  Cupos limitados a 500 lugares <br />
-                  para una mejor atención
+                  Conviértete en profesional <br /> con nuestro programa,
+                </b>
+                <br />
+                <b className='subtitle purple'>
+                  aprenderás a aplicar uñas de manera:
                 </b>
               </h2>
-              <button
-                className='btn right-left'
-                onClick={() => handleRedirection()}
-              >
-                {type ? (
-                  button_text
-                ) : (
-                  <>
-                    ¡Quiero comenzar
-                    <br /> ahora!
-                  </>
-                )}
-              </button>
+              <div className='uñas'>
+                <div className='uñas-q'>
+                  <div
+                    className={`uñas-q-container ${views.get(5) ? 'open' : ''}`}
+                    onClick={() => verQ(5)}
+                  >
+                    <div className='q'>
+                      <h2>
+                        <b>FUNCIONAL</b>
+                      </h2>
+                      {!!views.get(5) ? (
+                        <BsChevronUp className='icon' />
+                      ) : (
+                        <BsChevronDown className='icon' />
+                      )}
+                    </div>
+                    <div className='border-top'>
+                      <p>
+                        <b>✅ Logra aplicaciones </b>
+                        <b className='dark-blue'>útiles y cómodas.</b>
+                      </p>
+                      <p>
+                        <b>
+                          ✅ Aplicaciones con las que puedas realizar todas tus
+                          actividades de manera sencilla, cómoda y con confianza,{' '}
+                        </b>
+                        <b className='dark-blue'>
+                          sin riesgo a estropearlas o romperlas.
+                        </b>
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className={`uñas-q-container ${views.get(7) ? 'open' : ''}`}
+                    onClick={() => verQ(7)}
+                  >
+                    <div className='q'>
+                      <h2>
+                        <b>SEGURA</b>
+                      </h2>
+                      {!!views.get(7) ? (
+                        <BsChevronUp className='icon' />
+                      ) : (
+                        <BsChevronDown className='icon' />
+                      )}
+                    </div>
+                    <div className='border-top'>
+                      <p>
+                        <b className='dark-blue'>
+                          ✅ Aprende a realizar un diagnóstico inicial{' '}
+                        </b>
+                        <b>
+                          para determinar si puedes o no realizar una aplicación
+                          de uñas en sistema artificial.
+                        </b>
+                      </p>
+                      <p>
+                        <b className='dark-blue'>
+                          ✅ Conoce todas las medidas de higiene y seguridad
+                        </b>
+                        <b> en tu mesa de aplicación.</b>
+                      </p>
+                      <p>
+                        <b className='dark-blue'>
+                          ✅ Aprende a evitar hongos y enfermedades{' '}
+                        </b>
+                        <b>en las uñas naturales de tus clientas.</b>
+                      </p>
+                      <p>
+                        <b>✅ Aprende los</b>
+                        <b className='dark-blue'> lineamientos de acomodo </b>
+                        <b>
+                          de materiales para evitar riesgos de derrame y
+                          quemaduras.
+                          <i>(Prevención de accidentes)</i>
+                        </b>
+                      </p>
+                      <p>
+                        ✅<b className='dark-blue'> Aprende el uso correcto</b>
+                        <b>
+                          {' '}
+                          de los materiales químicos y medidas de protección
+                          dérmica y respiratoria.
+                        </b>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className='uñas-q'>
+                  <div
+                    className={`uñas-q-container ${views.get(6) ? 'open' : ''}`}
+                    onClick={() => verQ(6)}
+                  >
+                    <div className='q'>
+                      <h2>
+                        <b>ESTÉTICA</b>
+                      </h2>
+                      {!!views.get(6) ? (
+                        <BsChevronUp className='icon' />
+                      ) : (
+                        <BsChevronDown className='icon' />
+                      )}
+                    </div>
+                    <div className='border-top'>
+                      <p>
+                        ✅<b> Logra aplicaciones </b>
+                        <b className='dark-blue'>hermosas y detalladas.</b>
+                      </p>
+                      <p>
+                        ✅
+                        <b>
+                          {' '}
+                          Aprende a realizar aplicaciones realmente bellas y con{' '}
+                        </b>
+                        <b className='dark-blue'>lineamientos europeos.</b>
+                      </p>
+                      <p>
+                        ✅
+                        <b className='dark-blue'>
+                          {' '}
+                          Conoce y domina las técnicas de limado de competencia,{' '}
+                        </b>
+                        <b>
+                          para lograr aplicaciones con estructuras simétricas y
+                          con brillo
+                        </b>
+                        <b className='dark-blue'> de alto impacto.</b>
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className={`uñas-q-container ${views.get(8) ? 'open' : ''}`}
+                    onClick={() => verQ(8)}
+                  >
+                    <div className='q'>
+                      <h2>
+                        <b>DURADERA</b>
+                      </h2>
+                      {!!views.get(8) ? (
+                        <BsChevronUp className='icon' />
+                      ) : (
+                        <BsChevronDown className='icon' />
+                      )}
+                    </div>
+                    <div className='border-top'>
+                      <p>
+                        ✅<b> Logra aplicaciones </b>
+                        <b className='dark-blue'>
+                          con duración de más de 21 días.
+                        </b>
+                      </p>
+                      <p>
+                        ✅<b> Domina el </b>
+                        <b className='dark-blue'>cero desprendimiento.</b>
+                      </p>
+                      <p>
+                        ✅<b className='dark-blue'> Garantiza </b>
+                        <b>que tus aplicaciones no se quiebren o se caigan.</b>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <img src={chica} className='right-img' />
+            <img src={mujer_fondo_azul} className='img' />
           </div>
-        </div>
-      </SeventhSection>
-      <EightSection>
-        <img src={linesL} className='left-l' />
-        <div className='left-side'>
-          <h2 className='light-blue h1'>Certificado oficial</h2>
-          {!responsive850 ? (
+          <h2 className='h1 bold'>
+            Aprende desde cero y {responsive850 && <br />}
+            <strong className='dark-blue no-bold'>convierte de tu pasión</strong> <br /> por las
+            uñas en una carrera con nuestro <strong>curso de uñas acrilicas</strong>
+          </h2>
+          <div className='info-cards all-center'>
+            <div className='card'>
+              <div className='adjust' style={{ paddingBlock: 23 }}>
+                <img src={icon_1} className='icon-shop' />
+              </div>
+              <h4>Revisión y evaluación de prácticas</h4>
+              <p>
+                Revisamos de manera individual cada una de tus prácticas y te
+                damos retroalimentación.
+              </p>
+            </div>
+            <div className='card'>
+              <div className='adjust'>
+                <img src={icon_2} className='icon-page' />
+              </div>
+              <h4>Certificado al terminar</h4>
+              <p>
+                Al finalizar tu curso, obtén un certificado oficial de la marca.
+              </p>
+            </div>
+            <div className='card'>
+              <div className='adjust'>
+                <img src={icon_3} className='icon-pc' />
+              </div>
+              <h4>Asesorías Ilimitadas</h4>
+              <p>Aprende a tu ritmo con nuestras más de 40 lecciones.</p>
+            </div>
+          </div>
+          <img src={linesB} className='bottom-l' />
+        </SecondSection>
+        <ThirdSection>
+          <div className='video-container'>
+            <iframe src='https://www.youtube.com/embed/ru4xLs8gZQA?autoplay=1&mute=1' />
+          </div>
+          <div className='info-video'>
             <h2>
-              En Gonvar cada uno de nuestros certificados cuenta con{' '}
-              <b className='light-blue'>
-                FUV
-                <i>(Folio único verificado) </i>
-              </b>{' '}
-              que autentifica y valida que tomaste el curso con nosotros.
+              <b className='title-text'>Podrás acceder a</b>
+              <br />
+              <b className='big-title blue-gradient'>más de 40 clases</b>
             </h2>
-          ) : (
-            <h2 className='text-certificate'>
-              En Gonvar cada uno de nuestros <br />
-              certificados cuenta con{' '}
-              <b className='light-blue'>
-                FUV
+            <p className='reg-text'>
+              Además nuestro equipo estará disponible para ayudarte y resolver
+              todas las dudas que tengas.
+            </p>
+            <p>
+              <b>Sin limites mientras mantengas tu suscripción Gonvar+ activa.</b>
+            </p>
+            <button
+              className='btn left-right'
+              onClick={() => handleRedirection()}
+            >
+              {type ? button_text : 'Obtener acceso'}
+            </button>
+          </div>
+        </ThirdSection>
+        <FourthSection>
+          <div className='circle corner-left'></div>
+          <div className='image-quote'>
+            {!responsive850 && (
+              <p className='quote'>
                 <i>
-                  {' '}
-                  (Folio <br />
-                  único verificado){' '}
+                  "Hago lo que me <br /> apasiona y disfruto <br /> enseñando a
+                  otras"
                 </i>
-              </b>{' '}
+              </p>
+            )}
+            <img src={arita} className='image' />
+          </div>
+          <div className='text'>
+            <h2 className='dark-blue bold present'>Te presentamos a</h2>
+            <div className='text-container'>
+              <div className='header-contain'>
+                <h2 className='big-title bold'>Arita Gonvar</h2>
+              </div>
+              <p className='dark-blue italic'>
+                <b>
+                  Ella te guiará paso a paso en el programa{' '}
+                  {responsive850 && <br />} Nails Master Revolution
+                </b>
+              </p>
+              <div className='sangria'>
+                <p>
+                  <b>Instructora certificada</b> bajo {responsive850 && <br />}
+                  estándares de aplicación de {responsive850 && <br />}uñas
+                  artificiales por {responsive850 && <br />}competencia.
+                </p>
+                <p>
+                  <b>
+                    Especialista en capacitación{responsive850 && <br />} para
+                    principiantes,
+                  </b>{' '}
+                  estructura {responsive850 && <br />}profesional en escultural{' '}
+                  {!responsive850 && <br />}y {responsive850 && <br />}máster en
+                  técnicas y métodos {responsive850 && <br />}de enseñanza
+                  teóricos-prácticos.
+                </p>
+                <p>
+                  Creadora de la técnica {responsive850 && <br />}
+                  <b>"Cero Desprendimiento en 4 Pasos"</b>
+                  {responsive850 && <br />} y co-fundadora de la academia{' '}
+                  {!responsive850 && <br />}
+                  de uñas {responsive850 && <br />}
+                  <b>más grande de Latinoamerica.</b>
+                </p>
+              </div>
+              {responsive850 && (
+                <p className='quote-resp'>
+                  <i>
+                    "Hago lo que me apasiona <br />y disfruto enseñando a otras"
+                  </i>
+                  <br /> <span>-Arita Gonvar</span>
+                </p>
+              )}
+              {responsive850 && (
+                <div className='image-container'>
+                  <img src={arita_fondo_azul} className='image' />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className='circle corner-right'></div>
+        </FourthSection>
+        <Quote>
+          <p className='white'>
+            “Hago lo que me apasiona <br />
+            y disfruto enseñando a otras”
+            <br />
+            <span>-Arita Gonvar</span>
+          </p>
+        </Quote>
+        <FifthSection>
+          <h2 style={{
+            marginBottom: '25px'
+          }}><strong>Beneficios exclusivos</strong></h2>
+          <p className='text-blue padding-text' style={{
+            fontSize: 'calc(1.325rem + .9vw)',
+            fontWeight: 'bold',
+            lineHeight: '1.2',
+            marginTop: '0',
+            marginBottom: '.5rem',
+            // paddingInline: '130px'
+          }}>
+            Con nuestro curso de uñas en linea <b className='blue'>Nails Master Revolution</b> te daremos{' '}
+            <b className='blue'> beneficios exclusivos </b>{' '}
+            y tendrás acceso a la comunidad de estudiantes y profesionales de la industria de las uñas{' '}
+            <b className='blue'>más grande de Latinoamérica.</b>
+          </p>
+          <div className='benefits-info'>
+            <div className='info-row'>
+              <div className='info-content'>
+                <img src={icon_calendar} className='icon' />
+                <h5>
+                  Acceso a 70 cursos adicionales <br />
+                  <b>y beneficios incluídos en Gonvar+</b>
+                </h5>
+              </div>
+              <div className='info-content info-side'>
+                <img src={icon_calendar} className='icon' />
+                <h5>
+                  <b>Instructora certificada</b>
+                </h5>
+              </div>
+            </div>
+            <div className='info-row gray'>
+              <div className='info-content'>
+                <img src={icon_book_blue} className='icon' />
+                <h5>
+                  Más de 40 lecciones completas,
+                  <b>{responsive500 && <br />} actualizadas al 2023</b>
+                </h5>
+              </div>
+              <div className='info-content info-side'>
+                <img src={icon_bookmark} className='icon' />
+                <h5>
+                  <b>Biblioteca exclusiva</b>
+                </h5>
+              </div>
+            </div>
+            <div className='info-row'>
+              <div className='info-content'>
+                <img src={icon_file_blue} className='icon' />
+                <h5>
+                  Revisión de prácticas y{' '}
+                  <b>{responsive500 && <br />} asesorías ilimitadas</b>
+                </h5>
+              </div>
+              <div className='info-content info-side'>
+                <img src={icon_checkmark} className='icon' />
+                <h5>
+                  <b>Soporte prioritario</b> a dudas de tus clases
+                </h5>
+              </div>
+            </div>
+            <div className='info-row gray'>
+              <div className='info-content'>
+                <img src={icon_graph} className='icon' />
+                <h5>
+                  <b>Curso definitivo</b> con las técnicas
+                  {responsive500 && <br />} más solicitadas
+                </h5>
+              </div>
+              <div className='info-content info-side'>
+                <img src={icon_bulb} className='icon' />
+                <h5>
+                  Programa enfocado {responsive500 && <br />}al{' '}
+                  <b>Emprendimiento</b>
+                </h5>
+              </div>
+            </div>
+            <div className='info-row'>
+              <div className='info-content'>
+                <img src={icon_3} className='icon' />
+                <h5>
+                  <b>Certificado oficial</b> al terminar el{' '}
+                  {responsive500 && <br />}curso, con folio único verificado{' '}
+                  {responsive500 && <br />}(FUV)
+                </h5>
+              </div>
+              <div className='info-content info-side'>
+                <img src={icon_clock} className='icon' />
+                <h5>
+                  <b>Horarios flexible,</b> nuestro{responsive500 && <br />} curso
+                  es 100% online
+                </h5>
+              </div>
+            </div>
+            <img src={manoBenefits} className='back-hands' />
+          </div>
+        </FifthSection>
+        <SixthSection>
+          <h2 className='white h1'>
+            <b>
+              Todo lo que <span className='light-blue'>incluye</span> este{' '}
+              {responsive850 && <br />}increíble programa
+            </b>
+          </h2>
+          {!responsive850 ? (
+            <p className='h4'>
+              <b>
+                Para complementar tu aprendizaje, al inscribirte a Nails
+                MasterRevolution <br />
+                obtendrás cuadernillos, manuales y textos que te ayudarán en tu
+                carrera de Nail Artist.
+              </b>
+            </p>
+          ) : (
+            <p className='h4'>
+              Para complementar tu aprendizaje, <br />
+              al inscribirte a Nails MasterRevolution
+              <br />
               <b>
                 {' '}
-                que autentifica y <br />
-                valida{' '}
-              </b>
-              que tomaste el curso con <br />
-              nosotros.
+                obtendrás cuadernillos, manuales y textos
+                <br />
+              </b>{' '}
+              que te ayudarán en tu carrera de Nail Artist.
+            </p>
+          )}
+          <div className='program-course'>
+            <div className='course-container'>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Curso {responsive850 && 'Nails Master Revolution'}
+                  {responsive850 ? <br /> : ' | '}
+                  <span className='light-blue'> Costo real: $2,399.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  <b>Certificado</b> físico y digital (no incluye envío)
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $490.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  <b>Comunidad exclusiva</b> en What'sApp{' '}
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $239.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Manual <b>La Perla Perfecta</b> {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $297.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Manual <b>Química del Producto nivel básico</b>{' '}
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $497.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Revista Gonvar: <b>10 diseños increibles</b>{' '}
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Manual <b>Obtén tus primeros clientes</b>{' '}
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_book} className='icon' />
+                <p>
+                  Manual <b>Los secretos del gel semipermanente</b>{' '}
+                  {responsive850 ? <br /> : ' |'}
+                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                </p>
+              </div>
+              <div className='course-detail'>
+                <img src={icon_file} className='icon' />
+                <div className='d-block text-start'>
+                  <p>
+                    Manual{' '}
+                    <b>
+                      Cómo obtener un documento oficial que respalde mi vocación.
+                    </b>{' '}
+                    <br />
+                    <span className='light-blue'> Costo real: $850.00 MXN</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <img src={manuales} className='ghost' />
+          </div>
+        </SixthSection>
+        <SeventhSection>
+          <div className='cost-body'>
+            <div className='cost-info'>
+              <img src={manoCosto} className='left-img' />
+              <img src={mujer_fondo_azul_2} className='chica-resp' />
+              <div className='center'>
+                <h2 className='red h2'>
+                  Costo total real: {responsive850 && <br />}
+                  <del>$6,719.00 MXN</del>
+                </h2>
+                <h2 className='dark-blue h1'>
+                  <b>Precio de Lanzamiento {!responsive850 && 'con beca'}</b>
+                </h2>
+                <h2 className='green h1'>Sólo $1,599.00 MXN</h2>
+                {/* <p className="">Válido para las primeras 500 personas</p> */}
+                <h2>
+                  <b>
+                    Cupos limitados a 500 lugares <br />
+                    para una mejor atención
+                  </b>
+                </h2>
+                <button
+                  className='btn right-left'
+                  onClick={() => handleRedirection()}
+                >
+                  {type ? (
+                    button_text
+                  ) : (
+                    <>
+                      ¡Quiero comenzar
+                      <br /> ahora!
+                    </>
+                  )}
+                </button>
+              </div>
+              <img src={chica} className='right-img' />
+            </div>
+          </div>
+        </SeventhSection>
+        <EightSection>
+          <img src={linesL} className='left-l' />
+          <div className='left-side'>
+            <h2 className='light-blue h1'><p style={{
+              color: 'white',
+              fontSize: 'calc(1.325rem + .9vw)',
+              margin: '0'
+            }}>Curso de uñas con</p>Certificado oficial</h2>
+            {!responsive850 ? (
+              <h2>
+                En Gonvar cada uno de nuestros certificados cuenta con{' '}
+                <b className='light-blue'>
+                  FUV
+                  <i>(Folio único verificado) </i>
+                </b>{' '}
+                que autentifica y valida que tomaste el curso con nosotros.
+              </h2>
+            ) : (
+              <h2 className='text-certificate'>
+                En Gonvar cada uno de nuestros <br />
+                certificados cuenta con{' '}
+                <b className='light-blue'>
+                  FUV
+                  <i>
+                    {' '}
+                    (Folio <br />
+                    único verificado){' '}
+                  </i>
+                </b>{' '}
+                <b>
+                  {' '}
+                  que autentifica y <br />
+                  valida{' '}
+                </b>
+                que tomaste el curso con <br />
+                nosotros.
+              </h2>
+            )}
+          </div>
+          {responsive850 && <img src={cert} className='float-bottom' />}
+          <div className='right-side'>
+            <img src={cert} className='float-bottom' />
+          </div>
+          <img src={linesR} className='right-l' />
+        </EightSection>
+
+        <NinthSection>
+          <div className='all-center title'>
+            <img src={rewards} className='me-3' />
+            <h2 className='h1'>
+              CENTRO DE {responsive500 && <br />}
+              <b>RECOMPENSAS</b>
+            </h2>
+          </div>
+          <div className='rewards-container all-center'>
+            {!responsive850 ? (
+              <div className='points-rewards'>
+                <div className='display-row'>
+                  <div className='card card-style'>
+                    <img src={pincel} />
+                    <div className='points'>Necesitas 1000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={adherentes} />
+                    <div className='points'>Necesitas 3000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={monomero} />
+                    <div className='points'>Necesitas 4000 pts</div>
+                  </div>
+                </div>
+                <div className='display-row'>
+                  <div className='card card-style'>
+                    <img src={colecciones} />
+                    <div className='points'>Necesitas 6000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={davinci} />
+                    <div className='points'>Necesitas 15,000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={mas} />
+                    <div className='points'>Y mucho más...</div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className='points-rewards'>
+                <div className='display-row'>
+                  <div className='card card-style'>
+                    <img src={pincel} />
+                    <div className='points'>Necesitas 1000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={adherentes} />
+                    <div className='points'>Necesitas 3000 pts</div>
+                  </div>
+                </div>
+                <div className='display-row'>
+                  <div className='card card-style'>
+                    <img src={monomero} />
+                    <div className='points'>Necesitas 4000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={colecciones} />
+                    <div className='points'>Necesitas 6000 pts</div>
+                  </div>
+                </div>
+                <div className='display-row'>
+                  <div className='card card-style'>
+                    <img src={davinci} />
+                    <div className='points'>Necesitas 15,000 pts</div>
+                  </div>
+                  <div className='card card-style'>
+                    <img src={mas} />
+                    <div className='points'>Y mucho más...</div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <RewardComponent nails_master={true} />
+        </NinthSection>
+        <TenthSection>
+          {!responsive850 ? (
+            <h2 className='h1 bold'>
+              Conoce las <span className='light-blue'>experiencias</span> de
+              nuestras alumnas
+            </h2>
+          ) : (
+            <h2 className='h1 bold'>
+              Más de <span className='light-blue'>45,000</span>
+              <br /> alumnas
             </h2>
           )}
-        </div>
-        {responsive850 && <img src={cert} className='float-bottom' />}
-        <div className='right-side'>
-          <img src={cert} className='float-bottom' />
-        </div>
-        <img src={linesR} className='right-l' />
-      </EightSection>
 
-      <NinthSection>
-        <div className='all-center title'>
-          <img src={rewards} className='me-3' />
-          <h2 className='h1'>
-            CENTRO DE {responsive500 && <br />}
-            <b>RECOMPENSAS</b>
-          </h2>
-        </div>
-        <div className='rewards-container all-center'>
-          {!responsive850 ? (
-            <div className='points-rewards'>
-              <div className='display-row'>
-                <div className='card card-style'>
-                  <img src={pincel} />
-                  <div className='points'>Necesitas 1000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={adherentes} />
-                  <div className='points'>Necesitas 3000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={monomero} />
-                  <div className='points'>Necesitas 4000 pts</div>
-                </div>
-              </div>
-              <div className='display-row'>
-                <div className='card card-style'>
-                  <img src={colecciones} />
-                  <div className='points'>Necesitas 6000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={davinci} />
-                  <div className='points'>Necesitas 15,000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={mas} />
-                  <div className='points'>Y mucho más...</div>
-                </div>
-              </div>
+          <div className='experiences-container'>
+            <div className='next swiper-prev'>
+              <BsChevronLeft className='icon' />
             </div>
-          ) : (
-            <div className='points-rewards'>
-              <div className='display-row'>
-                <div className='card card-style'>
-                  <img src={pincel} />
-                  <div className='points'>Necesitas 1000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={adherentes} />
-                  <div className='points'>Necesitas 3000 pts</div>
-                </div>
-              </div>
-              <div className='display-row'>
-                <div className='card card-style'>
-                  <img src={monomero} />
-                  <div className='points'>Necesitas 4000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={colecciones} />
-                  <div className='points'>Necesitas 6000 pts</div>
-                </div>
-              </div>
-              <div className='display-row'>
-                <div className='card card-style'>
-                  <img src={davinci} />
-                  <div className='points'>Necesitas 15,000 pts</div>
-                </div>
-                <div className='card card-style'>
-                  <img src={mas} />
-                  <div className='points'>Y mucho más...</div>
-                </div>
-              </div>
+            <Swiper
+              className='experiences'
+              slidesPerView={3}
+              spaceBetween={30}
+              loop={true}
+              navigation={{
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev',
+              }}
+              modules={[Navigation]}
+            >
+              {reviews.length > 0 &&
+                reviews.map((review: any, index: any) => {
+                  return (
+                    <SwiperSlide
+                      id={'slide' + index}
+                      key={review.username + '_ID'}
+                    >
+                      <SlideModule_1
+                        index={index}
+                        isNew={review.isNew}
+                        descripcion={review.descripcion}
+                        datePublication={review.convertedDate}
+                        usrFacebookURL={review.usrFacebookURL}
+                        username={review.username}
+                        imgURL={downloadFileWithStoragePath(review.imgURL)}
+                        usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+
+            <Swiper
+              className='experiences resp'
+              slidesPerView={1}
+              loop={true}
+              spaceBetween={30}
+              navigation={{
+                nextEl: '.swiper-next',
+                prevEl: '.swiper-prev',
+              }}
+              modules={[Navigation]}
+            >
+              {reviews.length > 0 &&
+                reviews.map((review: any, index: any) => {
+                  return (
+                    <SwiperSlide
+                      id={'slide' + index}
+                      key={review.username + '_ID'}
+                    >
+                      <SlideModule_1
+                        index={index}
+                        isNew={review.isNew}
+                        descripcion={review.descripcion}
+                        datePublication={review.convertedDate}
+                        usrFacebookURL={review.usrFacebookURL}
+                        username={review.username}
+                        imgURL={downloadFileWithStoragePath(review.imgURL)}
+                        usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+            <div className='next swiper-next'>
+              <BsChevronRight className='icon' />
             </div>
-          )}
-        </div>
-        <RewardComponent nails_master={true} />
-      </NinthSection>
-      <TenthSection>
-        {!responsive850 ? (
-          <h2 className='h1 bold'>
-            Conoce las <span className='light-blue'>experiencias</span> de
-            nuestras alumnas
-          </h2>
-        ) : (
-          <h2 className='h1 bold'>
-            Más de <span className='light-blue'>45,000</span>
-            <br /> alumnas
-          </h2>
-        )}
-
-        <div className='experiences-container'>
-          <div className='next swiper-prev'>
-            <BsChevronLeft className='icon' />
           </div>
-          <Swiper
-            className='experiences'
-            slidesPerView={3}
-            spaceBetween={30}
-            loop={true}
-            navigation={{
-              nextEl: '.swiper-next',
-              prevEl: '.swiper-prev',
-            }}
-            modules={[Navigation]}
-          >
-            {reviews.length > 0 &&
-              reviews.map((review: any, index: any) => {
-                return (
-                  <SwiperSlide
-                    id={'slide' + index}
-                    key={review.username + '_ID'}
-                  >
-                    <SlideModule_1
-                      index={index}
-                      isNew={review.isNew}
-                      descripcion={review.descripcion}
-                      datePublication={review.convertedDate}
-                      usrFacebookURL={review.usrFacebookURL}
-                      username={review.username}
-                      imgURL={downloadFileWithStoragePath(review.imgURL)}
-                      usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-          </Swiper>
-
-          <Swiper
-            className='experiences resp'
-            slidesPerView={1}
-            loop={true}
-            spaceBetween={30}
-            navigation={{
-              nextEl: '.swiper-next',
-              prevEl: '.swiper-prev',
-            }}
-            modules={[Navigation]}
-          >
-            {reviews.length > 0 &&
-              reviews.map((review: any, index: any) => {
-                return (
-                  <SwiperSlide
-                    id={'slide' + index}
-                    key={review.username + '_ID'}
-                  >
-                    <SlideModule_1
-                      index={index}
-                      isNew={review.isNew}
-                      descripcion={review.descripcion}
-                      datePublication={review.convertedDate}
-                      usrFacebookURL={review.usrFacebookURL}
-                      username={review.username}
-                      imgURL={downloadFileWithStoragePath(review.imgURL)}
-                      usrImgURL={downloadFileWithStoragePath(review.usrImgURL)}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-          </Swiper>
-          <div className='next swiper-next'>
-            <BsChevronRight className='icon' />
-          </div>
-        </div>
-      </TenthSection>
-      <EleventhSection>
-        <img src={linesB} className='up-l' />
-        <h2 className='title-ppal bold'>TEMARIO</h2>
-        <h4>
-          Conoce todo lo que aprenderás {responsive850 && <br />}en{' '}
-          <b>Nail Master Revolution</b>
-        </h4>
-        <div
-          className={
-            'subject-container ' + (!showModules ? 'resp-class' : 'un-resp')
-          }
-        >
-          <div className='side side-right'>
-            {TEMARIO_ARRAY_1.map((temario: ITemario, index: number) => {
-              return (
-                <div className='subject' key={'Temario_1_' + index}>
-                  <h3 className='title'>
-                    <b>
-                      <span className='p-pink'>Módulo {temario.number} </span>
-                      {temario.title}
-                    </b>
-                  </h3>
-                  {temario.content.map((contenido: string, idx: number) => {
-                    return (
-                      <h5 key={'contenido_1_' + idx}>
-                        <b className='p-pink no-bold'>
-                          {!responsive850 ? `Lección ${idx + 1}.` : ''}
-                        </b>{' '}
-                        {contenido}
-                      </h5>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-          <div className='side'>
-            {TEMARIO_ARRAY_2.map((temario: ITemario, index: number) => {
-              return (
-                <div className='subject' key={'Temario_2_' + index}>
-                  <h3 className='title'>
-                    <b>
-                      <span className='p-pink'>Módulo {temario.number} </span>
-                      {temario.title}
-                    </b>
-                  </h3>
-                  {temario.content.map((contenido: string, idx: number) => {
-                    return (
-                      <h5 key={'contenido_2_' + idx}>
-                        <b className='p-pink no-bold'>
-                          {!responsive850 ? `Lección ${idx + 1}.` : ''}
-                        </b>{' '}
-                        {contenido}
-                      </h5>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className='line' />
-        <p className='h6' onClick={toggleModules}>
-          {responsive850 &&
-            (!showModules ? 'Ver todos los módulos' : 'Cerrar módulos')}
-        </p>
-        <button className='btn right-left' onClick={() => setverMat(true)}>
-          Consulta tu lista de materiales a utilizar
-        </button>
-        {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
-        <img src={linesB2} className='down-l' />
-      </EleventhSection>
-      <TwelveSection>
-        <h2 className='big-title bold'>
-          Disfruta tus clases <br />
-          <b className='light-blue no-bold'>
-            desde cualquier{responsive500 && <br />} dispositivo
-          </b>
-        </h2>
-        <img src={devices} className='py-2 devices' />
-      </TwelveSection>
-      <ThirteenSection className='all-center'>
-        <div className='text-end'>
-          <h2 className=''>¿Tienes alguna duda?</h2>
-          <h2 className='dark-blue bold'>
-            Nuestro equipo <br /> está para ayudarte.
-          </h2>
-        </div>
-        <div className='dudas-img'>
-          <img src={pointWatsap} className='point' />
+        </TenthSection>
+        <EleventhSection>
+          <img src={linesB} className='up-l' />
+          <h2 className='title-ppal bold'>TEMARIO<p style={{
+            fontSize: 'calc(1.275rem + .3vw)'
+          }}>del curso de uñas</p></h2>
+          <p style={{
+            fontSize: 'calc(1.275rem + .3vw)'
+          }}>
+            {/*
+          calc(1.275rem + .3vw)
+          */}
+            Conoce todo lo que aprenderás {responsive850 && <br />}en el curso{' '}
+            <b>Nail Master Revolution</b>
+          </p>
           <div
-            className='watsap-button all-center'
-            onClick={() => redirectToWhatsAppChat()}
+            className={
+              'subject-container ' + (!showModules ? 'resp-class' : 'un-resp')
+            }
           >
-            <img src={watsapOut} className='me-3' />
-            <p className='my-1'>
-              Contacta con
-              <br /> un agente
-            </p>
+            <div className='side side-right'>
+              {TEMARIO_ARRAY_1.map((temario: ITemario, index: number) => {
+                // 1.25rem
+                return (
+                  <div className='subject' key={'Temario_1_' + index}>
+                    <h3 className='title'>
+                      <b>
+                        <span className='p-pink'>Módulo {temario.number} </span>
+                        {temario.title}
+                      </b>
+                    </h3>
+                    {temario.content.map((contenido: string, idx: number) => {
+                      return (
+                        <h4 style={{
+                          fontSize: '1.25rem'
+                        }} key={'contenido_1_' + idx}>
+                          <b className='p-pink no-bold'>
+                            {!responsive850 ? `Lección ${idx + 1}.` : ''}
+                          </b>{' '}
+                          {contenido}
+                        </h4>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+            <div className='side'>
+              {TEMARIO_ARRAY_2.map((temario: ITemario, index: number) => {
+                return (
+                  <div className='subject' key={'Temario_2_' + index}>
+                    <h3 className='title'>
+                      <b>
+                        <span className='p-pink'>Módulo {temario.number} </span>
+                        {temario.title}
+                      </b>
+                    </h3>
+                    {temario.content.map((contenido: string, idx: number) => {
+                      return (
+                        <h4 style={{
+                          fontSize: '1.25rem'
+                        }} key={'contenido_2_' + idx}>
+                          <b className='p-pink no-bold'>
+                            {!responsive850 ? `Lección ${idx + 1}.` : ''}
+                          </b>{' '}
+                          {contenido}
+                        </h4>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </ThirteenSection>
-      <FourteenSection className='spacing'>
-        <h2 className='dark-blue big-title'>
-          Preguntas {responsive850 && <br />}Frecuentes
-        </h2>
-        <div className='faq'>
-          <div className='all-center'>
+          <div className='line' />
+          <p className='h6' onClick={toggleModules}>
+            {responsive850 &&
+              (!showModules ? 'Ver todos los módulos' : 'Cerrar módulos')}
+          </p>
+          <button className='btn right-left' onClick={() => setverMat(true)}>
+            Consulta tu lista de materiales a utilizar
+          </button>
+          {!!verMat && <MaterialesModal show={verMat} setShow={handleMats} />}
+          <img src={linesB2} className='down-l' />
+        </EleventhSection>
+        <TwelveSection>
+          <h2 className='big-title bold'>
+            Disfruta tus clases <br />
+            <b className='light-blue no-bold'>
+              desde cualquier{responsive500 && <br />} dispositivo
+            </b>
+          </h2>
+          <img src={devices} className='py-2 devices' />
+        </TwelveSection>
+        <ThirteenSection className='all-center'>
+          <div className='text-end'>
+            <h2 className=''>¿Tienes alguna duda?</h2>
+            <h2 className='dark-blue bold'>
+              Nuestro equipo <br /> está para ayudarte.
+            </h2>
+          </div>
+          <div className='dudas-img'>
+            <img src={pointWatsap} className='point' />
             <div
-              className={`q-container ${views.get(1) ? 'max' : 'min'}`}
-              onClick={() => verQ(1)}
+              className='watsap-button all-center'
+              onClick={() => redirectToWhatsAppChat()}
             >
-              <div className={`q ${views.get(1) && 'open-q'}`}>
-                <p className={`title bolder`}>¿Entregan reconocimiento?</p>
-                {views.get(1) ? (
-                  <BsChevronUp className='icon' />
-                ) : (
-                  <BsChevronDown className='icon' />
-                )}
-              </div>
+              <img src={watsapOut} className='me-3' />
+              <p className='my-1'>
+                Contacta con
+                <br /> un agente
+              </p>
+            </div>
+          </div>
+        </ThirteenSection>
+        <FourteenSection className='spacing'>
+          <h2 className='dark-blue big-title'>
+            Preguntas {responsive850 && <br />}Frecuentes
+          </h2>
+          <div className='faq'>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(1) ? 'max' : 'min'}`}
+                onClick={() => verQ(1)}
+              >
+                <div className={`q ${views.get(1) && 'open-q'}`}>
+                  <p className={`title bolder`}>¿Entregan reconocimiento?</p>
+                  {views.get(1) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
 
-              <div className='border-top'>
-                <p className='a'>
-                  ¡Claro!
-                  <br />
-                  Cada curso terminado, con prácticas aprobadas, te brinda un
-                  certificado con un folio único verificado para que puedas
-                  respaldar tus conocimientos.
-                </p>
+                <div className='border-top'>
+                  <p className='a'>
+                    ¡Claro!
+                    <br />
+                    Cada curso terminado, con prácticas aprobadas, te brinda un
+                    certificado con un folio único verificado para que puedas
+                    respaldar tus conocimientos.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='all-center'>
-            <div
-              className={`q-container ${views.get(2) ? 'max' : 'min'}`}
-              onClick={() => verQ(2)}
-            >
-              <div className={`q ${views.get(2) && 'open-q'}`}>
-                <p className={`title bolder`}>
-                  ¿Qué métodos de pago puedo usar para pagar mi suscripción?
-                </p>
-                {views.get(2) ? (
-                  <BsChevronUp className='icon' />
-                ) : (
-                  <BsChevronDown className='icon' />
-                )}
-              </div>
-              <div className='border-top'>
-                <p className='a'>
-                  Nuestros métodos de pago son súper cómodos.
-                  <br />
-                  Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta
-                  de crédito o débito.
-                  <i>(El cobro se realiza de manera automática mes con mes).</i>
-                  <br />
-                  Si prefieres pagar en transferencia, depósito en Oxxo o
-                  Paypal, está disponible la anualidad o el plan cuatrimestral,{' '}
-                  <i>
-                    (Pagando anualidad no se realiza ningún cobro adicional por
-                    un año).
-                  </i>
-                </p>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(2) ? 'max' : 'min'}`}
+                onClick={() => verQ(2)}
+              >
+                <div className={`q ${views.get(2) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Qué métodos de pago puedo usar para pagar mi suscripción?
+                  </p>
+                  {views.get(2) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
+                <div className='border-top'>
+                  <p className='a'>
+                    Nuestros métodos de pago son súper cómodos.
+                    <br />
+                    Si deseas pagar por mes, puedes hacerlo con cualquier tarjeta
+                    de crédito o débito.
+                    <i>(El cobro se realiza de manera automática mes con mes).</i>
+                    <br />
+                    Si prefieres pagar en transferencia, depósito en Oxxo o
+                    Paypal, está disponible la anualidad o el plan cuatrimestral,{' '}
+                    <i>
+                      (Pagando anualidad no se realiza ningún cobro adicional por
+                      un año).
+                    </i>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='all-center'>
-            <div
-              className={`q-container ${views.get(3) ? 'max' : 'min'}`}
-              onClick={() => verQ(3)}
-            >
-              <div className={`q ${views.get(3) && 'open-q'}`}>
-                <p className={`title bolder`}>
-                  ¿Puedo cancelar en cualquier momento?
-                </p>
-                {views.get(3) ? (
-                  <BsChevronUp className='icon' />
-                ) : (
-                  <BsChevronDown className='icon' />
-                )}
-              </div>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(3) ? 'max' : 'min'}`}
+                onClick={() => verQ(3)}
+              >
+                <div className={`q ${views.get(3) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Puedo cancelar en cualquier momento?
+                  </p>
+                  {views.get(3) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
 
-              <div className='border-top'>
-                <p className='a'>
-                  Así es, tú eliges libremente cuánto tiempo deseas aprender y
-                  gozar de todos nuestros beneficios.
-                  <br />
-                  Todos los descuentos a los que tienes derecho se pierden al
-                  momento de cancelar.
-                </p>
+                <div className='border-top'>
+                  <p className='a'>
+                    Así es, tú eliges libremente cuánto tiempo deseas aprender y
+                    gozar de todos nuestros beneficios.
+                    <br />
+                    Todos los descuentos a los que tienes derecho se pierden al
+                    momento de cancelar.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className='all-center'>
-            <div
-              className={`q-container ${views.get(4) ? 'max' : 'min'}`}
-              onClick={() => verQ(4)}
-            >
-              <div className={`q ${views.get(4) && 'open-q'}`}>
-                <p className={`title bolder`}>
-                  ¿Puedo inscribirme desde cualquier país?
-                </p>
-                {views.get(4) ? (
-                  <BsChevronUp className='icon' />
-                ) : (
-                  <BsChevronDown className='icon' />
-                )}
-              </div>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(4) ? 'max' : 'min'}`}
+                onClick={() => verQ(4)}
+              >
+                <div className={`q ${views.get(4) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Puedo inscribirme desde cualquier país?
+                  </p>
+                  {views.get(4) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
 
-              <div className='border-top'>
-                <p className='a'>
-                  Si, nuestra plataforma está diseñada para poder utilizarse
-                  desde cualquier lugar del mundo que cuente con acceso a
-                  internet y puedes disfrutar desde un celular, tableta
-                  electrónica o computadora.
-                </p>
+                <div className='border-top'>
+                  <p className='a'>
+                    Si, nuestra plataforma está diseñada para poder utilizarse
+                    desde cualquier lugar del mundo que cuente con acceso a
+                    internet y puedes disfrutar desde un celular, tableta
+                    electrónica o computadora.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </FourteenSection>
-      {/* <FifteenSection className="all-center">
+        </FourteenSection>
+        {/* <FifteenSection className="all-center">
         <div className="inside-footer">
           <div className="info">
             <h2 className="h1">Suscríbete a nuestro Newsletter</h2>
@@ -1356,7 +1391,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <img className="img" src={news} />
         </div>
       </FifteenSection> */}
-    </SuscriptionContain>
+      </SuscriptionContain>
+    </>
   );
 };
 export default LandingNailsMasterRevolution;
