@@ -465,7 +465,7 @@ export const PurchaseNewContainer = styled.div`
         grid-template-columns: 1fr;
         grid-gap: 10px;
         align-items: center;
-        margin-bottom: 40px;
+        /* margin-bottom: 40px; */
         p {
           color: black;
           font-size: 14px;
@@ -540,7 +540,7 @@ export const PurchaseNewContainer = styled.div`
         }
       }
       .price-container {
-        margin-top: auto;
+        margin-top: 10px;
         .total {
           text-align: end;
           font-size: 22px;
@@ -580,6 +580,23 @@ export const PurchaseNewContainer = styled.div`
   .white-space {
     visibility: hidden;
     min-width: 300px;
+  }
+  .hidden-image {
+    display: block;
+    /*
+    @media screen and (max-height: 870px) and (min-width: 768px) {
+      display: none;
+    }
+    */
+  }
+  @media screen and (max-height: 940px) and (min-width: 768px) {
+    .hidden-image {
+      display: none;
+    }
+    .info {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
   }
   @media (max-width: 1300px) {
     .right-section {
@@ -678,6 +695,7 @@ export const PurchaseNewContainer = styled.div`
       .main-container {
         .description {
           width: 350px;
+          padding-inline: 20px;
         }
         .add-payment-container {
           .description-text {
@@ -720,10 +738,10 @@ export const PurchaseNewContainer = styled.div`
         .add-payment-container {
           gap: 15px;
           .button-container {
-            grid-template-columns: 1fr;
             width: 100%;
             .box-container {
               width: 100%;
+              padding-left: 8px;
               p {
                 font-size: 12px;
               }

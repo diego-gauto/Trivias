@@ -1376,7 +1376,12 @@ export const PurchaseNew = () => {
                 }
                 <br />
               </p>
-              <img src="/images/purchase/chica_banner.png" alt="Chica volteando de espaldas" />
+              <img
+                className='hidden-image'
+                src="/images/purchase/chica_banner.png"
+                alt="chica-volteando-de-espaldas"
+                title="Chica volteando de espaldas"
+              />
             </div>
             <div className='price-container'>
               <p
