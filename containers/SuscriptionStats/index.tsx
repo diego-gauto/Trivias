@@ -5,7 +5,7 @@ const SuscriptionStats = () => {
   return (
     <div>
       <h1>Container Suscription</h1>
-      <CardStats />
+      <CardStats type={"Nuevas"} suscriptores={45} />
       <MultiLineChart />
     </div>
   );
