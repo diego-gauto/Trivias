@@ -316,12 +316,15 @@ export const PurchaseNew = () => {
     setLoader(true);
     let user = userDataAuth.user;
 
-    let diff = Math.round((today - user.final_date) / 86400);
+    // let diff = Math.round((today - user.final_date) / 86400);
 
+    /*
     if (diff > 90) {
+      localStorage.setItem('PLAN_PATH_REDIRECT', 'true');
       router.push(PLAN_PATH);
       return;
     }
+    */
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
       // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
