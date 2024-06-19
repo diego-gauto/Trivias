@@ -1151,13 +1151,15 @@ export const PurchaseNew = () => {
                       onChange={(e) => setTerms(e.target.checked)}
                       style={{
                         width: '16px',
-                        height: '16px'
+                        height: '16px',
+                        alignSelf: 'center'
                       }}
                     />
                     <label
                       htmlFor="terms"
                       style={{
-                        paddingLeft: '10px'
+                        paddingLeft: '40px',
+                        textAlign: 'left'
                       }}
                     >
                       Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
