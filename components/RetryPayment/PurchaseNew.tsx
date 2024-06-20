@@ -109,6 +109,8 @@ export const PurchaseNew = () => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
 
+
+
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
@@ -931,7 +933,14 @@ export const PurchaseNew = () => {
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
             <p className='description' style={{ textAlign: 'left' }}>
-              Seleccione cualquiera de los métodos de pago disponibles
+              {
+                (addPayment || paymentMethods.length === 0) &&
+                `Seleccione cualquiera de los métodos de pago disponibles`
+              }
+              {
+                (paymentMethods.length > 0 && !addPayment) &&
+                `Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo`
+              }
             </p>
             {paymentMethods.length > 0 && (
               <>

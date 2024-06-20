@@ -700,7 +700,7 @@ export const PurchaseNewContainer = styled.div`
         }
         .add-payment-container {
           .description-text {
-            font-size: 16px;
+            font-size: 12px;
           }
         }
       }
