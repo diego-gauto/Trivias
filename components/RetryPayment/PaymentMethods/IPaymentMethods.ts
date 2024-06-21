@@ -6,4 +6,5 @@ export interface IPaymentMethods {
   pm_size: number;
   changePaymentMethod: (pm: IPm) => void;
   handleDelete: (pm: IPm) => void;
+  isOnlyOne?: boolean;
 }

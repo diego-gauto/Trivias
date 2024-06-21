@@ -399,6 +399,7 @@ export const RetryPayment = () => {
                         changePaymentMethod={changePaymentMethod}
                         key={'pm-' + index}
                         handleDelete={detachPayment}
+                        isOnlyOne={paymentMethods.length === 1}
                       />
                     );
                   })

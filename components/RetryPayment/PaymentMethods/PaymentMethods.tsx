@@ -4,7 +4,7 @@ import { IPaymentMethods } from './IPaymentMethods';
 const master_card = '/images/RetryPayment/mastercard.png';
 
 export const PaymentMethods = (props: IPaymentMethods) => {
-  const { pm, index, pm_size, changePaymentMethod, handleDelete } = props;
+  const { pm, index, pm_size, changePaymentMethod, handleDelete, isOnlyOne } = props;
 
   return (
     <PaymentMethodsContainer>
@@ -13,7 +13,10 @@ export const PaymentMethods = (props: IPaymentMethods) => {
         <p className='dots'>**** **** ****</p>
         <p className='text'>{pm.last4}</p>
       </div>
-      <p className='description-2'>Para quitarla, agrega otra forma de pago </p>
+      {
+        isOnlyOne &&
+        <p className='description-2'>Para quitarla, agrega otra forma de pago </p>
+      }
       <div className='edit'>
         {pm_size > 1 ? (
           <div className='default'>

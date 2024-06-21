@@ -955,6 +955,7 @@ export const PurchaseNew = () => {
                           changePaymentMethod={changePaymentMethod}
                           key={'pm-' + index}
                           handleDelete={detachPayment}
+                          isOnlyOne={paymentMethods.length === 1}
                         />
                       );
                     })
