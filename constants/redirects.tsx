@@ -46,6 +46,9 @@ export const authRedirect = (type: string, userInfo?: any) => {
     } else if (localStorage.getItem('month_1') === 'true') {
       localStorage.removeItem('month_1')
       window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
+    } else if (localStorage.getItem('month_2') === 'true') {
+      localStorage.removeItem('month_2')
+      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`;
     } else if (
       localStorage.getItem('anual') === 'true' &&
       userInfo.final_date < today &&

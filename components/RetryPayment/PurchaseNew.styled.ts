@@ -169,10 +169,10 @@ export const PurchaseNewContainer = styled.div`
           display: grid;
           grid-template-columns: 1fr 1fr;
           width: 100%;
-          gap: 20px;
+          gap: 10px;
           .box-container {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             align-items: center;
             padding-block: 20px;
             height: 84px;
@@ -355,6 +355,9 @@ export const PurchaseNewContainer = styled.div`
       gap: 10px;
       @media (max-width: 520px) {
         right: -53px;
+      }
+      @media (max-width: 400px) {
+        right: -35px;
       }
       p {
         color: #942ced;
@@ -676,7 +679,6 @@ export const PurchaseNewContainer = styled.div`
           .description-text {
             font-size: 14px;
             text-align: justify;
-            padding-inline: 20px;
           }
         }
       }
@@ -694,12 +696,11 @@ export const PurchaseNewContainer = styled.div`
       align-self: center;
       .main-container {
         .description {
-          width: 350px;
-          padding-inline: 20px;
+          padding-inline: 0;
         }
         .add-payment-container {
           .description-text {
-            font-size: 16px;
+            font-size: 12px;
           }
         }
       }

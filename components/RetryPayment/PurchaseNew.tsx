@@ -109,6 +109,8 @@ export const PurchaseNew = () => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
 
+
+
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
@@ -316,12 +318,15 @@ export const PurchaseNew = () => {
     setLoader(true);
     let user = userDataAuth.user;
 
-    let diff = Math.round((today - user.final_date) / 86400);
+    // let diff = Math.round((today - user.final_date) / 86400);
 
+    /*
     if (diff > 90) {
+      localStorage.setItem('PLAN_PATH_REDIRECT', 'true');
       router.push(PLAN_PATH);
       return;
     }
+    */
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
       // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
@@ -928,7 +933,14 @@ export const PurchaseNew = () => {
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
             <p className='description' style={{ textAlign: 'left' }}>
-              Seleccione cualquiera de los métodos de pago disponibles
+              {
+                (addPayment || paymentMethods.length === 0) &&
+                `Seleccione cualquiera de los métodos de pago disponibles`
+              }
+              {
+                (paymentMethods.length > 0 && !addPayment) &&
+                `Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo`
+              }
             </p>
             {paymentMethods.length > 0 && (
               <>
@@ -943,6 +955,7 @@ export const PurchaseNew = () => {
                           changePaymentMethod={changePaymentMethod}
                           key={'pm-' + index}
                           handleDelete={detachPayment}
+                          isOnlyOne={paymentMethods.length === 1}
                         />
                       );
                     })
@@ -1148,13 +1161,15 @@ export const PurchaseNew = () => {
                       onChange={(e) => setTerms(e.target.checked)}
                       style={{
                         width: '16px',
-                        height: '16px'
+                        height: '16px',
+                        alignSelf: 'center'
                       }}
                     />
                     <label
                       htmlFor="terms"
                       style={{
-                        paddingLeft: '10px'
+                        paddingLeft: '40px',
+                        textAlign: 'left'
                       }}
                     >
                       Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
