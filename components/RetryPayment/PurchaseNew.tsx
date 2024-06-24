@@ -933,14 +933,7 @@ export const PurchaseNew = () => {
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
             <p className='description' style={{ textAlign: 'left' }}>
-              {
-                (addPayment || paymentMethods.length === 0) &&
-                `Seleccione cualquiera de los métodos de pago disponibles`
-              }
-              {
-                (paymentMethods.length > 0 && !addPayment) &&
-                `Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo`
-              }
+              Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
             </p>
             {paymentMethods.length > 0 && (
               <>
@@ -986,6 +979,9 @@ export const PurchaseNew = () => {
                 getCSSClassByUserSituation()
               }
             >
+              <p style={{
+                fontWeight: '500'
+              }}>Seleccione cualquiera de los métodos de pago disponibles</p>
               <div
                 className='button-container'
                 style={{
@@ -1020,223 +1016,226 @@ export const PurchaseNew = () => {
                   );
                 })}
               </div>
-              {selectedButton === 'card' && (
-                <>
-                  <div>
-                    <img
-                      style={{
-                        width: '75%'
-                      }}
-                      src="/images/purchase/tarjetas_gonvar_purchasenew.png"
-                      alt="card alternatives" />
-                  </div>
-                  <div className='card-container'>
-                    <div className='left-side'>
-                      <div className='input-container'>
-                        <label>Número de la tarjeta</label>
-                        <InputMask
-                          placeholder='**** **** **** ****'
-                          mask={
-                            card.number.startsWith(37)
-                              ? '9999 9999 9999 999'
-                              : '9999 9999 9999 9999'
-                          }
-                          maskChar={'*'}
-                          value={card.number}
-                          onChange={(e) =>
-                            changeElement('number', e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className='input-container'>
-                        <label>Nombre</label>
-                        <input
-                          value={card.holder}
-                          placeholder='Nombre del propetario'
-                          onChange={(e) =>
-                            changeElement('holder', e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className='inputs-column'>
+              {
+                selectedButton === 'card' && (
+                  <>
+                    <div>
+                      <img
+                        style={{
+                          width: '75%'
+                        }}
+                        src="/images/purchase/tarjetas_gonvar_purchasenew.png"
+                        alt="card alternatives" />
+                    </div>
+                    <div className='card-container'>
+                      <div className='left-side'>
                         <div className='input-container'>
-                          <label>Mes</label>
-                          <select
-                            value={card.exp_month}
-                            onChange={(e) =>
-                              changeElement('exp_month', e.target.value)
+                          <label>Número de la tarjeta</label>
+                          <InputMask
+                            placeholder='**** **** **** ****'
+                            mask={
+                              card.number.startsWith(37)
+                                ? '9999 9999 9999 999'
+                                : '9999 9999 9999 9999'
                             }
-                          >
-                            <option disabled value={'MM'}>
-                              MM
-                            </option>
-                            {Month.map((month: number, index: number) => {
-                              return (
-                                <option key={'mes-' + index} value={month}>
-                                  {month}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                        <div className='input-container'>
-                          <label>Año</label>
-                          <select
-                            value={card.exp_year}
+                            maskChar={'*'}
+                            value={card.number}
                             onChange={(e) =>
-                              changeElement('exp_year', e.target.value)
-                            }
-                          >
-                            <option disabled value={'AA'}>
-                              AA
-                            </option>
-                            {Year.map((year: number, index: number) => {
-                              return (
-                                <option key={'year-' + index} value={year}>
-                                  {year}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                        <div className='input-container'>
-                          <label>CVV</label>
-                          <input
-                            placeholder='***'
-                            type='password'
-                            value={card.cvc}
-                            onChange={(e) =>
-                              changeElement('cvc', e.target.value)
+                              changeElement('number', e.target.value)
                             }
                           />
                         </div>
+                        <div className='input-container'>
+                          <label>Nombre</label>
+                          <input
+                            value={card.holder}
+                            placeholder='Nombre del propetario'
+                            onChange={(e) =>
+                              changeElement('holder', e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className='inputs-column'>
+                          <div className='input-container'>
+                            <label>Mes</label>
+                            <select
+                              value={card.exp_month}
+                              onChange={(e) =>
+                                changeElement('exp_month', e.target.value)
+                              }
+                            >
+                              <option disabled value={'MM'}>
+                                MM
+                              </option>
+                              {Month.map((month: number, index: number) => {
+                                return (
+                                  <option key={'mes-' + index} value={month}>
+                                    {month}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                          <div className='input-container'>
+                            <label>Año</label>
+                            <select
+                              value={card.exp_year}
+                              onChange={(e) =>
+                                changeElement('exp_year', e.target.value)
+                              }
+                            >
+                              <option disabled value={'AA'}>
+                                AA
+                              </option>
+                              {Year.map((year: number, index: number) => {
+                                return (
+                                  <option key={'year-' + index} value={year}>
+                                    {year}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                          <div className='input-container'>
+                            <label>CVV</label>
+                            <input
+                              placeholder='***'
+                              type='password'
+                              value={card.cvc}
+                              onChange={(e) =>
+                                changeElement('cvc', e.target.value)
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className='right-side'>
-                      <div
-                        className={
-                          'card-img ' +
-                          (checkEmpty(card) ? 'background-checked ' : '')
-                        }
-                      >
-                        <div className='square' />
-                        <p className='number'>{card.number}</p>
-                        <div className='last-data'>
-                          <p>{card.holder}</p>
-                          {(card.exp_month !== '' || card.exp_year !== '') && (
-                            <div className='date'>
-                              <p>mes/año</p>
-                              <p>
-                                {card.exp_month}/{card.exp_year}
-                              </p>
-                            </div>
-                          )}
+                      <div className='right-side'>
+                        <div
+                          className={
+                            'card-img ' +
+                            (checkEmpty(card) ? 'background-checked ' : '')
+                          }
+                        >
+                          <div className='square' />
+                          <p className='number'>{card.number}</p>
+                          <div className='last-data'>
+                            <p>{card.holder}</p>
+                            {(card.exp_month !== '' || card.exp_year !== '') && (
+                              <div className='date'>
+                                <p>mes/año</p>
+                                <p>
+                                  {card.exp_month}/{card.exp_year}
+                                </p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <p className='description-text'>
-                    Presionando en el botón "Confirmar compra" estás dando tu
-                    consentimiento para que Gonvar automáticamente continúe con
-                    tu suscripción &nbsp;
-                    {returnFrecuency()} y te cobremos {returnPrice()}
-                    en el medio de pago que estás agregando hasta que tu decidas
-                    cancelarla.
-                    <br />
-                    <br />
-                    Puedes cancelar la suscripción en cualquier momento. Para
-                    hacerlo, dirígite a tu perfil y presiona en el botón
-                    "Cancelar suscripción"
-                  </p>
-                  <div style={{
-                    paddingInline: '10px',
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}>
-                    <input
-                      type="checkbox"
-                      name=""
-                      id="terms"
-                      checked={terms}
-                      onChange={(e) => setTerms(e.target.checked)}
-                      style={{
-                        width: '16px',
-                        height: '16px',
-                        alignSelf: 'center'
-                      }}
-                    />
-                    <label
-                      htmlFor="terms"
-                      style={{
-                        paddingLeft: '40px',
-                        textAlign: 'left'
-                      }}
-                    >
-                      Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
-                    </label>
-                  </div>
-                  {error && option === 1 && (
-                    <p
-                      className='description-text'
-                      style={{ color: 'red', textAlign: 'left' }}
-                    >
-                      No hemos podido procesar tu pago, puedes reintentar tu{' '}
+                    <p className='description-text'>
+                      Presionando en el botón "Confirmar compra" estás dando tu
+                      consentimiento para que Gonvar automáticamente continúe con
+                      tu suscripción &nbsp;
+                      {returnFrecuency()} y te cobremos {returnPrice()}
+                      en el medio de pago que estás agregando hasta que tu decidas
+                      cancelarla.
                       <br />
-                      pago nuevamente o probar con otro método de pago.
+                      <br />
+                      Puedes cancelar la suscripción en cualquier momento. Para
+                      hacerlo, dirígite a tu perfil y presiona en el botón
+                      "Cancelar suscripción"
                     </p>
-                  )}
-                  {loaderAdd ? (
-                    <LoaderContainSpinner />
-                  ) : (
-                    <button
-                      className='type3'
-                      style={{
-                        opacity: !terms ? '0.8' : '1'
-                      }}
-                      /*
-                      onClick={() => {
-                        addNewCard();
-                        setOption(1);
-                      }}
-                      */
-                      onClick={() => {
-                        if (terms) {
-                          handleConfirm();
-                        }
-                      }}
-                      disabled={!terms}
-                    >
-                      Confirmar compra
+                    <div style={{
+                      paddingInline: '10px',
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="terms"
+                        checked={terms}
+                        onChange={(e) => setTerms(e.target.checked)}
+                        style={{
+                          width: '16px',
+                          height: '16px',
+                          alignSelf: 'center'
+                        }}
+                      />
+                      <label
+                        htmlFor="terms"
+                        style={{
+                          paddingLeft: '40px',
+                          textAlign: 'left'
+                        }}
+                      >
+                        Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
+                      </label>
+                    </div>
+                    {error && option === 1 && (
+                      <p
+                        className='description-text'
+                        style={{ color: 'red', textAlign: 'left' }}
+                      >
+                        No hemos podido procesar tu pago, puedes reintentar tu{' '}
+                        <br />
+                        pago nuevamente o probar con otro método de pago.
+                      </p>
+                    )}
+                    {loaderAdd ? (
+                      <LoaderContainSpinner />
+                    ) : (
+                      <button
+                        className='type3'
+                        style={{
+                          opacity: !terms ? '0.8' : '1'
+                        }}
+                        /*
+                        onClick={() => {
+                          addNewCard();
+                          setOption(1);
+                        }}
+                        */
+                        onClick={() => {
+                          if (terms) {
+                            handleConfirm();
+                          }
+                        }}
+                        disabled={!terms}
+                      >
+                        Confirmar compra
+                      </button>
+                    )}
+                  </>
+                )}
+              {
+                selectedButton === 'oxxo' && (
+                  <div>
+                    <p className='description-text mb-5'>
+                      Presiona el botón de generar ficha de pago oxxo para
+                      visualizarla y poder descargarla. Una vez que abones en una
+                      tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
+                      continuación podrás comenzar con tus cursos
+                    </p>
+                    <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
+                      Genera ficha de pago OXXO
                     </button>
-                  )}
-                </>
-              )}
-              {selectedButton === 'oxxo' && (
-                <div>
-                  <p className='description-text mb-5'>
-                    Presiona el botón de generar ficha de pago oxxo para
-                    visualizarla y poder descargarla. Una vez que abones en una
-                    tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
-                    continuación podrás comenzar con tus cursos
-                  </p>
-                  <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
-                    Genera ficha de pago OXXO
-                  </button>
-                </div>
-              )}
-              {selectedButton === 'transfer' && (
-                <div>
-                  <p className='description-text mb-5'>
-                    Presiona el botón de generar ficha de transferencia para
-                    visualizarla y poder descargarla. Una vez que realices la
-                    transferencia tardaremos máximo 48hs en procesar tu pago y a
-                    continuación podrás comenzar con tus cursos
-                  </p>
-                  <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
-                    Genera ficha para transferencia
-                  </button>
-                </div>
-              )}
+                  </div>
+                )}
+              {
+                selectedButton === 'transfer' && (
+                  <div>
+                    <p className='description-text mb-5'>
+                      Presiona el botón de generar ficha de transferencia para
+                      visualizarla y poder descargarla. Una vez que realices la
+                      transferencia tardaremos máximo 48hs en procesar tu pago y a
+                      continuación podrás comenzar con tus cursos
+                    </p>
+                    <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
+                      Genera ficha para transferencia
+                    </button>
+                  </div>
+                )}
               {
                 selectedButton === 'paypal' && (
                   <>
