@@ -115,9 +115,51 @@ const Users = () => {
           }
         </div>
         {
+<<<<<<< Updated upstream
           selectedMainMenuOption === 'Payments' &&
           /*<!-- Invoices -->
           <!--*/
+=======
+          selectedMainMenuOption === 'Subscription' &&
+          <div className="content-section">
+            <div className="table-content">
+              <table className="gonvar-table">
+                <thead className="gonvar-table__thead">
+                  <tr className="gonvar-table__row">
+                    <th className="gonvar-table__th">Estado de la suscripción</th>
+                    <th className="gonvar-table__th">Tipo de suscripción</th>
+                    <th className="gonvar-table__th">Método de suscripción</th>
+                    <th className="gonvar-table__th">Inicio</th>
+                    <th className="gonvar-table__th">Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="gonvar-table__row">
+                    <td className="gonvar-table__data">#15267</td>
+                    <td className="gonvar-table__data">Mar 1, 2023</td>
+                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
+                    <td className="gonvar-table__data">1499</td>
+                  </tr>
+                  <tr className="gonvar-table__row">
+                    <td className="gonvar-table__data">#15663</td>
+                    <td className="gonvar-table__data">Abr 2, 2023</td>
+                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
+                    <td className="gonvar-table__data">1499</td>
+                  </tr>
+                  <tr className="gonvar-table__row">
+                    <td className="gonvar-table__data">#15814</td>
+                    <td className="gonvar-table__data">May 3, 2023</td>
+                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
+                    <td className="gonvar-table__data">1499</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+        {
+          selectedMainMenuOption === 'Payments' &&
+>>>>>>> Stashed changes
           <div className="content-section">
             <div className="table-content">
               <table className="gonvar-table">
@@ -154,10 +196,13 @@ const Users = () => {
           </div>
         }
         {
+<<<<<<< Updated upstream
           /*
           <!-- Cursos realizados  -->
         <!--
           */
+=======
+>>>>>>> Stashed changes
           (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
           <div className="content-section">
             <div className="table-content">
@@ -217,11 +262,14 @@ const Users = () => {
         }
 
         {
+<<<<<<< Updated upstream
           /*
           -->
         <!-- Homeworks -->
         <!--
           */
+=======
+>>>>>>> Stashed changes
           (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
           <div className="content-section content-section--with-go-back">
             <div className="table-content">
@@ -295,12 +343,15 @@ const Users = () => {
           </div>
         }
         {
+<<<<<<< Updated upstream
           /*
           -->
         <!-- Centro de recompensas -->
         <!-- Recompensas -->
         <!--
           */
+=======
+>>>>>>> Stashed changes
           (selectedMainMenuOption === 'Rewards') &&
           <div className="content-section">
             <div className="rewards-sections">
