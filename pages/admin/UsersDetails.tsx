@@ -1,11 +1,11 @@
-import Users from '../../components/admin/UsersNew/UsersNew';
+import UsersDetails from '../../components/admin/UsersNew/UsersNew';
 import { MainContain } from '../../screens/Styles.styled';
 
 const UsersView = () => {
   return (
     <MainContain>
       {/* <UsersList /> */}
-      <Users />
+      <UsersDetails />
     </MainContain>
   );
 };

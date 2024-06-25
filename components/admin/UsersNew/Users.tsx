@@ -36,6 +36,7 @@ import {
   Role,
   UserLevelValue,
 } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { useRouter } from 'next/router';
 
 type SuscriptionOption = 'todos' | 'mensual' | 'anual' | 'cuatri';
 interface MethodData {
@@ -50,6 +51,7 @@ interface UserAccesss {
 }
 
 const Users = () => {
+  const router = useRouter();
   const [userCalendar, setUserCalendar] = useState<boolean>(true);
   const [loginCalendar, setLoginCalendar] = useState<boolean>(true);
   const [openUserCalendar, setOpenUserCalendar] = useState<boolean>(false);
@@ -195,6 +197,13 @@ const Users = () => {
     setCurrentUser(user);
     setIsVisible(true);
   };
+
+  const changeToUserDetailsView = (user: IAdminUsers) => {
+    localStorage.setItem('selected-user-id', user.id + '');
+    router.push({
+      pathname: '/admin/UsersDetails'
+    });
+  }
 
   const getMethodsBySuscription = (option: SuscriptionOption) => {
     const methodsArray = methods as MethodData[];
@@ -572,7 +581,10 @@ const Users = () => {
                                 <td>{user.email}</td>
                                 <td>{formatDate(user.created_at)}</td>
                                 <td>MXN${user.spent}</td>
-                                <td onClick={() => openUserCard(user)}>
+                                <td onClick={
+                                  // () => openUserCard(user)
+                                  () => changeToUserDetailsView(user)
+                                }>
                                   <UserShow>
                                     <EditIcon />
                                     Visualizar Usuario

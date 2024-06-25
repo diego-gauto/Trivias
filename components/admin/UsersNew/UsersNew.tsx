@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { MainContainer } from './UsersNew.styled';
+import { getGenericQueryResponse } from '../../api/admin';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
+import { useRouter } from 'next/router';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
+
+const MONTHS_SPANISH = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
 interface IMainMenuOption {
   id: MainMenuOptionId,
@@ -12,6 +17,22 @@ interface IMainMenuOption {
 interface IRewardsCenterMenuOption {
   id: RewardsCenterMenuOptionId,
   label: string
+}
+
+interface IUserMainProperties {
+  username: string,
+  email: string,
+  phone: string,
+  createdAt: string,
+  points: number,
+  photo: string
+}
+
+interface IUserPaymentHistory {
+  orderNumber: number
+  amount: number
+  paidAt: string
+  product: string
 }
 
 const MAIN_SECTIONS: IMainMenuOption[] = [
@@ -44,13 +65,19 @@ const REWARDS_SECTIONS: IRewardsCenterMenuOption[] = [{
 }
 ];
 
+const getFormatedDate = (date: Date) => {
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+}
 
-
-const Users = () => {
+const UsersDetails = () => {
+  const router = useRouter();
+  const [userId, setUserId] = useState(0);
   const [selectedMainMenuOption, setSelectedMainMenuOption] = useState<MainMenuOptionId>('Payments');
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
   const [viewHomeworks, setViewHomeworks] = useState(false);
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
+  const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
+  const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
@@ -61,38 +88,120 @@ const Users = () => {
   para aclarar en cual sección esta el usuario
   */
 
+  useEffect(() => {
+    const selectedUserId = localStorage.getItem('selected-user-id');
+    if (selectedUserId !== null) {
+      setUserId(parseInt(selectedUserId));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId !== 0) {
+      getUserMainProperties();
+      getUserPaymentHistory();
+    }
+  }, [userId]);
+
+  const getUserMainProperties = async () => {
+    const userMainPropertiesQuery = `select concat(name, ' ', last_name) as username, email, phone_number, photo, score, created_at
+      from users 
+      where id = ${userId};`
+
+    interface IUserMainPropertiesResponse {
+      username: string
+      email: string
+      phone_number: string
+      photo: string
+      score: number
+      created_at: string
+    }
+
+    const response = await getGenericQueryResponse(userMainPropertiesQuery);
+    const userProperties: IUserMainPropertiesResponse = response.data.data[0];
+
+    console.log({ response });
+
+    const { username, created_at, email, phone_number, photo, score } = userProperties;
+
+    setUserMainProperties({
+      username,
+      createdAt: created_at,
+      email,
+      phone: phone_number,
+      points: score,
+      photo
+    });
+  }
+
+  const getUserPaymentHistory = async () => {
+    const query = `select id as order_number, amount, paid_at, product 
+    from invoices 
+    where user_id = ${userId};`;
+
+    interface IUserPaymentHistoryResponse {
+      order_number: number;
+      amount: number;
+      paid_at: string;
+      product: string;
+    }
+
+    const response = await getGenericQueryResponse(query);
+    const userPaymentHistory: IUserPaymentHistoryResponse[] = response.data.data;
+
+    const result: IUserPaymentHistory[] = [];
+    userPaymentHistory.forEach(({ amount, order_number, paid_at, product }) => {
+      result.push({
+        amount,
+        orderNumber: order_number,
+        paidAt: paid_at,
+        product
+      });
+    });
+
+    setUserPaymentHistory(result);
+  }
+
   return (
     <MainContainer>
-      <div className="top-header">
-        <i>🔙</i>
-        <p>Atrás</p>
+      <div
+        className="top-header"
+        onClick={() => {
+          localStorage.removeItem('selected-user-id');
+          router.push({
+            pathname: '/admin/Users'
+          });
+        }}
+      >
+        {/*<i>🔙</i>*/}
+        <img className="go-back__arrow" src="/images/back-arrow.png" alt="back-arrow" />
+        <p style={{ margin: '0' }}>Atrás</p>
       </div>
       <div className="data-container">
         <div className="user-main-header">
           <div className="user-profile">
             <div className="user-image">
-              <img src="/images/UsersNew/user-profile.png" alt="cute girl" />
+              <img src={`${userMainProperties.photo}`} alt="user profile photo" />
             </div>
             <div className="user-name">
-              Maria Herrera
+              {userMainProperties.username}
             </div>
           </div>
           <div className="user-properties">
             <div className="user-property">
               <div className="user-property-header">Correo electrónico</div>
-              <div className="user-property-value">gonvaroficial@gmail.com</div>
+              <div className="user-property-value">{userMainProperties.email}</div>
             </div>
             <div className="user-property">
               <div className="user-property-header">Teléfono</div>
-              <div className="user-property-value">526421910022</div>
+              <div className="user-property-value">{userMainProperties.phone}</div>
             </div>
             <div className="user-property">
               <div className="user-property-header">Fecha de creación</div>
-              <div className="user-property-value">26/6/2020</div>
+              <div className="user-property-value">{getFormatedDate(new Date(userMainProperties.createdAt))}</div>
             </div>
             <div className="user-property">
               <div className="user-property-header">Puntos</div>
-              <div className="user-property-value">0</div>
+              <div className="user-property-value">{userMainProperties.points}</div>
             </div>
           </div>
         </div>
@@ -102,7 +211,7 @@ const Users = () => {
               const extraCSSClass = selectedMainMenuOption === id ? 'section-title--active' : '';
               return (
                 <div
-                  id={`${id}`}
+                  key={`${id}`}
                   className={`section-title ${extraCSSClass}`}
                   onClick={(e) => {
                     setSelectedMainMenuOption(id)
@@ -115,11 +224,6 @@ const Users = () => {
           }
         </div>
         {
-<<<<<<< Updated upstream
-          selectedMainMenuOption === 'Payments' &&
-          /*<!-- Invoices -->
-          <!--*/
-=======
           selectedMainMenuOption === 'Subscription' &&
           <div className="content-section">
             <div className="table-content">
@@ -159,50 +263,67 @@ const Users = () => {
         }
         {
           selectedMainMenuOption === 'Payments' &&
->>>>>>> Stashed changes
           <div className="content-section">
-            <div className="table-content">
-              <table className="gonvar-table">
-                <thead className="gonvar-table__thead">
-                  <tr className="gonvar-table__row">
-                    <th className="gonvar-table__th">Numero de orden</th>
-                    <th className="gonvar-table__th">Fecha de pago</th>
-                    <th className="gonvar-table__th">Producto</th>
-                    <th className="gonvar-table__th">Monto</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15267</td>
-                    <td className="gonvar-table__data">Mar 1, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15663</td>
-                    <td className="gonvar-table__data">Abr 2, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15814</td>
-                    <td className="gonvar-table__data">May 3, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {
+              userPaymentHistory.length > 0 ?
+                <div className="table-content">
+                  <table className="gonvar-table">
+                    <thead className="gonvar-table__thead">
+                      <tr className="gonvar-table__row">
+                        <th className="gonvar-table__th">Numero de orden</th>
+                        <th className="gonvar-table__th">Fecha de pago</th>
+                        <th className="gonvar-table__th">Producto</th>
+                        <th className="gonvar-table__th">Monto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        userPaymentHistory.map(({ amount, orderNumber, paidAt, product }) => {
+                          const date = new Date(paidAt);
+                          const monthIndex = date.getMonth();
+                          const day = date.getDate();
+                          const year = date.getFullYear();
+                          const formatedDate = `${MONTHS_SPANISH[monthIndex]} ${day}, ${year}`;
+                          return (
+                            <tr className="gonvar-table__row" key={orderNumber}>
+                              <td className="gonvar-table__data">#{orderNumber}</td>
+                              <td className="gonvar-table__data">{formatedDate}</td>
+                              <td className="gonvar-table__data">{product}</td>
+                              <td className="gonvar-table__data">{amount / 100}</td>
+                            </tr>
+                          );
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                : <div style={{
+                  padding: '10px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%'
+                }}>
+                  <div style={{
+                    backgroundColor: '#eee',
+                    padding: '40px',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: '16px'
+                  }}>
+                    <p style={{
+                      margin: '0',
+                      fontWeight: '500'
+                    }}>No existen registros de pagos para este usuario</p>
+                  </div>
+                </div>
+            }
+
           </div>
         }
         {
-<<<<<<< Updated upstream
-          /*
-          <!-- Cursos realizados  -->
-        <!--
-          */
-=======
->>>>>>> Stashed changes
           (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
           <div className="content-section">
             <div className="table-content">
@@ -262,14 +383,6 @@ const Users = () => {
         }
 
         {
-<<<<<<< Updated upstream
-          /*
-          -->
-        <!-- Homeworks -->
-        <!--
-          */
-=======
->>>>>>> Stashed changes
           (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
           <div className="content-section content-section--with-go-back">
             <div className="table-content">
@@ -338,20 +451,11 @@ const Users = () => {
                 className="go-back__arrow"
                 src="/images/back-arrow.png"
                 alt="back-arrow" />
-              <p>Regresar</p>
+              <p style={{ margin: '0' }}>Regresar</p>
             </div>
           </div>
         }
         {
-<<<<<<< Updated upstream
-          /*
-          -->
-        <!-- Centro de recompensas -->
-        <!-- Recompensas -->
-        <!--
-          */
-=======
->>>>>>> Stashed changes
           (selectedMainMenuOption === 'Rewards') &&
           <div className="content-section">
             <div className="rewards-sections">
@@ -533,4 +637,4 @@ const Users = () => {
   )
 }
 
-export default Users;
+export default UsersDetails;

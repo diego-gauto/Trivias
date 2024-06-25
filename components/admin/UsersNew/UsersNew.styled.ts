@@ -128,6 +128,7 @@ export const MainContainer = styled.div`
   .content-section {
     display: flex;
     flex-direction: column;
+    gap: 15px;
   }
 
   .table-content {
@@ -196,6 +197,11 @@ export const MainContainer = styled.div`
   .gonvar-table__approved-text {
     background-color: #d5ffed;
     color: #0ead69;
+  }
+
+  .gonvar-table__purple-text {
+    background-color: #f6efff;
+    color: #691aca;
   }
 
   .gonvar-table__button {
