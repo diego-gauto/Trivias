@@ -1,35 +1,37 @@
-/* src/components/CardStats.module.css */
-
 .cardContainer {
   position: relative;
   margin: 16px;
   max-height: 120px;
+  width: 250px;
 }
 
-.card {
-  position: relative;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  transition: box-shadow 0.3s ease;
-  border: 1px solid #ddd;
-  z-index: 2; /* Capa superior */
-  height: 110px;
-}
-
-.cardTop {
-  position: absolute;
-  top: -5px;
+.cardBottom {
   height: 120px;
   width: 100%;
   background-color: #40E0D0; /* Color turquesa */
   border-radius: 8px;
   z-index: 1; /* Capa inferior */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+.cardTop{
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  height: 110px;
+  width: 99.5%;
+  z-index: 2;
+  padding: 10px;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .title {
@@ -38,21 +40,33 @@
   color: #333;
 }
 
-.content {
-  font-size: 1rem;
+.sub_type{
+  font-size: 24px;
+}
+
+.stats{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+}
+
+.subscriber {
+  font-size: 40px;
+  font-weight: bold;
   color: #666;
 }
 
-/* Estilos para mejorar la visibilidad del card de abajo */
-.cardBackground {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  background-color: #f5f5f5; /* Color de fondo del card de abajo */
-  border-radius: 8px;
-  z-index: 0; /* Colocar detrás de card y cardTop */
+.plans {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.plans p {
+  margin: 0;
+  font-size: 12px;
 }
 
 

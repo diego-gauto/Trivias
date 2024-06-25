@@ -1,0 +1,36 @@
+.container{
+  padding: 10px;
+}
+
+.button_container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_container{
+  display: flex;
+  
+}
+
+.button {
+  font-family: 'Montserrat';
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 2%;
+  cursor: pointer;
+
+  position: relative;
+  width: 180px;
+  height: 35px;
+}
+
+.button:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
