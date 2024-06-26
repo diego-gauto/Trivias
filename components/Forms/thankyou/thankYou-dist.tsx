@@ -32,7 +32,7 @@ const ThankYouFormDist = () => {
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
         <p className={paragraph}>
-          ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
+          En los próximos días nos comunicaremos contigo para indicarte los pasos a seguir.
         </p>
 
         <div className={contact}>

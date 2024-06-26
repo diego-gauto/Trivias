@@ -10,7 +10,6 @@
   background-position: center center; /* Centra la imagen */
 
   @media (max-width: 719px) {
-    height: 800px;
     flex-direction: column;
     justify-content: flex-start;
   }
@@ -119,6 +118,6 @@
     text-align: center;
     width: 600px;
     right: 40px;
-    bottom: 120px;
+    bottom: 80px;
   }
 }
