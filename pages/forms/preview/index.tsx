@@ -1,29 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc } from "firebase/firestore";
 // import { isValidPhoneNumber } from "react-phone-number-input";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 // import Link from "next/link";
-import { useRouter } from 'next/router';
-import * as Yup from 'yup';
+import { useRouter } from "next/router";
+import * as Yup from "yup";
 
-import { getFormApi } from '../../../components/api/form';
-import { createUserFormApi } from '../../../components/api/userform';
-import Countdown from '../../../components/Forms/countdown/countdown';
-import InputApellido from '../../../components/Forms/inputApellido/inputApellido';
-import InputMail from '../../../components/Forms/inputMail/inputMail';
-import InputNombre from '../../../components/Forms/inputNombre/inputNombre';
-import InputWatsapp from '../../../components/Forms/inputWhatsapp/inputWhatsapp';
-import ModalSuccessUserCreate from '../../../components/Forms/Modals/modalSuccesUserCreate';
-import ModalUserExist from '../../../components/Forms/Modals/modalUserExist';
-import OptionComponent from '../../../components/Forms/option/option';
-import { db } from '../../../firebase/firebaseConfig';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../screens/Login.styled';
-import styles from './preview.module.css';
+import { getFormApi } from "../../../components/api/form";
+import { createUserFormApi } from "../../../components/api/userform";
+import Countdown from "../../../components/Forms/countdown/countdown";
+import InputApellido from "../../../components/Forms/inputApellido/inputApellido";
+import InputMail from "../../../components/Forms/inputMail/inputMail";
+import InputNombre from "../../../components/Forms/inputNombre/inputNombre";
+import InputWatsapp from "../../../components/Forms/inputWhatsapp/inputWhatsapp";
+import ModalSuccessUserCreate from "../../../components/Forms/Modals/modalSuccesUserCreate";
+import ModalUserExist from "../../../components/Forms/Modals/modalUserExist";
+import OptionComponent from "../../../components/Forms/option/option";
+import { db } from "../../../firebase/firebaseConfig";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import styles from "./preview.module.css";
 
 interface Answer {
   label: string;
@@ -135,6 +131,16 @@ const Formularios = () => {
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
+    option4: Yup.lazy(() => {
+      return form?.optionsArray[3]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
+    option5: Yup.lazy(() => {
+      return form?.optionsArray[4]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
   });
 
   const formik = useFormik({
@@ -148,6 +154,8 @@ const Formularios = () => {
       option1: '',
       option2: '',
       option3: '',
+      option4: '',
+      option5: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -294,6 +302,8 @@ const Formularios = () => {
       option1: values.option1,
       option2: values.option2,
       option3: values.option3,
+      option4: values.option4,
+      option5: values.option5,
     };
 
     console.log(createUserDto);
@@ -347,6 +357,19 @@ const Formularios = () => {
       opcionesValidas = false;
     }
 
+    // Validar option4
+    if (!formik.values.option4 && form?.optionsArray[3]?.isVisible) {
+      formik.setFieldError('option4', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    // Validar option5
+    if (!formik.values.option5 && form?.optionsArray[4]?.isVisible) {
+      formik.setFieldError('option5', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+
     return opcionesValidas;
   };
 
@@ -360,6 +383,8 @@ const Formularios = () => {
       option1: true,
       option2: true,
       option3: true,
+      option4: true,
+      option5: true,
     });
 
     // Realizar la validación del formulario
@@ -524,11 +549,42 @@ const Formularios = () => {
               />
               {form?.optionsArray[2]?.isVisible
                 ? formik.touched.option3 &&
-                  formik.errors.option3 && (
-                    <div className={errorOption}>{formik.errors.option3}</div>
-                  )
+                formik.errors.option3 && (
+                  <div className={errorOption}>{formik.errors.option3}</div>
+                )
                 : null}
             </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[3]?.label || ''}
+                options={form?.optionsArray[3]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[4]?.label || ''}
+                options={form?.optionsArray[4]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
           </div>
           <div className={lineaAtravesada}></div>
 

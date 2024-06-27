@@ -1,28 +1,24 @@
-import { useEffect, useState, MouseEvent } from 'react';
+import { useEffect, useState, MouseEvent } from "react";
 
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Papa from 'papaparse';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Papa from "papaparse";
 
-import UserFormList from '../../../../components/admin/Forms/userFormList/userFormList';
+import UserFormList from "../../../../components/admin/Forms/userFormList/userFormList";
+import { getGenericQueryResponse } from "../../../../components/api/admin";
 // import { getAllTriviasApi } from "../../../../components/api/trivias";
-import { getUsersByFormApi } from '../../../../components/api/userform';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../../screens/Login.styled';
-import styles from './listUser.module.css';
+import { getUsersByFormApi } from "../../../../components/api/userform";
 import {
   Role,
   UserLevelValue,
-} from '../../../../components/GenericQueries/UserRoles/UserRolesInterfaces';
-import { getGenericQueryResponse } from '../../../../components/api/admin';
+} from "../../../../components/GenericQueries/UserRoles/UserRolesInterfaces";
 import {
   generateUserIdQuery,
-  generateUserRoleAccessQuery,
   generateUserRolesLevelQuery,
-} from '../../../../components/GenericQueries/UserRoles/UserRolesQueries';
+  generateUserRoleAccessQuery,
+} from "../../../../components/GenericQueries/UserRoles/UserRolesQueries";
+import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import styles from "./listUser.module.css";
 
 interface UserForm {
   id: number;
@@ -38,6 +34,8 @@ interface UserForm {
   option1: string;
   option2: string;
   option3: string;
+  option4: string;
+  option5: string;
 }
 
 interface UserAccesss {
@@ -215,10 +213,10 @@ const UsersForms = () => {
           </Link>
           {((canDownload && userLevel === 'admin') ||
             userLevel === 'superAdmin') && (
-            <button className={button} onClick={downloadCsv}>
-              Descargar CSV
-            </button>
-          )}
+              <button className={button} onClick={downloadCsv}>
+                Descargar CSV
+              </button>
+            )}
         </div>
         <h2 className={title}>Listados de usuarios</h2>
         <h3>Total de usuarios: {usersForms.length}</h3>
@@ -239,9 +237,8 @@ const UsersForms = () => {
               // Si hay 3 o menos páginas, muestra opciones para llegar directamente a las páginas
               numbers.map((number, index) => (
                 <li
-                  className={`${pageItem} ${
-                    currentPage === number ? active : ''
-                  }`}
+                  className={`${pageItem} ${currentPage === number ? active : ''
+                    }`}
                   key={index}
                 >
                   <a

@@ -207,6 +207,16 @@ const Formularios = () => {
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
+    option4: Yup.lazy(() => {
+      return form?.optionsArray[3]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
+    option5: Yup.lazy(() => {
+      return form?.optionsArray[4]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
   });
 
   const formik = useFormik({
@@ -220,6 +230,8 @@ const Formularios = () => {
       option1: '',
       option2: '',
       option3: '',
+      option4: '',
+      option5: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -362,6 +374,8 @@ const Formularios = () => {
       option1: values.option1,
       option2: values.option2,
       option3: values.option3,
+      option4: values.option4,
+      option5: values.option5,
     };
 
     console.log(createUserDto);
@@ -417,6 +431,18 @@ const Formularios = () => {
       opcionesValidas = false;
     }
 
+    // Validar option4
+    if (!formik.values.option4 && form?.optionsArray[3]?.isVisible) {
+      formik.setFieldError('option4', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    // Validar option5
+    if (!formik.values.option5 && form?.optionsArray[4]?.isVisible) {
+      formik.setFieldError('option5', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
     return opcionesValidas;
   };
 
@@ -430,6 +456,8 @@ const Formularios = () => {
       option1: true,
       option2: true,
       option3: true,
+      option4: true,
+      option5: true,
     });
 
     // Realizar la validación del formulario
@@ -603,6 +631,37 @@ const Formularios = () => {
                 )
                 : null}
             </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[3]?.label || ''}
+                options={form?.optionsArray[3]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[4]?.label || ''}
+                options={form?.optionsArray[4]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
           </div>
           <div className={lineaAtravesada}></div>
 

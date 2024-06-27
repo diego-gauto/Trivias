@@ -12,6 +12,8 @@ interface UserForm {
   option1: string;
   option2: string;
   option3: string;
+  option4: string;
+  option5: string;
 }
 
 interface UserRowProps {
@@ -33,6 +35,8 @@ const UserFormRow = ({ userForm }: UserRowProps) => {
       <td>{userForm.option1}</td>
       <td>{userForm.option2}</td>
       <td>{userForm.option3}</td>
+      <td>{userForm.option4}</td>
+      <td>{userForm.option5}</td>
     </tr>
   );
 };
