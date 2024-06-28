@@ -451,6 +451,7 @@ export const SecondSection = styled.div`
   width: 100%;
   position: relative;
   padding-block: 75px;
+  padding-inline: 150px;
   .data {
     position: absolute;
     background-color: #dad3e5;
@@ -573,13 +574,17 @@ export const SecondSection = styled.div`
       }
     }
   }
+  @media (max-width: 920px) {
+    padding-inline: 100px;
+  }
   @media (max-width: 850px) {
+    padding-block: 50px;
+    padding-inline: 75px;
     .data {
       .text {
         font-size: 1rem;
       }
     }
-    padding-block: 50px;
     .h1 {
       margin-top: 30px;
     }
@@ -622,6 +627,7 @@ export const SecondSection = styled.div`
     }
   }
   @media (max-width: 450px) {
+    padding-inline: 50px;
     .data {
       padding: 10px;
       top: -56px;
@@ -631,6 +637,7 @@ export const SecondSection = styled.div`
     }
   }
   @media (max-width: 400px) {
+    padding-inline: 20px;
     .info-cards {
       .card {
         width: 185px;
