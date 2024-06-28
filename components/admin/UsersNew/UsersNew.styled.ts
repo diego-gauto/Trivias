@@ -13,6 +13,16 @@ img {
 
 import styled from 'styled-components';
 
+//const linesBackgroundStyles: CSSProperties = {
+//backgroundImage: "url('/images/admin/users-view-background.png')", /* URL de tu imagen */
+//backgroundRepeat: "repeat-x", /* Repetir solo verticalmente */
+//backgroundSize: "100% auto", /* La imagen ocupa todo el ancho del contenedor */
+//backgroundPosition: "top", /* La imagen se alinea con la parte superior del contenedor */
+//backgroundAttachment: 'fixed', /* Hace que la imagen se quede fija al hacer scroll */
+//height: "100vh",
+//}
+//*/
+
 export const MainContainer = styled.div`
   width: 100%;
   display: flex;
@@ -21,6 +31,12 @@ export const MainContainer = styled.div`
   padding: 20px;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
+  background-image: url('/images/admin/users-view-background.png');
+  background-attachment: 'fixed';
+  min-height: 80vh;
+  background-position: 'top';
+  background-size: 100% auto;
+  background-repeat: repeat-y;
 
   .top-header {
     padding: 20px;

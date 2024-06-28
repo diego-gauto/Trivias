@@ -79,6 +79,8 @@ const UsersDetails = () => {
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
+  const [] = useState();
+
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
   }
@@ -338,6 +340,9 @@ const UsersDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {
+                    // TODO: Encontrar los registros de los cursos realizados
+                  }
                   <tr className="gonvar-table__row">
                     <td className="gonvar-table__data">Técnica Básica</td>
                     <td className="gonvar-table__data">Mar 1, 2023</td>
