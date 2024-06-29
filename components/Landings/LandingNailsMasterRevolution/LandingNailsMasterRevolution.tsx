@@ -390,7 +390,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <div className='data'>
             <p className='text'>
               Ahora disponible en tu suscripción Gonvar+ <br />
-              Más de 70 cursos de uñas y belleza incluídos.
+              Más de 70 cursos de uñas y belleza Incluidos.
             </p>
           </div>
           <div className='info-top'>
@@ -726,7 +726,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <img src={icon_calendar} className='icon' />
                 <h5>
                   Acceso a 70 cursos adicionales <br />
-                  <b>y beneficios incluídos en Gonvar+</b>
+                  <b>y beneficios Incluidos en Gonvar+</b>
                 </h5>
               </div>
               <div className='info-content info-side'>

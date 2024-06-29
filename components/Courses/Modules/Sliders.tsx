@@ -86,21 +86,21 @@ const Sliders = (props: ICourseData) => {
     }
     if (slideType === 'art-courses') {
       tempTexts.title = 'Cursos de Arte en Uñas, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.art_courses);
       setTexts(tempTexts);
     }
     if (slideType === 'structure-courses') {
       tempTexts.title = 'Cursos de Estructura en Uñas, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.structure_courses);
       setTexts(tempTexts);
     }
     if (slideType === 'makeup-courses') {
       tempTexts.title = 'Cursos de Maquillaje, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.makeup_courses);
       setTexts(tempTexts);
@@ -246,8 +246,8 @@ const Sliders = (props: ICourseData) => {
                 {(slideType === 'art-courses' ||
                   slideType === 'structure-courses' ||
                   slideType === 'makeup-courses') && (
-                  <img className='gonvar-logo' src={GonvarLogo} />
-                )}
+                    <img className='gonvar-logo' src={GonvarLogo} />
+                  )}
               </Title>
             </div>
             <SlideContain
@@ -326,8 +326,8 @@ const Sliders = (props: ICourseData) => {
                                   course.lessonProgress == null
                                     ? { width: 0 }
                                     : {
-                                        width: `calc(${course.lessonProgress}% - 20px)`,
-                                      }
+                                      width: `calc(${course.lessonProgress}% - 20px)`,
+                                    }
                                 }
                               />
                             )}
@@ -393,24 +393,24 @@ const Sliders = (props: ICourseData) => {
                 {
                   // (user && ([0, 5, 6, 8].includes(user.level) && user.final_date < today) || ([1, 4, 7].includes(user.level) && user.final_date < (today - (10 * 24 * 60 * 60)))) &&
                   user &&
-                    !haveAccess(
-                      user.level,
-                      user.final_date,
-                      user.role,
-                      user.method as MembershipMethodValue,
-                    ) && (
-                      // <Link href={{ pathname: PLAN_PATH }}>
-                      <div
-                        className='grey-field'
-                        style={{
-                          maxWidth: 'fit-content',
-                          position: 'relative',
-                        }}
-                        onClick={sendTo}
-                      >
-                        <PurpleButton>Adquiere Gonvar+</PurpleButton>
-                      </div>
-                    )
+                  !haveAccess(
+                    user.level,
+                    user.final_date,
+                    user.role,
+                    user.method as MembershipMethodValue,
+                  ) && (
+                    // <Link href={{ pathname: PLAN_PATH }}>
+                    <div
+                      className='grey-field'
+                      style={{
+                        maxWidth: 'fit-content',
+                        position: 'relative',
+                      }}
+                      onClick={sendTo}
+                    >
+                      <PurpleButton>Adquiere Gonvar+</PurpleButton>
+                    </div>
+                  )
                   // </Link>
                 }
                 {!user && (

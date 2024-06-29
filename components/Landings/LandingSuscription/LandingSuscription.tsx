@@ -467,7 +467,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 La Certificación en aplicación de {responsive650 && <br />} uñas
                 acrílicas desde 0 a Profesional.
               </p>
-              <p className='p-pink'>Técnicas de Escultural y Tips incluídas.</p>
+              <p className='p-pink'>Técnicas de Escultural y Tips Incluidas.</p>
             </>
           ) : (
             <>
