@@ -4,6 +4,7 @@ import Countdown from "react-countdown";
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 
+import Head from "next/head";
 import router from "next/router";
 import { Navigation } from "swiper";
 import "swiper/css";
@@ -63,7 +64,6 @@ import {
   ThirteenSection,
   TwelveSection,
 } from "./LandingNailsMasterRevolution.styled";
-import Head from "next/head";
 
 const pointWatsap = '/images/landing_suscription/point_at_button.png';
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -179,7 +179,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       const email = localStorage.getItem('email');
 
       if (email === null) {
-        localStorage.setItem('nailMaster', 'true');
+        localStorage.setItem('plan', 'true');
         router.push(SIGNUP_PATH);
         return;
       }
