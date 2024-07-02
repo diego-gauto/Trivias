@@ -35,6 +35,16 @@ interface IUserPaymentHistory {
   product: string
 }
 
+interface IUserCoursesResume {
+  courseId: number;
+  courseName: string;
+  lastSingIn: string;
+  finishDate: string;
+  statePercent: number;
+}
+
+// const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume>({} as IUserCoursesResume);
+
 const MAIN_SECTIONS: IMainMenuOption[] = [
   {
     label: 'Suscripción',
@@ -79,7 +89,7 @@ const UsersDetails = () => {
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
-  const [] = useState();
+  const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume>({} as IUserCoursesResume);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
@@ -161,6 +171,31 @@ const UsersDetails = () => {
     });
 
     setUserPaymentHistory(result);
+  }
+
+  const getUserCoursesResume = async () => {
+    // Curso y cuando termino el curso en segundos (convertir a fecha posteriormente)
+    const historyQuery = `select distinct h.course_id, to_seconds(h.last_seen) as last_seen_seconds 
+      from history as h 
+      where user_id = ${userId}
+      order by h.course_id;`;
+
+    interface IUserHistory {
+      course_id: number;
+      last_seen_seconds: number;
+    }
+
+    const responseHistory = await getGenericQueryResponse(historyQuery);
+    const userHistory: IUserHistory[] = responseHistory.data.data;
+
+
+
+    const result: IUserCoursesResume[] = [];
+    userHistory.forEach(() => {
+      // result.push({});
+    });
+
+    // setUserCoursesResume();
   }
 
   return (
