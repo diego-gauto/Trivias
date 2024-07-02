@@ -188,7 +188,25 @@ const UsersDetails = () => {
     const responseHistory = await getGenericQueryResponse(historyQuery);
     const userHistory: IUserHistory[] = responseHistory.data.data;
 
+    // Curso, con su titulo, si se encuentra publicado y la cantidad de lecciones
+    const courseWithLessonCountQuery = `select c.id as course_id, c.title, c.published, count(l.id) as lessons_count
+      from lessons as l
+      inner join seasons as s on s.id = l.seasons_id
+      inner join courses as c on c.id = s.course_id
+      group by c.id, c.title, c.published
+      order by course_id;`;
 
+    interface ICourseLessonCount {
+      course_id: number;
+      title: string;
+      published: number;
+      lessons_count: number;
+    }
+
+    const courseWithLessonCountResponse = await getGenericQueryResponse(courseWithLessonCountQuery);
+    const courseWithLessonCount: ICourseLessonCount[] = courseWithLessonCountResponse.data.data;
+
+    // 
 
     const result: IUserCoursesResume[] = [];
     userHistory.forEach(() => {
