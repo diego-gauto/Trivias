@@ -109,11 +109,12 @@ export const PurchaseNew = () => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
 
-
-
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
+        if (haveAccess(res.level, res.final_date, res.role as any, res.method)) {
+          window.location.href = PREVIEW_PATH;
+        }
         getAllCoupons();
         setPaypal(!paypal);
         if (type == 'subscription') {
@@ -199,25 +200,31 @@ export const PurchaseNew = () => {
       if (searchParams.get('trial') == 'true') {
         localStorage.setItem('trial', 'true');
       }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'month' &&
-        searchParams.get('v') === '1'
-      ) {
-        localStorage.setItem('month_1', 'true');
-      }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'month' &&
-        searchParams.get('v') === '2'
-      ) {
-        localStorage.setItem('month', 'true');
-      }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'anual'
-      ) {
-        localStorage.setItem('anual', 'true');
+      if (searchParams.get('type') === 'subscription') {
+        if (searchParams.get('frequency') === 'month') {
+          const monthVersion = searchParams.get('v');
+          if (monthVersion === '1') {
+            localStorage.setItem('month_1', 'true');
+          } else if (monthVersion === '2') {
+            localStorage.setItem('month_2', 'true');
+          } else if (monthVersion === '3') {
+            localStorage.setItem('month', 'true');
+          }
+        }
+        else if (searchParams.get('frequency') === 'anual') {
+          const annualVersion = searchParams.get('v');
+          if (['1', '2'].includes(annualVersion || '')) {
+            localStorage.setItem('anual_1', 'true');
+          } else if (annualVersion === '3') {
+            localStorage.setItem('anual', 'true');
+          }
+        }
+        else if (searchParams.get('frequency') === 'cuatrimestral') {
+          const cuatriVersion = searchParams.get('v');
+          if (['1', '2', '3'].includes(cuatriVersion || '')) {
+            localStorage.setItem('cuatri', 'true');
+          }
+        }
       }
       if (searchParams.get('type') === 'course') {
         localStorage.setItem('course', `${idC}`);

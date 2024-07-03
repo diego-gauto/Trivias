@@ -18,71 +18,116 @@ import {
 } from '../components/GlobalFunctions';
 let today = new Date().getTime() / 1000;
 
-export const authRedirect = (type: string, userInfo?: any) => {
+export interface IUserInfo {
+  id: number
+  name: string
+  last_name: string
+  email: string
+  password: string
+  phone_number: string
+  role: string
+  photo: string
+  score: number
+  stripe_id: string
+  provider: string
+  created_at: string
+  past_user: string
+  subscription: number
+  last_sign_in: string
+  country: string
+  conekta_id: string
+  terms: number
+  come_from: string
+  origin_state: any
+  offer_reference: string
+  user_id: number
+  final_date: number
+  level: number
+  method: any
+  payment_method: any
+  plan_id: any
+  plan_name: any
+  start_date: number
+  type: any
+  admin_update_id: any
+}
+
+const purchaseValues = ['month', 'month_1', 'month_2', 'cuatri', 'anual', 'anual_2'];
+
+const haveAnyPurchaseValue = () => {
+  for (const pv of purchaseValues) {
+    if (localStorage.getItem(pv) !== null) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
   let today = new Date().getTime() / 1000;
+
   if (type === 'login') {
+    if (haveAnyPurchaseValue()) {
+      if (haveAccess(userInfo.level, userInfo.final_date, userInfo.role as any, userInfo.method)) {
+        window.location.href = PREVIEW_PATH;
+      }
+    }
     if (
       localStorage.getItem('trial') === 'true' &&
       userInfo.final_date < today &&
       userInfo.role !== 'superAdmin'
     ) {
       localStorage.removeItem('trial');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&trial=true&v=3`;
     } else if (localStorage.getItem('course')) {
       const course = localStorage.getItem('course');
       localStorage.removeItem('course');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${course || ''}`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=${course || ''}`;
     } else if (localStorage.getItem('product')) {
       const product = localStorage.getItem('product');
       localStorage.removeItem('product');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${product || ''}`;
-    } else if (
-      localStorage.getItem('month') === 'true' &&
-      userInfo.final_date < today &&
-      userInfo.role !== 'superAdmin'
-    ) {
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=${product || ''}`;
+    } else if (localStorage.getItem('month') === 'true') {
       localStorage.removeItem('month')
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
     } else if (localStorage.getItem('month_1') === 'true') {
       localStorage.removeItem('month_1')
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
     } else if (localStorage.getItem('month_2') === 'true') {
       localStorage.removeItem('month_2')
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=2`;
-    } else if (
-      localStorage.getItem('anual') === 'true' &&
-      userInfo.final_date < today &&
-      userInfo.role !== 'superAdmin'
-    ) {
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=2`;
+    } else if (localStorage.getItem('anual') === 'true') {
       localStorage.removeItem('anual');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`;
+    } else if (localStorage.getItem('anual_1') === 'true') {
+      localStorage.removeItem('anual_1');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`;
     } else if (
-      localStorage.getItem('cuatri') === 'true' &&
-      userInfo.final_date < today &&
-      userInfo.role !== 'superAdmin'
-    ) {
+      localStorage.getItem('cuatri') === 'true') {
       localStorage.removeItem('cuatri');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
+      // window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
+      localStorage.setItem('window-location', JSON.stringify(window.location));
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
     } else if (localStorage.getItem('nailMaster') === 'true') {
       localStorage.removeItem('nailMaster');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=30`;
     } else if (
       localStorage.getItem('plan') === 'true' &&
       userInfo.final_date < today &&
       userInfo.role !== 'superAdmin'
     ) {
       localStorage.removeItem('plan');
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`;
+      window.location.href = `${window.location.origin}${PLAN_PATH}`;
     } else if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`;
+      window.location.href = `${window.location.origin}${PROFILE_PATH}`;
     } else if (localStorage.getItem('rewards') === 'true') {
       localStorage.removeItem('rewards');
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`;
+      window.location.href = `${window.location.origin}${REWARDS_PATH}`;
     }
     else if (localStorage.getItem('retryPayment') === 'true') {
       localStorage.removeItem('retryPayment');
-      window.location.href = `https://www.gonvar.io${RETRY_PAYMENT_PATH}`;
+      window.location.href = `${window.location.origin}${RETRY_PAYMENT_PATH}`;
     }
     else {
       window.location.href = PREVIEW_PATH;
@@ -91,49 +136,57 @@ export const authRedirect = (type: string, userInfo?: any) => {
   if (type === 'register') {
     if (localStorage.getItem('trial') === 'true') {
       localStorage.removeItem('trial');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&trial=true&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&trial=true&v=3`;
     }
     if (localStorage.getItem('course')) {
       const course = localStorage.getItem('course');
       localStorage.removeItem('course');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${course || ''}`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=${course || ''}`;
     }
     if (localStorage.getItem('product')) {
       const product = localStorage.getItem('product');
       localStorage.removeItem('product');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=${product || ''}`;
-    }
-    if (localStorage.getItem('month') === 'true') {
-      localStorage.removeItem('month');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=${product || ''}`;
     }
     if (localStorage.getItem('month_1') === 'true') {
       localStorage.removeItem('month_1');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
+    }
+    if (localStorage.getItem('month_2') === 'true') {
+      localStorage.removeItem('month_2');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=2`;
+    }
+    if (localStorage.getItem('month') === 'true') {
+      localStorage.removeItem('month');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
     }
     if (localStorage.getItem('anual') === 'true') {
       localStorage.removeItem('anual');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`;
+    }
+    if (localStorage.getItem('anual_1') === 'true') {
+      localStorage.removeItem('anual_1');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=2`;
     }
     if (localStorage.getItem('cuatri') === 'true') {
       localStorage.removeItem('cuatri');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
     }
     if (localStorage.getItem('nailMaster') === 'true') {
       localStorage.removeItem('nailMaster');
-      window.location.href = `https://www.gonvar.io${PURCHASE_PATH}?type=course&id=30`;
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=30`;
     }
     if (localStorage.getItem('plan') === 'true') {
       localStorage.removeItem('plan');
-      window.location.href = `https://www.gonvar.io${PLAN_PATH}`;
+      window.location.href = `${window.location.origin}${PLAN_PATH}`;
     }
     if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
-      window.location.href = `https://www.gonvar.io${PROFILE_PATH}`;
+      window.location.href = `${window.location.origin}${PROFILE_PATH}`;
     }
     if (localStorage.getItem('rewards') === 'true') {
       localStorage.removeItem('rewards');
-      window.location.href = `https://www.gonvar.io${REWARDS_PATH}`;
+      window.location.href = `${window.location.origin}${REWARDS_PATH}`;
     }
   }
 };
