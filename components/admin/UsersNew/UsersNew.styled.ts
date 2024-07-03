@@ -383,6 +383,54 @@ export const MainContainer = styled.div`
     border-radius: 16px;
   }
 
+  /*
+  <div style={{
+    padding: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  }}>
+    <div style={{
+      backgroundColor: '#eee',
+      padding: '40px',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: '16px'
+    }}>
+      <p style={{
+        margin: '0',
+        fontWeight: '500'
+      }}>No existen registros de pagos para este usuario</p>
+    </div>
+  </div>
+  */
+
+  .empty-container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .empty-content {
+    background-color: #eee;
+    padding: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+  }
+
+  .empty-content-text {
+    margin: 0;
+    font-weight: 500;
+  }
+
   @media screen and (min-width: 576px) {
     .sections-container {
       display: grid;

@@ -79,6 +79,15 @@ const getFormatedDate = (date: Date) => {
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
+const getPrettyFormatedDate = (paidAt: string | number) => {
+  const date = new Date(typeof paidAt === 'number' ? paidAt * 1000 : paidAt);
+  const monthIndex = date.getMonth();
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const formatedDate = `${MONTHS_SPANISH[monthIndex]} ${day}, ${year}`;
+  return formatedDate;
+}
+
 const UsersDetails = () => {
   const router = useRouter();
   const [userId, setUserId] = useState(0);
@@ -89,7 +98,7 @@ const UsersDetails = () => {
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
-  const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume>({} as IUserCoursesResume);
+  const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume[]>([]);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
@@ -111,6 +120,7 @@ const UsersDetails = () => {
     if (userId !== 0) {
       getUserMainProperties();
       getUserPaymentHistory();
+      getUserCoursesResume();
     }
   }, [userId]);
 
@@ -130,8 +140,6 @@ const UsersDetails = () => {
 
     const response = await getGenericQueryResponse(userMainPropertiesQuery);
     const userProperties: IUserMainPropertiesResponse = response.data.data[0];
-
-    console.log({ response });
 
     const { username, created_at, email, phone_number, photo, score } = userProperties;
 
@@ -175,14 +183,14 @@ const UsersDetails = () => {
 
   const getUserCoursesResume = async () => {
     // Curso y cuando termino el curso en segundos (convertir a fecha posteriormente)
-    const historyQuery = `select distinct h.course_id, to_seconds(h.last_seen) as last_seen_seconds 
+    const historyQuery = `select distinct h.course_id, h.last_seen 
       from history as h 
       where user_id = ${userId}
       order by h.course_id;`;
 
     interface IUserHistory {
       course_id: number;
-      last_seen_seconds: number;
+      last_seen: string;
     }
 
     const responseHistory = await getGenericQueryResponse(historyQuery);
@@ -206,14 +214,62 @@ const UsersDetails = () => {
     const courseWithLessonCountResponse = await getGenericQueryResponse(courseWithLessonCountQuery);
     const courseWithLessonCount: ICourseLessonCount[] = courseWithLessonCountResponse.data.data;
 
-    // 
+    // Cursos realizados por el usuario y el conteo de estos
+
+    const userLessonsFinishedQuery = `select c.id as course_id, count(p.status) as finish_lessons_count
+      from progress as p
+      inner join lessons as l on l.id = p.lessons_id
+      inner join seasons as s on s.id = l.seasons_id
+      inner join courses as c on c.id = s.course_id 
+      where user_id = 49678
+      group by c.id
+      order by c.id;`;
+
+    interface IUserFinishLessons {
+      course_id: number,
+      finish_lessons_count: number;
+    }
+
+    const userLessonsFinishedResponse = await getGenericQueryResponse(userLessonsFinishedQuery);
+    const userLessonsFinished: IUserFinishLessons[] = userLessonsFinishedResponse.data.data;
+
+    const userFinishCoursesQuery = `select course_id, final_date 
+      from user_courses 
+      where user_id = ${userId}`;
+
+    interface IUserFinishCourses {
+      course_id: number;
+      final_date: number;
+    }
+
+    const userFinishCoursesResponse = await getGenericQueryResponse(userFinishCoursesQuery);
+    const userFinishCourses: IUserFinishCourses[] = userFinishCoursesResponse.data.data;
 
     const result: IUserCoursesResume[] = [];
-    userHistory.forEach(() => {
-      // result.push({});
+    userLessonsFinished.forEach(({ course_id, finish_lessons_count }) => {
+
+      const courseTitle = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.title;
+      const realLessonCount = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.lessons_count;
+      const lastSingInString = userHistory.filter(v => v.course_id === course_id)[0]?.last_seen;
+      const finishCourseFinalDateSeconds = userFinishCourses.filter(v => v.course_id === course_id)[0]?.final_date;
+
+      const isPublishedCourse = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.published || 0;
+
+      if (courseTitle !== undefined &&
+        realLessonCount !== undefined &&
+        lastSingInString !== undefined &&
+        isPublishedCourse === 1) {
+        result.push({
+          courseId: course_id,
+          courseName: courseTitle,
+          statePercent: Math.round((finish_lessons_count / realLessonCount) * 100),
+          finishDate: finishCourseFinalDateSeconds !== undefined ? getPrettyFormatedDate(finishCourseFinalDateSeconds) : '- - -',
+          lastSingIn: getPrettyFormatedDate(lastSingInString)
+        });
+      }
     });
 
-    // setUserCoursesResume();
+    setUserCoursesResume(result);
   }
 
   return (
@@ -334,15 +390,17 @@ const UsersDetails = () => {
                     <tbody>
                       {
                         userPaymentHistory.map(({ amount, orderNumber, paidAt, product }) => {
+                          /*
                           const date = new Date(paidAt);
                           const monthIndex = date.getMonth();
                           const day = date.getDate();
                           const year = date.getFullYear();
                           const formatedDate = `${MONTHS_SPANISH[monthIndex]} ${day}, ${year}`;
+                          */
                           return (
                             <tr className="gonvar-table__row" key={orderNumber}>
                               <td className="gonvar-table__data">#{orderNumber}</td>
-                              <td className="gonvar-table__data">{formatedDate}</td>
+                              <td className="gonvar-table__data">{getPrettyFormatedDate(paidAt)}</td>
                               <td className="gonvar-table__data">{product}</td>
                               <td className="gonvar-table__data">{amount / 100}</td>
                             </tr>
@@ -352,26 +410,9 @@ const UsersDetails = () => {
                     </tbody>
                   </table>
                 </div>
-                : <div style={{
-                  padding: '10px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '100%'
-                }}>
-                  <div style={{
-                    backgroundColor: '#eee',
-                    padding: '40px',
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderRadius: '16px'
-                  }}>
-                    <p style={{
-                      margin: '0',
-                      fontWeight: '500'
-                    }}>No existen registros de pagos para este usuario</p>
+                : <div className='empty-container'>
+                  <div className='empty-content'>
+                    <p className='empty-content-text'>No existen registros de pagos para este usuario</p>
                   </div>
                 </div>
             }
@@ -395,45 +436,27 @@ const UsersDetails = () => {
                 <tbody>
                   {
                     // TODO: Encontrar los registros de los cursos realizados
+                    userCoursesResume.map(({ courseName, lastSingIn, finishDate, statePercent, courseId }) => {
+                      return (
+                        <tr className="gonvar-table__row" key={courseId}>
+                          <td className="gonvar-table__data">{courseName}</td>
+                          <td className="gonvar-table__data">{lastSingIn}</td>
+                          <td className="gonvar-table__data">{finishDate}</td>
+                          <td className="gonvar-table__data">{statePercent}%</td>
+                          <td className="gonvar-table__data">
+                            <button
+                              type="button"
+                              className="gonvar-table__button"
+                              onClick={(e) => {
+                                setViewHomeworks(true);
+                              }}>
+                              Ver tareas
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    })
                   }
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Técnica Básica</td>
-                    <td className="gonvar-table__data">Mar 1, 2023</td>
-                    <td className="gonvar-table__data">- - -</td>
-                    <td className="gonvar-table__data">50%</td>
-                    <td className="gonvar-table__data">
-                      <button
-                        type="button"
-                        className="gonvar-table__button"
-                        onClick={(e) => {
-                          setViewHomeworks(true);
-                        }}>
-                        Ver tareas
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Diseño de Uñas</td>
-                    <td className="gonvar-table__data">Abr 2, 2023</td>
-                    <td className="gonvar-table__data">- - -</td>
-                    <td className="gonvar-table__data">60%</td>
-                    <td className="gonvar-table__data">
-                      <button type="button" className="gonvar-table__button">
-                        Ver tareas
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Esmaltado Permanente</td>
-                    <td className="gonvar-table__data">Feb 16, 2033</td>
-                    <td className="gonvar-table__data">May 3, 2023</td>
-                    <td className="gonvar-table__data">70%</td>
-                    <td className="gonvar-table__data">
-                      <button type="button" className="gonvar-table__button">
-                        Ver tareas
-                      </button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -447,7 +470,7 @@ const UsersDetails = () => {
               <table className="gonvar-table">
                 <thead className="gonvar-table__thead">
                   <tr className="gonvar-table__row">
-                    <th className="gonvar-table__th">Todas las tareas</th>
+                    <th className="gonvar-table__th">Lección</th>
                     <th className="gonvar-table__th">Estado de tarea</th>
                     <th className="gonvar-table__th">Link de tarea</th>
                     <th className="gonvar-table__th">Retro alimentación</th>
