@@ -422,44 +422,53 @@ const UsersDetails = () => {
         {
           (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
           <div className="content-section">
-            <div className="table-content">
-              <table className="gonvar-table">
-                <thead className="gonvar-table__thead">
-                  <tr className="gonvar-table__row">
-                    <th className="gonvar-table__th">Nombre de curso</th>
-                    <th className="gonvar-table__th">Último ingreso</th>
-                    <th className="gonvar-table__th">Fecha de finalización</th>
-                    <th className="gonvar-table__th">Estado</th>
-                    <th className="gonvar-table__th">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    // TODO: Encontrar los registros de los cursos realizados
-                    userCoursesResume.map(({ courseName, lastSingIn, finishDate, statePercent, courseId }) => {
-                      return (
-                        <tr className="gonvar-table__row" key={courseId}>
-                          <td className="gonvar-table__data">{courseName}</td>
-                          <td className="gonvar-table__data">{lastSingIn}</td>
-                          <td className="gonvar-table__data">{finishDate}</td>
-                          <td className="gonvar-table__data">{statePercent}%</td>
-                          <td className="gonvar-table__data">
-                            <button
-                              type="button"
-                              className="gonvar-table__button"
-                              onClick={(e) => {
-                                setViewHomeworks(true);
-                              }}>
-                              Ver tareas
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-                </tbody>
-              </table>
-            </div>
+            {
+              userCoursesResume.length > 0 ?
+                <div className="table-content">
+                  <table className="gonvar-table">
+                    <thead className="gonvar-table__thead">
+                      <tr className="gonvar-table__row">
+                        <th className="gonvar-table__th">Nombre de curso</th>
+                        <th className="gonvar-table__th">Último ingreso</th>
+                        <th className="gonvar-table__th">Fecha de finalización</th>
+                        <th className="gonvar-table__th">Estado</th>
+                        <th className="gonvar-table__th">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        // TODO: Encontrar los registros de los cursos realizados
+                        userCoursesResume.map(({ courseName, lastSingIn, finishDate, statePercent, courseId }) => {
+                          return (
+                            <tr className="gonvar-table__row" key={courseId}>
+                              <td className="gonvar-table__data">{courseName}</td>
+                              <td className="gonvar-table__data">{lastSingIn}</td>
+                              <td className="gonvar-table__data">{finishDate}</td>
+                              <td className="gonvar-table__data">{statePercent}%</td>
+                              <td className="gonvar-table__data">
+                                <button
+                                  type="button"
+                                  className="gonvar-table__button"
+                                  onClick={(e) => {
+                                    setViewHomeworks(true);
+                                  }}>
+                                  Ver tareas
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                :
+                <div className='empty-container'>
+                  <div className='empty-content'>
+                    <p className='empty-content-text'>No existen registros de cursos para este usuario</p>
+                  </div>
+                </div>
+            }
           </div>
         }
 
