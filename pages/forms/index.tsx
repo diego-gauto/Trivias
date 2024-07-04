@@ -270,6 +270,20 @@ const Formularios = () => {
     }
   }, [errorMessage]);
 
+  useEffect(() => {
+    if (formik.values.nombrePais !== 'México') {
+      formik.setFieldValue('estado', '');
+      formik.setFieldValue('cp', '');
+      formik.setFieldError('estado', undefined);
+      formik.setFieldError('cp', undefined);
+      formik.setTouched({
+        ...formik.touched,
+        estado: false,
+        cp: false,
+      });
+    }
+  }, [formik.values.nombrePais]);
+
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
   };
@@ -299,6 +313,7 @@ const Formularios = () => {
     formik.setFieldValue('numeroWhatsApp', value);
     formik.setFieldValue('nombrePais', selectedCountry);
     formik.setFieldValue('codigoPais', selectedCode);
+    console.log(selectedCountry)
   };
 
   const handleStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -565,32 +580,33 @@ const Formularios = () => {
             )}
           </div>
 
-          <div className={states}>
-            <div className={state}>
-              <SelectState
-                label={'Selecciona tu estado'}
-                onChange={handleStateChange}
-                onBlur={handleStateBlur}
-                value={formik.values.estado}
-              />
-              {formik.touched.estado && formik.errors.estado && (
-                <div className={errorMessageMail}>{formik.errors.estado}</div>
-              )}
+          {formik.values.nombrePais === 'México' &&
+            <div className={states}>
+              <div className={state}>
+                <SelectState
+                  label={'Selecciona tu estado'}
+                  onChange={handleStateChange}
+                  onBlur={handleStateBlur}
+                  value={formik.values.estado}
+                />
+                {formik.touched.estado && formik.errors.estado && (
+                  <div className={errorMessageMail}>{formik.errors.estado}</div>
+                )}
+              </div>
+              <div className={cp}>
+                <InputCP
+                  label={'Escribe tu código postal'}
+                  placeholder={'21340'}
+                  onChange={handleCPChange}
+                  onBlur={handleCPBlur}
+                  value={formik.values.cp}
+                />
+                {formik.touched.cp && formik.errors.cp && (
+                  <div className={errorMessageMail}>{formik.errors.cp}</div>
+                )}
+              </div>
             </div>
-            <div className={cp}>
-              <InputCP
-                label={'Escribe tu código postal'}
-                placeholder={'21340'}
-                onChange={handleCPChange}
-                onBlur={handleCPBlur}
-                value={formik.values.cp}
-              />
-              {formik.touched.cp && formik.errors.cp && (
-                <div className={errorMessageMail}>{formik.errors.cp}</div>
-              )}
-            </div>
-          </div>
-
+          }
           <div className={image}>
             {form?.img.isVisible && <img src={form.img.source} alt='iphone' />}
           </div>
