@@ -186,10 +186,14 @@ const UsersDetails = () => {
     const userResumeQuery = `SELECT approve_lessons_by_user.course_id,
             title,
             last_seen_time,
-            finish_course_seconds,
+            CASE  
+            	WHEN Round(( finish_lessons_count / lessons_count ) * 100) = 100 and finish_course_seconds IS NULL THEN last_seen_time
+            	WHEN Round(( finish_lessons_count / lessons_count ) * 100) = 100 and finish_course_seconds IS NOT NULL THEN finish_course_seconds
+            	ELSE NULL  
+            END AS finish_course_time,
             Round(( finish_lessons_count / lessons_count ) * 100) AS percent,
             published
-      FROM   (SELECT c.id AS course_id, Count(p.status) AS finish_lessons_count
+      FROM   (SELECT c.id AS course_id, Count(DISTINCT l.id) AS finish_lessons_count
               FROM progress AS p
               INNER JOIN lessons AS l ON l.id = p.lessons_id
               INNER JOIN seasons AS s ON s.id = l.seasons_id
@@ -218,7 +222,7 @@ const UsersDetails = () => {
       course_id: number;
       title: string;
       last_seen_time: string;
-      finish_course_seconds: string;
+      finish_course_time: string;
       percent: number;
       published: number; // booleano
     }
@@ -227,8 +231,8 @@ const UsersDetails = () => {
     const userResume: IUserResume[] = userResumeResponse.data.data;
 
     const result: IUserCoursesResume[] = [];
-    userResume.forEach(({ course_id, title, finish_course_seconds, last_seen_time, percent, published }) => {
-      const lastDate = finish_course_seconds !== null ? getPrettyFormatedDate(parseInt(finish_course_seconds)) : '- - -';
+    userResume.forEach(({ course_id, title, finish_course_time, last_seen_time, percent, published }) => {
+      const lastDate = finish_course_time !== null ? getPrettyFormatedDate(parseInt(finish_course_time)) : '- - -';
       result.push({
         courseId: course_id,
         courseName: title,
