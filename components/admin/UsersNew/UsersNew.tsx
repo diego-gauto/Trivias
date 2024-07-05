@@ -183,90 +183,59 @@ const UsersDetails = () => {
 
   const getUserCoursesResume = async () => {
     // Curso y cuando termino el curso en segundos (convertir a fecha posteriormente)
-    const historyQuery = `select distinct h.course_id, h.last_seen 
-      from history as h 
-      where user_id = ${userId}
-      order by h.course_id;`;
+    const userResumeQuery = `SELECT approve_lessons_by_user.course_id,
+            title,
+            last_seen_time,
+            finish_course_seconds,
+            Round(( finish_lessons_count / lessons_count ) * 100) AS percent,
+            published
+      FROM   (SELECT c.id AS course_id, Count(p.status) AS finish_lessons_count
+              FROM progress AS p
+              INNER JOIN lessons AS l ON l.id = p.lessons_id
+              INNER JOIN seasons AS s ON s.id = l.seasons_id
+              INNER JOIN courses AS c ON c.id = s.course_id
+              WHERE  user_id = ${userId}
+              GROUP  BY c.id) AS approve_lessons_by_user
+      INNER JOIN (SELECT c.id AS course_id,
+                  c.title,
+                  c.published,
+                  Count(l.id) AS lessons_count
+                  FROM lessons AS l
+                  INNER JOIN seasons AS s ON s.id = l.seasons_id
+                  INNER JOIN courses AS c ON c.id = s.course_id
+                  GROUP  BY c.id, c.title, c.published) AS courses_all_lessons 
+                  ON approve_lessons_by_user.course_id = courses_all_lessons.course_id
+      INNER JOIN (SELECT DISTINCT h.course_id, Unix_timestamp(h.last_seen) AS last_seen_time
+                  FROM history AS h WHERE  user_id = ${userId}) AS last_seen_courses 
+                  ON last_seen_courses.course_id = approve_lessons_by_user.course_id
+      LEFT JOIN (SELECT course_id,
+                        Unix_timestamp(created_at) AS finish_course_seconds
+                        FROM   user_certificates
+                        WHERE  user_id = ${userId}) AS finish_courses 
+                        ON finish_courses.course_id = approve_lessons_by_user.course_id;`;
 
-    interface IUserHistory {
-      course_id: number;
-      last_seen: string;
-    }
-
-    const responseHistory = await getGenericQueryResponse(historyQuery);
-    const userHistory: IUserHistory[] = responseHistory.data.data;
-
-    // Curso, con su titulo, si se encuentra publicado y la cantidad de lecciones
-    const courseWithLessonCountQuery = `select c.id as course_id, c.title, c.published, count(l.id) as lessons_count
-      from lessons as l
-      inner join seasons as s on s.id = l.seasons_id
-      inner join courses as c on c.id = s.course_id
-      group by c.id, c.title, c.published
-      order by course_id;`;
-
-    interface ICourseLessonCount {
+    interface IUserResume {
       course_id: number;
       title: string;
-      published: number;
-      lessons_count: number;
+      last_seen_time: string;
+      finish_course_seconds: string;
+      percent: number;
+      published: number; // booleano
     }
 
-    const courseWithLessonCountResponse = await getGenericQueryResponse(courseWithLessonCountQuery);
-    const courseWithLessonCount: ICourseLessonCount[] = courseWithLessonCountResponse.data.data;
-
-    // Cursos realizados por el usuario y el conteo de estos
-
-    const userLessonsFinishedQuery = `select c.id as course_id, count(p.status) as finish_lessons_count
-      from progress as p
-      inner join lessons as l on l.id = p.lessons_id
-      inner join seasons as s on s.id = l.seasons_id
-      inner join courses as c on c.id = s.course_id 
-      where user_id = 49678
-      group by c.id
-      order by c.id;`;
-
-    interface IUserFinishLessons {
-      course_id: number,
-      finish_lessons_count: number;
-    }
-
-    const userLessonsFinishedResponse = await getGenericQueryResponse(userLessonsFinishedQuery);
-    const userLessonsFinished: IUserFinishLessons[] = userLessonsFinishedResponse.data.data;
-
-    const userFinishCoursesQuery = `select course_id, final_date 
-      from user_courses 
-      where user_id = ${userId}`;
-
-    interface IUserFinishCourses {
-      course_id: number;
-      final_date: number;
-    }
-
-    const userFinishCoursesResponse = await getGenericQueryResponse(userFinishCoursesQuery);
-    const userFinishCourses: IUserFinishCourses[] = userFinishCoursesResponse.data.data;
+    const userResumeResponse = await getGenericQueryResponse(userResumeQuery);
+    const userResume: IUserResume[] = userResumeResponse.data.data;
 
     const result: IUserCoursesResume[] = [];
-    userLessonsFinished.forEach(({ course_id, finish_lessons_count }) => {
-
-      const courseTitle = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.title;
-      const realLessonCount = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.lessons_count;
-      const lastSingInString = userHistory.filter(v => v.course_id === course_id)[0]?.last_seen;
-      const finishCourseFinalDateSeconds = userFinishCourses.filter(v => v.course_id === course_id)[0]?.final_date;
-
-      const isPublishedCourse = courseWithLessonCount.filter(v => v.course_id === course_id)[0]?.published || 0;
-
-      if (courseTitle !== undefined &&
-        realLessonCount !== undefined &&
-        lastSingInString !== undefined &&
-        isPublishedCourse === 1) {
-        result.push({
-          courseId: course_id,
-          courseName: courseTitle,
-          statePercent: Math.round((finish_lessons_count / realLessonCount) * 100),
-          finishDate: finishCourseFinalDateSeconds !== undefined ? getPrettyFormatedDate(finishCourseFinalDateSeconds) : '- - -',
-          lastSingIn: getPrettyFormatedDate(lastSingInString)
-        });
-      }
+    userResume.forEach(({ course_id, title, finish_course_seconds, last_seen_time, percent, published }) => {
+      const lastDate = finish_course_seconds !== null ? getPrettyFormatedDate(parseInt(finish_course_seconds)) : '- - -';
+      result.push({
+        courseId: course_id,
+        courseName: title,
+        finishDate: lastDate,
+        lastSingIn: getPrettyFormatedDate(parseInt(last_seen_time)),
+        statePercent: percent
+      });
     });
 
     setUserCoursesResume(result);
@@ -556,6 +525,7 @@ const UsersDetails = () => {
                     <div
                       className={`rewards-sections__option ${extraCSSClass}`}
                       id={id}
+                      key={id}
                       onClick={(e) => {
                         setSelectedRewardsCenterMenuOption(id)
                       }}
