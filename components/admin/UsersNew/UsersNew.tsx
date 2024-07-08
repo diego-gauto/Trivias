@@ -43,6 +43,19 @@ interface IUserCoursesResume {
   statePercent: number;
 }
 
+interface IUserHomeworkHistory {
+  homeworkId: number,
+  courseId: number,
+  seasonId: number,
+  lessonId: number,
+  lessonTitle: string,
+  status: number,
+  approved: number,
+  homeworkStatus: string,
+  comment: string,
+  createdAt: string
+}
+
 // const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume>({} as IUserCoursesResume);
 
 const MAIN_SECTIONS: IMainMenuOption[] = [
@@ -93,12 +106,16 @@ const UsersDetails = () => {
   const [userId, setUserId] = useState(0);
   const [selectedMainMenuOption, setSelectedMainMenuOption] = useState<MainMenuOptionId>('Payments');
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
-  const [viewHomeworks, setViewHomeworks] = useState(false);
+  const [viewHomeworks, setViewHomeworks] = useState<{
+    show: boolean,
+    courseId: number
+  }>({ show: false, courseId: -1 });
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
   const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume[]>([]);
+  const [userHomeworkHistory, setUserHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
@@ -121,6 +138,7 @@ const UsersDetails = () => {
       getUserMainProperties();
       getUserPaymentHistory();
       getUserCoursesResume();
+      getUserHomeworksHistory();
     }
   }, [userId]);
 
@@ -243,6 +261,63 @@ const UsersDetails = () => {
     });
 
     setUserCoursesResume(result);
+  }
+
+  const getUserHomeworksHistory = async () => {
+    const query = `select h.id as homework_id, 
+            h.courses_id,
+            h.season_id,
+            h.lesson_id,
+            h.title,
+            h.status,
+            h.approved,
+            case when status = 1 and approved = 1 then 'Aprobada'
+            when status = 1 and approved = 0 then 'Reprobada'
+            else 'Sin revisar' end as homework_status,
+            h.comment,
+            unix_timestamp(created_at) as created_at_seconds
+      from homeworks as h 
+      inner join (
+      select distinct h.courses_id, h.lesson_id, max(h.id) as last_try_id
+      from homeworks as h 
+      where h.user_id = ${userId}
+      group by h.courses_id, h.lesson_id
+      ) as h2 on h2.last_try_id = h.id;`;
+
+    interface IUserHomework {
+      homework_id: number,
+      courses_id: number,
+      season_id: number,
+      lesson_id: number,
+      title: string,
+      status: number,
+      approved: number,
+      homework_status: string,
+      comment: string,
+      created_at_seconds: string
+    }
+
+    const userHomeworkResumeResponse = await getGenericQueryResponse(query);
+    const userHomeworkResume: IUserHomework[] = userHomeworkResumeResponse.data.data;
+
+    const result: IUserHomeworkHistory[] = [];
+    userHomeworkResume.forEach(({ homework_id, courses_id, season_id, lesson_id, title, comment, created_at_seconds, homework_status, approved, status }) => {
+      const lastDate = created_at_seconds !== null ? getPrettyFormatedDate(parseInt(created_at_seconds)) : '- - -';
+      result.push({
+        courseId: courses_id,
+        homeworkId: homework_id,
+        approved,
+        comment,
+        homeworkStatus: homework_status,
+        createdAt: lastDate,
+        lessonId: lesson_id,
+        lessonTitle: title,
+        seasonId: season_id,
+        status
+      });
+    });
+
+    setUserHomeworkHistory(result);
   }
 
   return (
@@ -393,7 +468,7 @@ const UsersDetails = () => {
           </div>
         }
         {
-          (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
+          (selectedMainMenuOption === 'Courses' && !viewHomeworks.show) &&
           <div className="content-section">
             {
               userCoursesResume.length > 0 ?
@@ -423,7 +498,7 @@ const UsersDetails = () => {
                                   type="button"
                                   className="gonvar-table__button"
                                   onClick={(e) => {
-                                    setViewHomeworks(true);
+                                    setViewHomeworks({ show: true, courseId: courseId });
                                   }}>
                                   Ver tareas
                                 </button>
@@ -446,68 +521,63 @@ const UsersDetails = () => {
         }
 
         {
-          (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
+          (selectedMainMenuOption === 'Courses' && viewHomeworks.show) &&
           <div className="content-section content-section--with-go-back">
-            <div className="table-content">
-              <table className="gonvar-table">
-                <thead className="gonvar-table__thead">
-                  <tr className="gonvar-table__row">
-                    <th className="gonvar-table__th">Lección</th>
-                    <th className="gonvar-table__th">Estado de tarea</th>
-                    <th className="gonvar-table__th">Link de tarea</th>
-                    <th className="gonvar-table__th">Retro alimentación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Primera tarea</td>
-                    <td className="gonvar-table__data">
-                      <div className="gonvar-table__approved-text">
-                        Aprobada
-                      </div>
-                    </td>
-                    <td className="gonvar-table__data">
-                      <button type="button" className="gonvar-table__button">
-                        Ir a tarea
-                      </button>
-                    </td>
-                    <td className="gonvar-table__data gonvar-table__data--large-text">Excelente trabajo en la investigación. Los datos presentados son claros y concisos. Me gustaría ver más análisis crítico en la próxima tarea para profundizar en los hallazgos.</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Segunda tarea</td>
-                    <td className="gonvar-table__data">
-                      <div className="gonvar-table__approved-text">
-                        Aprobada
-                      </div>
-                    </td>
-                    <td className="gonvar-table__data">
-                      <button type="button" className="gonvar-table__button">
-                        Ir a tarea
-                      </button>
-                    </td>
-                    <td className="gonvar-table__data gonvar-table__data--large-text">Buen esfuerzo en abordar el tema. Considera mejorar la coherencia entre los párrafos y añadir ejemplos más específicos para respaldar tus argumentos.</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">Tercera tarea</td>
-                    <td className="gonvar-table__data">
-                      <div className="gonvar-table__not-approved-text">
-                        Reprobada
-                      </div>
-                    </td>
-                    <td className="gonvar-table__data">
-                      <button type="button" className="gonvar-table__button">
-                        Ir a tarea
-                      </button>
-                    </td>
-                    <td className="gonvar-table__data gonvar-table__data--large-text">Has mostrado una buena capacidad de síntesis en tu trabajo. Intenta profundizar más en los conceptos teóricos para ofrecer una perspectiva más completa en tu análisis.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {
+              userHomeworkHistory.length > 0 &&
+              <div className="table-content">
+                <table className="gonvar-table">
+                  <thead className="gonvar-table__thead">
+                    <tr className="gonvar-table__row">
+                      <th className="gonvar-table__th">Lección</th>
+                      <th className="gonvar-table__th">Estado de tarea</th>
+                      <th className="gonvar-table__th">Link de tarea</th>
+                      <th className="gonvar-table__th">Retro alimentación</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      userHomeworkHistory.map(({ homeworkId, lessonTitle, homeworkStatus, comment }, index) => {
+                        /*
+                        'Aprobada'
+                        'Reprobada'
+                        'Sin revisar'
+                        */
+                        const a = 'gonvar-table__approved-text';
+                        const na = 'gonvar-table__not-approved-text';
+                        const p = 'gonvar-table__not-approved-text';
+                        const textStyle = homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
+
+                        const newTitle = lessonTitle.replace('Actividad: ', '');
+                        return (<tr
+                          className="gonvar-table__row"
+                          key={homeworkId}
+                        >
+                          <td className="gonvar-table__data">{newTitle}</td>
+                          <td className="gonvar-table__data">
+                            <div className={`${textStyle}`}>
+                              {homeworkStatus}
+                            </div>
+                          </td>
+                          <td className="gonvar-table__data">
+                            <button type="button" className="gonvar-table__button">
+                              Ir a tarea
+                            </button>
+                          </td>
+                          <td className="gonvar-table__data gonvar-table__data--large-text">
+                            {comment}
+                          </td>
+                        </tr>)
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
             <div
               className="go-back"
               onClick={(e) => {
-                setViewHomeworks(false);
+                setViewHomeworks({ show: false, courseId: -1 });
               }}
             >
               <img
