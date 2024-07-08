@@ -412,6 +412,56 @@ export const MainContainer = styled.div`
     font-weight: 500;
   }
 
+  .subscription-container {
+  }
+
+  .subscription-info-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 5px;
+  }
+
+  .subscription-item {
+    padding: 10px;
+  }
+
+  .subscription-item__content,
+  .subscription-item__header {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .subscription-item__header {
+  }
+
+  .subscription-item__content {
+    border-radius: 16px;
+    background-color: #f6efff;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .subscription-item__content-text {
+    color: #8a4bd7;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .subscription-item__content-text--normal-weight {
+    font-weight: normal;
+  }
+
+  .subscription-item__title {
+    color: #691aca;
+    font-weight: 500;
+    margin: 0;
+  }
+
   @media screen and (min-width: 576px) {
     .sections-container {
       display: grid;
@@ -426,6 +476,10 @@ export const MainContainer = styled.div`
     }
 
     .rewards__grid-container {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .subscription-info-container {
       grid-template-columns: 1fr 1fr;
     }
   }
@@ -473,6 +527,10 @@ export const MainContainer = styled.div`
     }
     .rewards__grid-container {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .subscription-info-container {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   }
 

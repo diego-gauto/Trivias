@@ -383,39 +383,60 @@ const UsersDetails = () => {
         {
           selectedMainMenuOption === 'Subscription' &&
           <div className="content-section">
-            <div className="table-content">
-              <table className="gonvar-table">
-                <thead className="gonvar-table__thead">
-                  <tr className="gonvar-table__row">
-                    <th className="gonvar-table__th">Estado de la suscripción</th>
-                    <th className="gonvar-table__th">Tipo de suscripción</th>
-                    <th className="gonvar-table__th">Método de suscripción</th>
-                    <th className="gonvar-table__th">Inicio</th>
-                    <th className="gonvar-table__th">Final</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15267</td>
-                    <td className="gonvar-table__data">Mar 1, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15663</td>
-                    <td className="gonvar-table__data">Abr 2, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                  <tr className="gonvar-table__row">
-                    <td className="gonvar-table__data">#15814</td>
-                    <td className="gonvar-table__data">May 3, 2023</td>
-                    <td className="gonvar-table__data">Gonvar Plus Cuatrimestral</td>
-                    <td className="gonvar-table__data">1499</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            {
+              <div className='subscription-container'>
+                <div className='subscription-info-container'>
+                  <div className='subscription-item'>
+                    <div className='subscription-item__header'>
+                      <p className='subscription-item__title'>Estado de suscripción</p>
+                    </div>
+                    <div className='subscription-item__content'>
+                      <p className='subscription-item__content-text'>Activo</p>
+                    </div>
+                  </div>
+                  <div className='subscription-item'>
+                    <div className='subscription-item__header'>
+                      <p className='subscription-item__title'>Tipo de la suscripción</p>
+                    </div>
+                    <div className='subscription-item__content'>
+                      <p className='subscription-item__content-text'>Mensual</p>
+                    </div>
+                  </div>
+                  <div className='subscription-item'>
+                    <div className='subscription-item__header'>
+                      <p className='subscription-item__title'>Método de la suscripción</p>
+                    </div>
+                    <div className='subscription-item__content'>
+                      <p className='subscription-item__content-text'>Tarjeta de Credito / Debito (Conekta)</p>
+                    </div>
+                  </div>
+                  <div className='subscription-item'>
+                    <div className='subscription-item__header'>
+                      <p className='subscription-item__title'>Fechas</p>
+                    </div>
+                    <div className='subscription-item__content'>
+                      <p className='subscription-item__content-text'>
+                        Inicio:
+                        <span className='subscription-item__content-text--normal-weight'>
+                          {' '}25 May 2025
+                        </span>
+                      </p>
+                      <p className='subscription-item__content-text'>
+                        Termino:
+                        <span className='subscription-item__content-text--normal-weight'>
+                          {' '}25 Jun 2025
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className='subscription-actions-container'>
+                  <div>
+
+                  </div>
+                </div>
+              </div>
+            }
           </div>
         }
         {
