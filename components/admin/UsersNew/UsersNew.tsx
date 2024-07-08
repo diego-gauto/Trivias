@@ -106,16 +106,15 @@ const UsersDetails = () => {
   const [userId, setUserId] = useState(0);
   const [selectedMainMenuOption, setSelectedMainMenuOption] = useState<MainMenuOptionId>('Payments');
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
-  const [viewHomeworks, setViewHomeworks] = useState<{
-    show: boolean,
-    courseId: number
-  }>({ show: false, courseId: -1 });
+  const [viewHomeworks, setViewHomeworks] = useState<boolean>(false);
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
 
   const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume[]>([]);
   const [userHomeworkHistory, setUserHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
+
+  const [userFilteredHomeworkHistory, setUserFilteredHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
     setSelectedMainMenuOption(newOption);
@@ -200,7 +199,6 @@ const UsersDetails = () => {
   }
 
   const getUserCoursesResume = async () => {
-    // Curso y cuando termino el curso en segundos (convertir a fecha posteriormente)
     const userResumeQuery = `SELECT approve_lessons_by_user.course_id,
             title,
             last_seen_time,
@@ -468,7 +466,7 @@ const UsersDetails = () => {
           </div>
         }
         {
-          (selectedMainMenuOption === 'Courses' && !viewHomeworks.show) &&
+          (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
           <div className="content-section">
             {
               userCoursesResume.length > 0 ?
@@ -498,7 +496,10 @@ const UsersDetails = () => {
                                   type="button"
                                   className="gonvar-table__button"
                                   onClick={(e) => {
-                                    setViewHomeworks({ show: true, courseId: courseId });
+                                    setViewHomeworks(true);
+                                    console.log({ courseId });
+                                    const newList = userHomeworkHistory.filter((h) => h.courseId === courseId);
+                                    setUserFilteredHomeworkHistory(newList);
                                   }}>
                                   Ver tareas
                                 </button>
@@ -511,7 +512,7 @@ const UsersDetails = () => {
                   </table>
                 </div>
                 :
-                <div className='empty-container'>
+                <div className='empty-container' style={{ order: '2' }}>
                   <div className='empty-content'>
                     <p className='empty-content-text'>No existen registros de cursos para este usuario</p>
                   </div>
@@ -521,10 +522,10 @@ const UsersDetails = () => {
         }
 
         {
-          (selectedMainMenuOption === 'Courses' && viewHomeworks.show) &&
+          (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
           <div className="content-section content-section--with-go-back">
             {
-              userHomeworkHistory.length > 0 &&
+              userFilteredHomeworkHistory.length > 0 &&
               <div className="table-content">
                 <table className="gonvar-table">
                   <thead className="gonvar-table__thead">
@@ -537,15 +538,10 @@ const UsersDetails = () => {
                   </thead>
                   <tbody>
                     {
-                      userHomeworkHistory.map(({ homeworkId, lessonTitle, homeworkStatus, comment }, index) => {
-                        /*
-                        'Aprobada'
-                        'Reprobada'
-                        'Sin revisar'
-                        */
+                      userFilteredHomeworkHistory.map(({ homeworkId, lessonTitle, homeworkStatus, comment }, index) => {
                         const a = 'gonvar-table__approved-text';
                         const na = 'gonvar-table__not-approved-text';
-                        const p = 'gonvar-table__not-approved-text';
+                        const p = 'gonvar-table__not-checking-text';
                         const textStyle = homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
 
                         const newTitle = lessonTitle.replace('Actividad: ', '');
@@ -553,7 +549,7 @@ const UsersDetails = () => {
                           className="gonvar-table__row"
                           key={homeworkId}
                         >
-                          <td className="gonvar-table__data">{newTitle}</td>
+                          <td className="gonvar-table__data">{newTitle === '' ? lessonTitle : newTitle}</td>
                           <td className="gonvar-table__data">
                             <div className={`${textStyle}`}>
                               {homeworkStatus}
@@ -577,7 +573,7 @@ const UsersDetails = () => {
             <div
               className="go-back"
               onClick={(e) => {
-                setViewHomeworks({ show: false, courseId: -1 });
+                setViewHomeworks(false);
               }}
             >
               <img
@@ -586,6 +582,14 @@ const UsersDetails = () => {
                 alt="back-arrow" />
               <p style={{ margin: '0' }}>Regresar</p>
             </div>
+            {
+              userFilteredHomeworkHistory.length === 0 &&
+              <div className='empty-container' style={{ order: '2' }}>
+                <div className='empty-content'>
+                  <p className='empty-content-text'>No existen tareas registradas para este curso</p>
+                </div>
+              </div>
+            }
           </div>
         }
         {

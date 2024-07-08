@@ -195,7 +195,8 @@ export const MainContainer = styled.div`
   }
 
   .gonvar-table__approved-text,
-  .gonvar-table__not-approved-text {
+  .gonvar-table__not-approved-text,
+  .gonvar-table__not-checking-text {
     font-weight: bold;
     border-radius: 16px;
     display: flex;
@@ -213,6 +214,11 @@ export const MainContainer = styled.div`
   .gonvar-table__approved-text {
     background-color: #d5ffed;
     color: #0ead69;
+  }
+
+  .gonvar-table__not-checking-text {
+    background-color: #f8e2f8;
+    color: #d244d1;
   }
 
   .gonvar-table__purple-text {
