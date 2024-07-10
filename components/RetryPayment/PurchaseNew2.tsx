@@ -87,7 +87,7 @@ export const PurchaseNew2 = () => {
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [token, setToken] = useState('');
-  const [loader, setLoader] = useState<boolean>(false);
+  // const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
   /*
   */
@@ -175,7 +175,7 @@ export const PurchaseNew2 = () => {
   };
 
   const changePaymentMethod = (pm: IPm) => {
-    setLoader(true);
+    setLoaderAdd(true);
     let body = {
       payment_method: pm.id,
       stripe_id: user.stripe_id,
@@ -183,12 +183,12 @@ export const PurchaseNew2 = () => {
     };
     setDefaultPaymentMethodConekta(body).then((res) => {
       getPaymentMethods();
-      setLoader(false);
+      setLoaderAdd(false);
     });
   };
 
   const getPaymentMethods = () => {
-    setLoader(true);
+    setLoaderAdd(true);
     let user = userDataAuth.user;
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
@@ -218,7 +218,7 @@ export const PurchaseNew2 = () => {
         "default": true
       }];*/
       setPaymentMethods(extractedProperties); // pm
-      setLoader(false);
+      setLoaderAdd(false);
     });
   };
   useEffect(() => {
@@ -536,7 +536,7 @@ export const PurchaseNew2 = () => {
   };
 
   const detachPayment = async (card: IPm) => {
-    setLoader(true);
+    setLoaderAdd(true);
     let body = {
       payment_method: card.id,
       conekta_id: user.conekta_id,
@@ -592,7 +592,7 @@ export const PurchaseNew2 = () => {
 
   const FinishPayment = async () => {
     if (plan.method == 'paypal') {
-      setLoader(false);
+      setLoaderAdd(false);
       if (type == 'subscription') {
 
 
@@ -627,7 +627,7 @@ export const PurchaseNew2 = () => {
         createInvoiceApi(invoice).then((res) => {
 
 
-          setLoader(false);
+          setLoaderAdd(false);
           if (id === '57') {
             window.location.href = '/pagoexitosonailsmaster';
           }
@@ -704,7 +704,7 @@ export const PurchaseNew2 = () => {
               if (id === '45') {
                 window.location.href = `/pagofallidoalineacion?error=${error}`;
               }
-              setLoader(false);
+              setLoaderAdd(false);
               return;
             }
           }
@@ -726,7 +726,7 @@ export const PurchaseNew2 = () => {
             if (id === '45') {
               window.location.href = `/pagofallidoalineacion?error=${error}`;
             }
-            setLoader(false);
+            setLoaderAdd(false);
           }
         });
       }
@@ -873,7 +873,7 @@ export const PurchaseNew2 = () => {
             {paymentMethods.length > 0 && (
               <>
                 <div className='payment-container'>
-                  {!loader ? (
+                  {!loaderAdd ? (
                     paymentMethods.map((pm: IPm, index: number) => {
                       return (
                         <PaymentMethods
