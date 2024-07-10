@@ -170,6 +170,27 @@ const UpdateForm = () => {
           // Parsear la cadena JSON en la propiedad "result"
           formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
 
+          const additionalOptions = [
+            {
+              isVisible: false,
+              label: '',
+              options: [
+                { label: '', value: '' },
+                { label: '', value: '' },
+              ],
+            },
+            {
+              isVisible: false,
+              label: '',
+              options: [
+                { label: '', value: '' },
+                { label: '', value: '' },
+              ],
+            },
+          ];
+
+          formTemp.optionsArray.push(...additionalOptions);
+
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
           setUpdatedForm(formTemp);
