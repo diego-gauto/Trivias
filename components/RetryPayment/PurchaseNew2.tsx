@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { FaArrowRight, FaCheck, FaChevronDown } from 'react-icons/fa';
+import { FaCheck, FaChevronDown } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
 
 import router from 'next/router';
 
-import { LESSON_PATH, PLAN_PATH, PREVIEW_PATH } from '../../constants/paths';
+import { PREVIEW_PATH } from '../../constants/paths';
 import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
 import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
 import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
@@ -17,14 +17,13 @@ import {
   conektaSpeiApi,
   conektaSubscriptionApi,
   createInvoiceApi,
-  getCourseForCheckoutApi,
 } from '../api/checkout';
 import {
   detachPaymentMethodConekta,
   setDefaultPaymentMethodConekta,
 } from '../api/profile';
 import { conektaPm, getUserApi, updateMembership } from '../api/users';
-import { haveAccess, MembershipMethodValue } from '../GlobalFunctions';
+import { haveAccess } from '../GlobalFunctions';
 import {
   Month,
   PayOptionsPurchase,
@@ -36,14 +35,13 @@ import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
 import { PurchaseNewContainer } from './PurchaseNew.styled';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import ModalError from '../../containers/Profile/Purchase/Modal1/ModalError';
 import { createNotification } from '../api/notifications';
 import { IUserInfoResult } from '../../interfaces/IUser';
 import { retrieveCoupons } from '../api/admin';
 import ErrorModal from '../Error/ErrorModal';
 import { AiFillLock } from 'react-icons/ai';
 import { returnPriceTag } from '../../utils/functions';
-import { getPriceByParams, getTitle, getDuration, getSubscription } from './PurchaseNewFunctions';
+import { getSubscription } from './PurchaseNewFunctions';
 
 declare let window: any;
 interface Subscription {
@@ -91,13 +89,11 @@ export const PurchaseNew2 = () => {
   const [option, setOption] = useState(0);
   /*
   */
-  const [plan, setPlan] = useState<any>({ method: 'conekta' });
+  // const [plan, setPlan] = useState<any>({ method: 'conekta' });
   const [coupon, setCoupon] = useState<any>();
   const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
   const [paypal, setPaypal] = useState(false);
   const [coupons, setCoupons] = useState<any>([]);
-  const [cardInfo, setCardInfo] = useState(true);
-  const [payment, setPayment] = useState(false);
   const [defaultCard, setDefaultCard] = useState<ICardUser>({} as ICardUser);
   const [terms, setTerms] = useState(false);
 
@@ -359,8 +355,8 @@ export const PurchaseNew2 = () => {
     return title;
   }
 
-  const pay = () => {
-    const filter = paymentMethods.filter((x) => x.default);
+  const pay = async () => {
+    const filter = paymentMethods.filter((card) => card.default);
     const pm = filter[0];
     let plan_id = getPlanIdByFrecuency();
 
@@ -371,7 +367,8 @@ export const PurchaseNew2 = () => {
       userId: user.user_id,
     };
 
-    conektaSubscriptionApi(data).then(async (res) => {
+    try {
+      const res = await conektaSubscriptionApi(data);
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
@@ -400,7 +397,10 @@ export const PurchaseNew2 = () => {
         setLoaderAdd(false);
         setError(true);
       }
-    });
+    } catch (error) {
+      console.log({ data });
+      console.log({ error });
+    }
   };
 
   const getDurationByFrecuency = (): FrecuencyValue => {
@@ -590,212 +590,6 @@ export const PurchaseNew2 = () => {
     return sub;
   };
 
-  const FinishPayment = async () => {
-    if (plan.method == 'paypal') {
-      setLoaderAdd(false);
-      if (type == 'subscription') {
-
-
-        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-        window.location.href = getRouteByFrequency(frequency, true);
-      } else {
-        let price = product.price;
-        if (coupon) {
-          if (coupon.type == 'amount') {
-            price = price - coupon.discount;
-          } else {
-            price = price - (coupon.discount / 100) * price;
-          }
-        }
-        let invoice = {
-          amount: price * 100,
-          product: product.title,
-          method: 'paypal',
-          user_id: userData.user_id,
-          course_id: id,
-          final_date: new Date().getTime() / 1000 + product.duration * 86400,
-          newPlan: nailmasterplusanual === 'true' ? true : false,
-        };
-        if (coupon) {
-          let tempCoupon = {
-            coupons_id: coupon.id,
-            user_id: userData.user_id,
-          };
-          await addUserCouponApi(tempCoupon);
-        }
-
-        createInvoiceApi(invoice).then((res) => {
-
-
-          setLoaderAdd(false);
-          if (id === '57') {
-            window.location.href = '/pagoexitosonailsmaster';
-          }
-          if (id === '45') {
-            window.location.href = '/pagoexitosoalineacion';
-          }
-        });
-      }
-    }
-    if (plan.method === 'conekta') {
-      if (type === 'course' || nailmasterplusanual === 'true') {
-        let price = product.price;
-        if (coupon) {
-          if (coupon.type == 'amount') {
-            price = price - coupon.discount;
-          } else {
-            price = price - (coupon.discount / 100) * price;
-          }
-        }
-        let data = {
-          id: card.id ? card.id : defaultCard.paymentMethod,
-          conekta_id: userData.conekta_id,
-          price: price * 100,
-          product_name: product.title,
-          userId: userData.user_id,
-        };
-        conektaPaymentApi(data).then(async (res) => {
-          if (res.status === 200) {
-            let invoice = {
-              amount: price * 100,
-              product: product.title,
-              method: 'conekta',
-              user_id: userData.user_id,
-              course_id: id,
-              final_date:
-                new Date().getTime() / 1000 + product.duration * 86400,
-              newPlan: nailmasterplusanual === 'true' ? true : false,
-            };
-            if (coupon) {
-              let tempCoupon = {
-                coupons_id: coupon.id,
-                user_id: userData.user_id,
-              };
-              await addUserCouponApi(tempCoupon);
-            }
-            if (
-              res.data.data.payment_status === 'paid' ||
-              res.data.data.payment_status === 'pending_payment'
-            ) {
-              createInvoiceApi(invoice).then((res) => {
-                if (id === '57') {
-                  window.location.href = '/pagoexitosonailsmaster';
-                }
-                if (id === '45') {
-                  window.location.href = '/pagoexitosoalineacion';
-                }
-              });
-              return;
-            } else {
-              setCard({ ...card, cardId: '' });
-              let error = 'Su pago fue declinado';
-              let notification = {
-                userId: userData.user_id,
-                type: '8',
-                notificationId: '',
-                amount: price,
-                productName: product.title,
-                frequency: '',
-              };
-              await createNotification(notification);
-              if (id === '57') {
-                window.location.href = `/pagofallidonailsmaster?error=${error}`;
-              }
-              if (id === '45') {
-                window.location.href = `/pagofallidoalineacion?error=${error}`;
-              }
-              setLoaderAdd(false);
-              return;
-            }
-          }
-          if (res.response.status === 400) {
-            setCard({ ...card, cardId: '' });
-            let notification = {
-              userId: userData.user_id,
-              type: '8',
-              notificationId: '',
-              amount: price,
-              productName: product.title,
-              frequency: '',
-            };
-            await createNotification(notification);
-            let error = res.response.data.error.data.details[0].message;
-            if (id === '57') {
-              window.location.href = `/pagofallidonailsmaster?error=${error}`;
-            }
-            if (id === '45') {
-              window.location.href = `/pagofallidoalineacion?error=${error}`;
-            }
-            setLoaderAdd(false);
-          }
-        });
-      }
-      if (type === 'subscription') {
-        let price = getConektaPriceId();
-
-        let data = {
-          id: card.id ? card.id : defaultCard.paymentMethod,
-          conekta_id: userData.conekta_id,
-          plan_id: price,
-          userId: userData.user_id,
-        };
-        conektaSubscriptionApi(data).then(async (res) => {
-          if (res?.data.data.status === 'active') {
-            let sub = res.data.data;
-            await updateMembership({
-              ...plan,
-              final_date: sub.billing_cycle_end,
-              payment_method: sub.card_id,
-              plan_id: sub.id,
-              plan_name: product.title,
-              start_date: sub.billing_cycle_start,
-              userId: userData.user_id,
-              level:
-                frequency === 'month' || trial === 'true'
-                  ? 1
-                  : frequency === 'anual'
-                    ? 4
-                    : 7,
-              type: product.price,
-            });
-            /*
-            const QUERY = `UPDATE memberships SET 
-              final_date = ${membership.final_date},
-                method = '${membership.method}',
-                level = ${membership.level},
-                payment_method = '${membership.payment_method}',
-                plan_id = '${membership.plan_id}',
-                plan_name = '${membership.plan_name}',
-                start_date = ${membership.start_date},
-                type = ${membership.type}
-                WHERE user_id = ${membership.userId};`;
-            */
-            // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-            window.location.href = getRouteByFrequency(frequency, true);
-          } else {
-            let notification = {
-              userId: userData.user_id,
-              type: '8',
-              notificationId: '',
-              amount: product.price,
-              productName: product.title,
-              frecuency: frequency,
-            };
-            await createNotification(notification);
-            const msg = 'pago-rechazado';
-            // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-            window.location.href = getRouteByFrequency(
-              frequency,
-              false,
-              true,
-              msg,
-            );
-          }
-        });
-      }
-    }
-  };
-
   const getCSSClassByUserSituation = () => {
     if (paymentMethods.length === 0) {
       return 'add-payment-container show-contain';
@@ -891,6 +685,15 @@ export const PurchaseNew2 = () => {
                     <LoaderContainSpinner />
                   )}
                 </div>
+                {error && option === 0 && (
+                  <p
+                    className='description'
+                    style={{ color: 'red', textAlign: 'left', fontSize: '14px' }}
+                  >
+                    No hemos podido procesar tu pago, puedes intentar tu
+                    pago nuevamente o dirigirte a "Agregar método de pago".
+                  </p>
+                )}
                 <button
                   className={addPayment ? 'fade' : ''}
                   onClick={() => {
@@ -1113,8 +916,7 @@ export const PurchaseNew2 = () => {
                         className='description-text'
                         style={{ color: 'red', textAlign: 'left' }}
                       >
-                        No hemos podido procesar tu pago, puedes reintentar tu{' '}
-                        <br />
+                        No hemos podido procesar tu pago, puedes intentar tu
                         pago nuevamente o probar con otro método de pago.
                       </p>
                     )}
@@ -1240,7 +1042,7 @@ export const PurchaseNew2 = () => {
                             }}
                             createSubscription={
                               (data, actions) => {
-                                setPlan({ method: 'paypal' });
+                                // setPlan({ method: 'paypal' });
                                 return actions.subscription.create({
                                   plan_id: returnPricePaypal(),
                                 });
