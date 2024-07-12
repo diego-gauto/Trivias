@@ -188,8 +188,46 @@ const Users = () => {
     }
   };
   const downloadExcel = async () => {
-    const excel = await usersForExcelApi(userFilters);
-    return excel.data;
+    interface IRecordUsers {
+      nombre: string
+      apellido: string
+      correo: string
+      pais: string
+      whatsapp: string
+      level: number
+      final_date: number
+      origin_state: string
+      come_from: string
+    }
+    const excel: any = await usersForExcelApi(userFilters);
+
+    const data: IRecordUsers[] = excel.data;
+
+    const getFormattedDate = (fd: number) => {
+      const d = new Date(fd * 1000);
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    const result = data.map(({ apellido, come_from, correo, final_date, level, nombre, origin_state, pais, whatsapp }) => {
+      const fechaDeTermino = final_date > 0 ? getFormattedDate(final_date) : 'Sin definir';
+      return {
+        nombre,
+        apellido,
+        correo,
+        pais,
+        whatsapp,
+        // level,
+        estado: origin_state,
+        procedencia: come_from,
+        // suscrito_hasta: fechaDeTermino
+      }
+    });
+
+    console.log({ result });
+
+    return result;
   };
   const openUserCard = async (user: IAdminUsers) => {
     setCurrentUser(user);
@@ -552,6 +590,8 @@ const Users = () => {
                   <th>Correo Electrónico</th>
                   <th>Fecha de Creación</th>
                   <th>Amount spent</th>
+                  <th>Origen</th>
+                  <th>Estado</th>
                   <th>Visualizar</th>
                 </tr>
                 {/* TABLAS */}
@@ -560,7 +600,7 @@ const Users = () => {
                     {!userLoader && (
                       <>
                         {users.length > 0 &&
-                          users.map((user: IAdminUsers, index: number) => {
+                          users.map((user: /* IAdminUsers */ any, index: number) => {
                             return (
                               <tr key={index}>
                                 <td style={{ fontWeight: 600 }}>
@@ -572,6 +612,8 @@ const Users = () => {
                                 <td>{user.email}</td>
                                 <td>{formatDate(user.created_at)}</td>
                                 <td>MXN${user.spent}</td>
+                                <td>{user.come_from}</td>
+                                <td>{user.origin_state}</td>
                                 <td onClick={() => openUserCard(user)}>
                                   <UserShow>
                                     <EditIcon />
