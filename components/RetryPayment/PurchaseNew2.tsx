@@ -361,7 +361,7 @@ export const PurchaseNew2 = () => {
     let plan_id = getPlanIdByFrecuency();
 
     const conektaJson = {
-      id: token ? token : pm?.id,
+      id: (token && addPayment) ? token : pm?.id,
       conekta_id: user.conekta_id,
       plan_id: plan_id,
       userId: user.user_id,
