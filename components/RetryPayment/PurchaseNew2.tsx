@@ -360,7 +360,7 @@ export const PurchaseNew2 = () => {
     const pm = filter[0];
     let plan_id = getPlanIdByFrecuency();
 
-    const data = {
+    const conektaJson = {
       id: token ? token : pm?.id,
       conekta_id: user.conekta_id,
       plan_id: plan_id,
@@ -368,7 +368,8 @@ export const PurchaseNew2 = () => {
     };
 
     try {
-      const res = await conektaSubscriptionApi(data);
+      const res = await conektaSubscriptionApi(conektaJson);
+      console.log({ res });
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
@@ -398,7 +399,7 @@ export const PurchaseNew2 = () => {
         setError(true);
       }
     } catch (error) {
-      console.log({ data });
+      console.log({ conektaJson });
       console.log({ error });
     }
   };
