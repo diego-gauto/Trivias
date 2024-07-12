@@ -153,6 +153,7 @@ export const PurchaseNew2 = () => {
   const conektaSuccessResponseHandler = (token: any) => {
     let tokenId = token.id;
     setToken(tokenId);
+    getPaymentMethods();
   };
 
   const conektaErrorResponseHandler = (response: any) => {
