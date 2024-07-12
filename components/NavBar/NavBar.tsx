@@ -302,6 +302,8 @@ const NavBar = () => {
         const withoutTolerance = userDataAuth.user.final_date < today;
         const isSuperAdmin = userDataAuth.user.role === 'superAdmin';
 
+        // TODO: El usuario tuvo que haber sido un usuario activo
+
         if (
           diff < 90 &&
           // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0))
@@ -630,7 +632,7 @@ const NavBar = () => {
                   title='Iniciar Sesion'
                   style={
                     pathname === LOGIN_PATH ||
-                    pathname === SIGNUP_PAST_USER_PATH
+                      pathname === SIGNUP_PAST_USER_PATH
                       ? { fontWeight: 600, opacity: 1 }
                       : { fontWeight: '' }
                   }

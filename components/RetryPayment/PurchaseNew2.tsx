@@ -35,20 +35,13 @@ import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
 import { PaymentMethods } from './PaymentMethods/PaymentMethods';
 import { PurchaseNewContainer } from './PurchaseNew.styled';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { createNotification } from '../api/notifications';
 import { IUserInfoResult } from '../../interfaces/IUser';
 import { retrieveCoupons } from '../api/admin';
-import ErrorModal from '../Error/ErrorModal';
 import { AiFillLock } from 'react-icons/ai';
 import { returnPriceTag } from '../../utils/functions';
 import { getSubscription } from './PurchaseNewFunctions';
 
 declare let window: any;
-interface Subscription {
-  price: number,
-  title: string,
-  duration: any,
-}
 
 interface ICardUser {
   paymentMethod: string
@@ -94,31 +87,12 @@ export const PurchaseNew2 = () => {
   const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
   const [paypal, setPaypal] = useState(false);
   const [coupons, setCoupons] = useState<any>([]);
-  const [defaultCard, setDefaultCard] = useState<ICardUser>({} as ICardUser);
   const [terms, setTerms] = useState(false);
-
-  const [errorMsg, setErrorMsg] = useState<any>('');
 
   const courseId = new URLSearchParams(window.location.search);
   let idC = courseId.get('id');
 
   const subscription = getSubscription(type, frequency, v);
-
-  const [showModalError, setShowModalError] = useState<any>(false);
-
-  const getConektaPriceId = () => {
-    let price = '';
-    if (trial === 'true' && v === '1') price = 'mes_gratis';
-    if (trial === 'true' && v === '2') price = 'mes_gratis';
-    if (trial === 'true' && v === '3') price = 'mes_gratis';
-    if (frequency === 'month' && v === '1') price = 'mensual';
-    if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
-    if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
-    if (frequency === 'anual') price = 'anual';
-    if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
-    if (frequency === 'cuatrimestral' && ['1', '2', '3'].includes(v)) price = 'cuatrimestre';
-    return price;
-  }
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
@@ -184,7 +158,7 @@ export const PurchaseNew2 = () => {
     });
   };
 
-  const getPaymentMethods = () => {
+  const getPaymentMethods = async () => {
     setLoaderAdd(true);
     let user = userDataAuth.user;
 
@@ -197,7 +171,9 @@ export const PurchaseNew2 = () => {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id,
     };
-    conektaPm(body).then((res) => {
+    try {
+      const res = await conektaPm(body);
+      console.log({ res });
       const conektaPaymentMethods = res.data.payment_methods.data;
       const extractedProperties = conektaPaymentMethods.map(
         ({ id, brand, last4, default: boolean }: IPm) => ({
@@ -215,8 +191,10 @@ export const PurchaseNew2 = () => {
         "default": true
       }];*/
       setPaymentMethods(extractedProperties); // pm
-      setLoaderAdd(false);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
+    setLoaderAdd(false);
   };
   useEffect(() => {
     if (localStorage.getItem('email')) {
@@ -339,22 +317,6 @@ export const PurchaseNew2 = () => {
     }
     return `cuatrimestre`;
   }
-  /*
-  Gonvar Plus Mensual
-  Gonvar Plus Anual
-  Gonvar Plus Cuatri
-  */
-  const getPlanNameByFrecuency = () => {
-    let title = `Gonvar Plus`;
-    if (frequency === 'cuatri' || frequency === 'cuatrimestral') {
-      return `${title} Cuatri`;
-    } else if (frequency === 'month') {
-      return `${title} Mensual`;
-    } else if (frequency === 'anual') {
-      return `${title} Anual`;
-    }
-    return title;
-  }
 
   const pay = async () => {
     const filter = paymentMethods.filter((card) => card.default);
@@ -421,14 +383,16 @@ export const PurchaseNew2 = () => {
     return 'cuatrimestral';
   };
 
-  const payWithOxxo = () => {
+  const payWithOxxo = async () => {
     const currentDate: any = new Date();
     const futureDate = new Date(
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
-    let data = {
-      conekta_id: userData.conekta_id,
+    console.log({ user: userDataAuth.user });
+
+    let payOxxoJson = {
+      conekta_id: userDataAuth.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
@@ -440,23 +404,30 @@ export const PurchaseNew2 = () => {
           type === 'subscription' ? 0 : Math.floor(new Date().getTime() / 1000) + (product.duration * 24 * 60 * 60),
       },
     };
-    conektaOxxoApi(data).then((res) => {
+
+    console.log({ payOxxoJson });
+
+    try {
+      const res = await conektaOxxoApi(payOxxoJson);
+      console.log({ res });
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
       setReference(response.charges.data[0].payment_method.reference);
       setExpiresAt(response.charges.data[0].payment_method.expires_at);
       setOxxoIsActive(true);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
-  const payWitSpei = () => {
+  const payWitSpei = async () => {
     const currentDate = new Date();
     const futureDate = new Date(
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
-    let data = {
-      conekta_id: userData.conekta_id,
+    let speiJson = {
+      conekta_id: userDataAuth.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
@@ -471,12 +442,15 @@ export const PurchaseNew2 = () => {
       },
     };
 
-    conektaSpeiApi(data).then((res) => {
+    try {
+      const res = await conektaSpeiApi(speiJson);
       const charges = res.data.data.charges.data[0];
       const reference = charges.payment_method.clabe;
       setBank_ref(reference);
       setSpeiIsActive(true);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const returnFrecuency = () => {
@@ -605,7 +579,6 @@ export const PurchaseNew2 = () => {
   return (
     <>
       <PurchaseNewContainer>
-        <ErrorModal show={showModalError} setShow={setShowModalError} error={errorMsg} />
         <OxxoModal
           show={oxxoIsActive}
           setShow={setOxxoIsActive}
@@ -663,11 +636,11 @@ export const PurchaseNew2 = () => {
               </div>
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
-            <p className='description' style={{ textAlign: 'left' }}>
-              Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
-            </p>
             {paymentMethods.length > 0 && (
               <>
+                <p className='description' style={{ textAlign: 'left' }}>
+                  Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
+                </p>
                 <div className='payment-container'>
                   {!loaderAdd ? (
                     paymentMethods.map((pm: IPm, index: number) => {
