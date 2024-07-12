@@ -19,6 +19,8 @@ interface UserForm {
   option3: string;
   option4: string;
   option5: string;
+  estado: string;
+  cp: string;
 }
 
 interface UserFormListProps {
@@ -44,6 +46,8 @@ const UserFormList = ({
               <th>Correo Electŕonico</th>
               <th>WhatsApp</th>
               <th>Pais</th>
+              <th>Estado</th>
+              <th>Código Postal</th>
               <th>Usuaria</th>
               <th>Membresía</th>
               <th>fecha</th>

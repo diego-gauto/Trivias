@@ -14,6 +14,8 @@ interface UserForm {
   option3: string;
   option4: string;
   option5: string;
+  estado: string;
+  cp: string;
 }
 
 interface UserRowProps {
@@ -29,6 +31,8 @@ const UserFormRow = ({ userForm }: UserRowProps) => {
       <td>{userForm.mail}</td>
       <td>{userForm.numeroWhatsapp}</td>
       <td>{userForm.pais}</td>
+      <td>{userForm.estado}</td>
+      <td>{userForm.cp}</td>
       <td>{userForm.isUser}</td>
       <td>{userForm.suscription_status}</td>
       <td>{userForm.fecha}</td>

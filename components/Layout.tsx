@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import { Body, ChildrenContain } from '../screens/Login.styled';
-import SideBar from './admin/SideBar';
-import Footer from './Footer/Footer';
-import NavBar from './NavBar/NavBar';
-import { useAdmin } from '../hooks/AdminContext';
+import { useAdmin } from "../hooks/AdminContext";
+import { Body, ChildrenContain } from "../screens/Login.styled";
+import SideBar from "./admin/SideBar";
+import Footer from "./Footer/Footer";
+import NavBar from "./NavBar/NavBar";
 
 const Layout = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,11 +20,19 @@ const Layout = ({ children }: any) => {
   let adminContext = useAdmin();
   const { setOpenNotification } = adminContext;
   useEffect(() => {
+
+    // Redirección específica
+    if (asPath === '/nails-master-revolution-goo') {
+      router.replace('/nails-master-revolution');
+      return; // Detener el useEffect aquí para evitar otros chequeos
+    }
+
     setPath(pathname.split('/')[1]);
     if (pathname === '/_error' && asPath.slice(0, 6) === '/Blogs') {
       router.push('/blogs/' + asPath.slice(6));
     }
-  }, [pathname]);
+
+  }, [pathname, asPath]);
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000);
   }, []);

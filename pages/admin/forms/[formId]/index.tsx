@@ -36,6 +36,8 @@ interface UserForm {
   option3: string;
   option4: string;
   option5: string;
+  estado: string;
+  cp: string;
 }
 
 interface UserAccesss {
