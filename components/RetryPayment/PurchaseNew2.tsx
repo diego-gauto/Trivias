@@ -1,45 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { FaCheck, FaChevronDown } from 'react-icons/fa';
-import InputMask from 'react-input-mask';
+import { AiFillLock } from "react-icons/ai";
+import { FaCheck, FaChevronDown } from "react-icons/fa";
+import InputMask from "react-input-mask";
 
-import router from 'next/router';
+import router from "next/router";
 
-import { PREVIEW_PATH } from '../../constants/paths';
-import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
-import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
-import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
-import { useAuth } from '../../hooks/useAuth';
-import {
-  addUserCouponApi,
-  conektaOxxoApi,
-  conektaPaymentApi,
-  conektaSpeiApi,
-  conektaSubscriptionApi,
-  createInvoiceApi,
-} from '../api/checkout';
-import {
-  detachPaymentMethodConekta,
-  setDefaultPaymentMethodConekta,
-} from '../api/profile';
-import { conektaPm, getUserApi, updateMembership } from '../api/users';
-import { haveAccess } from '../GlobalFunctions';
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+
+import { PREVIEW_PATH } from "../../constants/paths";
+import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
+import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
+import { useAuth } from "../../hooks/useAuth";
+import { IUserInfoResult } from "../../interfaces/IUser";
+import { returnPriceTag } from "../../utils/functions";
+import { retrieveCoupons } from "../api/admin";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
+import { conektaPm, getUserApi, updateMembership } from "../api/users";
+import { haveAccess } from "../GlobalFunctions";
 import {
   Month,
   PayOptionsPurchase,
   PayOptionsPurchaseForMonthSuscription,
   Year,
-} from './constants';
-import { checkEmpty } from './functions';
-import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
-import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { PurchaseNewContainer } from './PurchaseNew.styled';
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { IUserInfoResult } from '../../interfaces/IUser';
-import { retrieveCoupons } from '../api/admin';
-import { AiFillLock } from 'react-icons/ai';
-import { returnPriceTag } from '../../utils/functions';
-import { getSubscription } from './PurchaseNewFunctions';
+} from "./constants";
+import { checkEmpty } from "./functions";
+import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
+import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
+import { PurchaseNewContainer } from "./PurchaseNew.styled";
+import { getSubscription } from "./PurchaseNewFunctions";
 
 declare let window: any;
 
@@ -454,35 +445,36 @@ export const PurchaseNew2 = () => {
   };
 
   const returnFrecuency = () => {
-    if (user.level === 5 || user.level === 4) {
-      return 'Anual';
-    } else if (user.level === 1 || user.level === 6) {
-      return 'Mensual';
-    } else if (user.level === 7 || user.level === 8 || user.level === 0) {
-      return 'Cuatrimestral';
-    } else {
-      return 'NA ';
-    }
+    // if (user.level === 5 || user.level === 4) {
+    //   return 'Anual';
+    // } else if (user.level === 1 || user.level === 6) {
+    //   return 'Mensual';
+    // } else if (user.level === 7 || user.level === 8 || user.level === 0) {
+    //   return 'Cuatrimestral';
+    // } else {
+    //   return 'NA ';
+    // }
+    return frequency === 'month' ? 'Mensual' : (frequency === 'anual' ? 'Anual' : 'Cuatrimestral');
   };
 
   const returnPrice = () => {
     if (frequency === 'cuatrimestral') {
       if (['1', '2', '3'].includes(v)) {
-        return `1599 / Cuatrimestral`;
+        return `1599 / Cuatrimestral `;
       }
     } else if (frequency === 'month') {
       if (v === '1') {
-        return `149 / Mensual`;
+        return `149 / Mensual `;
       } else if (v === '2') {
-        return `249 / Mensual`;
+        return `249 / Mensual `;
       } else if (v === '3') {
-        return `459 / Mensual`;
+        return `459 / Mensual `;
       }
     } else if (frequency === 'anual') {
       if (v === '1' || v === '2') {
-        return `1599 / Anual`;
+        return `1599 / Anual `;
       } else if (v === '3') {
-        return `3497 / Anual`;
+        return `3497 / Anual `;
       }
     }
     return 1599;
@@ -850,7 +842,7 @@ export const PurchaseNew2 = () => {
                       Presionando en el botón "Confirmar compra" estás dando tu
                       consentimiento para que Gonvar automáticamente continúe con
                       tu suscripción &nbsp;
-                      {returnFrecuency()} y te cobremos {returnPrice()}
+                      {returnFrecuency()} y te cobremos $ {returnPrice()}
                       en el medio de pago que estás agregando hasta que tu decidas
                       cancelarla.
                       <br />
