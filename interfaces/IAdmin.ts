@@ -24,7 +24,6 @@ export interface IUserFilters {
   method: string;
   membership: string;
   state: string;
-  come_from: string;
   courses: number;
   progress: number;
   dates_login: {
@@ -37,6 +36,8 @@ export interface IUserFilters {
     date_1: string;
     date_2: string;
   };
+  come_from: string;
+  origin_state: string;
 }
 
 export interface IAdminUsers {

@@ -55,6 +55,7 @@ export const AdminsContext = (props: Props) => {
       date_1: '',
       date_2: '',
     },
+    origin_state: 'todos'
   };
   const [userFilters, setUserFilters] = useState<IUserFilters>(initial_filters);
   const [countries, setCountries] = useState([]);
