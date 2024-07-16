@@ -86,13 +86,17 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     });
   };
 
-  const getPaymentMethods = () => {
+  const getPaymentMethods = async () => {
     setIsloading(true);
     let body = {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id,
     };
-    conektaPm(body).then((res) => {
+    console.log({ body });
+    console.log({ user });
+    try {
+      const res = await conektaPm(body);
+      console.log({ res });
       const conektaPaymentMethods = res.data.payment_methods.data;
       const extractedProperties = conektaPaymentMethods.map(
         ({ id, brand, last4, default: boolean }: IPm) => ({
@@ -103,8 +107,10 @@ export const RetryPayModal = (props: IRetryPayModal) => {
         }),
       );
       setPaymentMethods(extractedProperties);
-      setIsloading(false);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
+    setIsloading(false);
   };
 
   const dueOrders = () => {

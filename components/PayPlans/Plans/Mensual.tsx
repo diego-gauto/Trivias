@@ -119,7 +119,7 @@ const Mensual = (props: IData) => {
               <div className='b-p-pink'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just'>
                   <b>Certificación</b> en aplicación de uñas acrílicas desde 0 a
-                  Profesional. Técnicas de Tips y Escultural incluídas.
+                  Profesional. Técnicas de Tips y Escultural Incluidas.
                   <b> Precio Real: $6,719.00 MXN</b>
                 </p>
               </div>

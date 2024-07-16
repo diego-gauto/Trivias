@@ -4,6 +4,7 @@ import Countdown from "react-countdown";
 import { BsChevronDown, BsChevronLeft, BsChevronRight, BsChevronUp } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 
+import Head from "next/head";
 import router from "next/router";
 import { Navigation } from "swiper";
 import "swiper/css";
@@ -63,7 +64,6 @@ import {
   ThirteenSection,
   TwelveSection,
 } from "./LandingNailsMasterRevolution.styled";
-import Head from "next/head";
 
 const pointWatsap = '/images/landing_suscription/point_at_button.png';
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -103,6 +103,10 @@ views.set(5, false);
 views.set(6, false);
 views.set(7, false);
 views.set(8, false);
+// Nuevas preguntas
+views.set(9, false);
+views.set(10, false);
+views.set(11, false);
 
 type Origin = 'facebook' | 'google' | 'tiktok';
 
@@ -175,7 +179,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
       const email = localStorage.getItem('email');
 
       if (email === null) {
-        localStorage.setItem('nailMaster', 'true');
+        localStorage.setItem('plan', 'true');
         router.push(SIGNUP_PATH);
         return;
       }
@@ -256,10 +260,10 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               <br />
               Inscripciones sólo desde el
               <br />
-              6 de Mayo al 30 de Junio
+              1 de Julio al 31 de Julio
             </h4>
             <Countdown
-              date={new Date(2024, 5, 30, 23, 59, 59)}
+              date={new Date(2024, 6, 31, 23, 59, 59)}
               renderer={(props) => (
                 <div className='countdown'>
                   <h2>TIEMPO RESTANTE</h2>
@@ -386,7 +390,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
           <div className='data'>
             <p className='text'>
               Ahora disponible en tu suscripción Gonvar+ <br />
-              Más de 70 cursos de uñas y belleza incluídos.
+              Más de 70 cursos de uñas y belleza Incluidos.
             </p>
           </div>
           <div className='info-top'>
@@ -567,9 +571,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
             <img src={mujer_fondo_azul} className='img' />
           </div>
           <h2 className='h1 bold'>
-            Aprende desde cero y {responsive850 && <br />}
-            <strong className='dark-blue no-bold'>convierte de tu pasión</strong> <br /> por las
-            uñas en una carrera con nuestro <strong>curso de uñas acrilicas</strong>
+            Aprende desde cero y <strong className='dark-blue no-bold'>convierte de tu pasión</strong> por las uñas en una carrera con nuestro <strong>curso de uñas acrilicas</strong>
           </h2>
           <div className='info-cards all-center'>
             <div className='card'>
@@ -724,7 +726,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <img src={icon_calendar} className='icon' />
                 <h5>
                   Acceso a 70 cursos adicionales <br />
-                  <b>y beneficios incluídos en Gonvar+</b>
+                  <b>y beneficios Incluidos en Gonvar+</b>
                 </h5>
               </div>
               <div className='info-content info-side'>
@@ -1389,6 +1391,79 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                   </p>
                 </div>
               </div>
+
+            </div>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(9) ? 'max' : 'min'}`}
+                onClick={() => verQ(9)}
+              >
+                <div className={`q ${views.get(9) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Cuánto cuesta el curso de uñas?
+                  </p>
+                  {views.get(9) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
+
+                <div className='border-top'>
+                  <p className='a'>
+                    El curso de uñas Nail Master Revolution incluido en la suscripción Gonvar+ tiene un costo de $6,719 MXN. Sin embargo, si aprovechas nuestra beca del 75%, puedes obtenerlo por solo $1,599 MXN.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(10) ? 'max' : 'min'}`}
+                onClick={() => verQ(10)}
+              >
+                <div className={`q ${views.get(10) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Dónde podré ver mi curso?
+                  </p>
+                  {views.get(10) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
+
+                <div className='border-top'>
+                  <p className='a'>
+                    Tu curso los podrás ver son por medio de nuestra plataforma digital gonvar.io donde encontrarás Nails Master Revolution y +70 cursos.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+            <div className='all-center'>
+              <div
+                className={`q-container ${views.get(11) ? 'max' : 'min'}`}
+                onClick={() => verQ(11)}
+              >
+                <div className={`q ${views.get(11) && 'open-q'}`}>
+                  <p className={`title bolder`}>
+                    ¿Cuánto dura el curso?
+                  </p>
+                  {views.get(11) ? (
+                    <BsChevronUp className='icon' />
+                  ) : (
+                    <BsChevronDown className='icon' />
+                  )}
+                </div>
+
+                <div className='border-top'>
+                  <p className='a'>
+                    El curso tiene acceso a 4 meses, donde no solo podrás tomar tu curso Nails Master Revolution, también podrás tomas otros cursos incluidos en Gonvar+ de tu interés.
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
         </FourteenSection>

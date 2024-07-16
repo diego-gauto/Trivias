@@ -1,8 +1,7 @@
 import React from 'react';
 import { MainContain } from '../../screens/Styles.styled';
-import { PurchaseNew } from '../../components/RetryPayment/PurchaseNew';
-
-const retryPayment = () => {
+import Purchase from '../../containers/Profile/Purchase/Purchase';
+const PurchaseScreen = () => {
   return (
     <MainContain
       style={{
@@ -11,8 +10,8 @@ const retryPayment = () => {
         maxWidth: '100% !important',
       }}
     >
-      <PurchaseNew />
+      <Purchase></Purchase>
     </MainContain>
   );
 };
-export default retryPayment;
+export default PurchaseScreen;

@@ -1,56 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { FaArrowRight, FaCheck, FaChevronDown } from 'react-icons/fa';
-import InputMask from 'react-input-mask';
+import { AiFillLock } from "react-icons/ai";
+import { FaCheck, FaChevronDown } from "react-icons/fa";
+import InputMask from "react-input-mask";
 
-import router from 'next/router';
+import router from "next/router";
 
-import { LESSON_PATH, PLAN_PATH, PREVIEW_PATH } from '../../constants/paths';
-import OxxoModal from '../../containers/Profile/Purchase/Modals/Oxxo';
-import SpeiModal from '../../containers/Profile/Purchase/Modals/Spei';
-import { LoaderContainSpinner } from '../../containers/Profile/Purchase/Purchase.styled';
-import { useAuth } from '../../hooks/useAuth';
-import {
-  addUserCouponApi,
-  conektaOxxoApi,
-  conektaPaymentApi,
-  conektaSpeiApi,
-  conektaSubscriptionApi,
-  createInvoiceApi,
-  getCourseForCheckoutApi,
-} from '../api/checkout';
-import {
-  detachPaymentMethodConekta,
-  setDefaultPaymentMethodConekta,
-} from '../api/profile';
-import { conektaPm, getUserApi, updateMembership } from '../api/users';
-import { haveAccess, MembershipMethodValue } from '../GlobalFunctions';
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+
+import { PREVIEW_PATH } from "../../constants/paths";
+import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
+import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
+import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
+import { useAuth } from "../../hooks/useAuth";
+import { IUserInfoResult } from "../../interfaces/IUser";
+import { returnPriceTag } from "../../utils/functions";
+import { retrieveCoupons } from "../api/admin";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
+import { conektaPm, getUserApi, updateMembership } from "../api/users";
+import { haveAccess } from "../GlobalFunctions";
 import {
   Month,
   PayOptionsPurchase,
   PayOptionsPurchaseForMonthSuscription,
   Year,
-} from './constants';
-import { checkEmpty } from './functions';
-import { IPayOption, IPm, TKey, TPayOptionId } from './IRetryPayment';
-import { PaymentMethods } from './PaymentMethods/PaymentMethods';
-import { PurchaseNewContainer } from './PurchaseNew.styled';
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
-import ModalError from '../../containers/Profile/Purchase/Modal1/ModalError';
-import { createNotification } from '../api/notifications';
-import { IUserInfoResult } from '../../interfaces/IUser';
-import { retrieveCoupons } from '../api/admin';
-import ErrorModal from '../Error/ErrorModal';
-import { AiFillLock } from 'react-icons/ai';
-import { returnPriceTag } from '../../utils/functions';
-import { getPriceByParams, getTitle, getDuration, getSubscription } from './PurchaseNewFunctions';
+} from "./constants";
+import { checkEmpty } from "./functions";
+import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
+import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
+import { PurchaseNewContainer } from "./PurchaseNew.styled";
+import { getSubscription } from "./PurchaseNewFunctions";
 
 declare let window: any;
-interface Subscription {
-  price: number,
-  title: string,
-  duration: any,
-}
 
 interface ICardUser {
   paymentMethod: string
@@ -61,12 +43,10 @@ interface ICardUser {
 
 type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
 
-export const PurchaseNew = () => {
+export const PurchaseNew2 = () => {
   // type, id, trial, frequency, nailmasterplusanual, v
   const { type, frequency, v, id, trial, nailmasterplusanual }: any = router.query;
-  const [subscription, setSubscription] = useState<Subscription>(getSubscription(type, frequency, v));
   let userDataAuth: any = useAuth();
-  let today = new Date().getTime() / 1000;
   const context = useAuth();
   const user = context.user;
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
@@ -89,68 +69,132 @@ export const PurchaseNew = () => {
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [token, setToken] = useState('');
-  const [loader, setLoader] = useState<boolean>(false);
+  // const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
   /*
   */
-  const [plan, setPlan] = useState<any>({ method: 'conekta' });
+  // const [plan, setPlan] = useState<any>({ method: 'conekta' });
   const [coupon, setCoupon] = useState<any>();
   const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
   const [paypal, setPaypal] = useState(false);
   const [coupons, setCoupons] = useState<any>([]);
-  const [cardInfo, setCardInfo] = useState(true);
-  const [payment, setPayment] = useState(false);
-  const [defaultCard, setDefaultCard] = useState<ICardUser>({} as ICardUser);
-  const [cards, setCards] = useState<any[]>([]);
-  const [code, setCode] = useState('');
   const [terms, setTerms] = useState(false);
-
-  const [errorMsg, setErrorMsg] = useState<any>('');
 
   const courseId = new URLSearchParams(window.location.search);
   let idC = courseId.get('id');
 
-  const [showModalError, setShowModalError] = useState<any>(false);
-
-  /*
-          let price = '';
-          if (trial === 'true' && v === '1') price = 'mes_gratis';
-          if (trial === 'true' && v === '2') price = 'mes_gratis';
-          if (trial === 'true' && v === '3') price = 'mes_gratis';
-          if (frequency === 'month' && v === '1') price = 'mensual';
-          if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
-          if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
-          if (frequency === 'anual') price = 'anual';
-          if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
-          if (frequency === 'cuatrimestral' && v === '3') price = 'cuatrimestre';
-  */
-
-  const getConektaPriceId = () => {
-    let price = '';
-    if (trial === 'true' && v === '1') price = 'mes_gratis';
-    if (trial === 'true' && v === '2') price = 'mes_gratis';
-    if (trial === 'true' && v === '3') price = 'mes_gratis';
-    if (frequency === 'month' && v === '1') price = 'mensual';
-    if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
-    if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
-    if (frequency === 'anual') price = 'anual';
-    if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
-    if (frequency === 'cuatrimestral' && v === '3') price = 'cuatrimestre';
-    return price;
-  }
+  const subscription = getSubscription(type, frequency, v);
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
 
+  const addNewCard = async () => {
+    setLoaderAdd(!loaderAdd);
+    let c: any = card;
+    if (Object.keys(card).some((key: any) => c[key] === '')) {
+      alert('Por favor acomplete todos los campos!');
+      setLoaderAdd(false);
+    } else {
+      let tempCard = {
+        card: {
+          number: card.number.replaceAll(' ', '').replace(/\*/g, ''),
+          name: card.holder,
+          exp_month: card.exp_month,
+          exp_year: card.exp_year,
+          cvc: card.cvc,
+        },
+      };
+
+      window.Conekta.Token.create(
+        tempCard,
+        conektaSuccessResponseHandler,
+        conektaErrorResponseHandler,
+        'web',
+      );
+    }
+  };
+
+  const conektaSuccessResponseHandler = (token: any) => {
+    let tokenId = token.id;
+    setToken(tokenId);
+    getPaymentMethods();
+  };
+
+  const conektaErrorResponseHandler = (response: any) => {
+    alert('Hay un error en los datos de la tarjeta!');
+    setLoaderAdd(false);
+  };
+
+  const changeElement = (key: TKey, value: string) => {
+    let tempCard = { ...card };
+    tempCard[key] = value;
+    setCard(tempCard);
+  };
+
+  const handleAddpayment = () => {
+    setAddPayment(!addPayment);
+  };
+
+  const changePaymentMethod = (pm: IPm) => {
+    setLoaderAdd(true);
+    let body = {
+      payment_method: pm.id,
+      stripe_id: user.stripe_id,
+      conekta_id: user.conekta_id,
+    };
+    setDefaultPaymentMethodConekta(body).then((res) => {
+      getPaymentMethods();
+      setLoaderAdd(false);
+    });
+  };
+
+  const getPaymentMethods = async () => {
+    setLoaderAdd(true);
+    let user = userDataAuth.user;
+
+    if (haveAccess(user.level, user.final_date, user.role, user.method)) {
+      // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
+      router.push({ pathname: PREVIEW_PATH });
+      return;
+    }
+    let body = {
+      stripe_id: user.stripe_id,
+      conekta_id: user.conekta_id,
+    };
+    try {
+      const res = await conektaPm(body);
+      console.log({ res });
+      const conektaPaymentMethods = res.data.payment_methods.data;
+      const extractedProperties = conektaPaymentMethods.map(
+        ({ id, brand, last4, default: boolean }: IPm) => ({
+          id,
+          brand,
+          last4,
+          default: boolean,
+        }),
+      );
+      // Valores random de prueba
+      /*const pm = [{
+        "id": "src_gYwRtNpSjFqLmKtRw",
+        "brand": "visa",
+        "last4": "9999",
+        "default": true
+      }];*/
+      setPaymentMethods(extractedProperties); // pm
+    } catch (error) {
+      console.log({ error });
+    }
+    setLoaderAdd(false);
+  };
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
         if (haveAccess(res.level, res.final_date, res.role as any, res.method)) {
           window.location.href = PREVIEW_PATH;
         }
-        getAllCoupons();
-        setPaypal(!paypal);
+        // getAllCoupons();
+        // setPaypal(!paypal);
         if (type == 'subscription') {
           setProduct({
             ...product,
@@ -161,7 +205,7 @@ export const PurchaseNew = () => {
           });
           setPaypal(false);
         }
-        if (type == 'course') {
+        /*if (type == 'course') {
           getCourseForCheckoutApi(id).then((res: any) => {
             setProduct({
               ...product,
@@ -173,61 +217,7 @@ export const PurchaseNew = () => {
             });
             setPaypal(false);
           });
-        }
-        if (nailmasterplusanual == 'true') {
-          getCourseForCheckoutApi(30).then((res: any) => {
-            setProduct({
-              ...product,
-              title: 'Nails Master 3.0+Anualidad',
-              price: 2599,
-              duration: 90,
-              type: 'course',
-              img: res.image,
-            });
-            setPaypal(false);
-          });
-        }
-        guardCheckout(res);
-        let body = {
-          conekta_id: res.conekta_id,
-        };
-        let conektaCards = await conektaPm(body);
-        const conektaPaymentMethods = conektaCards.data.payment_methods.data;
-        const extractedProperties = conektaPaymentMethods.map(
-          ({
-            id,
-            brand,
-            last4,
-            default: boolean,
-            exp_month,
-            exp_year,
-          }: any) => ({
-            id,
-            brand,
-            last4,
-            default: boolean,
-            exp_month,
-            exp_year,
-          }),
-        );
-        let cards = extractedProperties;
-        if (cards.length > 0) {
-          setCardInfo(false);
-          setPayment(true);
-          cards.forEach((element: any) => {
-            if (element.default) {
-              let tempCard = {
-                paymentMethod: element.id,
-                status: false,
-                exp_month: element.exp_month,
-                exp_year: element.exp_year,
-              };
-              setDefaultCard({ ...tempCard });
-            }
-          });
-        }
-        setUserData(res);
-        setCards(extractedProperties);
+        }*/
       });
     } else {
       const searchParams = new URLSearchParams(window.location.search);
@@ -267,183 +257,6 @@ export const PurchaseNew = () => {
     }
   }, []);
 
-  const getAllCoupons = () => {
-    retrieveCoupons().then((res) => {
-      res.data.coupons.forEach((element: any) => {
-        let tempUsers: any = [];
-        element.users.forEach((user: any) => {
-          tempUsers.push(user.user_id);
-        });
-        element.users = tempUsers;
-      });
-      setCoupons(res.data.coupons);
-    });
-  };
-
-  const guardCheckout = (userData: IUserInfoResult) => {
-    let today = new Date().getTime() / 1000;
-    if (router.query.type == 'course') {
-      let user_course = userData.user_courses.filter(
-        (x: any) => x.course_id === +id,
-      );
-      if (
-        user_course.length > 0 &&
-        user_course[0].final_date > new Date().getTime() / 1000
-      ) {
-        router.push({
-          pathname: LESSON_PATH,
-          query: { id: id, season: 0, lesson: 0 },
-        });
-      }
-    }
-    /*
-      [1, 4, 7] son niveles donde las usuarias debería de encontrarse en reintento de pago
-      El resto de los niveles no tienen 10 días de gracia, debido a que no deberían
-      de encontrarse en este proceso.
-    */
-    if (
-      router.query.type == 'subscription' &&
-      //&& (([1, 4, 7].includes(userData.level) && userData.final_date > today - 10 * 24 * 60 * 60)
-      // || [0, 5, 6, 8].includes(userData.level) && userData.final_date > today))
-      haveAccess(
-        userData.level,
-        userData.final_date,
-        userData.role as any,
-        userData.method as MembershipMethodValue,
-      )
-    ) {
-      // window.location.href = PREVIEW_PATH;
-      router.push(PREVIEW_PATH);
-    }
-  };
-
-  const conektaSuccessResponseHandler = (token: any) => {
-    let user = userDataAuth.user;
-    let tokenId = token.id;
-    const body = {
-      token_id: tokenId,
-      conekta_id: user.conekta_id,
-    };
-    setToken(tokenId);
-    // attachPaymentMethodConekta(body).then((res) => {
-    //   getPaymentMethods();
-    //   setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-    // })
-  };
-  const conektaErrorResponseHandler = (response: any) => {
-    alert('Hay un error en los datos de la tarjeta!');
-    setLoaderAdd(false);
-  };
-  const changeElement = (key: TKey, value: string) => {
-    let tempCard = { ...card };
-    tempCard[key] = value;
-    setCard(tempCard);
-  };
-  const handleAddpayment = () => {
-    setAddPayment(!addPayment);
-  };
-
-  const changePaymentMethod = (pm: IPm) => {
-    setLoader(true);
-    let body = {
-      payment_method: pm.id,
-      stripe_id: user.stripe_id,
-      conekta_id: user.conekta_id,
-    };
-    setDefaultPaymentMethodConekta(body).then((res) => {
-      getPaymentMethods();
-      setLoader(false);
-    });
-  };
-  const getPaymentMethods = () => {
-    setLoader(true);
-    let user = userDataAuth.user;
-
-    // let diff = Math.round((today - user.final_date) / 86400);
-
-    /*
-    if (diff > 90) {
-      localStorage.setItem('PLAN_PATH_REDIRECT', 'true');
-      router.push(PLAN_PATH);
-      return;
-    }
-    */
-
-    if (haveAccess(user.level, user.final_date, user.role, user.method)) {
-      // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
-      router.push({ pathname: PREVIEW_PATH });
-      return;
-    }
-    let body = {
-      stripe_id: user.stripe_id,
-      conekta_id: user.conekta_id,
-    };
-    conektaPm(body).then((res) => {
-      const conektaPaymentMethods = res.data.payment_methods.data;
-      const extractedProperties = conektaPaymentMethods.map(
-        ({ id, brand, last4, default: boolean }: IPm) => ({
-          id,
-          brand,
-          last4,
-          default: boolean,
-        }),
-      );
-      // Valores random de prueba
-      /*const pm = [{
-        "id": "src_gYwRtNpSjFqLmKtRw",
-        "brand": "visa",
-        "last4": "9999",
-        "default": true
-      }];*/
-      setPaymentMethods(extractedProperties); // pm
-      setLoader(false);
-    });
-  };
-
-  const getNewUserLevel = (level: number) => {
-    if ([4, 5].includes(level)) return 4;
-    if ([1, 6].includes(level)) return 1;
-    return 7;
-  };
-
-  const getUserLevelByParams = () => {
-
-  }
-
-  const getPlanIdByFrecuency = () => {
-    if (frequency === 'cuatri' || frequency === 'cuatrimestral') {
-      return `cuatrimestre`;
-    } else if (frequency === 'month') {
-      if (v === '1') {
-        return 'mensual';
-      } else if (v === '2') {
-        return 'mensual_v1_1';
-      }
-      return 'mensual_v1_2';
-    } else if (frequency === 'anual') {
-      if (['1', '2', '3'].includes(v)) {
-        return 'anual'
-      }
-    }
-    return `anual`;
-  }
-  /*
-  Gonvar Plus Mensual
-  Gonvar Plus Anual
-  Gonvar Plus Cuatri
-  */
-  const getPlanNameByFrecuency = () => {
-    let title = `Gonvar Plus`;
-    if (frequency === 'cuatri' || frequency === 'cuatrimestral') {
-      return `${title} Cuatri`;
-    } else if (frequency === 'month') {
-      return `${title} Mensual`;
-    } else if (frequency === 'anual') {
-      return `${title} Anual`;
-    }
-    return title;
-  }
-
   useEffect(() => {
     if (userDataAuth.user) {
       getPaymentMethods();
@@ -458,111 +271,161 @@ export const PurchaseNew = () => {
     }
   }, [token]);
 
-  const pay = () => {
-    // const filter = paymentMethods.filter((x) => x.default);
-    // const pm = filter[0];
-
-    let price = getConektaPriceId();
-
-    // 1.
-    // paymentMethod de defaultCard podría no existir, pues solo existe en caso de que haya una tarjeta
-    // default del usuario cargada, pero en teoría aquí debería de funcionar
-
-    // 2.
-    // conekta_id se trata del id de conekta del usuario, pero al tener una tarjeta por default,
-    // no debería de haber problema, pues para tener una tarjeta pre-cargada debería de tenerlo, ¿o no?
-    let data = {
-      id: /* card.id ? card.id : */defaultCard.paymentMethod,
-      conekta_id: userData.conekta_id,
-      plan_id: price,
-      userId: userData.user_id,
-    };
-    conektaSubscriptionApi(data).then(async (res) => {
-      if (res?.data.data.status === 'active') {
-        let sub = res.data.data;
-        await updateMembership({
-          ...plan,
-          final_date: sub.billing_cycle_end,
-          payment_method: sub.card_id,
-          plan_id: sub.id,
-          plan_name: product.title,
-          start_date: sub.billing_cycle_start,
-          userId: userData.user_id,
-          level:
-            frequency === 'month' || trial === 'true'
-              ? 1
-              : frequency === 'anual'
-                ? 4
-                : 7,
-          type: product.price,
+  const getAllCoupons = () => {
+    retrieveCoupons().then((res) => {
+      res.data.coupons.forEach((element: any) => {
+        let tempUsers: any = [];
+        element.users.forEach((user: any) => {
+          tempUsers.push(user.user_id);
         });
-        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-        window.location.href = getRouteByFrequency(frequency, true);
-      } else {
-        let notification = {
-          userId: userData.user_id,
-          type: '8',
-          notificationId: '',
-          amount: product.price,
-          productName: product.title,
-          frecuency: frequency,
-        };
-        await createNotification(notification);
-        const msg = 'pago-rechazado';
-        // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-        window.location.href = getRouteByFrequency(
-          frequency,
-          false,
-          true,
-          msg,
-        );
-      }
+        element.users = tempUsers;
+      });
+      setCoupons(res.data.coupons);
     });
   };
 
-  const payWithOxxo = () => {
+  const getNewUserLevel = (level: number) => {
+    if ([4, 5].includes(level)) return 4;
+    if ([1, 6].includes(level)) return 1;
+    return 7;
+  };
+
+  const getPlanIdByFrecuency = () => {
+    if (frequency === 'cuatrimestral') {
+      return `cuatrimestre`;
+    } else if (frequency === 'month') {
+      if (v === '1') {
+        return 'mensual';
+      } else if (v === '2') {
+        return 'mensual_v1_1';
+      }
+      return 'mensual_v1_2';
+    } else if (frequency === 'anual') {
+      if (['1', '2'].includes(v)) {
+        return 'anual';
+      }
+      return 'anual_v1_1';
+    }
+    return `cuatrimestre`;
+  }
+
+  const pay = async () => {
+    const filter = paymentMethods.filter((card) => card.default);
+    const pm = filter[0];
+    let plan_id = getPlanIdByFrecuency();
+
+    const conektaJson = {
+      id: (token && addPayment) ? token : pm?.id,
+      conekta_id: user.conekta_id,
+      plan_id: plan_id,
+      userId: user.user_id,
+    };
+
+    try {
+      const res = await conektaSubscriptionApi(conektaJson);
+      console.log({ res });
+      if (res?.data.data.status === 'active') {
+        const sub = res.data.data;
+        const membership = {
+          final_date: sub.billing_cycle_end,
+          method: 'conekta',
+          level: getNewUserLevel(user.level),
+          payment_method: sub.card_id,
+          plan_id: sub.id,
+          plan_name: 'Gonvar Plus',
+          start_date: sub.billing_cycle_start,
+          type: user.type,
+          userId: user.user_id,
+        };
+        await updateMembership(membership);
+        // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
+        let url = '/pagoexitoso';
+        if (frequency === 'month') {
+          url += 'mensualidad';
+        } else if (frequency === 'anual') {
+          url += 'anualidad';
+        } else if (frequency === 'cuatrimestral') {
+          url += 'cuatrimestre';
+        }
+        window.location.href = url;
+      } else {
+        setLoaderAdd(false);
+        setError(true);
+      }
+    } catch (error) {
+      console.log({ conektaJson });
+      console.log({ error });
+    }
+  };
+
+  const getDurationByFrecuency = (): FrecuencyValue => {
+    if (frequency === 'month') {
+      return 'month';
+    }
+
+    if (frequency === 'anual') {
+      return 'year';
+    }
+
+    if (frequency === 'cuatrimestral') {
+      return 'cuatrimestral';
+    }
+
+    return 'cuatrimestral';
+  };
+
+  const payWithOxxo = async () => {
     const currentDate: any = new Date();
     const futureDate = new Date(
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
-    let data = {
-      conekta_id: userData.conekta_id,
+    console.log({ user: userDataAuth.user });
+
+    let payOxxoJson = {
+      conekta_id: userDataAuth.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
       meta: {
         type: type,
         course_id: type === 'subscription' ? 0 : id,
-        frecuency: type === 'subscription' ? frequency : '',
+        frecuency: type === 'subscription' ? getDurationByFrecuency() : '',
         duration:
           type === 'subscription' ? 0 : Math.floor(new Date().getTime() / 1000) + (product.duration * 24 * 60 * 60),
       },
     };
-    conektaOxxoApi(data).then((res) => {
+
+    console.log({ payOxxoJson });
+
+    try {
+      const res = await conektaOxxoApi(payOxxoJson);
+      console.log({ res });
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
       setReference(response.charges.data[0].payment_method.reference);
       setExpiresAt(response.charges.data[0].payment_method.expires_at);
       setOxxoIsActive(true);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
-  const payWitSpei = () => {
-    const currentDate: any = new Date();
+  const payWitSpei = async () => {
+    const currentDate = new Date();
     const futureDate = new Date(
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
-    let data = {
-      conekta_id: userData.conekta_id,
+    let speiJson = {
+      conekta_id: userDataAuth.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
       meta: {
         type: type,
         course_id: type === 'subscription' ? 0 : id,
-        frecuency: type === 'subscription' ? frequency : '',
+        frecuency: type === 'subscription' ? getDurationByFrecuency() : '',
         duration:
           type === 'subscription'
             ? 0
@@ -570,44 +433,48 @@ export const PurchaseNew = () => {
       },
     };
 
-    conektaSpeiApi(data).then((res) => {
+    try {
+      const res = await conektaSpeiApi(speiJson);
       const charges = res.data.data.charges.data[0];
       const reference = charges.payment_method.clabe;
       setBank_ref(reference);
       setSpeiIsActive(true);
-    });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const returnFrecuency = () => {
-    if (user.level === 5 || user.level === 4) {
-      return 'Anual';
-    } else if (user.level === 1 || user.level === 6) {
-      return 'Mensual';
-    } else if (user.level === 7 || user.level === 8 || user.level === 0) {
-      return 'Cuatrimestral';
-    } else {
-      return 'NA ';
-    }
+    // if (user.level === 5 || user.level === 4) {
+    //   return 'Anual';
+    // } else if (user.level === 1 || user.level === 6) {
+    //   return 'Mensual';
+    // } else if (user.level === 7 || user.level === 8 || user.level === 0) {
+    //   return 'Cuatrimestral';
+    // } else {
+    //   return 'NA ';
+    // }
+    return frequency === 'month' ? 'Mensual' : (frequency === 'anual' ? 'Anual' : 'Cuatrimestral');
   };
 
   const returnPrice = () => {
     if (frequency === 'cuatrimestral') {
       if (['1', '2', '3'].includes(v)) {
-        return `1599 / Cuatrimestral`;
+        return `1599 / Cuatrimestral `;
       }
     } else if (frequency === 'month') {
       if (v === '1') {
-        return `149 / Mensual`;
+        return `149 / Mensual `;
       } else if (v === '2') {
-        return `249 / Mensual`;
+        return `249 / Mensual `;
       } else if (v === '3') {
-        return `459 / Mensual`;
+        return `459 / Mensual `;
       }
     } else if (frequency === 'anual') {
       if (v === '1' || v === '2') {
-        return `1599 / Anual`;
+        return `1599 / Anual `;
       } else if (v === '3') {
-        return `3497 / Anual`;
+        return `3497 / Anual `;
       }
     }
     return 1599;
@@ -637,7 +504,7 @@ export const PurchaseNew = () => {
   };
 
   const detachPayment = async (card: IPm) => {
-    setLoader(true);
+    setLoaderAdd(true);
     let body = {
       payment_method: card.id,
       conekta_id: user.conekta_id,
@@ -691,271 +558,6 @@ export const PurchaseNew = () => {
     return sub;
   };
 
-  const FinishPayment = async () => {
-    if (plan.method == 'paypal') {
-      setLoader(false);
-      if (type == 'subscription') {
-
-
-        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-        window.location.href = getRouteByFrequency(frequency, true);
-      } else {
-        let price = product.price;
-        if (coupon) {
-          if (coupon.type == 'amount') {
-            price = price - coupon.discount;
-          } else {
-            price = price - (coupon.discount / 100) * price;
-          }
-        }
-        let invoice = {
-          amount: price * 100,
-          product: product.title,
-          method: 'paypal',
-          user_id: userData.user_id,
-          course_id: id,
-          final_date: new Date().getTime() / 1000 + product.duration * 86400,
-          newPlan: nailmasterplusanual === 'true' ? true : false,
-        };
-        if (coupon) {
-          let tempCoupon = {
-            coupons_id: coupon.id,
-            user_id: userData.user_id,
-          };
-          await addUserCouponApi(tempCoupon);
-        }
-
-        createInvoiceApi(invoice).then((res) => {
-
-
-          setLoader(false);
-          if (id === '57') {
-            window.location.href = '/pagoexitosonailsmaster';
-          }
-          if (id === '45') {
-            window.location.href = '/pagoexitosoalineacion';
-          }
-        });
-      }
-    }
-    if (plan.method === 'conekta') {
-      if (type === 'course' || nailmasterplusanual === 'true') {
-        let price = product.price;
-        if (coupon) {
-          if (coupon.type == 'amount') {
-            price = price - coupon.discount;
-          } else {
-            price = price - (coupon.discount / 100) * price;
-          }
-        }
-        let data = {
-          id: card.id ? card.id : defaultCard.paymentMethod,
-          conekta_id: userData.conekta_id,
-          price: price * 100,
-          product_name: product.title,
-          userId: userData.user_id,
-        };
-        conektaPaymentApi(data).then(async (res) => {
-          if (res.status === 200) {
-            let invoice = {
-              amount: price * 100,
-              product: product.title,
-              method: 'conekta',
-              user_id: userData.user_id,
-              course_id: id,
-              final_date:
-                new Date().getTime() / 1000 + product.duration * 86400,
-              newPlan: nailmasterplusanual === 'true' ? true : false,
-            };
-            if (coupon) {
-              let tempCoupon = {
-                coupons_id: coupon.id,
-                user_id: userData.user_id,
-              };
-              await addUserCouponApi(tempCoupon);
-            }
-            if (
-              res.data.data.payment_status === 'paid' ||
-              res.data.data.payment_status === 'pending_payment'
-            ) {
-              createInvoiceApi(invoice).then((res) => {
-                if (id === '57') {
-                  window.location.href = '/pagoexitosonailsmaster';
-                }
-                if (id === '45') {
-                  window.location.href = '/pagoexitosoalineacion';
-                }
-              });
-              return;
-            } else {
-              setCard({ ...card, cardId: '' });
-              let error = 'Su pago fue declinado';
-              let notification = {
-                userId: userData.user_id,
-                type: '8',
-                notificationId: '',
-                amount: price,
-                productName: product.title,
-                frequency: '',
-              };
-              await createNotification(notification);
-              if (id === '57') {
-                window.location.href = `/pagofallidonailsmaster?error=${error}`;
-              }
-              if (id === '45') {
-                window.location.href = `/pagofallidoalineacion?error=${error}`;
-              }
-              setLoader(false);
-              return;
-            }
-          }
-          if (res.response.status === 400) {
-            setCard({ ...card, cardId: '' });
-            let notification = {
-              userId: userData.user_id,
-              type: '8',
-              notificationId: '',
-              amount: price,
-              productName: product.title,
-              frequency: '',
-            };
-            await createNotification(notification);
-            let error = res.response.data.error.data.details[0].message;
-            if (id === '57') {
-              window.location.href = `/pagofallidonailsmaster?error=${error}`;
-            }
-            if (id === '45') {
-              window.location.href = `/pagofallidoalineacion?error=${error}`;
-            }
-            setLoader(false);
-          }
-        });
-      }
-      if (type === 'subscription') {
-        let price = getConektaPriceId();
-
-        let data = {
-          id: card.id ? card.id : defaultCard.paymentMethod,
-          conekta_id: userData.conekta_id,
-          plan_id: price,
-          userId: userData.user_id,
-        };
-        conektaSubscriptionApi(data).then(async (res) => {
-          if (res?.data.data.status === 'active') {
-            let sub = res.data.data;
-            await updateMembership({
-              ...plan,
-              final_date: sub.billing_cycle_end,
-              payment_method: sub.card_id,
-              plan_id: sub.id,
-              plan_name: product.title,
-              start_date: sub.billing_cycle_start,
-              userId: userData.user_id,
-              level:
-                frequency === 'month' || trial === 'true'
-                  ? 1
-                  : frequency === 'anual'
-                    ? 4
-                    : 7,
-              type: product.price,
-            });
-            /*
-            const QUERY = `UPDATE memberships SET 
-              final_date = ${membership.final_date},
-                method = '${membership.method}',
-                level = ${membership.level},
-                payment_method = '${membership.payment_method}',
-                plan_id = '${membership.plan_id}',
-                plan_name = '${membership.plan_name}',
-                start_date = ${membership.start_date},
-                type = ${membership.type}
-                WHERE user_id = ${membership.userId};`;
-            */
-            // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
-            window.location.href = getRouteByFrequency(frequency, true);
-          } else {
-            let notification = {
-              userId: userData.user_id,
-              type: '8',
-              notificationId: '',
-              amount: product.price,
-              productName: product.title,
-              frecuency: frequency,
-            };
-            await createNotification(notification);
-            const msg = 'pago-rechazado';
-            // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
-            window.location.href = getRouteByFrequency(
-              frequency,
-              false,
-              true,
-              msg,
-            );
-          }
-        });
-      }
-    }
-  };
-
-  const handleConfirm = async () => {
-    setLoader(true);
-    if (cardInfo) {
-      delete card.brand;
-      delete card.cardId;
-      delete card.last4;
-      delete card.status;
-      delete card.paymentMethod;
-    }
-
-    if (cardInfo && Object.keys(card).some((key) => card[key] === '')) {
-      setError(true);
-      setLoader(false);
-    }
-
-    if (cardInfo && Object.values(card).every((value) => value !== '')) {
-      if (!terms) {
-        setErrorMsg(
-          'Por favor de aceptar los terminos y condiciones para poder continuar!',
-        );
-        setLoader(false);
-        return;
-      }
-      if (plan.method === 'conekta') {
-        let tempCard = {
-          card: {
-            number: card.number.replaceAll(' ', ''),
-            name: card.holder,
-            exp_month: card.exp_month,
-            exp_year: card.exp_year,
-            cvc: card.cvc,
-          },
-        };
-        window.Conekta.Token.create(
-          tempCard,
-          conektaSuccessResponseHandler,
-          conektaErrorResponseHandler,
-          'web',
-        );
-      }
-    }
-    if (payment && defaultCard.paymentMethod) {
-      /*
-      if (!terms) {
-        setErrorMsg(
-          'Por favor de aceptar los terminos y condiciones para poder continuar!',
-        );
-        setShow(true);
-        setLoader(false);
-        return;
-      }
-      */
-      FinishPayment();
-    }
-    if (plan.method == 'paypal') {
-      setPaypal(!paypal);
-    }
-  };
-
   const getCSSClassByUserSituation = () => {
     if (paymentMethods.length === 0) {
       return 'add-payment-container show-contain';
@@ -969,7 +571,6 @@ export const PurchaseNew = () => {
   return (
     <>
       <PurchaseNewContainer>
-        <ErrorModal show={showModalError} setShow={setShowModalError} error={errorMsg} />
         <OxxoModal
           show={oxxoIsActive}
           setShow={setOxxoIsActive}
@@ -1027,13 +628,13 @@ export const PurchaseNew = () => {
               </div>
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
-            <p className='description' style={{ textAlign: 'left' }}>
-              Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
-            </p>
             {paymentMethods.length > 0 && (
               <>
+                <p className='description' style={{ textAlign: 'left' }}>
+                  Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
+                </p>
                 <div className='payment-container'>
-                  {!loader ? (
+                  {!loaderAdd ? (
                     paymentMethods.map((pm: IPm, index: number) => {
                       return (
                         <PaymentMethods
@@ -1051,11 +652,20 @@ export const PurchaseNew = () => {
                     <LoaderContainSpinner />
                   )}
                 </div>
+                {error && option === 0 && (
+                  <p
+                    className='description'
+                    style={{ color: 'red', textAlign: 'left', fontSize: '14px' }}
+                  >
+                    No hemos podido procesar tu pago, puedes intentar tu
+                    pago nuevamente o dirigirte a "Agregar método de pago".
+                  </p>
+                )}
                 <button
                   className={addPayment ? 'fade' : ''}
                   onClick={() => {
                     pay();
-                    // handleConfirm();
+                    //addNewCard();
                     setOption(0);
                   }}
                 >
@@ -1232,7 +842,7 @@ export const PurchaseNew = () => {
                       Presionando en el botón "Confirmar compra" estás dando tu
                       consentimiento para que Gonvar automáticamente continúe con
                       tu suscripción &nbsp;
-                      {returnFrecuency()} y te cobremos {returnPrice()}
+                      {returnFrecuency()} y te cobremos $ {returnPrice()}
                       en el medio de pago que estás agregando hasta que tu decidas
                       cancelarla.
                       <br />
@@ -1273,8 +883,7 @@ export const PurchaseNew = () => {
                         className='description-text'
                         style={{ color: 'red', textAlign: 'left' }}
                       >
-                        No hemos podido procesar tu pago, puedes reintentar tu{' '}
-                        <br />
+                        No hemos podido procesar tu pago, puedes intentar tu
                         pago nuevamente o probar con otro método de pago.
                       </p>
                     )}
@@ -1286,15 +895,10 @@ export const PurchaseNew = () => {
                         style={{
                           opacity: !terms ? '0.8' : '1'
                         }}
-                        /*
-                        onClick={() => {
-                          addNewCard();
-                          setOption(1);
-                        }}
-                        */
                         onClick={() => {
                           if (terms) {
-                            handleConfirm();
+                            addNewCard();
+                            setOption(1);
                           }
                         }}
                         disabled={!terms}
@@ -1405,7 +1009,7 @@ export const PurchaseNew = () => {
                             }}
                             createSubscription={
                               (data, actions) => {
-                                setPlan({ method: 'paypal' });
+                                // setPlan({ method: 'paypal' });
                                 return actions.subscription.create({
                                   plan_id: returnPricePaypal(),
                                 });
@@ -1417,11 +1021,11 @@ export const PurchaseNew = () => {
                                 let today = new Date().getTime() / 1000;
                                 let finalDate = 0;
                                 finalDate =
-                                  today + frequency === 'month'
+                                  today + (frequency === 'month'
                                     ? 2592000
                                     : frequency === 'anual'
                                       ? 31536000
-                                      : 10368000;
+                                      : 10368000);
                                 await updateMembership({
                                   method: 'paypal',
                                   final_date: finalDate,

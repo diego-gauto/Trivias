@@ -89,3 +89,9 @@
     height: 32px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .inputs label {
+    font-size: 15px;
+  }
+}

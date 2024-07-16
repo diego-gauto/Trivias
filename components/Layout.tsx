@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 import { Body, ChildrenContain } from '../screens/Login.styled';
 import SideBar from './admin/SideBar';
@@ -17,6 +17,13 @@ const Layout = ({ children }: any) => {
   const [path, setPath] = useState(pathname.split('/')[1]);
   const [show, setShow] = useState(false);
   useEffect(() => {
+
+    // Redirección específica
+    if (asPath === '/nails-master-revolution-goo') {
+      router.replace('/nails-master-revolution');
+      return; // Detener el useEffect aquí para evitar otros chequeos
+    }
+
     setPath(pathname.split('/')[1]);
     if (pathname === '/_error' && asPath.slice(0, 6) === '/Blogs') {
       router.push('/blogs/' + asPath.slice(6));

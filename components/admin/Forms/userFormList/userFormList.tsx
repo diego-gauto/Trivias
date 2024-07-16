@@ -1,7 +1,7 @@
-import { Table } from 'react-bootstrap';
+import { Table } from "react-bootstrap";
 
-import UserFormRow from '../userFormRow/userFormRow';
-import { UserLevelValue } from '../../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { UserLevelValue } from "../../../GenericQueries/UserRoles/UserRolesInterfaces";
+import UserFormRow from "../userFormRow/userFormRow";
 
 interface UserForm {
   id: number;
@@ -17,6 +17,10 @@ interface UserForm {
   option1: string;
   option2: string;
   option3: string;
+  option4: string;
+  option5: string;
+  estado: string;
+  cp: string;
 }
 
 interface UserFormListProps {
@@ -25,7 +29,7 @@ interface UserFormListProps {
   userLevel: UserLevelValue;
 }
 
-const UserTriviaList = ({
+const UserFormList = ({
   usersForm,
   canView,
   userLevel,
@@ -42,12 +46,16 @@ const UserTriviaList = ({
               <th>Correo Electŕonico</th>
               <th>WhatsApp</th>
               <th>Pais</th>
+              <th>Estado</th>
+              <th>Código Postal</th>
               <th>Usuaria</th>
               <th>Membresía</th>
               <th>fecha</th>
               <th>Opción 1</th>
               <th>Opción 2</th>
               <th>Opción 3</th>
+              <th>Opción 4</th>
+              <th>Opción 5</th>
             </tr>
           </thead>
           <tbody>
@@ -61,4 +69,4 @@ const UserTriviaList = ({
   );
 };
 
-export default UserTriviaList;
+export default UserFormList;
