@@ -36,6 +36,7 @@ import {
   Role,
   UserLevelValue,
 } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { STATES_NAMES, COME_FROM_VALUES } from './UsersFilters';
 import { useRouter } from 'next/router';
 
 type SuscriptionOption = 'todos' | 'mensual' | 'anual' | 'cuatri';
@@ -585,6 +586,48 @@ const Users = () => {
                       type='number'
                       defaultValue={userFilters.spent_max}
                     />
+                  </DefaultFilterContain>
+                </DefaultRow>
+                <DefaultRow>
+                  <DefaultFilterContain>
+                    <p className='title-filter'>Estado de origen (México)</p>
+                    <select
+                      defaultValue={userFilters.method}
+                      onChange={(e) => {
+                        changeData('origin_state', e.target.value);
+                      }}
+                    >
+                      <option value='todos'>Todos</option>
+                      {STATES_NAMES.map(
+                        (originState, index) => {
+                          return (
+                            <option value={originState} key={'origin_state_' + index}>
+                              {originState}
+                            </option>
+                          );
+                        },
+                      )}
+                    </select>
+                  </DefaultFilterContain>
+                  <DefaultFilterContain>
+                    <p className='title-filter'>Clientes gracias a</p>
+                    <select
+                      defaultValue={userFilters.method}
+                      onChange={(e) => {
+                        changeData('come_from', e.target.value);
+                      }}
+                    >
+                      <option value='todos'>Todos</option>
+                      {COME_FROM_VALUES.map(
+                        (comeFrom, index) => {
+                          return (
+                            <option value={comeFrom} key={'come_from_' + index}>
+                              {comeFrom}
+                            </option>
+                          );
+                        },
+                      )}
+                    </select>
                   </DefaultFilterContain>
                 </DefaultRow>
               </DefaultColumn>
