@@ -4,7 +4,7 @@ import React from "react";
 
 import styles from "./cardStats.module.css";
 
-interface Suscriptions {
+interface Stats {
   month: number;
   quarter: number;
   anual: number
@@ -13,7 +13,7 @@ interface Suscriptions {
 interface CardProps {
   type: string;
   suscriptores: number;
-  suscriptions: Suscriptions;
+  suscriptions: Stats;
   color: string
 }
 
