@@ -312,7 +312,7 @@ const RewardSlider = (props: reward_slider) => {
                           className='image-container'
                           style={
                             type == 'claim-certificates' ||
-                            type == 'certificates'
+                              type == 'certificates'
                               ? { borderRadius: 10 }
                               : {}
                           }
@@ -329,15 +329,15 @@ const RewardSlider = (props: reward_slider) => {
                           {(type === 'months' ||
                             type === 'points' ||
                             type === 'certificates') && (
-                            <button
-                              className='btn-info'
-                              onClick={() =>
-                                showRewardData(index, reward.points)
-                              }
-                            >
-                              <p className='text'>Más información</p>
-                            </button>
-                          )}
+                              <button
+                                className='btn-info'
+                                onClick={() =>
+                                  showRewardData(index, reward.points)
+                                }
+                              >
+                                <p className='text'>Más información</p>
+                              </button>
+                            )}
                           {((reward.type === 'points' &&
                             score >= reward.points &&
                             !userReward.find(
@@ -351,22 +351,22 @@ const RewardSlider = (props: reward_slider) => {
                             (reward.type === 'months' &&
                               (user.level === 5 || user.level === 4) &&
                               user.final_date > today)) && (
-                            <>
-                              {!loader ? (
-                                <button
-                                  className='btn-info'
-                                  onClick={() => {
-                                    // AddUserRewards(reward);
-                                    sendRequest(reward);
-                                  }}
-                                >
-                                  <p className='text'>Hacer Pedido</p>
-                                </button>
-                              ) : (
-                                <LoaderButton />
-                              )}
-                            </>
-                          )}
+                              <>
+                                {!loader ? (
+                                  <button
+                                    className='btn-info'
+                                    onClick={() => {
+                                      // AddUserRewards(reward);
+                                      sendRequest(reward);
+                                    }}
+                                  >
+                                    <p className='text'>Hacer Pedido</p>
+                                  </button>
+                                ) : (
+                                  <LoaderButton />
+                                )}
+                              </>
+                            )}
                           {!('totalLessons' in reward) &&
                             userReward.find(
                               (x: IUserReward) =>

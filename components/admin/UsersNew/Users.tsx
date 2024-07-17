@@ -666,7 +666,7 @@ const Users = () => {
                                 <td>MXN${user.spent}</td>
                                 <td>{user.come_from}</td>
                                 <td>{user.origin_state}</td>
-                                <td onClick={() => openUserCard(user)}>
+                                <td onClick={() => changeToUserDetailsView(user)}>
                                   <UserShow>
                                     <EditIcon />
                                     Visualizar Usuario

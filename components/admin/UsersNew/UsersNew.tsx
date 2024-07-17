@@ -577,7 +577,13 @@ const UsersDetails = () => {
                             </div>
                           </td>
                           <td className="gonvar-table__data">
-                            <button type="button" className="gonvar-table__button">
+                            <button
+                              type="button"
+                              className="gonvar-table__button"
+                              onClick={(e) => {
+
+                              }}
+                            >
                               Ir a tarea
                             </button>
                           </td>
