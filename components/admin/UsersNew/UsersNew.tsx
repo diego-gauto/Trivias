@@ -3,6 +3,7 @@ import { MainContainer } from './UsersNew.styled';
 import { getGenericQueryResponse } from '../../api/admin';
 import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 import { useRouter } from 'next/router';
+import { EmptyContentComponent } from './EmptyContentComponent';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -56,6 +57,29 @@ interface IUserHomeworkHistory {
   createdAt: string
 }
 
+type SubscriptionState = 'Activo' | 'Inactiva' | 'Cancelada' | 'En prueba' | 'Sin suscripción';
+
+type PaymentMethod = 'Tarjeta (Conekta)' | 'Paypal' | 'Oxxo (Conekta)' | 'Transferencia (Conekta)' | 'Stripe' | 'Por administración';
+
+type SubscriptionType = 'Mensual' | 'Cuatrimestral' | 'Anual' | 'Ninguno';
+
+interface IUserSubscriptionState {
+  state: SubscriptionState,
+  type: SubscriptionType,
+  method: PaymentMethod,
+  startDate: string,
+  finalDate: string,
+  level: number
+}
+
+interface IUserData {
+  userId: number,
+  method: string,
+  startDate: number,
+  finalDate: number,
+  level: number
+}
+
 // const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume>({} as IUserCoursesResume);
 
 const MAIN_SECTIONS: IMainMenuOption[] = [
@@ -101,10 +125,18 @@ const getPrettyFormatedDate = (paidAt: string | number) => {
   return formatedDate;
 }
 
+const TOLERANCE_DAYS_COUNT = 10;
+const RECURRING_PAYMENT_LEVELS = [1, 4, 7];
+const NO_RECURRING_PAYMENT_LEVELS = [0, 5, 6, 8];
+
 const UsersDetails = () => {
   const router = useRouter();
   const [userId, setUserId] = useState(0);
   const [selectedMainMenuOption, setSelectedMainMenuOption] = useState<MainMenuOptionId>('Payments');
+
+  const [subscription, setSubscription] = useState<IUserSubscriptionState>({} as IUserSubscriptionState);
+  const [user, setUser] = useState<IUserData>({} as IUserData);
+
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
   const [viewHomeworks, setViewHomeworks] = useState<boolean>(false);
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
@@ -138,6 +170,7 @@ const UsersDetails = () => {
       getUserPaymentHistory();
       getUserCoursesResume();
       getUserHomeworksHistory();
+      getUserSubscriptionInfo();
     }
   }, [userId]);
 
@@ -318,6 +351,170 @@ const UsersDetails = () => {
     setUserHomeworkHistory(result);
   }
 
+  const getUserSubscriptionInfo = async () => {
+    const query = `select level, method, admin_update_id, start_date, final_date, subscription, role
+      from users as u 
+      inner join memberships as m on u.id = m.user_id
+      where u.id = ${userId};`;
+    interface IUserSub {
+      level: number,
+      method: string,
+      admin_update_id: number,
+      start_date: number,
+      final_date: number,
+      subscription: number,
+      role: string
+    }
+
+    const userSubscriptionResponse = await getGenericQueryResponse(query);
+    const userSubscriptionValues: IUserSub[] = userSubscriptionResponse.data.data;
+
+    console.log(userSubscriptionValues[0]);
+
+    const userSubscription: IUserSub = userSubscriptionValues[0] as any;
+
+    const method = getMethodNameByDBValue(userSubscription.method);
+
+    const startDate = getPrettyFormatedDate(userSubscription.start_date);
+    const finalDate = getPrettyFormatedDate(userSubscription.final_date);
+    const now = (new Date()).getTime() / 1000;
+
+    const state = getStateOfSubscription(
+      userSubscription.final_date,
+      userSubscription.level,
+      userSubscription.role,
+      userSubscription.level,
+      userSubscription.method
+    );
+
+    const type = getSubscriptionTypeByLevel(userSubscription.level);
+
+    setUser({
+      finalDate: userSubscription.final_date,
+      level: userSubscription.level,
+      method: userSubscription.method,
+      startDate: userSubscription.start_date,
+      userId
+    });
+
+    setSubscription({
+      method,
+      startDate,
+      finalDate,
+      type,
+      state,
+      level: userSubscription.level
+    });
+  }
+
+  const getMethodNameByDBValue = (value: string): PaymentMethod => {
+    /*
+    admin
+    conekta
+    stripe
+
+    paypal
+    oxxo
+    0
+    spei
+    conketa
+    */
+    if (value === 'Conekta') {
+      return 'Tarjeta (Conekta)';
+    }
+    if (value === 'paypal') {
+      return 'Paypal';
+    }
+    if (value === 'oxxo') {
+      return 'Oxxo (Conekta)';
+    }
+    if (value === 'spei') {
+      return 'Transferencia (Conekta)';
+    }
+    if (value === 'stripe') {
+      return 'Stripe'
+    }
+    if (value === 'admin') {
+      return 'Por administración';
+    }
+    return 'Por administración';
+  }
+
+  const getStateOfSubscription = (userLevel: number, finalDate: number, userRole: string, level: number, method: string): SubscriptionState => {
+    const now = Math.floor((new Date()).getTime() / 1000);
+    const isActiveResult = isActive(userLevel, finalDate);
+
+    if (userLevel === 0 && finalDate > now) {
+      return 'En prueba';
+    }
+
+    if ((userLevel === 10) || (userLevel === 0 && finalDate < now)) {
+      // TODO: Hacer un mensaje personalizado para usuarios lvl 10, con el mensaje
+      // "Comunicarse con soporte"
+      return 'Sin suscripción';
+    }
+
+    if (isActiveResult) {
+      return 'Activo';
+    }
+    // TODO: Hacer aviso unico para usuarios superAdmin
+
+    // TODO: Revisar el caso de los usaurios "cancelados"
+
+    return 'Inactiva';
+  }
+
+  const getSubscriptionTypeByLevel = (level: number): SubscriptionType => {
+    if ([1, 6].includes(level)) {
+      return 'Mensual';
+    }
+    if ([7, 8].includes(level)) {
+      return 'Cuatrimestral';
+    }
+    if ([4, 5].includes(level)) {
+      return 'Anual';
+    }
+
+    return 'Ninguno';
+  }
+
+  const isActive = (
+    userLevel: number,
+    finalDate: number,
+  ) => {
+    const today = new Date().getTime() / 1000;
+    const finalDate2 = new Date(finalDate * 1000);
+
+    if (
+      // NO_RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
+      [1, 4, 5, 6, 8].includes(userLevel) &&
+      finalDate2.getTime() / 1000 > today
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const isOnRetryPaymentTime = (userLevel: number, finalDate: number, method: string) => {
+    const today = new Date().getTime() / 1000;
+    const tolerance = TOLERANCE_DAYS_COUNT * 24 * 60 * 60;
+
+    if (finalDate > today) {
+      return false;
+    }
+
+    if (
+      RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
+      (method === 'conekta' /*|| method === 'paypal'*/) &&
+      finalDate > (today - tolerance)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   return (
     <MainContainer>
       <div
@@ -391,45 +588,72 @@ const UsersDetails = () => {
                       <p className='subscription-item__title'>Estado de suscripción</p>
                     </div>
                     <div className='subscription-item__content'>
-                      <p className='subscription-item__content-text'>Activo</p>
+                      <p className='subscription-item__content-text'>{subscription.state}</p>
                     </div>
                   </div>
                   <div className='subscription-item'>
                     <div className='subscription-item__header'>
-                      <p className='subscription-item__title'>Tipo de la suscripción</p>
-                    </div>
-                    <div className='subscription-item__content'>
-                      <p className='subscription-item__content-text'>Mensual</p>
-                    </div>
-                  </div>
-                  <div className='subscription-item'>
-                    <div className='subscription-item__header'>
-                      <p className='subscription-item__title'>Método de la suscripción</p>
-                    </div>
-                    <div className='subscription-item__content'>
-                      <p className='subscription-item__content-text'>Tarjeta de Credito / Debito (Conekta)</p>
-                    </div>
-                  </div>
-                  <div className='subscription-item'>
-                    <div className='subscription-item__header'>
-                      <p className='subscription-item__title'>Fechas</p>
-                    </div>
-                    <div className='subscription-item__content'>
-                      <p className='subscription-item__content-text'>
-                        Inicio:
-                        <span className='subscription-item__content-text--normal-weight'>
-                          {' '}25 May 2025
-                        </span>
-                      </p>
-                      <p className='subscription-item__content-text'>
-                        Termino:
-                        <span className='subscription-item__content-text--normal-weight'>
-                          {' '}25 Jun 2025
-                        </span>
+                      <p className='subscription-item__title'>
+                        {
+                          subscription.state === 'Activo' &&
+                          'Su plan es'
+                        }
+                        {
+                          subscription.state === 'Inactiva' &&
+                          'Su plan era'
+                        }
                       </p>
                     </div>
+                    <div className='subscription-item__content'>
+                      <p className='subscription-item__content-text'>{subscription.type}</p>
+                    </div>
                   </div>
+                  {
+                    (subscription.state === 'Activo' || subscription.state === 'Inactiva') &&
+                    <>
+                      <div className='subscription-item'>
+                        <div className='subscription-item__header'>
+                          <p className='subscription-item__title'>Método de pago</p>
+                        </div>
+                        <div className='subscription-item__content'>
+                          <p className='subscription-item__content-text'>{subscription.method}</p>
+                        </div>
+                      </div>
+                      <div className='subscription-item'>
+                        <div className='subscription-item__header'>
+                          <p className='subscription-item__title'>Fechas</p>
+                        </div>
+                        <div className='subscription-item__content'>
+                          <p className='subscription-item__content-text'>
+                            Activa desde:
+                            <span className='subscription-item__content-text--normal-weight'>
+                              {' '}{subscription.startDate}
+                            </span>
+                          </p>
+                          <p className='subscription-item__content-text'>
+                            {
+                              subscription.state === 'Activo' &&
+                              'Termina el:'
+                            }
+                            {
+                              subscription.state === 'Inactiva' &&
+                              'Terminó el:'
+                            }
+                            <span className='subscription-item__content-text--normal-weight'>
+                              {' '}{subscription.finalDate}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  }
                 </div>
+                {
+                  isOnRetryPaymentTime(user.level, user.finalDate, user.method) &&
+                  <EmptyContentComponent
+                    message='Usuario en proceso de reintento de pago'
+                  />
+                }
                 <div className='subscription-actions-container'>
                   <div>
 
@@ -457,19 +681,17 @@ const UsersDetails = () => {
                     <tbody>
                       {
                         userPaymentHistory.map(({ amount, orderNumber, paidAt, product }) => {
-                          /*
-                          const date = new Date(paidAt);
-                          const monthIndex = date.getMonth();
-                          const day = date.getDate();
-                          const year = date.getFullYear();
-                          const formatedDate = `${MONTHS_SPANISH[monthIndex]} ${day}, ${year}`;
-                          */
                           return (
                             <tr className="gonvar-table__row" key={orderNumber}>
-                              <td className="gonvar-table__data">#{orderNumber}</td>
+                              <td className="gonvar-table__data">{orderNumber}</td>
                               <td className="gonvar-table__data">{getPrettyFormatedDate(paidAt)}</td>
                               <td className="gonvar-table__data">{product}</td>
-                              <td className="gonvar-table__data">{amount / 100}</td>
+                              <td className="gonvar-table__data">
+                                {
+                                  Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount / 100)
+                                }
+                              </td>
+                              {/* TODO: Cambiar a formato de peso mexicano */}
                             </tr>
                           );
                         })
@@ -477,11 +699,10 @@ const UsersDetails = () => {
                     </tbody>
                   </table>
                 </div>
-                : <div className='empty-container'>
-                  <div className='empty-content'>
-                    <p className='empty-content-text'>No existen registros de pagos para este usuario</p>
-                  </div>
-                </div>
+                :
+                <EmptyContentComponent
+                  message='No existen registros de pagos para este usuario'
+                />
             }
 
           </div>
@@ -518,7 +739,6 @@ const UsersDetails = () => {
                                   className="gonvar-table__button"
                                   onClick={(e) => {
                                     setViewHomeworks(true);
-                                    console.log({ courseId });
                                     const newList = userHomeworkHistory.filter((h) => h.courseId === courseId);
                                     setUserFilteredHomeworkHistory(newList);
                                   }}>
@@ -533,11 +753,21 @@ const UsersDetails = () => {
                   </table>
                 </div>
                 :
-                <div className='empty-container' style={{ order: '2' }}>
-                  <div className='empty-content'>
-                    <p className='empty-content-text'>No existen registros de cursos para este usuario</p>
-                  </div>
-                </div>
+                <EmptyContentComponent
+                  message='No existen registros de cursos para este usuario'
+                  styles={{
+                    order: '2'
+                  }}
+                />
+            }
+            {
+              /*
+              <div className='empty-container' style={{ order: '2' }}>
+              <div className='empty-content'>
+                <p className='empty-content-text'>No existen registros de cursos para este usuario</p>
+              </div>
+            </div>
+              */
             }
           </div>
         }
@@ -611,11 +841,19 @@ const UsersDetails = () => {
             </div>
             {
               userFilteredHomeworkHistory.length === 0 &&
+              <EmptyContentComponent
+                message='No existen tareas registradas para este curso'
+                styles={{ order: '2' }}
+              />
+            }
+            {
+              /*
               <div className='empty-container' style={{ order: '2' }}>
                 <div className='empty-content'>
                   <p className='empty-content-text'>No existen tareas registradas para este curso</p>
                 </div>
               </div>
+              */
             }
           </div>
         }

@@ -419,7 +419,7 @@ export const MainContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     align-content: center;
     gap: 5px;
   }
