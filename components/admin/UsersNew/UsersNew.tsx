@@ -4,6 +4,7 @@ import { getGenericQueryResponse } from '../../api/admin';
 import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 import { useRouter } from 'next/router';
 import { EmptyContentComponent } from './EmptyContentComponent';
+import Link from 'next/link';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -51,6 +52,7 @@ interface IUserHomeworkHistory {
   lessonId: number,
   lessonTitle: string,
   status: number,
+  image: string,
   approved: number,
   homeworkStatus: string,
   comment: string,
@@ -310,6 +312,7 @@ const UsersDetails = () => {
             h.lesson_id,
             h.title,
             h.status,
+            h.image,
             h.approved,
             case when status = 1 and approved = 1 then 'Aprobada'
             when status = 1 and approved = 0 then 'Reprobada'
@@ -333,6 +336,7 @@ const UsersDetails = () => {
       status: number,
       approved: number,
       homework_status: string,
+      image: string,
       comment: string,
       created_at_seconds: string
     }
@@ -341,7 +345,7 @@ const UsersDetails = () => {
     const userHomeworkResume: IUserHomework[] = userHomeworkResumeResponse.data.data;
 
     const result: IUserHomeworkHistory[] = [];
-    userHomeworkResume.forEach(({ homework_id, courses_id, season_id, lesson_id, title, comment, created_at_seconds, homework_status, approved, status }) => {
+    userHomeworkResume.forEach(({ homework_id, courses_id, season_id, lesson_id, title, comment, created_at_seconds, homework_status, approved, status, image }) => {
       const lastDate = created_at_seconds !== null ? getPrettyFormatedDate(parseInt(created_at_seconds)) : '- - -';
       result.push({
         courseId: courses_id,
@@ -353,7 +357,8 @@ const UsersDetails = () => {
         lessonId: lesson_id,
         lessonTitle: title,
         seasonId: season_id,
-        status
+        status,
+        image
       });
     });
 
@@ -583,7 +588,8 @@ const UsersDetails = () => {
         approved: 0,
         homeworkStatus: 'No entregada',
         comment: '',
-        createdAt: ''
+        createdAt: '',
+        image: ''
       }
 
       return result;
@@ -867,7 +873,7 @@ const UsersDetails = () => {
                   </thead>
                   <tbody>
                     {
-                      getCoursesHomeworksArray().map(({ homeworkId, lessonTitle, homeworkStatus, comment, status, createdAt }, index) => {
+                      getCoursesHomeworksArray().map(({ homeworkId, lessonTitle, homeworkStatus, comment, status, image }, index) => {
                         const a = 'gonvar-table__approved-text';
                         const na = 'gonvar-table__not-approved-text';
                         const p = 'gonvar-table__not-checking-text';
@@ -902,16 +908,15 @@ const UsersDetails = () => {
                           <td className="gonvar-table__data">
                             {
                               homeworkStatus !== 'No entregada' &&
-                              <button
-                                type="button"
-                                className="gonvar-table__button"
-                                onClick={(e) => {
-
-                                }
-                                }
-                              >
-                                Ir a tarea
-                              </button>
+                              <Link href={image}>
+                                <a
+                                  className="gonvar-table__button"
+                                  target='_blank'
+                                  style={{ textDecoration: 'none' }}
+                                >
+                                  Ir a tarea
+                                </a>
+                              </Link>
                             }
                             {
                               homeworkStatus === 'No entregada' &&

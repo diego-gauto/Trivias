@@ -178,6 +178,7 @@ export const MainContainer = styled.div`
   }
 
   .gonvar-table__data {
+    padding: 10px 5px 0;
     font-size: 14px;
     color: black;
   }
