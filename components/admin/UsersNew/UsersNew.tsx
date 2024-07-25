@@ -57,6 +57,12 @@ interface IUserHomeworkHistory {
   createdAt: string
 }
 
+interface IUserCoursesHomeworkHistory {
+  courseId: number,
+  lessonId: number,
+  title: string
+}
+
 type SubscriptionState = 'Activo' | 'Inactiva' | 'Cancelada' | 'En prueba' | 'Sin suscripción';
 
 type PaymentMethod = 'Tarjeta (Conekta)' | 'Paypal' | 'Oxxo (Conekta)' | 'Transferencia (Conekta)' | 'Stripe' | 'Por administración';
@@ -145,7 +151,8 @@ const UsersDetails = () => {
 
   const [userCoursesResume, setUserCoursesResume] = useState<IUserCoursesResume[]>([]);
   const [userHomeworkHistory, setUserHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
-
+  const [userCoursesHomeworkHistory, setUserCoursesHomeworkHistory] = useState<IUserCoursesHomeworkHistory[]>([]);
+  const [userFilteredCoursesHomeworkHistory, setUserFilteredCoursesHomeworkHistory] = useState<IUserCoursesHomeworkHistory[]>([]);
   const [userFilteredHomeworkHistory, setUserFilteredHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
 
   const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
@@ -170,6 +177,8 @@ const UsersDetails = () => {
       getUserPaymentHistory();
       getUserCoursesResume();
       getUserHomeworksHistory();
+      // Aquí faltan los registros de las tareas que faltan...
+      getHomeworksHistoryOfCourses();
       getUserSubscriptionInfo();
     }
   }, [userId]);
@@ -351,6 +360,45 @@ const UsersDetails = () => {
     setUserHomeworkHistory(result);
   }
 
+  const getHomeworksHistoryOfCourses = async () => {
+    const query = `select c.id as course_id, l.id as lesson_id, lh.id as lesson_h_id, lh.title as homework_title
+      from lessons as l
+      inner join seasons as s on s.id = l.seasons_id 
+      inner join courses as c on c.id = s.course_id
+      inner join lesson_homeworks as lh on l.id = lh.lessons_id 
+      where l.homework = 1 and c.id in (
+        select distinct c.id as course_id 
+        from progress as p 
+        inner join lessons as l on l.id = p.lessons_id
+        inner join seasons as s on s.id = l.seasons_id
+        inner join courses as c on c.id = s.course_id
+        where p.user_id = 154
+      ) order by course_id, lesson_id;`;
+
+    interface ILessonWithHomework {
+      course_id: number,
+      lesson_id: number,
+      homework_title: string,
+    }
+
+    try {
+      const userLessonsWithHomeworkResponse = await getGenericQueryResponse(query);
+      const userLessonsWithHomeworkResume: ILessonWithHomework[] = userLessonsWithHomeworkResponse.data.data;
+
+      const result: IUserCoursesHomeworkHistory[] = userLessonsWithHomeworkResume.map(({ course_id, homework_title, lesson_id }) => {
+        return {
+          courseId: course_id,
+          lessonId: lesson_id,
+          title: homework_title
+        }
+      })
+
+      setUserCoursesHomeworkHistory(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const getUserSubscriptionInfo = async () => {
     const query = `select level, method, admin_update_id, start_date, final_date, subscription, role
       from users as u 
@@ -368,8 +416,6 @@ const UsersDetails = () => {
 
     const userSubscriptionResponse = await getGenericQueryResponse(query);
     const userSubscriptionValues: IUserSub[] = userSubscriptionResponse.data.data;
-
-    console.log(userSubscriptionValues[0]);
 
     const userSubscription: IUserSub = userSubscriptionValues[0] as any;
 
@@ -513,6 +559,37 @@ const UsersDetails = () => {
     }
 
     return false;
+  }
+
+  const getCoursesHomeworksArray = () => {
+    // userFilteredHomeworkHistory
+    // userFilteredCoursesHomeworkHistory
+
+    const result: IUserHomeworkHistory[] = userFilteredCoursesHomeworkHistory.map(({ courseId, lessonId, title }) => {
+      const uh = userFilteredHomeworkHistory.filter((uh) => uh.lessonId === lessonId);
+      if (uh.length > 0) {
+        if (uh[0] !== undefined) {
+          return uh[0];
+        }
+      }
+
+      const result: IUserHomeworkHistory = {
+        homeworkId: 0,
+        courseId,
+        seasonId: 0,
+        lessonId,
+        lessonTitle: title,
+        status: 0,
+        approved: 0,
+        homeworkStatus: 'No entregada',
+        comment: '',
+        createdAt: ''
+      }
+
+      return result;
+    });
+    // console.log({ result });
+    return result;
   }
 
   return (
@@ -739,8 +816,10 @@ const UsersDetails = () => {
                                   className="gonvar-table__button"
                                   onClick={(e) => {
                                     setViewHomeworks(true);
-                                    const newList = userHomeworkHistory.filter((h) => h.courseId === courseId);
-                                    setUserFilteredHomeworkHistory(newList);
+                                    const filteredHomeworksOfUser = userHomeworkHistory.filter((h) => h.courseId === courseId);
+                                    const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
+                                    setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
+                                    setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
                                   }}>
                                   Ver tareas
                                 </button>
@@ -771,12 +850,11 @@ const UsersDetails = () => {
             }
           </div>
         }
-
         {
           (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
           <div className="content-section content-section--with-go-back">
             {
-              userFilteredHomeworkHistory.length > 0 &&
+              getCoursesHomeworksArray().length > 0 &&
               <div className="table-content">
                 <table className="gonvar-table">
                   <thead className="gonvar-table__thead">
@@ -789,36 +867,72 @@ const UsersDetails = () => {
                   </thead>
                   <tbody>
                     {
-                      userFilteredHomeworkHistory.map(({ homeworkId, lessonTitle, homeworkStatus, comment }, index) => {
+                      getCoursesHomeworksArray().map(({ homeworkId, lessonTitle, homeworkStatus, comment, status, createdAt }, index) => {
                         const a = 'gonvar-table__approved-text';
                         const na = 'gonvar-table__not-approved-text';
                         const p = 'gonvar-table__not-checking-text';
-                        const textStyle = homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
+                        const ns = 'gonvar-table__not-sended-text';
+
+                        let textStyle: string = '';
+                        //  homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
+                        if (homeworkStatus === 'Aprobada' && status === 1) {
+                          textStyle = a;
+                        } else if (homeworkStatus === 'Reprobada' && status === 1) {
+                          textStyle = na;
+                        } else if (homeworkStatus === 'No entregada') {
+                          textStyle = ns;
+                        } else {
+                          textStyle = p;
+                        }
 
                         const newTitle = lessonTitle.replace('Actividad: ', '');
+
                         return (<tr
                           className="gonvar-table__row"
-                          key={homeworkId}
+                          key={`${index}-${homeworkId}`}
                         >
                           <td className="gonvar-table__data">{newTitle === '' ? lessonTitle : newTitle}</td>
                           <td className="gonvar-table__data">
                             <div className={`${textStyle}`}>
-                              {homeworkStatus}
+                              {
+                                ['Pendiente', 'Aprobada', 'Reprobada'].includes(homeworkStatus) ? homeworkStatus : 'No entregada'
+                              }
                             </div>
                           </td>
                           <td className="gonvar-table__data">
-                            <button
-                              type="button"
-                              className="gonvar-table__button"
-                              onClick={(e) => {
+                            {
+                              homeworkStatus !== 'No entregada' &&
+                              <button
+                                type="button"
+                                className="gonvar-table__button"
+                                onClick={(e) => {
 
-                              }}
-                            >
-                              Ir a tarea
-                            </button>
+                                }
+                                }
+                              >
+                                Ir a tarea
+                              </button>
+                            }
+                            {
+                              homeworkStatus === 'No entregada' &&
+                              <div style={{
+                                height: '100%',
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                              }}>
+                                <p style={{
+                                  margin: '0'
+                                }}>Sin tarea</p>
+                              </div>
+
+                            }
                           </td>
                           <td className="gonvar-table__data gonvar-table__data--large-text">
-                            {comment}
+                            {
+                              comment
+                            }
                           </td>
                         </tr>)
                       })
@@ -840,7 +954,7 @@ const UsersDetails = () => {
               <p style={{ margin: '0' }}>Regresar</p>
             </div>
             {
-              userFilteredHomeworkHistory.length === 0 &&
+              getCoursesHomeworksArray().length === 0 &&
               <EmptyContentComponent
                 message='No existen tareas registradas para este curso'
                 styles={{ order: '2' }}
