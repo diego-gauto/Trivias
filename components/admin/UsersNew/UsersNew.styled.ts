@@ -147,6 +147,24 @@ export const MainContainer = styled.div`
     gap: 15px;
   }
 
+  .course-homeworks-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .course-homeworks-section__title-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .course-homeworks-section__title {
+    color: #691aca;
+    margin: 0;
+  }
+
   .table-content {
     border-collapse: collapse;
     width: 100%;

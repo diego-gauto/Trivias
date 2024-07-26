@@ -5,6 +5,7 @@ import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font
 import { useRouter } from 'next/router';
 import { EmptyContentComponent } from './EmptyContentComponent';
 import Link from 'next/link';
+import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -147,6 +148,9 @@ const UsersDetails = () => {
 
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
   const [viewHomeworks, setViewHomeworks] = useState<boolean>(false);
+
+  const [userHomeworksCourseTitle, setUserHomeworksCourseTitle] = useState<string>('');
+
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
   const [userPaymentHistory, setUserPaymentHistory] = useState<IUserPaymentHistory[]>([]);
@@ -156,10 +160,6 @@ const UsersDetails = () => {
   const [userCoursesHomeworkHistory, setUserCoursesHomeworkHistory] = useState<IUserCoursesHomeworkHistory[]>([]);
   const [userFilteredCoursesHomeworkHistory, setUserFilteredCoursesHomeworkHistory] = useState<IUserCoursesHomeworkHistory[]>([]);
   const [userFilteredHomeworkHistory, setUserFilteredHomeworkHistory] = useState<IUserHomeworkHistory[]>([]);
-
-  const changeMainMenuOptionHandler = (newOption: MainMenuOptionId) => {
-    setSelectedMainMenuOption(newOption);
-  }
 
   /*
   En el div cuya clase es "sections-container", hay que agregar la clase "section-title--active"
@@ -428,7 +428,6 @@ const UsersDetails = () => {
 
     const startDate = getPrettyFormatedDate(userSubscription.start_date);
     const finalDate = getPrettyFormatedDate(userSubscription.final_date);
-    const now = (new Date()).getTime() / 1000;
 
     const state = getStateOfSubscription(
       userSubscription.final_date,
@@ -774,7 +773,6 @@ const UsersDetails = () => {
                                   Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount / 100)
                                 }
                               </td>
-                              {/* TODO: Cambiar a formato de peso mexicano */}
                             </tr>
                           );
                         })
@@ -799,7 +797,7 @@ const UsersDetails = () => {
                   <table className="gonvar-table">
                     <thead className="gonvar-table__thead">
                       <tr className="gonvar-table__row">
-                        <th className="gonvar-table__th">Nombre de curso</th>
+                        <th className="gonvar-table__th">Nombre del curso</th>
                         <th className="gonvar-table__th">Último ingreso</th>
                         <th className="gonvar-table__th">Fecha de finalización</th>
                         <th className="gonvar-table__th">Estado</th>
@@ -808,7 +806,6 @@ const UsersDetails = () => {
                     </thead>
                     <tbody>
                       {
-                        // TODO: Encontrar los registros de los cursos realizados
                         userCoursesResume.map(({ courseName, lastSingIn, finishDate, statePercent, courseId }) => {
                           return (
                             <tr className="gonvar-table__row" key={courseId}>
@@ -826,6 +823,7 @@ const UsersDetails = () => {
                                     const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
                                     setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
                                     setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
+                                    setUserHomeworksCourseTitle(courseName);
                                   }}>
                                   Ver tareas
                                 </button>
@@ -845,135 +843,124 @@ const UsersDetails = () => {
                   }}
                 />
             }
-            {
-              /*
-              <div className='empty-container' style={{ order: '2' }}>
-              <div className='empty-content'>
-                <p className='empty-content-text'>No existen registros de cursos para este usuario</p>
-              </div>
-            </div>
-              */
-            }
           </div>
         }
         {
           (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
-          <div className="content-section content-section--with-go-back">
-            {
-              getCoursesHomeworksArray().length > 0 &&
-              <div className="table-content">
-                <table className="gonvar-table">
-                  <thead className="gonvar-table__thead">
-                    <tr className="gonvar-table__row">
-                      <th className="gonvar-table__th">Lección</th>
-                      <th className="gonvar-table__th">Estado de tarea</th>
-                      <th className="gonvar-table__th">Link de tarea</th>
-                      <th className="gonvar-table__th">Retro alimentación</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      getCoursesHomeworksArray().map(({ homeworkId, lessonTitle, homeworkStatus, comment, status, image }, index) => {
-                        const a = 'gonvar-table__approved-text';
-                        const na = 'gonvar-table__not-approved-text';
-                        const p = 'gonvar-table__not-checking-text';
-                        const ns = 'gonvar-table__not-sended-text';
-
-                        let textStyle: string = '';
-                        //  homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
-                        if (homeworkStatus === 'Aprobada' && status === 1) {
-                          textStyle = a;
-                        } else if (homeworkStatus === 'Reprobada' && status === 1) {
-                          textStyle = na;
-                        } else if (homeworkStatus === 'No entregada') {
-                          textStyle = ns;
-                        } else {
-                          textStyle = p;
-                        }
-
-                        const newTitle = lessonTitle.replace('Actividad: ', '');
-
-                        return (<tr
-                          className="gonvar-table__row"
-                          key={`${index}-${homeworkId}`}
-                        >
-                          <td className="gonvar-table__data">{newTitle === '' ? lessonTitle : newTitle}</td>
-                          <td className="gonvar-table__data">
-                            <div className={`${textStyle}`}>
-                              {
-                                ['Pendiente', 'Aprobada', 'Reprobada'].includes(homeworkStatus) ? homeworkStatus : 'No entregada'
-                              }
-                            </div>
-                          </td>
-                          <td className="gonvar-table__data">
-                            {
-                              homeworkStatus !== 'No entregada' &&
-                              <Link href={image}>
-                                <a
-                                  className="gonvar-table__button"
-                                  target='_blank'
-                                  style={{ textDecoration: 'none' }}
-                                >
-                                  Ir a tarea
-                                </a>
-                              </Link>
-                            }
-                            {
-                              homeworkStatus === 'No entregada' &&
-                              <div style={{
-                                height: '100%',
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                              }}>
-                                <p style={{
-                                  margin: '0'
-                                }}>Sin tarea</p>
-                              </div>
-
-                            }
-                          </td>
-                          <td className="gonvar-table__data gonvar-table__data--large-text">
-                            {
-                              comment
-                            }
-                          </td>
-                        </tr>)
-                      })
-                    }
-                  </tbody>
-                </table>
-              </div>
-            }
-            <div
-              className="go-back"
-              onClick={(e) => {
-                setViewHomeworks(false);
-              }}
-            >
-              <img
-                className="go-back__arrow"
-                src="/images/back-arrow.png"
-                alt="back-arrow" />
-              <p style={{ margin: '0' }}>Regresar</p>
+          <div className='course-homeworks-section'>
+            <div className='course-homeworks-section__title-container'>
+              <h3 className='course-homeworks-section__title'>
+                <strong>{userHomeworksCourseTitle}</strong>
+              </h3>
             </div>
-            {
-              getCoursesHomeworksArray().length === 0 &&
-              <EmptyContentComponent
-                message='No existen tareas registradas para este curso'
-                styles={{ order: '2' }}
-              />
-            }
-            {
-              /*
-              <div className='empty-container' style={{ order: '2' }}>
-                <div className='empty-content'>
-                  <p className='empty-content-text'>No existen tareas registradas para este curso</p>
+            <div className="content-section content-section--with-go-back">
+              {
+                getCoursesHomeworksArray().length > 0 &&
+                <div className="table-content">
+                  <table className="gonvar-table">
+                    <thead className="gonvar-table__thead">
+                      <tr className="gonvar-table__row">
+                        <th className="gonvar-table__th">Lección</th>
+                        <th className="gonvar-table__th">Estado de tarea</th>
+                        <th className="gonvar-table__th">Link de tarea</th>
+                        <th className="gonvar-table__th">Retro alimentación</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        getCoursesHomeworksArray().map(({ homeworkId, lessonTitle, homeworkStatus, comment, status, image }, index) => {
+                          const a = 'gonvar-table__approved-text';
+                          const na = 'gonvar-table__not-approved-text';
+                          const p = 'gonvar-table__not-checking-text';
+                          const ns = 'gonvar-table__not-sended-text';
+
+                          let textStyle: string = '';
+                          //  homeworkStatus === 'Aprobada' ? a : homeworkStatus === 'Reprobada' ? na : p;
+                          if (homeworkStatus === 'Aprobada' && status === 1) {
+                            textStyle = a;
+                          } else if (homeworkStatus === 'Reprobada' && status === 1) {
+                            textStyle = na;
+                          } else if (homeworkStatus === 'No entregada') {
+                            textStyle = ns;
+                          } else {
+                            textStyle = p;
+                          }
+
+                          const newTitle = lessonTitle.replace('Actividad: ', '');
+
+                          return (<tr
+                            className="gonvar-table__row"
+                            key={`${index}-${homeworkId}`}
+                          >
+                            <td className="gonvar-table__data">{newTitle === '' ? lessonTitle : newTitle}</td>
+                            <td className="gonvar-table__data">
+                              <div className={`${textStyle}`}>
+                                {
+                                  ['Pendiente', 'Aprobada', 'Reprobada'].includes(homeworkStatus) ? homeworkStatus : 'No entregada'
+                                }
+                              </div>
+                            </td>
+                            <td className="gonvar-table__data">
+                              {
+                                homeworkStatus !== 'No entregada' &&
+                                <Link href={image}>
+                                  <a
+                                    className="gonvar-table__button"
+                                    target='_blank'
+                                    style={{ textDecoration: 'none' }}
+                                  >
+                                    Ir a tarea
+                                  </a>
+                                </Link>
+                              }
+                              {
+                                homeworkStatus === 'No entregada' &&
+                                <div style={{
+                                  height: '100%',
+                                  width: '100%',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center'
+                                }}>
+                                  <p style={{
+                                    margin: '0'
+                                  }}>Sin tarea</p>
+                                </div>
+
+                              }
+                            </td>
+                            <td className="gonvar-table__data gonvar-table__data--large-text">
+                              {
+                                comment
+                              }
+                            </td>
+                          </tr>)
+                        })
+                      }
+                    </tbody>
+                  </table>
                 </div>
+              }
+              <div
+                className="go-back"
+                onClick={(e) => {
+                  setViewHomeworks(false);
+                }}
+              >
+                <img
+                  className="go-back__arrow"
+                  src="/images/back-arrow.png"
+                  alt="back-arrow" />
+                <p style={{ margin: '0' }}>Regresar</p>
               </div>
-              */
-            }
+              {
+                getCoursesHomeworksArray().length === 0 &&
+                <EmptyContentComponent
+                  message='No existen tareas registradas para este curso'
+                  styles={{ order: '2' }}
+                />
+              }
+            </div>
           </div>
         }
         {
