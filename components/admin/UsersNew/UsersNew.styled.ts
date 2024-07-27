@@ -70,7 +70,7 @@ export const MainContainer = styled.div`
   .user-main-header {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     justify-content: space-around;
     align-items: center;
   }
@@ -109,13 +109,14 @@ export const MainContainer = styled.div`
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
   }
 
   .user-property-header {
-    font-size: 18px;
+    font-size: 16px;
     color: black;
     font-weight: normal;
+    white-space: nowrap;
   }
 
   .user-property-value {
@@ -475,6 +476,7 @@ export const MainContainer = styled.div`
     color: #8a4bd7;
     font-weight: bold;
     margin: 0;
+    white-space: nowrap;
   }
 
   .subscription-item__content-text--normal-weight {

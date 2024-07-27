@@ -429,13 +429,9 @@ const UsersDetails = () => {
     const startDate = getPrettyFormatedDate(userSubscription.start_date);
     const finalDate = getPrettyFormatedDate(userSubscription.final_date);
 
-    const state = getStateOfSubscription(
-      userSubscription.final_date,
-      userSubscription.level,
-      userSubscription.role,
-      userSubscription.level,
-      userSubscription.method
-    );
+    const { level, final_date } = userSubscription;
+
+    const state = getStateOfSubscription(level, final_date);
 
     const type = getSubscriptionTypeByLevel(userSubscription.level);
 
@@ -490,7 +486,7 @@ const UsersDetails = () => {
     return 'Por administración';
   }
 
-  const getStateOfSubscription = (userLevel: number, finalDate: number, userRole: string, level: number, method: string): SubscriptionState => {
+  const getStateOfSubscription = (userLevel: number, finalDate: number): SubscriptionState => {
     const now = Math.floor((new Date()).getTime() / 1000);
     const isActiveResult = isActive(userLevel, finalDate);
 
@@ -532,13 +528,14 @@ const UsersDetails = () => {
     userLevel: number,
     finalDate: number,
   ) => {
-    const today = new Date().getTime() / 1000;
+    const today = new Date().getTime();
     const finalDate2 = new Date(finalDate * 1000);
-
+    console.log({ today });
+    console.log({ finalDate2 });
     if (
       // NO_RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
-      [1, 4, 5, 6, 8].includes(userLevel) &&
-      finalDate2.getTime() / 1000 > today
+      [1, 4, 5, 6, 7, 8].includes(userLevel) &&
+      finalDate2.getTime() > today
     ) {
       return true;
     }
@@ -608,8 +605,11 @@ const UsersDetails = () => {
           });
         }}
       >
-        {/*<i>🔙</i>*/}
-        <img className="go-back__arrow" src="/images/back-arrow.png" alt="back-arrow" />
+        <img
+          className="go-back__arrow"
+          src="/images/back-arrow.png"
+          alt="back-arrow"
+        />
         <p style={{ margin: '0' }}>Atrás</p>
       </div>
       <div className="data-container">
@@ -632,7 +632,7 @@ const UsersDetails = () => {
               <div className="user-property-value">{userMainProperties.phone}</div>
             </div>
             <div className="user-property">
-              <div className="user-property-header">Fecha de creación</div>
+              <div className="user-property-header user-property-header--small-text">Fecha de creación</div>
               <div className="user-property-value">{getFormatedDate(new Date(userMainProperties.createdAt))}</div>
             </div>
             <div className="user-property">
@@ -673,23 +673,25 @@ const UsersDetails = () => {
                       <p className='subscription-item__content-text'>{subscription.state}</p>
                     </div>
                   </div>
-                  <div className='subscription-item'>
-                    <div className='subscription-item__header'>
-                      <p className='subscription-item__title'>
-                        {
-                          subscription.state === 'Activo' &&
-                          'Su plan es'
-                        }
-                        {
-                          subscription.state === 'Inactiva' &&
-                          'Su plan era'
-                        }
-                      </p>
+                  {
+                    subscription.state !== 'Sin suscripción' &&
+                    <div className='subscription-item'>
+                      <div className='subscription-item__header'>
+                        <p className='subscription-item__title'>
+                          Su plan{' '}
+                          {
+                            subscription.state === 'Activo' && 'es'
+                          }
+                          {
+                            subscription.state === 'Inactiva' && 'era'
+                          }
+                        </p>
+                      </div>
+                      <div className='subscription-item__content'>
+                        <p className='subscription-item__content-text'>{subscription.type}</p>
+                      </div>
                     </div>
-                    <div className='subscription-item__content'>
-                      <p className='subscription-item__content-text'>{subscription.type}</p>
-                    </div>
-                  </div>
+                  }
                   {
                     (subscription.state === 'Activo' || subscription.state === 'Inactiva') &&
                     <>
@@ -854,6 +856,18 @@ const UsersDetails = () => {
               </h3>
             </div>
             <div className="content-section content-section--with-go-back">
+              <div
+                className="go-back"
+                onClick={(e) => {
+                  setViewHomeworks(false);
+                }}
+              >
+                <img
+                  className="go-back__arrow"
+                  src="/images/back-arrow.png"
+                  alt="back-arrow" />
+                <p style={{ margin: '0' }}>Regresar</p>
+              </div>
               {
                 getCoursesHomeworksArray().length > 0 &&
                 <div className="table-content">
@@ -941,18 +955,6 @@ const UsersDetails = () => {
                   </table>
                 </div>
               }
-              <div
-                className="go-back"
-                onClick={(e) => {
-                  setViewHomeworks(false);
-                }}
-              >
-                <img
-                  className="go-back__arrow"
-                  src="/images/back-arrow.png"
-                  alt="back-arrow" />
-                <p style={{ margin: '0' }}>Regresar</p>
-              </div>
               {
                 getCoursesHomeworksArray().length === 0 &&
                 <EmptyContentComponent
