@@ -268,7 +268,7 @@ export const MainContainer = styled.div`
 
   .go-back {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     font-weight: bold;
     order: 1;
@@ -547,10 +547,10 @@ export const MainContainer = styled.div`
     }
 
     .go-back {
-      order: 2;
+      order: 1;
     }
     .table-content {
-      order: 1;
+      order: 2;
     }
     .rewards__grid-container {
       grid-template-columns: 1fr 1fr 1fr;

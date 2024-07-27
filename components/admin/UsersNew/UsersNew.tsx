@@ -62,6 +62,7 @@ interface IUserHomeworkHistory {
 
 interface IUserCoursesHomeworkHistory {
   courseId: number,
+  courseTitle: string,
   lessonId: number,
   title: string
 }
@@ -366,7 +367,7 @@ const UsersDetails = () => {
   }
 
   const getHomeworksHistoryOfCourses = async () => {
-    const query = `select c.id as course_id, l.id as lesson_id, lh.id as lesson_h_id, lh.title as homework_title
+    const query = `select c.id as course_id, c.title as course_title, l.id as lesson_id, lh.id as lesson_h_id, lh.title as homework_title
       from lessons as l
       inner join seasons as s on s.id = l.seasons_id 
       inner join courses as c on c.id = s.course_id
@@ -377,11 +378,12 @@ const UsersDetails = () => {
         inner join lessons as l on l.id = p.lessons_id
         inner join seasons as s on s.id = l.seasons_id
         inner join courses as c on c.id = s.course_id
-        where p.user_id = 154
-      ) order by course_id, lesson_id;`;
+        where p.user_id = ${userId}
+      ) order by course_id, s.id, l.number;`;
 
     interface ILessonWithHomework {
       course_id: number,
+      course_title: string,
       lesson_id: number,
       homework_title: string,
     }
@@ -390,11 +392,12 @@ const UsersDetails = () => {
       const userLessonsWithHomeworkResponse = await getGenericQueryResponse(query);
       const userLessonsWithHomeworkResume: ILessonWithHomework[] = userLessonsWithHomeworkResponse.data.data;
 
-      const result: IUserCoursesHomeworkHistory[] = userLessonsWithHomeworkResume.map(({ course_id, homework_title, lesson_id }) => {
+      const result: IUserCoursesHomeworkHistory[] = userLessonsWithHomeworkResume.map(({ course_id, course_title, homework_title, lesson_id }) => {
         return {
           courseId: course_id,
           lessonId: lesson_id,
-          title: homework_title
+          title: homework_title,
+          courseTitle: course_title
         }
       })
 
@@ -530,8 +533,6 @@ const UsersDetails = () => {
   ) => {
     const today = new Date().getTime();
     const finalDate2 = new Date(finalDate * 1000);
-    console.log({ today });
-    console.log({ finalDate2 });
     if (
       // NO_RECURRING_PAYMENT_LEVELS.includes(userLevel) &&
       [1, 4, 5, 6, 7, 8].includes(userLevel) &&
@@ -590,7 +591,6 @@ const UsersDetails = () => {
 
       return result;
     });
-    // console.log({ result });
     return result;
   }
 
@@ -856,17 +856,19 @@ const UsersDetails = () => {
               </h3>
             </div>
             <div className="content-section content-section--with-go-back">
-              <div
-                className="go-back"
-                onClick={(e) => {
-                  setViewHomeworks(false);
-                }}
-              >
-                <img
-                  className="go-back__arrow"
-                  src="/images/back-arrow.png"
-                  alt="back-arrow" />
-                <p style={{ margin: '0' }}>Regresar</p>
+              <div >
+                <div
+                  className='go-back'
+                  onClick={(e) => {
+                    setViewHomeworks(false);
+                  }}
+                >
+                  <img
+                    className="go-back__arrow"
+                    src="/images/back-arrow.png"
+                    alt="back-arrow" />
+                  <p style={{ margin: '0' }}>Regresar</p>
+                </div>
               </div>
               {
                 getCoursesHomeworksArray().length > 0 &&
