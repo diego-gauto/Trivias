@@ -599,7 +599,7 @@ const UsersDetails = () => {
       <div
         className="top-header"
         onClick={() => {
-          localStorage.removeItem('selected-user-id');
+          // localStorage.removeItem('selected-user-id');
           router.push({
             pathname: '/admin/Users'
           });
@@ -650,7 +650,9 @@ const UsersDetails = () => {
                   key={`${id}`}
                   className={`section-title ${extraCSSClass}`}
                   onClick={(e) => {
-                    setSelectedMainMenuOption(id)
+                    if (id !== 'Rewards') {
+                      setSelectedMainMenuOption(id)
+                    }
                   }}
                 >
                   {label}
@@ -738,11 +740,18 @@ const UsersDetails = () => {
                     message='Usuario en proceso de reintento de pago'
                   />
                 }
-                <div className='subscription-actions-container'>
-                  <div>
-
+                {
+                  // ACTIVA - Pago no recurrente
+                  true &&
+                  <div className='subscription-actions-container'>
+                    <div className='subscription-actions-item'>
+                      <p className='subscription-actions-item__text'>Editar dias de suscripción</p>
+                    </div>
+                    <div className='subscription-actions-item'>
+                      <p className='subscription-actions-item__text'>Eliminar suscripción</p>
+                    </div>
                   </div>
-                </div>
+                }
               </div>
             }
           </div>

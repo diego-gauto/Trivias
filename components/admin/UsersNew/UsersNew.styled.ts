@@ -49,6 +49,15 @@ export const MainContainer = styled.div`
     gap: 20px;
     font-weight: bold;
     color: #691aca;
+    background-color: transparent;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin-bottom: 10px;
+  }
+
+  .top-header:hover {
+    background-color: rgba(105, 26, 202, 0.2);
   }
 
   .data-container {
@@ -174,6 +183,34 @@ export const MainContainer = styled.div`
   .course-homeworks-section__title {
     color: #691aca;
     margin: 0;
+  }
+
+  .subscription-actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .subscription-actions-item {
+    border-radius: 32px;
+    border: 2px solid #8a4bd7;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+  }
+
+  .subscription-actions-item:hover {
+    background-color: rgba(105, 26, 202, 0.2);
+  }
+
+  .subscription-actions-item__text {
+    margin: 0;
+    font-weight: bold;
+    color: #8a4bd7;
   }
 
   .table-content {
