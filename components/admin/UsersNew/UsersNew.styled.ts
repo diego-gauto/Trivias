@@ -128,7 +128,7 @@ export const MainContainer = styled.div`
   .sections-container {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 15px;
     flex-direction: column;
     align-items: center;
   }
@@ -136,10 +136,20 @@ export const MainContainer = styled.div`
   .section-title {
     font-size: 18px;
     color: #691aca;
+    background-color: transparent;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    padding: 10px;
+  }
+
+  .section-title:hover {
+    background-color: rgba(105, 26, 202, 0.2);
   }
 
   .section-title--active {
     font-weight: bold;
+    background-color: rgba(105, 26, 202, 0.2);
   }
 
   .content-section {
@@ -260,6 +270,7 @@ export const MainContainer = styled.div`
     font-size: 14px;
     font-weight: bold;
     color: #691aca;
+    transition: opacity 0.5s ease;
   }
 
   .gonvar-table__button:hover {
@@ -273,6 +284,15 @@ export const MainContainer = styled.div`
     font-weight: bold;
     order: 1;
     color: #691aca;
+    padding: 10px;
+    background-color: transparent;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+    border-radius: 16px;
+  }
+
+  .go-back:hover {
+    background-color: rgba(105, 26, 202, 0.2);
   }
 
   .go-back__arrow {
@@ -541,9 +561,6 @@ export const MainContainer = styled.div`
     }
     /* go-back contenedor ... TODO */
     .content-section {
-    }
-    .content-section--with-go-back {
-      flex-direction: row;
     }
 
     .go-back {

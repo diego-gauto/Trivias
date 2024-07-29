@@ -855,12 +855,17 @@ const UsersDetails = () => {
                 <strong>{userHomeworksCourseTitle}</strong>
               </h3>
             </div>
-            <div className="content-section content-section--with-go-back">
-              <div >
+            <div className="content-section">
+              <div style={{
+                width: '100%'
+              }}>
                 <div
                   className='go-back'
                   onClick={(e) => {
                     setViewHomeworks(false);
+                  }}
+                  style={{
+                    width: '135px'
                   }}
                 >
                   <img
