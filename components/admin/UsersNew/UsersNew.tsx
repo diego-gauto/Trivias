@@ -248,7 +248,7 @@ const UsersDetails = () => {
             title,
             last_seen_time,
             CASE  
-            	WHEN Round(( finish_lessons_count / lessons_count ) * 100) = 100 and finish_course_seconds IS NULL THEN last_seen_time
+            	-- WHEN Round(( finish_lessons_count / lessons_count ) * 100) = 100 and finish_course_seconds IS NULL THEN last_seen_time
             	WHEN Round(( finish_lessons_count / lessons_count ) * 100) = 100 and finish_course_seconds IS NOT NULL THEN finish_course_seconds
             	ELSE NULL  
             END AS finish_course_time,
