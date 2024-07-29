@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import CardStats from "../../components/admin/SuscriptionStats/Card";
 import MultiLineChart from "../../components/admin/SuscriptionStats/multiLineChart";
+import { getStatsByDate } from "../../components/api/subStats";
+import { Stats, StatsByType } from "./ISuscrioptionsStats";
 import styles from "./suscriptionStats.module.css";
 
 const today = () => {
@@ -15,23 +17,12 @@ const today = () => {
   return formattedDate
 }
 
-interface Stats {
-  month: number;
-  quarter: number;
-  anual: number;
-}
-
-interface StatsByType {
-  new: Stats;
-  renewed: Stats;
-  reactive: Stats;
-  canceled: Stats;
-}
-
 const defaultStats: Stats = { month: 0, quarter: 0, anual: 0 };
 
 const SuscriptionStats = () => {
   const { container, button_container, button, card_container } = styles
+
+  const [error, setError] = useState<string | null>(null);
 
   const [todayStats, setTodayStats] = useState<StatsByType>()
 
@@ -42,14 +33,35 @@ const SuscriptionStats = () => {
   }
 
   useEffect(() => {
-    const news: Stats = { month: 10, quarter: 30, anual: 5 }
-    const renewed: Stats = { month: 5, quarter: 12, anual: 3 }
-    const reactive: Stats = { month: 3, quarter: 10, anual: 2 }
-    const canceled: Stats = { month: 1, quarter: 1, anual: 1 }
-    const stats: StatsByType = { new: news, renewed: renewed, reactive: reactive, canceled: canceled }
-    setTodayStats(stats)
+
+    const fetchData = async () => {
+      try {
+        const response = await getStatsByDate(todayString);
+        // if (!response.ok) {
+        //   throw new Error(`Error: ${response.status} ${response.statusText}`);
+        // }
+        // const jsonData = await response.json();
+        // setTodayStats(jsonData);
+        setTodayStats(response);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Unexpected error');
+        }
+      }
+    };
+
+    fetchData();
   }, [])
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!todayStats) {
+    return <div>Cargando...</div>;
+  }
 
   return (
     <div className={container}>
