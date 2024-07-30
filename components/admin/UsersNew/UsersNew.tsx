@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { MainContainer } from './UsersNew.styled';
 import { getGenericQueryResponse } from '../../api/admin';
-import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 import { useRouter } from 'next/router';
 import { EmptyContentComponent } from './EmptyContentComponent';
 import Link from 'next/link';
-import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align';
+import { Modal } from './SubscriptionModal';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -166,6 +165,11 @@ const UsersDetails = () => {
   En el div cuya clase es "sections-container", hay que agregar la clase "section-title--active"
   para aclarar en cual sección esta el usuario
   */
+
+  const [showChangeFinalDateModal, setShowChangeFinalDateModal] = useState<boolean>(false);
+  const [showSuccesssModal, setShowSuccesssModal] = useState<boolean>(false);
+
+  const [finalDateNewValue, setFinalDateNewValue] = useState<number>(0);
 
   useEffect(() => {
     const selectedUserId = localStorage.getItem('selected-user-id');
@@ -446,6 +450,8 @@ const UsersDetails = () => {
       userId
     });
 
+    setFinalDateNewValue(userSubscription.final_date * 1000);
+
     setSubscription({
       method,
       startDate,
@@ -592,6 +598,153 @@ const UsersDetails = () => {
       return result;
     });
     return result;
+  }
+
+  type SubscriptionModalOption = 'edit-final-date' | 'remove-subscription' | 'active-subscription' | 'confirm' | 'success';
+
+  const generateModalContent = (option: SubscriptionModalOption): JSX.Element => {
+    switch (option) {
+      case 'edit-final-date':
+        return generateEditFinalDateContent(user.finalDate);
+      case 'remove-subscription':
+        return (<p></p>)
+      case 'active-subscription':
+        return (<p></p>)
+      case 'confirm':
+        return (<p></p>)
+      case 'success':
+        return (generateSuccessModalContent())
+    }
+  }
+
+  const generateEditFinalDateContent = (finalDate: number): JSX.Element => {
+
+    const fdf = getPrettyFormatedDate(finalDate);
+    const d = new Date(finalDateNewValue);
+
+    const formatDate = (date: Date) => {
+      let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) {
+        month = '0' + month;
+      }
+      if (day.length < 2) {
+        day = '0' + day;
+      }
+
+      return [year, month, day].join('-');
+    }
+
+    return (
+      <div
+        style={{
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px'
+        }}
+      >
+        <p>La fecha cuando termina la suscripción del usuario es el: <strong>{fdf}</strong></p>
+        <p>Si desea cambiar esta fecha, seleccione una nueva</p>
+        <input
+          style={{
+            borderRadius: '16px',
+            padding: '5px 15px'
+          }}
+          type="date"
+          name=""
+          id=""
+          value={formatDate(d)}
+          onChange={(e) => {
+            setFinalDateNewValue(new Date(e.target.value).getTime());
+            // console.log(e.target.value);
+          }}
+        />
+        <button
+          className='gonvar-button gonvar-button--purple'
+          type="button"
+          onClick={() => {
+            setShowChangeFinalDateModal(false);
+            setShowSuccesssModal(true);
+          }}
+        >
+          Aceptar
+        </button>
+        {
+          /*
+          <button
+          className='gonvar-button gonvar-button--purple'
+          type="button"
+        >
+          Cancelar
+        </button>
+          */
+        }
+      </div>);
+  }
+
+  const generateSuccessModalContent = (): JSX.Element => {
+    return (
+      <div
+        style={{
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: '25px',
+          color: '#691aca'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '25px'
+          }}>
+          <div style={{
+            borderRadius: '50%',
+            backgroundColor: '#0EAD69',
+            width: '50px',
+            height: '50px',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontWeight: 'bold',
+            fontSize: '24px'
+          }}>
+            {'✓'}
+          </div>
+          <p
+            style={{
+              margin: '0',
+              fontWeight: 'bold',
+              fontSize: '20px'
+            }}
+          >Felicidades</p>
+        </div>
+        <div>
+          <p style={{
+            fontWeight: 'bold',
+            color: '#8C4FD7',
+            textAlign: 'center',
+            margin: '0'
+          }}>La activación de suscripción se ha realizado correctamente</p>
+        </div>
+        <button
+          className='gonvar-button gonvar-button--purple'
+          type="button"
+          onClick={(e) => {
+            setShowSuccesssModal(false)
+          }}
+        >
+          Aceptar
+        </button>
+      </div>);
   }
 
   return (
@@ -744,11 +897,20 @@ const UsersDetails = () => {
                   // ACTIVA - Pago no recurrente
                   true &&
                   <div className='subscription-actions-container'>
-                    <div className='subscription-actions-item'>
-                      <p className='subscription-actions-item__text'>Editar dias de suscripción</p>
+                    <div
+                      className='subscription-actions-item'
+                      onClick={(e) => {
+                        setShowChangeFinalDateModal(true);
+                      }}
+                    >
+                      <p className='subscription-actions-item__text'>
+                        Editar dias de suscripción
+                      </p>
                     </div>
                     <div className='subscription-actions-item'>
-                      <p className='subscription-actions-item__text'>Eliminar suscripción</p>
+                      <p className='subscription-actions-item__text'>
+                        Eliminar suscripción
+                      </p>
                     </div>
                   </div>
                 }
@@ -1160,6 +1322,26 @@ const UsersDetails = () => {
           </div>
         }
       </div>
+      {
+        showChangeFinalDateModal &&
+        <Modal
+          show={showChangeFinalDateModal}
+          onClose={() => {
+            setShowChangeFinalDateModal(false)
+          }}
+          child={generateModalContent('edit-final-date')}
+        />
+      }
+      {
+        showSuccesssModal &&
+        <Modal
+          show={showSuccesssModal}
+          onClose={() => {
+            setShowSuccesssModal(false)
+          }}
+          child={generateModalContent('success')}
+        />
+      }
     </MainContainer>
   )
 }
