@@ -696,31 +696,32 @@ export const PurchaseNew2 = () => {
                     : 'space-between',
                 }}
               >
-                {([1, 6].includes(user.level)
-                  ? PayOptionsPurchaseForMonthSuscription
-                  : PayOptionsPurchase
-                ).map((pay: IPayOption, index: number) => {
-                  return (
-                    <div
-                      className={
-                        'box-container ' +
-                        (selectedButton === pay.id ? 'selected-box' : '')
-                      }
-                      key={'pay-button' + index}
-                      onClick={() => {
-                        setSelectedButton(pay.id);
-                        setTerms(false);
-                      }}
-                    >
-                      {selectedButton === pay.id ? (
-                        <img src={pay.img_select} />
-                      ) : (
-                        <img src={pay.img_unselect} />
-                      )}
-                      {pay.title !== '' && <p>{pay.title}</p>}
-                    </div>
-                  );
-                })}
+                {
+                  (frequency === 'month'
+                    ? PayOptionsPurchaseForMonthSuscription
+                    : PayOptionsPurchase
+                  ).map((pay: IPayOption, index: number) => {
+                    return (
+                      <div
+                        className={
+                          'box-container ' +
+                          (selectedButton === pay.id ? 'selected-box' : '')
+                        }
+                        key={'pay-button' + index}
+                        onClick={() => {
+                          setSelectedButton(pay.id);
+                          setTerms(false);
+                        }}
+                      >
+                        {selectedButton === pay.id ? (
+                          <img src={pay.img_select} />
+                        ) : (
+                          <img src={pay.img_unselect} />
+                        )}
+                        {pay.title !== '' && <p>{pay.title}</p>}
+                      </div>
+                    );
+                  })}
               </div>
               {
                 selectedButton === 'card' && (
