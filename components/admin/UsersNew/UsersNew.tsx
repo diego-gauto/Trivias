@@ -138,6 +138,20 @@ const TOLERANCE_DAYS_COUNT = 10;
 const RECURRING_PAYMENT_LEVELS = [1, 4, 7];
 const NO_RECURRING_PAYMENT_LEVELS = [0, 5, 6, 8];
 
+type MESSAGES_INDEXES = ''
+/*
+const SUCCESS_MESSAGES = new Map<number, string>();
+
+SUCCESS_MESSAGES.set(1, 'La activación de suscripción se ha realizado correctamente');
+SUCCESS_MESSAGES.set(2, 'La activación de suscripción se ha realizado correctamente');
+SUCCESS_MESSAGES.set(3, 'La activación de suscripción se ha realizado correctamente');
+*/
+
+const SUCCESS_MESSAGES = {
+  SUBSCRIPTION_ACTIVATION: 'La activación de suscripción se ha realizado correctamente',
+
+}
+
 const UsersDetails = () => {
   const router = useRouter();
   const [userId, setUserId] = useState(0);
@@ -168,6 +182,16 @@ const UsersDetails = () => {
 
   const [showChangeFinalDateModal, setShowChangeFinalDateModal] = useState<boolean>(false);
   const [showSuccesssModal, setShowSuccesssModal] = useState<boolean>(false);
+  const [showRemoveSubscriptionModal, setShowRemoveSubscriptionModal] = useState<boolean>(false);
+  const [showActivateSubscriptionModal, setShowActivateSubscriptionModal] = useState<boolean>(false);
+
+  /*
+  Activate Subscription Modal Values
+  */
+
+  type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
+  const [selectedSubscriptionToActivate, setSelectedSubscriptionToActivate] = useState<ISubscriptionOption>('month');
+  const [messageOfSuccessModal, set] = useState<string>('');
 
   const [finalDateNewValue, setFinalDateNewValue] = useState<number>(0);
 
@@ -607,9 +631,9 @@ const UsersDetails = () => {
       case 'edit-final-date':
         return generateEditFinalDateContent(user.finalDate);
       case 'remove-subscription':
-        return (<p></p>)
+        return (generateRemoveSubscriptionModalContent())
       case 'active-subscription':
-        return (<p></p>)
+        return (generateActivateSubscriptionModalContent())
       case 'confirm':
         return (<p></p>)
       case 'success':
@@ -745,6 +769,262 @@ const UsersDetails = () => {
           Aceptar
         </button>
       </div>);
+  }
+
+  const generateRemoveSubscriptionModalContent = (): JSX.Element => {
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          padding: '20px'
+        }}
+      >
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          color: '#691ACA',
+          textAlign: 'center'
+        }}>
+          <p style={{
+            margin: '0',
+            fontWeight: 'bold'
+          }}>¿Estas seguro de quitar la suscripción de este usuario?</p>
+          <div>
+            <p style={{
+              margin: '0',
+              fontWeight: 'bold'
+            }}>
+              Datos:
+            </p>
+            <p style={{
+              margin: '0'
+            }}>Tipo de membresia: {'Cuatrimestral'}</p>
+          </div>
+          <div>
+            <p style={{
+              margin: '0',
+              fontWeight: 'bold'
+            }}>
+              Fecha de inicio:
+            </p>
+            <p style={{
+              margin: '0'
+            }}>{'24 de Febrero de 2024'}</p>
+          </div>
+          <div>
+            <p style={{
+              margin: '0',
+              fontWeight: 'bold'
+            }}>
+              Fecha de final:
+            </p>
+            <p style={{
+              margin: '0'
+            }}>{'23 de Junio de 2024'}</p>
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px'
+            }}>
+            <button
+              className='gonvar-button gonvar-button--ghost'
+              type="button"
+            >
+              Cancelar
+            </button>
+            <button
+              className='gonvar-button gonvar-button--purple'
+              type="button"
+            >
+              Continuar
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  /*
+  const generatePricesByOption = () => {
+      const pricesMounth = [459, 249, 149];
+      const pricesCuatri = [1599, 999];
+      const pricesAnnual = [3497, 1599];
+  
+      let prices: number[] = [];
+      if (suscription === 'Month') {
+        prices = pricesMounth;
+      } else if (suscription === 'Annual') {
+        prices = pricesAnnual;
+      } else if (suscription === 'Cuatri') {
+        prices = pricesCuatri;
+      }
+  
+      if (suscription === 'None') {
+        return [];
+      }
+  
+      const options: JSX.Element[] = [];
+      for (const price of prices) {
+        const newElement = <option value={price}>{price}</option>;
+        options.push(newElement);
+      }
+      return options;
+    };
+  */
+
+  const generateActivateSubscriptionModalContent = (): JSX.Element => {
+
+    const generatePricesByOption = () => {
+      const pricesMounth = [459, 249, 149];
+      const pricesCuatri = [1599, 999];
+      const pricesAnnual = [3497, 1599];
+
+      let prices: number[] = [];
+      if (selectedSubscriptionToActivate === 'month') {
+        prices = pricesMounth;
+      } else if (selectedSubscriptionToActivate === 'annual') {
+        prices = pricesAnnual;
+      } else if (selectedSubscriptionToActivate === 'cuatri') {
+        prices = pricesCuatri;
+      }
+
+      const options: JSX.Element[] = [];
+      for (const price of prices) {
+        const newElement = <option value={price} key={`subscription_price_${price}`}>{price}</option>;
+        options.push(newElement);
+      }
+      return options;
+    };
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          padding: '20px'
+        }}
+      >
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          color: '#691ACA',
+          textAlign: 'start'
+        }}>
+          <p style={{
+            margin: '0',
+            fontWeight: 'bold'
+          }}>Activar suscripción</p>
+          <div>
+            <p style={{
+              margin: '0',
+              fontWeight: 'bold'
+            }}>
+              Tipo de suscripción:
+            </p>
+            {
+              /*
+              <select
+                  style={{
+                    width: '100%',
+                    borderRadius: '35px',
+                    paddingLeft: '10px',
+                    height: '50px',
+                  }}
+                  name=''
+                  id=''
+                  onChange={(event) => {
+                    setPrice(parseInt(event.target.value));
+                  }}
+                >
+                  <option value='0' disabled selected>
+                    Seleccione un precio
+                  </option>
+                  {generatePricesByOption()}
+                </select>
+
+                  type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
+                  const [selectedSubscriptionToActivate, setSelectedSubscriptionToActivate] = useState<ISubscriptionOption>('month');
+              */
+            }
+            <select
+              style={{
+                width: 'calc(100% - 30px)',
+                borderRadius: '16px',
+                height: '35px',
+                padding: '5px 10px',
+                marginTop: '5px'
+              }}
+              onChange={(e) => {
+                setSelectedSubscriptionToActivate(e.target.value as any);
+              }}
+            >
+              <option
+                value="month"
+                selected={selectedSubscriptionToActivate === 'month'}
+              >Mensual</option>
+              <option
+                value="cuatri"
+                selected={selectedSubscriptionToActivate === 'cuatri'}
+              >Cuatrimestral</option>
+              <option
+                value="annual"
+                selected={selectedSubscriptionToActivate === 'annual'}
+              >Anual</option>
+            </select>
+          </div>
+          <div>
+            <p style={{
+              margin: '0',
+              fontWeight: 'bold'
+            }}>
+              Precio de suscripción:
+            </p>
+            <select
+              name=""
+              id=""
+              style={{
+                width: 'calc(100% - 30px)',
+                borderRadius: '16px',
+                height: '35px',
+                padding: '5px 10px',
+                marginTop: '5px'
+              }}
+            >
+              {
+                generatePricesByOption()
+              }
+            </select>
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px'
+            }}>
+            <button
+              className='gonvar-button gonvar-button--ghost'
+              type="button"
+            >
+              Cancelar
+            </button>
+            <button
+              className='gonvar-button gonvar-button--purple'
+              type="button"
+            >
+              Continuar
+            </button>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -907,7 +1187,12 @@ const UsersDetails = () => {
                         Editar dias de suscripción
                       </p>
                     </div>
-                    <div className='subscription-actions-item'>
+                    <div
+                      className='subscription-actions-item'
+                      onClick={(e) => {
+                        setShowActivateSubscriptionModal(true);
+                      }}
+                    >
                       <p className='subscription-actions-item__text'>
                         Eliminar suscripción
                       </p>
@@ -1340,6 +1625,26 @@ const UsersDetails = () => {
             setShowSuccesssModal(false)
           }}
           child={generateModalContent('success')}
+        />
+      }
+      {
+        showRemoveSubscriptionModal &&
+        <Modal
+          show={showRemoveSubscriptionModal}
+          onClose={() => {
+            setShowRemoveSubscriptionModal(false)
+          }}
+          child={generateModalContent('remove-subscription')}
+        />
+      }
+      {
+        showActivateSubscriptionModal &&
+        <Modal
+          show={showActivateSubscriptionModal}
+          onClose={() => {
+            setShowActivateSubscriptionModal(false)
+          }}
+          child={generateModalContent('active-subscription')}
         />
       }
     </MainContainer>
