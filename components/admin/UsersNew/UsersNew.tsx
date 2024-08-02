@@ -138,7 +138,7 @@ const getPrettyFormatedDate = (paidAt: string | number) => {
 
 const TOLERANCE_DAYS_COUNT = 10;
 const RECURRING_PAYMENT_LEVELS = [1, 4, 7];
-const NO_RECURRING_PAYMENT_LEVELS = [0, 5, 6, 8];
+const NO_RECURRING_PAYMENT_LEVELS = [5, 6, 8];
 
 const SUCCESS_MESSAGES = {
   SUBSCRIPTION_ACTIVATION: 'La activación de suscripción se ha realizado correctamente',
@@ -705,13 +705,50 @@ const UsersDetails = () => {
 
     const buttons: JSX.Element[] = [];
 
+    /*
+    Activa -> Pago recurrente 1, 4, 7 (Botones no aparecen)
+    Activa -> Pago no recurrente 5, 6, 8 (Botones cancelar y editar días)
+    Inactiva -> Pago recurrente (Periodo de reintento, no mostrar botones)
+    Inactiva -> Pago recurrente (Ya paso periodo de reintento, editar días o activar plan)
+    Inactiva -> Pago no recurrente 5, 6 , 8 (Botones activar plan, editar días)
+    Nivel 0 -> Activar plan o editar dias
+    */
+
+    const RECURRING_PAYMENT_LEVELS = [1, 4, 7];
+    const NO_RECURRING_PAYMENT_LEVELS = [5, 6, 8];
+
+    const now = Math.floor((new Date()).getTime() / 1000);
+    const tenDaysInSeconds = 10 * 24 * 60 * 60;
+
+
+    const isRetryPeriod = user.finalDate > (now - tenDaysInSeconds) && user.finalDate < now;
+
+    const isActive = user.finalDate > now;
+
+    if (RECURRING_PAYMENT_LEVELS.includes(user.level) && isActive) {
+      // No aparecen botones
+    } else if (NO_RECURRING_PAYMENT_LEVELS.includes(user.level) && isActive) {
+      buttons.push(removeSubscription);
+      buttons.push(updateFinalDate);
+    } else if (RECURRING_PAYMENT_LEVELS.includes(user.level) && isRetryPeriod) {
+      // No aparecen botones
+    } else if (RECURRING_PAYMENT_LEVELS.includes(user.level) && user.finalDate < (now - tenDaysInSeconds)) {
+      buttons.push(updateSubscription);
+      buttons.push(updateFinalDate);
+    } else if (NO_RECURRING_PAYMENT_LEVELS.includes(user.level) && !isActive) {
+      buttons.push(updateSubscription);
+      buttons.push(updateFinalDate);
+    } else if (user.level === 0) {
+      buttons.push(updateSubscription);
+      buttons.push(updateFinalDate);
+    }
+
     return (
       <div className='subscription-actions-container'>
         {
           buttons
         }
       </div>
-
     );
   }
 
