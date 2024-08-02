@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { RemoveSubscriptionModal as Container } from './Modals.styled';
+import { removeMembershipApi } from '../../api/users';
 
 interface RemoveSubscriptionModalProps {
+  clientUserId: number,
   onCancelEvent: () => void,
   onSuccessEvent: () => void,
 }
 
 export const RemoveSubscriptionModal = ({
+  clientUserId,
   onCancelEvent,
   onSuccessEvent
 }: RemoveSubscriptionModalProps) => {
+
+  const removeSubscription = async () => {
+    try {
+      const response = removeMembershipApi({ user_id: clientUserId });
+      onSuccessEvent();
+    } catch (error) {
+      console.log({ error });
+    }
+  }
 
   return (<>
     <Container>
@@ -47,7 +59,7 @@ export const RemoveSubscriptionModal = ({
             className='gonvar-button gonvar-button--purple'
             type="button"
             onClick={() => {
-              onSuccessEvent();
+              removeSubscription();
             }}
           >
             Continuar

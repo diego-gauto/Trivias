@@ -627,6 +627,7 @@ const UsersDetails = () => {
       case 'remove-subscription':
         return (
           <RemoveSubscriptionModal
+            clientUserId={user.userId}
             onCancelEvent={() => {
               setShowRemoveSubscriptionModal(false);
             }}
@@ -640,6 +641,8 @@ const UsersDetails = () => {
         return (
           <ActivateSubscriptionModal
             clientUserId={userId}
+            clientStartDate={user.startDate}
+            clientFinalDate={user.finalDate}
             onCancelEvent={() => {
               setShowActivateSubscriptionModal(false);
             }}
@@ -658,6 +661,7 @@ const UsersDetails = () => {
             successMessage={messageOfSuccessModal}
             acceptEvent={() => {
               setShowSuccesssModal(false)
+              window.location.reload();
             }}
           />
         )

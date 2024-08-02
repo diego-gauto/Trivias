@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { ActivateSubscriptionModal as Container } from './Modals.styled';
 import { getGenericQueryResponse } from '../../api/admin';
+import { updateMembershipPlanApi } from '../../api/users';
 
 type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 
 interface ActivateSubscriptionModalProps {
   clientUserId: number,
+  clientStartDate: number,
+  clientFinalDate: number,
   onCancelEvent: () => void,
   onSuccessEvent: () => void,
 }
 
 export const ActivateSubscriptionModal = ({
   clientUserId,
+  clientStartDate,
+  clientFinalDate,
   onCancelEvent,
   onSuccessEvent
 }: ActivateSubscriptionModalProps): JSX.Element => {
@@ -41,16 +46,32 @@ export const ActivateSubscriptionModal = ({
     return options;
   };
 
-  const updateFinalDateToUser = async () => {
+  const activeSubscription = async () => {
+
     const userAdminEmail = localStorage.getItem('email') || '';
     const getAdminIdQuery = `select id from users where email like '${userAdminEmail}';`;
+
+    const generateBody = (suscription: ISubscriptionOption, price: number, adminUserId: number, finalDate: number) => {
+      const level = suscription === 'month' ? 6 : (suscription === 'annual' ? 5 : 8);
+      const days = suscription === 'month' ? 30 : (suscription === 'annual' ? 365 : 120);
+      return {
+        user_final_date: finalDate,
+        start_date: clientStartDate,
+        level,
+        id: clientUserId,
+        days,
+        type: price * 100,
+        admin_update_id: adminUserId
+      }
+    }
 
     try {
       const adminIdResponse = await getGenericQueryResponse(getAdminIdQuery);
       const adminId = adminIdResponse.data.data[0].id;
 
-      //const updateUserFinalDateQuery = `update memberships set final_date = ${newFinalDate}, admin_update_id = ${adminId} where user_id = ${userId};`;
-      //const updateUserFinalDateResponse = await getGenericQueryResponse(updateUserFinalDateQuery);
+      const body = generateBody(subscription, selectedPrice, adminId, clientFinalDate);
+
+      updateMembershipPlanApi(body);
 
       onSuccessEvent();
     } catch (error) {
@@ -117,7 +138,7 @@ export const ActivateSubscriptionModal = ({
             className='gonvar-button gonvar-button--purple'
             type="button"
             onClick={() => {
-              onSuccessEvent();
+              activeSubscription();
             }}
           >
             Continuar
