@@ -5,13 +5,15 @@ import { UpdateFinalDateModal as Container } from './Modals.styled';
 interface UpdateFinalDateModalProps {
   finalDate: number,
   userId: number,
-  onCancelEvent: () => void
+  onCancelEvent: () => void,
+  onSuccessEvent: () => void,
 }
 
 export const UpdateFinalDateModal = ({
   userId,
   finalDate,
-  onCancelEvent
+  onCancelEvent,
+  onSuccessEvent,
 }: UpdateFinalDateModalProps) => {
 
   const [newFinalDate, setNewFinalDate] = useState<number>(finalDate);
@@ -98,6 +100,7 @@ export const UpdateFinalDateModal = ({
               // setShowChangeFinalDateModal(false);
               // setShowSuccesssModal(true);
               //setA(1)
+              onSuccessEvent();
             }}
           >
             Aceptar

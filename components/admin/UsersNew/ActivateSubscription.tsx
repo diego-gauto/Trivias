@@ -4,11 +4,15 @@ import { ActivateSubscriptionModal as Container } from './Modals.styled';
 type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 
 interface ActivateSubscriptionModalProps {
-  clientUserId: number
+  clientUserId: number,
+  onCancelEvent: () => void,
+  onSuccessEvent: () => void,
 }
 
 export const ActivateSubscriptionModal = ({
-  clientUserId
+  clientUserId,
+  onCancelEvent,
+  onSuccessEvent
 }: ActivateSubscriptionModalProps): JSX.Element => {
 
   const [subscription, setSubscription] = useState<ISubscriptionOption>('month');
@@ -83,12 +87,18 @@ export const ActivateSubscriptionModal = ({
           <button
             className='gonvar-button gonvar-button--ghost'
             type="button"
+            onClick={() => {
+              onCancelEvent();
+            }}
           >
             Cancelar
           </button>
           <button
             className='gonvar-button gonvar-button--purple'
             type="button"
+            onClick={() => {
+              onSuccessEvent();
+            }}
           >
             Continuar
           </button>

@@ -105,3 +105,39 @@ export const UpdateFinalDateModal = styled.div`
     margin: 0;
   }
 `;
+
+export const RemoveSubscriptionModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+
+  .remove-subscription-modal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: #691aca;
+    text-align: center;
+  }
+
+  .remove-subscription-modal__title {
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .remove-subscription-modal__label {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .remove-subscription-modal__paragraph {
+    margin: 0;
+  }
+
+  .remove-subscription-modal__buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+`;
