@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UpdateFinalDateModal as Container } from './Modals.styled';
+import { getGenericQueryResponse } from '../../api/admin';
 
 
 interface UpdateFinalDateModalProps {
@@ -17,7 +18,6 @@ export const UpdateFinalDateModal = ({
 }: UpdateFinalDateModalProps) => {
 
   const [newFinalDate, setNewFinalDate] = useState<number>(finalDate);
-
   const [isFinalDateChanged, setIsChanged] = useState(false);
 
   const formatDate = (date: number) => {
@@ -61,6 +61,23 @@ export const UpdateFinalDateModal = ({
     return result;
   }
 
+  const updateFinalDateToUser = async () => {
+    const userAdminEmail = localStorage.getItem('email') || '';
+    const getAdminIdQuery = `select id from users where email like '${userAdminEmail}';`;
+
+    try {
+      const adminIdResponse = await getGenericQueryResponse(getAdminIdQuery);
+      const adminId = adminIdResponse.data.data[0].id;
+
+      const updateUserFinalDateQuery = `update memberships set final_date = ${newFinalDate}, admin_update_id = ${adminId} where user_id = ${userId};`;
+      const updateUserFinalDateResponse = await getGenericQueryResponse(updateUserFinalDateQuery);
+
+      onSuccessEvent();
+    } catch (error) {
+      console.log({ error });
+    }
+  }
+
   return (
     <Container>
       <p className='update-fd-modal__paragraph'>La fecha cuando termina la suscripción del usuario originalmente es el:{' '}
@@ -97,10 +114,7 @@ export const UpdateFinalDateModal = ({
             className='gonvar-button gonvar-button--purple'
             type="button"
             onClick={() => {
-              // setShowChangeFinalDateModal(false);
-              // setShowSuccesssModal(true);
-              //setA(1)
-              onSuccessEvent();
+              updateFinalDateToUser();
             }}
           >
             Aceptar

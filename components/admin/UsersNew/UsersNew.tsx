@@ -670,11 +670,11 @@ const UsersDetails = () => {
       <div
         className='subscription-actions-item'
         onClick={(e) => {
-          setShowChangeFinalDateModal(true);
+          setShowActivateSubscriptionModal(true);
         }}
       >
         <p className='subscription-actions-item__text'>
-          Editar dias de suscripción
+          Activar suscripción
         </p>
       </div>
     );

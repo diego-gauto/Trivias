@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivateSubscriptionModal as Container } from './Modals.styled';
+import { getGenericQueryResponse } from '../../api/admin';
 
 type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 
@@ -40,6 +41,23 @@ export const ActivateSubscriptionModal = ({
     return options;
   };
 
+  const updateFinalDateToUser = async () => {
+    const userAdminEmail = localStorage.getItem('email') || '';
+    const getAdminIdQuery = `select id from users where email like '${userAdminEmail}';`;
+
+    try {
+      const adminIdResponse = await getGenericQueryResponse(getAdminIdQuery);
+      const adminId = adminIdResponse.data.data[0].id;
+
+      //const updateUserFinalDateQuery = `update memberships set final_date = ${newFinalDate}, admin_update_id = ${adminId} where user_id = ${userId};`;
+      //const updateUserFinalDateResponse = await getGenericQueryResponse(updateUserFinalDateQuery);
+
+      onSuccessEvent();
+    } catch (error) {
+      console.log({ error });
+    }
+  }
+
   return (
     <Container>
       <div className='activate-subscription-modal__body'>
@@ -53,6 +71,7 @@ export const ActivateSubscriptionModal = ({
             onChange={(e) => {
               setSubscription(e.target.value as any);
             }}
+            defaultValue={'month'}
           >
             <option
               value="month"
@@ -77,6 +96,7 @@ export const ActivateSubscriptionModal = ({
             onChange={(e) => {
               setSelectedPrice(parseInt(e.target.value))
             }}
+            defaultValue={459}
           >
             {
               generatePricesByOption()
