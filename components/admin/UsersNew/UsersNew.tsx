@@ -39,6 +39,7 @@ interface IUserPaymentHistory {
   amount: number
   paidAt: string
   product: string
+  method: string
 }
 
 interface IUserCoursesResume {
@@ -230,7 +231,7 @@ const UsersDetails = () => {
   }
 
   const getUserPaymentHistory = async () => {
-    const query = `select id as order_number, amount, paid_at, product 
+    const query = `select id as order_number, amount, paid_at, product, method 
     from invoices 
     where user_id = ${userId};`;
 
@@ -239,18 +240,20 @@ const UsersDetails = () => {
       amount: number;
       paid_at: string;
       product: string;
+      method: string;
     }
 
     const response = await getGenericQueryResponse(query);
     const userPaymentHistory: IUserPaymentHistoryResponse[] = response.data.data;
 
     const result: IUserPaymentHistory[] = [];
-    userPaymentHistory.forEach(({ amount, order_number, paid_at, product }) => {
+    userPaymentHistory.forEach(({ amount, order_number, paid_at, product, method }) => {
       result.push({
         amount,
         orderNumber: order_number,
         paidAt: paid_at,
-        product
+        product,
+        method
       });
     });
 
@@ -460,6 +463,14 @@ const UsersDetails = () => {
       userId
     });
 
+    console.log({
+      finalDate: userSubscription.final_date,
+      level: userSubscription.level,
+      method: userSubscription.method,
+      startDate: userSubscription.start_date,
+      userId
+    });
+
     setSubscription({
       method,
       startDate,
@@ -482,7 +493,7 @@ const UsersDetails = () => {
     spei
     conketa
     */
-    if (value === 'Conekta') {
+    if (value === 'conekta') {
       return 'Tarjeta (Conekta)';
     }
     if (value === 'paypal') {
@@ -676,6 +687,7 @@ const UsersDetails = () => {
         onClick={(e) => {
           setShowActivateSubscriptionModal(true);
         }}
+        key={`subscription-actions-update`}
       >
         <p className='subscription-actions-item__text'>
           Activar suscripción
@@ -689,6 +701,7 @@ const UsersDetails = () => {
         onClick={(e) => {
           setShowRemoveSubscriptionModal(true);
         }}
+        key={`subscription-actions-remove`}
       >
         <p className='subscription-actions-item__text'>
           Eliminar suscripción
@@ -701,6 +714,7 @@ const UsersDetails = () => {
       onClick={(e) => {
         setShowChangeFinalDateModal(true);
       }}
+      key={`subscription-actions-update-final-date`}
     >
       <p className='subscription-actions-item__text'>
         Editar dias de suscripción
@@ -748,11 +762,16 @@ const UsersDetails = () => {
     }
 
     return (
-      <div className='subscription-actions-container'>
+      <>
         {
-          buttons
+          buttons.length > 0 &&
+          <div className='subscription-actions-container'>
+            {
+              buttons
+            }
+          </div>
         }
-      </div>
+      </>
     );
   }
 
@@ -809,7 +828,7 @@ const UsersDetails = () => {
               const extraCSSClass = selectedMainMenuOption === id ? 'section-title--active' : '';
               return (
                 <div
-                  key={`${id}`}
+                  key={`main_section_${id}`}
                   className={`section-title ${extraCSSClass}`}
                   onClick={(e) => {
                     if (id !== 'Rewards') {
@@ -825,7 +844,7 @@ const UsersDetails = () => {
         </div>
         {
           selectedMainMenuOption === 'Subscription' &&
-          <div className="content-section">
+          <div className="content-section" key={`content-section_subscription`}>
             {
               <div className='subscription-container'>
                 <div className='subscription-info-container'>
@@ -857,7 +876,7 @@ const UsersDetails = () => {
                     </div>
                   }
                   {
-                    (subscription.state === 'Activo' || subscription.state === 'Inactiva') &&
+                    (subscription.state === 'Activo' || subscription.state === 'Inactiva' || subscription.state === 'En prueba') &&
                     <>
                       <div className='subscription-item'>
                         <div className='subscription-item__header'>
@@ -867,32 +886,43 @@ const UsersDetails = () => {
                           <p className='subscription-item__content-text'>{subscription.method}</p>
                         </div>
                       </div>
-                      <div className='subscription-item'>
-                        <div className='subscription-item__header'>
-                          <p className='subscription-item__title'>Fechas</p>
-                        </div>
-                        <div className='subscription-item__content'>
-                          <p className='subscription-item__content-text'>
-                            Activa desde:
-                            <span className='subscription-item__content-text--normal-weight'>
-                              {' '}{subscription.startDate}
-                            </span>
-                          </p>
-                          <p className='subscription-item__content-text'>
+                      {
+                        (user.startDate !== 0 || user.finalDate !== 0) &&
+                        <div className='subscription-item'>
+                          <div className='subscription-item__header'>
+                            <p className='subscription-item__title'>Fechas</p>
+                          </div>
+                          <div className='subscription-item__content'>
                             {
-                              subscription.state === 'Activo' &&
-                              'Termina el:'
+                              user.startDate !== 0 &&
+                              <p className='subscription-item__content-text'>
+                                Activa desde:
+                                <span className='subscription-item__content-text--normal-weight'>
+                                  {' '}{subscription.startDate}
+                                </span>
+                              </p>
                             }
                             {
-                              subscription.state === 'Inactiva' &&
-                              'Terminó el:'
+                              user.finalDate !== 0 &&
+                              <p className='subscription-item__content-text'>
+                                {
+                                  (subscription.state === 'Activo' ||
+                                    subscription.state === 'En prueba')
+                                  &&
+                                  'Termina el:'
+                                }
+                                {
+                                  subscription.state === 'Inactiva' &&
+                                  'Terminó el:'
+                                }
+                                <span className='subscription-item__content-text--normal-weight'>
+                                  {' '}{subscription.finalDate}
+                                </span>
+                              </p>
                             }
-                            <span className='subscription-item__content-text--normal-weight'>
-                              {' '}{subscription.finalDate}
-                            </span>
-                          </p>
+                          </div>
                         </div>
-                      </div>
+                      }
                     </>
                   }
                 </div>
@@ -911,27 +941,29 @@ const UsersDetails = () => {
         }
         {
           selectedMainMenuOption === 'Payments' &&
-          <div className="content-section">
+          <div className="content-section" key={`content-section_payments`}>
             {
               userPaymentHistory.length > 0 ?
-                <div className="table-content">
+                <div className="table-content" key={`user_payment_history`}>
                   <table className="gonvar-table">
                     <thead className="gonvar-table__thead">
                       <tr className="gonvar-table__row">
                         <th className="gonvar-table__th">Numero de orden</th>
                         <th className="gonvar-table__th">Fecha de pago</th>
                         <th className="gonvar-table__th">Producto</th>
+                        <th className="gonvar-table__th">Método de pago</th>
                         <th className="gonvar-table__th">Monto</th>
                       </tr>
                     </thead>
                     <tbody>
                       {
-                        userPaymentHistory.map(({ amount, orderNumber, paidAt, product }) => {
+                        userPaymentHistory.map(({ amount, orderNumber, paidAt, product, method }) => {
                           return (
-                            <tr className="gonvar-table__row" key={orderNumber}>
+                            <tr className="gonvar-table__row" key={`user_payment_record_${orderNumber}`}>
                               <td className="gonvar-table__data">{orderNumber}</td>
                               <td className="gonvar-table__data">{getPrettyFormatedDate(paidAt)}</td>
                               <td className="gonvar-table__data">{product}</td>
+                              <td className="gonvar-table__data">{getMethodNameByDBValue(method)}</td>
                               <td className="gonvar-table__data">
                                 {
                                   Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount / 100)
@@ -954,7 +986,7 @@ const UsersDetails = () => {
         }
         {
           (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
-          <div className="content-section">
+          <div className="content-section" key={`content-section_courses_main`}>
             {
               userCoursesResume.length > 0 ?
                 <div className="table-content">
@@ -972,25 +1004,41 @@ const UsersDetails = () => {
                       {
                         userCoursesResume.map(({ courseName, lastSingIn, finishDate, statePercent, courseId }) => {
                           return (
-                            <tr className="gonvar-table__row" key={courseId}>
+                            <tr className="gonvar-table__row" key={`course_resume_row_${courseId}`}>
                               <td className="gonvar-table__data">{courseName}</td>
                               <td className="gonvar-table__data">{lastSingIn}</td>
                               <td className="gonvar-table__data">{finishDate}</td>
                               <td className="gonvar-table__data">{statePercent}%</td>
                               <td className="gonvar-table__data">
-                                <button
-                                  type="button"
-                                  className="gonvar-table__button"
-                                  onClick={(e) => {
-                                    setViewHomeworks(true);
-                                    const filteredHomeworksOfUser = userHomeworkHistory.filter((h) => h.courseId === courseId);
-                                    const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
-                                    setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
-                                    setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
-                                    setUserHomeworksCourseTitle(courseName);
-                                  }}>
-                                  Ver tareas
-                                </button>
+                                <div
+                                  style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 1fr',
+                                    gap: '5px'
+                                  }}
+                                >
+                                  <button
+                                    type="button"
+                                    className="gonvar-table__button"
+                                    onClick={(e) => {
+                                      setViewHomeworks(true);
+                                      const filteredHomeworksOfUser = userHomeworkHistory.filter((h) => h.courseId === courseId);
+                                      const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
+                                      setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
+                                      setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
+                                      setUserHomeworksCourseTitle(courseName);
+                                    }}>
+                                    Ver tareas
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="gonvar-table__button"
+                                    onClick={(e) => {
+
+                                    }}>
+                                    Ver Quizzes
+                                  </button>
+                                </div>
                               </td>
                             </tr>
                           )
@@ -1011,7 +1059,7 @@ const UsersDetails = () => {
         }
         {
           (selectedMainMenuOption === 'Courses' && viewHomeworks) &&
-          <div className='course-homeworks-section'>
+          <div className='course-homeworks-section' key={`content-section_courses_homeworks`}>
             <div className='course-homeworks-section__title-container'>
               <h3 className='course-homeworks-section__title'>
                 <strong>{userHomeworksCourseTitle}</strong>
@@ -1073,7 +1121,7 @@ const UsersDetails = () => {
 
                           return (<tr
                             className="gonvar-table__row"
-                            key={`${index}-${homeworkId}`}
+                            key={`homework_row_${index}-${homeworkId}`}
                           >
                             <td className="gonvar-table__data">{newTitle === '' ? lessonTitle : newTitle}</td>
                             <td className="gonvar-table__data">
@@ -1136,7 +1184,7 @@ const UsersDetails = () => {
         }
         {
           (selectedMainMenuOption === 'Rewards') &&
-          <div className="content-section">
+          <div className="content-section" key={`content-section_courses_rewards`}>
             <div className="rewards-sections">
               {
                 REWARDS_SECTIONS.map(({ id, label }) => {
@@ -1145,7 +1193,7 @@ const UsersDetails = () => {
                     <div
                       className={`rewards-sections__option ${extraCSSClass}`}
                       id={id}
-                      key={id}
+                      key={`reward_section_${id}`}
                       onClick={(e) => {
                         setSelectedRewardsCenterMenuOption(id)
                       }}

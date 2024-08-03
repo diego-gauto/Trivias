@@ -92,11 +92,10 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       stripe_id: user.stripe_id,
       conekta_id: user.conekta_id,
     };
-    console.log({ body });
-    console.log({ user });
+
     try {
       const res = await conektaPm(body);
-      console.log({ res });
+
       const conektaPaymentMethods = res.data.payment_methods.data;
       const extractedProperties = conektaPaymentMethods.map(
         ({ id, brand, last4, default: boolean }: IPm) => ({

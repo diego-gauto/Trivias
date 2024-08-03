@@ -40,7 +40,11 @@ export const ActivateSubscriptionModal = ({
 
     const options: JSX.Element[] = [];
     for (const price of prices) {
-      const newElement = <option value={price} key={`subscription_price_${price}`}>{price}</option>;
+      const newElement = <option value={price} key={`subscription_price_${price}`}>
+        {
+          Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price)
+        }
+      </option>;
       options.push(newElement);
     }
     return options;
@@ -96,15 +100,18 @@ export const ActivateSubscriptionModal = ({
           >
             <option
               value="month"
-              selected={subscription === 'month'}
+              key={`subscription_month`}
+            // selected={subscription === 'month'}
             >Mensual</option>
             <option
               value="cuatri"
-              selected={subscription === 'cuatri'}
+              key={`subscription_cuatri`}
+            // selected={subscription === 'cuatri'}
             >Cuatrimestral</option>
             <option
               value="annual"
-              selected={subscription === 'annual'}
+              key={`subscription_annual`}
+            // selected={subscription === 'annual'}
             >Anual</option>
           </select>
         </div>

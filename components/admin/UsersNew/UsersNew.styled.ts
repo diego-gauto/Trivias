@@ -150,6 +150,9 @@ export const MainContainer = styled.div`
     cursor: pointer;
     transition: background-color 0.5s ease;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
   .section-title:hover {
@@ -364,8 +367,8 @@ style={{
     background-color: transparent;
     border: 2px solid #691aca;
     border-radius: 12px;
-    padding: 6px 18px;
-    font-size: 14px;
+    padding: 6px 12px;
+    font-size: 12px;
     font-weight: bold;
     color: #691aca;
     transition: opacity 0.5s ease;
