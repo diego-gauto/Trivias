@@ -9,6 +9,7 @@ import { SuccessModal } from './SuccessModal';
 import { ActivateSubscriptionModal } from './ActivateSubscription';
 import { UpdateFinalDateModal } from './UpdateFinalDateModal';
 import { RemoveSubscriptionModal } from './RemoveSubscriptionModal';
+import image from 'next/image';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -69,6 +70,28 @@ interface IUserCoursesHomeworkHistory {
   courseTitle: string,
   lessonId: number,
   title: string
+}
+
+interface ICourseQuizz {
+  courseId: number,
+  courseTitle: string,
+  lessonId: number,
+  quizzId: number,
+  quizzTitle: string,
+  passingGrade: number,
+  points: number
+}
+
+interface IUserQuizz {
+  courseId: number,
+  courseTitle: string,
+  lessonId: number,
+  quizzId: number,
+  quizzTitle: string,
+  grade: number,
+  passingGrade: number,
+  points: number,
+  isPending: boolean,
 }
 
 type SubscriptionState = 'Activo' | 'Inactiva' | 'Cancelada' | 'En prueba' | 'Sin suscripción';
@@ -157,8 +180,9 @@ const UsersDetails = () => {
 
   const [selectedRewardsCenterMenuOption, setSelectedRewardsCenterMenuOption] = useState<RewardsCenterMenuOptionId>('Rewards');
   const [viewHomeworks, setViewHomeworks] = useState<boolean>(false);
+  const [viewQuizzes, setViewQuizzes] = useState<boolean>(false);
 
-  const [userHomeworksCourseTitle, setUserHomeworksCourseTitle] = useState<string>('');
+  const [userCourseTitle, setUserCourseTitle] = useState<string>('');
 
   const [rewardsMenuOption, setRewardsMenuOption] = useState();
   const [userMainProperties, setUserMainProperties] = useState<IUserMainProperties>({} as IUserMainProperties);
@@ -181,6 +205,10 @@ const UsersDetails = () => {
   const [showActivateSubscriptionModal, setShowActivateSubscriptionModal] = useState<boolean>(false);
 
   const [messageOfSuccessModal, setMessageOfSuccessModal] = useState<string>('');
+  const [courseQuizzes, setCourseQuizzes] = useState<ICourseQuizz[]>([]);
+  const [filteredCourseQuizzes, setFilteredCourseQuizzes] = useState<ICourseQuizz[]>([]);
+  const [userQuizzes, setUserQuizzes] = useState<IUserQuizz[]>([]);
+  const [filteredUserQuizzes, setFilteredUserQuizzes] = useState<IUserQuizz[]>([]);
 
   useEffect(() => {
     const selectedUserId = localStorage.getItem('selected-user-id');
@@ -198,6 +226,9 @@ const UsersDetails = () => {
       // Aquí faltan los registros de las tareas que faltan...
       getHomeworksHistoryOfCourses();
       getUserSubscriptionInfo();
+      getQuizzesHistoryOfCourses();
+      getQuizzesHistoryOfUser();
+
     }
   }, [userId]);
 
@@ -424,6 +455,92 @@ const UsersDetails = () => {
     }
   }
 
+  const getQuizzesHistoryOfCourses = async () => {
+    const query = `select c.id as course_id, c.title as course_title, l.id as lesson_id, q.id as quizz_id, q.title as quizz_title, passing_grade, q.points
+      from lessons as l
+      inner join seasons as s on s.id = l.seasons_id 
+      inner join courses as c on c.id = s.course_id
+      inner join quizzes as q on l.id = q.lessons_id
+      where l.quiz = 1
+      order by course_id, s.id, l.number;`;
+
+    interface ICourseQuizzSQL {
+      course_id: number,
+      course_title: string,
+      lesson_id: number,
+      quizz_id: number,
+      quizz_title: string,
+      passing_grade: number,
+      points: number
+    }
+
+    try {
+      const coursesQuizzesResponse = await getGenericQueryResponse(query);
+      const coursesQuizzesResume: ICourseQuizzSQL[] = coursesQuizzesResponse.data.data;
+
+      const result: ICourseQuizz[] = coursesQuizzesResume.map(({ course_id, course_title, lesson_id, passing_grade, quizz_id, quizz_title, points }) => {
+        return {
+          courseId: course_id,
+          lessonId: lesson_id,
+          passingGrade: passing_grade,
+          courseTitle: course_title,
+          quizzId: quizz_id,
+          quizzTitle: quizz_title,
+          points
+        }
+      })
+
+      setCourseQuizzes(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getQuizzesHistoryOfUser = async () => {
+    const query = `select c.id as course_id, c.title as course_title, l.id as lesson_id, q.id as quizz_id, q.title as quizz_title, grade, passing_grade, q.points 
+      from lessons as l
+      inner join seasons as s on s.id = l.seasons_id 
+      inner join courses as c on c.id = s.course_id
+      inner join quizzes as q on l.id = q.lessons_id
+      inner join user_quizzes as uq on uq.lesson_id = l.id
+      where l.quiz = 1 and uq.user_id = ${userId}
+      order by course_id, s.id, l.number;`;
+
+    interface IUserQuizzSQL {
+      course_id: number,
+      course_title: string,
+      lesson_id: number,
+      quizz_id: number,
+      quizz_title: string,
+      grade: number,
+      points: number,
+      passing_grade: number,
+    }
+
+    try {
+      const userQuizzesResponse = await getGenericQueryResponse(query);
+      const userQuizzesResume: IUserQuizzSQL[] = userQuizzesResponse.data.data;
+
+      const result: IUserQuizz[] = userQuizzesResume.map(({ course_id, course_title, lesson_id, passing_grade, quizz_id, quizz_title, grade, points }) => {
+        return {
+          courseId: course_id,
+          lessonId: lesson_id,
+          passingGrade: passing_grade,
+          courseTitle: course_title,
+          quizzId: quizz_id,
+          quizzTitle: quizz_title,
+          grade,
+          points,
+          isPending: false
+        }
+      });
+
+      setUserQuizzes(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const getUserSubscriptionInfo = async () => {
     const query = `select level, method, admin_update_id, start_date, final_date, subscription, role
       from users as u 
@@ -456,14 +573,6 @@ const UsersDetails = () => {
     const type = getSubscriptionTypeByLevel(userSubscription.level);
 
     setUser({
-      finalDate: userSubscription.final_date,
-      level: userSubscription.level,
-      method: userSubscription.method,
-      startDate: userSubscription.start_date,
-      userId
-    });
-
-    console.log({
       finalDate: userSubscription.final_date,
       level: userSubscription.level,
       method: userSubscription.method,
@@ -615,6 +724,33 @@ const UsersDetails = () => {
     });
     return result;
   }
+
+  const getCoursesQuizzesArray = () => {
+    const result: IUserQuizz[] = filteredCourseQuizzes.map(({ courseId, courseTitle, lessonId, passingGrade, quizzId, quizzTitle, }) => {
+      const uq = filteredUserQuizzes.filter((uq) => uq.lessonId === lessonId);
+
+      if (uq.length > 0) {
+        if (uq[0] !== undefined) {
+          return uq[0];
+        }
+      }
+
+      return ({
+        courseId,
+        courseTitle,
+        grade: 0,
+        lessonId,
+        passingGrade,
+        quizzId,
+        quizzTitle,
+        points: 0,
+        isPending: true
+      });
+    });
+
+    return result;
+  }
+
 
   type SubscriptionModalOption = 'edit-final-date' | 'remove-subscription' | 'active-subscription' | 'confirm' | 'success';
 
@@ -985,7 +1121,7 @@ const UsersDetails = () => {
           </div>
         }
         {
-          (selectedMainMenuOption === 'Courses' && !viewHomeworks) &&
+          (selectedMainMenuOption === 'Courses' && !viewHomeworks && !viewQuizzes) &&
           <div className="content-section" key={`content-section_courses_main`}>
             {
               userCoursesResume.length > 0 ?
@@ -1026,7 +1162,7 @@ const UsersDetails = () => {
                                       const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
                                       setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
                                       setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
-                                      setUserHomeworksCourseTitle(courseName);
+                                      setUserCourseTitle(courseName);
                                     }}>
                                     Ver tareas
                                   </button>
@@ -1034,7 +1170,12 @@ const UsersDetails = () => {
                                     type="button"
                                     className="gonvar-table__button"
                                     onClick={(e) => {
-
+                                      setViewQuizzes(true);
+                                      const filteredQuizzesOfUser = userQuizzes.filter((uq) => uq.courseId === courseId);
+                                      const filteredQuizzesOfCourse = courseQuizzes.filter((cq) => cq.courseId === courseId);
+                                      setFilteredCourseQuizzes(filteredQuizzesOfCourse);
+                                      setFilteredUserQuizzes(filteredQuizzesOfUser);
+                                      setUserCourseTitle(courseName);
                                     }}>
                                     Ver Quizzes
                                   </button>
@@ -1062,7 +1203,7 @@ const UsersDetails = () => {
           <div className='course-homeworks-section' key={`content-section_courses_homeworks`}>
             <div className='course-homeworks-section__title-container'>
               <h3 className='course-homeworks-section__title'>
-                <strong>{userHomeworksCourseTitle}</strong>
+                <strong>{userCourseTitle}</strong>
               </h3>
             </div>
             <div className="content-section">
@@ -1176,6 +1317,110 @@ const UsersDetails = () => {
                 getCoursesHomeworksArray().length === 0 &&
                 <EmptyContentComponent
                   message='No existen tareas registradas para este curso'
+                  styles={{ order: '2' }}
+                />
+              }
+            </div>
+          </div>
+        }
+        {
+          (selectedMainMenuOption === 'Courses' && !viewHomeworks && viewQuizzes) &&
+          <div className='course-homeworks-section' key={`content-section_courses_homeworks`}>
+            <div className='course-homeworks-section__title-container'>
+              <h3 className='course-homeworks-section__title'>
+                <strong>{userCourseTitle}</strong>
+              </h3>
+            </div>
+            <div className="content-section">
+              <div style={{
+                width: '100%'
+              }}>
+                <div
+                  className='go-back'
+                  onClick={(e) => {
+                    setViewQuizzes(false);
+                  }}
+                  style={{
+                    width: '135px'
+                  }}
+                >
+                  <img
+                    className="go-back__arrow"
+                    src="/images/back-arrow.png"
+                    alt="back-arrow" />
+                  <p style={{ margin: '0' }}>Regresar</p>
+                </div>
+              </div>
+              {
+                getCoursesQuizzesArray().length > 0 &&
+                <div className="table-content">
+                  <table className="gonvar-table">
+                    <thead className="gonvar-table__thead">
+                      <tr className="gonvar-table__row">
+                        <th className="gonvar-table__th">Quizz</th>
+                        <th className="gonvar-table__th">Estado</th>
+                        <th className="gonvar-table__th">P. máximo</th>
+                        <th className="gonvar-table__th">P. mínimo</th>
+                        <th className="gonvar-table__th">P. obtenido</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        getCoursesQuizzesArray().map(({ courseId, courseTitle, grade, lessonId, passingGrade, quizzId, quizzTitle, isPending, points }, index) => {
+                          const approve = 'gonvar-table__approved-text';
+                          const notApprove = 'gonvar-table__not-approved-text';
+                          const pending = 'gonvar-table__not-sended-text';
+
+                          let textStyle: string = '';
+                          const isApprove = Math.round((grade / points) * 100) >= passingGrade;
+                          const quizzStatus = isPending ? 'Pendiente' : (isApprove ? 'Aprobado' : 'Reprobado');
+
+                          if (isPending) {
+                            textStyle = pending;
+                          } else if (isApprove) {
+                            textStyle = approve;
+                          } else {
+                            textStyle = notApprove;
+                          }
+
+                          return (<tr
+                            className="gonvar-table__row"
+                            key={`homework_row_${index}-${courseId}-${lessonId}`}
+                          >
+                            <td className="gonvar-table__data">{quizzTitle}</td>
+                            <td className="gonvar-table__data">
+                              <div className={`${textStyle}`}>
+                                {
+                                  quizzStatus
+                                }
+                              </div>
+                            </td>
+                            <td className="gonvar-table__data">
+                              {
+                                points
+                              }
+                            </td>
+                            <td className="gonvar-table__data">
+                              {
+                                Math.round((points / 100) * passingGrade)
+                              }
+                            </td>
+                            <td className="gonvar-table__data">
+                              {
+                                grade
+                              }
+                            </td>
+                          </tr>)
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              }
+              {
+                getCoursesQuizzesArray().length === 0 &&
+                <EmptyContentComponent
+                  message='No existen quizzes registrados para este curso'
                   styles={{ order: '2' }}
                 />
               }

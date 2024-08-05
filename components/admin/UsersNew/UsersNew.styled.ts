@@ -336,6 +336,7 @@ style={{
     align-items: center;
     width: 100%;
     height: 30px;
+    padding-inline: 10px;
   }
 
   .gonvar-table__not-approved-text {
