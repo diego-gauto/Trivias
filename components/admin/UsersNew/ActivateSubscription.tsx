@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { ActivateSubscriptionModal as Container } from './Modals.styled';
 import { getGenericQueryResponse } from '../../api/admin';
-import { updateMembershipPlanApi } from '../../api/users';
+import { IUpdateMembershipData, updateMembershipPlanApi } from '../../api/users';
 
 type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 
 interface ActivateSubscriptionModalProps {
   clientUserId: number,
-  clientStartDate: number,
   clientFinalDate: number,
+  clientCurrentLevel: number,
   onCancelEvent: () => void,
   onSuccessEvent: () => void,
 }
 
 export const ActivateSubscriptionModal = ({
   clientUserId,
-  clientStartDate,
   clientFinalDate,
+  clientCurrentLevel,
   onCancelEvent,
   onSuccessEvent
 }: ActivateSubscriptionModalProps): JSX.Element => {
@@ -55,16 +55,16 @@ export const ActivateSubscriptionModal = ({
     const userAdminEmail = localStorage.getItem('email') || '';
     const getAdminIdQuery = `select id from users where email like '${userAdminEmail}';`;
 
-    const generateBody = (suscription: ISubscriptionOption, price: number, adminUserId: number, finalDate: number) => {
+    const generateBody = (suscription: ISubscriptionOption, price: number, adminUserId: number, finalDate: number): IUpdateMembershipData => {
       const level = suscription === 'month' ? 6 : (suscription === 'annual' ? 5 : 8);
       const days = suscription === 'month' ? 30 : (suscription === 'annual' ? 365 : 120);
       return {
-        user_final_date: finalDate,
-        start_date: clientStartDate,
+        current_final_date: finalDate,
         level,
-        id: clientUserId,
+        current_level: clientCurrentLevel,
+        user_id: clientUserId,
         days,
-        type: price * 100,
+        type: `${price * 100}`,
         admin_update_id: adminUserId
       }
     }

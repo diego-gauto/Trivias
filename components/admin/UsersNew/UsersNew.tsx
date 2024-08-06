@@ -9,7 +9,6 @@ import { SuccessModal } from './SuccessModal';
 import { ActivateSubscriptionModal } from './ActivateSubscription';
 import { UpdateFinalDateModal } from './UpdateFinalDateModal';
 import { RemoveSubscriptionModal } from './RemoveSubscriptionModal';
-import image from 'next/image';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -774,6 +773,9 @@ const UsersDetails = () => {
       case 'remove-subscription':
         return (
           <RemoveSubscriptionModal
+            clientFinalDate={user.finalDate}
+            clientStartDate={user.startDate}
+            clientUserLevel={user.level}
             clientUserId={user.userId}
             onCancelEvent={() => {
               setShowRemoveSubscriptionModal(false);
@@ -788,8 +790,8 @@ const UsersDetails = () => {
         return (
           <ActivateSubscriptionModal
             clientUserId={userId}
-            clientStartDate={user.startDate}
             clientFinalDate={user.finalDate}
+            clientCurrentLevel={user.level}
             onCancelEvent={() => {
               setShowActivateSubscriptionModal(false);
             }}

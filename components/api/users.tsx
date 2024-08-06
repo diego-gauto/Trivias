@@ -92,7 +92,7 @@ export const updateMembershipDaysApi = async (user: IUpdateMembershipDaysApi) =>
       return error;
     });
 };
-
+/*
 export interface IUpdateMembershipPlanApi {
   id: number,
   start_date: number,
@@ -102,7 +102,18 @@ export interface IUpdateMembershipPlanApi {
   admin_update_id: number,
   days: number
 }
-export const updateMembershipPlanApi = async (body: IUpdateMembershipPlanApi) => {
+*/
+
+export interface IUpdateMembershipData {
+  current_final_date: number,
+  current_level: number,
+  level: number,
+  user_id: number,
+  type: string,
+  days: number,
+  admin_update_id: number,
+}
+export const updateMembershipPlanApi = async (body: IUpdateMembershipData) => {
   return axios
     .put('https://gonvar.inowu.dev/' + 'admin/updateMembershipPlan', body)
     .then((res) => {
