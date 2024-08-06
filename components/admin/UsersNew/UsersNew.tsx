@@ -726,7 +726,7 @@ const UsersDetails = () => {
   }
 
   const getCoursesQuizzesArray = () => {
-    const result: IUserQuizz[] = filteredCourseQuizzes.map(({ courseId, courseTitle, lessonId, passingGrade, quizzId, quizzTitle, }) => {
+    const result: IUserQuizz[] = filteredCourseQuizzes.map(({ courseId, courseTitle, lessonId, passingGrade, quizzId, quizzTitle, points }) => {
       const uq = filteredUserQuizzes.filter((uq) => uq.lessonId === lessonId);
 
       if (uq.length > 0) {
@@ -743,7 +743,7 @@ const UsersDetails = () => {
         passingGrade,
         quizzId,
         quizzTitle,
-        points: 0,
+        points,
         isPending: true
       });
     });
@@ -909,6 +909,14 @@ const UsersDetails = () => {
         }
       </>
     );
+  }
+
+  const haveSomeHomework = (courseId: number): boolean => {
+    return userCoursesHomeworkHistory.some((uh) => uh.courseId === courseId);
+  }
+
+  const haveSomeQuizz = (courseId: number): boolean => {
+    return courseQuizzes.some((cq) => cq.courseId === courseId);
   }
 
   return (
@@ -1153,32 +1161,39 @@ const UsersDetails = () => {
                                     gap: '5px'
                                   }}
                                 >
-                                  <button
-                                    type="button"
-                                    className="gonvar-table__button"
-                                    onClick={(e) => {
-                                      setViewHomeworks(true);
-                                      const filteredHomeworksOfUser = userHomeworkHistory.filter((h) => h.courseId === courseId);
-                                      const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
-                                      setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
-                                      setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
-                                      setUserCourseTitle(courseName);
-                                    }}>
-                                    Ver tareas
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="gonvar-table__button"
-                                    onClick={(e) => {
-                                      setViewQuizzes(true);
-                                      const filteredQuizzesOfUser = userQuizzes.filter((uq) => uq.courseId === courseId);
-                                      const filteredQuizzesOfCourse = courseQuizzes.filter((cq) => cq.courseId === courseId);
-                                      setFilteredCourseQuizzes(filteredQuizzesOfCourse);
-                                      setFilteredUserQuizzes(filteredQuizzesOfUser);
-                                      setUserCourseTitle(courseName);
-                                    }}>
-                                    Ver Quizzes
-                                  </button>
+                                  {
+                                    haveSomeHomework(courseId) &&
+                                    <button
+                                      type="button"
+                                      className="gonvar-table__button"
+                                      onClick={(e) => {
+                                        setViewHomeworks(true);
+                                        const filteredHomeworksOfUser = userHomeworkHistory.filter((h) => h.courseId === courseId);
+                                        const filteredCoursesHomeworks = userCoursesHomeworkHistory.filter((ch) => ch.courseId === courseId);
+                                        setUserFilteredCoursesHomeworkHistory(filteredCoursesHomeworks);
+                                        setUserFilteredHomeworkHistory(filteredHomeworksOfUser);
+                                        setUserCourseTitle(courseName);
+                                      }}>
+                                      Ver tareas
+                                    </button>
+                                  }
+                                  {
+                                    haveSomeQuizz(courseId) &&
+                                    <button
+                                      type="button"
+                                      className="gonvar-table__button"
+                                      onClick={(e) => {
+                                        setViewQuizzes(true);
+                                        const filteredQuizzesOfUser = userQuizzes.filter((uq) => uq.courseId === courseId);
+                                        const filteredQuizzesOfCourse = courseQuizzes.filter((cq) => cq.courseId === courseId);
+                                        setFilteredCourseQuizzes(filteredQuizzesOfCourse);
+                                        setFilteredUserQuizzes(filteredQuizzesOfUser);
+                                        setUserCourseTitle(courseName);
+                                      }}>
+                                      Ver Quizzes
+                                    </button>
+                                  }
+
                                 </div>
                               </td>
                             </tr>
@@ -1359,9 +1374,9 @@ const UsersDetails = () => {
                       <tr className="gonvar-table__row">
                         <th className="gonvar-table__th">Quizz</th>
                         <th className="gonvar-table__th">Estado</th>
-                        <th className="gonvar-table__th">P. máximo</th>
-                        <th className="gonvar-table__th">P. mínimo</th>
-                        <th className="gonvar-table__th">P. obtenido</th>
+                        <th className="gonvar-table__th">Puntos</th>
+                        <th className="gonvar-table__th">Porcentaje de aprobación</th>
+                        <th className="gonvar-table__th">Porcentaje obtenido</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1373,7 +1388,7 @@ const UsersDetails = () => {
 
                           let textStyle: string = '';
                           const isApprove = Math.round((grade / points) * 100) >= passingGrade;
-                          const quizzStatus = isPending ? 'Pendiente' : (isApprove ? 'Aprobado' : 'Reprobado');
+                          const quizzStatus = isPending ? 'No realizado' : (isApprove ? 'Aprobado' : 'No aprobado');
 
                           if (isPending) {
                             textStyle = pending;
@@ -1395,19 +1410,25 @@ const UsersDetails = () => {
                                 }
                               </div>
                             </td>
+                            {
+                              <td className="gonvar-table__data">
+                                {
+                                  points
+                                }
+                              </td>
+                            }
                             <td className="gonvar-table__data">
                               {
-                                points
+                                // Math.round((points / 100) * passingGrade)
+                                passingGrade
                               }
+                              {'%'}
                             </td>
                             <td className="gonvar-table__data">
                               {
-                                Math.round((points / 100) * passingGrade)
-                              }
-                            </td>
-                            <td className="gonvar-table__data">
-                              {
-                                grade
+                                grade !== 0 ?
+                                  `${Math.round((grade / points) * 100)} %`
+                                  : ''
                               }
                             </td>
                           </tr>)
