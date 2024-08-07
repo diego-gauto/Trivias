@@ -31,7 +31,7 @@ const convertToPrettyDateFormat = (value: number) => {
     'diciembre'];
 
   const day = d.getDate();
-  const monthIndex = d.getMonth() + 1;
+  const monthIndex = d.getMonth();
   const year = d.getFullYear();
 
   const result = `${day} de ${SPANISH_MONTHS[monthIndex]} de ${year}`;

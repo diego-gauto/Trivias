@@ -54,7 +54,7 @@ export const UpdateFinalDateModal = ({
       'diciembre'];
 
     const day = d.getDate();
-    const monthIndex = d.getMonth() + 1;
+    const monthIndex = d.getMonth();
     const year = d.getFullYear();
 
     const result = `${day} de ${SPANISH_MONTHS[monthIndex]} de ${year}`;
@@ -80,15 +80,30 @@ export const UpdateFinalDateModal = ({
 
   return (
     <Container>
-      <p className='update-fd-modal__paragraph'>La fecha cuando termina la suscripción del usuario originalmente es el:{' '}
-        <strong>{
-          convertToPrettyDateFormat(finalDate * 1000)
-        }</strong>
-      </p>
-      <p className='update-fd-modal__paragraph'>Si desea cambiar esta fecha, seleccione una nueva</p>
+      {
+        finalDate !== 0 &&
+        <p className='update-fd-modal__paragraph'>La fecha cuando termina la suscripción del usuario originalmente es el:{' '}
+          <strong>{
+            convertToPrettyDateFormat(finalDate * 1000)
+          }</strong>
+        </p>
+      }
+      {
+        // <p>No se tiene establecido en que fecha finaliza su suscripción.</p>
+      }
+      {
+        finalDate !== 0 ?
+          <p className='update-fd-modal__paragraph'>
+            Si desea cambiar esta fecha, seleccione una nueva en el calendario.
+          </p>
+          :
+          <p className='update-fd-modal__paragraph'>
+            Seleccione una fecha en el calendario para ser la nueva fecha de termino de suscripción.
+          </p>
+      }
       <input className='update-fd-modal__input-date'
         type="date"
-        value={formatDate(newFinalDate * 1000)}
+        value={formatDate(newFinalDate !== 0 ? (newFinalDate * 1000) : Math.round(new Date().getTime()))}
         onChange={(e) => {
           const values = e.target.value.split('-').map(v => parseInt(v));
           const year = values[0] as number;
@@ -121,7 +136,6 @@ export const UpdateFinalDateModal = ({
           </button>
         </>
       }
-
       {
         <button
           className='gonvar-button gonvar-button--ghost'
