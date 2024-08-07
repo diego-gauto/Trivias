@@ -105,7 +105,7 @@ const Users = () => {
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
-        canReport: role?.delete === 1,
+        canReport: role?.report === 1,
         canDelete: role?.delete === 1,
       });
       // Role level
