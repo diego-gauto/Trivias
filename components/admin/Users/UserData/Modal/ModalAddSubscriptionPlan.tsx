@@ -58,6 +58,7 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user, adminUserId }: Props) =
       return {
         //user_final_date: user.final_date,
         current_final_date: user.final_date,
+        current_start_date: user.start_date,
         // start_date: user.start_date,
         current_level: 0,
         user_id: user.id,

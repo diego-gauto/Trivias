@@ -84,7 +84,6 @@ const Users = () => {
     setUserFilters,
     courses,
     payCourses,
-    permits,
   } = adminContext;
 
   const getUserData = async () => {
@@ -265,9 +264,8 @@ const Users = () => {
           <div className='header'>
             <DefaultColumn gap={5}>
               <div className='top-title'>
-                {permits &&
-                  ((userLevel === 'admin' && canReport) ||
-                    userLevel === 'superAdmin') && (
+                {((userLevel === 'admin' && canReport)
+                  || userLevel === 'superAdmin') && (
                     <CsvDownloader
                       filename='usersData'
                       extension='.csv'

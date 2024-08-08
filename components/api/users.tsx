@@ -106,6 +106,7 @@ export interface IUpdateMembershipPlanApi {
 
 export interface IUpdateMembershipData {
   current_final_date: number,
+  current_start_date: number,
   current_level: number,
   level: number,
   user_id: number,

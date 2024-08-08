@@ -5,6 +5,7 @@ import { getGenericQueryResponse } from '../../api/admin';
 
 interface UpdateFinalDateModalProps {
   finalDate: number,
+  startDate: number,
   userId: number,
   onCancelEvent: () => void,
   onSuccessEvent: () => void,
@@ -13,6 +14,7 @@ interface UpdateFinalDateModalProps {
 export const UpdateFinalDateModal = ({
   userId,
   finalDate,
+  startDate,
   onCancelEvent,
   onSuccessEvent,
 }: UpdateFinalDateModalProps) => {
@@ -69,9 +71,25 @@ export const UpdateFinalDateModal = ({
       const adminIdResponse = await getGenericQueryResponse(getAdminIdQuery);
       const adminId = adminIdResponse.data.data[0].id;
 
-      const updateUserFinalDateQuery = `update memberships set final_date = ${newFinalDate}, admin_update_id = ${adminId} where user_id = ${userId};`;
-      const updateUserFinalDateResponse = await getGenericQueryResponse(updateUserFinalDateQuery);
+      let updateUserFinalDateQuery = `update memberships 
+        set final_date = ${newFinalDate}, 
+        admin_update_id = ${adminId} 
+        where user_id = ${userId};`;
 
+      const today = Math.round(new Date().getTime() / 1000);
+      const RESET_START_DATE_TOLERANCE_DAYS = 30;
+
+      const finalDateExpired = finalDate < (today - (RESET_START_DATE_TOLERANCE_DAYS * 24 * 60 * 60));
+
+      if (startDate === 0 || finalDateExpired) {
+        updateUserFinalDateQuery = `update memberships 
+        set final_date = ${newFinalDate}, 
+        start_date = ${today}, 
+        admin_update_id = ${adminId} 
+        where user_id = ${userId};`;
+      }
+
+      const updateUserFinalDateResponse = await getGenericQueryResponse(updateUserFinalDateQuery);
       onSuccessEvent();
     } catch (error) {
       console.log({ error });

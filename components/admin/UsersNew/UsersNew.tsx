@@ -759,6 +759,7 @@ const UsersDetails = () => {
         return (
           <UpdateFinalDateModal
             finalDate={user.finalDate}
+            startDate={user.startDate}
             userId={user.userId}
             onCancelEvent={() => {
               setShowChangeFinalDateModal(false);
@@ -789,6 +790,7 @@ const UsersDetails = () => {
       case 'active-subscription':
         return (
           <ActivateSubscriptionModal
+            clientStartDate={user.startDate}
             clientUserId={userId}
             clientFinalDate={user.finalDate}
             clientCurrentLevel={user.level}

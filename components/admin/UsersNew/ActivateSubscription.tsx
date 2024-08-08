@@ -8,6 +8,7 @@ type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 interface ActivateSubscriptionModalProps {
   clientUserId: number,
   clientFinalDate: number,
+  clientStartDate: number,
   clientCurrentLevel: number,
   onCancelEvent: () => void,
   onSuccessEvent: () => void,
@@ -16,6 +17,7 @@ interface ActivateSubscriptionModalProps {
 export const ActivateSubscriptionModal = ({
   clientUserId,
   clientFinalDate,
+  clientStartDate,
   clientCurrentLevel,
   onCancelEvent,
   onSuccessEvent
@@ -65,6 +67,7 @@ export const ActivateSubscriptionModal = ({
         user_id: clientUserId,
         days,
         type: `${price * 100}`,
+        current_start_date: clientStartDate,
         admin_update_id: adminUserId
       }
     }
@@ -86,7 +89,9 @@ export const ActivateSubscriptionModal = ({
   return (
     <Container>
       <div className='activate-subscription-modal__body'>
-        <p className='activate-subscription-modal__title'>Activar suscripción</p>
+        <p className='activate-subscription-modal__title'>
+          Activar suscripción
+        </p>
         <div className='activate-subscription-modal__section'>
           <p className='activate-subscription-modal__label'>
             Tipo de suscripción:

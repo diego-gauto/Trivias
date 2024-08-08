@@ -250,7 +250,7 @@ const Courses = () => {
       errorRating: course.rating === 0 ? true : false,
       errorReviews: course.reviews === 0 ? true : false,
       errorDuration:
-        course.type === ('Gratis' || 'Mensual') || course.type === 'Mensual'
+        (course.type === 'Gratis' || course.type === 'Mensual')
           ? false
           : course.duration === 0
             ? true
@@ -353,18 +353,18 @@ const Courses = () => {
           userAccess.canCreate &&
           userAccess.canDelete) ||
           userLevel === 'superAdmin') && (
-          <div className='courses-buttons'>
-            <Link href='/admin/Teacher'>
-              <button>Profesores</button>
-            </Link>
-            <Link href='/admin/CourseAttributes'>
-              <button>Categorías</button>
-            </Link>
-            <Link href='/admin/Materials'>
-              <button>Materiales</button>
-            </Link>
-          </div>
-        )}
+            <div className='courses-buttons'>
+              <Link href='/admin/Teacher'>
+                <button>Profesores</button>
+              </Link>
+              <Link href='/admin/CourseAttributes'>
+                <button>Categorías</button>
+              </Link>
+              <Link href='/admin/Materials'>
+                <button>Materiales</button>
+              </Link>
+            </div>
+          )}
       </div>
       <CourseContainer>
         <div className='create-course'>
@@ -662,15 +662,15 @@ const Courses = () => {
                 <p>
                   {course.professors.length > 0
                     ? course.professors.map(
-                        (val: IProfessors, index: number) => {
-                          return (
-                            <React.Fragment key={'profName_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: IProfessors, index: number) => {
+                        return (
+                          <React.Fragment key={'profName_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione un professor'}
                 </p>
                 {openProfessorsSelect ? (
@@ -704,15 +704,15 @@ const Courses = () => {
                 <p>
                   {course.categories.length > 0
                     ? course.categories.map(
-                        (val: ICategories, index: number) => {
-                          return (
-                            <React.Fragment key={'catsName_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: ICategories, index: number) => {
+                        return (
+                          <React.Fragment key={'catsName_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione una categoría'}
                 </p>
                 {openCategoriesSelect ? (
@@ -747,13 +747,13 @@ const Courses = () => {
                 <p>
                   {course.materials.length > 0
                     ? course.materials.map((val: IMaterials, index: number) => {
-                        return (
-                          <React.Fragment key={'matsName_' + index}>
-                            {val.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'matsName_' + index}>
+                          {val.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Seleccione un material'}
                 </p>
                 {openMaterialsSelect ? (
