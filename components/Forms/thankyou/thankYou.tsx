@@ -126,7 +126,7 @@ const ThankYouForm = () => {
   };
 
   const redirectToLanding = () => {
-    const link = "/suscripcion-cuatrimestral";
+    const link = "/suscripcion-anual";
     if (link) {
       window.open(link, '_blank');
     } else {
@@ -143,7 +143,7 @@ const ThankYouForm = () => {
     //   // Manejar el caso en el que link es undefined
     //   console.error('El enlace de redirección es indefinido');
     // }
-    const frequency = 'cuatrimestral'
+    const frequency = 'anual'
     const today = new Date().getTime() / 1000;
 
     if (user && user.id) {
@@ -181,7 +181,7 @@ const ThankYouForm = () => {
         });
       }
     } else {
-      localStorage.setItem('cuatri', 'true');
+      localStorage.setItem('anual', 'true');
       router.push(SIGNUP_PATH);
     }
   };
@@ -284,7 +284,7 @@ const ThankYouForm = () => {
         </p>
         <p className={paragraph}>
           Cuentas con 30 segundos para unirte a la academia con beca del 75%
-          y pagar <strong>sólo 1,599 MXN por 120 días</strong> de aprendizaje con <strong>certificados incluidos. </strong>
+          y pagar <strong>sólo 3,497 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
           Recibe Gratis 600-800 pesos en producto de la marca <strong>al unirte ahora.</strong>
         </p>
         <div
