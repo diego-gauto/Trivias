@@ -93,31 +93,38 @@ const AllCourses = (props: AllCoursesProps) => {
     material_route,
     canEdit,
   } = props;
-  const [course, setCourse] = useState<ICourses>({
-    id: id,
-    title: title,
-    subtitle: subtitle,
-    about: about,
-    difficulty: difficulty,
-    mandatory: mandatory,
-    image: image,
-    phrase: phrase,
-    certificate_color: certificate_color,
-    price: price,
-    rating: rating,
-    reviews: reviews,
-    duration: duration,
-    course_number: course_number,
-    route: route,
-    type: type,
-    sequential: sequential,
-    professors: professors,
-    categories: categories,
-    materials: materials,
-    published: published,
-    with_certificate: with_certificate,
-    material_route: material_route,
-  });
+
+  const generateCourseValues = (): ICourses => {
+    return {
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      about: about,
+      difficulty: difficulty,
+      mandatory: mandatory,
+      image: image,
+      phrase: phrase,
+      certificate_color: certificate_color,
+      price: price,
+      rating: rating,
+      reviews: reviews,
+      duration: duration,
+      course_number: course_number,
+      route: route,
+      type: type,
+      sequential: sequential,
+      professors: professors,
+      categories: categories,
+      materials: materials,
+      published: published,
+      with_certificate: with_certificate,
+      material_route: material_route,
+    };
+  }
+
+  const originalCourse = generateCourseValues();
+
+  const [course, setCourse] = useState<ICourses>(generateCourseValues());
   const difficultyData = [
     'Muy Fácil',
     'Fácil',
@@ -197,10 +204,11 @@ const AllCourses = (props: AllCoursesProps) => {
     setCourse({ ...course, materials: tempMaterials });
   };
   const editCourse = async () => {
-    if (userData.role === 'admin' && userData.roles[0].edit === 0) {
+    if (!canEdit) {
       alert('No tienes permisos para esta acción');
       return;
     }
+    console.log('Si entro al editCourse');
     setLoader(true);
     let tempErrors: any = {
       errorTitle: course.title === '' ? true : false,
@@ -229,7 +237,9 @@ const AllCourses = (props: AllCoursesProps) => {
     };
     setErrors(tempErrors);
     let checkErrors = Object.values(tempErrors).includes(true);
+    console.log({ tempErrors });
     if (!checkErrors) {
+      console.log('No tiene errores');
       if (course.type === 'Gratis') {
         course.price = 0;
         course.duration = 0;
@@ -244,7 +254,7 @@ const AllCourses = (props: AllCoursesProps) => {
       }
       setLoader(true);
 
-      if (course.published) {
+      if (originalCourse.published === 0 && course.published === 1) {
         sendNotificationToAllActiveUsers();
       }
 
@@ -279,10 +289,10 @@ const AllCourses = (props: AllCoursesProps) => {
       const activeUsers = activeUsersResponse.data.data;
       // Para que sea para todos los usuarios de la consulta, remover el .filter
       activeUsers
-        .filter((user) => {
-          // 54598 para alberto, 49678 para Diego
-          return [54598, 49678].includes(user['id']);
-        })
+        //.filter((user) => {
+        // 54598 para alberto, 49678 para Diego
+        //  return [54598, 49678].includes(user['id']);
+        //})
         .forEach((user) => {
           sendNotificationToUser(user['id']);
         });
@@ -301,7 +311,8 @@ const AllCourses = (props: AllCoursesProps) => {
       const insertCourseNotificationQuery = `insert into course_notification 
       (notification_id, course_id, title, user_id) 
       values (${insertIdNotification}, ${course.id}, '${course.title}', ${userId});`;
-      await getGenericQueryResponse(insertCourseNotificationQuery);
+      const newCourseNotificationResponse = await getGenericQueryResponse(insertCourseNotificationQuery);
+      console.log({ newCourseNotificationResponse });
     } catch (error) {
       throw error;
     }
@@ -317,7 +328,7 @@ const AllCourses = (props: AllCoursesProps) => {
         date: '',
         courseName: '',
       };
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -677,13 +688,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {professors.length > 0
                     ? professors.map((prof: IProfessors, index: number) => {
-                        return (
-                          <React.Fragment key={'showProf_' + index}>
-                            {prof.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showProf_' + index}>
+                          {prof.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Instructor'}
                 </p>
               ) : (
@@ -695,15 +706,15 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.professors.length > 0
                     ? course.professors.map(
-                        (val: IProfessors, index: number) => {
-                          return (
-                            <React.Fragment key={'profNameEdit_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: IProfessors, index: number) => {
+                        return (
+                          <React.Fragment key={'profNameEdit_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione un professor'}
                   {openProfessorsSelect ? (
                     <RiArrowDropUpLine className='arrow' />
@@ -734,13 +745,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {categories.length > 0
                     ? categories.map((cat: ICategories, index: number) => {
-                        return (
-                          <React.Fragment key={'showCat_' + index}>
-                            {cat.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showCat_' + index}>
+                          {cat.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Categorías'}
                 </p>
               ) : (
@@ -752,15 +763,15 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.categories.length > 0
                     ? course.categories.map(
-                        (val: ICategories, index: number) => {
-                          return (
-                            <React.Fragment key={'catNameEdit_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: ICategories, index: number) => {
+                        return (
+                          <React.Fragment key={'catNameEdit_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione una categoria'}
                   {openCategoriesSelect ? (
                     <RiArrowDropUpLine className='arrow' />
@@ -791,13 +802,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {materials.length > 0
                     ? materials.map((mat: IMaterials, index: number) => {
-                        return (
-                          <React.Fragment key={'showMat_' + index}>
-                            {mat.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showMat_' + index}>
+                          {mat.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Materiales'}
                 </p>
               ) : (
@@ -806,13 +817,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.materials.length > 0
                     ? course.materials.map((val: IMaterials, index: number) => {
-                        return (
-                          <React.Fragment key={'matNameEdit_' + index}>
-                            {val.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'matNameEdit_' + index}>
+                          {val.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Seleccione un material'}
                   {openMaterialsSelect ? (
                     <RiArrowDropUpLine className='arrow' />

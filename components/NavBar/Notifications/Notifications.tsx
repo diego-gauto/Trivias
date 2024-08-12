@@ -16,7 +16,6 @@ import {
   returnNotificationMessage,
   returnNotificationTitles,
 } from '../../../utils/functions';
-import { user } from 'firebase-functions/v1/auth';
 import { userById } from '../../api/users';
 
 interface NotificationByUser {
