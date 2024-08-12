@@ -8,7 +8,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getFormApi } from "../../api/form";
-import Countdown30Seconds from "../countdown30seconds";
+import Countdown60Seconds from "../countdown60seconds";
 import styles from "./thankYou.module.css";
 
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -278,12 +278,12 @@ const ThankYouForm = () => {
       <div className={textContainer}>
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
-        <Countdown30Seconds />
+        <Countdown60Seconds />
         <p className={paragraph}>
           ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
         </p>
         <p className={paragraph}>
-          Cuentas con 30 segundos para unirte a la academia con beca del 75%
+          Cuentas con 1 minuto para unirte a la academia con beca del 75%
           y pagar <strong>sólo 3,497 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
           Recibe Gratis 600-800 pesos en producto de la marca <strong>al unirte ahora.</strong>
         </p>
