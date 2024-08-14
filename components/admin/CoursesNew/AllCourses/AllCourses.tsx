@@ -278,23 +278,52 @@ const AllCourses = (props: AllCoursesProps) => {
 
   const sendNotificationToAllActiveUsers = async () => {
     try {
-      const toleranceDays = 10;
-      const secondsOfTolerance = toleranceDays * 24 * 60 * 60;
-      const insertCourseNotificationQuery = `select u.id from users as u inner join 
-      memberships as m on m.user_id = u.id 
-      where from_unixtime(m.final_date + ${secondsOfTolerance}) > now() and m.level != 10;`;
+      const insertCourseNotificationQuery = `select m.user_id, u.name, u.last_name, u.email from users as u 
+        inner join memberships as m on m.user_id = u.id
+        where 
+        (m.level in (1, 4, 7) and (m.final_date + 864000) > unix_timestamp(now()))
+        or m.final_date  > unix_timestamp(now());`;
       const activeUsersResponse = await getGenericQueryResponse(
         insertCourseNotificationQuery,
       );
-      const activeUsers = activeUsersResponse.data.data;
+
+      interface IUserActiveToCourseNotification {
+        user_id: number,
+        name: string,
+        last_name: string,
+        email: string,
+      }
+
+      const activeUsers: IUserActiveToCourseNotification[] = activeUsersResponse.data.data;
       // Para que sea para todos los usuarios de la consulta, remover el .filter
       activeUsers
         //.filter((user) => {
         // 54598 para alberto, 49678 para Diego
-        //  return [54598, 49678].includes(user['id']);
+        //return [54598, 49678, 56264, 50099, 50098].includes(user['user_id']);
         //})
-        .forEach((user) => {
-          sendNotificationToUser(user['id']);
+        .forEach(({ user_id, email }) => {
+          // sendNotificationToUser(user['user_id']);
+          /*
+          userId: number,
+          type: string (numero, ejemplo '10'),
+          title: string (courseTitle),
+          notificationId: number,
+          */
+          interface INewCourseNotification {
+            userId: number,
+            type: string /*(numero, ejemplo '10')*/,
+            title: string /*(courseTitle)*/,
+            notificationId: number,
+            courseId: number,
+          }
+          const body: INewCourseNotification = {
+            userId: user_id,
+            notificationId: 0,
+            title: course.title,
+            courseId: course.id,
+            type: '10'
+          }
+          createNotification(body);
         });
     } catch (error) {
       console.error(error);
