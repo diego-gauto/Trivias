@@ -8,7 +8,7 @@ import { db } from "../../../firebase/firebaseConfig";
 import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getFormApi } from "../../api/form";
-import Countdown30Seconds from "../countdown30seconds";
+import Countdown60Seconds from "../countdown60seconds";
 import styles from "./thankYou.module.css";
 
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -126,7 +126,7 @@ const ThankYouForm = () => {
   };
 
   const redirectToLanding = () => {
-    const link = "/suscripcion-cuatrimestral";
+    const link = "/suscripcion-anual";
     if (link) {
       window.open(link, '_blank');
     } else {
@@ -143,7 +143,7 @@ const ThankYouForm = () => {
     //   // Manejar el caso en el que link es undefined
     //   console.error('El enlace de redirección es indefinido');
     // }
-    const frequency = 'cuatrimestral'
+    const frequency = 'anual'
     const today = new Date().getTime() / 1000;
 
     if (user && user.id) {
@@ -181,7 +181,7 @@ const ThankYouForm = () => {
         });
       }
     } else {
-      localStorage.setItem('cuatri', 'true');
+      localStorage.setItem('anual', 'true');
       router.push(SIGNUP_PATH);
     }
   };
@@ -278,13 +278,13 @@ const ThankYouForm = () => {
       <div className={textContainer}>
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
-        <Countdown30Seconds />
+        <Countdown60Seconds />
         <p className={paragraph}>
           ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
         </p>
         <p className={paragraph}>
-          Cuentas con 30 segundos para unirte a la academia con beca del 75%
-          y pagar <strong>sólo 1,599 MXN por 120 días</strong> de aprendizaje con <strong>certificados incluidos. </strong>
+          Cuentas con 1 minuto para unirte a la academia con beca del 75%
+          y pagar <strong>sólo 3,497 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
           Recibe Gratis 600-800 pesos en producto de la marca <strong>al unirte ahora.</strong>
         </p>
         <div
