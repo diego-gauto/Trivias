@@ -87,7 +87,7 @@ const Sliders = (props: ICourseData) => {
     if (slideType === 'new-courses') {
       tempTexts.title = 'Cursos de novedad';
       tempTexts.spanTitle = '';
-      setCourses(tempCourses.new_courses || []);
+      setCourses(/*tempCourses.new_courses ||*/[]);
       setTexts(tempTexts);
     }
     if (slideType === 'continue-watching') {
