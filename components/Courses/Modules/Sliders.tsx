@@ -71,7 +71,25 @@ const Sliders = (props: ICourseData) => {
       spanTitle: '',
     };
     let tempCourses: any = allCourses;
-    let tempShowCourse: any = [];
+    /*
+    // En 'components\Courses\Courses.tsx'
+    let courseSections = [
+      'continue-watching',
+      'free-courses',
+      'product-courses',
+      'special-courses',
+      'art-courses',
+      'structure-courses',
+      'makeup-courses',
+      'new-courses',
+    ];
+    */
+    if (slideType === 'new-courses') {
+      tempTexts.title = 'Cursos de novedad';
+      tempTexts.spanTitle = '';
+      setCourses(tempCourses.new_courses || []);
+      setTexts(tempTexts);
+    }
     if (slideType === 'continue-watching') {
       tempTexts.title = 'Continua Viendo';
       tempTexts.spanTitle = '';
@@ -175,7 +193,6 @@ const Sliders = (props: ICourseData) => {
   useEffect(() => {
     if (!containLoader) {
       getCourseContent();
-      // setLoading(false);
       setTimeout(() => {
         setLoading(false);
       }, 300 * slideNumber);
@@ -272,7 +289,8 @@ const Sliders = (props: ICourseData) => {
                           slideType === 'product-courses' ||
                           slideType === 'structure-courses' ||
                           slideType === 'makeup-courses' ||
-                          slideType === 'special-courses'
+                          slideType === 'special-courses' ||
+                          slideType === 'new-courses'
                         ) {
                           openModal(course);
                         }

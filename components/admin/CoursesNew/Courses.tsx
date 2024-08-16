@@ -116,6 +116,7 @@ const Courses = () => {
     type: 'Gratis',
     sequential: false,
     published: true,
+    is_new: 0,
     with_certificate: true,
     professors: [],
     categories: [],
@@ -228,7 +229,7 @@ const Courses = () => {
     setCourse({ ...course, materials: tempMaterials });
   };
   const createCourse = async () => {
-    if (!userAccess.canCreate && userLevel === 'admin') {
+    if (!userAccess.canCreate && userLevel !== 'superAdmin') {
       alert('No tienes permisos para esta acción');
       return;
     }
@@ -270,51 +271,20 @@ const Courses = () => {
       }
       let tempImage = course.image;
       course.image = '';
+
       try {
         const res = await createCoursesApi(course);
         course.id = res;
-        let notification = {
-          type: '10',
-          notificationId: '',
-          title: course.title,
-          courseId: res,
-          season: 0,
-          lesson: 0,
-        };
 
-        // createNotification(notification);
         const image = await updateCourseImage(course.id, tempImage);
         course.image = image;
         await updateCourseImageFromApi(course);
         const getCoursesResponse = await getCoursesApi();
-        setLoader(false);
         setCourses(getCoursesResponse);
-        /*
-        createCoursesApi(course).then((res) => {
-          course.id = res;
-          let notification = {
-            type: "10",
-            notificationId: '',
-            title: course.title,
-            courseId: res,
-            season: 0,
-            lesson: 0,
-          }
-          createNotification(notification);
-          updateCourseImage(course.id, tempImage).then((image) => {
-            course.image = image;
-            updateCourseImageFromApi(course).then(() => {
-              getCoursesApi().then((res) => {
-                setLoader(false);
-                setCourses(res);
-              });
-            })
-          })
-        })
-        */
       } catch (error) {
         console.error(error);
       }
+      setLoader(false);
     } else {
       setLoader(false);
     }
@@ -865,6 +835,20 @@ const Courses = () => {
               />
             </div>
           </div>
+          <div className='rows'>
+            <div className='input-contain'>
+              <label className='input-label'>Es novedad</label>
+              <select
+                onChange={(e) => {
+                  setCourse({ ...course, is_new: parseInt(e.target.value) });
+                }}
+                defaultValue={`${course.is_new}`}
+              >
+                <option value='0'>No</option>
+                <option value='1'>Si</option>
+              </select>
+            </div>
+          </div>
           <div className='rows' style={{ justifyContent: 'center' }}>
             <div className='input-contain' style={{ alignItems: 'center' }}>
               {loader && <LoaderButton />}
@@ -914,6 +898,7 @@ const Courses = () => {
               index={index}
               key={'AllCourses_' + index}
               canEdit={userAccess.canEdit || userLevel === 'superAdmin'}
+              is_new={course.is_new}
             />
           );
         })}

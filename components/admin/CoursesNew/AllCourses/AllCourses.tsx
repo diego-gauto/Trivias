@@ -91,6 +91,7 @@ const AllCourses = (props: AllCoursesProps) => {
     getAllCourses,
     with_certificate,
     material_route,
+    is_new,
     canEdit,
   } = props;
 
@@ -119,6 +120,7 @@ const AllCourses = (props: AllCoursesProps) => {
       published: published,
       with_certificate: with_certificate,
       material_route: material_route,
+      is_new: is_new
     };
   }
 
@@ -1019,6 +1021,46 @@ const AllCourses = (props: AllCoursesProps) => {
                 </p>
               </div>
             )}
+          </div>
+          <div
+            className='rows'
+          >
+            {
+              !startEdit ?
+                (
+                  <div className='course-data'>
+                    <label className='course-data-title'>
+                      Es novedad
+                    </label>
+                    <p className='content'>
+                      {
+                        is_new ? 'Si' : 'No'
+                      }
+                    </p>
+                  </div>
+                )
+                :
+                (
+                  <div className='course-data'>
+                    <label className='course-data-title'>
+                      Es novedad
+                    </label>
+                    <select
+                      name="is_new"
+                      defaultValue={`${course.is_new}`}
+                      onChange={(e) => {
+                        setCourse({
+                          ...course,
+                          is_new: parseInt(e.target.value)
+                        });
+                      }}
+                    >
+                      <option value="0">No</option>
+                      <option value="1">Si</option>
+                    </select>
+                  </div>
+                )
+            }
           </div>
           <div
             className='rows'
