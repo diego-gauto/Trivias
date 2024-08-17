@@ -228,6 +228,18 @@ const Sliders = (props: ICourseData) => {
     }
     return;
   }, [start, countdown]);
+
+  const getImageComponent = (course: ICourse) => {
+    return (<Image
+      src={course.image}
+      fluid
+      style={{
+        borderRadius: '10px',
+        width: 'calc(100% - 20px)',
+      }}
+    />)
+  }
+
   return (
     <>
       {courses.length > 0 && (
@@ -304,40 +316,29 @@ const Sliders = (props: ICourseData) => {
                             : (innerWidth - 60) / 5,
                         }}
                       >
-                        {slideType === 'my-courses' ? (
+                        {
                           <ImageContent>
-                            {course.type === 'Producto' && (
-                              <>
-                                <i className='band' />
-                                <div className='days-left'>
-                                  {course.days} días
-                                </div>
-                              </>
-                            )}
+                            {
+                              (['Mensual', 'Gratis'].includes(course.type)
+                                && course.is_new === 1
+                              )
+                              && (
+                                <>
+                                  <i className='band' />
+                                  <div className='days-left'>
+                                    <strong>¡Novedad!</strong>
+                                  </div>
+                                </>
+                              )}
 
-                            <Image
-                              src={course.image}
-                              fluid
-                              style={{
-                                borderRadius: '10px',
-                                width: 'calc(100% - 20px)',
-                                marginBottom: '10px',
-                              }}
-                            />
-                          </ImageContent>
-                        ) : (
-                          <ImageContent>
                             {slideType === 'continue-watching' && (
                               <BsPlayCircle className='play-icon' />
                             )}
-                            <Image
-                              src={course.image}
-                              fluid
-                              style={{
-                                borderRadius: '10px',
-                                width: 'calc(100% - 20px)',
-                              }}
-                            />
+
+                            {
+                              getImageComponent(course)
+                            }
+
                             {slideType === 'continue-watching' && (
                               <Progress
                                 style={
@@ -349,8 +350,9 @@ const Sliders = (props: ICourseData) => {
                                 }
                               />
                             )}
+
                           </ImageContent>
-                        )}
+                        }
 
                         <p className='title'>{course.title}</p>
                         <p className='sub'>

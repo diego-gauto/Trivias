@@ -221,26 +221,28 @@ export const ImageContent = styled.div`
       sans serif;
     transform: rotate(-40deg);
     color: white;
-    top: 25px;
-    left: 15px;
+    top: 20px;
+    left: 0px;
     z-index: 2;
   }
   @media (max-width: 1023px) {
     height: auto;
+    /*
     .band {
       background-image: none;
-      top: -33px;
-      left: 0;
-      width: 27px;
-      rotate: 45deg;
+      top: -48px;
+      left: 0px;
+      width: 57px;
+      rotate: 50deg;
       background: #6717cd;
     }
     .days-left {
-      top: 8px;
+      top: 20px;
       left: 0px;
       z-index: 2;
-      font-size: 12px;
+      font-size: 14px;
     }
+    */
     .play-icon {
       font-size: 40px;
     }
