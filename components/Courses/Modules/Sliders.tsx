@@ -85,7 +85,7 @@ const Sliders = (props: ICourseData) => {
     ];
     */
     if (slideType === 'new-courses') {
-      tempTexts.title = 'Cursos de novedad';
+      tempTexts.title = 'Lo nuevo en Gonvar+';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.new_courses || []);
       setTexts(tempTexts);
@@ -326,7 +326,7 @@ const Sliders = (props: ICourseData) => {
                                 <>
                                   <i className='band' />
                                   <div className='days-left'>
-                                    <strong>¡Novedad!</strong>
+                                    <strong>¡Estreno!</strong>
                                   </div>
                                 </>
                               )}

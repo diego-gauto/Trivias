@@ -227,22 +227,23 @@ export const ImageContent = styled.div`
   }
   @media (max-width: 1023px) {
     height: auto;
-    /*
+
     .band {
       background-image: none;
-      top: -48px;
+      top: -43px;
       left: 0px;
-      width: 57px;
+      width: 20px;
+      height: 160px;
       rotate: 50deg;
       background: #6717cd;
     }
     .days-left {
-      top: 20px;
-      left: 0px;
+      top: 14px;
+      left: -2px;
       z-index: 2;
-      font-size: 14px;
+      font-size: 12px;
     }
-    */
+
     .play-icon {
       font-size: 40px;
     }
