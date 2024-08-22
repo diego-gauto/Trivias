@@ -36,6 +36,7 @@ const SuscriptionStats = () => {
 
     const fetchData = async () => {
       try {
+        console.log(todayString)
         const response = await getStatsByDate(todayString);
         // if (!response.ok) {
         //   throw new Error(`Error: ${response.status} ${response.statusText}`);
