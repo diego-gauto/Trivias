@@ -113,7 +113,8 @@ interface IUserData {
   method: string,
   startDate: number,
   finalDate: number,
-  level: number
+  level: number,
+  role: string,
 }
 
 const MAIN_SECTIONS: IMainMenuOption[] = [
@@ -576,6 +577,7 @@ const UsersDetails = () => {
       level: userSubscription.level,
       method: userSubscription.method,
       startDate: userSubscription.start_date,
+      role: userSubscription.role,
       userId
     });
 
@@ -904,7 +906,8 @@ const UsersDetails = () => {
     return (
       <>
         {
-          buttons.length > 0 &&
+          (buttons.length > 0 && user.role !== 'superAdmin')
+          &&
           <div className='subscription-actions-container'>
             {
               buttons
