@@ -194,15 +194,17 @@ export const ImageContent = styled.div`
   position: relative;
   padding-bottom: 10px;
   .band {
-    background-image: url(../images/band.png);
-    background-repeat: no-repeat;
-    width: 140px;
-    height: 110px;
+    /*background-image: url(../images/band.png);*/
+    background-image: none;
+    background: #6717cd;
+    width: 30px;
+    height: 160px;
     cursor: pointer;
     position: absolute;
-    top: -10px;
-    left: -20px;
+    top: -46px;
+    left: 20px;
     z-index: 1;
+    rotate: 50deg;
   }
   .play-icon {
     font-size: 55px;
@@ -230,12 +232,13 @@ export const ImageContent = styled.div`
 
     .band {
       background-image: none;
+      background: #6717cd;
+      rotate: 50deg;
       top: -43px;
       left: 0px;
       width: 20px;
       height: 160px;
       rotate: 50deg;
-      background: #6717cd;
     }
     .days-left {
       top: 14px;
