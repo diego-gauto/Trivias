@@ -1,4 +1,4 @@
-import { Card, Col, Image, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
 import {
@@ -10,9 +10,7 @@ import {
 import { PurpleButton } from '../../common/PurpleButton/PurpleButton';
 import { CardContainer } from './GonvarPlusModule.styled';
 import { WhiteButton } from '../../common/WhiteButton/WhiteButton';
-import { useEffect, useState } from 'react';
-import { ModalGonvarPlus } from '../../Modals/ModalGonvarPlus/ModalGonvarPlus';
-import { getWholeCourses } from '../../../store/actions/courseActions';
+import { useEffect } from 'react';
 import { haveAccess, IUserData } from '../../GlobalFunctions';
 declare let Hls: any;
 
@@ -26,11 +24,8 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
   const responsive1140 = useMediaQuery({ query: '(max-width: 1140px)' });
   const responsive768 = useMediaQuery({ query: '(max-width: 784px)' });
   const responsive576 = useMediaQuery({ query: '(max-width: 576px)' });
-  const [loading, setLoading] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
-  let today = new Date().getTime() / 1000;
+
   const handleShow = () => {
-    // setOpenModal(true);
     router.push({ pathname: CUATRIMESTRAL_SUSCRIPTION_REDIRECT });
   };
   const router = useRouter();
@@ -50,16 +45,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
       video.src = `${videoSrc}`;
     }
   };
-  const hms = (totalSeconds: any) => {
-    if (typeof totalSeconds == 'string') return totalSeconds;
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    let result = `${minutes.toString().padStart(1, '0')} min`;
-    if (!!hours) {
-      result = `${hours.toString()} hr ${minutes} min`;
-    }
-    return result;
-  };
+
   const goTo = () => {
     if (user) {
       // let complete_nails = user.user_courses.filter((user: any) => user.course_id === 57 && user.final_date > today);
@@ -128,13 +114,6 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
                   }}
                 />
               </Col>
-              <ModalGonvarPlus
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                course={courses}
-                user={user}
-                loggedIn={loggedIn}
-              />
             </Row>
           )}
         </div>
@@ -163,13 +142,6 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
                   }}
                 />
               </Col>
-              <ModalGonvarPlus
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-                course={courses}
-                user={user}
-                loggedIn={loggedIn}
-              />
             </Row>
           )}
         </div>
