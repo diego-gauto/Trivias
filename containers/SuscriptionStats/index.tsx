@@ -26,7 +26,8 @@ const SuscriptionStats = () => {
 
   const [todayStats, setTodayStats] = useState<StatsByType>()
 
-  const todayString = today()
+  // const todayString = today()
+  const todayString = '2024-05-31'
 
   const handleClickToday = () => {
     console.log(todayString)

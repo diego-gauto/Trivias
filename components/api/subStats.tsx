@@ -4,7 +4,7 @@ import { Stats, StatsByType } from "../../containers/SuscriptionStats/ISuscriopt
 
 export const getStatsByDate = async (date: string) => {
   return axios
-    .post('https://gonvar.inowu.dev/subStats', date)
+    .post('https://gonvar.inowu.dev/subStats', { date })
     .then((res) => {
       console.log(res)
       // return res;
