@@ -230,7 +230,7 @@ const Mensual = (props: IData) => {
                   <i>
                     <b>
                       El kit de producto tiene valor de $700-$800 MXN, pero es
-                      un regalo sin costo. Sólo debes pagar el envío de $245
+                      un regalo sin costo. Sólo debes pagar el envío de $345
                       MXN.
                     </b>
                   </i>
