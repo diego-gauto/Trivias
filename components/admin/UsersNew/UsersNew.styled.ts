@@ -254,6 +254,12 @@ style={{
     height: 35px;
   }
 
+  .gonvar-button--disabled {
+    border: none;
+    background-color: darkgray;
+    color: white;
+  }
+
   .gonvar-button--purple {
     border: 2px solid white;
     background-color: #691aca;
