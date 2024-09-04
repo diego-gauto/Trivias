@@ -705,9 +705,10 @@ const NextReward = (props: Props) => {
               )}
             {!loader &&
               ((user.final_date > today ||
-                ([1, 4, 7].includes(user.level)
-                  && user.method === 'conekta'
-                  && user.final_date > today - 10 * 24 * 60 * 60))
+                ([1, 4, 7].includes(user.level) &&
+                  (user.method === 'conekta')
+                  && user.final_date > today - 10 * 24 * 60 * 60)
+              )
                 && user.role !== "superAdmin"
               )
               && (

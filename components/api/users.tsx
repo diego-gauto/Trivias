@@ -213,7 +213,9 @@ export const cancelPaypal = async (user: any) => {
             .post(
               'https://gonvar.inowu.dev/' +
               'subscriptions/paypal-canceled-subscription',
-              user,
+              {
+                plan_id: user.planId
+              },
             )
             .then((res) => {
               return res;
