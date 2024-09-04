@@ -45,6 +45,7 @@ const SuscriptionStats = () => {
         // const jsonData = await response.json();
         // setTodayStats(jsonData);
         setTodayStats(response);
+        console.log(response)
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
