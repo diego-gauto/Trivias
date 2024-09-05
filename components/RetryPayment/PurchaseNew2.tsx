@@ -43,10 +43,14 @@ interface ICardUser {
 
 type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
 
+const frecuenciesPlanNames = new Map<string, string>();
+frecuenciesPlanNames.set('cuatrimestral', 'Cuatri');
+frecuenciesPlanNames.set('month', 'Mensual');
+frecuenciesPlanNames.set('anual', 'Anual');
+
 export const PurchaseNew2 = () => {
   // type, id, trial, frequency, nailmasterplusanual, v
   const { type, frequency, v, id, trial, nailmasterplusanual }: any = router.query;
-  let userDataAuth: any = useAuth();
   const context = useAuth();
   const user = context.user;
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
@@ -151,7 +155,7 @@ export const PurchaseNew2 = () => {
 
   const getPaymentMethods = async () => {
     setLoaderAdd(true);
-    let user = userDataAuth.user;
+    let user = context.user;
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
       // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
@@ -258,12 +262,12 @@ export const PurchaseNew2 = () => {
   }, []);
 
   useEffect(() => {
-    if (userDataAuth.user) {
+    if (context.user) {
       getPaymentMethods();
     } else {
       router.push({ pathname: PREVIEW_PATH });
     }
-  }, [userDataAuth]);
+  }, [context]);
 
   useEffect(() => {
     if (token) {
@@ -284,11 +288,15 @@ export const PurchaseNew2 = () => {
     });
   };
 
-  const getNewUserLevel = (level: number) => {
-    if ([4, 5].includes(level)) return 4;
-    if ([1, 6].includes(level)) return 1;
-    return 7;
+  const getUserLevel = () => {
+    return (frequency === 'month' || trial === 'true') ? 1 : (frequency === 'anual' ? 4 : 7);
   };
+
+  type FrequencyType = 'cuatrimestral' | 'month' | 'anual';
+
+  const getPlanNameByFrecuency = (frequency: FrequencyType): string => {
+    return `Gonvar Plus ${frecuenciesPlanNames.get(frequency) || ''}`;
+  }
 
   const getPlanIdByFrecuency = () => {
     if (frequency === 'cuatrimestral') {
@@ -329,13 +337,14 @@ export const PurchaseNew2 = () => {
         const membership = {
           final_date: sub.billing_cycle_end,
           method: 'conekta',
-          level: getNewUserLevel(user.level),
+          level: getUserLevel(),
           payment_method: sub.card_id,
           plan_id: sub.id,
-          plan_name: 'Gonvar Plus',
+          plan_name: getPlanNameByFrecuency(frequency),
           start_date: sub.billing_cycle_start,
-          type: user.type,
+          type: subscription.price,
           userId: user.user_id,
+          is_canceled: false,
         };
         await updateMembership(membership);
         // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
@@ -380,10 +389,8 @@ export const PurchaseNew2 = () => {
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
-    console.log({ user: userDataAuth.user });
-
     let payOxxoJson = {
-      conekta_id: userDataAuth.user.conekta_id,
+      conekta_id: context.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
@@ -418,7 +425,7 @@ export const PurchaseNew2 = () => {
     );
 
     let speiJson = {
-      conekta_id: userDataAuth.user.conekta_id,
+      conekta_id: context.user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: product.title,
       price: product.price * 100,
