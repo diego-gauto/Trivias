@@ -1040,7 +1040,7 @@ export const PurchaseNew2 = () => {
                                   plan_id: data.subscriptionID,
                                   plan_name: product.title,
                                   start_date: new Date().getTime() / 1000,
-                                  userId: userDataAuth.user.user_id,
+                                  userId: context.user.user_id,
                                   level:
                                     frequency === 'month' || trial === 'true'
                                       ? 1
