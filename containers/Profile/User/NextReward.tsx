@@ -42,7 +42,7 @@ type UserRole = 'user' | 'admin' | 'superAdmin';
 type UserSubscription = 0 | 1;
 
 const NextReward = (props: Props) => {
-  const { timeLevel, reward, lastTimeReward, setReward, user: userProps } = props;
+  const { timeLevel, reward, lastTimeReward, setReward, user } = props;
 
   const responsive1023 = useMediaQuery({ query: '(max-width: 1023px)' });
   const [loader, setLoader] = useState<any>(false);
@@ -411,7 +411,7 @@ const NextReward = (props: Props) => {
     conekta_active: finalDateActiveToConekta
   }
 
-  const user: IUserInfoResult = {
+  const user_test: IUserInfoResult = {
     ...userTest,
     user_id: 50099,
     final_date: FINAL_DATES.conekta_active,
