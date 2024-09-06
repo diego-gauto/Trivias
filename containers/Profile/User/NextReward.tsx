@@ -21,10 +21,8 @@ import { REWARDS_PATH, SUPPORT_PATH } from '../../../constants/paths';
 import { conektaResumeSubscription } from '../../../components/api/profile';
 import { getUsersStripe } from '../../../components/api/conekta/test';
 import ChangePlanModal from '../../../components/Modals/ChangePlanModal/ChangePlanModal';
-import { haveAccess } from '../../../components/GlobalFunctions';
-import { time } from 'console';
 import { IUserInfoResult } from '../../../interfaces/IUser';
-import { user } from 'firebase-functions/v1/auth';
+import { user as userTest } from './UserTestData';
 
 const or_star = '/images/cancel_modal/or_star.png';
 const gr_star = '/images/cancel_modal/gr_star.png';
@@ -44,7 +42,7 @@ type UserRole = 'user' | 'admin' | 'superAdmin';
 type UserSubscription = 0 | 1;
 
 const NextReward = (props: Props) => {
-  const { timeLevel, reward, lastTimeReward, setReward, user } = props;
+  const { timeLevel, reward, lastTimeReward, setReward, user: userProps } = props;
 
   const responsive1023 = useMediaQuery({ query: '(max-width: 1023px)' });
   const [loader, setLoader] = useState<any>(false);
@@ -391,7 +389,7 @@ const NextReward = (props: Props) => {
     return result;
   };
 
-  const isConektaUser = (method: string) => {
+  const isConektaUser = (method: string = ''): boolean => {
     return method === 'conekta';
   }
 
@@ -403,12 +401,62 @@ const NextReward = (props: Props) => {
     return [1, 4, 7].includes(level);
   };
 
-  const isAbleToUpdateToCuatri = () => {
+  const finalDateActive = Math.floor(new Date().getTime() / 1000) + (10 * 24 * 60 * 60 * 60);
+  const finalDateNotActive = Math.floor(new Date().getTime() / 1000) - ((15 * 24 * 60 * 60 * 60));
+  const finalDateActiveToConekta = Math.floor(new Date().getTime() / 1000) - (5 * 24 * 60 * 60 * 60);
 
+  const FINAL_DATES = {
+    active: finalDateActive,
+    not_active: finalDateNotActive,
+    conekta_active: finalDateActiveToConekta
   }
 
-  const isAbleToUpdateToAnual = () => {
+  const user: IUserInfoResult = {
+    ...userTest,
+    user_id: 50099,
+    final_date: FINAL_DATES.conekta_active,
+    level: 0,
+    method: 'conekta',
+    is_canceled: 0,
+    role: 'user'
+  }
 
+  const ableToShowCancelButton = (): boolean => {
+    // 1. Si esta cancelado o es super admin
+    const isCanceled = user.is_canceled === 1;
+    const isSuperAdmin = user.role === 'superAdmin';
+
+    if (isCanceled || isSuperAdmin) {
+      return false;
+    }
+
+    // 2. Si es usuario inactivo de conekta
+    const today = Math.round(new Date().getTime() / 1000);
+    const finalDate = user.final_date;
+
+    if (isConektaUser(user.method || '')) {
+      console.log('Es usuario conekta');
+      if ((today - (10 * 24 * 60 * 60 * 60)) > finalDate) {
+        console.log('Su final date es caducado');
+        return false;
+      }
+    }
+
+    // 3. Si el usuario es de paypal pero no pertenece a los niveles correctos
+    const isPaypalUser = user.method === 'paypal';
+    if (isPaypalUser) {
+      if (!haveRecurrentSuscription(user.level)) {
+        // 0, 2, 3, 5, 6, 8
+        return false;
+      }
+    }
+
+    if (!(isConektaUser(user.method || '') || isPaypalUser)) {
+      return false;
+    }
+
+    // 4. Tiene que ser usuario con suscripción activa
+    return isActiveSubscription(finalDate);
   }
 
   return (
@@ -657,7 +705,7 @@ const NextReward = (props: Props) => {
                 user.level,
                 user.final_date,
                 user.role as UserRole,
-                user.method,
+                user.method || '',
               )}
             </div>
             {
@@ -671,7 +719,7 @@ const NextReward = (props: Props) => {
             }
             {(
               isActiveSubscription(user.final_date) &&
-              isConektaUser(user.method) &&
+              isConektaUser(user.method || '') &&
               user.level === 1
             ) && (
                 <button
@@ -688,7 +736,7 @@ const NextReward = (props: Props) => {
               )}
             {(
               isActiveSubscription(user.final_date) &&
-              isConektaUser(user.method) &&
+              isConektaUser(user.method || '') &&
               [1, 7].includes(user.level)
             ) && (
                 <button
@@ -704,13 +752,7 @@ const NextReward = (props: Props) => {
                 </button>
               )}
             {!loader &&
-              ((user.final_date > today ||
-                ([1, 4, 7].includes(user.level) &&
-                  (user.method === 'conekta')
-                  && user.final_date > today - 10 * 24 * 60 * 60)
-              )
-                && user.role !== "superAdmin"
-              )
+              (ableToShowCancelButton())
               && (
                 <button
                   onClick={() => {

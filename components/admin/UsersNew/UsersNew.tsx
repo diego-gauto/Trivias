@@ -542,7 +542,7 @@ const UsersDetails = () => {
   }
 
   const getUserSubscriptionInfo = async () => {
-    const query = `select level, method, admin_update_id, start_date, final_date, subscription, role
+    const query = `select level, method, admin_update_id, start_date, final_date, subscription, role, is_canceled
       from users as u 
       inner join memberships as m on u.id = m.user_id
       where u.id = ${userId};`;
@@ -553,7 +553,8 @@ const UsersDetails = () => {
       start_date: number,
       final_date: number,
       subscription: number,
-      role: string
+      role: string,
+      is_canceled: number,
     }
 
     const userSubscriptionResponse = await getGenericQueryResponse(query);
@@ -566,9 +567,9 @@ const UsersDetails = () => {
     const startDate = getPrettyFormatedDate(userSubscription.start_date);
     const finalDate = getPrettyFormatedDate(userSubscription.final_date);
 
-    const { level, final_date } = userSubscription;
+    const { level, final_date, is_canceled } = userSubscription;
 
-    const state = getStateOfSubscription(level, final_date);
+    const state = getStateOfSubscription(level, final_date, is_canceled === 1);
 
     const type = getSubscriptionTypeByLevel(userSubscription.level);
 
@@ -624,7 +625,7 @@ const UsersDetails = () => {
     return 'Por administración';
   }
 
-  const getStateOfSubscription = (userLevel: number, finalDate: number): SubscriptionState => {
+  const getStateOfSubscription = (userLevel: number, finalDate: number, isCanceled: boolean): SubscriptionState => {
     const now = Math.floor((new Date()).getTime() / 1000);
     const isActiveResult = isActive(userLevel, finalDate);
 
@@ -644,6 +645,10 @@ const UsersDetails = () => {
     // TODO: Hacer aviso unico para usuarios superAdmin
 
     // TODO: Revisar el caso de los usaurios "cancelados"
+
+    if (isCanceled && finalDate > now) {
+      return 'Cancelada';
+    }
 
     return 'Inactiva';
   }

@@ -194,7 +194,7 @@ export const PurchaseNew2 = () => {
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
-        if (haveAccess(res.level, res.final_date, res.role as any, res.method)) {
+        if (haveAccess(res.level, res.final_date, res.role as any, res.method as any)) {
           window.location.href = PREVIEW_PATH;
         }
         // getAllCoupons();
@@ -407,7 +407,6 @@ export const PurchaseNew2 = () => {
 
     try {
       const res = await conektaOxxoApi(payOxxoJson);
-      console.log({ res });
       let response = res.data.data;
       setBarcode(response.charges.data[0].payment_method.barcode_url);
       setReference(response.charges.data[0].payment_method.reference);
@@ -482,29 +481,6 @@ export const PurchaseNew2 = () => {
         return `1599 / Anual `;
       } else if (v === '3') {
         return `3497 / Anual `;
-      }
-    }
-    return 1599;
-  };
-
-  const returnPriceType = () => {
-    if (frequency === 'cuatrimestral') {
-      if (['1', '2', '3'].includes(v)) {
-        return 1599;
-      }
-    } else if (frequency === 'month') {
-      if (v === '1') {
-        return 149;
-      } else if (v === '2') {
-        return 249;
-      } else if (v === '3') {
-        return 459;
-      }
-    } else if (frequency === 'anual') {
-      if (v === '1' || v === '2') {
-        return 1599;
-      } else if (v === '3') {
-        return 3497;
       }
     }
     return 1599;

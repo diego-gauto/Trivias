@@ -146,7 +146,7 @@ export const PurchaseNew = () => {
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
-        if (haveAccess(res.level, res.final_date, res.role as any, res.method)) {
+        if (haveAccess(res.level, res.final_date, res.role as any, res.method as any)) {
           window.location.href = PREVIEW_PATH;
         }
         getAllCoupons();
