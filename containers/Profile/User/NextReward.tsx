@@ -22,6 +22,7 @@ import { conektaResumeSubscription } from '../../../components/api/profile';
 import { getUsersStripe } from '../../../components/api/conekta/test';
 import ChangePlanModal from '../../../components/Modals/ChangePlanModal/ChangePlanModal';
 import { IUserInfoResult } from '../../../interfaces/IUser';
+import { Modal as GenericModal } from '../../../components/admin/UsersNew/GenericModal';
 import { user as userTest } from './UserTestData';
 
 const or_star = '/images/cancel_modal/or_star.png';
@@ -397,13 +398,9 @@ const NextReward = (props: Props) => {
     return finalDate > Math.floor(new Date().getTime() / 1000);
   }
 
-  const haveRecurrentSuscription = (level: number) => {
-    return [1, 4, 7].includes(level);
-  };
-
-  const finalDateActive = Math.floor(new Date().getTime() / 1000) + (10 * 24 * 60 * 60 * 60);
-  const finalDateNotActive = Math.floor(new Date().getTime() / 1000) - ((15 * 24 * 60 * 60 * 60));
-  const finalDateActiveToConekta = Math.floor(new Date().getTime() / 1000) - (5 * 24 * 60 * 60 * 60);
+  const finalDateActive = Math.floor(new Date().getTime() / 1000) + (10 * 24 * 60 * 60);
+  const finalDateNotActive = Math.floor(new Date().getTime() / 1000) - ((15 * 24 * 60 * 60));
+  const finalDateActiveToConekta = Math.floor(new Date().getTime() / 1000) - (5 * 24 * 60 * 60);
 
   const FINAL_DATES = {
     active: finalDateActive,
@@ -411,53 +408,106 @@ const NextReward = (props: Props) => {
     conekta_active: finalDateActiveToConekta
   }
 
-  const user_test: IUserInfoResult = {
+  /*
+  const user: IUserInfoResult = {
     ...userTest,
-    user_id: 50099,
+    user_id: 49678,
     final_date: FINAL_DATES.conekta_active,
-    level: 0,
+    level: 1,
     method: 'conekta',
     is_canceled: 0,
     role: 'user'
   }
-
+*/
   const ableToShowCancelButton = (): boolean => {
-    // 1. Si esta cancelado o es super admin
+    // 1. Si esta cancelado o es super admin, directamente no puede cancelar
     const isCanceled = user.is_canceled === 1;
     const isSuperAdmin = user.role === 'superAdmin';
+    const finalDate = user.final_date;
 
     if (isCanceled || isSuperAdmin) {
       return false;
     }
 
-    // 2. Si es usuario inactivo de conekta
-    const today = Math.round(new Date().getTime() / 1000);
-    const finalDate = user.final_date;
-
-    if (isConektaUser(user.method || '')) {
-      console.log('Es usuario conekta');
-      if ((today - (10 * 24 * 60 * 60 * 60)) > finalDate) {
-        console.log('Su final date es caducado');
-        return false;
-      }
-    }
-
-    // 3. Si el usuario es de paypal pero no pertenece a los niveles correctos
+    // 2. Si no es del tipo paypal ni de conekta, no tendría porque poder cancelar
     const isPaypalUser = user.method === 'paypal';
-    if (isPaypalUser) {
-      if (!haveRecurrentSuscription(user.level)) {
-        // 0, 2, 3, 5, 6, 8
-        return false;
-      }
-    }
-
-    if (!(isConektaUser(user.method || '') || isPaypalUser)) {
+    const isAConektaUser = isConektaUser(user.method || '');
+    if (!(isPaypalUser || isAConektaUser)) {
       return false;
     }
 
-    // 4. Tiene que ser usuario con suscripción activa
+    // 2. El final date para los conekta tiene tolerancia de 10 dias,
+    // si es conekta y tiene un final_date mayor a hacer 10 días, directamente
+    // puede cancelar
+    const CONEKTA_FINAL_DATE_LIMIT = Math.floor(new Date().getTime() / 1000) - (10 * 24 * 60 * 60);
+    if (isAConektaUser) {
+      if (finalDate > CONEKTA_FINAL_DATE_LIMIT) {
+        return true;
+      }
+    }
+
+    // 4. Si llega a ser usuario de paypal o conekta, tiene que ser activo para poder cancelar
     return isActiveSubscription(finalDate);
   }
+
+  const getImportantValuesOfUser = () => {
+    const { role, final_date, user_id, method, is_canceled, level } = user;
+
+    const finalDateString = (new Date(final_date * 1000)).toJSON().substring(0, 10);
+
+    return {
+      role,
+      final_date: finalDateString,
+      method,
+      user_id,
+      is_canceled: is_canceled === 1,
+      level
+    }
+  }
+
+  const generateModalContent2 = (): JSX.Element => {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+      }}>
+        <div>
+          <p
+            style={{
+              fontWeight: 'bold'
+            }}
+          >Valores del usuario actual</p>
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          width: '100%'
+        }}>
+          {
+            Object.keys(getImportantValuesOfUser()).map((prop) => {
+              return <>
+                <div>
+                  <p
+                    style={{ margin: '4px 0' }}
+                  >{`${prop}`}</p>
+                </div>
+                <div>
+                  {
+                    <p style={{ margin: '4px 0' }}
+                    >{`${(getImportantValuesOfUser() as any)[`${prop}`]}`}</p>
+                  }
+                </div>
+              </>
+            })
+          }
+        </div>
+      </div>
+    )
+  }
+
+  const [showUserMembershipInfo, setShowUserMembershipInfo] = useState<boolean>(false);
 
   return (
     <ThirdBox>
@@ -775,7 +825,12 @@ const NextReward = (props: Props) => {
         <div className='second-section'>
           <p className='first-text'>PROXIMAMENTE</p>
           <p className='second-text'>Refiere amigos</p>
-          <p className='third-text'>
+          <p
+            className='third-text'
+            onClick={(e) => {
+              setShowUserMembershipInfo(true);
+            }}
+          >
             Obtén premios para ti {!responsive1023 && <br />}y para ellos.
           </p>
         </div>
@@ -783,6 +838,16 @@ const NextReward = (props: Props) => {
           <img src={handImage} />
         </div>
       </SubscriptionContainer>
+      {
+        (showUserMembershipInfo && user.user_id === 49678) &&
+        <GenericModal
+          child={generateModalContent2()}
+          onClose={() => {
+            setShowUserMembershipInfo(false);
+          }}
+          show={showUserMembershipInfo}
+          key={``} />
+      }
     </ThirdBox>
   );
 };
