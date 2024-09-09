@@ -629,6 +629,11 @@ const UsersDetails = () => {
     const now = Math.floor((new Date()).getTime() / 1000);
     const isActiveResult = isActive(userLevel, finalDate);
 
+    // TODO: Revisar el caso de los usaurios "cancelados"
+    if (isCanceled && finalDate > now) {
+      return 'Cancelada';
+    }
+
     if (userLevel === 0 && finalDate > now) {
       return 'En prueba';
     }
@@ -643,12 +648,6 @@ const UsersDetails = () => {
       return 'Activo';
     }
     // TODO: Hacer aviso unico para usuarios superAdmin
-
-    // TODO: Revisar el caso de los usaurios "cancelados"
-
-    if (isCanceled && finalDate > now) {
-      return 'Cancelada';
-    }
 
     return 'Inactiva';
   }
@@ -1019,7 +1018,8 @@ const UsersDetails = () => {
                         <p className='subscription-item__title'>
                           Su plan{' '}
                           {
-                            subscription.state === 'Activo' && 'es'
+                            (subscription.state === 'Activo' || subscription.state === 'Cancelada')
+                            && 'es'
                           }
                           {
                             subscription.state === 'Inactiva' && 'era'
@@ -1032,7 +1032,7 @@ const UsersDetails = () => {
                     </div>
                   }
                   {
-                    (subscription.state === 'Activo' || subscription.state === 'Inactiva' || subscription.state === 'En prueba') &&
+                    (subscription.state === 'Activo' || subscription.state === 'Inactiva' || subscription.state === 'En prueba' || subscription.state === 'Cancelada') &&
                     <>
                       <div className='subscription-item'>
                         <div className='subscription-item__header'>
@@ -1063,7 +1063,8 @@ const UsersDetails = () => {
                               <p className='subscription-item__content-text'>
                                 {
                                   (subscription.state === 'Activo' ||
-                                    subscription.state === 'En prueba')
+                                    subscription.state === 'En prueba' ||
+                                    subscription.state === 'Cancelada')
                                   &&
                                   'Termina el:'
                                 }

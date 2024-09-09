@@ -1007,22 +1007,22 @@ export const PurchaseNew2 = () => {
                                 finalDate =
                                   today + (frequency === 'month'
                                     ? 2592000
-                                    : frequency === 'anual'
+                                    : (frequency === 'anual'
                                       ? 31536000
-                                      : 10368000);
+                                      : 10368000));
                                 await updateMembership({
                                   method: 'paypal',
                                   final_date: finalDate,
                                   plan_id: data.subscriptionID,
                                   plan_name: product.title,
-                                  start_date: new Date().getTime() / 1000,
+                                  start_date: Math.floor(new Date().getTime() / 1000),
                                   userId: context.user.user_id,
                                   level:
-                                    frequency === 'month' || trial === 'true'
+                                    (frequency === 'month' || trial === 'true')
                                       ? 1
-                                      : frequency === 'anual'
+                                      : (frequency === 'anual'
                                         ? 4
-                                        : 7,
+                                        : 7),
                                   type: product.price,
                                 });
                                 // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
