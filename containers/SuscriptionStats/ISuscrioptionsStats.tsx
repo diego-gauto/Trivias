@@ -9,4 +9,9 @@ export interface StatsByType {
   renewed: Stats;
   reactive: Stats;
   canceled: Stats;
+  inactive: Stats
+}
+
+export interface StatsByDate {
+
 }

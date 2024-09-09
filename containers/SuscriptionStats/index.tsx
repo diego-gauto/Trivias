@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import CardStats from "../../components/admin/SuscriptionStats/Card";
 import MultiLineChart from "../../components/admin/SuscriptionStats/multiLineChart";
-import { getStatsByDate } from "../../components/api/subStats";
+import { getStatsByDate, getStatsByRange } from "../../components/api/subStats";
 import { Stats, StatsByType } from "./ISuscrioptionsStats";
 import styles from "./suscriptionStats.module.css";
 
@@ -25,27 +25,35 @@ const SuscriptionStats = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [todayStats, setTodayStats] = useState<StatsByType>()
+  const [rangeStats, setRangeStats] = useState<Stats>(defaultStats)
 
   // const todayString = today()
   const todayString = '2024-05-31'
+  const starDate = '2024-09-01'
+  const endDate = '2024-09-02'
 
   const handleClickToday = () => {
     console.log(todayString)
   }
 
+  const handleClickLastWeek = () => {
+    console.log(rangeStats)
+  }
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         console.log(todayString)
         const response = await getStatsByDate(todayString);
+        const statsByRange = await getStatsByRange(starDate, endDate)
         // if (!response.ok) {
         //   throw new Error(`Error: ${response.status} ${response.statusText}`);
         // }
         // const jsonData = await response.json();
         // setTodayStats(jsonData);
         setTodayStats(response);
-        console.log(response)
+        setRangeStats(statsByRange)
+
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -71,7 +79,7 @@ const SuscriptionStats = () => {
       <h1>Estadísticas de Suscripciones</h1>
       <div className={button_container}>
         <button className={button} onClick={handleClickToday}>Hoy</button>
-        <button className={button}>Última semana</button>
+        <button className={button} onClick={handleClickLastWeek}>Última semana</button>
         <button className={button}>Último mes</button>
         <button className={button}>último trimestre</button>
         <button className={button}>Personalizar fechas</button>

@@ -12,7 +12,8 @@ export const getStatsByDate = async (date: string) => {
       const renewed: Stats = { month: 5, quarter: 12, anual: 3 }
       const reactive: Stats = { month: 3, quarter: 10, anual: 2 }
       const canceled: Stats = { month: 1, quarter: 1, anual: 1 }
-      const stats: StatsByType = { new: news, renewed: renewed, reactive: reactive, canceled: canceled }
+      const inactive: Stats = { month: 5, quarter: 3, anual: 1 }
+      const stats: StatsByType = { new: news, renewed: renewed, reactive: reactive, canceled: canceled, inactive: inactive }
       return stats;
     })
     .catch((error) => {
@@ -22,9 +23,9 @@ export const getStatsByDate = async (date: string) => {
 
 };
 
-export const getStatsByRange = async (range: any) => {
+export const getStatsByRange = async (startDate: string, endDate: string) => {
   return axios
-    .post('https://gonvar.inowu.dev/subStats', range)
+    .post('https://gonvar.inowu.dev/subStats/range', { startDate, endDate })
     .then((res) => {
       return res;
     })
