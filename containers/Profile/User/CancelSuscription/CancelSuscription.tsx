@@ -1,21 +1,16 @@
-import router from 'next/router';
+import { useEffect, useState } from "react";
 
-import { CancelSub } from './CancelSuscription.styled';
-import { useEffect, useState } from 'react';
-import { getUserApi } from '../../../../components/api/users';
-import {
-  BackgroundLoader,
-  LoaderContain,
-  LoaderImage,
-} from '../../../../screens/Login.styled';
-import {
-  getAllRewardDataApi,
-  getRewardsApi,
-} from '../../../../components/api/rewards';
-import CircleProgress from '../../../CircleProgress/CircleProgress';
-import { PROFILE_PATH } from '../../../../constants/paths';
-import { getPausedSubscription } from '../../../../components/api/profile';
-import { getUsersStripe } from '../../../../components/api/conekta/test';
+import router from "next/router";
+
+import { getUsersStripe } from "../../../../components/api/conekta/test";
+import { getPausedSubscription } from "../../../../components/api/profile";
+import { getAllRewardDataApi, getRewardsApi } from "../../../../components/api/rewards";
+import { getUserApi } from "../../../../components/api/users";
+import { PROFILE_PATH } from "../../../../constants/paths";
+import { BackgroundLoader, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import CircleProgress from "../../../CircleProgress/CircleProgress";
+import { CancelSub } from "./CancelSuscription.styled";
+
 const manitas = '/images/cancel_suscription/manos moradas.png';
 
 const CancelSuscription = () => {
@@ -124,7 +119,7 @@ const CancelSuscription = () => {
           dashArray -
           ((monthProgress - monthRewardCompleted[0].month) /
             (monthFilter[0].month - monthRewardCompleted[0].month)) *
-            dashArray;
+          dashArray;
       }
     } else {
       progressMonth = 0;
@@ -156,7 +151,7 @@ const CancelSuscription = () => {
           dashArray -
           ((user.score - pointRewardCompleted[0].points) /
             (pointsFilter[0].points - pointRewardCompleted[0].points)) *
-            dashArray;
+          dashArray;
       }
     } else {
       progressPoints = 0;
@@ -341,9 +336,9 @@ const CancelSuscription = () => {
         </p>
         <p className='my-4'>
           Evita cancelar tu suscripción y recuerda que Gonvar+ te regala
-          producto cada mes, te otorga
-          <b> boletos para rifas </b>y{' '}
-          <b>descuentos de hasta 40% en producto</b>.
+          producto cada mes y te otorga
+          <b> boletos para rifas </b>
+          {/* <b>descuentos de hasta 40% en producto</b>. */}
         </p>
         {/* <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad
           para cuidar de ti misma. Cuando estés lista, <b>estaremos aquí para ayudarte a retomar tu camino como
