@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from "react";
 
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
-import router from 'next/router';
+import { user } from "firebase-functions/v1/auth";
+import router from "next/router";
 
-import {
-  PLAN_PATH,
-  PREVIEW_PATH,
-  PURCHASE_PATH,
-  SIGNUP_PATH,
-} from '../../../constants/paths';
-import { useAuth } from '../../../hooks/useAuth';
-import { IUser } from '../../../interfaces/IUserData';
-import { PlanStyles } from './Plans.styled';
-import { user } from 'firebase-functions/v1/auth';
-import { goTo } from './functions';
+import { useAuth } from "../../../hooks/useAuth";
+import { IUser } from "../../../interfaces/IUserData";
+import { goTo } from "./functions";
+import { PlanStyles } from "./Plans.styled";
 
 const gPlus = '/images/pay_plans/G+.png';
 let views = new Map<number, boolean>();
@@ -188,7 +182,7 @@ const Mensual = (props: IData) => {
               </div>
             )}
           </div>
-          <div className='back tip m-2' onClick={() => verQ(5)}>
+          {/* <div className='back tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='purple-pink mb-0'>
                 Hasta 40% de descuento en productos
@@ -210,7 +204,7 @@ const Mensual = (props: IData) => {
                 </p>
               </div>
             )}
-          </div>
+          </div> */}
           <div className='back tip m-2' onClick={() => verQ(6)}>
             <div className='tip-q mb-1'>
               <p className='purple-pink mb-0'>Kits de producto Gratis</p>

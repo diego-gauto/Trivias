@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 // background-color: rgba(210, 68, 209, 0.25);
 export const SuscriptionContain = styled.div`
   position: relative;
@@ -497,8 +498,8 @@ export const SuscriptionContain = styled.div`
         justify-content: center;
         .list {
           width: fit-content;
-          margin-bottom: 20px;
-          margin-top: 20px;
+          margin-bottom: 30px;
+          margin-top: 30px;
           padding-left: 10px;
           display: flex;
           align-items: center;

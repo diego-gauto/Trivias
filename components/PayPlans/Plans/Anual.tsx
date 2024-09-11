@@ -261,7 +261,7 @@ const Anual = (props: IData) => {
               </div>
             )}
           </div>
-
+          {/* 
           <div className='break tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='blue mb-0'>
@@ -283,7 +283,7 @@ const Anual = (props: IData) => {
                 </p>
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className='break tip m-2' onClick={() => verQ(6)}>
             <div className='tip-q mb-1'>

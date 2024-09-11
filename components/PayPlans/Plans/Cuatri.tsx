@@ -247,7 +247,7 @@ const Cuatri = (props: IData) => {
             )}
           </div>
 
-          <div className='black-background tip m-2' onClick={() => verQ(5)}>
+          {/* <div className='black-background tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='white mb-0'>
                 Precio de Distribución con 40% de descuento
@@ -268,7 +268,7 @@ const Cuatri = (props: IData) => {
                 </p>
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className='black-background tip m-2' onClick={() => verQ(6)}>
             <div className='tip-q mb-1'>
