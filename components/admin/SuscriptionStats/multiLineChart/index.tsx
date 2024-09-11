@@ -88,9 +88,6 @@ const MultiLineChart = () => {
       lineSeriesOne.setData(lineSeriesOneData);
       lineSeriesTwo.setData(lineSeriesTwoData);
       lineSeriesThree.setData(lineSeriesThreeData);
-      console.log(lineSeriesOneData)
-      console.log(lineSeriesTwoData)
-      console.log(lineSeriesThreeData)
 
       chart.timeScale().fitContent();
 
