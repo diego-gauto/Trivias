@@ -247,10 +247,10 @@ const Cuatri = (props: IData) => {
             )}
           </div>
 
-          {/* <div className='black-background tip m-2' onClick={() => verQ(5)}>
+          <div className='black-background tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='white mb-0'>
-                Precio de Distribución con 40% de descuento
+                Precio de Distribución con 20% de descuento
               </p>
               {views.get(5) ? (
                 <BsChevronUp className='tip-icon-special back-white' />
@@ -261,14 +261,14 @@ const Cuatri = (props: IData) => {
             {views.get(5) && (
               <div className='b-white-2'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just white'>
-                  <b>40% de descuento en todo el producto Gonvar.</b>
+                  <b>20% de descuento en todo el producto Gonvar.</b>
                   <br />
                   Sin compras mínimas. Compra con nosotros a un precio de
                   distribución, ahorra o vende en tu localidad.
                 </p>
               </div>
             )}
-          </div> */}
+          </div>
 
           <div className='black-background tip m-2' onClick={() => verQ(6)}>
             <div className='tip-q mb-1'>

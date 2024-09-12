@@ -182,10 +182,10 @@ const Mensual = (props: IData) => {
               </div>
             )}
           </div>
-          {/* <div className='back tip m-2' onClick={() => verQ(5)}>
+          <div className='back tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='purple-pink mb-0'>
-                Hasta 40% de descuento en productos
+                Hasta 20% de descuento en productos
               </p>
               {views.get(5) ? (
                 <BsChevronUp className='tip-icon Back-p-pink' />
@@ -197,14 +197,14 @@ const Mensual = (props: IData) => {
               <div className='b-p-pink'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just'>
                   Recibe <b>20% de descuento </b>
-                  en productos Gonvar a partir del 2do mes suscrita.
-                  <br />
+                  en productos Gonvar mientras mantengas tu suscripción activa.
+                  {/* <br />
                   Recibe <b>40% de descuento</b> en productos Gonvar a partir
-                  del 4to mes suscrita.
+                  del 4to mes suscrita. */}
                 </p>
               </div>
             )}
-          </div> */}
+          </div>
           <div className='back tip m-2' onClick={() => verQ(6)}>
             <div className='tip-q mb-1'>
               <p className='purple-pink mb-0'>Kits de producto Gratis</p>

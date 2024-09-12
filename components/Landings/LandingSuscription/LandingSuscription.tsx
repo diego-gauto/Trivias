@@ -1058,15 +1058,15 @@ const LandingSuscription = (props: ILandingSuscription) => {
               </h5>
             </div>
 
-            {/* <div className='list'>
+            <div className='list'>
               <img src={descuento} className='me-3' />
               <div className='m-0'>
                 <h5>
-                  <b className='p-pink'>40% de descuento</b> en todo el producto
+                  <b className='p-pink'>20% de descuento</b> en todo el producto
                   Gonvar.
                 </h5>
               </div>
-            </div> */}
+            </div>
 
             <div className='list'>
               <img src={regalo} className='me-3' />

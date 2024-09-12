@@ -336,9 +336,9 @@ const CancelSuscription = () => {
         </p>
         <p className='my-4'>
           Evita cancelar tu suscripción y recuerda que Gonvar+ te regala
-          producto cada mes y te otorga
-          <b> boletos para rifas </b>
-          {/* <b>descuentos de hasta 40% en producto</b>. */}
+          producto cada mes, te otorga
+          <b> boletos para rifas</b>
+          <b>y descuentos de hasta 20% en producto</b>.
         </p>
         {/* <p><b>No dejes que los obstáculos te detengan.</b> Pausa tu suscripción y aprovecha esta oportunidad
           para cuidar de ti misma. Cuando estés lista, <b>estaremos aquí para ayudarte a retomar tu camino como
