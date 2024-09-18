@@ -23,7 +23,6 @@ import { RetryPaymentContainer } from "./RetryPayment.styled";
 declare let window: any;
 
 export const RetryPayment = () => {
-  let userDataAuth: any = useAuth();
   let today = new Date().getTime() / 1000;
   const context = useAuth();
   const user = context.user;
@@ -80,17 +79,12 @@ export const RetryPayment = () => {
     }
   };
   const conektaSuccessResponseHandler = (token: any) => {
-    let user = userDataAuth.user;
     let tokenId = token.id;
     const body = {
       token_id: tokenId,
       conekta_id: user.conekta_id,
     };
     setToken(tokenId);
-    // attachPaymentMethodConekta(body).then((res) => {
-    //   getPaymentMethods();
-    //   setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-    // })
   };
   const conektaErrorResponseHandler = (response: any) => {
     alert('Hay un error en los datos de la tarjeta!');
@@ -119,8 +113,6 @@ export const RetryPayment = () => {
   };
   const getPaymentMethods = () => {
     setLoader(true);
-    let user = userDataAuth.user;
-
     let diff = Math.round((today - user.final_date) / 86400);
 
     if (diff > 90) {
@@ -129,7 +121,6 @@ export const RetryPayment = () => {
     }
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
-      // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
       router.push({ pathname: PREVIEW_PATH });
       return;
     }
@@ -173,12 +164,12 @@ export const RetryPayment = () => {
       router.push({ pathname: LOGIN_PATH });
     }
 
-    if (userDataAuth.user) {
+    if (user) {
       getPaymentMethods();
     } else {
       router.push({ pathname: PREVIEW_PATH });
     }
-  }, [userDataAuth]);
+  }, [context]);
 
   useEffect(() => {
     if (token) {
@@ -193,13 +184,10 @@ export const RetryPayment = () => {
 
     if (user.level === 0) plan_id = 'cuatrimestre';
     if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
-    if ([4, 5].includes(user.level) && user.type === 3497)
-      plan_id = 'anual_v1_1';
+    if ([4, 5].includes(user.level) && user.type === 3497) plan_id = 'anual_v1_1';
     if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
-    if ([1, 6].includes(user.level) && user.type === 249)
-      plan_id = 'mensual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 459)
-      plan_id = 'mensual_v1_2';
+    if ([1, 6].includes(user.level) && user.type === 249) plan_id = 'mensual_v1_1';
+    if ([1, 6].includes(user.level) && user.type === 459) plan_id = 'mensual_v1_2';
     if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
 
     const data = {
@@ -224,7 +212,6 @@ export const RetryPayment = () => {
           userId: user.user_id,
         };
         await updateMembership(membership);
-        // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
         let url = '/pagoexitoso';
         if (getNewUserLevel(user.level) === 1) {
           url += 'mensualidad';
@@ -237,16 +224,6 @@ export const RetryPayment = () => {
       } else {
         setLoaderAdd(false);
         setError(true);
-        // let notification = {
-        //   userId: user.user_id,
-        //   type: "8",
-        //   notificationId: '',
-        //   amount: user.type,
-        //   productName: 'Gonvar Plus',
-        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        // }
-        // await createNotification(notification);
-
         const msg = 'pago-rechazado';
       }
     });

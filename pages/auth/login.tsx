@@ -39,8 +39,6 @@ import {
   Title,
 } from '../../screens/Login.styled';
 import ModalForgot from './Modals/ModalForgot';
-import ActiveUserConekta from './Modals/ActiveUserConekta';
-import { getUsersStripe } from '../../components/api/conekta/test';
 import { IUser } from '../../interfaces/IUserData';
 import ComeFromModal from '../../components/Modals/ComeFromModal/ComeFromModal';
 import { authRedirect } from '../../constants/redirects';
