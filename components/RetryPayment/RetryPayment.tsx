@@ -184,13 +184,10 @@ export const RetryPayment = () => {
 
     if (user.level === 0) plan_id = 'cuatrimestre';
     if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
-    if ([4, 5].includes(user.level) && user.type === 3497)
-      plan_id = 'anual_v1_1';
+    if ([4, 5].includes(user.level) && user.type === 3497) plan_id = 'anual_v1_1';
     if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
-    if ([1, 6].includes(user.level) && user.type === 249)
-      plan_id = 'mensual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 459)
-      plan_id = 'mensual_v1_2';
+    if ([1, 6].includes(user.level) && user.type === 249) plan_id = 'mensual_v1_1';
+    if ([1, 6].includes(user.level) && user.type === 459) plan_id = 'mensual_v1_2';
     if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
 
     const data = {
