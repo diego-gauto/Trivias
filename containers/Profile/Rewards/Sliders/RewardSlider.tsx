@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import SwiperCore, { Autoplay } from 'swiper';
-import 'swiper/css';
-import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
-import { IUserReward, SlideObj, reward_slider } from './IRewardSlider';
-import { createRequestApi } from '../../../../components/api/rewards';
-import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
-import { goToCertificate } from '../../../../constants/redirects';
+import React, { useEffect, useState } from "react";
+
+import SwiperCore, { Autoplay } from "swiper";
+import "swiper/css";
+
+import { LoaderButton } from "../../../../components/admin/CoursesNew/Courses.styled";
+import { createRequestApi } from "../../../../components/api/rewards";
+import { goToCertificate } from "../../../../constants/redirects";
 import {
   checkCurrentDay,
   checkIfClaimed,
   showLessonText,
   showMonthText,
   showScoreText,
-} from './functions';
+} from "./functions";
+import { reward_slider, IUserReward } from "./IRewardSlider";
+import { BackgroundSlide, SlideContainer } from "./RewardModuleSlider.styled";
+
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -90,13 +93,14 @@ const RewardSlider = (props: reward_slider) => {
           (val.type == 'months' &&
             val.published === 'publicado' &&
             months >= val.month &&
-            today < user.final_date) ||
-          (user.level === 5 &&
-            today < user.final_date &&
-            val.month === -1 &&
-            val.type == 'months' &&
-            val.published === 'publicado') ||
-          (user.final_date > today && val.month === -1)
+            today < user.final_date)
+          //   ||
+          // (user.level === 5 &&
+          //   today < user.final_date &&
+          //   val.month === -1 &&
+          //   val.type == 'months' &&
+          //   val.published === 'publicado') ||
+          // (user.final_date > today && val.month === -1)
         );
       });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
@@ -119,12 +123,14 @@ const RewardSlider = (props: reward_slider) => {
         return (
           (val.type === 'months' &&
             val.published === 'publicado' &&
-            months < val.month &&
-            !(
-              (user.level === 5 || user.level === 4) &&
-              user.final_date > today
-            )) ||
-          (user.final_date < today && val.month === -1)
+            (months < val.month ||
+              user.final_date < today))
+          //   &&
+          //   !(
+          //     (user.level === 5 || user.level === 4) &&
+          //     user.final_date > today
+          //   )) ||
+          // (user.final_date < today && val.month === -1)
         );
       });
       tempFilter.sort((a: any, b: any) => a.month - b.month);

@@ -1,29 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { AiOutlineHourglass, AiOutlineStar } from 'react-icons/ai';
-import { FaArrowRight, FaAward } from 'react-icons/fa';
-import { TfiClose } from 'react-icons/tfi';
-import { useMediaQuery } from 'react-responsive';
+import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
+import { FaArrowRight, FaAward } from "react-icons/fa";
+import { TfiClose } from "react-icons/tfi";
+import { useMediaQuery } from "react-responsive";
 
-import 'animate.css';
-import Link from 'next/link';
-import router from 'next/router';
+import "animate.css";
+import Link from "next/link";
+import router from "next/router";
 
-import { getCoursesApi } from '../../../components/api/lessons';
-import { getRewardsApi } from '../../../components/api/rewards';
-import { LoaderContainSpinner } from '../Purchase/Purchase.styled';
-import {
-  RewardContainer,
-  SubscriptionContainer,
-  ThirdBox,
-} from './User.styled';
-import { REWARDS_PATH, SUPPORT_PATH } from '../../../constants/paths';
-import { conektaResumeSubscription } from '../../../components/api/profile';
-import { getUsersStripe } from '../../../components/api/conekta/test';
-import ChangePlanModal from '../../../components/Modals/ChangePlanModal/ChangePlanModal';
-import { IUserInfoResult } from '../../../interfaces/IUser';
-import { Modal as GenericModal } from '../../../components/admin/UsersNew/GenericModal';
-import { user as userTest } from './UserTestData';
+import { Modal as GenericModal } from "../../../components/admin/UsersNew/GenericModal";
+import { getUsersStripe } from "../../../components/api/conekta/test";
+import { getCoursesApi } from "../../../components/api/lessons";
+import { conektaResumeSubscription } from "../../../components/api/profile";
+import { getRewardsApi } from "../../../components/api/rewards";
+import ChangePlanModal from "../../../components/Modals/ChangePlanModal/ChangePlanModal";
+import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
+import { IUserInfoResult } from "../../../interfaces/IUser";
+import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
+import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
 
 const or_star = '/images/cancel_modal/or_star.png';
 const gr_star = '/images/cancel_modal/gr_star.png';
@@ -63,7 +58,8 @@ const NextReward = (props: Props) => {
     let tempMonths: any = [];
     getRewardsApi().then((res) => {
       tempPoints = res.data.data.filter((x: any) => x.type === 'points');
-      tempMonths = res.data.data.filter((x: any) => x.type === 'months');
+      tempMonths = res.data.data.filter((x: any) => x.type === 'months' && x.published === 'publicado');
+      console.log(tempMonths)
       tempPoints.sort((a: any, b: any) => a.points - b.points);
       tempMonths.sort((a: any, b: any) => a.month - b.month);
 
@@ -78,7 +74,7 @@ const NextReward = (props: Props) => {
       let today: any = new Date().getTime() / 1000;
       let tempDayCount: any = today - user.start_date;
       let tempMonth =
-        user.start_date === 0 ? 0 : tempDayCount / (3600 * 24 * 30);
+        user.final_date < today ? -1 : tempDayCount / (3600 * 24 * 30);
       tempMonths.forEach((element: any) => {
         if (Math.floor(tempMonth) >= element.month) {
           tempMonthObj.obtained.push(element);
@@ -701,7 +697,8 @@ const NextReward = (props: Props) => {
                   {time.blocked.length > 0 ? (
                     <>
                       Siguiente Beneficio <span>{time?.blocked[0].title}</span>{' '}
-                      a los <span>{time?.blocked[0].month} meses</span>
+                      {time?.blocked[0].month === 0 ? 'mientras tu suscripción esté activa' :
+                        `a los ${time?.blocked[0].month} meses`}
                     </>
                   ) : (
                     <>

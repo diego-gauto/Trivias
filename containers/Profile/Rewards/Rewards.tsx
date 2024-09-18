@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+
+import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
+import { FaAward, FaPrescriptionBottleAlt } from "react-icons/fa";
+
+import { useRouter } from "next/router";
+
+import { getAllRewardDataApi, getPublishedRewardsApi } from "../../../components/api/rewards";
+import { getUserApi } from "../../../components/api/users";
+import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../screens/Login.styled';
-import {
-  TitleContainer,
-  RewardContainer,
+  AllSlider,
   RewardsTitle,
   RewardCardContainer,
-  AllSlider,
-} from './Rewards.styled';
-import { AiOutlineHourglass, AiOutlineStar } from 'react-icons/ai';
-import { FaAward, FaPrescriptionBottleAlt } from 'react-icons/fa';
-import RewardSlider from './Sliders/RewardSlider';
-import { useRouter } from 'next/router';
-import {
-  getAllRewardDataApi,
-  getPublishedRewardsApi,
-} from '../../../components/api/rewards';
-import { getUserApi } from '../../../components/api/users';
+  RewardContainer,
+  TitleContainer,
+} from "./Rewards.styled";
+import RewardSlider from "./Sliders/RewardSlider";
 
 const Rewards = () => {
   const [rewards, setRewards] = useState<any>([]);
@@ -145,9 +141,12 @@ const Rewards = () => {
           565 -
           ((monthProgress - monthRewardCompleted[0].month) /
             (monthFilter[0].month - monthRewardCompleted[0].month)) *
-            565;
+          565;
       }
     }
+    console.log(progressMonth)
+    console.log(monthFilter)
+    console.log(monthRewardCompleted)
     return { progressMonth, monthFilter, monthRewardCompleted };
   };
   const getNextRewards = async (data: any) => {
@@ -188,7 +187,7 @@ const Rewards = () => {
           565 -
           ((user.score - pointRewardCompleted[0].points) /
             (pointsFilter[0].points - pointRewardCompleted[0].points)) *
-            565;
+          565;
       }
     }
     if (nextCourseCertificate) {
