@@ -146,11 +146,21 @@ const Formularios = () => {
     numeroWhatsApp: Yup.string().required(
       'El número de WhatsApp es obligatorio',
     ),
+    nombrePais: Yup.string(), // Asegúrate de incluir este campo en el esquema
     estado: Yup.string()
-      .required('El estado es obligatorio'),
+      .when('nombrePais', {
+        is: (nombrePais: string) => nombrePais === 'Mexico', // Verifica si el país es México
+        then: Yup.string().required('El estado es obligatorio'),
+        otherwise: Yup.string(), // No es obligatorio si el país no es México
+      }),
     cp: Yup.string()
-      .matches(/^\d{5}$/, 'El cp debe tener 5 números')
-      .required('El código postal es obligatorio'),
+      .when('nombrePais', {
+        is: (nombrePais: string) => nombrePais === 'Mexico', // Verifica si el país es México
+        then: Yup.string()
+          .matches(/^\d{5}$/, 'El cp debe tener 5 números')
+          .required('El código postal es obligatorio'),
+        otherwise: Yup.string(), // No es obligatorio si el país no es México
+      }),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
