@@ -386,7 +386,7 @@ const Formularios = () => {
         //   form?.redirect?.type === "thankYouPage"
         //     ? "/forms/thankyoupage"
         //     : form?.redirect?.link || "";
-        const link = formId === '17' ? 'forms/thankyoupage-dist' : 'forms/thankyoupage?formId=' + formId;
+        const link = (formId === '17' || formId === '19') ? 'forms/thankyoupage-dist' : 'forms/thankyoupage?formId=' + formId;
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
