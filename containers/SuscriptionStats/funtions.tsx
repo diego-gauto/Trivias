@@ -1,4 +1,4 @@
-import { Stats } from "./ISuscrioptionsStats";
+import { Stats, StatsByDate } from "./ISuscrioptionsStats";
 
 export const formatDate = (date: Date) => {
   const year = date.getFullYear();
@@ -38,3 +38,24 @@ export const addSubsByRange = (statsByRange: Record<string, Stats>): number => {
     return acc + addSubsByDate(stats);
   }, 0);
 };
+
+export function summarizeCounts(input: StatsByDate): Stats {
+  let monthTotal = 0;
+  let quarterTotal = 0;
+  let anualTotal = 0;
+
+  for (const date in input) {
+    const counts = input[date];
+    if (counts) {  // Verifica que counts no sea undefined
+      monthTotal += counts.month;
+      quarterTotal += counts.quarter;
+      anualTotal += counts.anual;
+    }
+  }
+
+  return {
+    month: monthTotal,
+    quarter: quarterTotal,
+    anual: anualTotal,
+  };
+}

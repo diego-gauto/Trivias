@@ -4,7 +4,7 @@ export interface Stats {
   anual: number;
 }
 
-export interface StatsByDate {
+export interface StatsByType {
   new: Stats;
   renewed: Stats;
   reactive: Stats;
@@ -12,10 +12,12 @@ export interface StatsByDate {
   inactive: Stats
 }
 
+export interface StatsByDate extends Record<string, Stats> { }
+
 export interface StatsByRange {
-  new: Record<string, Stats>;
-  renewed: Record<string, Stats>;
-  reactive: Record<string, Stats>;
-  canceled: Record<string, Stats>;
-  inactive: Record<string, Stats>;
+  new: StatsByDate;
+  renewed: StatsByDate;
+  reactive: StatsByDate;
+  canceled: StatsByDate;
+  inactive: StatsByDate;
 }

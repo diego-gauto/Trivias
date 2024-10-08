@@ -10,7 +10,7 @@ import {
   getLastMonthStart,
   getLastWeekStart,
 } from "./funtions";
-import { Stats, StatsByDate, StatsByRange } from "./ISuscrioptionsStats";
+import { Stats, StatsByRange, StatsByType } from "./ISuscrioptionsStats";
 import styles from "./suscriptionStats.module.css";
 
 const today = (() => {
@@ -28,7 +28,7 @@ const SuscriptionStats = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const [todayStats, setTodayStats] = useState<StatsByDate>()
+  const [todayStats, setTodayStats] = useState<StatsByType>()
   const [rangeStats, setRangeStats] = useState<StatsByRange>()
   const [showChart, setShowChart] = useState<boolean>(true);
   const [allNewStats, setAllNewStats] = useState<number>(0);
@@ -45,7 +45,7 @@ const SuscriptionStats = () => {
 
   const fetchStatsByDate = async (date: string) => {
     try {
-      const statsByDate: StatsByDate = await getStatsByDate(date);
+      const statsByDate: StatsByType = await getStatsByDate(date);
       setTodayStats(statsByDate);
       setAllNewStats(addSubsByDate(statsByDate.new))
       setAllRenewellsStats(addSubsByDate(statsByDate.renewed))
@@ -141,10 +141,10 @@ const SuscriptionStats = () => {
         <button className={button}>Personalizar fechas</button>
       </div>
       <div className={card_container}>
-        <CardStats type={"Nuevas"} suscriptores={45} suscriptions={todayStats?.new || defaultStats} color={"#2962FF"} />
-        <CardStats type={"Renovadas"} suscriptores={20} suscriptions={todayStats?.renewed || defaultStats} color={"#E1575A"} />
-        <CardStats type={"Reactivadas"} suscriptores={15} suscriptions={todayStats?.reactive || defaultStats} color={"#F28E2C"} />
-        <CardStats type={"Canceladas"} suscriptores={3} suscriptions={todayStats?.canceled || defaultStats} color={"#40E0D0"} />
+        <CardStats type={"Nuevas"} suscriptions={todayStats?.new || defaultStats} color={"#2962FF"} />
+        <CardStats type={"Renovadas"} suscriptions={todayStats?.renewed || defaultStats} color={"#E1575A"} />
+        <CardStats type={"Reactivadas"} suscriptions={todayStats?.reactive || defaultStats} color={"#F28E2C"} />
+        <CardStats type={"Canceladas"} suscriptions={todayStats?.canceled || defaultStats} color={"#40E0D0"} />
       </div>
       {showChart && <MultiLineChart />}    </div>
   );

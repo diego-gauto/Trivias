@@ -12,13 +12,13 @@ interface Stats {
 
 interface CardProps {
   type: string;
-  suscriptores: number;
   suscriptions: Stats;
   color: string
 }
 
-const CardStats: React.FC<CardProps> = ({ type, suscriptores, suscriptions, color }) => {
+const CardStats: React.FC<CardProps> = ({ type, suscriptions, color }) => {
   const { cardContainer, cardBottom, cardTop, title, sub_type, stats, content, plans, subscriber } = styles
+  const total = suscriptions.month + suscriptions.quarter + suscriptions.anual
   return (
     <div className={cardContainer}>
       <div className={cardBottom} style={{ background: color }}>
@@ -32,7 +32,7 @@ const CardStats: React.FC<CardProps> = ({ type, suscriptores, suscriptions, colo
                 <p>Anuales: {suscriptions.anual}</p>
               </div>
               <div className={subscriber}>
-                <p>{suscriptores}</p>
+                <p>{total}</p>
               </div>
             </div>
           </div>
