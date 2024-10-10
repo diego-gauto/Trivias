@@ -14,7 +14,6 @@ import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 import { useAuth } from "../../hooks/useAuth";
 import { IUserInfoResult } from "../../interfaces/IUser";
-import { returnPriceTag } from "../../utils/functions";
 import { retrieveCoupons } from "../api/admin";
 import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
@@ -41,16 +40,19 @@ interface ICardUser {
   exp_year: string
 }
 
-type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
+type FrecuencyValues = 'cuatri' | 'month' | 'anual';
 
-const frecuenciesPlanNames = new Map<string, string>();
-frecuenciesPlanNames.set('cuatrimestral', 'Cuatri');
+const frecuenciesPlanNames = new Map<FrecuencyValues, string>();
+frecuenciesPlanNames.set('cuatri', 'Cuatri');
 frecuenciesPlanNames.set('month', 'Mensual');
 frecuenciesPlanNames.set('anual', 'Anual');
 
 export const PurchaseNew2 = () => {
   // type, id, trial, frequency, nailmasterplusanual, v
-  const { type, frequency, v, id, trial, nailmasterplusanual }: any = router.query;
+  const { type, v, frequency, id, trial, nailmasterplusanual }: any = router.query;
+  const subscriptionFrequency = frequency as FrecuencyValues;
+  const planVersion = v as '1' | '2' | '3';
+  const subscriptionType = type as 'subscription' | 'course';
   const context = useAuth();
   const user = context.user;
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
@@ -87,7 +89,7 @@ export const PurchaseNew2 = () => {
   const courseId = new URLSearchParams(window.location.search);
   let idC = courseId.get('id');
 
-  const subscription = getSubscription(type, frequency, v);
+  const subscription = getSubscription(subscriptionType, subscriptionFrequency, planVersion);
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
@@ -199,7 +201,7 @@ export const PurchaseNew2 = () => {
         }
         // getAllCoupons();
         // setPaypal(!paypal);
-        if (type == 'subscription') {
+        if (subscriptionType == 'subscription') {
           setProduct({
             ...product,
             title: subscription.title,
@@ -247,7 +249,7 @@ export const PurchaseNew2 = () => {
             localStorage.setItem('anual', 'true');
           }
         }
-        else if (searchParams.get('frequency') === 'cuatrimestral') {
+        else if (searchParams.get('frequency') === 'cuatri') {
           const cuatriVersion = searchParams.get('v');
           if (['1', '2', '3'].includes(cuatriVersion || '')) {
             localStorage.setItem('cuatri', 'true');
@@ -289,27 +291,27 @@ export const PurchaseNew2 = () => {
   };
 
   const getUserLevel = () => {
-    return (frequency === 'month' || trial === 'true') ? 1 : (frequency === 'anual' ? 4 : 7);
+    return (subscriptionFrequency === 'month' || trial === 'true') ? 1 : (subscriptionFrequency === 'anual' ? 4 : 7);
   };
 
-  type FrequencyType = 'cuatrimestral' | 'month' | 'anual';
+  type FrequencyType = 'cuatri' | 'month' | 'anual';
 
   const getPlanNameByFrecuency = (frequency: FrequencyType): string => {
     return `Gonvar Plus ${frecuenciesPlanNames.get(frequency) || ''}`;
   }
 
   const getPlanIdByFrecuency = () => {
-    if (frequency === 'cuatrimestral') {
+    if (subscriptionFrequency === 'cuatri') {
       return `cuatrimestre`;
-    } else if (frequency === 'month') {
-      if (v === '1') {
+    } else if (subscriptionFrequency === 'month') {
+      if (planVersion === '1') {
         return 'mensual';
-      } else if (v === '2') {
+      } else if (planVersion === '2') {
         return 'mensual_v1_1';
       }
       return 'mensual_v1_2';
-    } else if (frequency === 'anual') {
-      if (['1', '2'].includes(v)) {
+    } else if (subscriptionFrequency === 'anual') {
+      if (['1', '2'].includes(planVersion)) {
         return 'anual';
       }
       return 'anual_v1_1';
@@ -340,7 +342,7 @@ export const PurchaseNew2 = () => {
           level: getUserLevel(),
           payment_method: sub.card_id,
           plan_id: sub.id,
-          plan_name: getPlanNameByFrecuency(frequency),
+          plan_name: getPlanNameByFrecuency(subscriptionFrequency as FrecuencyValues),
           start_date: sub.billing_cycle_start,
           type: subscription.price,
           userId: user.user_id,
@@ -349,11 +351,11 @@ export const PurchaseNew2 = () => {
         await updateMembership(membership);
         // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
         let url = '/pagoexitoso';
-        if (frequency === 'month') {
+        if (subscriptionFrequency === 'month') {
           url += 'mensualidad';
-        } else if (frequency === 'anual') {
+        } else if (subscriptionFrequency === 'anual') {
           url += 'anualidad';
-        } else if (frequency === 'cuatrimestral') {
+        } else if (subscriptionFrequency === 'cuatri') {
           url += 'cuatrimestre';
         }
         window.location.href = url;
@@ -367,16 +369,16 @@ export const PurchaseNew2 = () => {
     }
   };
 
-  const getDurationByFrecuency = (): FrecuencyValue => {
-    if (frequency === 'month') {
+  const getDurationByFrecuency = (): 'month' | 'year' | 'cuatrimestral' => {
+    if (subscriptionFrequency === 'month') {
       return 'month';
     }
 
-    if (frequency === 'anual') {
+    if (subscriptionFrequency === 'anual') {
       return 'year';
     }
 
-    if (frequency === 'cuatrimestral') {
+    if (subscriptionFrequency === 'cuatri') {
       return 'cuatrimestral';
     }
 
@@ -395,11 +397,11 @@ export const PurchaseNew2 = () => {
       title: product.title,
       price: product.price * 100,
       meta: {
-        type: type,
-        course_id: type === 'subscription' ? 0 : id,
-        frecuency: type === 'subscription' ? getDurationByFrecuency() : '',
+        type: subscriptionType,
+        course_id: subscriptionType === 'subscription' ? 0 : id,
+        frecuency: subscriptionType === 'subscription' ? getDurationByFrecuency() : '',
         duration:
-          type === 'subscription' ? 0 : Math.floor(new Date().getTime() / 1000) + (product.duration * 24 * 60 * 60),
+          subscriptionType === 'subscription' ? 0 : Math.floor(new Date().getTime() / 1000) + (product.duration * 24 * 60 * 60),
       },
     };
 
@@ -429,11 +431,11 @@ export const PurchaseNew2 = () => {
       title: product.title,
       price: product.price * 100,
       meta: {
-        type: type,
-        course_id: type === 'subscription' ? 0 : id,
-        frecuency: type === 'subscription' ? getDurationByFrecuency() : '',
+        type: subscriptionType,
+        course_id: subscriptionType === 'subscription' ? 0 : id,
+        frecuency: subscriptionType === 'subscription' ? getDurationByFrecuency() : '',
         duration:
-          type === 'subscription'
+          subscriptionType === 'subscription'
             ? 0
             : new Date().getTime() / 1000 + product.duration * 86400,
       },
@@ -460,27 +462,50 @@ export const PurchaseNew2 = () => {
     // } else {
     //   return 'NA ';
     // }
-    return frequency === 'month' ? 'Mensual' : (frequency === 'anual' ? 'Anual' : 'Cuatrimestral');
+    return subscriptionFrequency === 'month' ? 'Mensual' : (subscriptionFrequency === 'anual' ? 'Anual' : 'Cuatrimestral');
   };
 
   const returnPrice = () => {
-    if (frequency === 'cuatrimestral') {
-      if (['1', '2', '3'].includes(v)) {
+    if (subscriptionFrequency === 'cuatri') {
+      if (['1', '2', '3'].includes(planVersion)) {
         return `1599 / Cuatrimestral `;
       }
-    } else if (frequency === 'month') {
-      if (v === '1') {
+    } else if (subscriptionFrequency === 'month') {
+      if (planVersion === '1') {
         return `149 / Mensual `;
-      } else if (v === '2') {
+      } else if (planVersion === '2') {
         return `249 / Mensual `;
-      } else if (v === '3') {
+      } else if (planVersion === '3') {
         return `459 / Mensual `;
       }
-    } else if (frequency === 'anual') {
-      if (v === '1' || v === '2') {
+    } else if (subscriptionFrequency === 'anual') {
+      if (planVersion === '1' || planVersion === '2') {
         return `1599 / Anual `;
-      } else if (v === '3') {
+      } else if (planVersion === '3') {
         return `3497 / Anual `;
+      }
+    }
+    return 1599;
+  };
+
+  const returnPriceNumber = () => {
+    if (subscriptionFrequency === 'cuatri') {
+      if (['1', '2', '3'].includes(planVersion)) {
+        return 1599;
+      }
+    } else if (subscriptionFrequency === 'month') {
+      if (planVersion === '1') {
+        return 149;
+      } else if (planVersion === '2') {
+        return 249;
+      } else if (planVersion === '3') {
+        return 459;
+      }
+    } else if (subscriptionFrequency === 'anual') {
+      if (planVersion === '1' || planVersion === '2') {
+        return 1599;
+      } else if (planVersion === '3') {
+        return 3497;
       }
     }
     return 1599;
@@ -498,7 +523,7 @@ export const PurchaseNew2 = () => {
   };
 
   const getRouteByFrequency = (
-    frequency: 'month' | 'anual' | 'cuatrimestral',
+    frequency: 'month' | 'anual' | 'cuatri',
     success: boolean,
     error: boolean = false,
     errorMessage?: string,
@@ -511,7 +536,7 @@ export const PurchaseNew2 = () => {
       case 'month':
         membership = 'mensualidad';
         break;
-      case 'cuatrimestral':
+      case 'cuatri':
         membership = 'cuatrimestre';
         break;
       case 'anual':
@@ -524,19 +549,19 @@ export const PurchaseNew2 = () => {
 
   const returnPricePaypal = () => {
     let sub = '';
-    if (frequency === 'month' && v === '1')
+    if (subscriptionFrequency === 'month' && planVersion === '1')
       return (sub = 'P-2P063165RR167053TMRKD7BQ');
-    if (frequency === 'anual' && v === '1')
+    if (subscriptionFrequency === 'anual' && planVersion === '1')
       return (sub = 'P-1VN62329L4770474AMSHBSZY');
-    if (frequency === 'month' && v === '2')
+    if (subscriptionFrequency === 'month' && planVersion === '2')
       return (sub = 'P-2UH60720VG8742017MTYPHOQ');
-    if (frequency === 'anual' && v === '2')
+    if (subscriptionFrequency === 'anual' && planVersion === '2')
       return (sub = 'P-1VN62329L4770474AMSHBSZY');
-    if (frequency === 'month' && v === '3')
+    if (subscriptionFrequency === 'month' && planVersion === '3')
       return (sub = 'P-1EG90467MN295414UMVEUKHI');
-    if (frequency === 'anual' && v === '3')
+    if (subscriptionFrequency === 'anual' && planVersion === '3')
       return (sub = 'P-0ND16663SN6195536MVEUMXI');
-    if (frequency === 'cuatrimestral' && v === '3')
+    if (subscriptionFrequency === 'cuatri' && planVersion === '3')
       return (sub = 'P-6RT70377G6729623WMVJLPYQ');
     return sub;
   };
@@ -680,7 +705,7 @@ export const PurchaseNew2 = () => {
                 }}
               >
                 {
-                  (frequency === 'month'
+                  (subscriptionFrequency === 'month'
                     ? PayOptionsPurchaseForMonthSuscription
                     : PayOptionsPurchase
                   ).map((pay: IPayOption, index: number) => {
@@ -826,7 +851,7 @@ export const PurchaseNew2 = () => {
                       Presionando en el botón "Confirmar compra" estás dando tu
                       consentimiento para que Gonvar automáticamente continúe con
                       tu suscripción &nbsp;
-                      {returnFrecuency()} y te cobremos $ {returnPrice()}
+                      {returnFrecuency()} y te cobremos $ {returnPrice()}{' '}
                       en el medio de pago que estás agregando hasta que tu decidas
                       cancelarla.
                       <br />
@@ -1005,9 +1030,9 @@ export const PurchaseNew2 = () => {
                                 let today = new Date().getTime() / 1000;
                                 let finalDate = 0;
                                 finalDate =
-                                  today + (frequency === 'month'
+                                  today + (subscriptionFrequency === 'month'
                                     ? 2592000
-                                    : (frequency === 'anual'
+                                    : (subscriptionFrequency === 'anual'
                                       ? 31536000
                                       : 10368000));
                                 await updateMembership({
@@ -1018,16 +1043,16 @@ export const PurchaseNew2 = () => {
                                   start_date: Math.floor(new Date().getTime() / 1000),
                                   userId: context.user.user_id,
                                   level:
-                                    (frequency === 'month' || trial === 'true')
+                                    (subscriptionFrequency === 'month' || trial === 'true')
                                       ? 1
-                                      : (frequency === 'anual'
+                                      : (subscriptionFrequency === 'anual'
                                         ? 4
                                         : 7),
                                   type: product.price,
                                 });
                                 // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
                                 window.location.href = getRouteByFrequency(
-                                  frequency,
+                                  subscriptionFrequency,
                                   true,
                                 );
                                 return data;
@@ -1050,15 +1075,15 @@ export const PurchaseNew2 = () => {
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src="/images/purchase/logo.png" alt="Gonvar Logo" style={{ margin: '0px' }} />
               </div>
-              {type == 'subscription' ? (
+              {subscriptionType == 'subscription' ? (
                 <p className='title'>
                   Suscripción{' '}
                   <span>
                     Gonvar+{' '}
-                    {(frequency === 'month' || trial === 'true') &&
+                    {(subscriptionFrequency === 'month' || trial === 'true') &&
                       'Mensual'}{' '}
-                    {frequency === 'anual' && 'Anual'}{' '}
-                    {frequency === 'cuatrimestral' && 'Cuatrimestral'}
+                    {subscriptionFrequency === 'anual' && 'Anual'}{' '}
+                    {subscriptionFrequency === 'cuatri' && 'Cuatrimestral'}
                   </span>{' '}
                 </p>
               ) : (
@@ -1088,19 +1113,10 @@ export const PurchaseNew2 = () => {
               >
                 Total<span> a pagar</span>
               </p>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: returnPriceTag(
-                    trial,
-                    v,
-                    frequency,
-                    type,
-                    coupon,
-                    product.price,
-                    nailmasterplusanual,
-                  ),
-                }}
-              ></p>
+              <p className="total">
+                {returnPriceNumber()}{' '}
+                <span>MXN</span>
+              </p>
             </div>
             <div className='bg'></div>
             <img className="image" src="/images/purchase/neworange.png" alt="" />

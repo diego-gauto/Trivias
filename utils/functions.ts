@@ -342,7 +342,7 @@ export function returnPriceTag(
   }
   if (
     type == 'subscription' &&
-    frequency === 'cuatrimestral' &&
+    frequency === 'cuatri' &&
     ['1', '2', '3'].includes(v)
   ) {
     priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
