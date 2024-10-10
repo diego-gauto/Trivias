@@ -13,6 +13,26 @@ export const conektaCustomer = async (user: any) => {
     });
 };
 
+interface ICreateFamsaUserEstruct {
+  phone_number: string;
+  name: string;
+  email: string;
+  user_id: number;
+}
+
+export const createFamsaOxxoCustomer = async (user: ICreateFamsaUserEstruct) => {
+  return axios
+    .post('https://gonvar.inowu.dev/' + 'auth/femsa/customer', user)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+
+      return error;
+    });
+};
+
 export const newUser = async (user: any) => {
   return axios
     .post('https://gonvar.inowu.dev/' + 'auth/register', user)
@@ -76,6 +96,8 @@ export const googleTokens = async (code: any) => {
 };
 
 export const facebookUserInfo = (userData: any) => {
+  const query = `https://graph.facebook.com/${userData.id}?fields=id,name,email,picture&access_token=${userData.access_token}`;
+  console.log({ query });
   return axios
     .get(
       `https://graph.facebook.com/${userData.id}?fields=id,name,email,picture&access_token=${userData.access_token}`,
