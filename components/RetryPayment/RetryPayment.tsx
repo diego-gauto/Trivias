@@ -10,7 +10,7 @@ import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
 import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 import { useAuth } from "../../hooks/useAuth";
-import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
@@ -19,6 +19,7 @@ import { checkEmpty } from "./functions";
 import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { RetryPaymentContainer } from "./RetryPayment.styled";
+import { FemsaCreateOrderResponse } from "./FemsaOxxo";
 
 declare let window: any;
 
@@ -41,7 +42,7 @@ export const RetryPayment = () => {
   const [product, setProduct] = useState({ price: 149 });
   const [reference, setReference] = useState('');
   const [bank_ref, setBank_ref] = useState('');
-  const [expiresAt, setExpiresAt] = useState();
+  const [expiresAt, setExpiresAt] = useState<number>(0);
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
@@ -273,6 +274,62 @@ export const RetryPayment = () => {
       setExpiresAt(response.charges.data[0].payment_method.expires_at);
       setOxxoIsActive(true);
     });
+  };
+
+  const getFinalDateByFrequency = (subscriptionFrequency: FrecuencyValue): number => {
+    const today = new Date();
+    switch (subscriptionFrequency) {
+      case "year":
+        today.setFullYear(today.getFullYear() + 1);
+        break;
+      case "cuatrimestral":
+        today.setMonth(today.getMonth() + 4);
+        break;
+      case "month":
+        today.setMonth(today.getMonth() + 1);
+        break;
+      default:
+
+        break;
+    }
+    return Math.floor(today.getTime() / 1000);
+  }
+
+  const payWithOxxoFemsa = async () => {
+    setProduct({ ...product, price: user.type });
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 1);
+
+    let data = {
+      femsa_customer_id: context.user.femsa_customer_id,
+      expires_at: Math.round(expirationDate.getTime() / 1000),
+      title: 'Gonvar Plus',
+      price: user.type * 100,
+      meta: {
+        type: 'subscription',
+        course_id: 0,
+        frecuency: getFrecuency(user.level),
+        duration: getFinalDateByFrequency(getFrecuency(user.level)),
+      },
+    };
+
+    try {
+      const femsaCreateOrderResponse: FemsaCreateOrderResponse = await femsaOxxoApi(data);
+      console.log({ femsaCreateOrderResponse });
+      let { order_response } = femsaCreateOrderResponse.data;
+      if (order_response.charges.data[0] !== undefined) {
+        const { barcode_url, reference, expires_at } = order_response.charges.data[0].payment_method;
+
+        setBarcode(barcode_url);
+        setReference(reference);
+        setExpiresAt(expires_at);
+        setOxxoIsActive(true);
+      } else {
+        throw new Error(`Hubo un error, no existen cargos para continuar con el pago en oxxo...`);
+      }
+    } catch (error) {
+      console.error({ error });
+    }
   };
 
   const payWitSpei = () => {
@@ -606,7 +663,7 @@ export const RetryPayment = () => {
                     tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
                     continuación podrás comenzar con tus cursos
                   </p>
-                  <button className='type3 oxxo' onClick={payWithOxxo}>
+                  <button className='type3 oxxo' onClick={payWithOxxoFemsa}>
                     Genera ficha de pago OXXO
                   </button>
                 </div>

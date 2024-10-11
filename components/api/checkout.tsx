@@ -57,7 +57,7 @@ export const conektaSubscriptionApi = async (order: any) => {
     });
 };
 
-export const famsaOxxoApi = async (order: any) => {
+export const femsaOxxoApi = async (order: any) => {
   return axios
     .post('https://gonvar.inowu.dev/' + 'checkout/femsa/payment/oxxo', order)
     .then((res) => {

@@ -15,7 +15,7 @@ import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase
 import { useAuth } from "../../hooks/useAuth";
 import { IUserInfoResult } from "../../interfaces/IUser";
 import { retrieveCoupons } from "../api/admin";
-import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, getUserApi, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
@@ -30,6 +30,7 @@ import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { PurchaseNewContainer } from "./PurchaseNew.styled";
 import { getSubscription } from "./PurchaseNewFunctions";
+import { FemsaCreateOrderResponse } from "./FemsaOxxo";
 
 declare let window: any;
 
@@ -70,7 +71,7 @@ export const PurchaseNew2 = () => {
   const [product, setProduct] = useState<any>({});
   const [reference, setReference] = useState('');
   const [bank_ref, setBank_ref] = useState('');
-  const [expiresAt, setExpiresAt] = useState();
+  const [expiresAt, setExpiresAt] = useState<number>(0);
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
@@ -416,6 +417,63 @@ export const PurchaseNew2 = () => {
       setOxxoIsActive(true);
     } catch (error) {
       console.log({ error });
+    }
+  };
+
+  const getFinalDateByFrequency = (): number => {
+    const today = new Date();
+    switch (subscriptionFrequency) {
+      case "anual":
+        today.setFullYear(today.getFullYear() + 1);
+        break;
+      case "cuatri":
+        today.setMonth(today.getMonth() + 4);
+        break;
+      case "month":
+        today.setMonth(today.getMonth() + 1);
+        break;
+      default:
+
+        break;
+    }
+    return Math.floor(today.getTime() / 1000);
+  }
+
+  const payWithOxxoFemsa = async () => {
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 1);
+
+    let payOxxoJson = {
+      femsa_customer_id: context.user.femsa_customer_id,
+      expires_at: Math.round(expirationDate.getTime() / 1000),
+      title: product.title,
+      price: product.price * 100,
+      meta: {
+        type: subscriptionType,
+        course_id: subscriptionType === 'subscription' ? 0 : id,
+        frecuency: subscriptionType === 'subscription' ? getDurationByFrecuency() : '',
+        duration: subscriptionType === 'subscription' ? getFinalDateByFrequency() : 0,
+      },
+    };
+
+    console.log({ payOxxoJson });
+
+    try {
+      const femsaCreateOrderResponse: FemsaCreateOrderResponse = await femsaOxxoApi(payOxxoJson);
+      console.log({ femsaCreateOrderResponse });
+      let { order_response } = femsaCreateOrderResponse.data;
+      if (order_response.charges.data[0] !== undefined) {
+        const { barcode_url, reference, expires_at } = order_response.charges.data[0].payment_method;
+
+        setBarcode(barcode_url);
+        setReference(reference);
+        setExpiresAt(expires_at);
+        setOxxoIsActive(true);
+      } else {
+        throw new Error(`Hubo un error, no existen cargos para continuar con el pago en oxxo...`);
+      }
+    } catch (error) {
+      console.error({ error });
     }
   };
 
@@ -926,7 +984,7 @@ export const PurchaseNew2 = () => {
                       tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
                       continuación podrás comenzar con tus cursos
                     </p>
-                    <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
+                    <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxoFemsa}>
                       Genera ficha de pago OXXO
                     </button>
                   </div>
