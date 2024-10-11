@@ -12,7 +12,7 @@ import {
   LoaderContain,
   LoaderImage,
 } from '../../../../screens/Login.styled';
-import { cancelReview } from '../../../../components/api/admin';
+import { cancelReview, getGenericQueryResponse } from '../../../../components/api/admin';
 import AlertModal from '../../../../components/Modals/AlertModal/AlertModal';
 import { PROFILE_PATH } from '../../../../constants/paths';
 import {
@@ -64,7 +64,7 @@ const CancelFinal = () => {
     }
     return text;
   };
-  const goCancel = () => {
+  const goCancel = async () => {
     //router.push({ pathname: "/pause-suscription" });
     setButtonLoader(true);
     let tempData = {
@@ -86,46 +86,45 @@ const CancelFinal = () => {
       setShow(true);
       setButtonLoader(false);
     } else {
-      cancelReview(tempData).then((res) => {
-        if (
-          conektaUsers.filter(
-            (x: any) =>
-              x.email === userData.email && x.final_date === 1694040000,
-          ).length > 0
+      try {
+        const cancelReviewResponse = await cancelReview(tempData);
+        if (conektaUsers.filter(
+          (x: any) =>
+            x.email === userData.email && x.final_date === 1694040000,
+        ).length > 0
         ) {
           let body = {
             final_date: 0,
             user_id: userData.user_id,
           };
-          canelConektaUserArray(body).then((res) => {
-            setPop(true);
-          });
-          return;
-        }
-        if (userData.method === 'conekta') {
+          await canelConektaUserArray(body);
+          setPop(true);
+        } else if (userData.method === 'conekta') {
           let data = {
             conekta_id: userData.conekta_id,
             plan_id: userData.plan_id,
           };
           if (type === 'pause') {
-            conektaPausedSubscription(data).then((res) => {
-              setPop(true);
-            });
+            await conektaPausedSubscription(data);
+            setPop(true);
           } else {
-            conektaCancelSubscription(data).then((res) => {
-              setPop(true);
-            });
+            await conektaCancelSubscription(data);
+            setPop(true);
           }
         } else {
           let membership = {
             planId: userData.plan_id,
             id: userData.plan_id,
           };
-          cancelPaypal(membership).then(() => {
-            setPop(true);
-          });
+          await cancelPaypal(membership);
+          setPop(true);
         }
-      });
+        const { user_id } = userData;
+        const query = `UPDATE memberships SET is_cenceled = 1 WHERE user_id = ${user_id};`;
+        await getGenericQueryResponse(query);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   const comeback = [

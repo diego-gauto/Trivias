@@ -422,11 +422,13 @@ export const RetryPayment = () => {
             >
               <div
                 className='button-container'
-                style={{
-                  justifyContent: [1, 6].includes(user.level)
-                    ? 'center'
-                    : 'space-between',
-                }}
+              /*
+              style={{
+                justifyContent: [1, 6].includes(user.level)
+                  ? 'center'
+                  : 'space-between',
+              }}
+              */
               >
                 {([1, 6].includes(user.level)
                   ? PayOptionsForMonthSuscription
