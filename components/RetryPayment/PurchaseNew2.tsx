@@ -31,6 +31,7 @@ import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { PurchaseNewContainer } from "./PurchaseNew.styled";
 import { getSubscription } from "./PurchaseNewFunctions";
 import { FemsaCreateOrderResponse } from "./FemsaOxxo";
+import { createFemsaOxxoCustomer } from "../api/auth";
 
 declare let window: any;
 
@@ -76,13 +77,7 @@ export const PurchaseNew2 = () => {
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [token, setToken] = useState('');
-  // const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
-  /*
-  */
-  // const [plan, setPlan] = useState<any>({ method: 'conekta' });
-  const [coupon, setCoupon] = useState<any>();
-  const [userData, setUserData] = useState<IUserInfoResult>({} as IUserInfoResult);
   const [paypal, setPaypal] = useState(false);
   const [coupons, setCoupons] = useState<any>([]);
   const [terms, setTerms] = useState(false);
@@ -91,6 +86,8 @@ export const PurchaseNew2 = () => {
   let idC = courseId.get('id');
 
   const subscription = getSubscription(subscriptionType, subscriptionFrequency, planVersion);
+
+  const [isCreatingFamsaCustomer, setIsCreatingFamsaCustomer] = useState<boolean>(false);
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
@@ -443,27 +440,46 @@ export const PurchaseNew2 = () => {
     const expirationDate = new Date();
     expirationDate.setMonth(expirationDate.getMonth() + 1);
 
-    let payOxxoJson = {
-      femsa_customer_id: context.user.femsa_customer_id,
-      expires_at: Math.round(expirationDate.getTime() / 1000),
-      title: product.title,
-      price: product.price * 100,
-      meta: {
-        type: subscriptionType,
-        course_id: subscriptionType === 'subscription' ? 0 : id,
-        frecuency: subscriptionType === 'subscription' ? getDurationByFrecuency() : '',
-        duration: subscriptionType === 'subscription' ? getFinalDateByFrequency() : 0,
-      },
-    };
+    const { femsa_customer_id } = user;
 
-    console.log({ payOxxoJson });
+    let customer_id: null | string = null;
 
+    setIsCreatingFamsaCustomer(true);
     try {
+      if (femsa_customer_id === null) {
+        const femsaCustomerResponse = await createFemsaOxxoCustomer({
+          email: user.email,
+          name: `${user.name} ${user.lastname}`,
+          phone_number: user.phone_number,
+          user_id: user.user_id
+        });
+        customer_id = femsaCustomerResponse.data.id;
+      } else {
+        customer_id = femsa_customer_id;
+      }
+
+      let payOxxoJson = {
+        femsa_customer_id: customer_id,
+        expires_at: Math.round(expirationDate.getTime() / 1000),
+        title: product.title,
+        price: product.price * 100,
+        meta: {
+          type: subscriptionType,
+          course_id: subscriptionType === 'subscription' ? 0 : id,
+          frecuency: subscriptionType === 'subscription' ? getDurationByFrecuency() : '',
+          duration: subscriptionType === 'subscription' ? getFinalDateByFrequency() : 0,
+        },
+      };
+
+      console.log({ payOxxoJson });
+
       const femsaCreateOrderResponse: FemsaCreateOrderResponse = await femsaOxxoApi(payOxxoJson);
       console.log({ femsaCreateOrderResponse });
       let { order_response } = femsaCreateOrderResponse.data;
       if (order_response.charges.data[0] !== undefined) {
         const { barcode_url, reference, expires_at } = order_response.charges.data[0].payment_method;
+
+        setIsCreatingFamsaCustomer(false);
 
         setBarcode(barcode_url);
         setReference(reference);
@@ -984,7 +1000,11 @@ export const PurchaseNew2 = () => {
                       tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
                       continuación podrás comenzar con tus cursos
                     </p>
-                    <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxoFemsa}>
+                    <button
+                      className='type3 oxxo mt-4 mb-2'
+                      onClick={payWithOxxoFemsa}
+                      disabled={isCreatingFamsaCustomer}
+                    >
                       Genera ficha de pago OXXO
                     </button>
                   </div>

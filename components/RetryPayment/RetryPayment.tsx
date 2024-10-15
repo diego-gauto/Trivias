@@ -20,6 +20,7 @@ import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { RetryPaymentContainer } from "./RetryPayment.styled";
 import { FemsaCreateOrderResponse } from "./FemsaOxxo";
+import { createFemsaOxxoCustomer } from "../api/auth";
 
 declare let window: any;
 
@@ -49,6 +50,7 @@ export const RetryPayment = () => {
   const [token, setToken] = useState('');
   const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
+  const [isCreatingFamsaCustomer, setIsCreatingFamsaCustomer] = useState<boolean>(false);
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
@@ -300,25 +302,45 @@ export const RetryPayment = () => {
     const expirationDate = new Date();
     expirationDate.setMonth(expirationDate.getMonth() + 1);
 
-    let data = {
-      femsa_customer_id: context.user.femsa_customer_id,
-      expires_at: Math.round(expirationDate.getTime() / 1000),
-      title: 'Gonvar Plus',
-      price: user.type * 100,
-      meta: {
-        type: 'subscription',
-        course_id: 0,
-        frecuency: getFrecuency(user.level),
-        duration: getFinalDateByFrequency(getFrecuency(user.level)),
-      },
-    };
-
     try {
+      const { femsa_customer_id } = user;
+
+      let customer_id: null | string = null;
+
+      setIsCreatingFamsaCustomer(true);
+
+      if (femsa_customer_id === null) {
+        const femsaCustomerResponse = await createFemsaOxxoCustomer({
+          email: user.email,
+          name: `${user.name} ${user.lastname}`,
+          phone_number: user.phone_number,
+          user_id: user.user_id
+        });
+        customer_id = femsaCustomerResponse.data.id;
+      } else {
+        customer_id = femsa_customer_id;
+      }
+
+      let data = {
+        femsa_customer_id: customer_id,
+        expires_at: Math.round(expirationDate.getTime() / 1000),
+        title: 'Gonvar Plus',
+        price: user.type * 100,
+        meta: {
+          type: 'subscription',
+          course_id: 0,
+          frecuency: getFrecuency(user.level),
+          duration: getFinalDateByFrequency(getFrecuency(user.level)),
+        },
+      };
+
       const femsaCreateOrderResponse: FemsaCreateOrderResponse = await femsaOxxoApi(data);
       console.log({ femsaCreateOrderResponse });
       let { order_response } = femsaCreateOrderResponse.data;
       if (order_response.charges.data[0] !== undefined) {
         const { barcode_url, reference, expires_at } = order_response.charges.data[0].payment_method;
+
+        setIsCreatingFamsaCustomer(false);
 
         setBarcode(barcode_url);
         setReference(reference);
@@ -663,7 +685,11 @@ export const RetryPayment = () => {
                     tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
                     continuación podrás comenzar con tus cursos
                   </p>
-                  <button className='type3 oxxo' onClick={payWithOxxoFemsa}>
+                  <button
+                    className='type3 oxxo'
+                    onClick={payWithOxxoFemsa}
+                    disabled={isCreatingFamsaCustomer}
+                  >
                     Genera ficha de pago OXXO
                   </button>
                 </div>
