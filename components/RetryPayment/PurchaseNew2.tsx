@@ -449,7 +449,7 @@ export const PurchaseNew2 = () => {
       if (femsa_customer_id === null) {
         const femsaCustomerResponse = await createFemsaOxxoCustomer({
           email: user.email,
-          name: `${user.name} ${user.lastname}`,
+          name: `${user.name} ${user.last_name}`,
           phone_number: user.phone_number,
           user_id: user.user_id
         });
