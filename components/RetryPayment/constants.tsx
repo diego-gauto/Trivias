@@ -22,12 +22,12 @@ export const PayOptions: IPayOption[] = [
   //   img_unselect: paypal_uns,
   //   id: "paypal",
   // },
-  /*{
+  {
     title: '',
     img_select: oxxo_select,
     img_unselect: oxxo_unselect,
     id: 'oxxo',
-  },*/
+  },
   {
     title: 'Transferencia',
     img_select: moneda_select,

@@ -20,17 +20,21 @@ interface ICreateFamsaUserEstruct {
   user_id: number;
 }
 
-export const createFamsaOxxoCustomer = async (user: ICreateFamsaUserEstruct) => {
-  return axios
-    .post('https://gonvar.inowu.dev/' + 'auth/femsa/customer', user)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      console.log(error);
+export interface ICreateFamsaUserResponse {
+  livemode: boolean
+  name: string
+  email: string
+  phone: string
+  id: string
+  object: string
+  created_at: number
+  corporate: boolean
+  custom_reference: string
+}
 
-      return error;
-    });
+export const createFemsaOxxoCustomer = async (user: ICreateFamsaUserEstruct) => {
+  return axios
+    .post<ICreateFamsaUserResponse>('https://gonvar.inowu.dev/' + 'auth/femsa/customer', user);
 };
 
 export const newUser = async (user: any) => {
