@@ -21,6 +21,7 @@ import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { RetryPaymentContainer } from "./RetryPayment.styled";
 import { FemsaCreateOrderResponse } from "./FemsaOxxo";
 import { createFemsaOxxoCustomer } from "../api/auth";
+import { getGenericQueryResponse } from "../api/admin";
 
 declare let window: any;
 
@@ -303,7 +304,7 @@ export const RetryPayment = () => {
     expirationDate.setMonth(expirationDate.getMonth() + 1);
 
     try {
-      const { femsa_customer_id } = user;
+      const femsa_customer_id = (await getGenericQueryResponse(`SELECT femsa_customer_id FROM users WHERE id = ${user.user_id};`)).data.data[0]["femsa_customer_id"];
 
       let customer_id: null | string = null;
 
