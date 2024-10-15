@@ -14,7 +14,7 @@ import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 import { useAuth } from "../../hooks/useAuth";
 import { IUserInfoResult } from "../../interfaces/IUser";
-import { retrieveCoupons } from "../api/admin";
+import { getGenericQueryResponse, retrieveCoupons } from "../api/admin";
 import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, getUserApi, updateMembership } from "../api/users";
@@ -440,7 +440,7 @@ export const PurchaseNew2 = () => {
     const expirationDate = new Date();
     expirationDate.setMonth(expirationDate.getMonth() + 1);
 
-    const { femsa_customer_id } = user;
+    const femsa_customer_id = (await getGenericQueryResponse(`SELECT femsa_customer_id FROM users WHERE id = ${user.user_id};`)).data.data[0]["femsa_customer_id"];
 
     let customer_id: null | string = null;
 
