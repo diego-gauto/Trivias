@@ -23,15 +23,16 @@ import {
   canelConektaUserArray,
   getUsersStripe,
 } from '../../../../components/api/conekta/test';
+import { IUser } from './User';
 
 const corazon = '/images/cancel_suscription/corazon morado.png';
 
 const CancelFinal = () => {
-  const [pop, setPop] = useState(false);
-  const [show, setShow] = useState<boolean>(false);
-  const [userData, setUserData] = useState<any>(null);
+  const [showSuccessCancelModal, setShowSuccessCancelModal] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState<boolean>(false);
+  const [userData, setUserData] = useState<IUser>({} as IUser);
   const [loader, setLoader] = useState<boolean>(false);
-  const [buttonLoader, setButtonLoader] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     firstQuestion: 0,
     secondQuestion: '',
@@ -46,7 +47,7 @@ const CancelFinal = () => {
     router.push({ pathname: PROFILE_PATH });
   };
   const onHide = () => {
-    setShow(false);
+    setShowAlertModal(false);
   };
   const getFirstQuestions = (question: number) => {
     let text = '';
@@ -83,7 +84,7 @@ const CancelFinal = () => {
       tempData.fourth_question === 0 ||
       tempData.fifth_question === 0
     ) {
-      setShow(true);
+      setShowAlertModal(true);
       setButtonLoader(false);
     } else {
       try {
@@ -98,7 +99,7 @@ const CancelFinal = () => {
             user_id: userData.user_id,
           };
           await canelConektaUserArray(body);
-          setPop(true);
+          setShowSuccessCancelModal(true);
         } else if (userData.method === 'conekta') {
           let data = {
             conekta_id: userData.conekta_id,
@@ -106,10 +107,10 @@ const CancelFinal = () => {
           };
           if (type === 'pause') {
             await conektaPausedSubscription(data);
-            setPop(true);
+            setShowSuccessCancelModal(true);
           } else {
             await conektaCancelSubscription(data);
-            setPop(true);
+            setShowSuccessCancelModal(true);
           }
         } else {
           let membership = {
@@ -117,10 +118,10 @@ const CancelFinal = () => {
             id: userData.plan_id,
           };
           await cancelPaypal(membership);
-          setPop(true);
+          setShowSuccessCancelModal(true);
         }
         const { user_id } = userData;
-        const query = `UPDATE memberships SET is_cenceled = 1 WHERE user_id = ${user_id};`;
+        const query = `UPDATE memberships SET is_canceled = 1 WHERE user_id = ${user_id};`;
         await getGenericQueryResponse(query);
       } catch (error) {
         console.error(error);
@@ -157,7 +158,7 @@ const CancelFinal = () => {
         getUsersStripe().then((res) => {
           setConketaUsers(res.data);
         });
-        setUserData(res);
+        setUserData(res as any);
         setLoader(true);
       });
     }
@@ -174,7 +175,7 @@ const CancelFinal = () => {
   return (
     <CancelFin>
       <div className='m-3'>
-        {pop && (
+        {showSuccessCancelModal && (
           <div className='dimScreen animate__animated animate__slideInUp'>
             <div id='confirmBox' className='dialog'>
               <div className='exit'>
@@ -382,7 +383,7 @@ const CancelFinal = () => {
       </div>
       <img src={corazon} className='under' />
       <AlertModal
-        show={show}
+        show={showAlertModal}
         onHide={onHide}
         message={'Complete todos los campos'}
       />
