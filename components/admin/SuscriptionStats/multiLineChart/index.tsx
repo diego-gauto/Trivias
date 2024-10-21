@@ -2,65 +2,67 @@ import React, { useEffect, useRef } from "react";
 
 import { createChart, ColorType, LineData, Time } from "lightweight-charts";
 
-type TimeString = string;
+import {
+  StatsByDate,
+  StatsByRange,
+} from "../../../../containers/SuscriptionStats/ISuscrioptionsStats";
 
-
-interface Colors {
-  backgroundColor?: string;
-  lineColor?: string;
-  textColor?: string;
-  areaTopColor?: string;
-  areaBottomColor?: string;
+interface VisibleSeries {
+  new: boolean;
+  renewed: boolean;
+  reactive: boolean;
+  canceled: boolean;
+  inactive: boolean;
 }
 
-interface DataPoint {
-  time: Time;
-  value: number;
+// Interfaz para las props del componente MultiLineChart
+interface MultiLineChartProps {
+  membershipsStats: StatsByRange | undefined;
+  visibleSeries: VisibleSeries;  // Usando la interfaz modular
 }
 
-interface Props {
-  data: DataPoint[];
-  colors?: Colors;
-}
+const getMembershipsByDate = (statsByDate: StatsByDate): LineData[] => {
+  const lineData: LineData[] = [];
 
-function generateLineData(numberOfPoints = 100): LineData[] {
+  Object.keys(statsByDate).forEach(date => {
+    const stats = statsByDate[date];
+    if (stats) {
+      const value = Number(stats.anual_count) + Number(stats.cuatri_count) + Number(stats.mensual_count);
+      lineData.push({
+        time: date as Time, // Convertimos la fecha a tipo `Time`
+        value,              // Sumamos los valores
+      });
+    }
+  });
 
-  const samplePoint = (i: number) =>
-    i *
-    (0.5 +
-      Math.sin(i / 10) * 0.2 +
-      Math.sin(i / 20) * 0.4 +
-      Math.sin(i / randomFactor) * 0.8 +
-      Math.sin(i / 500) * 0.5) +
-    200;
-  const randomFactor = 25 + Math.random() * 25;
-  const res: LineData[] = [];
-  const date = new Date(Date.UTC(2018, 0, 1, 12, 0, 0, 0));
-
-  for (let i = 0; i < numberOfPoints; ++i) {
-    const time = date.toISOString().split('T')[0]; // Convertir a cadena en formato ISO (solo fecha)
-    const value = samplePoint(i);
-
-    res.push({
-      time: time as unknown as Time, // Asegurar el tipo Time
-      value,
-    });
-
-    date.setUTCDate(date.getUTCDate() + 1);
-  }
-
-  return res;
-}
+  return lineData;
+};
 
 const chartOptions = {
   layout: {
     textColor: 'black',
     background: { type: ColorType.Solid, color: 'white' },
   },
+  timeScale: {
+    timeVisible: true,
+    secondsVisible: false,
+    tickMarkFormatter: (time: string): string => {
+      // Obtener fecha en UTC para evitar problemas de zona horaria
+      const date = new Date(Date.UTC(
+        parseInt(time.slice(0, 4)),   // Año
+        parseInt(time.slice(5, 7)) - 1,  // Mes (0-indexed)
+        parseInt(time.slice(8, 10))  // Día
+      ));
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const year = date.getUTCFullYear();
+      return `${day}-${month}-${year}`;  // Formato dd-mm-aaaa
+    },
+  },
 };
 
 
-const MultiLineChart = () => {
+const MultiLineChart = ({ membershipsStats, visibleSeries }: MultiLineChartProps) => {
 
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -77,19 +79,31 @@ const MultiLineChart = () => {
       });
 
 
-      const lineSeriesOne = chart.addLineSeries({ color: '#2962FF' });
-      const lineSeriesTwo = chart.addLineSeries({ color: 'rgb(225, 87, 90)' });
-      const lineSeriesThree = chart.addLineSeries({ color: 'rgb(242, 142, 44)' });
+      const lineSeriesNew = chart.addLineSeries({ color: '#629753', lastValueVisible: false });
+      const lineSeriesRenewel = chart.addLineSeries({ color: '#2962FF', lastValueVisible: false });
+      const lineSeriesReactive = chart.addLineSeries({ color: '#40E0D0', lastValueVisible: false });
+      const lineSeriesCanceled = chart.addLineSeries({ color: '#E1575A', lastValueVisible: false })
+      const lineSeriesInactive = chart.addLineSeries({ color: '#F28E2C', lastValueVisible: false })
 
-      const lineSeriesOneData = generateLineData();
-      const lineSeriesTwoData = generateLineData();
-      const lineSeriesThreeData = generateLineData();
+      const lineSeriesNewData = getMembershipsByDate(membershipsStats?.new || {});
+      const lineSeriesRenewelData = getMembershipsByDate(membershipsStats?.renewed || {});
+      const lineSeriesReactiveData = getMembershipsByDate(membershipsStats?.reactive || {});
+      const lineSeriesCanceledData = getMembershipsByDate(membershipsStats?.canceled || {});
+      const lineSeriesInactiveData = getMembershipsByDate(membershipsStats?.inactive || {});
 
-      lineSeriesOne.setData(lineSeriesOneData);
-      lineSeriesTwo.setData(lineSeriesTwoData);
-      lineSeriesThree.setData(lineSeriesThreeData);
+      if (visibleSeries.new) lineSeriesNew.setData(lineSeriesNewData);
+      if (visibleSeries.renewed) lineSeriesRenewel.setData(lineSeriesRenewelData);
+      if (visibleSeries.reactive) lineSeriesReactive.setData(lineSeriesReactiveData);
+      if (visibleSeries.canceled) lineSeriesCanceled.setData(lineSeriesCanceledData);
+      if (visibleSeries.inactive) lineSeriesInactive.setData(lineSeriesInactiveData);
 
       chart.timeScale().fitContent();
+
+      chart.applyOptions({
+        localization: {
+          priceFormatter: (price: number) => price.toFixed(0)
+        }
+      })
 
       window.addEventListener('resize', handleResize);
 
@@ -98,10 +112,10 @@ const MultiLineChart = () => {
         chart.remove();
       };
     }
-  }, []);
+  }, [membershipsStats, visibleSeries]);
 
   return (
-    <div ref={chartContainerRef} style={{ height: '500px' }} />
+    <div ref={chartContainerRef} style={{ height: '500px', width: '1100px', alignItems: 'center' }} />
   );
 };
 

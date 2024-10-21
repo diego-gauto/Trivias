@@ -1,14 +1,14 @@
 .cardContainer {
   position: relative;
-  margin: 16px;
+  margin: 15px 5px;
   max-height: 120px;
-  width: 250px;
+  width: 215px;
+  cursor: pointer;
 }
 
 .cardBottom {
   height: 120px;
   width: 100%;
-  background-color: #40E0D0; /* Color turquesa */
   border-radius: 8px;
   z-index: 1; /* Capa inferior */
   display: flex;
@@ -23,15 +23,19 @@
   display: flex;
   justify-content: center;
   height: 110px;
-  width: 99.5%;
+  width: 99%;
   z-index: 2;
-  padding: 10px;
+  padding: 8px;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.contentGrey{
+  color: #B0B0B0!important
 }
 
 .title {
@@ -53,7 +57,7 @@
 }
 
 .subscriber {
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   color: #666;
 }

@@ -1,37 +1,44 @@
 // src/components/CardStats.tsx
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import styles from "./cardStats.module.css";
 
 interface Stats {
-  month: number;
-  quarter: number;
-  anual: number
+  mensual_count: number;
+  cuatri_count: number;
+  anual_count: number
 }
 
 interface CardProps {
   type: string;
   suscriptions: Stats;
-  color: string
+  color: string;
+  isVisible: boolean
+  onClick: () => void
 }
 
-const CardStats: React.FC<CardProps> = ({ type, suscriptions, color }) => {
-  const { cardContainer, cardBottom, cardTop, title, sub_type, stats, content, plans, subscriber } = styles
-  const total = suscriptions.month + suscriptions.quarter + suscriptions.anual
+const CardStats: React.FC<CardProps> = ({ type, suscriptions, color, isVisible, onClick }) => {
+  const { cardContainer, cardBottom, cardTop, title, sub_type, stats, content, contentGrey, plans, subscriber } = styles
+  const { mensual_count, cuatri_count, anual_count } = suscriptions
+  const total = mensual_count + cuatri_count + anual_count
+
+  useEffect(() => {
+  }, [suscriptions]);
+
   return (
-    <div className={cardContainer}>
-      <div className={cardBottom} style={{ background: color }}>
+    <div className={cardContainer} onClick={onClick}>
+      <div className={cardBottom} style={{ background: isVisible ? color : "#B0B0B0" }}>
         <div className={cardTop}>
-          <div className={content}>
-            <h3 className={title}>Suscripciones <span className={sub_type}>{type}</span></h3>
+          <div className={`${content} ${!isVisible ? contentGrey : ""}`}>
+            <h3 className={`${title} ${!isVisible ? contentGrey : ""}`}> <span className={sub_type}>{type}</span></h3>
             <div className={stats}>
               <div className={plans}>
-                <p>Mensuales: {suscriptions.month}</p>
-                <p>Cuatrimestrales: {suscriptions.quarter}</p>
-                <p>Anuales: {suscriptions.anual}</p>
+                <p>Mensuales: {mensual_count}</p>
+                <p>Cuatrimestrales: {cuatri_count}</p>
+                <p>Anuales: {anual_count}</p>
               </div>
-              <div className={subscriber}>
+              <div className={`${subscriber} ${!isVisible ? contentGrey : ""}`}>
                 <p>{total}</p>
               </div>
             </div>

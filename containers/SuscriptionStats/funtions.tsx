@@ -1,3 +1,5 @@
+import { format, parse, subDays, subMonths } from "date-fns";
+
 import { Stats, StatsByDate } from "./ISuscrioptionsStats";
 
 export const formatDate = (date: Date) => {
@@ -8,29 +10,26 @@ export const formatDate = (date: Date) => {
 };
 
 export const getLastMonthStart = (today: string) => {
-  const date = new Date(today);
+  const date = parse(today, 'yyyy-MM-dd', new Date());
 
-  // Restar 1 mes
-  date.setMonth(date.getMonth() - 1);
+  // Restar un mes para obtener el inicio del mes anterior
+  const lastMonthStart = subMonths(date, 1);
 
-  // Si el día de hoy es mayor que el último día del mes anterior, ajustamos la fecha
-  // Esto maneja casos como el paso de marzo a febrero
-  if (date.getDate() > new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()) {
-    date.setDate(new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate());
-  }
-
-  return formatDate(date);
+  // Formatear la fecha al formato 'yyyy-MM-dd'
+  return format(lastMonthStart, 'yyyy-MM-dd');
 };
 
 export const getLastWeekStart = (today: string) => {
-  const date = new Date(today);
-  const lastWeekStart = new Date(date);
-  lastWeekStart.setDate(date.getDate() - 6); // Hace 6 días, ya que today es el último día
-  return formatDate(lastWeekStart);
+
+  const date = parse(today, 'yyyy-MM-dd', new Date());
+
+  const lastWeekStart = subDays(date, 6);
+
+  return format(lastWeekStart, 'yyyy-MM-dd');
 };
 
 export const addSubsByDate = (stats: Stats): number => {
-  return (stats.month + stats.quarter + stats.anual)
+  return (stats.mensual_count + stats.cuatri_count + stats.anual_count)
 }
 
 export const addSubsByRange = (statsByRange: Record<string, Stats>): number => {
@@ -40,22 +39,30 @@ export const addSubsByRange = (statsByRange: Record<string, Stats>): number => {
 };
 
 export function summarizeCounts(input: StatsByDate): Stats {
-  let monthTotal = 0;
-  let quarterTotal = 0;
-  let anualTotal = 0;
+  let mensual_count = 0;
+  let cuatri_count = 0;
+  let anual_count = 0;
 
   for (const date in input) {
     const counts = input[date];
     if (counts) {  // Verifica que counts no sea undefined
-      monthTotal += counts.month;
-      quarterTotal += counts.quarter;
-      anualTotal += counts.anual;
+      mensual_count += Number(counts.mensual_count) || 0;
+      cuatri_count += Number(counts.cuatri_count) || 0;
+      anual_count += Number(counts.anual_count) || 0;
     }
   }
 
   return {
-    month: monthTotal,
-    quarter: quarterTotal,
-    anual: anualTotal,
+    mensual_count: mensual_count,
+    cuatri_count: cuatri_count,
+    anual_count: anual_count,
   };
 }
+
+export const formatStats = (stat: Stats): Stats => {
+  return {
+    anual_count: Number(stat.anual_count),
+    cuatri_count: Number(stat.cuatri_count),
+    mensual_count: Number(stat.mensual_count),
+  };
+};
