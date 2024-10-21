@@ -18,16 +18,6 @@ const ThankYouFormStore = () => {
     allCenter
   } = styles;
 
-  // if (loading) {
-  //   return (
-  //     <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
-  //       <LoaderImage>
-  //         <LoaderContain />
-  //       </LoaderImage>
-  //     </Background>
-  //   );
-  // }
-
   const redirectToStore = () => {
     const link = "https://gonvarnails.mx/products/mystery-box-premium-pincel-garantizado?_pos=1&_psq=myste&_ss=e&_v=1.0";
     if (link) {
@@ -55,7 +45,7 @@ const ThankYouFormStore = () => {
           onClick={() => redirectToStore()}
         >
           <p style={{ marginTop: "3px", fontSize: "16px" }}>
-            <b>Ir al producto</b>
+            <b>Comprar ahora</b>
           </p>
         </div>
 
