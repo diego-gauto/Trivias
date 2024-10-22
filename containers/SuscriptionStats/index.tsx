@@ -57,38 +57,6 @@ const SuscriptionStats = () => {
 
   const [visibleSeries, setVisibleSeries] = useState(defaultVisibility);
 
-  // const fetchStatsByDate = async (date: string) => {
-  //   if (cachedTodayStats) {
-  //     // Si ya tenemos los datos cacheados, usarlos
-  //     setTodayStats(cachedTodayStats);
-  //     setNewStats(formatStats(cachedTodayStats.new));
-  //     setRenewedStats(formatStats(cachedTodayStats.renewed));
-  //     setReactiveStats(formatStats(cachedTodayStats.reactive));
-  //     setCancelledStats(formatStats(cachedTodayStats.canceled));
-  //     setInactiveStats(formatStats(cachedTodayStats.inactive));
-  //     setLoading(false);
-  //     setShowChart(false); // Oculta el gráfico cuando se muestran estadísticas de hoy
-  //     return;
-  //   }
-
-  //   try {
-  //     const statsByDate: StatsByType = await getStatsByDate(date);
-  //     setTodayStats(statsByDate);
-  //     setNewStats(formatStats(statsByDate.new));
-  //     setRenewedStats(formatStats(statsByDate.renewed));
-  //     setReactiveStats(formatStats(statsByDate.reactive));
-  //     setCancelledStats(formatStats(statsByDate.canceled));
-  //     setInactiveStats(formatStats(statsByDate.inactive));
-  //     setLoading(false);
-  //     setShowChart(false); // Oculta el gráfico cuando se muestran estadísticas de hoy
-
-  //     // Cachear los datos obtenidos
-  //     setCachedTodayStats(statsByDate);
-  //   } catch (err) {
-  //     handleError(err);
-  //   }
-  // };
-
   const fetchStatsByRange = async (startDate: string, endDate: string, period: string) => {
     let cachedData;
 
@@ -159,22 +127,6 @@ const SuscriptionStats = () => {
     }
   };
 
-  // const handleClickToday = () => {
-  //   fetchStatsByDate(today);
-  // };
-
-  // const handleClickLastWeek = async () => {
-  //   setStartDate(lastWeekStart);
-  //   await fetchStatsByRange(lastWeekStart, today, "week");
-  //   setVisibleSeries(defaultVisibility)
-  // };
-
-  // const handleClickLastMonth = async () => {
-  //   setStartDate(lastMonthStart);
-  //   await fetchStatsByRange(lastMonthStart, today, "month");
-  //   setVisibleSeries(defaultVisibility)
-  // };
-
   const handleVisibility = (seriesKey: keyof typeof visibleSeries) => {
     setVisibleSeries(prevState => ({
       ...prevState,
@@ -189,7 +141,6 @@ const SuscriptionStats = () => {
   useEffect(() => {
     setLoading(true);
     fetchStatsByRange(range.startDate, range.endDate, range.period);
-    console.log(range)
   }, [range]);
 
   if (error) {
@@ -210,9 +161,6 @@ const SuscriptionStats = () => {
     <div className={container}>
       <h1>Estadísticas de Suscripciones</h1>
       <div className={button_container}>
-        {/* <button className={button} onClick={handleClickToday}>Hoy</button>
-        <button className={button} onClick={handleClickLastWeek}>Última semana</button>
-        <button className={button} onClick={handleClickLastMonth}>Último mes</button> */}
         <DateRangePickerComp setRange={handleSetRange} range={range} />
       </div>
       <div className={card_container}>
@@ -220,7 +168,7 @@ const SuscriptionStats = () => {
           type={"Nuevas"}
           suscriptions={newStats}
           color={"#629753"}
-          isVisible={visibleSeries.new} // Condicional según visibilidad
+          isVisible={visibleSeries.new}
           onClick={() => handleVisibility("new")}
         />
         <CardStats
