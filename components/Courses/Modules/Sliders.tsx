@@ -71,7 +71,25 @@ const Sliders = (props: ICourseData) => {
       spanTitle: '',
     };
     let tempCourses: any = allCourses;
-    let tempShowCourse: any = [];
+    /*
+    // En 'components\Courses\Courses.tsx'
+    let courseSections = [
+      'continue-watching',
+      'free-courses',
+      'product-courses',
+      'special-courses',
+      'art-courses',
+      'structure-courses',
+      'makeup-courses',
+      'new-courses',
+    ];
+    */
+    if (slideType === 'new-courses') {
+      tempTexts.title = 'Lo nuevo en Gonvar+';
+      tempTexts.spanTitle = '';
+      setCourses(tempCourses.new_courses || []);
+      setTexts(tempTexts);
+    }
     if (slideType === 'continue-watching') {
       tempTexts.title = 'Continua Viendo';
       tempTexts.spanTitle = '';
@@ -86,21 +104,21 @@ const Sliders = (props: ICourseData) => {
     }
     if (slideType === 'art-courses') {
       tempTexts.title = 'Cursos de Arte en Uñas, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.art_courses);
       setTexts(tempTexts);
     }
     if (slideType === 'structure-courses') {
       tempTexts.title = 'Cursos de Estructura en Uñas, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.structure_courses);
       setTexts(tempTexts);
     }
     if (slideType === 'makeup-courses') {
       tempTexts.title = 'Cursos de Maquillaje, ';
-      tempTexts.spanAditional = 'Incluídos en ';
+      tempTexts.spanAditional = 'Incluidos en ';
       tempTexts.spanTitle = '';
       setCourses(tempCourses.makeup_courses);
       setTexts(tempTexts);
@@ -175,7 +193,6 @@ const Sliders = (props: ICourseData) => {
   useEffect(() => {
     if (!containLoader) {
       getCourseContent();
-      // setLoading(false);
       setTimeout(() => {
         setLoading(false);
       }, 300 * slideNumber);
@@ -211,6 +228,18 @@ const Sliders = (props: ICourseData) => {
     }
     return;
   }, [start, countdown]);
+
+  const getImageComponent = (course: ICourse) => {
+    return (<Image
+      src={course.image}
+      fluid
+      style={{
+        borderRadius: '10px',
+        width: 'calc(100% - 20px)',
+      }}
+    />)
+  }
+
   return (
     <>
       {courses.length > 0 && (
@@ -246,8 +275,8 @@ const Sliders = (props: ICourseData) => {
                 {(slideType === 'art-courses' ||
                   slideType === 'structure-courses' ||
                   slideType === 'makeup-courses') && (
-                  <img className='gonvar-logo' src={GonvarLogo} />
-                )}
+                    <img className='gonvar-logo' src={GonvarLogo} />
+                  )}
               </Title>
             </div>
             <SlideContain
@@ -272,7 +301,8 @@ const Sliders = (props: ICourseData) => {
                           slideType === 'product-courses' ||
                           slideType === 'structure-courses' ||
                           slideType === 'makeup-courses' ||
-                          slideType === 'special-courses'
+                          slideType === 'special-courses' ||
+                          slideType === 'new-courses'
                         ) {
                           openModal(course);
                         }
@@ -286,53 +316,43 @@ const Sliders = (props: ICourseData) => {
                             : (innerWidth - 60) / 5,
                         }}
                       >
-                        {slideType === 'my-courses' ? (
+                        {
                           <ImageContent>
-                            {course.type === 'Producto' && (
-                              <>
-                                <i className='band' />
-                                <div className='days-left'>
-                                  {course.days} días
-                                </div>
-                              </>
-                            )}
+                            {
+                              (['Mensual', 'Gratis'].includes(course.type)
+                                && course.is_new === 1
+                              )
+                              && (
+                                <>
+                                  <i className='band' />
+                                  <div className='days-left'>
+                                    <strong>¡Estreno!</strong>
+                                  </div>
+                                </>
+                              )}
 
-                            <Image
-                              src={course.image}
-                              fluid
-                              style={{
-                                borderRadius: '10px',
-                                width: 'calc(100% - 20px)',
-                                marginBottom: '10px',
-                              }}
-                            />
-                          </ImageContent>
-                        ) : (
-                          <ImageContent>
                             {slideType === 'continue-watching' && (
                               <BsPlayCircle className='play-icon' />
                             )}
-                            <Image
-                              src={course.image}
-                              fluid
-                              style={{
-                                borderRadius: '10px',
-                                width: 'calc(100% - 20px)',
-                              }}
-                            />
+
+                            {
+                              getImageComponent(course)
+                            }
+
                             {slideType === 'continue-watching' && (
                               <Progress
                                 style={
                                   course.lessonProgress == null
                                     ? { width: 0 }
                                     : {
-                                        width: `calc(${course.lessonProgress}% - 20px)`,
-                                      }
+                                      width: `calc(${course.lessonProgress}% - 20px)`,
+                                    }
                                 }
                               />
                             )}
+
                           </ImageContent>
-                        )}
+                        }
 
                         <p className='title'>{course.title}</p>
                         <p className='sub'>
@@ -393,24 +413,24 @@ const Sliders = (props: ICourseData) => {
                 {
                   // (user && ([0, 5, 6, 8].includes(user.level) && user.final_date < today) || ([1, 4, 7].includes(user.level) && user.final_date < (today - (10 * 24 * 60 * 60)))) &&
                   user &&
-                    !haveAccess(
-                      user.level,
-                      user.final_date,
-                      user.role,
-                      user.method as MembershipMethodValue,
-                    ) && (
-                      // <Link href={{ pathname: PLAN_PATH }}>
-                      <div
-                        className='grey-field'
-                        style={{
-                          maxWidth: 'fit-content',
-                          position: 'relative',
-                        }}
-                        onClick={sendTo}
-                      >
-                        <PurpleButton>Adquiere Gonvar+</PurpleButton>
-                      </div>
-                    )
+                  !haveAccess(
+                    user.level,
+                    user.final_date,
+                    user.role,
+                    user.method as MembershipMethodValue,
+                  ) && (
+                    // <Link href={{ pathname: PLAN_PATH }}>
+                    <div
+                      className='grey-field'
+                      style={{
+                        maxWidth: 'fit-content',
+                        position: 'relative',
+                      }}
+                      onClick={sendTo}
+                    >
+                      <PurpleButton>Adquiere Gonvar+</PurpleButton>
+                    </div>
+                  )
                   // </Link>
                 }
                 {!user && (

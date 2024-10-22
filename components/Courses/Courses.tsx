@@ -47,6 +47,7 @@ const Courses = () => {
   const router = useRouter();
   let courseSections = [
     'continue-watching',
+    'new-courses',
     'free-courses',
     'product-courses',
     'special-courses',

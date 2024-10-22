@@ -24,6 +24,7 @@ export interface ICourse {
   pay: boolean;
   currentSeason: number;
   currentLesson: number;
+  is_new: number;
 }
 interface IProfessors {
   name: string;

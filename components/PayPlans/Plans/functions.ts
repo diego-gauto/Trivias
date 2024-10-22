@@ -12,8 +12,7 @@ type Suscription = 'M' | 'C' | 'A';
 
 export const goTo = (user: IUser, type: Suscription) => {
   const today = new Date().getTime() / 1000;
-  const frequency =
-    type === 'M' ? 'month' : type === 'C' ? 'cuatrimestral' : 'anual';
+  const frequency = type === 'M' ? 'month' : type === 'C' ? 'cuatri' : 'anual';
   // debugger;
   if (user && user.id) {
     let complete_nails = user.user_courses.filter(

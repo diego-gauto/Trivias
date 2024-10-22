@@ -324,7 +324,11 @@ export function returnPriceTag(
   if (type == 'subscription' && frequency === 'month' && v === '2' && !trial) {
     priceTag = `<p class="total">$ 249 <span>MXN</span></p>`;
   }
-  if (type == 'subscription' && frequency === 'anual' && v === '2') {
+  if (
+    type == 'subscription' &&
+    frequency === 'anual' &&
+    ['1', '2'].includes(v)
+  ) {
     priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
   }
   if (trial === 'true' && v === '3') {
@@ -336,7 +340,11 @@ export function returnPriceTag(
   if (type == 'subscription' && frequency === 'anual' && v === '3') {
     priceTag = `<p class="total">$ 3,497 <span>MXN</span></p>`;
   }
-  if (type == 'subscription' && frequency === 'cuatrimestral' && v === '3') {
+  if (
+    type == 'subscription' &&
+    frequency === 'cuatri' &&
+    ['1', '2', '3'].includes(v)
+  ) {
     priceTag = `<p class="total">$ 1,599 <span>MXN</span></p>`;
   }
   if (type == 'course' && !coupon) {

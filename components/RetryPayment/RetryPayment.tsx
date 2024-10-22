@@ -10,7 +10,7 @@ import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
 import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 import { useAuth } from "../../hooks/useAuth";
-import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi } from "../api/checkout";
+import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
@@ -19,11 +19,13 @@ import { checkEmpty } from "./functions";
 import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { RetryPaymentContainer } from "./RetryPayment.styled";
+import { FemsaCreateOrderResponse } from "./FemsaOxxo";
+import { createFemsaOxxoCustomer } from "../api/auth";
+import { getGenericQueryResponse } from "../api/admin";
 
 declare let window: any;
 
 export const RetryPayment = () => {
-  let userDataAuth: any = useAuth();
   let today = new Date().getTime() / 1000;
   const context = useAuth();
   const user = context.user;
@@ -42,13 +44,14 @@ export const RetryPayment = () => {
   const [product, setProduct] = useState({ price: 149 });
   const [reference, setReference] = useState('');
   const [bank_ref, setBank_ref] = useState('');
-  const [expiresAt, setExpiresAt] = useState();
+  const [expiresAt, setExpiresAt] = useState<number>(0);
   const [oxxoIsActive, setOxxoIsActive] = useState<boolean>(false);
   const [speiIsActive, setSpeiIsActive] = useState<boolean>(false);
   const [error, setError] = useState(false);
   const [token, setToken] = useState('');
   const [loader, setLoader] = useState<boolean>(false);
   const [option, setOption] = useState(0);
+  const [isCreatingFamsaCustomer, setIsCreatingFamsaCustomer] = useState<boolean>(false);
 
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
@@ -80,17 +83,12 @@ export const RetryPayment = () => {
     }
   };
   const conektaSuccessResponseHandler = (token: any) => {
-    let user = userDataAuth.user;
     let tokenId = token.id;
     const body = {
       token_id: tokenId,
       conekta_id: user.conekta_id,
     };
     setToken(tokenId);
-    // attachPaymentMethodConekta(body).then((res) => {
-    //   getPaymentMethods();
-    //   setCard({ holder: '', number: '', cvc: '', exp_month: '', exp_year: '' });
-    // })
   };
   const conektaErrorResponseHandler = (response: any) => {
     alert('Hay un error en los datos de la tarjeta!');
@@ -119,8 +117,6 @@ export const RetryPayment = () => {
   };
   const getPaymentMethods = () => {
     setLoader(true);
-    let user = userDataAuth.user;
-
     let diff = Math.round((today - user.final_date) / 86400);
 
     if (diff > 90) {
@@ -129,7 +125,6 @@ export const RetryPayment = () => {
     }
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
-      // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
       router.push({ pathname: PREVIEW_PATH });
       return;
     }
@@ -173,12 +168,12 @@ export const RetryPayment = () => {
       router.push({ pathname: LOGIN_PATH });
     }
 
-    if (userDataAuth.user) {
+    if (user) {
       getPaymentMethods();
     } else {
       router.push({ pathname: PREVIEW_PATH });
     }
-  }, [userDataAuth]);
+  }, [context]);
 
   useEffect(() => {
     if (token) {
@@ -193,13 +188,10 @@ export const RetryPayment = () => {
 
     if (user.level === 0) plan_id = 'cuatrimestre';
     if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
-    if ([4, 5].includes(user.level) && user.type === 3497)
-      plan_id = 'anual_v1_1';
+    if ([4, 5].includes(user.level) && user.type === 3497) plan_id = 'anual_v1_1';
     if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
-    if ([1, 6].includes(user.level) && user.type === 249)
-      plan_id = 'mensual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 459)
-      plan_id = 'mensual_v1_2';
+    if ([1, 6].includes(user.level) && user.type === 249) plan_id = 'mensual_v1_1';
+    if ([1, 6].includes(user.level) && user.type === 459) plan_id = 'mensual_v1_2';
     if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
 
     const data = {
@@ -224,7 +216,6 @@ export const RetryPayment = () => {
           userId: user.user_id,
         };
         await updateMembership(membership);
-        // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
         let url = '/pagoexitoso';
         if (getNewUserLevel(user.level) === 1) {
           url += 'mensualidad';
@@ -237,16 +228,6 @@ export const RetryPayment = () => {
       } else {
         setLoaderAdd(false);
         setError(true);
-        // let notification = {
-        //   userId: user.user_id,
-        //   type: "8",
-        //   notificationId: '',
-        //   amount: user.type,
-        //   productName: 'Gonvar Plus',
-        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        // }
-        // await createNotification(notification);
-
         const msg = 'pago-rechazado';
       }
     });
@@ -296,6 +277,82 @@ export const RetryPayment = () => {
       setExpiresAt(response.charges.data[0].payment_method.expires_at);
       setOxxoIsActive(true);
     });
+  };
+
+  const getFinalDateByFrequency = (subscriptionFrequency: FrecuencyValue): number => {
+    const today = new Date();
+    switch (subscriptionFrequency) {
+      case "year":
+        today.setFullYear(today.getFullYear() + 1);
+        break;
+      case "cuatrimestral":
+        today.setMonth(today.getMonth() + 4);
+        break;
+      case "month":
+        today.setMonth(today.getMonth() + 1);
+        break;
+      default:
+
+        break;
+    }
+    return Math.floor(today.getTime() / 1000);
+  }
+
+  const payWithOxxoFemsa = async () => {
+    setProduct({ ...product, price: user.type });
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 1);
+
+    try {
+      const femsa_customer_id = (await getGenericQueryResponse(`SELECT femsa_customer_id FROM users WHERE id = ${user.user_id};`)).data.data[0]["femsa_customer_id"];
+
+      let customer_id: null | string = null;
+
+      setIsCreatingFamsaCustomer(true);
+
+      if (femsa_customer_id === null) {
+        const femsaCustomerResponse = await createFemsaOxxoCustomer({
+          email: user.email,
+          name: `${user.name} ${user.last_name}`,
+          phone_number: user.phone_number,
+          user_id: user.user_id
+        });
+        customer_id = femsaCustomerResponse.data.id;
+      } else {
+        customer_id = femsa_customer_id;
+      }
+
+      let data = {
+        femsa_customer_id: customer_id,
+        expires_at: Math.round(expirationDate.getTime() / 1000),
+        title: 'Gonvar Plus',
+        price: user.type * 100,
+        meta: {
+          type: 'subscription',
+          course_id: 0,
+          frecuency: getFrecuency(user.level),
+          duration: getFinalDateByFrequency(getFrecuency(user.level)),
+        },
+      };
+
+      const femsaCreateOrderResponse: FemsaCreateOrderResponse = await femsaOxxoApi(data);
+      console.log({ femsaCreateOrderResponse });
+      let { order_response } = femsaCreateOrderResponse.data;
+      if (order_response.charges.data[0] !== undefined) {
+        const { barcode_url, reference, expires_at } = order_response.charges.data[0].payment_method;
+
+        setIsCreatingFamsaCustomer(false);
+
+        setBarcode(barcode_url);
+        setReference(reference);
+        setExpiresAt(expires_at);
+        setOxxoIsActive(true);
+      } else {
+        throw new Error(`Hubo un error, no existen cargos para continuar con el pago en oxxo...`);
+      }
+    } catch (error) {
+      console.error({ error });
+    }
   };
 
   const payWitSpei = () => {
@@ -399,6 +456,7 @@ export const RetryPayment = () => {
                         changePaymentMethod={changePaymentMethod}
                         key={'pm-' + index}
                         handleDelete={detachPayment}
+                        isOnlyOne={paymentMethods.length === 1}
                       />
                     );
                   })
@@ -444,11 +502,13 @@ export const RetryPayment = () => {
             >
               <div
                 className='button-container'
-                style={{
-                  justifyContent: [1, 6].includes(user.level)
-                    ? 'center'
-                    : 'space-between',
-                }}
+              /*
+              style={{
+                justifyContent: [1, 6].includes(user.level)
+                  ? 'center'
+                  : 'space-between',
+              }}
+              */
               >
                 {([1, 6].includes(user.level)
                   ? PayOptionsForMonthSuscription
@@ -626,7 +686,11 @@ export const RetryPayment = () => {
                     tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
                     continuación podrás comenzar con tus cursos
                   </p>
-                  <button className='type3 oxxo' onClick={payWithOxxo}>
+                  <button
+                    className='type3 oxxo'
+                    onClick={payWithOxxoFemsa}
+                    disabled={isCreatingFamsaCustomer}
+                  >
                     Genera ficha de pago OXXO
                   </button>
                 </div>

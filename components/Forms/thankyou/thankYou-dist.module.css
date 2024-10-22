@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.container {
+  width: 100%;
+  height: 670px;
+  display: flex;
+  justify-content: center;
+  background-image: url('/images/forms/thankyou.png');
+  background-size: cover;
+  background-position: center center; /* Centra la imagen */
+
+  @media (max-width: 719px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 100px 0 0 10%;
+
+  font-family: 'Montserrat', Helvetica;
+  color: #3f1168;
+
+  @media (max-width: 719px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    width: 100%;
+    padding: 10px 0 0 0;
+    position: relative;
+  }
+
+  .title {
+    font-size: 50px;
+    font-weight: 700;
+    max-width: 500px;
+
+    @media (max-width: 420px) {
+      font-size: 35px;
+      font-weight: 600;
+      max-width: 400px;
+    }
+  }
+
+  .subtitle {
+    font-size: 25px;
+    font-weight: 500;
+    max-width: 600px;
+    line-height: 30px;
+    width: 100%;
+
+    @media (max-width: 719px) {
+      padding: 0 10px;
+      text-align: start;
+
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+
+  .paragraph {
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 600px;
+    line-height: 25px;
+
+    @media (max-width: 719px) {
+      padding: 0 10px;
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  .contact {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    width: 100%;
+    margin-top: 30px;
+  
+    @media (max-width: 719px) {
+      max-width: 600px;
+      padding: 0 10px;
+      font-size: 13px;
+      line-height: 15px;
+    }
+  }
+
+}
+
+.imgContainer {
+  width: 40%;
+
+  @media (max-width: 719px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.imgContainer img {
+  height: 100%;
+  position: relative;
+  right: 300px;
+
+  @media (max-width: 719px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 600px;
+    right: 40px;
+    bottom: 80px;
+  }
+}

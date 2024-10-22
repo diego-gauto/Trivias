@@ -4,6 +4,8 @@ interface Subscription {
   duration: any;
 }
 
+type FecuencyURLParam = 'month' | 'anual' | 'cuatri';
+
 export const getSubscriptionTypeTitle = (frequency: string) => {
   if (frequency === 'month') {
     return 'Mensual';
@@ -29,7 +31,7 @@ export const getDuration = (frequency: string) => {
 
 export const getSubscription = (
   type: string,
-  frequency: string,
+  frequency: FecuencyURLParam,
   v: string,
 ): Subscription => {
   return {
@@ -53,17 +55,16 @@ export const getTitle = (frequency: string) => {
 
 export const getPriceByParams = (
   type: string,
-  frequency: string,
+  frequency: FecuencyURLParam,
   v: string,
 ) => {
   let tempPrice = 0;
   if (frequency === 'month' && v === '1') tempPrice = 149;
   if (frequency === 'month' && v === '2') tempPrice = 249;
   if (frequency === 'month' && v === '3') tempPrice = 459;
-  if (frequency === 'anual' && v === '1') tempPrice = 1599;
-  if (frequency === 'anual' && v === '2') tempPrice = 1599;
+  if (frequency === 'anual' && ['1', '2'].includes(v)) tempPrice = 1599;
   if (frequency === 'anual' && v === '3') tempPrice = 3497;
-  if (frequency === 'cuatrimestral' && v === '3') tempPrice = 1599;
+  if (frequency === 'cuatri' && ['1', '2', '3'].includes(v)) tempPrice = 1599;
   if (type === 'course') tempPrice = 1599;
   return tempPrice;
 };

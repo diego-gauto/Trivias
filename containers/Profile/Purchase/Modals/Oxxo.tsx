@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ModalContainer, OxxoContainer } from './Modals.styled';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { getImage } from '../../../../components/api/conekta/test';
 
 const OxxoModal = ({
   show,
@@ -36,7 +35,6 @@ const OxxoModal = ({
     html2canvas(DATA).then((canvas) => {
       var imgData = canvas.toDataURL('image/jpeg', 1.0);
       //Get the original size of canvas/image
-      const pdf = new jsPDF();
       var img_w = canvas.width;
       var img_h = canvas.height;
       //Convert to mm
@@ -67,7 +65,7 @@ const OxxoModal = ({
         <h3>Hola {user.name}</h3>
         <p>
           Gonvar Nails te ha enviado una referencia para pago seguro en efectivo
-          con <span>Conekta</span> en <span>tiendas OXXO</span>
+          con <span>Famsa</span> en <span>tiendas OXXO</span>
         </p>
         <p className='p10'>
           Los pagos en oxxo tardan en reflejarse hasta 48 hrs. <br />

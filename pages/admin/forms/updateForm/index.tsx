@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
 
-import { collection, doc, setDoc } from 'firebase/firestore';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { collection, doc, setDoc } from "firebase/firestore";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import FileUpload from '../../../../components/admin/Forms/fileUpload/fileUpload';
-import { getFormApi, updateFormApi } from '../../../../components/api/form';
-import { db } from '../../../../firebase/firebaseConfig';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../../screens/Login.styled';
-import styles from './update.module.css';
+import FileUpload from "../../../../components/admin/Forms/fileUpload/fileUpload";
+import { getFormApi, updateFormApi } from "../../../../components/api/form";
+import { db } from "../../../../firebase/firebaseConfig";
+import { Background, LoaderContain, LoaderImage } from "../../../../screens/Login.styled";
+import styles from "./update.module.css";
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
@@ -74,6 +70,22 @@ const UpdateForm = () => {
     editedAt: '',
     img: { source: '', isVisible: false },
     optionsArray: [
+      {
+        isVisible: false,
+        label: '',
+        options: [
+          { label: '', value: '' },
+          { label: '', value: '' },
+        ],
+      },
+      {
+        isVisible: false,
+        label: '',
+        options: [
+          { label: '', value: '' },
+          { label: '', value: '' },
+        ],
+      },
       {
         isVisible: false,
         label: '',
@@ -158,6 +170,27 @@ const UpdateForm = () => {
           // Parsear la cadena JSON en la propiedad "result"
           formTemp.optionsArray = JSON.parse(formTemp.optionsArray);
 
+          const additionalOptions = [
+            {
+              isVisible: false,
+              label: '',
+              options: [
+                { label: '', value: '' },
+                { label: '', value: '' },
+              ],
+            },
+            {
+              isVisible: false,
+              label: '',
+              options: [
+                { label: '', value: '' },
+                { label: '', value: '' },
+              ],
+            },
+          ];
+
+          formTemp.optionsArray.push(...additionalOptions);
+
           formTemp.redirect = JSON.parse(formTemp.redirect);
 
           setUpdatedForm(formTemp);
@@ -228,11 +261,11 @@ const UpdateForm = () => {
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? [...question.options, { label: '', value: '' }]
-                  : [{ label: '', value: '' }],
-              }
+              ...question,
+              options: question.options
+                ? [...question.options, { label: '', value: '' }]
+                : [{ label: '', value: '' }],
+            }
             : question,
       );
 
@@ -251,14 +284,14 @@ const UpdateForm = () => {
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? [
-                      ...question.options.slice(0, optionIndex),
-                      ...question.options.slice(optionIndex + 1),
-                    ]
-                  : [],
-              }
+              ...question,
+              options: question.options
+                ? [
+                  ...question.options.slice(0, optionIndex),
+                  ...question.options.slice(optionIndex + 1),
+                ]
+                : [],
+            }
             : question,
       );
 
@@ -295,13 +328,13 @@ const UpdateForm = () => {
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? question.options.map((pair, idx) =>
-                      idx === optionIndex ? { ...pair, label: content } : pair,
-                    )
-                  : [],
-              }
+              ...question,
+              options: question.options
+                ? question.options.map((pair, idx) =>
+                  idx === optionIndex ? { ...pair, label: content } : pair,
+                )
+                : [],
+            }
             : question,
       );
       return {
@@ -323,13 +356,13 @@ const UpdateForm = () => {
         (question, index) =>
           index === questionIndex
             ? {
-                ...question,
-                options: question.options
-                  ? question.options.map((pair, idx) =>
-                      idx === optionIndex ? { ...pair, value: content } : pair,
-                    )
-                  : [],
-              }
+              ...question,
+              options: question.options
+                ? question.options.map((pair, idx) =>
+                  idx === optionIndex ? { ...pair, value: content } : pair,
+                )
+                : [],
+            }
             : question,
       );
       // const updatedOptionsArray = (prevForm.optionsArray).map(
@@ -557,13 +590,12 @@ const UpdateForm = () => {
         )}
       </div>
 
-      {[0, 1, 2].map((questionIndex) => (
+      {[0, 1, 2, 3, 4].map((questionIndex) => (
         <div className={questionGroup} key={questionIndex}>
           <div className={lineaAtravesada}></div>
 
-          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${
-            questionIndex + 1
-          }:`}</label>
+          <label htmlFor={`option${questionIndex + 1}`}>{`Pregunta ${questionIndex + 1
+            }:`}</label>
           <ReactQuill
             className={editor}
             id={`option${questionIndex + 1}`}

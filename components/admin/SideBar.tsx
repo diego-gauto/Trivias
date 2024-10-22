@@ -194,7 +194,7 @@ const SideBar = ({ show, onHide }: any) => {
         setIndex(16);
       }
     }, []);
-  } catch (error) {}
+  } catch (error) { }
 
   useEffect(() => {
     if (userData !== null) {
@@ -484,6 +484,24 @@ const SideBar = ({ show, onHide }: any) => {
                   }}
                 >
                   Team Members
+                </li>
+              </Link>
+            </ul>
+          </>
+        )}
+        {isSuperAdmin && (
+          <>
+            <Text>Testing</Text>
+            <ul>
+              <Link href='/admin/Twilio'>
+                <li
+                  style={{ color: index == 17 ? '#ffa500' : '#fff' }}
+                  onClick={() => {
+                    setIndex(17);
+                    onHide();
+                  }}
+                >
+                  Twilio
                 </li>
               </Link>
             </ul>

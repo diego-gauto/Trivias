@@ -13,10 +13,12 @@ import { getFormApi } from "../../components/api/form";
 import { createUserFormApi } from "../../components/api/userform";
 import Countdown from "../../components/Forms/countdown/countdown";
 import InputApellido from "../../components/Forms/inputApellido/inputApellido";
+import InputCP from "../../components/Forms/inputCP/inputCP";
 import InputMail from "../../components/Forms/inputMail/inputMail";
 import InputNombre from "../../components/Forms/inputNombre/inputNombre";
 import InputWatsapp from "../../components/Forms/inputWhatsapp/inputWhatsapp";
 import OptionComponent from "../../components/Forms/option/option";
+import SelectState from "../../components/Forms/selectState/selectState";
 import { db } from "../../firebase/firebaseConfig";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./formulario.module.css";
@@ -77,66 +79,15 @@ const Formularios = () => {
     '16',
     '17',
     '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
-
-  // const form10: Form = {
-  //   name: "campaña 11 Febrero 2024 Facebook",
-  //   title:
-  //     "<p><strong>Solicitud</strong> de Beca de 75% y <strong>Plan de 4 pagos</strong> ¡Última oportunidad!</p>",
-  //   subtitle:
-  //     "<p><strong>Más de 70 cursos</strong> de uñas, maquillaje y pestañas <strong>incluídos</strong>. Además, recibe acceso a cursos de Lash Master (3 cursos de pestañas en Técnicas Clásica, Abanicos Tecnológicos, Diseños y Efectos). Aprende en línea, <strong>Desde cero</strong> con <strong>revisión de prácticas</strong>, asesorías ilimitadas y <strong>Certificado oficial</strong> de la marca. Un precio real de <s>$6,307.00 MXN</s> reducido a un costo total de $1,599.00 MXN (99 USD) que podrás pagar en 4 pagos de $399.00 MXN (25 USD). 💞 <strong>LUGARES MUY LIMITADOS. Apresúrate a apartar tu lugar antes de que se agoten. Solicita</strong> tu inscripción con beca al 75% de descuento y plan de <strong>4 pagos de $399 MXN</strong> (uno a la semana) y en caso de ser seleccionada, te contactaremos de inmediato. 🥳</p>",
-  //   createdAt: "11-03-2024 15:40:36",
-  //   editedAt: "11-03-2024 20:50:35",
-  //   img: {
-  //     source:
-  //       "https://firebasestorage.googleapis.com/v0/b/marketing-gonvar.appspot.com/o/forms%2Fform_10?alt=media&token=bf9cd061-79de-4657-854a-85dd5c4bb4a8",
-  //     isVisible: true,
-  //   },
-  //   optionsArray: [
-  //     {
-  //       isVisible: true,
-  //       label: `<p>Recuerda que el <strong>costo del programa es de $1,599.00 MXN</strong> y podrás pagarlo en 4 partes. <strong>Se dará acceso</strong> una vez que liquides el monto total. ¡Todas las alumnas de este programa "Gonvar+ cuatrimestral" participan para <strong>ganar un iPad Nuevo</strong>, remodelación de su salón y miles de pesos más! <span style="color: rgb(18, 18, 18);">😍 </span>El primer pago de cuatro, deberás darlo hoy y <strong>Máximo este</strong> SÁBADO 16 de Marzo. Elige tu plan de Pagos:</p>`,
-  //       options: [
-  //         {
-  //           label: "Pagaré en 4 partes de 399 pesos (un pago a la semana)",
-  //           value: "Pagaré en 4 partes de 399 pesos",
-  //         },
-  //         {
-  //           label: "Pagaré en una sola exhibición máximo el día sábado",
-  //           value: "Pagaré en una sola exhibición",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       isVisible: true,
-  //       label: `<p><strong>En caso de ser seleccionada</strong>, ¿Te comprometes a tomar el lugar, realizar tus pagos puntualmente y realizar el curso <strong>por completo</strong>? Recuerda que al ser seleccionada <strong>tomarás uno de los lugares</strong> y otras aspirantes quedarán fuera.</p>`,
-  //       options: [
-  //         {
-  //           label: "<p>Si, me comprometo a realizar el programa</p>",
-  //           value: "Si, me comprometo",
-  //         },
-  //         {
-  //           label: "<p>No, gracias. Quiero perder mi lugar</p>",
-  //           value: "No, gracias",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       isVisible: false,
-  //       label: "",
-  //       options: [
-  //         { label: "", value: "" },
-  //         { label: "", value: "" },
-  //       ],
-  //     },
-  //   ],
-  //   redirect: {
-  //     type: "customLink",
-  //     link: "https://chat.whatsapp.com/DnmdR5MubavFDGVkkbnmaM",
-  //     textButton: "",
-  //   },
-  // };
 
   const responsive500 = useMediaQuery({ query: '(max-width: 500px)' });
   // const router = useRouter();
@@ -165,6 +116,9 @@ const Formularios = () => {
     last_name,
     mail,
     phone,
+    states,
+    state,
+    cp,
     errorMessageNombre,
     errorMessageApellido,
     errorMessageMail,
@@ -192,6 +146,21 @@ const Formularios = () => {
     numeroWhatsApp: Yup.string().required(
       'El número de WhatsApp es obligatorio',
     ),
+    nombrePais: Yup.string(), // Asegúrate de incluir este campo en el esquema
+    estado: Yup.string()
+      .when('nombrePais', {
+        is: (nombrePais: string) => nombrePais === 'Mexico', // Verifica si el país es México
+        then: Yup.string().required('El estado es obligatorio'),
+        otherwise: Yup.string(), // No es obligatorio si el país no es México
+      }),
+    cp: Yup.string()
+      .when('nombrePais', {
+        is: (nombrePais: string) => nombrePais === 'Mexico', // Verifica si el país es México
+        then: Yup.string()
+          .matches(/^\d{5}$/, 'El cp debe tener 5 números')
+          .required('El código postal es obligatorio'),
+        otherwise: Yup.string(), // No es obligatorio si el país no es México
+      }),
     option1: Yup.lazy(() => {
       return form?.optionsArray[0]?.isVisible
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
@@ -207,6 +176,16 @@ const Formularios = () => {
         ? Yup.string().required('Debes seleccionar alguna de las opciones')
         : Yup.string();
     }),
+    option4: Yup.lazy(() => {
+      return form?.optionsArray[3]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
+    option5: Yup.lazy(() => {
+      return form?.optionsArray[4]?.isVisible
+        ? Yup.string().required('Debes seleccionar alguna de las opciones')
+        : Yup.string();
+    }),
   });
 
   const formik = useFormik({
@@ -217,9 +196,13 @@ const Formularios = () => {
       numeroWhatsApp: '',
       codigoPais: '',
       nombrePais: '',
+      estado: '',
+      cp: '',
       option1: '',
       option2: '',
       option3: '',
+      option4: '',
+      option5: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -302,6 +285,20 @@ const Formularios = () => {
     }
   }, [errorMessage]);
 
+  useEffect(() => {
+    if (formik.values.nombrePais !== 'México') {
+      formik.setFieldValue('estado', '');
+      formik.setFieldValue('cp', '');
+      formik.setFieldError('estado', undefined);
+      formik.setFieldError('cp', undefined);
+      formik.setTouched({
+        ...formik.touched,
+        estado: false,
+        cp: false,
+      });
+    }
+  }, [formik.values.nombrePais]);
+
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formik.setFieldValue('nombre', event.target.value);
   };
@@ -331,8 +328,17 @@ const Formularios = () => {
     formik.setFieldValue('numeroWhatsApp', value);
     formik.setFieldValue('nombrePais', selectedCountry);
     formik.setFieldValue('codigoPais', selectedCode);
+    console.log(selectedCountry)
   };
 
+  const handleStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue('estado', event.target.value);
+  }
+
+  const handleCPChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newCP = event.target.value.replace(/\D/g, '').slice(0, 5);
+    formik.setFieldValue('cp', newCP);
+  }
   const handleNombreBlur = () => {
     formik.setFieldTouched('nombre', true);
   };
@@ -349,6 +355,14 @@ const Formularios = () => {
     formik.setFieldTouched('numeroWhatsApp', true);
   };
 
+  const handleStateBlur = () => {
+    formik.setFieldTouched('estado', true);
+  };
+
+  const handleCPBlur = () => {
+    formik.setFieldTouched('cp', true);
+  };
+
   const handleSubmit = async (values: any) => {
     const lowerCaseMail = values.correo.toLowerCase();
 
@@ -358,10 +372,14 @@ const Formularios = () => {
       apellido: values.apellido,
       mail: lowerCaseMail,
       numeroWhatsapp: values.numeroWhatsApp,
+      estado: values.estado,
+      cp: values.cp,
       pais: values.nombrePais,
       option1: values.option1,
       option2: values.option2,
       option3: values.option3,
+      option4: values.option4,
+      option5: values.option5,
     };
 
     console.log(createUserDto);
@@ -378,7 +396,12 @@ const Formularios = () => {
         //   form?.redirect?.type === "thankYouPage"
         //     ? "/forms/thankyoupage"
         //     : form?.redirect?.link || "";
-        const link = 'forms/thankyoupage?formId=' + formId;
+        const link = (formId === '17' || formId === '19')
+          ? 'forms/thankyoupage-dist'
+          : (formId === '22')
+            ? 'forms/thankyoupage-store'
+            : 'forms/thankyoupage?formId=' + formId;
+
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
@@ -417,6 +440,18 @@ const Formularios = () => {
       opcionesValidas = false;
     }
 
+    // Validar option4
+    if (!formik.values.option4 && form?.optionsArray[3]?.isVisible) {
+      formik.setFieldError('option4', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
+    // Validar option5
+    if (!formik.values.option5 && form?.optionsArray[4]?.isVisible) {
+      formik.setFieldError('option5', 'Debes seleccionar una de las opciones');
+      opcionesValidas = false;
+    }
+
     return opcionesValidas;
   };
 
@@ -427,9 +462,13 @@ const Formularios = () => {
       apellido: true,
       correo: true,
       numeroWhatsApp: true,
+      estado: true,
+      cp: true,
       option1: true,
       option2: true,
       option3: true,
+      option4: true,
+      option5: true,
     });
 
     // Realizar la validación del formulario
@@ -560,6 +599,34 @@ const Formularios = () => {
               </div>
             )}
           </div>
+
+          {formik.values.nombrePais === 'México' &&
+            <div className={states}>
+              <div className={state}>
+                <SelectState
+                  label={'Selecciona tu estado'}
+                  onChange={handleStateChange}
+                  onBlur={handleStateBlur}
+                  value={formik.values.estado}
+                />
+                {formik.touched.estado && formik.errors.estado && (
+                  <div className={errorMessageMail}>{formik.errors.estado}</div>
+                )}
+              </div>
+              <div className={cp}>
+                <InputCP
+                  label={'Escribe tu código postal'}
+                  placeholder={'21340'}
+                  onChange={handleCPChange}
+                  onBlur={handleCPBlur}
+                  value={formik.values.cp}
+                />
+                {formik.touched.cp && formik.errors.cp && (
+                  <div className={errorMessageMail}>{formik.errors.cp}</div>
+                )}
+              </div>
+            </div>
+          }
           <div className={image}>
             {form?.img.isVisible && <img src={form.img.source} alt='iphone' />}
           </div>
@@ -603,6 +670,37 @@ const Formularios = () => {
                 )
                 : null}
             </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[3]?.label || ''}
+                options={form?.optionsArray[3]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
+            <div className={optionContainer}>
+              <OptionComponent
+                label={form?.optionsArray[4]?.label || ''}
+                options={form?.optionsArray[4]?.options || []}
+                onOptionChange={(value) => handleOptionChange(4, value)}
+                isVisible={!!form?.optionsArray[3]?.isVisible}
+              />
+              {form?.optionsArray[3]?.isVisible
+                ? formik.touched.option4 &&
+                formik.errors.option4 && (
+                  <div className={errorOption}>{formik.errors.option4}</div>
+                )
+                : null}
+            </div>
+
           </div>
           <div className={lineaAtravesada}></div>
 

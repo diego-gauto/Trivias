@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { AiOutlineHourglass, AiOutlineStar } from 'react-icons/ai';
-import { FaArrowRight, FaAward } from 'react-icons/fa';
-import { TfiClose } from 'react-icons/tfi';
-import { useMediaQuery } from 'react-responsive';
+import { AiOutlineHourglass, AiOutlineStar } from "react-icons/ai";
+import { FaArrowRight, FaAward } from "react-icons/fa";
+import { TfiClose } from "react-icons/tfi";
+import { useMediaQuery } from "react-responsive";
 
-import 'animate.css';
-import Link from 'next/link';
-import router from 'next/router';
+import "animate.css";
+import Link from "next/link";
+import router from "next/router";
 
-import { getCoursesApi } from '../../../components/api/lessons';
-import { getRewardsApi } from '../../../components/api/rewards';
-import { LoaderContainSpinner } from '../Purchase/Purchase.styled';
-import {
-  RewardContainer,
-  SubscriptionContainer,
-  ThirdBox,
-} from './User.styled';
-import { REWARDS_PATH, SUPPORT_PATH } from '../../../constants/paths';
-import { conektaResumeSubscription } from '../../../components/api/profile';
-import { getUsersStripe } from '../../../components/api/conekta/test';
-import ChangePlanModal from '../../../components/Modals/ChangePlanModal/ChangePlanModal';
-import { haveAccess } from '../../../components/GlobalFunctions';
-import { time } from 'console';
-import { IUserInfoResult } from '../../../interfaces/IUser';
-import { user } from 'firebase-functions/v1/auth';
+import { Modal as GenericModal } from "../../../components/admin/UsersNew/GenericModal";
+import { getUsersStripe } from "../../../components/api/conekta/test";
+import { getCoursesApi } from "../../../components/api/lessons";
+import { conektaResumeSubscription } from "../../../components/api/profile";
+import { getRewardsApi } from "../../../components/api/rewards";
+import ChangePlanModal from "../../../components/Modals/ChangePlanModal/ChangePlanModal";
+import { REWARDS_PATH, SUPPORT_PATH } from "../../../constants/paths";
+import { IUserInfoResult } from "../../../interfaces/IUser";
+import { LoaderContainSpinner } from "../Purchase/Purchase.styled";
+import { RewardContainer, SubscriptionContainer, ThirdBox } from "./User.styled";
 
 const or_star = '/images/cancel_modal/or_star.png';
 const gr_star = '/images/cancel_modal/gr_star.png';
@@ -64,7 +58,8 @@ const NextReward = (props: Props) => {
     let tempMonths: any = [];
     getRewardsApi().then((res) => {
       tempPoints = res.data.data.filter((x: any) => x.type === 'points');
-      tempMonths = res.data.data.filter((x: any) => x.type === 'months');
+      tempMonths = res.data.data.filter((x: any) => x.type === 'months' && x.published === 'publicado');
+      console.log(tempMonths)
       tempPoints.sort((a: any, b: any) => a.points - b.points);
       tempMonths.sort((a: any, b: any) => a.month - b.month);
 
@@ -79,7 +74,7 @@ const NextReward = (props: Props) => {
       let today: any = new Date().getTime() / 1000;
       let tempDayCount: any = today - user.start_date;
       let tempMonth =
-        user.start_date === 0 ? 0 : tempDayCount / (3600 * 24 * 30);
+        user.final_date < today ? -1 : tempDayCount / (3600 * 24 * 30);
       tempMonths.forEach((element: any) => {
         if (Math.floor(tempMonth) >= element.month) {
           tempMonthObj.obtained.push(element);
@@ -391,7 +386,7 @@ const NextReward = (props: Props) => {
     return result;
   };
 
-  const isConektaUser = (method: string) => {
+  const isConektaUser = (method: string = ''): boolean => {
     return method === 'conekta';
   }
 
@@ -399,17 +394,116 @@ const NextReward = (props: Props) => {
     return finalDate > Math.floor(new Date().getTime() / 1000);
   }
 
-  const haveRecurrentSuscription = (level: number) => {
-    return [1, 4, 7].includes(level);
-  };
+  const finalDateActive = Math.floor(new Date().getTime() / 1000) + (10 * 24 * 60 * 60);
+  const finalDateNotActive = Math.floor(new Date().getTime() / 1000) - ((15 * 24 * 60 * 60));
+  const finalDateActiveToConekta = Math.floor(new Date().getTime() / 1000) - (5 * 24 * 60 * 60);
 
-  const isAbleToUpdateToCuatri = () => {
-
+  const FINAL_DATES = {
+    active: finalDateActive,
+    not_active: finalDateNotActive,
+    conekta_active: finalDateActiveToConekta
   }
 
-  const isAbleToUpdateToAnual = () => {
-
+  /*
+  const user: IUserInfoResult = {
+    ...userTest,
+    user_id: 49678,
+    final_date: FINAL_DATES.conekta_active,
+    level: 1,
+    method: 'conekta',
+    is_canceled: 0,
+    role: 'user'
   }
+*/
+  const ableToShowCancelButton = (): boolean => {
+    // 1. Si esta cancelado o es super admin, directamente no puede cancelar
+    const isCanceled = user.is_canceled === 1;
+    const isSuperAdmin = user.role === 'superAdmin';
+    const finalDate = user.final_date;
+
+    if (isCanceled || isSuperAdmin) {
+      return false;
+    }
+
+    // 2. Si no es del tipo paypal ni de conekta, no tendría porque poder cancelar
+    const isPaypalUser = user.method === 'paypal';
+    const isAConektaUser = isConektaUser(user.method || '');
+    if (!(isPaypalUser || isAConektaUser)) {
+      return false;
+    }
+
+    // 2. El final date para los conekta tiene tolerancia de 10 dias,
+    // si es conekta y tiene un final_date mayor a hacer 10 días, directamente
+    // puede cancelar
+    const CONEKTA_FINAL_DATE_LIMIT = Math.floor(new Date().getTime() / 1000) - (10 * 24 * 60 * 60);
+    if (isAConektaUser) {
+      if (finalDate > CONEKTA_FINAL_DATE_LIMIT) {
+        return true;
+      }
+    }
+
+    // 4. Si llega a ser usuario de paypal o conekta, tiene que ser activo para poder cancelar
+    return isActiveSubscription(finalDate);
+  }
+
+  const getImportantValuesOfUser = () => {
+    const { role, final_date, user_id, method, is_canceled, level } = user;
+
+    const finalDateString = (new Date(final_date * 1000)).toJSON().substring(0, 10);
+
+    return {
+      role,
+      final_date: finalDateString,
+      method,
+      user_id,
+      is_canceled: is_canceled === 1,
+      level
+    }
+  }
+
+  const generateModalContent2 = (): JSX.Element => {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+      }}>
+        <div>
+          <p
+            style={{
+              fontWeight: 'bold'
+            }}
+          >Valores del usuario actual</p>
+        </div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          width: '100%'
+        }}>
+          {
+            Object.keys(getImportantValuesOfUser()).map((prop) => {
+              return <>
+                <div>
+                  <p
+                    style={{ margin: '4px 0' }}
+                  >{`${prop}`}</p>
+                </div>
+                <div>
+                  {
+                    <p style={{ margin: '4px 0' }}
+                    >{`${(getImportantValuesOfUser() as any)[`${prop}`]}`}</p>
+                  }
+                </div>
+              </>
+            })
+          }
+        </div>
+      </div>
+    )
+  }
+
+  const [showUserMembershipInfo, setShowUserMembershipInfo] = useState<boolean>(false);
 
   return (
     <ThirdBox>
@@ -603,7 +697,8 @@ const NextReward = (props: Props) => {
                   {time.blocked.length > 0 ? (
                     <>
                       Siguiente Beneficio <span>{time?.blocked[0].title}</span>{' '}
-                      a los <span>{time?.blocked[0].month} meses</span>
+                      {time?.blocked[0].month === 0 ? 'mientras tu suscripción esté activa' :
+                        `a los ${time?.blocked[0].month} meses`}
                     </>
                   ) : (
                     <>
@@ -657,7 +752,7 @@ const NextReward = (props: Props) => {
                 user.level,
                 user.final_date,
                 user.role as UserRole,
-                user.method,
+                user.method || '',
               )}
             </div>
             {
@@ -671,7 +766,7 @@ const NextReward = (props: Props) => {
             }
             {(
               isActiveSubscription(user.final_date) &&
-              isConektaUser(user.method) &&
+              isConektaUser(user.method || '') &&
               user.level === 1
             ) && (
                 <button
@@ -688,7 +783,7 @@ const NextReward = (props: Props) => {
               )}
             {(
               isActiveSubscription(user.final_date) &&
-              isConektaUser(user.method) &&
+              isConektaUser(user.method || '') &&
               [1, 7].includes(user.level)
             ) && (
                 <button
@@ -704,10 +799,7 @@ const NextReward = (props: Props) => {
                 </button>
               )}
             {!loader &&
-              (user.final_date > today ||
-                ([1, 4, 7].includes(user.level)
-                  && user.method === 'conekta'
-                  && user.final_date > today - 10 * 24 * 60 * 60))
+              (ableToShowCancelButton())
               && (
                 <button
                   onClick={() => {
@@ -730,7 +822,12 @@ const NextReward = (props: Props) => {
         <div className='second-section'>
           <p className='first-text'>PROXIMAMENTE</p>
           <p className='second-text'>Refiere amigos</p>
-          <p className='third-text'>
+          <p
+            className='third-text'
+            onClick={(e) => {
+              setShowUserMembershipInfo(true);
+            }}
+          >
             Obtén premios para ti {!responsive1023 && <br />}y para ellos.
           </p>
         </div>
@@ -738,6 +835,16 @@ const NextReward = (props: Props) => {
           <img src={handImage} />
         </div>
       </SubscriptionContainer>
+      {
+        (showUserMembershipInfo && user.user_id === 49678) &&
+        <GenericModal
+          child={generateModalContent2()}
+          onClose={() => {
+            setShowUserMembershipInfo(false);
+          }}
+          show={showUserMembershipInfo}
+          key={``} />
+      }
     </ThirdBox>
   );
 };

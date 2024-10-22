@@ -22,6 +22,7 @@ export interface ICourses {
   published: number;
   with_certificate: number;
   material_route: string;
+  is_new: number;
 }
 
 export interface IProfessors {

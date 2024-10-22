@@ -148,7 +148,7 @@ export const RetryPaymentContainer = styled.div`
         }
         .button-container {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           width: 100%;
           gap: 20px;
           .box-container {
@@ -359,6 +359,7 @@ export const RetryPaymentContainer = styled.div`
     .button-container {
       scale: 0.7;
       width: auto !important;
+      justify-content: center;
     }
   }
   @media (max-width: 480px) {
@@ -370,6 +371,7 @@ export const RetryPaymentContainer = styled.div`
         .add-payment-container {
           gap: 15px;
           .button-container {
+            justify-content: center;
             .box-container {
               width: 150px;
               p {

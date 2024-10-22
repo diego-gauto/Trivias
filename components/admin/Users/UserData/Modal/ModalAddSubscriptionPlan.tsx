@@ -1,6 +1,6 @@
 import { CSSProperties, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { IUpdateMembershipPlanApi, updateMembershipPlanApi } from '../../../../api/users';
+import { IUpdateMembershipData, updateMembershipPlanApi } from '../../../../api/users';
 
 import { CloseIcon } from '../UsersCardData.styled';
 import {
@@ -52,16 +52,20 @@ const ModalAddSubscriptionPlan = ({ show, setShow, user, adminUserId }: Props) =
       return;
     }
 
-    const generateBody = (suscription: SuscriptionOption, price: number): IUpdateMembershipPlanApi => {
+    const generateBody = (suscription: SuscriptionOption, price: number): IUpdateMembershipData => {
       const level = suscription === 'Month' ? 6 : (suscription === 'Annual' ? 5 : 8);
       const days = suscription === 'Month' ? 30 : (suscription === 'Annual' ? 365 : 120);
       return {
-        user_final_date: user.final_date,
-        start_date: user.start_date,
+        //user_final_date: user.final_date,
+        current_final_date: user.final_date,
+        current_start_date: user.start_date,
+        // start_date: user.start_date,
+        current_level: 0,
+        user_id: user.id,
         level,
-        id: user.id,
+        //id: user.id,
         days,
-        type: price * 100,
+        type: `${price * 100}`,
         admin_update_id: adminUserId
       }
     }

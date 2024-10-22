@@ -194,15 +194,17 @@ export const ImageContent = styled.div`
   position: relative;
   padding-bottom: 10px;
   .band {
-    background-image: url(../images/band.png);
-    background-repeat: no-repeat;
-    width: 140px;
-    height: 110px;
+    /*background-image: url(../images/band.png);*/
+    background-image: none;
+    background: #6717cd;
+    width: 30px;
+    height: 160px;
     cursor: pointer;
     position: absolute;
-    top: -10px;
-    left: -20px;
+    top: -46px;
+    left: 20px;
     z-index: 1;
+    rotate: 50deg;
   }
   .play-icon {
     font-size: 55px;
@@ -221,26 +223,30 @@ export const ImageContent = styled.div`
       sans serif;
     transform: rotate(-40deg);
     color: white;
-    top: 25px;
-    left: 15px;
+    top: 20px;
+    left: 0px;
     z-index: 2;
   }
   @media (max-width: 1023px) {
     height: auto;
+
     .band {
       background-image: none;
-      top: -33px;
-      left: 0;
-      width: 27px;
-      rotate: 45deg;
       background: #6717cd;
+      rotate: 50deg;
+      top: -43px;
+      left: 0px;
+      width: 20px;
+      height: 160px;
+      rotate: 50deg;
     }
     .days-left {
-      top: 8px;
-      left: 0px;
+      top: 14px;
+      left: -2px;
       z-index: 2;
       font-size: 12px;
     }
+
     .play-icon {
       font-size: 40px;
     }

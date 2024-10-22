@@ -169,10 +169,10 @@ export const PurchaseNewContainer = styled.div`
           display: grid;
           grid-template-columns: 1fr 1fr;
           width: 100%;
-          gap: 20px;
+          gap: 10px;
           .box-container {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             align-items: center;
             padding-block: 20px;
             height: 84px;
@@ -356,6 +356,9 @@ export const PurchaseNewContainer = styled.div`
       @media (max-width: 520px) {
         right: -53px;
       }
+      @media (max-width: 400px) {
+        right: -35px;
+      }
       p {
         color: #942ced;
         font-size: 18px;
@@ -433,6 +436,11 @@ export const PurchaseNewContainer = styled.div`
       background: rgb(148 44 237 / 30%);
       border-radius: 20px;
       padding: 20px 20px;
+      .gonvar-subscription-container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+      }
       .title {
         text-align: center;
         font-size: 16px;
@@ -457,8 +465,10 @@ export const PurchaseNewContainer = styled.div`
       }
       .info {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr;
         grid-gap: 10px;
+        align-items: center;
+        /* margin-bottom: 40px; */
         p {
           color: black;
           font-size: 14px;
@@ -468,9 +478,20 @@ export const PurchaseNewContainer = styled.div`
           }
         }
         img {
-          height: 70%;
-          width: 100%;
+          width: 70%;
           border-radius: 10px;
+          justify-self: center;
+        }
+        @media screen and (max-width: 758px) {
+          grid-template-columns: 1fr;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 100px;
+          img {
+            width: 70%;
+            border-radius: 10px;
+            justify-self: center;
+          }
         }
       }
 
@@ -522,7 +543,7 @@ export const PurchaseNewContainer = styled.div`
         }
       }
       .price-container {
-        margin-top: auto;
+        margin-top: 10px;
         .total {
           text-align: end;
           font-size: 22px;
@@ -548,13 +569,13 @@ export const PurchaseNewContainer = styled.div`
       .image {
         position: absolute;
         bottom: 0;
-        left: -71px;
-        max-height: 350px;
-        @media (max-width: 1400px) {
-          max-height: 300px;
+        left: 0;
+        max-width: 50%;
+        @media (max-width: 768px) {
+          max-height: 40%;
         }
-        @media (max-width: 1280px) {
-          max-height: 270px;
+        @media (max-width: 1300px) {
+          max-height: 100%;
         }
       }
     }
@@ -562,6 +583,23 @@ export const PurchaseNewContainer = styled.div`
   .white-space {
     visibility: hidden;
     min-width: 300px;
+  }
+  .hidden-image {
+    display: block;
+    /*
+    @media screen and (max-height: 870px) and (min-width: 768px) {
+      display: none;
+    }
+    */
+  }
+  @media screen and (max-height: 940px) and (min-width: 768px) {
+    .hidden-image {
+      display: none;
+    }
+    .info {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
   }
   @media (max-width: 1300px) {
     .right-section {
@@ -641,7 +679,6 @@ export const PurchaseNewContainer = styled.div`
           .description-text {
             font-size: 14px;
             text-align: justify;
-            padding-inline: 20px;
           }
         }
       }
@@ -659,11 +696,11 @@ export const PurchaseNewContainer = styled.div`
       align-self: center;
       .main-container {
         .description {
-          width: 350px;
+          padding-inline: 0;
         }
         .add-payment-container {
           .description-text {
-            font-size: 16px;
+            font-size: 12px;
           }
         }
       }
@@ -702,10 +739,10 @@ export const PurchaseNewContainer = styled.div`
         .add-payment-container {
           gap: 15px;
           .button-container {
-            grid-template-columns: 1fr;
             width: 100%;
             .box-container {
               width: 100%;
+              padding-left: 8px;
               p {
                 font-size: 12px;
               }
@@ -768,14 +805,19 @@ export const PurchaseNewContainer = styled.div`
     .complete-contain {
       order: 1; /* Cambia el orden de la primera tarjeta */
       align-self: center; /* Centra verticalmente */
-      margin-right: 50px;
+      margin-right: 200px;
     }
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
       position: fixed; /* Fija la posición */
-      max-width: 372px;
-      top: 25%;
-      left: 72.5%;
+      max-width: 432px;
+      top: 15%;
+      left: 67%;
+    }
+    .info {
+      grid-template-columns: 3fr 2fr;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
     }
   }
 `;

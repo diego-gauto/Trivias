@@ -55,6 +55,7 @@ export const AdminsContext = (props: Props) => {
       date_1: '',
       date_2: '',
     },
+    origin_state: 'todos'
   };
   const [userFilters, setUserFilters] = useState<IUserFilters>(initial_filters);
   const [countries, setCountries] = useState([]);
@@ -68,7 +69,6 @@ export const AdminsContext = (props: Props) => {
   const [totalAssignments, setTotalAssignments] = useState<number>(0);
   const [courses, setCourses] = useState<any>([]);
   const [payCourses, setPayCourses] = useState<any>([]);
-  const [permits, setPermits] = useState(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
 
   const { children } = props;
@@ -122,12 +122,6 @@ export const AdminsContext = (props: Props) => {
       (user && user.role === 'superAdmin')
     ) {
       loadUsers();
-      if (user && user.role === 'superAdmin') {
-        setPermits(true);
-      }
-      if (user && user.role === 'admin' && user.roles[4].report === 0) {
-        setPermits(true);
-      }
     }
   }, [user, userFilters]);
 
@@ -143,7 +137,6 @@ export const AdminsContext = (props: Props) => {
     setUserFilters,
     courses,
     payCourses,
-    permits,
     assignLoader,
     assignments,
     totalAssignments,

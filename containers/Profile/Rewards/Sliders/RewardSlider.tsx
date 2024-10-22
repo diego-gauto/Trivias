@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import SwiperCore, { Autoplay } from 'swiper';
-import 'swiper/css';
-import { BackgroundSlide, SlideContainer } from './RewardModuleSlider.styled';
-import { IUserReward, SlideObj, reward_slider } from './IRewardSlider';
-import { createRequestApi } from '../../../../components/api/rewards';
-import { LoaderButton } from '../../../../components/admin/CoursesNew/Courses.styled';
-import { goToCertificate } from '../../../../constants/redirects';
+import React, { useEffect, useState } from "react";
+
+import SwiperCore, { Autoplay } from "swiper";
+import "swiper/css";
+
+import { LoaderButton } from "../../../../components/admin/CoursesNew/Courses.styled";
+import { createRequestApi } from "../../../../components/api/rewards";
+import { goToCertificate } from "../../../../constants/redirects";
 import {
   checkCurrentDay,
   checkIfClaimed,
   showLessonText,
   showMonthText,
   showScoreText,
-} from './functions';
+} from "./functions";
+import { reward_slider, IUserReward } from "./IRewardSlider";
+import { BackgroundSlide, SlideContainer } from "./RewardModuleSlider.styled";
+
 SwiperCore.use([Autoplay]);
 
 const RewardSlider = (props: reward_slider) => {
@@ -90,13 +93,14 @@ const RewardSlider = (props: reward_slider) => {
           (val.type == 'months' &&
             val.published === 'publicado' &&
             months >= val.month &&
-            today < user.final_date) ||
-          (user.level === 5 &&
-            today < user.final_date &&
-            val.month === -1 &&
-            val.type == 'months' &&
-            val.published === 'publicado') ||
-          (user.final_date > today && val.month === -1)
+            today < user.final_date)
+          //   ||
+          // (user.level === 5 &&
+          //   today < user.final_date &&
+          //   val.month === -1 &&
+          //   val.type == 'months' &&
+          //   val.published === 'publicado') ||
+          // (user.final_date > today && val.month === -1)
         );
       });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
@@ -119,12 +123,14 @@ const RewardSlider = (props: reward_slider) => {
         return (
           (val.type === 'months' &&
             val.published === 'publicado' &&
-            months < val.month &&
-            !(
-              (user.level === 5 || user.level === 4) &&
-              user.final_date > today
-            )) ||
-          (user.final_date < today && val.month === -1)
+            (months < val.month ||
+              user.final_date < today))
+          //   &&
+          //   !(
+          //     (user.level === 5 || user.level === 4) &&
+          //     user.final_date > today
+          //   )) ||
+          // (user.final_date < today && val.month === -1)
         );
       });
       tempFilter.sort((a: any, b: any) => a.month - b.month);
@@ -312,7 +318,7 @@ const RewardSlider = (props: reward_slider) => {
                           className='image-container'
                           style={
                             type == 'claim-certificates' ||
-                            type == 'certificates'
+                              type == 'certificates'
                               ? { borderRadius: 10 }
                               : {}
                           }
@@ -329,15 +335,15 @@ const RewardSlider = (props: reward_slider) => {
                           {(type === 'months' ||
                             type === 'points' ||
                             type === 'certificates') && (
-                            <button
-                              className='btn-info'
-                              onClick={() =>
-                                showRewardData(index, reward.points)
-                              }
-                            >
-                              <p className='text'>Más información</p>
-                            </button>
-                          )}
+                              <button
+                                className='btn-info'
+                                onClick={() =>
+                                  showRewardData(index, reward.points)
+                                }
+                              >
+                                <p className='text'>Más información</p>
+                              </button>
+                            )}
                           {((reward.type === 'points' &&
                             score >= reward.points &&
                             !userReward.find(
@@ -351,22 +357,22 @@ const RewardSlider = (props: reward_slider) => {
                             (reward.type === 'months' &&
                               (user.level === 5 || user.level === 4) &&
                               user.final_date > today)) && (
-                            <>
-                              {!loader ? (
-                                <button
-                                  className='btn-info'
-                                  onClick={() => {
-                                    // AddUserRewards(reward);
-                                    sendRequest(reward);
-                                  }}
-                                >
-                                  <p className='text'>Hacer Pedido</p>
-                                </button>
-                              ) : (
-                                <LoaderButton />
-                              )}
-                            </>
-                          )}
+                              <>
+                                {!loader ? (
+                                  <button
+                                    className='btn-info'
+                                    onClick={() => {
+                                      // AddUserRewards(reward);
+                                      sendRequest(reward);
+                                    }}
+                                  >
+                                    <p className='text'>Hacer Pedido</p>
+                                  </button>
+                                ) : (
+                                  <LoaderButton />
+                                )}
+                              </>
+                            )}
                           {!('totalLessons' in reward) &&
                             userReward.find(
                               (x: IUserReward) =>

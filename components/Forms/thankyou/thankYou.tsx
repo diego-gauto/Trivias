@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 
+import { PREVIEW_PATH, PROFILE_PATH, PURCHASE_PATH, SIGNUP_PATH } from "../../../constants/paths";
 import { db } from "../../../firebase/firebaseConfig";
+import { useAuth } from "../../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import { getFormApi } from "../../api/form";
+import Countdown60Seconds from "../countdown60seconds";
 import styles from "./thankYou.module.css";
 
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -42,6 +45,8 @@ interface Form {
 const ThankYouForm = () => {
   const [form, setForm] = useState<Form | null>();
   const [loading, setLoading] = useState(true);
+
+  const [user, setUser] = useState<any>(null);
 
   const {
     container,
@@ -81,6 +86,13 @@ const ThankYouForm = () => {
     '16',
     '17',
     '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
@@ -114,12 +126,63 @@ const ThankYouForm = () => {
   };
 
   const redirectToLanding = () => {
-    const link = "/suscripcion-cuatrimestral";
+    const link = "/suscripcion-anual";
     if (link) {
       window.open(link, '_blank');
     } else {
       // Manejar el caso en el que link es undefined
       console.error('El enlace de redirección es indefinido');
+    }
+  };
+
+  const redirectToCheckout = () => {
+    // const link = "/suscripcion-cuatrimestral";
+    // if (link) {
+    //   window.open(link, '_blank');
+    // } else {
+    //   // Manejar el caso en el que link es undefined
+    //   console.error('El enlace de redirección es indefinido');
+    // }
+    const frequency = 'anual'
+    const today = new Date().getTime() / 1000;
+
+    if (user && user.id) {
+
+      // Usuarios que estan en proceso de re-intento de pago que final_date puede estar vencido
+      // Si una usuaria es de pago recurrente nivel 1, 4, 7
+      // debugger;
+      if (
+        [1, 4, 7].includes(user.level) &&
+        user.final_date > today - 10 * 24 * 60 * 60
+      ) {
+        router.push(PREVIEW_PATH);
+      }
+      // Cambiar
+      // Pagos no recurrentes
+      // 1. Con final_date vencido (inactivas)
+      // 2. Con final_date no vencido (activas)
+      else if ([0, 5, 6, 8].includes(user.level)) {
+        if (user.final_date < today) {
+          router.push({
+            pathname: PURCHASE_PATH,
+            query: { type: 'subscription', frequency, v: '3' },
+          });
+        } else {
+          router.push(PREVIEW_PATH);
+        }
+      }
+      // niveles 3 pausados
+      else if (user.level === 3) {
+        router.push(PROFILE_PATH);
+      } else {
+        router.push({
+          pathname: PURCHASE_PATH,
+          query: { type: 'subscription', frequency, v: '3' },
+        });
+      }
+    } else {
+      localStorage.setItem('anual', 'true');
+      router.push(SIGNUP_PATH);
     }
   };
 
@@ -191,6 +254,15 @@ const ThankYouForm = () => {
     }
   }, [router.isReady, formId]);
 
+  let userData: any = useAuth();
+  useEffect(() => {
+    if (userData.user !== null) {
+      setUser(userData.user);
+    }
+  }, []);
+
+  console.log(user)
+
   if (loading) {
     return (
       <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -206,9 +278,26 @@ const ThankYouForm = () => {
       <div className={textContainer}>
         <p className={title}>¡Felicidades!</p>
         <p className={subtitle}>Has llenado el formulario con éxito.</p>
+        <Countdown60Seconds />
         <p className={paragraph}>
-          En los próximos días nos comunicaremos contigo para
-          indicarte los pasos a seguir.
+          ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
+        </p>
+        <p className={paragraph}>
+          Cuentas con 1 minuto para unirte a la academia con beca del 75%
+          y pagar <strong>sólo 3,497 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
+          Recibe Gratis 600-800 pesos en producto de la marca <strong>al unirte ahora.</strong>
+        </p>
+        <div
+          className={`${linkButton} ${allCenter}`}
+          onClick={() => redirectToCheckout()}
+        >
+          <p>
+            <b>Comenzar ahora</b>
+          </p>
+        </div>
+        <p className={paragraph}>
+          En caso de que no te unas ahora, quédate pendiente a tu teléfono,
+          ya que nos contactaremos contigo por medio de whatsapp y llamadas en caso de que aún haya lugar.
         </p>
 
         {isLinkToWhatsappGroup(form?.redirect.link) && (

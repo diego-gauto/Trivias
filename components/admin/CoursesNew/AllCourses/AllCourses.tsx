@@ -91,33 +91,42 @@ const AllCourses = (props: AllCoursesProps) => {
     getAllCourses,
     with_certificate,
     material_route,
+    is_new,
     canEdit,
   } = props;
-  const [course, setCourse] = useState<ICourses>({
-    id: id,
-    title: title,
-    subtitle: subtitle,
-    about: about,
-    difficulty: difficulty,
-    mandatory: mandatory,
-    image: image,
-    phrase: phrase,
-    certificate_color: certificate_color,
-    price: price,
-    rating: rating,
-    reviews: reviews,
-    duration: duration,
-    course_number: course_number,
-    route: route,
-    type: type,
-    sequential: sequential,
-    professors: professors,
-    categories: categories,
-    materials: materials,
-    published: published,
-    with_certificate: with_certificate,
-    material_route: material_route,
-  });
+
+  const generateCourseValues = (): ICourses => {
+    return {
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      about: about,
+      difficulty: difficulty,
+      mandatory: mandatory,
+      image: image,
+      phrase: phrase,
+      certificate_color: certificate_color,
+      price: price,
+      rating: rating,
+      reviews: reviews,
+      duration: duration,
+      course_number: course_number,
+      route: route,
+      type: type,
+      sequential: sequential,
+      professors: professors,
+      categories: categories,
+      materials: materials,
+      published: published,
+      with_certificate: with_certificate,
+      material_route: material_route,
+      is_new: is_new
+    };
+  }
+
+  const originalCourse = generateCourseValues();
+
+  const [course, setCourse] = useState<ICourses>(generateCourseValues());
   const difficultyData = [
     'Muy Fácil',
     'Fácil',
@@ -197,10 +206,11 @@ const AllCourses = (props: AllCoursesProps) => {
     setCourse({ ...course, materials: tempMaterials });
   };
   const editCourse = async () => {
-    if (userData.role === 'admin' && userData.roles[0].edit === 0) {
+    if (!canEdit) {
       alert('No tienes permisos para esta acción');
       return;
     }
+    console.log('Si entro al editCourse');
     setLoader(true);
     let tempErrors: any = {
       errorTitle: course.title === '' ? true : false,
@@ -229,7 +239,9 @@ const AllCourses = (props: AllCoursesProps) => {
     };
     setErrors(tempErrors);
     let checkErrors = Object.values(tempErrors).includes(true);
+    console.log({ tempErrors });
     if (!checkErrors) {
+      console.log('No tiene errores');
       if (course.type === 'Gratis') {
         course.price = 0;
         course.duration = 0;
@@ -244,7 +256,7 @@ const AllCourses = (props: AllCoursesProps) => {
       }
       setLoader(true);
 
-      if (course.published) {
+      if (originalCourse.published === 0 && course.published === 1) {
         sendNotificationToAllActiveUsers();
       }
 
@@ -268,23 +280,52 @@ const AllCourses = (props: AllCoursesProps) => {
 
   const sendNotificationToAllActiveUsers = async () => {
     try {
-      const toleranceDays = 10;
-      const secondsOfTolerance = toleranceDays * 24 * 60 * 60;
-      const insertCourseNotificationQuery = `select u.id from users as u inner join 
-      memberships as m on m.user_id = u.id 
-      where from_unixtime(m.final_date + ${secondsOfTolerance}) > now() and m.level != 10;`;
+      const insertCourseNotificationQuery = `select m.user_id, u.name, u.last_name, u.email from users as u 
+        inner join memberships as m on m.user_id = u.id
+        where 
+        (m.level in (1, 4, 7) and (m.final_date + 864000) > unix_timestamp(now()))
+        or m.final_date  > unix_timestamp(now());`;
       const activeUsersResponse = await getGenericQueryResponse(
         insertCourseNotificationQuery,
       );
-      const activeUsers = activeUsersResponse.data.data;
+
+      interface IUserActiveToCourseNotification {
+        user_id: number,
+        name: string,
+        last_name: string,
+        email: string,
+      }
+
+      const activeUsers: IUserActiveToCourseNotification[] = activeUsersResponse.data.data;
       // Para que sea para todos los usuarios de la consulta, remover el .filter
       activeUsers
-        .filter((user) => {
-          // 54598 para alberto, 49678 para Diego
-          return [54598, 49678].includes(user['id']);
-        })
-        .forEach((user) => {
-          sendNotificationToUser(user['id']);
+        //.filter((user) => {
+        // 54598 para alberto, 49678 para Diego
+        //return [54598, 49678, 56264, 50099, 50098].includes(user['user_id']);
+        //})
+        .forEach(({ user_id, email }) => {
+          // sendNotificationToUser(user['user_id']);
+          /*
+          userId: number,
+          type: string (numero, ejemplo '10'),
+          title: string (courseTitle),
+          notificationId: number,
+          */
+          interface INewCourseNotification {
+            userId: number,
+            type: string /*(numero, ejemplo '10')*/,
+            title: string /*(courseTitle)*/,
+            notificationId: number,
+            courseId: number,
+          }
+          const body: INewCourseNotification = {
+            userId: user_id,
+            notificationId: 0,
+            title: course.title,
+            courseId: course.id,
+            type: '10'
+          }
+          createNotification(body);
         });
     } catch (error) {
       console.error(error);
@@ -301,7 +342,8 @@ const AllCourses = (props: AllCoursesProps) => {
       const insertCourseNotificationQuery = `insert into course_notification 
       (notification_id, course_id, title, user_id) 
       values (${insertIdNotification}, ${course.id}, '${course.title}', ${userId});`;
-      await getGenericQueryResponse(insertCourseNotificationQuery);
+      const newCourseNotificationResponse = await getGenericQueryResponse(insertCourseNotificationQuery);
+      console.log({ newCourseNotificationResponse });
     } catch (error) {
       throw error;
     }
@@ -317,7 +359,7 @@ const AllCourses = (props: AllCoursesProps) => {
         date: '',
         courseName: '',
       };
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -677,13 +719,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {professors.length > 0
                     ? professors.map((prof: IProfessors, index: number) => {
-                        return (
-                          <React.Fragment key={'showProf_' + index}>
-                            {prof.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showProf_' + index}>
+                          {prof.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Instructor'}
                 </p>
               ) : (
@@ -695,15 +737,15 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.professors.length > 0
                     ? course.professors.map(
-                        (val: IProfessors, index: number) => {
-                          return (
-                            <React.Fragment key={'profNameEdit_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: IProfessors, index: number) => {
+                        return (
+                          <React.Fragment key={'profNameEdit_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione un professor'}
                   {openProfessorsSelect ? (
                     <RiArrowDropUpLine className='arrow' />
@@ -734,13 +776,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {categories.length > 0
                     ? categories.map((cat: ICategories, index: number) => {
-                        return (
-                          <React.Fragment key={'showCat_' + index}>
-                            {cat.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showCat_' + index}>
+                          {cat.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Categorías'}
                 </p>
               ) : (
@@ -752,15 +794,15 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.categories.length > 0
                     ? course.categories.map(
-                        (val: ICategories, index: number) => {
-                          return (
-                            <React.Fragment key={'catNameEdit_' + index}>
-                              {val.name}
-                              <br />
-                            </React.Fragment>
-                          );
-                        },
-                      )
+                      (val: ICategories, index: number) => {
+                        return (
+                          <React.Fragment key={'catNameEdit_' + index}>
+                            {val.name}
+                            <br />
+                          </React.Fragment>
+                        );
+                      },
+                    )
                     : 'Seleccione una categoria'}
                   {openCategoriesSelect ? (
                     <RiArrowDropUpLine className='arrow' />
@@ -791,13 +833,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 <p className='content'>
                   {materials.length > 0
                     ? materials.map((mat: IMaterials, index: number) => {
-                        return (
-                          <React.Fragment key={'showMat_' + index}>
-                            {mat.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'showMat_' + index}>
+                          {mat.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Sin Materiales'}
                 </p>
               ) : (
@@ -806,13 +848,13 @@ const AllCourses = (props: AllCoursesProps) => {
                 >
                   {course.materials.length > 0
                     ? course.materials.map((val: IMaterials, index: number) => {
-                        return (
-                          <React.Fragment key={'matNameEdit_' + index}>
-                            {val.name}
-                            <br />
-                          </React.Fragment>
-                        );
-                      })
+                      return (
+                        <React.Fragment key={'matNameEdit_' + index}>
+                          {val.name}
+                          <br />
+                        </React.Fragment>
+                      );
+                    })
                     : 'Seleccione un material'}
                   {openMaterialsSelect ? (
                     <RiArrowDropUpLine className='arrow' />
@@ -979,6 +1021,46 @@ const AllCourses = (props: AllCoursesProps) => {
                 </p>
               </div>
             )}
+          </div>
+          <div
+            className='rows'
+          >
+            {
+              !startEdit ?
+                (
+                  <div className='course-data'>
+                    <label className='course-data-title'>
+                      Es novedad
+                    </label>
+                    <p className='content'>
+                      {
+                        is_new ? 'Si' : 'No'
+                      }
+                    </p>
+                  </div>
+                )
+                :
+                (
+                  <div className='course-data'>
+                    <label className='course-data-title'>
+                      Es novedad
+                    </label>
+                    <select
+                      name="is_new"
+                      defaultValue={`${course.is_new}`}
+                      onChange={(e) => {
+                        setCourse({
+                          ...course,
+                          is_new: parseInt(e.target.value)
+                        });
+                      }}
+                    >
+                      <option value="0">No</option>
+                      <option value="1">Si</option>
+                    </select>
+                  </div>
+                )
+            }
           </div>
           <div
             className='rows'

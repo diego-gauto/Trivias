@@ -302,10 +302,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Desde el 6 de Mayo al 30 de Junio
+            Desde el 01 de Septiembre al 30 de Septiembre
           </h4>
           <Countdown
-            date={new Date(2024, 5, 30, 23, 59, 59)}
+            date={new Date(2024, 8, 30, 23, 59, 59)}
             renderer={(props) => (
               <div className='countdown' style={{ marginTop: '0' }}>
                 <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
@@ -467,7 +467,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
                 La Certificación en aplicación de {responsive650 && <br />} uñas
                 acrílicas desde 0 a Profesional.
               </p>
-              <p className='p-pink'>Técnicas de Escultural y Tips incluídas.</p>
+              <p className='p-pink'>Técnicas de Escultural y Tips Incluidas.</p>
             </>
           ) : (
             <>
@@ -1062,7 +1062,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <img src={descuento} className='me-3' />
               <div className='m-0'>
                 <h5>
-                  <b className='p-pink'>40% de descuento</b> en todo el producto
+                  <b className='p-pink'>20% de descuento</b> en todo el producto
                   Gonvar.
                 </h5>
               </div>

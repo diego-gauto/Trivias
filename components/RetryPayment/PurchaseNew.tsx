@@ -52,6 +52,13 @@ interface Subscription {
   duration: any,
 }
 
+interface ICardUser {
+  paymentMethod: string
+  status: boolean
+  exp_month: string
+  exp_year: string
+}
+
 type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
 
 export const PurchaseNew = () => {
@@ -93,7 +100,7 @@ export const PurchaseNew = () => {
   const [coupons, setCoupons] = useState<any>([]);
   const [cardInfo, setCardInfo] = useState(true);
   const [payment, setPayment] = useState(false);
-  const [defaultCard, setDefaultCard] = useState<any>({});
+  const [defaultCard, setDefaultCard] = useState<ICardUser>({} as ICardUser);
   const [cards, setCards] = useState<any[]>([]);
   const [code, setCode] = useState('');
   const [terms, setTerms] = useState(false);
@@ -105,6 +112,33 @@ export const PurchaseNew = () => {
 
   const [showModalError, setShowModalError] = useState<any>(false);
 
+  /*
+          let price = '';
+          if (trial === 'true' && v === '1') price = 'mes_gratis';
+          if (trial === 'true' && v === '2') price = 'mes_gratis';
+          if (trial === 'true' && v === '3') price = 'mes_gratis';
+          if (frequency === 'month' && v === '1') price = 'mensual';
+          if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
+          if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
+          if (frequency === 'anual') price = 'anual';
+          if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
+          if (frequency === 'cuatrimestral' && v === '3') price = 'cuatrimestre';
+  */
+
+  const getConektaPriceId = () => {
+    let price = '';
+    if (trial === 'true' && v === '1') price = 'mes_gratis';
+    if (trial === 'true' && v === '2') price = 'mes_gratis';
+    if (trial === 'true' && v === '3') price = 'mes_gratis';
+    if (frequency === 'month' && v === '1') price = 'mensual';
+    if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
+    if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
+    if (frequency === 'anual') price = 'anual';
+    if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
+    if (frequency === 'cuatrimestral' && v === '3') price = 'cuatrimestre';
+    return price;
+  }
+
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
@@ -112,6 +146,9 @@ export const PurchaseNew = () => {
   useEffect(() => {
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then(async (res) => {
+        if (haveAccess(res.level, res.final_date, res.role as any, res.method as any)) {
+          window.location.href = PREVIEW_PATH;
+        }
         getAllCoupons();
         setPaypal(!paypal);
         if (type == 'subscription') {
@@ -197,25 +234,31 @@ export const PurchaseNew = () => {
       if (searchParams.get('trial') == 'true') {
         localStorage.setItem('trial', 'true');
       }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'month' &&
-        searchParams.get('v') === '1'
-      ) {
-        localStorage.setItem('month_1', 'true');
-      }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'month' &&
-        searchParams.get('v') === '2'
-      ) {
-        localStorage.setItem('month', 'true');
-      }
-      if (
-        searchParams.get('type') === 'subscription' &&
-        searchParams.get('frequency') === 'anual'
-      ) {
-        localStorage.setItem('anual', 'true');
+      if (searchParams.get('type') === 'subscription') {
+        if (searchParams.get('frequency') === 'month') {
+          const monthVersion = searchParams.get('v');
+          if (monthVersion === '1') {
+            localStorage.setItem('month_1', 'true');
+          } else if (monthVersion === '2') {
+            localStorage.setItem('month_2', 'true');
+          } else if (monthVersion === '3') {
+            localStorage.setItem('month', 'true');
+          }
+        }
+        else if (searchParams.get('frequency') === 'anual') {
+          const annualVersion = searchParams.get('v');
+          if (['1', '2'].includes(annualVersion || '')) {
+            localStorage.setItem('anual_1', 'true');
+          } else if (annualVersion === '3') {
+            localStorage.setItem('anual', 'true');
+          }
+        }
+        else if (searchParams.get('frequency') === 'cuatrimestral') {
+          const cuatriVersion = searchParams.get('v');
+          if (['1', '2', '3'].includes(cuatriVersion || '')) {
+            localStorage.setItem('cuatri', 'true');
+          }
+        }
       }
       if (searchParams.get('type') === 'course') {
         localStorage.setItem('course', `${idC}`);
@@ -316,12 +359,15 @@ export const PurchaseNew = () => {
     setLoader(true);
     let user = userDataAuth.user;
 
-    let diff = Math.round((today - user.final_date) / 86400);
+    // let diff = Math.round((today - user.final_date) / 86400);
 
+    /*
     if (diff > 90) {
+      localStorage.setItem('PLAN_PATH_REDIRECT', 'true');
       router.push(PLAN_PATH);
       return;
     }
+    */
 
     if (haveAccess(user.level, user.final_date, user.role, user.method)) {
       // if (isNotValidToRetry(0, new Date(2024, 3, 18).getTime() / 1000, 'admin', 'conekta')) {
@@ -360,6 +406,44 @@ export const PurchaseNew = () => {
     return 7;
   };
 
+  const getUserLevelByParams = () => {
+
+  }
+
+  const getPlanIdByFrecuency = () => {
+    if (frequency === 'cuatri' || frequency === 'cuatrimestral') {
+      return `cuatrimestre`;
+    } else if (frequency === 'month') {
+      if (v === '1') {
+        return 'mensual';
+      } else if (v === '2') {
+        return 'mensual_v1_1';
+      }
+      return 'mensual_v1_2';
+    } else if (frequency === 'anual') {
+      if (['1', '2', '3'].includes(v)) {
+        return 'anual'
+      }
+    }
+    return `anual`;
+  }
+  /*
+  Gonvar Plus Mensual
+  Gonvar Plus Anual
+  Gonvar Plus Cuatri
+  */
+  const getPlanNameByFrecuency = () => {
+    let title = `Gonvar Plus`;
+    if (frequency === 'cuatri' || frequency === 'cuatrimestral') {
+      return `${title} Cuatri`;
+    } else if (frequency === 'month') {
+      return `${title} Mensual`;
+    } else if (frequency === 'anual') {
+      return `${title} Anual`;
+    }
+    return title;
+  }
+
   useEffect(() => {
     if (userDataAuth.user) {
       getPaymentMethods();
@@ -375,67 +459,63 @@ export const PurchaseNew = () => {
   }, [token]);
 
   const pay = () => {
-    const filter = paymentMethods.filter((x) => x.default);
-    const pm = filter[0];
-    let plan_id = '';
+    // const filter = paymentMethods.filter((x) => x.default);
+    // const pm = filter[0];
 
-    if (user.level === 0) plan_id = 'cuatrimestre';
-    if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
-    if ([4, 5].includes(user.level) && user.type === 3497)
-      plan_id = 'anual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
-    if ([1, 6].includes(user.level) && user.type === 249)
-      plan_id = 'mensual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 459)
-      plan_id = 'mensual_v1_2';
-    if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
+    let price = getConektaPriceId();
 
-    const data = {
-      id: token ? token : pm?.id,
-      conekta_id: user.conekta_id,
-      plan_id: plan_id,
-      userId: user.user_id,
+    // 1.
+    // paymentMethod de defaultCard podría no existir, pues solo existe en caso de que haya una tarjeta
+    // default del usuario cargada, pero en teoría aquí debería de funcionar
+
+    // 2.
+    // conekta_id se trata del id de conekta del usuario, pero al tener una tarjeta por default,
+    // no debería de haber problema, pues para tener una tarjeta pre-cargada debería de tenerlo, ¿o no?
+    let data = {
+      id: /* card.id ? card.id : */defaultCard.paymentMethod,
+      conekta_id: userData.conekta_id,
+      plan_id: price,
+      userId: userData.user_id,
     };
-
     conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
-        const sub = res.data.data;
-        const membership = {
+        let sub = res.data.data;
+        await updateMembership({
+          ...plan,
           final_date: sub.billing_cycle_end,
-          method: 'conekta',
-          level: getNewUserLevel(user.level),
           payment_method: sub.card_id,
           plan_id: sub.id,
-          plan_name: 'Gonvar Plus',
+          plan_name: product.title,
           start_date: sub.billing_cycle_start,
-          type: user.type,
-          userId: user.user_id,
-        };
-        await updateMembership(membership);
-        // window.location.href = user.level === 5 ? "/pagoexitosoanualidad" : "/pagoexitosocuatrimestre";
-        let url = '/pagoexitoso';
-        if (getNewUserLevel(user.level) === 1) {
-          url += 'mensualidad';
-        } else if (getNewUserLevel(user.level) === 4) {
-          url += 'anualidad';
-        } else if (getNewUserLevel(user.level) === 7) {
-          url += 'cuatrimestre';
-        }
-        window.location.href = url;
+          userId: userData.user_id,
+          level:
+            frequency === 'month' || trial === 'true'
+              ? 1
+              : frequency === 'anual'
+                ? 4
+                : 7,
+          type: product.price,
+        });
+        // window.location.href = frequency === "month" ? "/pagoexitosomensualidad" : "/pagoexitosoanualidad";
+        window.location.href = getRouteByFrequency(frequency, true);
       } else {
-        setLoaderAdd(false);
-        setError(true);
-        // let notification = {
-        //   userId: user.user_id,
-        //   type: "8",
-        //   notificationId: '',
-        //   amount: user.type,
-        //   productName: 'Gonvar Plus',
-        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        // }
-        // await createNotification(notification);
-
+        let notification = {
+          userId: userData.user_id,
+          type: '8',
+          notificationId: '',
+          amount: product.price,
+          productName: product.title,
+          frecuency: frequency,
+        };
+        await createNotification(notification);
         const msg = 'pago-rechazado';
+        // window.location.href = frequency === "month" ? `/pagofallidomensualidad?error=${msg}` : `/pagofallidoanualidad?error=${msg}`;
+        window.location.href = getRouteByFrequency(
+          frequency,
+          false,
+          true,
+          msg,
+        );
       }
     });
   };
@@ -511,17 +591,49 @@ export const PurchaseNew = () => {
   };
 
   const returnPrice = () => {
-    if (user.level === 5 || user.level === 4) {
-      return `$${user.type} / Anual `;
-    } else if (user.level === 1 || user.level === 6) {
-      return `$${user.type} / Mensual `;
-    } else if (user.level === 7 || user.level === 8) {
-      return `$${user.type} / Cuatrimestral `;
-    } else if (user.level === 0) {
-      return `1599 / Cuatrimestral `;
-    } else {
-      return 'NA ';
+    if (frequency === 'cuatrimestral') {
+      if (['1', '2', '3'].includes(v)) {
+        return `1599 / Cuatrimestral`;
+      }
+    } else if (frequency === 'month') {
+      if (v === '1') {
+        return `149 / Mensual`;
+      } else if (v === '2') {
+        return `249 / Mensual`;
+      } else if (v === '3') {
+        return `459 / Mensual`;
+      }
+    } else if (frequency === 'anual') {
+      if (v === '1' || v === '2') {
+        return `1599 / Anual`;
+      } else if (v === '3') {
+        return `3497 / Anual`;
+      }
     }
+    return 1599;
+  };
+
+  const returnPriceType = () => {
+    if (frequency === 'cuatrimestral') {
+      if (['1', '2', '3'].includes(v)) {
+        return 1599;
+      }
+    } else if (frequency === 'month') {
+      if (v === '1') {
+        return 149;
+      } else if (v === '2') {
+        return 249;
+      } else if (v === '3') {
+        return 459;
+      }
+    } else if (frequency === 'anual') {
+      if (v === '1' || v === '2') {
+        return 1599;
+      } else if (v === '3') {
+        return 3497;
+      }
+    }
+    return 1599;
   };
 
   const detachPayment = async (card: IPm) => {
@@ -667,9 +779,6 @@ export const PurchaseNew = () => {
               res.data.data.payment_status === 'pending_payment'
             ) {
               createInvoiceApi(invoice).then((res) => {
-
-
-
                 if (id === '57') {
                   window.location.href = '/pagoexitosonailsmaster';
                 }
@@ -723,16 +832,7 @@ export const PurchaseNew = () => {
         });
       }
       if (type === 'subscription') {
-        let price = '';
-        if (trial === 'true' && v === '1') price = 'mes_gratis';
-        if (trial === 'true' && v === '2') price = 'mes_gratis';
-        if (trial === 'true' && v === '3') price = 'mes_gratis';
-        if (frequency === 'month' && v === '1') price = 'mensual';
-        if (frequency === 'month' && v === '2') price = 'mensual_v1_1';
-        if (frequency === 'month' && v === '3') price = 'mensual_v1_2';
-        if (frequency === 'anual') price = 'anual';
-        if (frequency === 'anual' && v === '3') price = 'anual_v1_1';
-        if (frequency === 'cuatrimestral' && v === '3') price = 'cuatrimestre';
+        let price = getConektaPriceId();
 
         let data = {
           id: card.id ? card.id : defaultCard.paymentMethod,
@@ -928,7 +1028,7 @@ export const PurchaseNew = () => {
               <p>Este certificado garantiza la seguridad de todas tus conexiones mediante cifrado.</p>
             </div>
             <p className='description' style={{ textAlign: 'left' }}>
-              Seleccione cualquiera de los métodos de pago disponibles
+              Selecciona uno de tus métodos de pago almacenados o agrega uno nuevo más abajo
             </p>
             {paymentMethods.length > 0 && (
               <>
@@ -943,6 +1043,7 @@ export const PurchaseNew = () => {
                           changePaymentMethod={changePaymentMethod}
                           key={'pm-' + index}
                           handleDelete={detachPayment}
+                          isOnlyOne={paymentMethods.length === 1}
                         />
                       );
                     })
@@ -954,6 +1055,7 @@ export const PurchaseNew = () => {
                   className={addPayment ? 'fade' : ''}
                   onClick={() => {
                     pay();
+                    // handleConfirm();
                     setOption(0);
                   }}
                 >
@@ -973,6 +1075,9 @@ export const PurchaseNew = () => {
                 getCSSClassByUserSituation()
               }
             >
+              <p style={{
+                fontWeight: '500'
+              }}>Seleccione cualquiera de los métodos de pago disponibles</p>
               <div
                 className='button-container'
                 style={{
@@ -1007,221 +1112,226 @@ export const PurchaseNew = () => {
                   );
                 })}
               </div>
-              {selectedButton === 'card' && (
-                <>
-                  <div>
-                    <img
-                      style={{
-                        width: '75%'
-                      }}
-                      src="/images/purchase/tarjetas_gonvar_purchasenew.png"
-                      alt="card alternatives" />
-                  </div>
-                  <div className='card-container'>
-                    <div className='left-side'>
-                      <div className='input-container'>
-                        <label>Número de la tarjeta</label>
-                        <InputMask
-                          placeholder='**** **** **** ****'
-                          mask={
-                            card.number.startsWith(37)
-                              ? '9999 9999 9999 999'
-                              : '9999 9999 9999 9999'
-                          }
-                          maskChar={'*'}
-                          value={card.number}
-                          onChange={(e) =>
-                            changeElement('number', e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className='input-container'>
-                        <label>Nombre</label>
-                        <input
-                          value={card.holder}
-                          placeholder='Nombre del propetario'
-                          onChange={(e) =>
-                            changeElement('holder', e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className='inputs-column'>
+              {
+                selectedButton === 'card' && (
+                  <>
+                    <div>
+                      <img
+                        style={{
+                          width: '75%'
+                        }}
+                        src="/images/purchase/tarjetas_gonvar_purchasenew.png"
+                        alt="card alternatives" />
+                    </div>
+                    <div className='card-container'>
+                      <div className='left-side'>
                         <div className='input-container'>
-                          <label>Mes</label>
-                          <select
-                            value={card.exp_month}
-                            onChange={(e) =>
-                              changeElement('exp_month', e.target.value)
+                          <label>Número de la tarjeta</label>
+                          <InputMask
+                            placeholder='**** **** **** ****'
+                            mask={
+                              card.number.startsWith(37)
+                                ? '9999 9999 9999 999'
+                                : '9999 9999 9999 9999'
                             }
-                          >
-                            <option disabled value={'MM'}>
-                              MM
-                            </option>
-                            {Month.map((month: number, index: number) => {
-                              return (
-                                <option key={'mes-' + index} value={month}>
-                                  {month}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                        <div className='input-container'>
-                          <label>Año</label>
-                          <select
-                            value={card.exp_year}
+                            maskChar={'*'}
+                            value={card.number}
                             onChange={(e) =>
-                              changeElement('exp_year', e.target.value)
-                            }
-                          >
-                            <option disabled value={'AA'}>
-                              AA
-                            </option>
-                            {Year.map((year: number, index: number) => {
-                              return (
-                                <option key={'year-' + index} value={year}>
-                                  {year}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-                        <div className='input-container'>
-                          <label>CVV</label>
-                          <input
-                            placeholder='***'
-                            type='password'
-                            value={card.cvc}
-                            onChange={(e) =>
-                              changeElement('cvc', e.target.value)
+                              changeElement('number', e.target.value)
                             }
                           />
                         </div>
+                        <div className='input-container'>
+                          <label>Nombre</label>
+                          <input
+                            value={card.holder}
+                            placeholder='Nombre del propetario'
+                            onChange={(e) =>
+                              changeElement('holder', e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className='inputs-column'>
+                          <div className='input-container'>
+                            <label>Mes</label>
+                            <select
+                              value={card.exp_month}
+                              onChange={(e) =>
+                                changeElement('exp_month', e.target.value)
+                              }
+                            >
+                              <option disabled value={'MM'}>
+                                MM
+                              </option>
+                              {Month.map((month: number, index: number) => {
+                                return (
+                                  <option key={'mes-' + index} value={month}>
+                                    {month}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                          <div className='input-container'>
+                            <label>Año</label>
+                            <select
+                              value={card.exp_year}
+                              onChange={(e) =>
+                                changeElement('exp_year', e.target.value)
+                              }
+                            >
+                              <option disabled value={'AA'}>
+                                AA
+                              </option>
+                              {Year.map((year: number, index: number) => {
+                                return (
+                                  <option key={'year-' + index} value={year}>
+                                    {year}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                          <div className='input-container'>
+                            <label>CVV</label>
+                            <input
+                              placeholder='***'
+                              type='password'
+                              value={card.cvc}
+                              onChange={(e) =>
+                                changeElement('cvc', e.target.value)
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className='right-side'>
-                      <div
-                        className={
-                          'card-img ' +
-                          (checkEmpty(card) ? 'background-checked ' : '')
-                        }
-                      >
-                        <div className='square' />
-                        <p className='number'>{card.number}</p>
-                        <div className='last-data'>
-                          <p>{card.holder}</p>
-                          {(card.exp_month !== '' || card.exp_year !== '') && (
-                            <div className='date'>
-                              <p>mes/año</p>
-                              <p>
-                                {card.exp_month}/{card.exp_year}
-                              </p>
-                            </div>
-                          )}
+                      <div className='right-side'>
+                        <div
+                          className={
+                            'card-img ' +
+                            (checkEmpty(card) ? 'background-checked ' : '')
+                          }
+                        >
+                          <div className='square' />
+                          <p className='number'>{card.number}</p>
+                          <div className='last-data'>
+                            <p>{card.holder}</p>
+                            {(card.exp_month !== '' || card.exp_year !== '') && (
+                              <div className='date'>
+                                <p>mes/año</p>
+                                <p>
+                                  {card.exp_month}/{card.exp_year}
+                                </p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <p className='description-text'>
-                    Presionando en el botón "Confirmar compra" estás dando tu
-                    consentimiento para que Gonvar automáticamente continúe con
-                    tu suscripción &nbsp;
-                    {returnFrecuency()} y te cobremos {returnPrice()}
-                    en el medio de pago que estás agregando hasta que tu decidas
-                    cancelarla.
-                    <br />
-                    <br />
-                    Puedes cancelar la suscripción en cualquier momento. Para
-                    hacerlo, dirígite a tu perfil y presiona en el botón
-                    "Cancelar suscripción"
-                  </p>
-                  <div style={{
-                    paddingInline: '10px',
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}>
-                    <input
-                      type="checkbox"
-                      name=""
-                      id="terms"
-                      checked={terms}
-                      onChange={(e) => setTerms(e.target.checked)}
-                      style={{
-                        width: '16px',
-                        height: '16px'
-                      }}
-                    />
-                    <label
-                      htmlFor="terms"
-                      style={{
-                        paddingLeft: '10px'
-                      }}
-                    >
-                      Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
-                    </label>
-                  </div>
-                  {error && option === 1 && (
-                    <p
-                      className='description-text'
-                      style={{ color: 'red', textAlign: 'left' }}
-                    >
-                      No hemos podido procesar tu pago, puedes reintentar tu{' '}
+                    <p className='description-text'>
+                      Presionando en el botón "Confirmar compra" estás dando tu
+                      consentimiento para que Gonvar automáticamente continúe con
+                      tu suscripción &nbsp;
+                      {returnFrecuency()} y te cobremos {returnPrice()}
+                      en el medio de pago que estás agregando hasta que tu decidas
+                      cancelarla.
                       <br />
-                      pago nuevamente o probar con otro método de pago.
+                      <br />
+                      Puedes cancelar la suscripción en cualquier momento. Para
+                      hacerlo, dirígite a tu perfil y presiona en el botón
+                      "Cancelar suscripción"
                     </p>
-                  )}
-                  {loaderAdd ? (
-                    <LoaderContainSpinner />
-                  ) : (
-                    <button
-                      className='type3'
-                      style={{
-                        opacity: !terms ? '0.8' : '1'
-                      }}
-                      /*
-                      onClick={() => {
-                        addNewCard();
-                        setOption(1);
-                      }}
-                      */
-                      onClick={() => {
-                        if (terms) {
-                          handleConfirm();
-                        }
-                      }}
-                      disabled={!terms}
-                    >
-                      Confirmar compra
+                    <div style={{
+                      paddingInline: '10px',
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}>
+                      <input
+                        type="checkbox"
+                        name=""
+                        id="terms"
+                        checked={terms}
+                        onChange={(e) => setTerms(e.target.checked)}
+                        style={{
+                          width: '16px',
+                          height: '16px',
+                          alignSelf: 'center'
+                        }}
+                      />
+                      <label
+                        htmlFor="terms"
+                        style={{
+                          paddingLeft: '40px',
+                          textAlign: 'left'
+                        }}
+                      >
+                        Acepto los <a href="">términos, condiciones y políticas</a> de Gonvar
+                      </label>
+                    </div>
+                    {error && option === 1 && (
+                      <p
+                        className='description-text'
+                        style={{ color: 'red', textAlign: 'left' }}
+                      >
+                        No hemos podido procesar tu pago, puedes reintentar tu{' '}
+                        <br />
+                        pago nuevamente o probar con otro método de pago.
+                      </p>
+                    )}
+                    {loaderAdd ? (
+                      <LoaderContainSpinner />
+                    ) : (
+                      <button
+                        className='type3'
+                        style={{
+                          opacity: !terms ? '0.8' : '1'
+                        }}
+                        /*
+                        onClick={() => {
+                          addNewCard();
+                          setOption(1);
+                        }}
+                        */
+                        onClick={() => {
+                          if (terms) {
+                            handleConfirm();
+                          }
+                        }}
+                        disabled={!terms}
+                      >
+                        Confirmar compra
+                      </button>
+                    )}
+                  </>
+                )}
+              {
+                selectedButton === 'oxxo' && (
+                  <div>
+                    <p className='description-text mb-5'>
+                      Presiona el botón de generar ficha de pago oxxo para
+                      visualizarla y poder descargarla. Una vez que abones en una
+                      tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
+                      continuación podrás comenzar con tus cursos
+                    </p>
+                    <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
+                      Genera ficha de pago OXXO
                     </button>
-                  )}
-                </>
-              )}
-              {selectedButton === 'oxxo' && (
-                <div>
-                  <p className='description-text mb-5'>
-                    Presiona el botón de generar ficha de pago oxxo para
-                    visualizarla y poder descargarla. Una vez que abones en una
-                    tienda Oxxo tardaremos máximo 48hs en procesar tu pago y a
-                    continuación podrás comenzar con tus cursos
-                  </p>
-                  <button className='type3 oxxo mt-4 mb-2' onClick={payWithOxxo}>
-                    Genera ficha de pago OXXO
-                  </button>
-                </div>
-              )}
-              {selectedButton === 'transfer' && (
-                <div>
-                  <p className='description-text mb-5'>
-                    Presiona el botón de generar ficha de transferencia para
-                    visualizarla y poder descargarla. Una vez que realices la
-                    transferencia tardaremos máximo 48hs en procesar tu pago y a
-                    continuación podrás comenzar con tus cursos
-                  </p>
-                  <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
-                    Genera ficha para transferencia
-                  </button>
-                </div>
-              )}
+                  </div>
+                )}
+              {
+                selectedButton === 'transfer' && (
+                  <div>
+                    <p className='description-text mb-5'>
+                      Presiona el botón de generar ficha de transferencia para
+                      visualizarla y poder descargarla. Una vez que realices la
+                      transferencia tardaremos máximo 48hs en procesar tu pago y a
+                      continuación podrás comenzar con tus cursos
+                    </p>
+                    <button className='type3 spei  mt-5 mb-2' onClick={payWitSpei}>
+                      Genera ficha para transferencia
+                    </button>
+                  </div>
+                )}
               {
                 selectedButton === 'paypal' && (
                   <>
@@ -1347,7 +1457,11 @@ export const PurchaseNew = () => {
         <div className={`right-section`}>
           <div className='box'>
             <p className='title'>¿Qué estás adquiriendo?</p>
-            <div>
+            <p className="subtitle">PRODUCTOS</p>
+            <div className='gonvar-subscription-container'>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img src="/images/purchase/logo.png" alt="Gonvar Logo" style={{ margin: '0px' }} />
+              </div>
               {type == 'subscription' ? (
                 <p className='title'>
                   Suscripción{' '}
@@ -1372,6 +1486,12 @@ export const PurchaseNew = () => {
                 }
                 <br />
               </p>
+              <img
+                className='hidden-image'
+                src="/images/purchase/chica_banner.png"
+                alt="chica-volteando-de-espaldas"
+                title="Chica volteando de espaldas"
+              />
             </div>
             <div className='price-container'>
               <p
@@ -1395,6 +1515,7 @@ export const PurchaseNew = () => {
               ></p>
             </div>
             <div className='bg'></div>
+            <img className="image" src="/images/purchase/neworange.png" alt="" />
           </div>
         </div>
       </PurchaseNewContainer>

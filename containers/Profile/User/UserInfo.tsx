@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { useFacebook } from 'react-facebook';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { MdEdit, MdModeEditOutline } from 'react-icons/md';
+import { useFacebook } from "react-facebook";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { MdEdit, MdModeEditOutline } from "react-icons/md";
 
-import { getAuth } from 'firebase/auth';
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { getAuth } from "firebase/auth";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
-import { googleLogout } from '@react-oauth/google';
+import { googleLogout } from "@react-oauth/google";
 
-import { updateUserInfo } from '../../../components/api/users';
-import { DEFAULT_USER_IMG } from '../../../constants/paths';
-import { useAuth } from '../../../hooks/useAuth';
-import { updateProfileImage } from '../../../store/actions/UserActions';
+import { updateUserInfo } from "../../../components/api/users";
+import { DEFAULT_USER_IMG } from "../../../constants/paths";
+import { useAuth } from "../../../hooks/useAuth";
+import { updateProfileImage } from "../../../store/actions/UserActions";
 import {
   Box2,
   InputPhone,
@@ -20,7 +20,7 @@ import {
   ProfileIcon,
   ProfileMainContainer,
   ProfileText,
-} from './User.styled';
+} from "./User.styled";
 
 const { getCode, getName } = require('country-list');
 
@@ -224,19 +224,27 @@ const UserInfo = ({
                 )}
               </span>
             ) : reward === 1 ? (
-              <span className='time-reward'>
-                {nextTimeReward?.month ? (
-                  nextTimeReward.month > 1 ? (
-                    nextTimeReward.month + ' meses'
+              user.final_date >= today ? (
+                <span className='time-reward'>
+                  {nextTimeReward?.month ? (
+                    nextTimeReward.month > 1 ? (
+                      nextTimeReward.month + ' meses'
+                    ) : (
+                      nextTimeReward.month + ' mes'
+                    )
                   ) : (
-                    nextTimeReward.month + ' mes'
-                  )
-                ) : (
+                    <div className='reward-height'>
+                      ¡Próximamente: <br /> más beneficios para ti!
+                    </div>
+                  )}
+                </span>
+              ) : (
+                <span className='time-reward'>
                   <div className='reward-height'>
-                    ¡Próximamente: <br /> más beneficios para ti!
+                    Al ser alumna Gonvar
                   </div>
-                )}
-              </span>
+                </span>
+              )
             ) : (
               <></>
             )}
@@ -250,11 +258,11 @@ const UserInfo = ({
                       <>
                         {nextCertificate.lessonsLeft === 1
                           ? 'Estás a ' +
-                            nextCertificate.lessonsLeft +
-                            ' lección'
+                          nextCertificate.lessonsLeft +
+                          ' lección'
                           : 'Estás a ' +
-                            nextCertificate.lessonsLeft +
-                            ' lecciones'}
+                          nextCertificate.lessonsLeft +
+                          ' lecciones'}
                       </>
                     )
                   ) : (
@@ -316,10 +324,10 @@ const UserInfo = ({
                     ? timeLevel === 0
                       ? { bottom: -67, right: -116, transform: 'rotate(1deg)' }
                       : {
-                          bottom: -27,
-                          right: -131,
-                          transform: 'rotate(-13deg)',
-                        }
+                        bottom: -27,
+                        right: -131,
+                        transform: 'rotate(-13deg)',
+                      }
                     : {}
               }
             >

@@ -9,6 +9,15 @@ export interface IUserInfoResponse {
   roles: any[];
 }
 
+type MembershipMethod =
+  | 'admin'
+  | 'conekta'
+  | 'paypal'
+  | 'spei'
+  | 'oxxo'
+  | 'stripe'
+  | '0';
+
 export interface IUserInfo {
   id: number;
   name: string;
@@ -16,7 +25,7 @@ export interface IUserInfo {
   email: string;
   password: string;
   phone_number: string;
-  role: string;
+  role: 'user' | 'admin' | 'superAdmin';
   photo: string;
   score: number;
   stripe_id: string;
@@ -32,13 +41,16 @@ export interface IUserInfo {
   user_id: number;
   final_date: number;
   level: number;
-  method: any;
+  method: MembershipMethod | null;
   payment_method: any;
   plan_id: any;
   plan_name: any;
   start_date: number;
   type: any;
-  origin_state: string;
+  origin_state: string | null;
+  offer_reference: string;
+  is_canceled: number;
+  admin_update_id: number | null;
 }
 
 export interface IProgress {

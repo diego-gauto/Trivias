@@ -36,6 +36,8 @@ import {
   Role,
   UserLevelValue,
 } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { STATES_NAMES, COME_FROM_VALUES } from './UsersFilters';
+import { useRouter } from 'next/router';
 
 type SuscriptionOption = 'todos' | 'mensual' | 'anual' | 'cuatri';
 interface MethodData {
@@ -50,6 +52,7 @@ interface UserAccesss {
 }
 
 const Users = () => {
+  const router = useRouter();
   const [userCalendar, setUserCalendar] = useState<boolean>(true);
   const [loginCalendar, setLoginCalendar] = useState<boolean>(true);
   const [openUserCalendar, setOpenUserCalendar] = useState<boolean>(false);
@@ -81,7 +84,6 @@ const Users = () => {
     setUserFilters,
     courses,
     payCourses,
-    permits,
   } = adminContext;
 
   const getUserData = async () => {
@@ -102,7 +104,7 @@ const Users = () => {
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
-        canReport: role?.delete === 1,
+        canReport: role?.report === 1,
         canDelete: role?.delete === 1,
       });
       // Role level
@@ -188,13 +190,58 @@ const Users = () => {
     }
   };
   const downloadExcel = async () => {
-    const excel = await usersForExcelApi(userFilters);
-    return excel.data;
+    interface IRecordUsers {
+      nombre: string
+      apellido: string
+      correo: string
+      pais: string
+      whatsapp: string
+      level: number
+      final_date: number
+      origin_state: string
+      come_from: string
+    }
+    const excel: any = await usersForExcelApi(userFilters);
+
+    const data: IRecordUsers[] = excel.data;
+
+    const getFormattedDate = (fd: number) => {
+      const d = new Date(fd * 1000);
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    const result = data.map(({ apellido, come_from, correo, final_date, level, nombre, origin_state, pais, whatsapp }) => {
+      const fechaDeTermino = final_date > 0 ? getFormattedDate(final_date) : 'Sin definir';
+      return {
+        nombre,
+        apellido,
+        correo,
+        pais,
+        whatsapp,
+        // level,
+        estado: origin_state,
+        procedencia: come_from,
+        // suscrito_hasta: fechaDeTermino
+      }
+    });
+
+    console.log({ result });
+
+    return result;
   };
   const openUserCard = async (user: IAdminUsers) => {
     setCurrentUser(user);
     setIsVisible(true);
   };
+
+  const changeToUserDetailsView = (user: IAdminUsers) => {
+    localStorage.setItem('selected-user-id', user.id + '');
+    router.push({
+      pathname: '/admin/UsersDetails'
+    });
+  }
 
   const getMethodsBySuscription = (option: SuscriptionOption) => {
     const methodsArray = methods as MethodData[];
@@ -217,9 +264,8 @@ const Users = () => {
           <div className='header'>
             <DefaultColumn gap={5}>
               <div className='top-title'>
-                {permits &&
-                  ((userLevel === 'admin' && canReport) ||
-                    userLevel === 'superAdmin') && (
+                {((userLevel === 'admin' && canReport)
+                  || userLevel === 'superAdmin') && (
                     <CsvDownloader
                       filename='usersData'
                       extension='.csv'
@@ -540,6 +586,48 @@ const Users = () => {
                     />
                   </DefaultFilterContain>
                 </DefaultRow>
+                <DefaultRow>
+                  <DefaultFilterContain>
+                    <p className='title-filter'>Estado de origen (México)</p>
+                    <select
+                      defaultValue={userFilters.method}
+                      onChange={(e) => {
+                        changeData('origin_state', e.target.value);
+                      }}
+                    >
+                      <option value='todos'>Todos</option>
+                      {STATES_NAMES.map(
+                        (originState, index) => {
+                          return (
+                            <option value={originState} key={'origin_state_' + index}>
+                              {originState}
+                            </option>
+                          );
+                        },
+                      )}
+                    </select>
+                  </DefaultFilterContain>
+                  <DefaultFilterContain>
+                    <p className='title-filter'>Clientes gracias a</p>
+                    <select
+                      defaultValue={userFilters.method}
+                      onChange={(e) => {
+                        changeData('come_from', e.target.value);
+                      }}
+                    >
+                      <option value='todos'>Todos</option>
+                      {COME_FROM_VALUES.map(
+                        (comeFrom, index) => {
+                          return (
+                            <option value={comeFrom} key={'come_from_' + index}>
+                              {comeFrom}
+                            </option>
+                          );
+                        },
+                      )}
+                    </select>
+                  </DefaultFilterContain>
+                </DefaultRow>
               </DefaultColumn>
             )}
         </div>
@@ -552,6 +640,8 @@ const Users = () => {
                   <th>Correo Electrónico</th>
                   <th>Fecha de Creación</th>
                   <th>Amount spent</th>
+                  <th>Origen</th>
+                  <th>Estado</th>
                   <th>Visualizar</th>
                 </tr>
                 {/* TABLAS */}
@@ -560,7 +650,7 @@ const Users = () => {
                     {!userLoader && (
                       <>
                         {users.length > 0 &&
-                          users.map((user: IAdminUsers, index: number) => {
+                          users.map((user: /* IAdminUsers */ any, index: number) => {
                             return (
                               <tr key={index}>
                                 <td style={{ fontWeight: 600 }}>
@@ -572,7 +662,9 @@ const Users = () => {
                                 <td>{user.email}</td>
                                 <td>{formatDate(user.created_at)}</td>
                                 <td>MXN${user.spent}</td>
-                                <td onClick={() => openUserCard(user)}>
+                                <td>{user.come_from}</td>
+                                <td>{user.origin_state}</td>
+                                <td onClick={() => changeToUserDetailsView(user)}>
                                   <UserShow>
                                     <EditIcon />
                                     Visualizar Usuario
