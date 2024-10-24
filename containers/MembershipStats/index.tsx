@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 
 import { getLastsActive } from "../../components/api/subStats";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./membershipsStats.module.css"; // Desestructuración de styles
 
 interface Stat {
@@ -25,17 +26,28 @@ interface Stat {
 const StatsTable = () => {
   const [stats, setStats] = useState<any>([]);
 
-  const { container, title, loading, tableContainer } = styles
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const { container, title, tableContainer } = styles
+
+  const handleError = (err: unknown) => {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError("Unexpected error");
+    }
+  };
 
   useEffect(() => {
     // Llamada a la función para obtener los últimos 4 registros
     getLastsActive()
       .then(data => {
         setStats(data);
-        console.log(data);
+        setLoading(false)
       })
       .catch(error => {
-        console.error('Error fetching stats:', error);
+        handleError(error);
       });
   }, []);
 
@@ -153,23 +165,33 @@ const StatsTable = () => {
     },
   };
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (loading) {
+    return (
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    );
+  }
+
   return (
     <div className={container}>
       <h1 className={title}>Membresías activas por semana</h1>
-      {stats.length === 4 ? (
-        <div className={tableContainer}> {/* Nuevo contenedor para la tabla */}
-          <DataTable
-            columns={columns}
-            data={[...data, totalRow]} // Añadir la fila de total al final de los datos
-            pagination={false}
-            highlightOnHover
-            striped
-            customStyles={customStyles}
-          />
-        </div>
-      ) : (
-        <p className={loading}>Cargando estadísticas...</p>
-      )}
+      <div className={tableContainer}> {/* Nuevo contenedor para la tabla */}
+        <DataTable
+          columns={columns}
+          data={[...data, totalRow]} // Añadir la fila de total al final de los datos
+          pagination={false}
+          highlightOnHover
+          striped
+          customStyles={customStyles}
+        />
+      </div>
     </div>
   );
 };

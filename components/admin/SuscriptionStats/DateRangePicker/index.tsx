@@ -18,58 +18,51 @@ import {
   startOfWeek,
   subDays,
 } from "date-fns";
+import enUS from "date-fns/locale/en-US";
 
 import {
   CalendarResponse,
   Period,
 } from "../../../../containers/SuscriptionStats/ISuscrioptionsStats";
+import styles from "./dateRangePicker.module.css";
 
 interface DateRangePickerCompProps {
   setRange: (range: CalendarResponse) => void;
-  range: CalendarResponse; // Pasar el rango desde el padre para sincronización
+  range: CalendarResponse;
 }
-// Define types for the range state
+
 interface RangeCalendar {
   startDate: Date;
   endDate: Date;
   key: string;
 }
 
-const today = new Date()
+const today = new Date();
 
 function rangeKeyDictToCalendarResponse(rangeKeyDict: RangeCalendar): CalendarResponse {
-  // Asumimos que la clave relevante es 'selection', pero puedes adaptarlo si es necesario
-
   const startDate = rangeKeyDict.startDate ? format(rangeKeyDict.startDate, 'yyyy-MM-dd') : '';
   const endDate = rangeKeyDict.endDate ? format(min([rangeKeyDict.endDate, today]), 'yyyy-MM-dd') : '';
 
-  let period: Period = 'custom'; // Valor predeterminado
+  let period: Period = 'custom';
 
   if (startDate === endDate) {
-    // Mismo día
     if (isToday(rangeKeyDict.startDate)) {
       period = 'today';
     } else if (isYesterday(rangeKeyDict.startDate)) {
       period = 'yesterday';
     } else {
-      period = 'customDay'; // Un solo día, pero no today o yesterday
+      period = 'customDay';
     }
   } else {
-    // Rango de fechas
     const thisWeekStart = startOfWeek(today, { weekStartsOn: 0 });
-    console.log(thisWeekStart)
     const thisWeekEnd = endOfWeek(today, { weekStartsOn: 0 });
-    console.log(thisWeekEnd)
     const lastWeekStart = startOfWeek(subDays(today, 7), { weekStartsOn: 0 });
-    console.log(lastWeekStart)
     const lastWeekEnd = endOfWeek(subDays(today, 7), { weekStartsOn: 0 });
-    console.log(lastWeekEnd)
     const thisMonthStart = startOfMonth(today);
     const thisMonthEnd = endOfMonth(today);
     const lastMonthStart = startOfMonth(addMonths(today, -1));
     const lastMonthEnd = endOfMonth(addMonths(today, -1));
 
-    // Verificar si el rango es de esta semana
     if (isSameDay(rangeKeyDict.startDate, thisWeekStart) && isSameDay(rangeKeyDict.endDate, thisWeekEnd)) {
       period = 'thisWeek';
     } else if (isSameDay(rangeKeyDict.startDate, lastWeekStart) && isSameDay(rangeKeyDict.endDate, lastWeekEnd)) {
@@ -89,15 +82,18 @@ function rangeKeyDictToCalendarResponse(rangeKeyDict: RangeCalendar): CalendarRe
 }
 
 const DateRangePickerComp: React.FC<DateRangePickerCompProps> = memo(({ setRange, range }) => {
-
+  const { dateInput, showPickerContainer, inputContainer, calendarElement } = styles;
+  const [showPicker, setShowPicker] = useState(false);
   const [rangeCalendar, setRangeCalendar] = useState<RangeCalendar>({
     startDate: subDays(today, 6),
     endDate: today,
     key: 'selection',
   });
 
-  useEffect(() => {
+  const refOne = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null); // Ref para el botón
 
+  useEffect(() => {
     if (
       format(rangeCalendar.startDate, 'yyyy-MM-dd') !== range.startDate ||
       format(rangeCalendar.endDate, 'yyyy-MM-dd') !== range.endDate
@@ -110,20 +106,56 @@ const DateRangePickerComp: React.FC<DateRangePickerCompProps> = memo(({ setRange
     }
   }, [range]);
 
-  // get the target element to toggle
-  const refOne = useRef<HTMLDivElement>(null);
+  // Cerrar al hacer clic fuera del componente
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (refOne.current && !refOne.current.contains(event.target as Node) && !buttonRef.current?.contains(event.target as Node)) {
+        setShowPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [refOne]);
+
+  // Manejador para alternar la visibilidad del calendario
+  const handleTogglePicker = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation(); // Evitar la propagación del evento
+    setShowPicker((prev) => !prev);
+  };
 
   return (
     <div className="calendarWrap">
+      <div className={showPickerContainer}>
+        <button ref={buttonRef} onClick={handleTogglePicker}>
+          {showPicker ? "Ocultar Calendario" : "Mostrar Calendario"}
+        </button>
+        {!showPicker && (
+          <div className={inputContainer}>
+            <input
+              className={dateInput}
+              value={format(rangeCalendar.startDate, 'MMM dd, yyyy')}
+              readOnly
+            />
+            <input
+              className={dateInput}
+              value={format(rangeCalendar.endDate, 'MMM dd, yyyy')}
+              readOnly
+            />
+          </div>
+        )}
+      </div>
 
-      <div ref={refOne}>
-        {(
+      {showPicker && (
+        <div ref={refOne}>
           <DateRangePicker
             onChange={(item: RangeKeyDict) => {
-              console.log(item)
               const selection = item.selection as RangeCalendar;
               setRangeCalendar(selection);
               setRange(rangeKeyDictToCalendarResponse(selection));
+              setShowPicker(false); // Ocultar el calendario al seleccionar
             }}
             editableDateInputs={false}
             moveRangeOnFirstSelection={false}
@@ -133,14 +165,17 @@ const DateRangePickerComp: React.FC<DateRangePickerCompProps> = memo(({ setRange
             minDate={new Date(2024, 0, 1)}
             maxDate={today}
             direction="horizontal"
-            className="calendarElement"
+            className={calendarElement}
             calendarFocus="backwards"
             preventSnapRefocus={true}
+            locale={enUS}
+            fixedHeight={true}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 });
 
 export default DateRangePickerComp;
+

@@ -3,6 +3,10 @@
   width: 1150px;
 }
 
+.container H1{
+  text-align: center;
+}
+
 .button_container{
   display: flex;
   justify-content: center;

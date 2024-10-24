@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { IoClose } from 'react-icons/io5';
+import { IoClose } from "react-icons/io5";
 
-import Link from 'next/link';
-import router from 'next/router';
+import Link from "next/link";
+import router from "next/router";
 
-import { useAuth } from '../../hooks/useAuth';
-import { Container, Text } from './SideBar.styled';
+import { useAuth } from "../../hooks/useAuth";
+import { Container, Text } from "./SideBar.styled";
 
 const SideBar = ({ show, onHide }: any) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
@@ -484,6 +484,35 @@ const SideBar = ({ show, onHide }: any) => {
                   }}
                 >
                   Team Members
+                </li>
+              </Link>
+            </ul>
+          </>
+        )}
+        {isSuperAdmin && (
+          <>
+            <Text>Statistics</Text>
+            <ul>
+              <Link href='/admin/SuscriptionStats'>
+                <li
+                  style={{ color: index == 18 ? '#ffa500' : '#fff' }}
+                  onClick={() => {
+                    setIndex(18);
+                    onHide();
+                  }}
+                >
+                  Subscriptions
+                </li>
+              </Link>
+              <Link href='/admin/MembershipStats'>
+                <li
+                  style={{ color: index == 19 ? '#ffa500' : '#fff' }}
+                  onClick={() => {
+                    setIndex(19);
+                    onHide();
+                  }}
+                >
+                  Active Memberships
                 </li>
               </Link>
             </ul>

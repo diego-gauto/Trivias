@@ -21,7 +21,6 @@ const lastWeekStart = getLastWeekStart(today);
 
 const defaultStats: Stats = { mensual_count: 0, cuatri_count: 0, anual_count: 0 };
 const defaultRange: CalendarResponse = { startDate: lastWeekStart, endDate: today, period: "custom" }
-console.log(defaultRange)
 
 const SuscriptionStats = () => {
   const { container, button_container, button, card_container, chartContainer } = styles
@@ -159,7 +158,7 @@ const SuscriptionStats = () => {
 
   return (
     <div className={container}>
-      <h1>Estadísticas de Suscripciones</h1>
+      <h1>Suscripciones</h1>
       <div className={button_container}>
         <DateRangePickerComp setRange={handleSetRange} range={range} />
       </div>
