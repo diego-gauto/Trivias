@@ -112,6 +112,7 @@ const MultiLineChart = ({ membershipsStats, visibleSeries }: MultiLineChartProps
         chart.remove();
       };
     }
+    return undefined
   }, [membershipsStats, visibleSeries]);
 
   return (
