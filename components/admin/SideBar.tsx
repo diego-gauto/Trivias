@@ -6,6 +6,7 @@ import Link from "next/link";
 import router from "next/router";
 
 import { useAuth } from "../../hooks/useAuth";
+import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import { Container, Text } from "./SideBar.styled";
 
 const SideBar = ({ show, onHide }: any) => {
@@ -27,6 +28,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isComments, setIsComments] = useState<boolean>();
   const [index, setIndex] = useState(0);
   const [userData, setUserData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   const changeValue = (value: number) => {
     return value === 1;
@@ -248,8 +250,19 @@ const SideBar = ({ show, onHide }: any) => {
           router.push({ pathname: '/' });
         }
       }
+      setLoading(false)
     }
   }, [userData]);
+
+  if (loading) {
+    return (
+      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <LoaderImage>
+          <LoaderContain />
+        </LoaderImage>
+      </Background>
+    );
+  }
 
   return (
     <Container show={show}>
@@ -489,7 +502,7 @@ const SideBar = ({ show, onHide }: any) => {
             </ul>
           </>
         )}
-        {isSuperAdmin && (
+        {(isSuperAdmin || userData.email === 'contacto@gonvar.io') && (
           <>
             <Text>Statistics</Text>
             <ul>
