@@ -10,18 +10,23 @@ import OxxoModal from "../../containers/Profile/Purchase/Modals/Oxxo";
 import SpeiModal from "../../containers/Profile/Purchase/Modals/Spei";
 import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase.styled";
 import { useAuth } from "../../hooks/useAuth";
-import { conektaOxxoApi, conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
+import { getGenericQueryResponse } from "../api/admin";
+import { createFemsaOxxoCustomer } from "../api/auth";
+import {
+  conektaOxxoApi,
+  conektaSpeiApi,
+  conektaSubscriptionApi,
+  femsaOxxoApi,
+} from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
 import { conektaPm, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
 import { Month, PayOptions, PayOptionsForMonthSuscription, Year } from "./constants";
+import { FemsaCreateOrderResponse } from "./FemsaOxxo";
 import { checkEmpty } from "./functions";
 import { IPayOption, IPm, TKey, TPayOptionId } from "./IRetryPayment";
 import { PaymentMethods } from "./PaymentMethods/PaymentMethods";
 import { RetryPaymentContainer } from "./RetryPayment.styled";
-import { FemsaCreateOrderResponse } from "./FemsaOxxo";
-import { createFemsaOxxoCustomer } from "../api/auth";
-import { getGenericQueryResponse } from "../api/admin";
 
 declare let window: any;
 
@@ -326,7 +331,7 @@ export const RetryPayment = () => {
         femsa_customer_id: customer_id,
         expires_at: Math.round(expirationDate.getTime() / 1000),
         title: 'Gonvar Plus',
-        price: user.type * 100,
+        price: [0, 1599].includes(user.type) ? 159900 : user.type * 100,
         meta: {
           type: 'subscription',
           course_id: 0,
@@ -365,7 +370,7 @@ export const RetryPayment = () => {
       conekta_id: user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: 'Gonvar Plus',
-      price: user.type * 100,
+      price: [0, 1599].includes(user.type) ? 159900 : user.type * 100,
       meta: {
         type: 'subscription',
         course_id: 0,
@@ -400,7 +405,7 @@ export const RetryPayment = () => {
     } else if (user.level === 1 || user.level === 6) {
       return `$${user.type} / Mensual `;
     } else if (user.level === 7 || user.level === 8) {
-      return `$${user.type} / Cuatrimestral `;
+      return `$1599 / Cuatrimestral `;
     } else if (user.level === 0) {
       return `1599 / Cuatrimestral `;
     } else {

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { IoClose } from 'react-icons/io5';
+import { IoClose } from "react-icons/io5";
 
-import { user } from 'firebase-functions/v1/auth';
-import router from 'next/router';
+import { user } from "firebase-functions/v1/auth";
+import router from "next/router";
 
-import { useAuth } from '../../../hooks/useAuth';
-import { conektaSubscriptionApi } from '../../api/checkout';
-import { customerOrders } from '../../api/profile';
-import { conektaPm, updateMembership } from '../../api/users';
-import { IPm } from '../../RetryPayment/IRetryPayment';
-import { IRetryPayModal } from './IRetryPayModal';
-import { ModalContainer, RetryPayModalContain } from './RetryPayModal.styled';
+import { useAuth } from "../../../hooks/useAuth";
+import { conektaSubscriptionApi } from "../../api/checkout";
+import { customerOrders } from "../../api/profile";
+import { conektaPm, updateMembership } from "../../api/users";
+import { IPm } from "../../RetryPayment/IRetryPayment";
+import { IRetryPayModal } from "./IRetryPayModal";
+import { ModalContainer, RetryPayModalContain } from "./RetryPayModal.styled";
 
 const alert_icon = '/images/RetryPayment/alert-icon.png';
 export const RetryPayModal = (props: IRetryPayModal) => {
@@ -63,7 +63,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
           plan_id: sub.id,
           plan_name: 'Gonvar Plus',
           start_date: sub.billing_cycle_start,
-          type: user.type,
+          type: [0, 999].includes(user.type) ? 1599 : user.type,
           userId: user.user_id,
         };
         await updateMembership(membership);
@@ -171,7 +171,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       case 6:
         return `puedes agregar 1 mes de acceso más por ${user.type} MXN`;
       case 8:
-        return `puedes agregar 4 meses de acceso más por ${user.type} MXN`;
+        return `puedes agregar 4 meses de acceso más por 1599 MXN`;
       default:
         return;
     }
