@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 
 import DataTable from "react-data-table-component";
 
-import { getLastsActive } from "../../components/api/subStats";
+import Papa from "papaparse";
+
+import { getAllActive, getLastsActive } from "../../components/api/subStats";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import styles from "./membershipsStats.module.css"; // Desestructuración de styles
 
@@ -29,7 +31,7 @@ const StatsTable = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { container, title, tableContainer } = styles
+  const { container, title, tableContainer, button } = styles
 
   const handleError = (err: unknown) => {
     if (err instanceof Error) {
@@ -165,6 +167,56 @@ const StatsTable = () => {
     },
   };
 
+  const downloadCsv = async () => {
+
+    const allActive = await getAllActive()
+
+    const transformedData = allActive.map((row: any) => {
+      // Calculamos el total sumando todos los valores excepto `id` y `date`
+      const total = Object.entries(row).reduce((sum, [key, value]) => {
+        if (key !== 'id' && key !== 'date') {
+          return sum + (value as number); // Convertimos `value` a número
+        }
+        return sum;
+      }, 0);
+
+      // Retornamos un nuevo objeto sin `id`, con los nombres de las columnas en español y el total
+      return {
+        fecha: row.date,
+        "Mensuales Conekta": row.monthly_conekta,
+        "Mensuales PayPal": row.monthly_paypal,
+        "Mensuales Activadas": row.monthly_admin,
+        "Cuatrimestrales Conekta": row.quarterly_conekta,
+        "Cuatrimestrales PayPal": row.quarterly_paypal,
+        "Cuatrimestrales Oxxo": row.quarterly_oxxo,
+        "Cuatrimestrales Transf": row.quarterly_spei,
+        "Cuatrimestrales Activadas": row.quarterly_admin,
+        "Anuales Conekta": row.yearly_conekta,
+        "Anuales PayPal": row.yearly_paypal,
+        "Anuales Oxxo": row.yearly_oxxo,
+        "Anuales Transf": row.yearly_spei,
+        "Anuales Activadas": row.yearly_admin,
+        total: total // Agregamos el total calculado
+      };
+    });
+
+    // Configuramos PapaParse para exportar con los encabezados y delimitadores correctos
+    const csv = Papa.unparse(transformedData, {
+      header: true,        // Incluir encabezados
+      delimiter: ",",      // Delimitador de columnas
+      newline: "\n"        // Asegura el salto de línea en cada fila
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'ActiveMemberships.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -192,6 +244,9 @@ const StatsTable = () => {
           customStyles={customStyles}
         />
       </div>
+      <button className={button} onClick={downloadCsv}>
+        Descargar CSV
+      </button>
     </div>
   );
 };
