@@ -138,7 +138,7 @@ export const NotificationData = styled.div<{
         }
       }
       .date-text {
-        font-size: 7px;
+        font-size: 11px;
         font-weight: 600;
         color: #868686;
       }

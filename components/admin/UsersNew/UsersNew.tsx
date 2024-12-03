@@ -703,10 +703,15 @@ const UsersDetails = () => {
   }
 
   const getCoursesHomeworksArray = () => {
+    // TODO
     const result: IUserHomeworkHistory[] = userFilteredCoursesHomeworkHistory.map(({ courseId, lessonId, title }) => {
       const uh = userFilteredHomeworkHistory.filter((uh) => uh.lessonId === lessonId);
+
       if (uh.length > 0) {
         if (uh[0] !== undefined) {
+          if (lessonId === 810) {
+            console.log({ uh });
+          }
           return uh[0];
         }
       }
@@ -1296,7 +1301,7 @@ const UsersDetails = () => {
                             <td className="gonvar-table__data">
                               <div className={`${textStyle}`}>
                                 {
-                                  ['Pendiente', 'Aprobada', 'Reprobada'].includes(homeworkStatus) ? homeworkStatus : 'No entregada'
+                                  ['Sin revisar', 'Aprobada', 'Reprobada'].includes(homeworkStatus) ? homeworkStatus : 'No entregada'
                                 }
                               </div>
                             </td>

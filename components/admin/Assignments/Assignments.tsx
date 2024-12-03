@@ -203,8 +203,8 @@ const Assignments = () => {
       <HomeWorkModal
         setShow={setShow}
         show={show}
-        data={currentAssignment}
-        handleClick={() => {}}
+        homework={currentAssignment as any} // Esto ya no funciona
+        handleClick={() => { }}
       />
     </AdminContain>
   );

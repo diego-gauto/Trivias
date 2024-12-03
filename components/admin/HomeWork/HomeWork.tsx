@@ -59,7 +59,6 @@ const HomeWork = () => {
     let user: any;
     if (localStorage.getItem('email'))
       user = await getUserApi(localStorage.getItem('email'));
-    setUserData(user);
     getHomeworksApi().then(async (res: any) => {
       let tempHomeworks = res.data.data;
       setAllHomeWorks(tempHomeworks);
@@ -536,7 +535,7 @@ const HomeWork = () => {
           <HomeWorkModal
             setShow={setShow}
             show={show}
-            data={data}
+            homework={data}
             handleClick={handleClick}
           />
         </Container>
