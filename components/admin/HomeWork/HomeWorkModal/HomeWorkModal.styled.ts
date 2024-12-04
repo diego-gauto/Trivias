@@ -119,28 +119,29 @@ export const ButtonContain = styled.div`
   }
 `;
 export const SafeContained = styled.div`
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-p{
-  font-size: 16px;
-  font-family:'Montserrat',sans-serif;
-  color: #33C600;
-  font-weight: 600;
-  margin: 0;
-}
-button{
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  padding-block: 15px;
-  padding-inline: 25px;
-  background: #33C600;
-  border-radius: 100px;
-  color: white;
-  border: none;
-  &:hover{
-    transform:scale(1.1);
-    transition:.5s ease all;
+  p {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #33c600;
+    font-weight: 600;
+    margin: 0;
+  }
+  button {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    padding-block: 15px;
+    padding-inline: 25px;
+    background: #33c600;
+    border-radius: 100px;
+    color: white;
+    border: none;
+    &:hover {
+      transform: scale(1.1);
+      transition: 0.5s ease all;
+    }
   }
 `;

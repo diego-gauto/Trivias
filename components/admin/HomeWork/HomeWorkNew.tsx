@@ -1,9 +1,7 @@
 import { CSSProperties, useEffect, useState } from 'react';
-import { AdminContain } from '../SideBar.styled';
 import {
   Container,
   HWContainer,
-  TitleContain,
 } from './HomeWork.styled';
 
 import styles from './HomeWorkNew.module.css';
@@ -12,7 +10,7 @@ import HomeWorkModal from './HomeWorkModal/HomeWorkModal';
 import { getGenericQueryResponse } from '../../api/admin';
 import { GenericModal } from './HomeWorkModal/GenericModal';
 
-type StatusValue = 'Pendiente' | 'Reprobada' | 'Aprobada' | 'Cualquiera';
+type StatusValue = 'Pendiente' | 'Reprobada' | 'Aprobada' | 'Todos';
 
 interface IHomework {
   homeworkId: number,
@@ -55,7 +53,7 @@ export const NewHomeworks: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [courseId, setCourseId] = useState<number>(0);
-  const [status, setStatus] = useState<StatusValue>('Cualquiera');
+  const [status, setStatus] = useState<StatusValue>('Todos');
 
   const [offset, setOffset] = useState(0);
   const [homeworks, setHomeworks] = useState<IHomework[]>([]);
@@ -87,7 +85,7 @@ export const NewHomeworks: React.FC = () => {
   }
 
   const getStatusWhereString = (status: StatusValue | undefined): string => {
-    if (status === 'Cualquiera') {
+    if (status === 'Todos') {
       return '';
     }
 
@@ -402,7 +400,7 @@ export const NewHomeworks: React.FC = () => {
                     }}
                     value={status}
                   >
-                    <option value="Cualquiera">Cualquiera</option>
+                    <option value="Todos">Todos</option>
                     {
                       ['Pendiente', 'Reprobada', 'Aprobada'].map((status, index) => {
                         return (
