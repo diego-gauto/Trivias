@@ -41,7 +41,8 @@
   font-weight: 500;
 }
 
-.select, .input-text {
+.select,
+.input-text {
   border-radius: 24px;
   border: 1px solid #6717cd;
   padding: 8px;
@@ -90,8 +91,17 @@ MENSAJE DE INFORMACIÓN VACIA
   padding: 8px 16px;
 }
 
+.table-row:hover {
+  cursor: pointer;
+  background-color: rgba(0, 136, 255, 0.2);
+}
+
 .table-row:nth-child(even) {
   background-color: rgb(240, 240, 240);
+}
+
+.table-row:nth-child(even):hover {
+  background-color: rgba(0, 136, 255, 0.2);
 }
 
 .table-body-data {
@@ -103,6 +113,7 @@ MENSAJE DE INFORMACIÓN VACIA
 }
 
 .table-link-column {
+  margin: 0;
   text-wrap: nowrap;
   font-size: 12px !important;
   font-weight: 600 !important;
@@ -161,6 +172,7 @@ MENSAJE DE INFORMACIÓN VACIA
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
