@@ -167,6 +167,16 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       name: 'memberships_list',
       tasks: [{ active: false, task: 'Descargar' }],
     },
+    {
+      role: 'Distribuidoras',
+      active: false,
+      name: 'distributors',
+      tasks: [
+        { active: false, task: 'Crear' },
+        { active: false, task: 'Editar' },
+        { active: false, task: 'Eliminar' },
+      ],
+    },
   ]);
   const [loading, setLoading] = useState(true);
   const [homeworksCourseIds, setHomeworksCourseIds] = useState<number[]>([]);
@@ -244,6 +254,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   ) => {
     const value = e.target.checked;
     roles[indexRole]!.tasks[indexTask]!.active = value;
+    console.log({ roles });
     setRoles(roles);
   };
 

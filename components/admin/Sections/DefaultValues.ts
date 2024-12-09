@@ -13,7 +13,8 @@ type RoleValue =
   | 'forms'
   | 'forms_list'
   | 'tickets_list'
-  | 'memberships_list';
+  | 'memberships_list'
+  | 'distributors';
 
 interface AdminType {
   id: number;
@@ -46,6 +47,7 @@ tableSourceByAdminRole.set('forms', 'admin_forms');
 tableSourceByAdminRole.set('forms_list', 'admin_forms_list');
 tableSourceByAdminRole.set('tickets_list', 'admin_tickets_list');
 tableSourceByAdminRole.set('memberships_list', 'admin_memberships_list');
+tableSourceByAdminRole.set('distributors', 'admin_distributors');
 
 export const defaultValues: AdminType[] = [
   {
@@ -176,5 +178,15 @@ export const defaultValues: AdminType[] = [
     user_id: 0,
     view: 0,
     download: 0,
+  },
+  {
+    id: 0,
+    role: 'distributors',
+    source_table: 'admin_distributors',
+    user_id: 0,
+    view: 0,
+    create: 0,
+    delete: 0,
+    edit: 0,
   },
 ];

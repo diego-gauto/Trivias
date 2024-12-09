@@ -195,6 +195,13 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(16);
       }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'Distributors'
+      ) {
+        setIndex(20);
+      }
     }, []);
   } catch (error) { }
 
@@ -497,6 +504,17 @@ const SideBar = ({ show, onHide }: any) => {
                   }}
                 >
                   Team Members
+                </li>
+              </Link>
+              <Link href='/admin/Distributors'>
+                <li
+                  style={{ color: index == 20 ? '#ffa500' : '#fff' }}
+                  onClick={() => {
+                    setIndex(20);
+                    onHide();
+                  }}
+                >
+                  Distributors
                 </li>
               </Link>
             </ul>
