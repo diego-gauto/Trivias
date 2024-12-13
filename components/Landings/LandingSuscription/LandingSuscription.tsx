@@ -302,10 +302,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Desde el 01 de Septiembre al 30 de Septiembre
+            Desde el 01 de Diciembre al 31 de Diciembre
           </h4>
           <Countdown
-            date={new Date(2024, 8, 30, 23, 59, 59)}
+            date={new Date(2024, 11, 31, 23, 59, 59)}
             renderer={(props) => (
               <div className='countdown' style={{ marginTop: '0' }}>
                 <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
