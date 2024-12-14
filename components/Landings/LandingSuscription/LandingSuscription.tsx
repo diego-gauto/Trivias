@@ -414,6 +414,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
             hoy mismo!
           </h4>
           <h4 className='bold font-size-16'>Sólo {price}</h4>
+          <h4 className='bold font-size-16'>No incluye material</h4>
         </div>
 
         <button

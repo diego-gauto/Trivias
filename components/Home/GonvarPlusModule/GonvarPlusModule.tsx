@@ -100,6 +100,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
           <h3 className='price'>
             Sólo $1599 <span>MXN el cuatrimestre</span>
           </h3>
+          <h3 className='price'><span>No incluye material</span></h3>
           {responsive1140 && (
             <Row>
               <Col sm={12} md={5} className='second-col'>
