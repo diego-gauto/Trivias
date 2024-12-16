@@ -20,6 +20,8 @@
   flex-direction: column;
   width: 60%;
   padding: 100px 0 0 10%;
+  position: relative;
+  z-index: 10;
 
   font-family: 'Montserrat', Helvetica;
   color: #3f1168;
