@@ -3,9 +3,13 @@
 // import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
 import styles from "./thankYou-store.module.css";
 
-const ThankYouFormStore = () => {
-  // const [loading, setLoading] = useState(true);
+type TypeValue = 'store' | 'catalog';
 
+type ThankYouFormStoreProps = {
+  type: TypeValue
+}
+
+const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
   const {
     container,
     textContainer,
@@ -28,6 +32,16 @@ const ThankYouFormStore = () => {
     }
   };
 
+  const redirectToGoogleDrive = () => {
+    const link = "https://bit.ly/3XGu3AV";
+    if (link) {
+      window.open(link, '_blank');
+    } else {
+      // Manejar el caso en el que link es undefined
+      console.error('El enlace de redirección es indefinido');
+    }
+  };
+
   return (
     <div className={container}>
       <div className={textContainer}>
@@ -37,15 +51,29 @@ const ThankYouFormStore = () => {
           En los próximos días nos comunicaremos contigo para indicarte los pasos a seguir.
         </p>
         <p className={paragraph}>
-          Si quieres realizar tu compra en un solo pago, dale click aquí
+          {
+            type === 'catalog' ? 'Si quieres checar el catálogo con precio oficial para socias distribuidoras, dale click aquí'
+              : 'Si quieres realizar tu compra en un solo pago, dale click aquí'
+          }
         </p>
 
         <div
           className={`${linkButton} ${allCenter}`}
-          onClick={() => redirectToStore()}
+          onClick={() => {
+            if (type === 'catalog') {
+              redirectToGoogleDrive();
+            } else {
+              redirectToStore()
+            }
+          }}
         >
           <p style={{ marginTop: "3px", fontSize: "16px" }}>
-            <b>Comprar ahora</b>
+            <b>
+              {
+                type === 'catalog' ? 'Ver catálogo'
+                  : 'Comprar ahora'
+              }
+            </b>
           </p>
         </div>
 

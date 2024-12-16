@@ -11,7 +11,7 @@ const formThankYouPageStore = () => {
       }}
     >
       <ThankYouFormStore
-        type="store"
+        type="catalog"
       />
     </MainContain>
   );

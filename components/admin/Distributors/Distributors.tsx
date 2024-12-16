@@ -22,6 +22,8 @@ import { IoClose } from 'react-icons/io5';
 import { getCoursesApi } from '../../api/lessons';
 import { defaultValues /*getRolesWithDefaults*/ } from '../Sections/DefaultValues';
 import { DistributorModal } from './DistributorModal';
+import { GenericModal } from '../HomeWork/HomeWorkModal/GenericModal';
+import { GenerateCodesModal } from './GenerateCodesModal/GenerateCodesModalContent';
 
 export type INewUser = {
   name?: string;
@@ -80,6 +82,7 @@ const Distributors = () => {
   const [topValue, setTopValue] = useState<string>('-100%');
   const [admins, setAdmins] = useState<IAdmin[]>([]);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
+  const [showGenerateCodesModal, setShowGenerateCodesModal] = useState(false);
 
   const showViewUserModal = async (index: number): Promise<void> => {
     // setIsVisible(true);
@@ -241,10 +244,31 @@ const Distributors = () => {
               })}
               distributor={distributors[selectedUserIndex]!}
               adminsList={admins}
+              onClickGenerateCodes={() => {
+                console.log('Generar codigos de acceso');
+                setModalVisible(false);
+                setShowGenerateCodesModal(true);
+              }}
+              onClickRemoveDistributorRole={() => {
+                console.log('Remover rol de distribuidor');
+              }}
             />
 
           )}
         </ModalContain>
+        <GenericModal
+          content={
+            <GenerateCodesModal
+              admin={admins[0]!}
+              distributor={distributors[selectedUserIndex]!}
+            />}
+          title='Generar códigos de acceso'
+          onClose={() => {
+            setShowGenerateCodesModal(false);
+          }}
+          context='information'
+          isOpen={showGenerateCodesModal}
+        />
       </GeneralContain>
       {newMember && (
         <NewUser>

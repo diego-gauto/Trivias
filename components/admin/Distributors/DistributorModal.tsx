@@ -36,13 +36,17 @@ interface IDistributor {
 interface IDistributorModalProps {
   setIsVisible: (isVisible: boolean) => void;
   distributor: IDistributor,
-  adminsList: IAdmin[]
+  adminsList: IAdmin[],
+  onClickGenerateCodes: () => void,
+  onClickRemoveDistributorRole: () => void,
 }
 
 export const DistributorModal = ({
   setIsVisible,
   distributor,
-  adminsList
+  adminsList,
+  onClickGenerateCodes,
+  onClickRemoveDistributorRole,
 }: IDistributorModalProps) => {
 
   const generateDateWithFormat = (time: number) => {
@@ -157,8 +161,14 @@ export const DistributorModal = ({
       </div>
     </div>
     <div className={styles['buttons-container']}>
-      <button className={styles['button']}>Quitar rol de distribuidor</button>
-      <button className={styles['button']}>Generar codigos</button>
+      <button
+        className={styles['button']}
+        onClick={onClickRemoveDistributorRole}
+      >Quitar rol de distribuidor</button>
+      <button
+        className={styles['button']}
+        onClick={onClickGenerateCodes}
+      >Generar codigos</button>
     </div>
   </div>
 }

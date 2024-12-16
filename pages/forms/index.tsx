@@ -368,6 +368,19 @@ const Formularios = () => {
     formik.setFieldTouched('cp', true);
   };
 
+  const getLinkByFormId = (formId: string) => {
+    if (['17', '19'].includes(formId)) {
+      return 'forms/thankyoupage-dist';
+    }
+    if (formId === '22') {
+      return 'forms/thankyoupage-store';
+    }
+    if (formId === '25') {
+      return 'forms/thankyoupage-catalog';
+    }
+    return 'forms/thankyoupage?formId=' + formId;
+  }
+
   const handleSubmit = async (values: any) => {
     const lowerCaseMail = values.correo.toLowerCase();
 
@@ -401,12 +414,13 @@ const Formularios = () => {
         //   form?.redirect?.type === "thankYouPage"
         //     ? "/forms/thankyoupage"
         //     : form?.redirect?.link || "";
-        const link = (formId === '17' || formId === '19')
+        /*const link = (formId === '17' || formId === '19')
           ? 'forms/thankyoupage-dist'
           : (formId === '22')
             ? 'forms/thankyoupage-store'
             : 'forms/thankyoupage?formId=' + formId;
-
+        */
+        const link = getLinkByFormId(formId || '');
         router.push(link);
 
         // setIsUserCreateModalVisible(true)
