@@ -86,6 +86,11 @@ const Formularios = () => {
     '23',
     '24',
     '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
