@@ -35,9 +35,13 @@ export const Module2_1 = (props: IModule2_1) => {
 
   useEffect(() => {
     getData();
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       setLoading(true);
     }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    }
   }, [data, setlandingData]);
 
   const startFromRedirect = () => {

@@ -55,11 +55,7 @@ const Courses = () => {
     'structure-courses',
     'makeup-courses',
   ];
-  window.addEventListener('resize', () => {
-    setInnerWidth(window.innerWidth <= 400 ? 399 : window.innerWidth);
-  });
-  // aquí hay un problema
-  // Agregar 10 dias de gracia (1, 4, 7)
+
   const goToNew = () => {
     if (userData) {
       if (
@@ -90,29 +86,38 @@ const Courses = () => {
     setShow(true);
   };
   useEffect(() => {
+    let isMounted = true;
+
     if (localStorage.getItem('email')) {
       getUserApi(localStorage.getItem('email')).then((res) => {
         setLoggedIn(true);
-        setUserData(res);
-        // coursesAll(res);
-        getAllCourseDataApi(res.id).then((data) => {
-          setCourses(data);
-          setVideoCourse(data.video_preview);
-          setSeasonIndex(data.video_preview.currentSeason);
-          setLessonIndex(data.video_preview.currentLesson);
-          setLoading(false);
-        });
+        if (isMounted) {
+          setUserData(res);
+          getAllCourseDataApi(res.id).then((data) => {
+            if (isMounted) {
+              setCourses(data);
+              setVideoCourse(data.video_preview);
+              setSeasonIndex(data.video_preview.currentSeason);
+              setLessonIndex(data.video_preview.currentLesson);
+              setLoading(false);
+            }
+          });
+        }
       });
     } else {
-      // coursesAll(null);
       getAllCourseDataApi(null).then((data) => {
-        setCourses(data);
-        setVideoCourse(data.video_preview);
-        setSeasonIndex(0);
-        setLessonIndex(0);
-        setLoading(false);
+        if (isMounted) {
+          setCourses(data);
+          setVideoCourse(data.video_preview);
+          setSeasonIndex(0);
+          setLessonIndex(0);
+          setLoading(false);
+        }
       });
     }
+    return () => {
+      isMounted = false;
+    };
   }, []);
   return (
     <CoursesContain>

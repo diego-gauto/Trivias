@@ -33,7 +33,8 @@ const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
   };
 
   const redirectToGoogleDrive = () => {
-    const link = "https://bit.ly/3XGu3AV";
+    // https://bit.ly/3XGu3AV
+    const link = "https://drive.google.com/file/d/1F3bbY8Uwje3Uf8EtCydDh24lHH5BChrY/view?usp=sharing";
     if (link) {
       window.open(link, '_blank');
     } else {

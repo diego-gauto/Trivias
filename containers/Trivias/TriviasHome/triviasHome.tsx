@@ -18,37 +18,6 @@ interface Trivia {
 }
 
 const TriviaHome = () => {
-  // const triviasMock = [
-  //   {
-  //     id: 0,
-  //     img: "/images/trivias/Trivia00/T00-Portada.png",
-  //     title: "¿Cuánto te apoya tu esposo en tu emprendimiento?",
-  //     color: "#C57DFF",
-  //     trans: "#9115f7",
-  //   },
-  //   {
-  //     id: 1,
-  //     img: "/images/trivias/Trivia01/T01-Portada.png",
-  //     title: "Gonvar te dice tu futuro en el mundo de las uñas",
-  //     color: "#ffcb7d",
-  //     trans: "#ffb800",
-  //   },
-  //   {
-  //     id: 2,
-  //     img: "/images/trivias/Trivia02/T02-Portada.png",
-  //     title: "¿Qué nivel de manicurista eres?",
-  //     color: "#7dffa2",
-  //     trans: "#00c620",
-  //   },
-  //   {
-  //     id: 3,
-  //     img: "/images/trivias/mujer4.svg",
-  //     title: "Descubre  tu bandera roja como manicurista",
-  //     color: "#7de0ff",
-  //     trans: "#156ff7",
-  //   },
-  // ];
-
   const [trivias, setTrivias] = useState<Trivia[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -56,10 +25,8 @@ const TriviaHome = () => {
     const fetchTrivias = async () => {
       try {
         const triviasData = await getAllTriviasApi();
-        console.log(triviasData);
         setTrivias(triviasData);
         setLoading(false);
-        // setTrivias(triviasMock)
       } catch (error) {
         console.error('Error al obtener las trivias:', error);
       }

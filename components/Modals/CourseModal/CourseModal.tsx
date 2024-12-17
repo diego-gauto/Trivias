@@ -51,13 +51,21 @@ const CourseModal = (props: ICourseModal) => {
     router.push('/nails-master-revolution');
   };
   useEffect(() => {
+    let timer = undefined;
     if (Object.values(course).length > 0) {
       setLessons(course?.seasons[0]?.lessons);
       setIsPlaying(true);
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setIsPlaying(false);
       }, 2000);
     }
+
+    return () => {
+      if (timer !== undefined) {
+        clearTimeout(timer);
+      }
+    };
+
   }, [course]);
 
   const hms = (totalSeconds: any) => {

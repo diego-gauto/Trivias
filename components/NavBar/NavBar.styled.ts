@@ -386,7 +386,6 @@ export const NavResponsive = styled.div`
   width: 100%;
   padding-block: 10px;
   z-index: 2;
-  padding-right: 40px !important;
   padding-inline: 20px;
   justify-content: space-between;
   background-color: #dad3e5;
@@ -413,8 +412,7 @@ export const NavResponsive = styled.div`
   }
   @media (max-width: 450px) {
     // padding-block: 5px;
-    padding-right: 20px !important;
-    padding-inline: 10px;
+    padding-inline: 20px !important;
     // padding-bottom: 15px;
   }
   input.hamburger-checkbox {

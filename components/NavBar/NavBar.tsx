@@ -82,7 +82,7 @@ const NavBar = () => {
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] =
     useState(false);
   const [newHamburgerMenuIsOpen, setNewHamburgerMenuIsOpen] = useState(false);
-  const [openNotification, setOpenNotification] = useState<boolean>(false);
+  const [showNotification, setOpenNotification] = useState<boolean>(false);
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
@@ -170,8 +170,8 @@ const NavBar = () => {
       modalNotificationsRef.current &&
       !modalNotificationsRef.current.contains(event.target)
     ) {
-      if (!openNotification) {
-        setOpenNotification(openNotification);
+      if (!showNotification) {
+        setOpenNotification(showNotification);
       }
     }
   };
@@ -186,7 +186,7 @@ const NavBar = () => {
     setIngresarOpetionsMenuIsOpen(false);
   };
   const openNotifications = () => {
-    setOpenNotification(!openNotification);
+    setOpenNotification(!showNotification);
   };
   function closeHamburgerMenu() {
     setHamburger(false);
@@ -561,13 +561,8 @@ const NavBar = () => {
               <NotificationContainer
                 ref={modalNotificationsRef}
                 id='notification-container'
-                style={{
-                  height:
-                    notifications.length === 0
-                      ? 'fit-content'
-                      : 'calc(100vh - 150px)',
-                }}
-                not={openNotification}
+                show={showNotification}
+                empty={notifications.length === 0}
               >
                 <div className='title-container'>
                   <h1 className='title'>Notificaciones</h1>
@@ -602,7 +597,7 @@ const NavBar = () => {
                   </p>
                 )}
               </NotificationContainer>
-              {!openNotification && (
+              {!showNotification && (
                 <HoverText className='hover-text' style={{ top: 39 }}>
                   Notificaciones
                 </HoverText>
@@ -716,7 +711,6 @@ const NavBar = () => {
                 display: 'flex',
                 width: 'auto',
                 height: '100%',
-                marginLeft: !responsive400 ? '35px' : '0px',
               }}
             >
               <Link href='/'>
@@ -741,52 +735,11 @@ const NavBar = () => {
                     {unReadNotification}
                   </p>
                 )}
-                {/* <NotificationContainer not={openNotification}>
-                  <div className='title-container'>
-                    <h1 className='title'>
-                      Notificaciones
-                    </h1>
-                    <p className='read-all-tag' onClick={updateNotificationStatus}>
-                      Marcar como leidos
-                    </p>
-                  </div>
-                  <div className="all-notifications">
-                    {
-                      notifications.length > 0 ?
-                        notifications.map((not: any, index: number) => {
-                          return (
-                            <Notifications
-                              message={not.message === "Recompensa aprovada" ? "Recompensa aprobada" : not.message}
-                              status={not.status}
-                              title={not.title}
-                              type={not.type}
-                              courseID={not.course_id}
-                              seasonID={not.season}
-                              lessonID={not.lesson}
-                              created_at={not.created_at}
-                              openNotifications={openNotifications}
-                              notification_id={not.notification_id}
-                              unReadNotification={unReadNotification}
-                              setUnReadNotification={setUnReadNotification}
-                              key={"Notifications_" + index}
-                            />
-                          )
-                        })
-                        :
-                        <div className="empty-notifications">Sin Notificaciones!</div>
-                    }
-                  </div>
-                </NotificationContainer> */}
                 <NotificationContainer
                   ref={modalNotificationsRef}
                   id='notification-container'
-                  style={{
-                    height:
-                      notifications.length === 0
-                        ? 'fit-content'
-                        : 'calc(100vh - 150px)',
-                  }}
-                  not={openNotification}
+                  show={showNotification}
+                  empty={notifications.length === 0}
                 >
                   <div className='title-container'>
                     <h1 className='title'>Notificaciones</h1>
@@ -797,7 +750,7 @@ const NavBar = () => {
                         <p>Actualmente no hay notificaciones</p>
                       </div>
                     ) : (
-                      notifications.map((not: any, index: number) => {
+                      notifications.map((not, index) => {
                         return (
                           <Notifications
                             notification={not}
@@ -821,7 +774,7 @@ const NavBar = () => {
                     </p>
                   )}
                 </NotificationContainer>
-                {!openNotification && (
+                {!showNotification && (
                   <HoverText className='hover-text' style={{ top: 39 }}>
                     Notificaciones
                   </HoverText>

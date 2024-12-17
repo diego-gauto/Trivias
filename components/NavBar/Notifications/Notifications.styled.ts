@@ -1,39 +1,44 @@
 import styled, { css } from 'styled-components';
 
-export const NotificationContainer = styled.div<{ not: boolean }>`
+export const NotificationContainer = styled.div<{
+  show: boolean;
+  empty: boolean;
+}>`
   position: absolute;
   cursor: auto;
   transition: 0.4s ease-in-out;
   background-color: #dad3e5;
   opacity: 0;
-  top: 60px;
-  right: -515px;
+  top: 51px;
+  right: -100px;
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding: 20px 5px;
   border-radius: 8px;
-  width: 400px;
+  width: 101vw;
   z-index: 10;
   gap: 20px;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 150px);
+
   ${(props) =>
-    props.not &&
+    props.show &&
     css`
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
-      right: -130px;
-      ::-webkit-scrollbar {
-        background: white;
-        border-radius: 10px;
-        width: 10px;
-      }
-      ::-webkit-scrollbar-thumb {
-        width: 10px;
-        background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
-        border-radius: 10px;
-      }
     `}
+
+  ${(props) =>
+    props.empty &&
+    css`
+      overflow: auto;
+      transition: 0.4s ease-in-out;
+      opacity: 1;
+      right: -73px;
+      height: fit-content;
+    `}
+
   p,
   h1 {
     margin: 0;
@@ -62,6 +67,35 @@ export const NotificationContainer = styled.div<{ not: boolean }>`
   .all-notifications {
     display: flex;
     flex-direction: column;
+  }
+
+  @media screen and (min-width: 451px) {
+    right: -118px;
+    ::-webkit-scrollbar {
+      background: white;
+      border-radius: 10px;
+      width: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      cursor: pointer;
+      width: 10px;
+      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+      border-radius: 10px;
+    }
+  }
+
+  @media screen and (min-width: 576px) {
+    width: 400px;
+    right: -95px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 500px;
+    right: -145px;
+    top: 46px;
+  }
+
+  @media screen and (min-width: 992px) {
   }
 `;
 export const NotificationData = styled.div<{
