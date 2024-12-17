@@ -43,7 +43,8 @@ export const History = ({ user, addPayment }: any) => {
     return Math.round((user.final_date - today) / 86400);
   };
 
-  const retrieveInvoices = () => {
+  useEffect(() => {
+    let isMounted = true;
     userInvoices(user.id).then(async (res) => {
       let tempInvoice: any = [];
       let tempOption: any = [];
@@ -62,7 +63,7 @@ export const History = ({ user, addPayment }: any) => {
           let tempFinalDate: any = new Date(element.paid_at).getTime() / 1000;
           tempDate = new Date(
             (tempFinalDate + (element.amount === 1599 ? 31536000 : 2628000)) *
-              1000,
+            1000,
           );
           tempDay = tempDate.getDate();
           tempMonth = tempDate.getMonth() + 1;
@@ -102,13 +103,15 @@ export const History = ({ user, addPayment }: any) => {
       tempInvoice.forEach((element: any, index: number) => {
         tempOption.push(index);
       });
-      setAllOptions(tempOption);
-      setInvoices(tempInvoice.slice(0, 5));
+      if (isMounted) {
+        setAllOptions(tempOption);
+        setInvoices(tempInvoice.slice(0, 5));
+      }
     });
-  };
 
-  useEffect(() => {
-    retrieveInvoices();
+    return () => {
+      isMounted = false;
+    }
   }, []);
 
   const formatAmountNumberToString = (amount: number) => {

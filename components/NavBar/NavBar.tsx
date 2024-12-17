@@ -86,7 +86,7 @@ const NavBar = () => {
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
   const [userData, setUserData] = useState<any>(null);
-  const [show, setShow] = useState(false);
+  const [showRetryPaymentModal, setShowRetryPaymentModal] = useState(false);
   const [withSubscription, setWithSubscription] = useState(true);
   const modalNotificationsRef = useRef<any>(null);
   const [firstTime, setFirstTime] = useState(true);
@@ -300,7 +300,7 @@ const NavBar = () => {
           [1, 4, 7].includes(userDataAuth.user.level) &&
           userDataAuth.user.method === 'conekta';
         const withTolerance =
-          userDataAuth.user.final_date < today - 10 * 24 * 60 * 60;
+          userDataAuth.user.final_date > today - 30 * 24 * 60 * 60;
         const withoutTolerance = userDataAuth.user.final_date < today;
         const isSuperAdmin = userDataAuth.user.role === 'superAdmin';
 
@@ -314,7 +314,7 @@ const NavBar = () => {
           pathname !== '/reintentar-pago' &&
           !isSuperAdmin
         ) {
-          setShow(true);
+          setShowRetryPaymentModal(true);
           setWithSubscription(false);
         }
 
@@ -409,9 +409,9 @@ const NavBar = () => {
     <NavContainer pathname={pathname} color={color}>
       {firstTime && (
         <RetryPayModal
-          show={show}
+          show={showRetryPaymentModal}
           onHide={() => {
-            setShow(false);
+            setShowRetryPaymentModal(false);
             setFirstTime(false);
           }}
           withSubscription={withSubscription}

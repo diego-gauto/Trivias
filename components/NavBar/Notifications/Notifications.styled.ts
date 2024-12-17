@@ -12,7 +12,7 @@ export const NotificationContainer = styled.div<{
   background-color: #dad3e5;
   opacity: 0;
   top: 51px;
-  transform: translateX(-100%); /* Mueve el componente fuera de la vista */
+  transform: translateX(100%); /* Mueve el componente fuera de la vista */
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding: 20px 5px;
   border-radius: 8px;
@@ -39,6 +39,7 @@ export const NotificationContainer = styled.div<{
 
   ${(props) =>
     props.empty &&
+    props.show &&
     css`
       overflow: auto;
       transition: 0.4s ease-in-out;

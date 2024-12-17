@@ -24,13 +24,13 @@ export const ActivateSubscriptionModal = ({
 }: ActivateSubscriptionModalProps): JSX.Element => {
 
   const [subscription, setSubscription] = useState<ISubscriptionOption>('month');
-  const [selectedPrice, setSelectedPrice] = useState<number>(0);
+  const [selectedPrice, setSelectedPrice] = useState<number>(-1);
   const [canContinue, setCanContinue] = useState<boolean>(false);
 
   const generatePricesByOption = () => {
-    const pricesMounth = [459, 249, 149];
-    const pricesCuatri = [1599, 999];
-    const pricesAnnual = [3497, 1599];
+    const pricesMounth = [459, 249, 149, 0];
+    const pricesCuatri = [1599, 999, 0];
+    const pricesAnnual = [3497, 1599, 0];
 
     let prices: number[] = [];
     if (subscription === 'month') {
@@ -79,7 +79,7 @@ export const ActivateSubscriptionModal = ({
 
       const body = generateBody(subscription, selectedPrice, adminId, clientFinalDate);
 
-      if (selectedPrice === 0) {
+      if (selectedPrice === -1) {
         return;
       }
 
@@ -106,8 +106,9 @@ export const ActivateSubscriptionModal = ({
             onChange={(e) => {
               setSubscription(e.target.value as any);
               setCanContinue(false);
+              setSelectedPrice(-1);
             }}
-            defaultValue={'month'}
+            value={subscription}
           >
             <option
               value="month"
@@ -131,19 +132,20 @@ export const ActivateSubscriptionModal = ({
             className='activate-subscription-modal__select-input'
             onChange={(e) => {
               const newValue = parseInt(e.target.value);
-              if (newValue === 0) {
+              console.log({ newValue });
+              if (newValue === -1) {
                 setCanContinue(false);
-              } else if (selectedPrice !== 0 && newValue === 0) {
+              } else if (selectedPrice !== -1 && newValue === -1) {
                 return;
               } else {
                 setSelectedPrice(parseInt(e.target.value))
                 setCanContinue(true);
               }
             }}
-            defaultValue={selectedPrice}
+            value={selectedPrice}
           >
             <option
-              value={'0'}
+              value={'-1'}
               key={`subscription_price_${0}`}
               defaultChecked
             >
@@ -177,7 +179,7 @@ export const ActivateSubscriptionModal = ({
           </button>
           <button
             className={
-              canContinue ?
+              (canContinue && selectedPrice !== -1) ?
                 `gonvar-button gonvar-button--purple`
                 :
                 `gonvar-button gonvar-button--disabled`
