@@ -51,7 +51,7 @@ const CourseModal = (props: ICourseModal) => {
     router.push('/nails-master-revolution');
   };
   useEffect(() => {
-    let timer = undefined;
+    let timer: NodeJS.Timeout | undefined = undefined;
     if (Object.values(course).length > 0) {
       setLessons(course?.seasons[0]?.lessons);
       setIsPlaying(true);
@@ -81,8 +81,16 @@ const CourseModal = (props: ICourseModal) => {
 
   var xDown: any = null;
   var yDown: any = null;
-  document.addEventListener('touchstart', handleTouchStart, false);
-  document.addEventListener('touchmove', handleTouchMove, false);
+  useEffect(() => {
+    window.addEventListener('touchstart', handleTouchStart, false);
+    window.addEventListener('touchmove', handleTouchMove, false);
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart, false);
+      window.removeEventListener('touchmove', handleTouchMove, false);
+    }
+  });
+
   function getTouches(evt: any) {
     return (
       evt.touches || // browser API
@@ -90,6 +98,7 @@ const CourseModal = (props: ICourseModal) => {
     ); // jQuery
   }
   function handleTouchStart(evt: any) {
+    console.log({ evt });
     const firstTouch = getTouches(evt)[0];
     xDown = firstTouch.clientX;
     yDown = firstTouch.clientY;

@@ -85,7 +85,6 @@ const Notifications = (props: NotificationsProps) => {
           is_comment: user_comment_id !== undefined,
           other_user_id: user_comment_id || user_like_id,
         };
-        console.log({ notification });
         localStorage.setItem('pending-comment-focus', JSON.stringify(data));
       }
 

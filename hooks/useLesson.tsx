@@ -30,6 +30,7 @@ export const CourseProvider = ({ children }: any) => {
     getCourseApi(id)
       .then((res) => {
         if (res !== undefined) {
+          console.log({ res });
           let lesson = res.seasons[+seasonId]!.lessons[+lessonId];
           if (lesson === undefined) {
             lesson = res.seasons[0]!.lessons[0];
@@ -73,8 +74,8 @@ export const CourseProvider = ({ children }: any) => {
           reason.stack
             ? console.error(reason.stack)
             : console.log(
-                'No stack error in line 51, useLesson.tsx > CourseProvider',
-              );
+              'No stack error in line 51, useLesson.tsx > CourseProvider',
+            );
         }
       });
   };

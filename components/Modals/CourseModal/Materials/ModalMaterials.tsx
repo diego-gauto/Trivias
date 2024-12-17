@@ -17,10 +17,10 @@ export const ModalMaterials = (props: IMaterials) => {
           <h1>Materiales</h1>
           {materials?.map((material: IMaterialData, index: any) => {
             return (
-              <p key={'Materiales ' + index}>
+              <div key={'Materiales ' + index}>
                 <div className='circle' />
                 {material.name}
-              </p>
+              </div>
             );
           })}
         </div>
