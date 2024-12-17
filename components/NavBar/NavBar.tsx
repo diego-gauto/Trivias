@@ -75,7 +75,6 @@ interface NotificationByUser {
 }
 
 const NavBar = () => {
-  const responsive400 = useMediaQuery({ query: '(max-width: 400px)' });
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [hamburger, setHamburger] = useState(false);
@@ -235,6 +234,9 @@ const NavBar = () => {
   };
   useEffect(() => {
     window.addEventListener('scroll', ChangeNav);
+    return () => {
+      window.removeEventListener('scroll', ChangeNav);
+    }
   }, [pathname]);
 
   const closeNavbar = () => {

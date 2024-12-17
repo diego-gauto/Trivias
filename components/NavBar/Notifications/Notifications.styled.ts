@@ -6,11 +6,13 @@ export const NotificationContainer = styled.div<{
 }>`
   position: absolute;
   cursor: auto;
-  transition: 0.4s ease-in-out;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease; /* Anima la posición y la opacidad */
   background-color: #dad3e5;
   opacity: 0;
   top: 51px;
-  right: -100px;
+  transform: translateX(-100%); /* Mueve el componente fuera de la vista */
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding: 20px 5px;
   border-radius: 8px;
@@ -20,6 +22,8 @@ export const NotificationContainer = styled.div<{
   display: flex;
   flex-direction: column;
   height: calc(100vh - 150px);
+  pointer-events: none; /* Evita que sea clickeable */
+  overflow: auto;
 
   ${(props) =>
     props.show &&
@@ -27,6 +31,10 @@ export const NotificationContainer = styled.div<{
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
+      transform: translateX(
+        0
+      ); /* Regresa el componente a su posición original */
+      pointer-events: auto; /* Permite que sea clickeable */
     `}
 
   ${(props) =>
