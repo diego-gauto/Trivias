@@ -154,7 +154,7 @@ const Blog = () => {
         </div>
         {loader ? (
           <div className='blogs'>
-            {canView &&
+            {canView || userLevel === 'superAdmin' &&
               blogs.map((blog: any, index: any) => {
                 return (
                   <BlogCard key={'blog-card ' + index}>
