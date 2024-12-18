@@ -51,7 +51,7 @@ export type INewUser = {
 
 const Sections = () => {
   const [users, setUsers] = useState<Admin[]>([]);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [showAdminDataUpdate, setShowAdminDataUpdate] = useState<boolean>(false);
   const [selectedAdmin, setSelectedAdmin] = useState<Admin>({} as Admin);
   const [newMember, setNewMember] = useState<boolean>(false);
   const [member, setMember] = useState<any>('');
@@ -180,11 +180,11 @@ const Sections = () => {
     if (show) {
       setDisplayValue('block');
       setTopValue('0');
-      setIsVisible(true);
+      setShowAdminDataUpdate(true);
     } else {
       setDisplayValue('none');
       setTopValue('-100%');
-      setIsVisible(false);
+      setShowAdminDataUpdate(false);
     }
   };
 
@@ -205,47 +205,49 @@ const Sections = () => {
               Nuevo miembro
             </Button>
           </TitleContain>
-          <Table id='Users'>
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
-              <tr>
-                <th>Administrador</th>
-                <th>Correo Electrónico</th>
-                <th>Fecha de Creación</th>
-                <th>Rol</th>
-                <th></th>
-              </tr>
-              {/* TABLAS */}
-              {users.length > 0 ? (
-                users.map((user, index): any => {
-                  return (
-                    <tr key={index} onClick={() => editRole(user)}>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{formatDate(user.created_at)}</td>
-                      {user.role === 'superAdmin' ? (
-                        <td>superAdmin</td>
-                      ) : (
-                        <td>admin</td>
-                      )}
-                      {user.role === 'superAdmin' ? (
-                        <td>Visualizar</td>
-                      ) : (
-                        <td>Editar</td>
-                      )}
-                    </tr>
-                  );
-                })
-              ) : (
-                <td>Sin administradores</td>
-              )}
-            </tbody>
-          </Table>
+          {
+            users.length > 0 &&
+            <Table id='Users'>
+              <thead>
+                <tr>
+                  <th>Administrador</th>
+                  <th>Correo Electrónico</th>
+                  <th>Fecha de Creación</th>
+                  <th>Rol</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  users.map((user, index): any => {
+                    return (
+                      <tr key={index} onClick={() => editRole(user)}>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{formatDate(user.created_at)}</td>
+                        {user.role === 'superAdmin' ? (
+                          <td>superAdmin</td>
+                        ) : (
+                          <td>admin</td>
+                        )}
+                        {user.role === 'superAdmin' ? (
+                          <td>Visualizar</td>
+                        ) : (
+                          <td>Editar</td>
+                        )}
+                      </tr>
+                    );
+                  })
+                }
+              </tbody>
+            </Table>
+          }
         </Container>
         <ModalContain
           className='modal'
           style={{ display: `${displayValue}`, top: `${topValue}` }}
         >
-          {isVisible && (
+          {showAdminDataUpdate && (
             <AdminDataUpdate
               admin={selectedAdmin}
               setIsVisible={setModalVisible}

@@ -137,8 +137,17 @@ export const AdminContain = styled.div`
   }
 `;
 export const Table = styled.table`
-  display: block;
+  display: inline-table;
   overflow-x: scroll;
+  tbody {
+    width: 100%;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  tbody tr:nth-child(even):hover {
+    background-color: #d3d3d3;
+  }
   td {
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
@@ -169,13 +178,6 @@ export const Table = styled.table`
       &:last-child {
         border-radius: 0 0 10px 10px;
       }
-    }
-    border-bottom: 1px solid gray;
-    &:first-child {
-      border-bottom: none;
-    }
-    &:last-child {
-      border-bottom: none;
     }
   }
 `;
