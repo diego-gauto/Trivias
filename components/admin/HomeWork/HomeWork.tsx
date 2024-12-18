@@ -456,7 +456,7 @@ const HomeWork = () => {
             </div>
           </div>
           <Table id='Pay'>
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
+            <thead>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>
@@ -465,6 +465,8 @@ const HomeWork = () => {
                 <th>Descargar Tarea</th>
                 <th>Estatus</th>
               </tr>
+            </thead>
+            <tbody>
               {/* TABLAS */}
               {homeWorks.length > 0 &&
                 homeWorks[pageIndex].map((task: any, index: any) => {

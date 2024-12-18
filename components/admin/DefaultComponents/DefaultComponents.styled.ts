@@ -12,7 +12,7 @@ export const DefaultContainer = styled.div`
   h2 {
     margin: 0;
   }
-  media(max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
     .table-contain {
       max-width: 100%;
       overflow-x: auto;
@@ -49,7 +49,7 @@ export const DefaultContainer = styled.div`
     padding-inline: 30px;
     padding-block: 20px;
   }
-  @media (max-width: 800px) {
+  @media screen and (max-width: 800px) {
     min-width: unset;
     margin: unset;
     margin-block: 15px;

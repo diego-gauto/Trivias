@@ -111,7 +111,7 @@ const Assignments = () => {
         </div>
         <div className='table-contain'>
           <AdminTable id='Users'>
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
+            <thead>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>
@@ -120,6 +120,8 @@ const Assignments = () => {
                 <th>Descargar Tarea</th>
                 <th>Estatus</th>
               </tr>
+            </thead>
+            <tbody>
               {/* TABLAS */}
               {
                 <>

@@ -254,7 +254,7 @@ const Pay = () => {
             </div>
           </TitleContain>
           <Table id='Pay'>
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
+            <thead>
               <tr>
                 <th>Usuario</th>
                 <th>Correo Electrónico</th>
@@ -263,7 +263,9 @@ const Pay = () => {
                 <th>Curso</th>
                 <th>Método de Pago</th>
               </tr>
-              {/* TABLAS */}
+            </thead>
+            {/* TABLAS */}
+            <tbody>
               {!isLoading &&
                 invoices
                   .filter((invoice) => invoice.email.startsWith(email))

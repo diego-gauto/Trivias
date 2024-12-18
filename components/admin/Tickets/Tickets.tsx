@@ -188,95 +188,95 @@ const Tickets = () => {
             </DefaultColumn>
             {((canView && userLevel === 'admin') ||
               userLevel === 'superAdmin') && (
-              <Pagination
-                changePage={changePage}
-                currentPage={offset / 100}
-                totalPage={Math.ceil(filteredData.length / 100)}
-              />
-            )}
+                <Pagination
+                  changePage={changePage}
+                  currentPage={offset / 100}
+                  totalPage={Math.ceil(filteredData.length / 100)}
+                />
+              )}
           </div>
           {((canView && userLevel === 'admin') ||
             userLevel === 'superAdmin') && (
-            <div className='bottom-header'>
-              <div>
-                <p className='title-filter'>Usuarios activos: {totalUsers}</p>
-                <p className='title-filter'>
-                  Cantidad total de boletos: {totalTickets}
-                </p>
-              </div>
-              <form>
-                <div className='search-input-tickets'>
-                  <div className='search-input-container'>
-                    <div className='search-icon' />
-                    <input
-                      style={{ fontSize: '18px', paddingLeft: '50px' }}
-                      className='search-input'
-                      placeholder='Buscar'
-                      onChange={handleInputSearchChangeValue}
-                      type={'text'}
-                      value={textFilter}
-                    />
-                  </div>
+              <div className='bottom-header'>
+                <div>
+                  <p className='title-filter'>Usuarios activos: {totalUsers}</p>
+                  <p className='title-filter'>
+                    Cantidad total de boletos: {totalTickets}
+                  </p>
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    marginTop: '10px',
-                    gap: '5px',
-                  }}
-                >
-                  <div className='option' style={{ fontSize: '18px' }}>
-                    <input
-                      id='radio-name'
-                      type='radio'
-                      checked={selectedOption === 'NAME'}
-                      value={'NAME'}
-                      onChange={() => {
-                        setSelectedOption('NAME');
-                        setTextFilter('');
-                      }}
-                    />
-                    <label htmlFor='radio-name'>Por correo eléctronico</label>
+                <form>
+                  <div className='search-input-tickets'>
+                    <div className='search-input-container'>
+                      <div className='search-icon' />
+                      <input
+                        style={{ fontSize: '18px', paddingLeft: '50px' }}
+                        className='search-input'
+                        placeholder='Buscar'
+                        onChange={handleInputSearchChangeValue}
+                        type={'text'}
+                        value={textFilter}
+                      />
+                    </div>
                   </div>
-                  <div className='option' style={{ fontSize: '18px' }}>
-                    <input
-                      id='radio-ticket-number'
-                      type='radio'
-                      checked={selectedOption === 'TICKET_NUMBER'}
-                      value={'TICKET_NUMBER'}
-                      onChange={() => {
-                        setSelectedOption('TICKET_NUMBER');
-                        setTextFilter('');
-                      }}
-                    />
-                    <label htmlFor='radio-ticket-number'>
-                      Por número de boleto
-                    </label>
-                  </div>
-                </div>
-              </form>
-              {((canDownload && userLevel === 'admin') ||
-                userLevel === 'superAdmin') && (
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <button
-                    type='button'
-                    style={{ height: 'fit-content', fontSize: '20px' }}
-                    className='button button-purple'
-                    onClick={downloadListCSVHandler}
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginTop: '10px',
+                      gap: '5px',
+                    }}
                   >
-                    Descargar listado
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+                    <div className='option' style={{ fontSize: '18px' }}>
+                      <input
+                        id='radio-name'
+                        type='radio'
+                        checked={selectedOption === 'NAME'}
+                        value={'NAME'}
+                        onChange={() => {
+                          setSelectedOption('NAME');
+                          setTextFilter('');
+                        }}
+                      />
+                      <label htmlFor='radio-name'>Por correo eléctronico</label>
+                    </div>
+                    <div className='option' style={{ fontSize: '18px' }}>
+                      <input
+                        id='radio-ticket-number'
+                        type='radio'
+                        checked={selectedOption === 'TICKET_NUMBER'}
+                        value={'TICKET_NUMBER'}
+                        onChange={() => {
+                          setSelectedOption('TICKET_NUMBER');
+                          setTextFilter('');
+                        }}
+                      />
+                      <label htmlFor='radio-ticket-number'>
+                        Por número de boleto
+                      </label>
+                    </div>
+                  </div>
+                </form>
+                {((canDownload && userLevel === 'admin') ||
+                  userLevel === 'superAdmin') && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <button
+                        type='button'
+                        style={{ height: 'fit-content', fontSize: '20px' }}
+                        className='button button-purple'
+                        onClick={downloadListCSVHandler}
+                      >
+                        Descargar listado
+                      </button>
+                    </div>
+                  )}
+              </div>
+            )}
         </div>
         {!isLoadingData && (
           <Background
@@ -290,37 +290,39 @@ const Tickets = () => {
         <div className='table-contain'>
           {((canView && userLevel === 'admin') ||
             userLevel === 'superAdmin') && (
-            <AdminTable id='Users'>
-              <tbody style={{ display: 'inline-table', width: '100%' }}>
-                <tr>
-                  <th>Boleto</th>
-                  <th>Nombre</th>
-                  <th>Correo Electrónico</th>
-                  <th>Telefono</th>
-                </tr>
-                {isLoadingData &&
-                  filteredData
-                    .filter(
-                      (_, index) => index >= offset && index < offset + 100,
-                    )
-                    .map((user, index) => {
-                      return (
-                        <tr key={index}>
-                          <td style={{ fontWeight: 600 }}>
-                            <ProfileContain>
-                              <Profile />
-                              {user.ticket_value}
-                            </ProfileContain>
-                          </td>
-                          <td>{`${user.name} ${user.last_name}`}</td>
-                          <td>{user.email}</td>
-                          <td>{user.phone_number}</td>
-                        </tr>
-                      );
-                    })}
-              </tbody>
-            </AdminTable>
-          )}
+              <AdminTable id='Users'>
+                <thead>
+                  <tr>
+                    <th>Boleto</th>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Telefono</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {isLoadingData &&
+                    filteredData
+                      .filter(
+                        (_, index) => index >= offset && index < offset + 100,
+                      )
+                      .map((user, index) => {
+                        return (
+                          <tr key={index}>
+                            <td style={{ fontWeight: 600 }}>
+                              <ProfileContain>
+                                <Profile />
+                                {user.ticket_value}
+                              </ProfileContain>
+                            </td>
+                            <td>{`${user.name} ${user.last_name}`}</td>
+                            <td>{user.email}</td>
+                            <td>{user.phone_number}</td>
+                          </tr>
+                        );
+                      })}
+                </tbody>
+              </AdminTable>
+            )}
         </div>
       </DefaultContainer>
     </AdminContain>

@@ -517,7 +517,7 @@ const Memberships = () => {
             userLevel === 'superAdmin') && (
             <div className='table-contain'>
               <AdminTable2>
-                <tbody style={{ display: 'inline-table', width: '100%' }}>
+                <thead>
                   <tr>
                     <th>Nombre</th>
                     <th>Email</th>
@@ -528,6 +528,8 @@ const Memberships = () => {
                     <th>Fecha de terminación</th>
                     <th>Dias faltantes</th>
                   </tr>
+                </thead>
+                <tbody>
                   {isLoadingData &&
                     filteredData
                       .filter(

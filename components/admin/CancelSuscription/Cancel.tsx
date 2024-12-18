@@ -222,7 +222,7 @@ const Cancel = () => {
               </tr>
             </thead>
             {loader && (
-              <tbody style={{ display: 'inline-table', width: '100%' }}>
+              <tbody>
                 {reviews.map((review: ICancelReview, index: number) => {
                   return (
                     <tr key={'cancel-review-' + index}>

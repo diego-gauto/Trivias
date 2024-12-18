@@ -634,7 +634,7 @@ const Users = () => {
         {((userLevel === 'admin' && canView) || userLevel === 'superAdmin') && (
           <div className='table-contain'>
             <AdminTable id='Users'>
-              <tbody style={{ display: 'inline-table', width: '100%' }}>
+              <thead>
                 <tr>
                   <th>Usuario</th>
                   <th>Correo Electrónico</th>
@@ -644,6 +644,8 @@ const Users = () => {
                   <th>Estado</th>
                   <th>Visualizar</th>
                 </tr>
+              </thead>
+              <tbody>
                 {/* TABLAS */}
                 {
                   <>

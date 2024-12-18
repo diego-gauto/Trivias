@@ -290,9 +290,8 @@ const Coupons = () => {
           <TitleContain>
             <TableTitle>Cupones Activos</TableTitle>
           </TitleContain>
-
           <Table id='Coupons'>
-            <tbody style={{ display: 'inline-table', width: '100%' }}>
+            <thead>
               <tr>
                 <th>Cupón</th>
                 <th>Código</th>
@@ -300,6 +299,8 @@ const Coupons = () => {
                 <th>Activo</th>
                 <th></th>
               </tr>
+            </thead>
+            <tbody>
               {/* TABLAS */}
               {coupons.map((coupon: any, index) => {
                 return (
