@@ -9,6 +9,8 @@ import { SuccessModal } from './SuccessModal';
 import { ActivateSubscriptionModal } from './ActivateSubscription';
 import { UpdateFinalDateModal } from './UpdateFinalDateModal';
 import { RemoveSubscriptionModal } from './RemoveSubscriptionModal';
+import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
+import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
 
 type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
@@ -170,9 +172,25 @@ const SUCCESS_MESSAGES = {
   UPDATE_SUBSCRIPTION_FINAL_DATE: 'Se han modificado los dias seleccionados correctamente'
 }
 
+interface UserAccesss {
+  canView: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+  canCreate: boolean;
+}
+
 const UsersDetails = () => {
   const router = useRouter();
   const [userId, setUserId] = useState(0);
+  const [userAccess, setUserAccess] = useState<UserAccesss>({
+    canView: false,
+    canCreate: false,
+    canDelete: false,
+    canEdit: false,
+  });
+  const { canView, canCreate, canDelete, canEdit } = userAccess;
+  const [userLevel, setUserLevel] = useState<UserLevelValue>('user');
+
   const [selectedMainMenuOption, setSelectedMainMenuOption] = useState<MainMenuOptionId>('Payments');
 
   const [subscription, setSubscription] = useState<IUserSubscriptionState>({} as IUserSubscriptionState);
@@ -231,6 +249,42 @@ const UsersDetails = () => {
 
     }
   }, [userId]);
+
+  const getUserData = async () => {
+    try {
+      const email = localStorage.getItem('email');
+      if (email === null) {
+        throw new Error('No existe un email establecido para el usuario');
+      }
+      const userIdQuery = generateUserIdQuery(email);
+      const userIdResponse = await getGenericQueryResponse(userIdQuery);
+      const userId = userIdResponse.data.data[0]['id'];
+      // Roles request
+      const userRolesQuery = generateUserRoleAccessQuery(userId);
+      const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
+      const userRoles = userRolesResponse.data.data as Role[];
+      const role = userRoles.find((role) => role.role === 'users');
+      setUserAccess({
+        canView: role?.view === 1,
+        canEdit: role?.edit === 1,
+        canDelete: role?.delete === 1,
+        canCreate: role?.create === 1,
+      });
+      // Role level
+      const userLevelQuery = generateUserRolesLevelQuery(userId);
+      const userLevelResponse = await getGenericQueryResponse(userLevelQuery);
+      const userRoleLevel = userLevelResponse.data.data[0]['role'];
+      setUserLevel(userRoleLevel);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const getUserMainProperties = async () => {
     const userMainPropertiesQuery = `select concat(name, ' ', last_name) as username, email, phone_number, photo, score, created_at
@@ -1095,7 +1149,8 @@ const UsersDetails = () => {
                   />
                 }
                 {
-                  generateActionButtons()
+                  (canEdit || userLevel === 'superAdmin')
+                  && generateActionButtons()
                 }
               </div>
             }

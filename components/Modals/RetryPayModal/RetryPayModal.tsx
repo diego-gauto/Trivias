@@ -12,12 +12,36 @@ import { conektaPm, updateMembership } from "../../api/users";
 import { IPm } from "../../RetryPayment/IRetryPayment";
 import { IRetryPayModal } from "./IRetryPayModal";
 import { ModalContainer, RetryPayModalContain } from "./RetryPayModal.styled";
-
+import { getPlanId, getPriceToPay } from '../../../components/api/retry-payment';
+/*
+const USER_TEST = {
+  "id": 49678,
+  "name": "Diego",
+  "last_name": " Gauto",
+  "email": "diego@gonvar.io",
+  "role": "admin",
+  "stripe_id": "cus_NlfRoVQIQxAOJm",
+  "conekta_id": "cus_2vW7pxSgqbiNemfHb",
+  "terms": 1,
+  "femsa_customer_id": null,
+  "user_id": 49519,
+  "final_date": 1734450000,
+  "level": 5,
+  "method": "admin",
+  "payment_method": null,
+  "plan_id": null,
+  "plan_name": null,
+  "start_date": 1734630000,
+  "type": 0,
+  "admin_update_id": 49678,
+  "is_canceled": 0,
+};
+*/
 const alert_icon = '/images/RetryPayment/alert-icon.png';
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
   const context = useAuth();
-  const user = context.user;
+  const user = context.user; // USER_TEST
   const [pm, setPm] = useState<any>([]);
   const [isLaoding, setIsloading] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
@@ -33,18 +57,9 @@ export const RetryPayModal = (props: IRetryPayModal) => {
   const pay = () => {
     const filter = paymentMethods.filter((x) => x.default);
     const pm = filter[0];
-    let plan_id = '';
 
-    if (user.level === 0) plan_id = 'cuatrimestre';
-    if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
-    if ([4, 5].includes(user.level) && user.type === 3497)
-      plan_id = 'anual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
-    if ([1, 6].includes(user.level) && user.type === 249)
-      plan_id = 'mensual_v1_1';
-    if ([1, 6].includes(user.level) && user.type === 459)
-      plan_id = 'mensual_v1_2';
-    if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
+    let plan_id = getPlanId(user.level, user.type);
+    const type = getPriceToPay(user.level, user.type);
 
     const data = {
       id: pm?.id,
@@ -52,6 +67,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       plan_id: plan_id,
       userId: user.user_id,
     };
+
     conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
@@ -63,7 +79,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
           plan_id: sub.id,
           plan_name: 'Gonvar Plus',
           start_date: sub.billing_cycle_start,
-          type: [0, 999].includes(user.type) ? 1599 : user.type,
+          type,
           userId: user.user_id,
         };
         await updateMembership(membership);
@@ -73,15 +89,6 @@ export const RetryPayModal = (props: IRetryPayModal) => {
             : '/pagoexitosocuatrimestre';
       } else {
         setError(true);
-        // let notification = {
-        //   userId: user.user_id,
-        //   type: "8",
-        //   notificationId: '',
-        //   amount: user.type,
-        //   productName: 'Gonvar Plus',
-        //   frecuency: user.level === 5 ? 'anual' : 'cuatrimestral'
-        // }
-        // await createNotification(notification);
       }
     });
   };
@@ -112,13 +119,6 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     setIsloading(false);
   };
 
-  const dueOrders = () => {
-    customerOrders({ conekta_id: user.conekta_id }).then((res) => {
-      let order = res.data.data[0];
-      setInvoice(order);
-    });
-  };
-
   const goTo = () => {
     onHide();
     router.push({ pathname: '/reintentar-pago' });
@@ -128,53 +128,63 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     if (user) {
       getPaymentMethods();
     }
-
-    // dueOrders();
   }, [user]);
 
   const returnSubscription = () => {
-    switch (user.level) {
-      case 0:
-        return '';
-      case 5:
-        return 'anual';
-      case 6:
-        return 'mensual';
-      case 8:
-        return 'cuatrimestral';
-      default:
-        return;
+    const level = user.level;
+    if ([1, 6].includes(level)) {
+      return 'mensual';
     }
+    if ([5, 4].includes(level)) {
+      return 'anual';
+    }
+    if ([7, 8].includes(level)) {
+      return 'cuatrimestral'
+    }
+
+    console.error(`El nivel del usuario "${level}" no coincide a ningun tipo de suscripción. Metodo: 'returnSubscription'`);
+    return '';
   };
 
   const returnAccess = () => {
-    switch (user.level) {
-      case 0:
-        return 'tus días';
-      case 5:
-        return 'tu año';
-      case 6:
-        return 'tu mes';
-      case 8:
-        return 'tus 4 meses';
-      default:
-        return;
+    const level = user.level;
+    if (level === 0) {
+      return 'tus días'
     }
+    if ([1, 6].includes(level)) {
+      return 'tu mes';
+    }
+    if ([5, 4].includes(level)) {
+      return 'tu año';
+    }
+    if ([7, 8].includes(level)) {
+      return 'tus 4 meses'
+    }
+
+    console.error(`El nivel del usuario "${level}" no coincide a ningun tipo de los valores apropiados. Metodo: ${'returnAccess'}`);
+    return '';
   };
 
   const returnAccessCondition = () => {
-    switch (user.level) {
-      case 0:
-        return `puedes agregar 4 meses de acceso más por 1599 MXN`;
-      case 5:
-        return `puedes agregar 1 año de acceso más por ${user.type} MXN`;
-      case 6:
-        return `puedes agregar 1 mes de acceso más por ${user.type} MXN`;
-      case 8:
-        return `puedes agregar 4 meses de acceso más por 1599 MXN`;
-      default:
-        return;
+    const price = getPriceToPay(user.level, user.type);
+
+    const level = user.level;
+
+    if (level === 0) {
+      return `puedes agregar 4 meses de acceso más por ${price} MXN`;
     }
+    if ([1, 6].includes(level)) {
+      return `puedes agregar 1 mes de acceso más por ${price} MXN`;
+    }
+    if ([5, 4].includes(level)) {
+      return `puedes agregar 1 año de acceso más por ${price} MXN`;
+    }
+    if ([7, 8].includes(level)) {
+      return `puedes agregar 4 meses de acceso más por ${price} MXN`;
+    }
+
+    console.error(`El nivel del usuario "${level}" no coincide a ningun tipo de los valores apropiados. Metodo: ${'returnAccessCondition'}`);
+    return '';
   };
 
   return (

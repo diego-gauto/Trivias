@@ -25,6 +25,7 @@ import {
   getGenericQueryResponse,
   updateAdminAccessApi,
 } from '../../../api/admin';
+import { backendRoleEditMethod } from './Queries';
 
 type CheckBoxValues = {
   name: string;
@@ -345,6 +346,27 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
     console.log({ user });
 
+    const queries = user.roles.map(role => {
+      try {
+        return backendRoleEditMethod(role);
+      } catch (error) {
+        return `Error con el role ${JSON.stringify(role)}`;
+      }
+
+    });
+    console.log({ queries });
+    // anterior
+    try {
+      await anterior(user);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const anterior = async (user: {
+    user_id: number;
+    roles: AdminType[];
+  }) => {
     try {
       const res = await updateAdminAccessApi(user);
       setShow(false);
@@ -354,7 +376,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       console.error(error);
       alert('Error al intentar actualizar los permisos');
     }
-  };
+  }
 
   const selectAllFormChecks = () => {
     const result = forms.map(({ id }) => id);
