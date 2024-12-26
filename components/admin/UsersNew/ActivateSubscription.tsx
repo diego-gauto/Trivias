@@ -29,7 +29,7 @@ export const ActivateSubscriptionModal = ({
 
   const generatePricesByOption = () => {
     const pricesMounth = [459, 249, 149, 0];
-    const pricesCuatri = [1599, 999, 0];
+    const pricesCuatri = [2000, 1599, 999, 0];
     const pricesAnnual = [3497, 1599, 0];
 
     let prices: number[] = [];
