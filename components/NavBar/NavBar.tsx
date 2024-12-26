@@ -53,6 +53,7 @@ import { SlBell } from 'react-icons/sl';
 import Notifications from './Notifications/Notifications';
 import { NotificationContainer } from './Notifications/Notifications.styled';
 import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
+import { IUserData } from '../admin/UserData';
 
 interface NotificationByUser {
   notification_id: number;
@@ -85,7 +86,7 @@ const NavBar = () => {
   const [unReadNotification, setUnReadNotification] = useState<number>(0);
   const [notifications, setNotifications] = useState<NotificationByUser[]>([]);
   const { api } = useFacebook();
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<IUserData>({} as IUserData);
   const [showRetryPaymentModal, setShowRetryPaymentModal] = useState(false);
   const [withSubscription, setWithSubscription] = useState(true);
   const modalNotificationsRef = useRef<any>(null);
@@ -336,14 +337,17 @@ const NavBar = () => {
     setLoggedIn(false);
   }
   const sendAdminTo = () => {
-    if (userData.role === 'superAdmin') {
+    if (userData.role === 'superAdmin' ||
+      (userData.roles.length > 0 && userData.role === 'admin')
+    ) {
       router.push('/admin/Courses');
     } else {
       let counter: number = 0;
       let route: string = '/';
-      userData.roles.map((role: any) => {
+      userData.roles.forEach((role) => {
         if (counter === 0) {
-          if (role.view !== 0) {
+          console.log({ role });
+          if (role.view !== '0') {
             counter++;
             if (role.role === 'course') {
               route = 'Courses';

@@ -8,41 +8,45 @@ import router from "next/router";
 import { useAuth } from "../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import { Container, Text } from "./SideBar.styled";
+import { IUserData } from './UserData';
 
 const SideBar = ({ show, onHide }: any) => {
-  const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
-  const [isPay, setIsPay] = useState<boolean>();
-  const [isCourses, setIsCourses] = useState<boolean>();
-  const [isBlogs, setIsBlogs] = useState<boolean>();
-  const [isHomeworks, setIsHomeworks] = useState<boolean>();
-  const [isRewards, setIsRewards] = useState<boolean>();
-  const [isLanding, setIsLanding] = useState<boolean>();
-  const [isCoupons, setIsCoupons] = useState<boolean>();
-  const [isUsers, setIsUsers] = useState<boolean>();
-  const [isTrivias, setIsTrivias] = useState<boolean>();
-  const [isTriviasList, setIsTriviasList] = useState<boolean>();
-  const [isForms, setIsForms] = useState<boolean>();
-  const [isFormsList, setIsFormsList] = useState<boolean>();
-  const [isTicketsList, setIsTicketsList] = useState<boolean>();
-  const [isMembershipsList, setIsMembershipsList] = useState<boolean>();
-  const [isComments, setIsComments] = useState<boolean>();
+  const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
+  const [isPay, setIsPay] = useState<boolean>(false);
+  const [isCourses, setIsCourses] = useState<boolean>(false);
+  const [isBlogs, setIsBlogs] = useState<boolean>(false);
+  const [isHomeworks, setIsHomeworks] = useState<boolean>(false);
+  const [isRewards, setIsRewards] = useState<boolean>(false);
+  const [isLanding, setIsLanding] = useState<boolean>(false);
+  const [isCoupons, setIsCoupons] = useState<boolean>(false);
+  const [isUsers, setIsUsers] = useState<boolean>(false);
+  const [isTrivias, setIsTrivias] = useState<boolean>(false);
+  const [isTriviasList, setIsTriviasList] = useState<boolean>(false);
+  const [isForms, setIsForms] = useState<boolean>(false);
+  const [isFormsList, setIsFormsList] = useState<boolean>(false);
+  const [isTicketsList, setIsTicketsList] = useState<boolean>(false);
+  const [isMembershipsList, setIsMembershipsList] = useState<boolean>(false);
+  const [isComments, setIsComments] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<IUserData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const changeValue = (value: number) => {
-    return value === 1;
+  const changeValue = (value: string) => {
+    return value === '1';
   };
 
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
       if (userDataAuth.user !== null) {
-        let user = userDataAuth.user;
+        let user: IUserData = userDataAuth.user;
         if (user.role === 'user') {
           router.push({ pathname: '/' });
         }
-        user.roles.forEach((role: any) => {
+        if (user.roles.length === 0 && user.role !== 'superAdmin') {
+          router.push({ pathname: '/' });
+        }
+        user.roles.forEach((role) => {
           if (role.role === 'course' && changeValue(role.view))
             setIsCourses(true);
           if (role.role === 'landing' && changeValue(role.view))
@@ -72,6 +76,7 @@ const SideBar = ({ show, onHide }: any) => {
             setIsMembershipsList(true);
         });
         setUserData(userDataAuth.user);
+        setLoading(false);
         if (userDataAuth.user.role === 'superAdmin') {
           setIsSuperAdmin(true);
         }
@@ -205,8 +210,10 @@ const SideBar = ({ show, onHide }: any) => {
     }, []);
   } catch (error) { }
 
+  /*
   useEffect(() => {
     if (userData !== null) {
+      console.log({ userData });
       if (userData.role == 'admin') {
         if (
           router.pathname == '/admin/Courses' &&
@@ -260,6 +267,11 @@ const SideBar = ({ show, onHide }: any) => {
       setLoading(false)
     }
   }, [userData]);
+  */
+
+  useEffect(() => {
+
+  }, []);
 
   if (loading) {
     return (
@@ -520,7 +532,7 @@ const SideBar = ({ show, onHide }: any) => {
             </ul>
           </>
         )}
-        {(isSuperAdmin || userData.email === 'contacto@gonvar.io') && (
+        {(isSuperAdmin || userData?.email === 'contacto@gonvar.io') && (
           <>
             <Text>Statistics</Text>
             <ul>
