@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useFacebook } from 'react-facebook';
-import { useMediaQuery } from 'react-responsive';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -260,7 +258,7 @@ const NavBar = () => {
           conektaCustomer(body);
         }
 
-        let today = new Date().getTime() / 1000;
+        let today = Math.floor(new Date().getTime() / 1000);
         userNotifications(userDataAuth.user.user_id);
         if (userDataAuth.user.level === 2) {
           let course = userDataAuth.user.user_courses.filter(
@@ -282,48 +280,31 @@ const NavBar = () => {
             });
           }
         }
-
-        // if (userDataAuth.user.final_date < today && (userDataAuth.user.level === 1 || userDataAuth.user.level === 4 || userDataAuth.user.level === 7)) {
-
-        //   customerOrders({ conekta_id: userDataAuth.user.conekta_id }).then((res) => {
-        //     const response = res.data.data;
-        //     if (response.length > 0 && response[0].payment_status === "pending_payment") {
-        //       setShow(true);
-        //       setWithSubscription(true);
-        //     }
-        //   })
-        // }
-        let diff = Math.round((today - userDataAuth.user.final_date) / 86400);
-        const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(
-          userDataAuth.user.level,
-        );
-        const haveRecurrentSubscription =
-          [1, 4, 7].includes(userDataAuth.user.level) &&
-          userDataAuth.user.method === 'conekta';
-        const withTolerance =
-          userDataAuth.user.final_date > today - 30 * 24 * 60 * 60;
-        const withoutTolerance = userDataAuth.user.final_date < today;
-        const isSuperAdmin = userDataAuth.user.role === 'superAdmin';
+        const { final_date, level, role, method } = userDataAuth.user;
+        let diff = Math.round((today - final_date) / 86400);
+        const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(level);
+        const haveRecurrentSubscription = [1, 4, 7].includes(level) && method === 'conekta';
+        const withTolerance = final_date > today - 30 * 24 * 60 * 60;
+        const withoutTolerance = final_date < today;
+        const isSuperAdmin = role === 'superAdmin';
 
         // TODO: El usuario tuvo que haber sido un usuario activo
 
-        if (
-          diff < 90 &&
-          // && (userDataAuth.user.level === 5 || userDataAuth.user.level === 8 || userDataAuth.user.level === 6 || (userDataAuth.user.level === 0 && userDataAuth.user.final_date > 0))
-          ((haveNoRecurrentSubscription && withoutTolerance) ||
-            (haveRecurrentSubscription && withTolerance)) &&
-          pathname !== '/reintentar-pago' &&
-          !isSuperAdmin
-        ) {
-          setShowRetryPaymentModal(true);
-          setWithSubscription(false);
+        if (final_date < today) {
+          if (
+            diff < 90 &&
+            ((haveNoRecurrentSubscription && withoutTolerance) ||
+              (haveRecurrentSubscription && withTolerance)) &&
+            pathname !== '/reintentar-pago' &&
+            !isSuperAdmin
+          ) {
+            setShowRetryPaymentModal(true);
+            setWithSubscription(false);
+          }
         }
 
         setUserData(userDataAuth.user);
-        if (
-          userDataAuth.user.role === 'admin' ||
-          userDataAuth.user.role === 'superAdmin'
-        ) {
+        if (role === 'admin' || role === 'superAdmin') {
           setIsAdmin(true);
         }
         setLoggedIn(true);
