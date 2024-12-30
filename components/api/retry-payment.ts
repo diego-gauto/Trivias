@@ -40,9 +40,14 @@ export const getPriceToPay = (level: number, type: number) => {
   const CORRECT_PRICES = [149, 249, 459, 1599, 3497];
 
   if (!CORRECT_PRICES.includes(type)) {
-    throw new Error(
+    /*throw new Error(
       `Cuenta con un precio que no es correcto, contacte con soporte tecnico`,
+    );*/
+    console.error(
+      'Cuenta con un precio que no es correcto, contacte con soporte tecnico: ' +
+        type,
     );
+    return 1599;
   }
 
   return type;

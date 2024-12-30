@@ -38,6 +38,9 @@ const USER_TEST = {
 };
 */
 const alert_icon = '/images/RetryPayment/alert-icon.png';
+
+const notHavePreviusSubscription = (level: number, type: number) => level === 0 || (type === null || type === undefined);
+
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
   const context = useAuth();

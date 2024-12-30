@@ -280,7 +280,7 @@ const NavBar = () => {
             });
           }
         }
-        const { final_date, level, role, method } = userDataAuth.user;
+        const { final_date, level, role, method, type } = userDataAuth.user;
         let diff = Math.round((today - final_date) / 86400);
         const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(level);
         const haveRecurrentSubscription = [1, 4, 7].includes(level) && method === 'conekta';
@@ -290,13 +290,22 @@ const NavBar = () => {
 
         // TODO: El usuario tuvo que haber sido un usuario activo
 
+        /*
+        - Usuario tiene que tener un final_date menor que hoy (En cualquier caso)
+
+        -- El usuario no puede ser un superAdmin
+        -- La ruta en la que se encuentra el usuario no puede ser la de reintentar-pago
+        -- La cantidad de días donde al usuario se le va a mostrar este pop up no puede pasar los 90 dias
+        -- El precio que venia pagando el usuario no puede ser null
+        */
+
         if (final_date < today) {
           if (
             diff < 90 &&
             ((haveNoRecurrentSubscription && withoutTolerance) ||
               (haveRecurrentSubscription && withTolerance)) &&
             pathname !== '/reintentar-pago' &&
-            !isSuperAdmin
+            !isSuperAdmin && type !== null
           ) {
             setShowRetryPaymentModal(true);
             setWithSubscription(false);
