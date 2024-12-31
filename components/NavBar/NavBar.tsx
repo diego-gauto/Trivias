@@ -52,6 +52,7 @@ import Notifications from './Notifications/Notifications';
 import { NotificationContainer } from './Notifications/Notifications.styled';
 import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
 import { IUserData } from '../admin/UserData';
+import { getFirstLinkToAdmin } from './NavBarConstants';
 
 interface NotificationByUser {
   notification_id: number;
@@ -330,7 +331,20 @@ const NavBar = () => {
     if (userData.role === 'superAdmin' ||
       (userData.roles.length > 0 && userData.role === 'admin')
     ) {
-      router.push('/admin/Courses');
+      // router.push('/admin/Courses');
+      const roles = userData.roles.map(r => {
+        return {
+          source_table: r.source_table,
+          view: r.view === '1'
+        }
+      }).filter(r => r.view === true)
+        .map(r => {
+          return r.source_table
+        });
+      console.log({ roles });
+      const firstLinkToAdmin = getFirstLinkToAdmin(roles);
+      console.log({ firstLinkToAdmin });
+      router.push(firstLinkToAdmin);
     } else {
       let counter: number = 0;
       let route: string = '/';
