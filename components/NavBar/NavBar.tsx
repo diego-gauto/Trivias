@@ -341,10 +341,13 @@ const NavBar = () => {
         .map(r => {
           return r.source_table
         });
-      console.log({ roles });
+
       const firstLinkToAdmin = getFirstLinkToAdmin(roles);
-      console.log({ firstLinkToAdmin });
-      router.push(firstLinkToAdmin);
+      if (userData.role === 'superAdmin') {
+        router.push('/admin/Courses');
+      } else {
+        router.push(firstLinkToAdmin);
+      }
     } else {
       let counter: number = 0;
       let route: string = '/';
