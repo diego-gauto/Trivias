@@ -16,6 +16,8 @@ import {
   getGenericQueryResponse,
   getUserByEmailApi,
   updateUserRoleApi,
+  getAAdminDistributor,
+  createCodes
 } from '../../api/admin';
 import { Button } from '../Courses/CourseMain.styled';
 import { IoClose } from 'react-icons/io5';
@@ -24,6 +26,7 @@ import { defaultValues /*getRolesWithDefaults*/ } from '../Sections/DefaultValue
 import { DistributorModal } from './DistributorModal';
 import { GenericModal } from '../HomeWork/HomeWorkModal/GenericModal';
 import { GenerateCodesModal } from './GenerateCodesModal/GenerateCodesModalContent';
+
 
 export type INewUser = {
   name?: string;
@@ -126,7 +129,6 @@ const Distributors = () => {
   useEffect(() => {
     getAllDistributorUsers();
     getAllAdmins();
-    getAllDistributorUsers();
   }, []);
 
   const formatDate = (value: number) => {
@@ -229,13 +231,13 @@ const Distributors = () => {
         >
           {isVisible && (
             /*
-                        <AdminDataUpdate
-                          admin={selectedAdmin}
-                          setIsVisible={setModalVisible}
-                          handleClick={handleClick}
-                          courses={courses}
-                          forms={forms}
-                        />
+              <AdminDataUpdate
+                admin={selectedAdmin}
+                setIsVisible={setModalVisible}
+                handleClick={handleClick}
+                courses={courses}
+                forms={forms}
+              />
             */
             // 8/5/2023
             <DistributorModal
@@ -259,7 +261,7 @@ const Distributors = () => {
         <GenericModal
           content={
             <GenerateCodesModal
-              admin={admins[0]!}
+              admin={admins.find(admin => admin.email === localStorage.getItem('email'))}
               distributor={distributors[selectedUserIndex]!}
             />}
           title='Generar códigos de acceso'
