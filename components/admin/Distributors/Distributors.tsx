@@ -11,47 +11,14 @@ import {
   ModalContain,
 } from '../Sections/Sections.styled';
 import {
-  Admin,
-  getAdmins,
   getGenericQueryResponse,
-  getUserByEmailApi,
   updateUserRoleApi,
-  getAAdminDistributor,
-  createCodes
 } from '../../api/admin';
 import { Button } from '../Courses/CourseMain.styled';
 import { IoClose } from 'react-icons/io5';
-import { getCoursesApi } from '../../api/lessons';
-import { defaultValues /*getRolesWithDefaults*/ } from '../Sections/DefaultValues';
 import { DistributorModal } from './DistributorModal';
 import { GenericModal } from '../HomeWork/HomeWorkModal/GenericModal';
 import { GenerateCodesModal } from './GenerateCodesModal/GenerateCodesModalContent';
-
-
-export type INewUser = {
-  name?: string;
-  email?: string;
-  phoneNumber?: number;
-  created_at?: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  score?: string;
-  role?: string;
-  id?: string;
-  adminType?: {
-    general: boolean;
-    pay: boolean;
-    courses: boolean;
-    rewards: boolean;
-    landing: boolean;
-    coupons: boolean;
-    users: boolean;
-    superAdmin: boolean;
-    blogs: boolean;
-    assignments: boolean;
-  };
-};
 
 interface IAdmin {
   admin_id: number
@@ -73,14 +40,20 @@ interface IDistributor {
   email: string
 }
 
+interface IUser {
+  id: number,
+  name: string,
+  email: string
+}
+
 const Distributors = () => {
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
   const [newMember, setNewMember] = useState<boolean>(false);
-  const [member, setMember] = useState<any>('');
+  const [emailToFind, setEmailToFind] = useState<string>('');
   const [find, setFind] = useState<boolean>(false);
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<IUser | null>(null);
   const [displayValue, setDisplayValue] = useState<string>('none');
   const [topValue, setTopValue] = useState<string>('-100%');
   const [admins, setAdmins] = useState<IAdmin[]>([]);
@@ -88,7 +61,6 @@ const Distributors = () => {
   const [showGenerateCodesModal, setShowGenerateCodesModal] = useState(false);
 
   const showViewUserModal = async (index: number): Promise<void> => {
-    // setIsVisible(true);
     setModalVisible(true);
     setSelectedUserIndex(index);
   };
@@ -135,28 +107,34 @@ const Distributors = () => {
     return new Date(value * 1000).toLocaleDateString('es-MX');
   };
 
-  const search = () => {
-    if (member !== '') {
-      let temp = {
-        email: member,
-      };
-      getUserByEmailApi(temp).then((res) => {
-        setMember('');
-        setUser(res.data.user);
+  const search = async () => {
+    try {
+      const query = `SELECT id, concat(name, ' ', last_name) as name, email FROM users WHERE email = '${emailToFind}';`;
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as IUser[];
+      if (data.length > 0) {
+        const user = data[0]!;
+        setUser(user);
         setFind(true);
-      });
+      } else {
+        setFind(false);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const updateRole = () => {
-    let temp = {
-      userId: user[0].id,
-    };
-    updateUserRoleApi(temp).then(() => {
-      setMember('');
-      setFind(false);
-      setNewMember(false);
-    });
+    if (user !== null) {
+      let temp = {
+        userId: user.id,
+      };
+      updateUserRoleApi(temp).then(() => {
+        setEmailToFind('');
+        setFind(false);
+        setNewMember(false);
+      });
+    }
   };
 
   const setModalVisible = (show: boolean) => {
@@ -277,28 +255,30 @@ const Distributors = () => {
           <IoClose
             onClick={() => {
               setNewMember(false);
-              setMember('');
+              setEmailToFind('');
               setFind(false);
-              setUser({});
+              setUser(null);
             }}
           />
           <div className='filter'>
             <input
-              defaultValue={member}
+              value={emailToFind}
               type='text'
               placeholder='Buscar por email'
-              onChange={(e) => setMember(e.target.value)}
+              onChange={(e) => setEmailToFind(e.target.value)}
             />
-            <Button onClick={search}>Buscar</Button>
+            <Button onClick={(e) => {
+              search();
+            }}>Buscar</Button>
           </div>
-          {find && user.length > 0 && (
+          {find && user !== null && (
             <div className='column'>
-              <p>{user[0].name}</p>
-              <p>{user[0].email}</p>
+              <p>{user.name}</p>
+              <p>{user.email}</p>
               <Button onClick={updateRole}>Hacer distribuidor(a)</Button>
             </div>
           )}
-          {find && user.length === 0 && (
+          {find && user === null && (
             <div className='column'>
               <p>No se encontró un usuario</p>
             </div>
