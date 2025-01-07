@@ -458,6 +458,20 @@ export const updateUserRoleApi = async (user: any) => {
       return error;
     });
 };
+
+// admin-distributors
+export const createDistributorUser = async (user: any) => {
+  return axios
+    .put('https://gonvar.inowu.dev/' + 'admin/update-role-user', user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
+};
+
 export const getLandingReviewApi = async () => {
   return axios
     .get('https://gonvar.inowu.dev/' + 'landing/getLandingReview')
@@ -721,7 +735,6 @@ export const postGenericQueryResponse = async (query: string) => {
     body,
   );
 };
-
 // TODO: Esto esta fallando, ver que sucede
 export const getAllAdminDistributors = async () => {
   return axios.get('https://gonvar.inowu.dev/' + 'admin/admin-distributors');
