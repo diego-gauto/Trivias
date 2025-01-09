@@ -118,9 +118,9 @@ const Cuatri = (props: IData) => {
             </div>
           </div>
           <div className='text-center my-4 tit-contain'>
-            <i className='save white'>Ahorras $711.00 MXN por cuatrimestre</i>
+            <i className='save white'>Ahorras $397.00 MXN por cuatrimestre</i>
             <h2 className='h3 mb-0 white'>
-              $1,599.00{' '}
+              $2,599.00{' '}
               <span className='h3 mb-0 white size-sm fw-bold'>
                 MXN/cuatrimestre
               </span>

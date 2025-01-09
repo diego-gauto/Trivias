@@ -44,7 +44,7 @@ const Individual = (props: IData) => {
   const goToRoute = () => {
     router.push('/nails-master-revolution');
   };
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   const goTo = () => {
     if (user.id) {
@@ -85,7 +85,7 @@ const Individual = (props: IData) => {
             </div>
           </div>
           <div className='text-center my-4'>
-            <h2 className='h3 mb-0'>$1,599.00 MXN</h2>
+            <h2 className='h3 mb-0'>$2,599.00 MXN</h2>
             <span>
               <i>Único pago</i>
             </span>

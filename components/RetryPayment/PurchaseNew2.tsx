@@ -53,7 +53,7 @@ export const PurchaseNew2 = () => {
   // type, id, trial, frequency, nailmasterplusanual, v
   const { type, v, frequency, id, trial, nailmasterplusanual }: any = router.query;
   const subscriptionFrequency = frequency as FrecuencyValues;
-  const planVersion = v as '1' | '2' | '3';
+  const planVersion = v as '1' | '2' | '3' | '4';
   const subscriptionType = type as 'subscription' | 'course';
   const context = useAuth();
   const user = context.user;
@@ -228,29 +228,48 @@ export const PurchaseNew2 = () => {
       if (searchParams.get('trial') == 'true') {
         localStorage.setItem('trial', 'true');
       }
+      /*
+        cuatrimestre
+        cuatrimestre_v1_1
+
+        mensual
+        mensual_v1_1
+        mensual_v1_2
+        mensual_v1_3
+
+        anual
+        anual_v1_1
+        anual_v1_2
+      */
       if (searchParams.get('type') === 'subscription') {
         if (searchParams.get('frequency') === 'month') {
           const monthVersion = searchParams.get('v');
           if (monthVersion === '1') {
-            localStorage.setItem('month_1', 'true');
+            localStorage.setItem('mensual', 'true');
           } else if (monthVersion === '2') {
-            localStorage.setItem('month_2', 'true');
+            localStorage.setItem('mensual_v1_1', 'true');
           } else if (monthVersion === '3') {
-            localStorage.setItem('month', 'true');
+            localStorage.setItem('mensual_v1_2', 'true');
+          } else if (monthVersion === '4') {
+            localStorage.setItem('mensual_v1_3', 'true');
           }
         }
         else if (searchParams.get('frequency') === 'anual') {
           const annualVersion = searchParams.get('v');
           if (['1', '2'].includes(annualVersion || '')) {
-            localStorage.setItem('anual_1', 'true');
-          } else if (annualVersion === '3') {
             localStorage.setItem('anual', 'true');
+          } else if (annualVersion === '3') {
+            localStorage.setItem('anual_v1_1', 'true');
+          } else if (annualVersion === '4') {
+            localStorage.setItem('anual_v1_2', 'true');
           }
         }
         else if (searchParams.get('frequency') === 'cuatri') {
           const cuatriVersion = searchParams.get('v');
           if (['1', '2', '3'].includes(cuatriVersion || '')) {
-            localStorage.setItem('cuatri', 'true');
+            localStorage.setItem('cuatrimestre', 'true');
+          } else if (cuatriVersion === '4') {
+            localStorage.setItem('cuatrimestre_v1_1', 'true');
           }
         }
       }
@@ -300,21 +319,28 @@ export const PurchaseNew2 = () => {
 
   const getPlanIdByFrecuency = () => {
     if (subscriptionFrequency === 'cuatri') {
-      return `cuatrimestre`;
+      if (['1', '2', '3'].includes(planVersion || '')) {
+        return `cuatrimestre`;
+      }
+      return `cuatrimestre_v1_1`;
     } else if (subscriptionFrequency === 'month') {
       if (planVersion === '1') {
         return 'mensual';
       } else if (planVersion === '2') {
         return 'mensual_v1_1';
+      } else if (planVersion === '3') {
+        return 'mensual_v1_2';
       }
-      return 'mensual_v1_2';
+      return 'mensual_v1_3';
     } else if (subscriptionFrequency === 'anual') {
       if (['1', '2'].includes(planVersion)) {
         return 'anual';
+      } else if (planVersion === '3') {
+        return 'anual_v1_1';
       }
-      return 'anual_v1_1';
+      return 'anual_v1_2';
     }
-    return `cuatrimestre`;
+    return `cuatrimestre_v1_1`;
   }
 
   const pay = async () => {
@@ -446,7 +472,7 @@ export const PurchaseNew2 = () => {
 
     setIsCreatingFamsaCustomer(true);
     try {
-      if (femsa_customer_id === null) {
+      if (femsa_customer_id === null || femsa_customer_id === undefined) {
         const femsaCustomerResponse = await createFemsaOxxoCustomer({
           email: user.email,
           name: `${user.name} ${user.last_name}`,
@@ -543,6 +569,8 @@ export const PurchaseNew2 = () => {
     if (subscriptionFrequency === 'cuatri') {
       if (['1', '2', '3'].includes(planVersion)) {
         return `1599 / Cuatrimestral `;
+      } else if (planVersion === '4') {
+        return `2599 / Cuatrimestral `;
       }
     } else if (subscriptionFrequency === 'month') {
       if (planVersion === '1') {
@@ -551,21 +579,27 @@ export const PurchaseNew2 = () => {
         return `249 / Mensual `;
       } else if (planVersion === '3') {
         return `459 / Mensual `;
+      } else if (planVersion === '4') {
+        return `749 / Mensual `;
       }
     } else if (subscriptionFrequency === 'anual') {
       if (planVersion === '1' || planVersion === '2') {
         return `1599 / Anual `;
       } else if (planVersion === '3') {
         return `3497 / Anual `;
+      } else if (planVersion === '4') {
+        return `5697 / Anual `;
       }
     }
-    return 1599;
+    return `2599 / Cuatrimestral `;
   };
 
   const returnPriceNumber = () => {
     if (subscriptionFrequency === 'cuatri') {
       if (['1', '2', '3'].includes(planVersion)) {
         return 1599;
+      } else if (planVersion === '4') {
+        return 2599;
       }
     } else if (subscriptionFrequency === 'month') {
       if (planVersion === '1') {
@@ -574,15 +608,19 @@ export const PurchaseNew2 = () => {
         return 249;
       } else if (planVersion === '3') {
         return 459;
+      } else if (planVersion === '4') {
+        return 749;
       }
     } else if (subscriptionFrequency === 'anual') {
       if (planVersion === '1' || planVersion === '2') {
         return 1599;
       } else if (planVersion === '3') {
         return 3497;
+      } else if (planVersion === '4') {
+        return 5697;
       }
     }
-    return 1599;
+    return 2599;
   };
 
   const detachPayment = async (card: IPm) => {
@@ -627,16 +665,29 @@ export const PurchaseNew2 = () => {
       return (sub = 'P-2P063165RR167053TMRKD7BQ');
     if (subscriptionFrequency === 'anual' && planVersion === '1')
       return (sub = 'P-1VN62329L4770474AMSHBSZY');
+    if (subscriptionFrequency === 'cuatri' && planVersion === '1')
+      return (sub = 'P-6RT70377G6729623WMVJLPYQ');
+    // v 2
     if (subscriptionFrequency === 'month' && planVersion === '2')
       return (sub = 'P-2UH60720VG8742017MTYPHOQ');
     if (subscriptionFrequency === 'anual' && planVersion === '2')
       return (sub = 'P-1VN62329L4770474AMSHBSZY');
+    if (subscriptionFrequency === 'cuatri' && planVersion === '2')
+      return (sub = 'P-6RT70377G6729623WMVJLPYQ');
+    // v 3
     if (subscriptionFrequency === 'month' && planVersion === '3')
       return (sub = 'P-1EG90467MN295414UMVEUKHI');
     if (subscriptionFrequency === 'anual' && planVersion === '3')
       return (sub = 'P-0ND16663SN6195536MVEUMXI');
     if (subscriptionFrequency === 'cuatri' && planVersion === '3')
       return (sub = 'P-6RT70377G6729623WMVJLPYQ');
+    // v 4
+    if (subscriptionFrequency === 'month' && planVersion === '4')
+      return (sub = 'P-06P017941C387814JM56XXNI');
+    if (subscriptionFrequency === 'anual' && planVersion === '4')
+      return (sub = 'P-4A568141ME338762BM56X6DI');
+    if (subscriptionFrequency === 'cuatri' && planVersion === '4')
+      return (sub = 'P-78L04026JY110403VM56X24I');
     return sub;
   };
 

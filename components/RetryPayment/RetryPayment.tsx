@@ -191,26 +191,33 @@ export const RetryPayment = () => {
     const pm = filter[0];
     let plan_id = '';
 
-    if (user.level === 0) plan_id = 'cuatrimestre';
+    if (user.level === 0) plan_id = 'cuatrimestre_v1_1';
 
     if (user.type === 0) {
       if ([4, 5].includes(user.level)) {
-        plan_id = 'anual_v1_1';
+        plan_id = 'anual_v1_2';
       }
       if ([7, 8].includes(user.level)) {
-        plan_id = 'cuatrimestre';
+        plan_id = 'cuatrimestre_v1_1';
       }
       if ([1, 6].includes(user.level)) {
-        plan_id = 'mensual_v1_2';
+        plan_id = 'mensual_v1_3';
       }
     }
 
+    if ([4, 5].includes(user.level) /* && user.type === 5697 */) plan_id = 'anual_v1_2';
     if ([4, 5].includes(user.level) && user.type === 1599) plan_id = 'anual';
     if ([4, 5].includes(user.level) && user.type === 3497) plan_id = 'anual_v1_1';
+    if ([1, 6].includes(user.level) /* && user.type === 749 */) plan_id = 'mensual_v1_3';
     if ([1, 6].includes(user.level) && user.type === 149) plan_id = 'mensual';
     if ([1, 6].includes(user.level) && user.type === 249) plan_id = 'mensual_v1_1';
     if ([1, 6].includes(user.level) && user.type === 459) plan_id = 'mensual_v1_2';
-    if ([7, 8].includes(user.level)) plan_id = 'cuatrimestre';
+    if ([7, 8].includes(user.level) /* && user.type === 2599 */) plan_id = 'cuatrimestre_v1_1';
+    if ([7, 8].includes(user.level) && user.type === 1599) plan_id = 'cuatrimestre';
+
+    if (plan_id === '') {
+      plan_id = 'cuatrimestre_v1_1';
+    }
 
     const data = {
       id: token ? token : pm?.id,
@@ -276,10 +283,12 @@ export const RetryPayment = () => {
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
+    const frecuency = getFrecuency(user.level);
+
     let data = {
       conekta_id: user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
-      title: 'Gonvar Plus',
+      title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
       price: user.type * 100,
       meta: {
         type: 'subscription',
@@ -340,15 +349,17 @@ export const RetryPayment = () => {
         customer_id = femsa_customer_id;
       }
 
+      const frecuency = getFrecuency(user.level);
+
       let data = {
         femsa_customer_id: customer_id,
         expires_at: Math.round(expirationDate.getTime() / 1000),
-        title: 'Gonvar Plus',
-        price: [0, 1599].includes(user.type) ? 159900 : user.type * 100,
+        title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
+        price: [0, 1599, 2599].includes(user.type) ? 259900 : user.type * 100,
         meta: {
           type: 'subscription',
           course_id: 0,
-          frecuency: getFrecuency(user.level),
+          frecuency,
           duration: getFinalDateByFrequency(getFrecuency(user.level)),
         },
       };
@@ -379,11 +390,13 @@ export const RetryPayment = () => {
       currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
     );
 
+    const frecuency = getFrecuency(user.level);
+
     let data = {
       conekta_id: user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
-      title: 'Gonvar Plus',
-      price: [0, 1599].includes(user.type) ? 159900 : user.type * 100,
+      title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
+      price: [0, 1599, 2599].includes(user.type) ? 259900 : user.type * 100,
       meta: {
         type: 'subscription',
         course_id: 0,
@@ -418,9 +431,9 @@ export const RetryPayment = () => {
     } else if (user.level === 1 || user.level === 6) {
       return `$${user.type} / Mensual `;
     } else if (user.level === 7 || user.level === 8) {
-      return `$1599 / Cuatrimestral `;
+      return `$2599 / Cuatrimestral `;
     } else if (user.level === 0) {
-      return `1599 / Cuatrimestral `;
+      return `$2599 / Cuatrimestral `;
     } else {
       return 'NA ';
     }
