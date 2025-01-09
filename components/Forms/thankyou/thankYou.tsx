@@ -170,7 +170,7 @@ const ThankYouForm = () => {
         if (user.final_date < today) {
           router.push({
             pathname: PURCHASE_PATH,
-            query: { type: 'subscription', frequency, v: '3' },
+            query: { type: 'subscription', frequency, v: '4' },
           });
         } else {
           router.push(PREVIEW_PATH);
@@ -182,7 +182,7 @@ const ThankYouForm = () => {
       } else {
         router.push({
           pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency, v: '3' },
+          query: { type: 'subscription', frequency, v: '4' },
         });
       }
     } else {

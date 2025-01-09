@@ -111,9 +111,9 @@ const Terms = () => {
       <p>
         <span className='underline'>Precio. </span>
         El Usuario pagará al Prestador por los Servicios elegidos al ingresar a
-        la Plataforma de $459.00 (Cuatrocientos cincuenta y nueve pesos
-        mexicanos mensuales 00/100 M.N.), $1599.00 (Mil quinientos noventa y
-        nueve pesos mexicanos cuatrimestrales 00/100 M.N.) o $3497.00 (Tres mil
+        la Plataforma de $749.00 (Cuatrocientos cincuenta y nueve pesos
+        mexicanos mensuales 00/100 M.N.), $2599.00 (Mil quinientos noventa y
+        nueve pesos mexicanos cuatrimestrales 00/100 M.N.) o $5697.00 (Tres mil
         cuatrocientos noventa y siete pesos mexicanos anuales 00/100 M.N.). El
         precio de los Servicios son los que en adelante se describen, en el
         entendido de que los mismos podrán variar de tiempo en tiempo, y a

@@ -196,13 +196,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
           if (type === 'mensual') {
             router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription', frequency: 'month', v: '3' },
+              query: { type: 'subscription', frequency: 'month', v: '4' },
             });
           }
           if (type === 'anual') {
             router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription', frequency: 'anual', v: '3' },
+              query: { type: 'subscription', frequency: 'anual', v: '4' },
             });
           }
           if (type === 'cuatrimestral') {
@@ -211,7 +211,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               query: {
                 type: 'subscription',
                 frequency: 'cuatrimestral',
-                v: '3',
+                v: '4',
               },
             });
           }
@@ -252,13 +252,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
           if (type === 'mensual') {
             router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription', frequency: 'month', v: '3' },
+              query: { type: 'subscription', frequency: 'month', v: '4' },
             });
           }
           if (type === 'anual') {
             router.push({
               pathname: PURCHASE_PATH,
-              query: { type: 'subscription', frequency: 'anual', v: '3' },
+              query: { type: 'subscription', frequency: 'anual', v: '4' },
             });
           }
           if (type === 'cuatrimestral') {
@@ -267,7 +267,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               query: {
                 type: 'subscription',
                 frequency: 'cuatrimestral',
-                v: '3',
+                v: '4',
               },
             });
           }
@@ -302,10 +302,10 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Desde el 01 de Diciembre al 31 de Diciembre
+            Desde el 01 de Enero al 31 de Enero
           </h4>
           <Countdown
-            date={new Date(2024, 11, 31, 23, 59, 59)}
+            date={new Date(2025, 0, 31, 23, 59, 59)}
             renderer={(props) => (
               <div className='countdown' style={{ marginTop: '0' }}>
                 <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>
@@ -414,7 +414,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
             hoy mismo!
           </h4>
           <h4 className='bold font-size-16'>Sólo {price}</h4>
-          <h4 className='bold font-size-16'>No incluye material</h4>
+          <h4 className='bold font-size-16'>
+            {
+              type !== 'anual' ?
+                'No incluye material'
+                : 'Incluye material'
+            }
+          </h4>
         </div>
 
         <button

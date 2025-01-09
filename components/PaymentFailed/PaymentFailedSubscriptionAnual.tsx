@@ -49,7 +49,7 @@ const PaymentFailedSubscriptionAnual = () => {
     updateUserOfferReference(body).then((res) => {
       router.push({
         pathname: PURCHASE_PATH,
-        query: { type: 'subscription', frequency: 'anual', v: '3' },
+        query: { type: 'subscription', frequency: 'anual', v: '4' },
       });
     });
   };

@@ -59,7 +59,7 @@ const Mensual = (props: IData) => {
             style={{ marginTop: 32, marginBottom: '1.5rem' }}
           >
             <h2 className='h3 mb-0'>
-              $459.00 <span className='size-sm fw-bold'>MXN/mes</span>
+              $749.00 <span className='size-sm fw-bold'>MXN/mes</span>
             </h2>
             <span>
               <i>Cargo automático mensual</i>

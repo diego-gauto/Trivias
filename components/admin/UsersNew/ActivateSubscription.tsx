@@ -28,9 +28,9 @@ export const ActivateSubscriptionModal = ({
   const [canContinue, setCanContinue] = useState<boolean>(false);
 
   const generatePricesByOption = () => {
-    const pricesMounth = [459, 249, 149, 0];
-    const pricesCuatri = [2000, 1599, 999, 0];
-    const pricesAnnual = [3497, 1599, 0];
+    const pricesMounth = [749, 459, 249, 149, 0];
+    const pricesCuatri = [2599, 2000, 1599, 999, 0];
+    const pricesAnnual = [5697, 3497, 1599, 0];
 
     let prices: number[] = [];
     if (subscription === 'month') {
