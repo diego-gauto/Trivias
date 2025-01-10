@@ -39,16 +39,13 @@ const USER_TEST = {
 */
 const alert_icon = '/images/RetryPayment/alert-icon.png';
 
-const notHavePreviusSubscription = (level: number, type: number) => level === 0 || (type === null || type === undefined);
-
 export const RetryPayModal = (props: IRetryPayModal) => {
   const { show, onHide, withSubscription } = props;
   const context = useAuth();
   const user = context.user; // USER_TEST
-  const [pm, setPm] = useState<any>([]);
+  const [pm, setPm] = useState<IPm | undefined>(undefined);
   const [isLaoding, setIsloading] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
-  const [invoice, setInvoice] = useState({} as any);
   const [error, setError] = useState(false);
 
   const getNewUserLevel = (level: number) => {
@@ -57,9 +54,13 @@ export const RetryPayModal = (props: IRetryPayModal) => {
     return 7;
   };
 
-  const pay = () => {
+  const pay = async () => {
     const filter = paymentMethods.filter((x) => x.default);
     const pm = filter[0];
+
+    if (pm !== undefined && pm !== null) {
+      setPm(pm);
+    }
 
     let plan_id = getPlanId(user.level, user.type);
     const type = getPriceToPay(user.level, user.type);
@@ -71,7 +72,9 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       userId: user.user_id,
     };
 
-    conektaSubscriptionApi(data).then(async (res) => {
+    try {
+      const res = await conektaSubscriptionApi(data);
+
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
@@ -93,7 +96,14 @@ export const RetryPayModal = (props: IRetryPayModal) => {
       } else {
         setError(true);
       }
-    });
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    }
+
+    /*conektaSubscriptionApi(data).then(async (res) => {
+
+    });*/
   };
 
   const getPaymentMethods = async () => {
@@ -203,7 +213,7 @@ export const RetryPayModal = (props: IRetryPayModal) => {
                 <p className='bold'>¿Quieres reintentar el pago?</p>
                 <p className='paragraph'>
                   No pudimos procesar tu pago mas reciente. Reintenta con tu (
-                  {pm.brand} - {pm.last4}) O actualiza tu información de pago
+                  {pm?.brand} - {pm?.last4}) O actualiza tu información de pago
                   para seguir disfrutando de los cursos.
                 </p>
               </>
