@@ -42,6 +42,8 @@ export const getPlanId = (level: number, type: number) => {
   if ([1, 6].includes(level) && type === 759) plan_id = 'mensual_v1_3';
   // CUATRIMESTRALES
   if ([7, 8].includes(level)) plan_id = 'cuatrimestre_v1_1';
+  if ([7, 8].includes(level) && type === 1599) plan_id = 'cuatrimestre';
+  if (type === 2000) plan_id = 'cuatrimestre_v1_1';
 
   if (plan_id === '') {
     plan_id = 'cuatrimestre_v1_1';
