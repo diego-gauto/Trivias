@@ -46,7 +46,7 @@ export const RetryPayment = () => {
     holder: '',
   });
   const [barcode, setBarcode] = useState('');
-  const [product, setProduct] = useState({ price: 149 });
+  const [product, setProduct] = useState<{ price: number }>({ price: 2599 });
   const [reference, setReference] = useState('');
   const [bank_ref, setBank_ref] = useState('');
   const [expiresAt, setExpiresAt] = useState<number>(0);
@@ -276,6 +276,26 @@ export const RetryPayment = () => {
     return 'cuatrimestral';
   };
 
+  const getCorrectPriceOxxoAndSpei = (type: number, level: number) => {
+    const correctPrices = [149, 249, 459, 749, 1599, 2599, 3497, 5697];
+
+    if (correctPrices.includes(type)) {
+      return type;
+    }
+
+    if ([1, 6].includes(level)) {
+      return 749; // Ultimo precio mensual
+    }
+    if ([4, 5].includes(level)) {
+      return 5697;  // Ultimo precio mensual
+    }
+    if ([7, 8].includes(level)) {
+      return 2599;  // Ultimo precio cuatrimestral
+    }
+
+    return 2599;
+  }
+
   const payWithOxxo = () => {
     setProduct({ ...product, price: user.type });
     const currentDate: any = new Date();
@@ -326,7 +346,8 @@ export const RetryPayment = () => {
   }
 
   const payWithOxxoFemsa = async () => {
-    setProduct({ ...product, price: user.type });
+    const correctPrice = getCorrectPriceOxxoAndSpei(user.type, user.level);
+    setProduct({ ...product, price: correctPrice });
     const expirationDate = new Date();
     expirationDate.setMonth(expirationDate.getMonth() + 1);
 
@@ -350,12 +371,11 @@ export const RetryPayment = () => {
       }
 
       const frecuency = getFrecuency(user.level);
-
       let data = {
         femsa_customer_id: customer_id,
         expires_at: Math.round(expirationDate.getTime() / 1000),
         title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
-        price: [0, 1599, 2599].includes(user.type) ? 259900 : user.type * 100,
+        price: correctPrice * 100,
         meta: {
           type: 'subscription',
           course_id: 0,
@@ -391,12 +411,15 @@ export const RetryPayment = () => {
     );
 
     const frecuency = getFrecuency(user.level);
+    const correctPrice = getCorrectPriceOxxoAndSpei(user.type, user.level);
+
+    setProduct({ ...product, price: correctPrice })
 
     let data = {
       conekta_id: user.conekta_id,
       expires_at: Math.round(new Date(futureDate).getTime() / 1000),
       title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
-      price: [0, 1599, 2599].includes(user.type) ? 259900 : user.type * 100,
+      price: correctPrice * 100,
       meta: {
         type: 'subscription',
         course_id: 0,
