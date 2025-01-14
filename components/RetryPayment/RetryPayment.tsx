@@ -226,7 +226,9 @@ export const RetryPayment = () => {
       userId: user.user_id,
     };
 
-    conektaSubscriptionApi(data).then(async (res) => {
+    console.log({ ...data, level: user.level, type: user.type });
+
+    /*conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
@@ -255,7 +257,7 @@ export const RetryPayment = () => {
         setError(true);
         const msg = 'pago-rechazado';
       }
-    });
+    });*/
   };
 
   type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
@@ -295,36 +297,6 @@ export const RetryPayment = () => {
 
     return 2599;
   }
-
-  const payWithOxxo = () => {
-    setProduct({ ...product, price: user.type });
-    const currentDate: any = new Date();
-    const futureDate = new Date(
-      currentDate.getTime() + 30 * 24 * 60 * 60 * 1000,
-    );
-
-    const frecuency = getFrecuency(user.level);
-
-    let data = {
-      conekta_id: user.conekta_id,
-      expires_at: Math.round(new Date(futureDate).getTime() / 1000),
-      title: 'Gonvar Plus ' + (frecuency === 'month' ? 'Mensual' : frecuency === 'year' ? 'Anual' : 'Cuatrimestral'),
-      price: user.type * 100,
-      meta: {
-        type: 'subscription',
-        course_id: 0,
-        frecuency: getFrecuency(user.level),
-        duration: 0,
-      },
-    };
-    conektaOxxoApi(data).then((res) => {
-      let response = res.data.data;
-      setBarcode(response.charges.data[0].payment_method.barcode_url);
-      setReference(response.charges.data[0].payment_method.reference);
-      setExpiresAt(response.charges.data[0].payment_method.expires_at);
-      setOxxoIsActive(true);
-    });
-  };
 
   const getFinalDateByFrequency = (subscriptionFrequency: FrecuencyValue): number => {
     const today = new Date();
@@ -413,7 +385,7 @@ export const RetryPayment = () => {
     const frecuency = getFrecuency(user.level);
     const correctPrice = getCorrectPriceOxxoAndSpei(user.type, user.level);
 
-    setProduct({ ...product, price: correctPrice })
+    setProduct({ price: correctPrice })
 
     let data = {
       conekta_id: user.conekta_id,
@@ -450,10 +422,19 @@ export const RetryPayment = () => {
 
   const returnPrice = () => {
     if (user.level === 5 || user.level === 4) {
-      return `$${user.type} / Anual `;
+      if ([1599, 3497, 5697].includes(user.type)) {
+        return `$${user.type} / Anual `;
+      }
+      return `$5697 / Anual `;
     } else if (user.level === 1 || user.level === 6) {
-      return `$${user.type} / Mensual `;
+      if ([149, 249, 459, 749].includes(user.type)) {
+        return `$${user.type} / Mensual `;
+      }
+      return `$749 / Mensual `;
     } else if (user.level === 7 || user.level === 8) {
+      if ([1599, 2599].includes(user.type)) {
+        return `$${user.type} / Cuatrimestral `;
+      }
       return `$2599 / Cuatrimestral `;
     } else if (user.level === 0) {
       return `$2599 / Cuatrimestral `;
