@@ -228,7 +228,7 @@ export const RetryPayment = () => {
 
     console.log({ ...data, level: user.level, type: user.type });
 
-    /*conektaSubscriptionApi(data).then(async (res) => {
+    conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
         const membership = {
@@ -257,7 +257,7 @@ export const RetryPayment = () => {
         setError(true);
         const msg = 'pago-rechazado';
       }
-    });*/
+    });
   };
 
   type FrecuencyValue = 'cuatrimestral' | 'year' | 'month';
