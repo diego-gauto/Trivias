@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFacebook } from 'react-facebook';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
 import { googleLogout } from '@react-oauth/google';
 
 import {
@@ -285,7 +284,7 @@ const NavBar = () => {
         let diff = Math.round((today - final_date) / 86400);
         const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(level);
         const haveRecurrentSubscription = [1, 4, 7].includes(level) && method === 'conekta';
-        const withTolerance = final_date > today - 30 * 24 * 60 * 60;
+        const withTolerance = final_date < today - 30 * 24 * 60 * 60;
         const withoutTolerance = final_date < today;
         const isSuperAdmin = role === 'superAdmin';
 
@@ -300,13 +299,18 @@ const NavBar = () => {
         -- El precio que venia pagando el usuario no puede ser null
         */
 
+        console.log({
+          final_date, level, role, method, type, diff
+        });
+
         if (final_date < today) {
           if (
             diff < 90 &&
             ((haveNoRecurrentSubscription && withoutTolerance) ||
               (haveRecurrentSubscription && withTolerance)) &&
+            method !== 'paypal' &&
             pathname !== '/reintentar-pago' &&
-            !isSuperAdmin && type !== null
+            !isSuperAdmin
           ) {
             setShowRetryPaymentModal(true);
             setWithSubscription(false);
