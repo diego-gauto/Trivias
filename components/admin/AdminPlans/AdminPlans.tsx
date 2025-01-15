@@ -43,7 +43,7 @@ const links: IGroup[] = [
   },
   {
     title: 'Cuatrimestrales',
-    frequency: 'cuatrimestral',
+    frequency: 'cuatri',
     frequencyLabel: 'cuatrimestral',
     values: [
       {
