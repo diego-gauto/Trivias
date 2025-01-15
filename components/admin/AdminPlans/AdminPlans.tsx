@@ -35,7 +35,7 @@ const links: IGroup[] = [
         selected: false,
       },
       {
-        price: 759,
+        price: 749,
         v: 4,
         selected: false,
       }
