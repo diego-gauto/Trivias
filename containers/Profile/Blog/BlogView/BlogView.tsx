@@ -94,7 +94,7 @@ const BlogView = () => {
       } else {
         router.push({
           pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency: 'anual', v: '1' },
+          query: { type: 'subscription', frequency: 'anual', v: '4' },
         });
       }
     } else {
