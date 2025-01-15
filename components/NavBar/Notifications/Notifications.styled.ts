@@ -16,7 +16,7 @@ export const NotificationContainer = styled.div<{
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.2);
   padding: 20px 5px;
   border-radius: 8px;
-  width: 101vw;
+  width: 97vw;
   z-index: 10;
   gap: 20px;
   display: flex;
@@ -44,7 +44,7 @@ export const NotificationContainer = styled.div<{
       overflow: auto;
       transition: 0.4s ease-in-out;
       opacity: 1;
-      right: -73px;
+      /*right: -173px;*/
       height: fit-content;
     `}
 
@@ -78,29 +78,40 @@ export const NotificationContainer = styled.div<{
     flex-direction: column;
   }
 
-  @media screen and (min-width: 451px) {
-    right: -118px;
-    ::-webkit-scrollbar {
-      background: white;
-      border-radius: 10px;
-      width: 15px;
-    }
-    ::-webkit-scrollbar-thumb {
-      cursor: pointer;
-      width: 10px;
-      background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
-      border-radius: 10px;
-    }
+  ::-webkit-scrollbar {
+    background: white;
+    border-radius: 10px;
+    width: 15px;
+  }
+  ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    width: 10px;
+    background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+    border-radius: 10px;
   }
 
-  @media screen and (min-width: 576px) {
+  right: -23vw;
+
+  @media screen and (min-width: 300px) {
+    right: calc(100% - 100px);
+  }
+
+  @media screen and (min-width: 325px) {
+    right: -90px;
+  }
+
+  @media screen and (min-width: 350px) {
+    right: -95px;
+  }
+
+  @media screen and (min-width: 451px) {
     width: 400px;
     right: -95px;
   }
 
   @media screen and (min-width: 768px) {
     width: 500px;
-    right: -145px;
+    right: -95px;
     top: 46px;
   }
 
