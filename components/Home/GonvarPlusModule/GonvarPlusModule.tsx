@@ -61,7 +61,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
       } else {
         router.push({
           pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency: 'cuatrimestral', v: '4' },
+          query: { type: 'subscription', frequency: 'cuatri', v: '4' },
         });
       }
     } else {
