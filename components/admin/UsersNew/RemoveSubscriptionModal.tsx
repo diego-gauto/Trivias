@@ -64,7 +64,7 @@ export const RemoveSubscriptionModal = ({
 
   const removeSubscription = async () => {
     try {
-      const response = removeMembershipApi({ user_id: clientUserId });
+      const response = await removeMembershipApi({ user_id: clientUserId });
       onSuccessEvent();
     } catch (error) {
       console.log({ error });

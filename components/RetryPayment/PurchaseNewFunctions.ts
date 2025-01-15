@@ -62,9 +62,12 @@ export const getPriceByParams = (
   if (frequency === 'month' && v === '1') tempPrice = 149;
   if (frequency === 'month' && v === '2') tempPrice = 249;
   if (frequency === 'month' && v === '3') tempPrice = 459;
+  if (frequency === 'month' && v === '4') tempPrice = 749;
   if (frequency === 'anual' && ['1', '2'].includes(v)) tempPrice = 1599;
   if (frequency === 'anual' && v === '3') tempPrice = 3497;
+  if (frequency === 'anual' && v === '4') tempPrice = 5697;
   if (frequency === 'cuatri' && ['1', '2', '3'].includes(v)) tempPrice = 1599;
+  if (frequency === 'cuatri' && v === '4') tempPrice = 2599;
   if (type === 'course') tempPrice = 1599;
   return tempPrice;
 };

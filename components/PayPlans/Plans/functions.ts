@@ -35,7 +35,7 @@ export const goTo = (user: IUser, type: Suscription) => {
       if (user.final_date < today) {
         router.push({
           pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency, v: '3' },
+          query: { type: 'subscription', frequency, v: '4' },
         });
       } else {
         router.push(PREVIEW_PATH);
@@ -49,7 +49,7 @@ export const goTo = (user: IUser, type: Suscription) => {
     } else {
       router.push({
         pathname: PURCHASE_PATH,
-        query: { type: 'subscription', frequency, v: '3' },
+        query: { type: 'subscription', frequency, v: '4' },
       });
     }
   } else {

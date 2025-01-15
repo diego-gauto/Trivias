@@ -141,3 +141,10 @@ export const RemoveSubscriptionModal = styled.div`
     gap: 10px;
   }
 `;
+
+export const ShowCodeSellDetailModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+`;

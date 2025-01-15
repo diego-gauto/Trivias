@@ -24,7 +24,7 @@ const Success = () => {
     localStorage.setItem('plan', 'true');
     router.push({
       pathname: PURCHASE_PATH,
-      query: { type: 'subscription', frequency: 'anual', v: '3' },
+      query: { type: 'subscription', frequency: 'anual', v: '4' },
     });
   };
 

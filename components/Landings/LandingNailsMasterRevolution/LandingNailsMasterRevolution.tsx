@@ -256,14 +256,14 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         <FirstSection>
           <div className='mt-3 fechas'>
             <h4>
-              <b>Actualización 2024</b>
+              <b>Actualización 2025</b>
               <br />
               Inscripciones sólo desde el
               <br />
-              01 de Diciembre al 31 de Diciembre
+              01 de Enero al 31 de Enero
             </h4>
             <Countdown
-              date={new Date(2024, 11, 31, 23, 59, 59)}
+              date={new Date(2025, 0, 31, 23, 59, 59)}
               renderer={(props) => (
                 <div className='countdown'>
                   <h2>TIEMPO RESTANTE</h2>
@@ -877,7 +877,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <p>
                   Revista Gonvar: <b>10 diseños increibles</b>{' '}
                   {responsive850 ? <br /> : ' |'}
-                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                  <span className='light-blue'> Costo real: $749.00 MXN</span>
                 </p>
               </div>
               <div className='course-detail'>
@@ -885,7 +885,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <p>
                   Manual <b>Obtén tus primeros clientes</b>{' '}
                   {responsive850 ? <br /> : ' |'}
-                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                  <span className='light-blue'> Costo real: $749.00 MXN</span>
                 </p>
               </div>
               <div className='course-detail'>
@@ -893,7 +893,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <p>
                   Manual <b>Los secretos del gel semipermanente</b>{' '}
                   {responsive850 ? <br /> : ' |'}
-                  <span className='light-blue'> Costo real: $649.00 MXN</span>
+                  <span className='light-blue'> Costo real: $749.00 MXN</span>
                 </p>
               </div>
               <div className='course-detail'>
@@ -926,7 +926,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
                 <h2 className='dark-blue h1'>
                   <b>Precio de Lanzamiento {!responsive850 && 'con beca'}</b>
                 </h2>
-                <h2 className='green h1'>Sólo $1,599.00 MXN</h2>
+                <h2 className='green h1'>Sólo $2,599.00 MXN</h2>
                 {/* <p className="">Válido para las primeras 500 personas</p> */}
                 <h2>
                   <b>
@@ -1411,7 +1411,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
 
                 <div className='border-top'>
                   <p className='a'>
-                    El curso de uñas Nail Master Revolution incluido en la suscripción Gonvar+ tiene un costo de $6,719 MXN. Sin embargo, si aprovechas nuestra beca del 75%, puedes obtenerlo por solo $1,599 MXN.
+                    El curso de uñas Nail Master Revolution incluido en la suscripción Gonvar+ tiene un costo de $6,719 MXN. Sin embargo, si aprovechas nuestra beca del 75%, puedes obtenerlo por solo $2,599 MXN.
                   </p>
                 </div>
               </div>

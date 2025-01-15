@@ -238,16 +238,6 @@ export const MainContainer = styled.div`
     min-width: 300px;
   }
 
-  /*
-style={{
-            padding: '10px',
-            border: 'none',
-            borderRadius: '16px',
-            color: 'white',
-            backgroundColor: ''
-          }}
-*/
-
   .gonvar-button {
     border-radius: 16px;
     transition: background-color 0.5s ease;
@@ -617,6 +607,55 @@ style={{
     margin: 0;
   }
 
+  .distributor-options-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .distributor-option {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    font-weight: 500;
+    border-radius: 16px;
+  }
+
+  .distributor-option:hover {
+    background-color: rgba(105, 26, 202, 0.2);
+  }
+
+  .distributor-option-active {
+    font-weight: bold;
+    background-color: rgba(105, 26, 202, 0.2);
+  }
+
+  .distributor-option-text {
+    color: #691aca;
+  }
+
+  .distributor-code-sells-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .distributor-code-sell {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    border: 2px solid rgba(138, 75, 215, 0.5);
+    border-radius: 16px;
+    gap: 8px;
+    background-color: rgba(138, 75, 215, 0.2);
+  }
+
   @media screen and (min-width: 576px) {
     .sections-container {
       display: grid;
@@ -654,6 +693,14 @@ style={{
     .rewards-sections {
       flex-direction: row;
       justify-content: center;
+    }
+
+    .distributor-options-container {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .distributor-code-sells-container {
+      grid-template-columns: 1fr 1fr;
     }
   }
 

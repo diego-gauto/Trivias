@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import styles from './GenerateCodesModalContent.module.css';
+// import { createCodes } from '../../../api/admin';
+import { generateCodes } from './GenerateCodesApi';
 
 interface IAdmin {
   admin_id: number
@@ -33,7 +35,7 @@ interface IData {
   details: IDetail[]
 }
 
-type Duration = 'm' | 'c' | 'a';
+type Duration = 'M' | 'C' | 'A';
 
 interface IDetail {
   duration_type: Duration,
@@ -52,17 +54,17 @@ export const GenerateCodesModal = ({
       distributor,
       details: [
         {
-          duration_type: 'm',
+          duration_type: 'M',
           amount: 459,
           count: 0,
         },
         {
-          duration_type: 'c',
+          duration_type: 'C',
           amount: 1599,
           count: 0,
         },
         {
-          duration_type: 'a',
+          duration_type: 'A',
           amount: 3497,
           count: 0,
         },
@@ -70,8 +72,29 @@ export const GenerateCodesModal = ({
     }
   }
 
+  const generateInitialCodesData = (): {
+    codeSellId: number,
+    mensualCodes: string[],
+    cuatrimestralCodes: string[],
+    annualCodes: string[]
+  } => {
+
+    return {
+      codeSellId: 0,
+      annualCodes: [],
+      cuatrimestralCodes: [],
+      mensualCodes: []
+    }
+  }
+
   const [sellData, setSellData] = useState<IData>(generateInitialData());
   const [state, setState] = useState<'sell' | 'codes'>('sell');
+  const [codes, setCodes] = useState<{
+    codeSellId: number,
+    mensualCodes: string[],
+    cuatrimestralCodes: string[],
+    annualCodes: string[]
+  }>(generateInitialCodesData());
 
   const isAbleToContinueToCodes = sellData.details.filter(d => d.count > 0).length > 0;
 
@@ -103,7 +126,36 @@ export const GenerateCodesModal = ({
           type="button"
           onClick={() => {
             if (isAbleToContinueToCodes) {
-              setState('codes');
+              // Aquí se manda el body a la api de crear codigos
+              const body = {
+                admin_id: sellData.admin!.admin_id,
+                distributor_id: sellData.distributor!.distributor_id,
+                details: sellData.details
+              }
+              console.log(body);
+              generateCodes(body).then(res => {
+                console.log({ res });
+                let codeSellId = res[0]?.code_sell_id || 0;
+                const mensualCodes = res
+                  .filter(code => code.duration_type === 'M')
+                  .map(code => code.code.toUpperCase());
+                const cuatrimestralCodes = res
+                  .filter(code => code.duration_type === 'C')
+                  .map(code => code.code.toUpperCase());
+                const annualCodes = res
+                  .filter(code => code.duration_type === 'A')
+                  .map(code => code.code.toUpperCase());
+
+                const codesResult = {
+                  codeSellId,
+                  mensualCodes,
+                  cuatrimestralCodes,
+                  annualCodes
+                }
+
+                setCodes(codesResult);
+                setState('codes');
+              });
             }
           }}
         >
@@ -114,16 +166,18 @@ export const GenerateCodesModal = ({
   }
 
   const generateTitleByDurationType = (durationType: Duration) => {
-    return durationType === 'm' ? 'Mensual' : durationType === 'c' ? 'Cuatrimestral' : 'Anual'
+    return durationType === 'M' ? 'Mensual' : durationType === 'C' ? 'Cuatrimestral' : 'Anual'
   }
 
   return <>
     <div className={styles['main-container']}>
       <div className={styles['header']}>
-        <h3 className={styles['title']}>Codigos pre-generados</h3>
+        <h3 className={styles['title']}>Codigos generados</h3>
       </div>
       <div className={styles['body']}>
         {
+          /*
+          {
           sellData.details
             .filter(d => d.count > 0)
             .map((d, index) => {
@@ -138,8 +192,8 @@ export const GenerateCodesModal = ({
                 </h4>
                 <ol className={styles['order-list']}>
                   {
-                    generateSequence(d.count).map(v => {
-                      return <li className={styles['order-list-item']}>
+                    generateSequence(d.count).map((v, index) => {
+                      return <li className={styles['order-list-item']} key={`sequence_${index}`}>
                         {
                           generateUUID()
                             .split('-')
@@ -151,26 +205,95 @@ export const GenerateCodesModal = ({
                     })
                   }
                 </ol>
-
               </div>
             })
         }
+          */
+        }
+        {
+          (codes.codeSellId !== 0 &&
+            codes.annualCodes.length > 0
+          ) &&
+          < div
+            className={styles['codes-section']}
+          >
+            <h4 className={styles['subtitle']}>
+              {
+                generateTitleByDurationType('A')
+              }
+            </h4>
+            <ol className={styles['order-list']}>
+              {
+                codes.annualCodes.map((code, index) => {
+                  return <li className={styles['order-list-item']} key={`sequence_${index}`}>
+                    {code.toUpperCase()}
+                  </li>
+                })
+              }
+            </ol>
+          </div>
+        }
+        {
+          (codes.codeSellId !== 0 &&
+            codes.cuatrimestralCodes.length > 0
+          ) &&
+          < div
+            className={styles['codes-section']}
+          >
+            <h4 className={styles['subtitle']}>
+              {
+                generateTitleByDurationType('C')
+              }
+            </h4>
+            <ol className={styles['order-list']}>
+              {
+                codes.cuatrimestralCodes.map((code, index) => {
+                  return <li className={styles['order-list-item']} key={`sequence_${index}`}>
+                    {code.toUpperCase()}
+                  </li>
+                })
+              }
+            </ol>
+          </div>
+        }
+        {
+          (codes.codeSellId !== 0 &&
+            codes.mensualCodes.length > 0
+          ) &&
+          < div
+            className={styles['codes-section']}
+          >
+            <h4 className={styles['subtitle']}>
+              {
+                generateTitleByDurationType('M')
+              }
+            </h4>
+            <ol className={styles['order-list']}>
+              {
+                codes.mensualCodes.map((code, index) => {
+                  return <li className={styles['order-list-item']} key={`sequence_${index}`}>
+                    {code.toUpperCase()}
+                  </li>
+                })
+              }
+            </ol>
+          </div>
+        }
       </div>
-    </div>
+    </div >
     <div className={styles['buttons-container']}>
       <button
-        className={`${styles['button']} ${styles['button--back']}`}
+        className={`${styles['button']}`}
         type="button"
-        onClick={() => setState('sell')}
+        onClick={() => {
+          let annuals = codes.annualCodes.length > 0 ? `Anuales\n${codes.annualCodes.join('\n')}\n` : '';
+          let cuatrimestrals = codes.cuatrimestralCodes.length > 0 ? `Cuatrimestrales\n${codes.cuatrimestralCodes.join('\n')}\n` : '';
+          let mensuals = codes.mensualCodes.length > 0 ? `Mensuales\n${codes.mensualCodes.join('\n')}` : '';
+          const text = `${annuals}${cuatrimestrals}${mensuals}`;
+          navigator.clipboard.writeText(text);
+        }}
       >
-        Atrás
-      </button>
-      <button
-        className={styles['button']}
-        type="button"
-        onClick={() => setState('codes')}
-      >
-        Aceptar
+        Copiar
       </button>
     </div>
   </>
@@ -210,7 +333,7 @@ interface CodeSellDetailProps {
 
 const CodeSellDetail = ({ data, setData }: CodeSellDetailProps) => {
 
-  const TYPE_VALUES: Duration[] = ['m', 'c', 'a'];
+  const TYPE_VALUES: Duration[] = ['M', 'C', 'A'];
 
   const changeDetails = (type: Duration, field: 'amount' | 'count', value: any) => {
     const newDetails = [...data.details.filter(d => d.duration_type !== type)];
@@ -223,7 +346,6 @@ const CodeSellDetail = ({ data, setData }: CodeSellDetailProps) => {
       ...data,
       details: newDetails
     }
-    console.log({ newData });
     setData(newData);
   }
 
@@ -231,7 +353,7 @@ const CodeSellDetail = ({ data, setData }: CodeSellDetailProps) => {
     {
       TYPE_VALUES.map(type => {
         return <div className={styles['access-detail']} key={`access-detail-${type}`}>
-          <p className={styles['access-title']}>Accesos {type === 'm' ? 'mensuales' : type === 'c' ? 'cuatrimestrales' : 'anuales'}</p>
+          <p className={styles['access-title']}>Accesos {type === 'M' ? 'mensuales' : type === 'C' ? 'cuatrimestrales' : 'anuales'}</p>
           <div className={styles['access-form']}>
             <p className={styles['access-property-label']}>Cantidad</p>
             <input
@@ -262,14 +384,6 @@ const CodeSellDetail = ({ data, setData }: CodeSellDetailProps) => {
       })
     }
   </div>
-}
-
-const getCurrentCodes = () => {
-  try {
-
-  } catch (error) {
-
-  }
 }
 
 const generateUUID = () => {

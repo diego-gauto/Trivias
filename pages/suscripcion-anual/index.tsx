@@ -11,7 +11,7 @@ type Repo = {
 export const getServerSideProps = async ({ req, res }: any) => {
   // const result = await fetch("https://gonvar.inowu.dev/" + "courses/getCourses");
   const html = renderToString(
-    <LandingSuscription price={'$1,599 MXN/anual'} type={'anual'} />,
+    <LandingSuscription price={'$5,697 MXN/anual'} type={'anual'} />,
   );
   res.setHeader(
     'Cache-Control',
@@ -26,7 +26,7 @@ export const getServerSideProps = async ({ req, res }: any) => {
 const termsConditions = ({
   anual,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const price = '$3,497 MXN/anual';
+  const price = '$5,697 MXN/anual';
   const type = 'anual';
   return (
     <MainContain

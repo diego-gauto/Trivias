@@ -458,6 +458,20 @@ export const updateUserRoleApi = async (user: any) => {
       return error;
     });
 };
+
+// admin-distributors
+export const createDistributorUser = async (user: any) => {
+  return axios
+    .put('https://gonvar.inowu.dev/' + 'admin/update-role-user', user)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
+};
+
 export const getLandingReviewApi = async () => {
   return axios
     .get('https://gonvar.inowu.dev/' + 'landing/getLandingReview')
@@ -721,3 +735,49 @@ export const postGenericQueryResponse = async (query: string) => {
     body,
   );
 };
+// TODO: Esto esta fallando, ver que sucede
+export const getAllAdminDistributors = async () => {
+  return axios.get('https://gonvar.inowu.dev/' + 'admin/admin-distributors');
+}
+
+// TODO: al parecer la ruta "https://gonvar.inowu.dev/admin/" tiene un problema
+// ya que cualquier parametro que mandes en un get lo toma como una ruta diferente
+// a la que estas pidiendo, como si siempre se hiciera referencia a la ruta '/admin:userId'
+export const getAAdminDistributor = async (distributor_id: number) => {
+  return axios.get('https://gonvar.inowu.dev/' + 'admin/admin-distributors/' + distributor_id);
+}
+
+export const getCodeSells = async () => {
+  return axios.get('https://gonvar.inowu.dev/' + 'admin/code-sells');
+}
+
+interface InsertAdminDistributorBodyRequest {
+  user_id: number;
+  view: boolean;
+  create: boolean;
+  edit: boolean;
+  remove: boolean;
+}
+
+export const insertAdminDistributor = async (body: InsertAdminDistributorBodyRequest) => {
+  // admin-distributors
+  return axios.post('https://gonvar.inowu.dev/' + 'admin/admin-distributors', body);
+}
+
+type DurationType = 'M' | 'C' | 'A';
+
+interface CodeSellDetail {
+  duration_type: DurationType,
+  count: number,
+  amount: number,
+}
+
+interface CreateCodeSellRequest {
+  distributor_id: number,
+  admin_id: number,
+  details: CodeSellDetail[]
+}
+
+export const createCodes = async (body: CreateCodeSellRequest) => {
+  return axios.post('https://gonvar.inowu.dev/' + 'admin/code-sells', body);
+}

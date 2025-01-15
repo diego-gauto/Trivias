@@ -34,6 +34,11 @@ const links: IGroup[] = [
         v: 3,
         selected: false,
       },
+      {
+        price: 759,
+        v: 4,
+        selected: false,
+      }
     ],
   },
   {
@@ -44,6 +49,11 @@ const links: IGroup[] = [
       {
         price: 1599,
         v: 3,
+        selected: false,
+      },
+      {
+        price: 2599,
+        v: 4,
         selected: false,
       },
     ],
@@ -61,6 +71,11 @@ const links: IGroup[] = [
       {
         price: 3497,
         v: 3,
+        selected: false,
+      },
+      {
+        price: 5697,
+        v: 4,
         selected: false,
       },
     ],

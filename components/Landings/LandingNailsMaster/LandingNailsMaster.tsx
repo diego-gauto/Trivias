@@ -162,7 +162,7 @@ const LandingNailsMaster = () => {
     window.open(url, '_blank');
   };
 
-  useEffect(() => {}, [setver]);
+  useEffect(() => { }, [setver]);
 
   return (
     <SuscriptionContain>
@@ -210,7 +210,7 @@ const LandingNailsMaster = () => {
           onClick={() => handleRedirection()}
         >
           Comienza ahora <br />
-          por $1,599.00 MXN
+          por $2,599.00 MXN
         </button>
       </div>
 
@@ -685,7 +685,7 @@ const LandingNailsMaster = () => {
               <p>
                 Revista Gonvar: <b>10 diseños increibles</b>{' '}
                 {responsive850 ? <br /> : ' |'}
-                <b className='p-pink'>Costo real: $649.00 MXN</b>
+                <b className='p-pink'>Costo real: $749.00 MXN</b>
               </p>
             </div>
             <div className='course-detail'>
@@ -693,7 +693,7 @@ const LandingNailsMaster = () => {
               <p>
                 Manual <b>Obtén tus primeros clientes</b>{' '}
                 {responsive850 ? <br /> : ' |'}
-                <b className='p-pink'>Costo real: $649.00 MXN</b>
+                <b className='p-pink'>Costo real: $749.00 MXN</b>
               </p>
             </div>
             <div className='course-detail'>
@@ -701,7 +701,7 @@ const LandingNailsMaster = () => {
               <p>
                 Manual <b>Los secretos del gel semipermanente</b>{' '}
                 {responsive850 ? <br /> : ' |'}
-                <b className='p-pink'>Costo real: $649.00 MXN</b>
+                <b className='p-pink'>Costo real: $749.00 MXN</b>
               </p>
             </div>
             <div className='course-detail'>
@@ -735,7 +735,7 @@ const LandingNailsMaster = () => {
               <h2 className='p-pink h1'>
                 <b>Precio de Lanzamiento {!responsive850 && 'con beca'}</b>
               </h2>
-              <h2 className='green h1'>Sólo $1,599.00 MXN</h2>
+              <h2 className='green h1'>Sólo $2,599.00 MXN</h2>
               <p className=''>Válido para las primeras 500 personas</p>
               <h2>
                 <b>Quedan 123 lugares</b>
@@ -1290,7 +1290,7 @@ const LandingNailsMaster = () => {
                   </i>
                   <br />
                   Si prefieres pagar en transferencia, depósito en Oxxo o
-                  Paypal, está disponible la anualidad, $1599 por todo un año de
+                  Paypal, está disponible la anualidad, $2599 por todo un año de
                   aprendizaje y aventura.{' '}
                   <i>
                     (Pagando anualidad no se realiza ningún cobro adicional por

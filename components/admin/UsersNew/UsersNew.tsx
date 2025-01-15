@@ -11,8 +11,9 @@ import { UpdateFinalDateModal } from './UpdateFinalDateModal';
 import { RemoveSubscriptionModal } from './RemoveSubscriptionModal';
 import { generateUserIdQuery, generateUserRoleAccessQuery, generateUserRolesLevelQuery } from '../../GenericQueries/UserRoles/UserRolesQueries';
 import { Role, UserLevelValue } from '../../GenericQueries/UserRoles/UserRolesInterfaces';
+import { ShowCodeSellDetailModal } from './ShowCodeSellDetailModal';
 
-type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards';
+type MainMenuOptionId = 'Subscription' | 'Payments' | 'Courses' | 'Rewards' | 'Distributors';
 type RewardsCenterMenuOptionId = 'Rewards' | 'Benefits' | 'Certificates';
 
 const MONTHS_SPANISH = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
@@ -95,6 +96,48 @@ interface IUserQuizz {
   isPending: boolean,
 }
 
+interface IAdminDistributor {
+  admin_distributor_id: number
+  user_id: number
+  username: string
+  email: string
+  phone_number: string
+}
+
+interface IAdminUser {
+  admin_user_id: number
+  user_id: number
+  username: string
+  email: string
+  phone_number: string
+}
+
+export interface ICodeSell {
+  distributor_id: number
+  admin_id: number
+  code_sell_id: number
+  created_sell_at: number
+  details: ICodeSellDetail[]
+}
+
+export interface ICodeSellDetail {
+  code_sell_id: number
+  code_sell_detail_id: number
+  amount: number
+  count: number
+  duration_type: 'M' | 'C' | 'A'
+  codes: ICode[]
+}
+
+export interface ICode {
+  code: string
+  sell_at: number | null
+  user_id: number | null
+  code_sell_detail_id: number
+  email: string | null
+  username: string | null
+}
+
 type SubscriptionState = 'Activo' | 'Inactiva' | 'Cancelada' | 'En prueba' | 'Sin suscripción';
 
 type PaymentMethod = 'Tarjeta (Conekta)' | 'Paypal' | 'Oxxo (Conekta)' | 'Transferencia (Conekta)' | 'Stripe' | 'Por administración';
@@ -135,7 +178,14 @@ const MAIN_SECTIONS: IMainMenuOption[] = [
   {
     label: 'Centro de recompensas',
     id: 'Rewards'
-  }];
+  },
+  /*
+  {
+    label: 'Distribución',
+    id: 'Distributors'
+  }
+  */
+];
 
 const REWARDS_SECTIONS: IRewardsCenterMenuOption[] = [{
   label: 'Recompensas',
@@ -160,6 +210,13 @@ const getPrettyFormatedDate = (paidAt: string | number) => {
   const year = date.getFullYear();
   const formatedDate = `${MONTHS_SPANISH[monthIndex]} ${day}, ${year}`;
   return formatedDate;
+}
+
+const getPriceInMxnCurrency = (amount: number) => {
+  return amount.toLocaleString('es-MX', {
+    style: "currency",
+    currency: "MXN"
+  });
 }
 
 const TOLERANCE_DAYS_COUNT = 10;
@@ -228,6 +285,12 @@ const UsersDetails = () => {
   const [userQuizzes, setUserQuizzes] = useState<IUserQuizz[]>([]);
   const [filteredUserQuizzes, setFilteredUserQuizzes] = useState<IUserQuizz[]>([]);
 
+  const [adminDistributors, setAdminDistributors] = useState<IAdminDistributor[]>([]);
+  const [adminUsers, setAdminUsers] = useState<IAdminUser[]>([]);
+  const [distributorOption, setDistributorOption] = useState<'sells' | 'codes'>('sells');
+  const [codeSells, setCodeSells] = useState<ICodeSell[]>([]);
+  const [showDetailCodeModal, setShowDetailCodeModal] = useState<boolean>(false);
+
   useEffect(() => {
     const selectedUserId = localStorage.getItem('selected-user-id');
     if (selectedUserId !== null) {
@@ -285,6 +348,14 @@ const UsersDetails = () => {
   useEffect(() => {
     getUserData();
   }, []);
+
+  useEffect(() => {
+    if (userId !== 0) {
+      getDistributorsCodes();
+      getAllDistributors();
+      getAllAdmins();
+    }
+  }, [userId])
 
   const getUserMainProperties = async () => {
     const userMainPropertiesQuery = `select concat(name, ' ', last_name) as username, email, phone_number, photo, score, created_at
@@ -590,6 +661,135 @@ const UsersDetails = () => {
       });
 
       setUserQuizzes(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getDistributorsCodes = async () => {
+    const getDistributorId = `select distributor_id from distributors where user_id = ${userId};`;
+    try {
+      const response1 = await getGenericQueryResponse(getDistributorId);
+      const distributorId = response1.data.data[0]['distributor_id'];
+
+      interface ICodeSellCode {
+        code_sell_id: number,
+        admin_id: number,
+        distributor_id: number,
+        created_sell_at: string,
+        code_sell_detail_id: number,
+        duration_type: 'M' | 'C' | 'A',
+        count: number,
+        amount: number,
+        code_id: number,
+        user_id: number | null,
+        code: string,
+        sell_at: string | null
+        username: string | null
+        email: string | null
+        phone_number: string | null
+      }
+
+      /*
+      const getCodeSellsQuery = `select cs.code_sell_id, cs.admin_id, cs.distributor_id, unix_timestamp(created_at) as created_sell_at, 
+            csd.code_sell_detail_id, duration_type, \`count\`, amount, code_id, user_id, code, unix_timestamp(sell_at) as sell_at 
+            from code_sells as cs
+            inner join code_sell_details as csd on cs.code_sell_id = csd.code_sell_id
+            inner join codes as c on c.code_sell_detail_id = csd.code_sell_detail_id
+            where cs.distributor_id = ${distributorId};`;
+      */
+
+      /*
+      select cs.code_sell_id, cs.admin_id, cs.distributor_id, unix_timestamp(created_at) as created_sell_at, 
+      csd.code_sell_detail_id, duration_type, `count`, amount, code_id, user_id, concat(u.name, ' ', u.last_name) as username, u.email, u.phone_number,code, unix_timestamp(sell_at) as sell_at 
+      from code_sells as cs
+      inner join code_sell_details as csd on cs.code_sell_id = csd.code_sell_id
+      inner join codes as c on c.code_sell_detail_id = csd.code_sell_detail_id
+      inner join users as u on u.id = c.user_id
+      */
+      const getCodeSellsQuery = `select cs.code_sell_id, cs.admin_id, cs.distributor_id, cs.created_at as created_sell_at, 
+        csd.code_sell_detail_id, duration_type, \`count\`, amount, code_id, user_id, concat(u.name, ' ', u.last_name) as username, u.email, u.phone_number,code, sell_at 
+        from code_sells as cs
+        inner join code_sell_details as csd on cs.code_sell_id = csd.code_sell_id
+        inner join codes as c on c.code_sell_detail_id = csd.code_sell_detail_id
+        left join users as u on c.user_id = u.id
+        where cs.distributor_id = ${distributorId}
+        order by cs.created_at desc;`;
+
+      const getCodeSellsResponse = await getGenericQueryResponse(getCodeSellsQuery);
+      const rows = getCodeSellsResponse.data.data as ICodeSellCode[];
+
+      console.log({ rows });
+
+      const codeSellIds = new Set([...rows.map(c => c.code_sell_id)]);
+      const result: ICodeSell[] = [];
+      for (const codeSellId of codeSellIds) {
+        const codesX = rows.filter(c => c.code_sell_id === codeSellId);
+        const codeSellDetailIds = new Set([...codesX.map(c => c.code_sell_detail_id)]);
+        let codeSellDetailsArray = [];
+        for (const codeSellDetailId of codeSellDetailIds) {
+          const codes = codesX.filter(c => c.code_sell_detail_id === codeSellDetailId);
+
+          const readyCodes = codes.map(c => {
+            const { code, sell_at, user_id, code_sell_detail_id, email, username } = c;
+            console.log({ sell_at });
+            return {
+              code,
+              sell_at: sell_at !== null ? parseInt(sell_at) : null,
+              user_id,
+              code_sell_detail_id,
+              username,
+              email
+            }
+          });
+          const { code_sell_detail_id, code_sell_id, amount, count, duration_type } = codes[0]!;
+          codeSellDetailsArray.push({
+            code_sell_id,
+            code_sell_detail_id,
+            amount,
+            count,
+            duration_type,
+            codes: readyCodes
+          });
+
+        }
+        const { created_sell_at, distributor_id, admin_id, code_sell_id } = codesX[0]!;
+        result.push({
+          distributor_id,
+          admin_id,
+          code_sell_id,
+          created_sell_at: parseInt(created_sell_at),
+          details: codeSellDetailsArray
+        });
+      }
+      setCodeSells(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  const getAllDistributors = async () => {
+    try {
+      const getDistributorsQuery = `SELECT ad.admin_distributor_id, ad.user_id, concat(u.name, ' ', u.last_name) as username, u.email, u.phone_number
+        FROM admin_distributors AS ad 
+        INNER JOIN users AS u ON u.id = ad.user_id;`;
+      const response = await getGenericQueryResponse(getDistributorsQuery);
+      const result = response.data.data as IAdminDistributor[];
+      setAdminDistributors(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getAllAdmins = async () => {
+    try {
+      const getDistributorsQuery = `SELECT au.id as admin_user_id, au.user_id, concat(u.name, ' ', u.last_name) as username, u.email, u.phone_number
+        FROM admin_users AS au
+        INNER JOIN users AS u ON u.id = au.user_id;`;
+      const response = await getGenericQueryResponse(getDistributorsQuery);
+      const result = response.data.data as IAdminUser[];
+      setAdminUsers(result);
     } catch (error) {
       console.error(error);
     }
@@ -981,12 +1181,27 @@ const UsersDetails = () => {
     );
   }
 
+  const generateCodeSellDetailModalContent = () => {
+    return <ShowCodeSellDetailModal />;
+  }
+
   const haveSomeHomework = (courseId: number): boolean => {
     return userCoursesHomeworkHistory.some((uh) => uh.courseId === courseId);
   }
 
   const haveSomeQuizz = (courseId: number): boolean => {
     return courseQuizzes.some((cq) => cq.courseId === courseId);
+  }
+
+  const generateMainOptions = () => {
+    const distributorsElement: IMainMenuOption = {
+      label: 'Distribución',
+      id: 'Distributors'
+    }
+    return (adminDistributors.length > 0 &&
+      adminDistributors.filter(ad => ad.user_id === userId).length === 1)
+      ? [...MAIN_SECTIONS, distributorsElement]
+      : MAIN_SECTIONS;
   }
 
   return (
@@ -1038,7 +1253,8 @@ const UsersDetails = () => {
         </div>
         <div className="sections-container">
           {
-            MAIN_SECTIONS.map(({ id, label }) => {
+            // TODO
+            generateMainOptions().map(({ id, label }) => {
               const extraCSSClass = selectedMainMenuOption === id ? 'section-title--active' : '';
               return (
                 <div
@@ -1699,6 +1915,156 @@ const UsersDetails = () => {
             }
           </div>
         }
+        {
+          (selectedMainMenuOption === 'Distributors') &&
+          <div className="content-section" key={`content-section_courses_distributors`}>
+            <div className='distributor-options-container'>
+              <div
+                className={`distributor-option ${distributorOption !== 'sells' ? '' : 'distributor-option-active'}`}
+                onClick={(e) => {
+                  setDistributorOption('sells');
+                }}
+              >
+                <span className='distributor-option-text'>Compras</span>
+              </div>
+              <div
+                className={`distributor-option ${distributorOption !== 'codes' ? '' : 'distributor-option-active'}`}
+                onClick={(e) => {
+                  setDistributorOption('codes');
+                }}
+              >
+                <span className='distributor-option-text'>Códigos</span>
+              </div>
+            </div>
+            {
+              distributorOption === 'sells' &&
+              <div className='distributor-code-sells-container'>
+                {
+                  codeSells.length > 0 &&
+                  codeSells.map((cs, index) => {
+
+                    const admin = adminUsers.find(au => au.admin_user_id === cs.admin_id);
+
+                    return (<div
+                      className='distributor-code-sell'
+                      key={`sell_element_${index}`}
+                    >
+                      <div>
+                        <strong>Compra otorgada por</strong>
+                        <div>
+                          {
+                            admin?.username || ''
+                          }
+                        </div>
+                        <div>
+                          {
+                            admin?.email || ''
+                          }
+                        </div>
+                      </div>
+                      <div>
+                        <strong>Fecha de venta</strong>
+                        <div>{getPrettyFormatedDate(cs.created_sell_at)}</div>
+                      </div>
+                      <div>
+                        <strong>Detalles</strong>
+                        <ul style={{
+                          listStyle: 'none',
+                          paddingLeft: '0'
+                        }}>
+                          {
+                            cs.details.length > 0 &&
+                            cs.details.map((d, index) => {
+                              const { duration_type, amount, count } = d;
+                              return <li key={`detail_${index}`}>
+                                <div>{duration_type === 'M' ? 'Mensuales' : duration_type === 'C' ? 'Cuatrimestrales' : 'Anuales'}</div>
+                                <span>{count} a {getPriceInMxnCurrency(amount)} {count === 1 ? '' : 'cada una'}</span>
+                              </li>
+                            })
+                          }
+                        </ul>
+                        <strong>Total</strong>
+                        <div>
+                          {
+                            getPriceInMxnCurrency(cs.details.map(d => d.amount * d.count).reduce((pv, cv) => pv + cv, 0))
+                          }
+                        </div>
+                      </div>
+                    </div>)
+                  })
+                }
+              </div>
+            }
+            {
+              distributorOption === 'codes' &&
+              <div className="table-content">
+                <table className="gonvar-table">
+                  <thead className="gonvar-table__thead">
+                    <tr className="gonvar-table__row">
+                      <th className="gonvar-table__th">Id de código</th>
+                      <th className="gonvar-table__th">Compra</th>
+                      <th className="gonvar-table__th">Membresia</th>
+                      <th className="gonvar-table__th">Otorgado por</th>
+                      <th className="gonvar-table__th">Asignación</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      codeSells.length > 0 &&
+                      codeSells.map(cs => {
+                        const { created_sell_at, admin_id, details } = cs;
+                        return details.map(d => {
+                          const { codes, duration_type, amount } = d;
+                          return codes.map((c, index) => {
+                            const { code, user_id, sell_at, username, email } = c;
+
+                            const generateLastColumValue = (sell_at: number, username: string, email: string) => {
+                              return <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '2px'
+                              }}>
+                                <div>
+                                  {getPrettyFormatedDate(sell_at)}
+                                </div>
+                                <div>
+                                  por {username}
+                                </div>
+                                <div>
+                                  {email.trim().toLowerCase()}
+                                </div>
+                              </div>
+                            }
+
+                            return <tr key={`code-sell_${index}`}>
+                              <td className="gonvar-table__data">{code}</td>
+                              <td className="gonvar-table__data">{getPrettyFormatedDate(created_sell_at)}</td>
+                              <td className="gonvar-table__data">
+                                {
+                                  duration_type === 'M' ? 'Mensual' : duration_type === 'C' ? 'Cuatrimestral' : 'Anual'
+                                }
+                              </td>
+                              <td className="gonvar-table__data">
+                                {
+                                  admin_id === null ? 'Pendiente' : adminUsers.find(au => au.admin_user_id === admin_id)?.email
+                                }
+                              </td>
+                              <td className="gonvar-table__data">
+                                {
+                                  sell_at === null ? 'Pendiente' : generateLastColumValue(sell_at, username || '', email || '')
+                                }
+                              </td>
+                            </tr>
+                          })
+                        })
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
+        }
       </div>
       {
         showChangeFinalDateModal &&
@@ -1740,8 +2106,20 @@ const UsersDetails = () => {
           child={generateModalContent('active-subscription')}
         />
       }
+      {
+        // TODO
+        showDetailCodeModal &&
+        <Modal
+          show={showDetailCodeModal}
+          onClose={() => {
+            setShowDetailCodeModal(false);
+          }}
+          child={generateCodeSellDetailModalContent()}
+        />
+      }
     </MainContainer>
   )
 }
 
 export default UsersDetails;
+

@@ -1,0 +1,98 @@
+
+.distributors-grid {
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.distributors-scroll {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow-y: scroll;
+  max-height: 500px;
+  padding: 16px;
+  gap: 12px;
+}
+
+.distributor-card-item {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.distributor-card-item:hover {
+  background-color: rgb(245, 220, 255);
+}
+
+.distributor-property-container {
+  text-align: center;
+}
+
+.distributor-header-property {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.distributor-property-value {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.sections-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.filters-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid black;
+}
+
+.filter-property {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-property-header {
+  font-weight: 500;
+  font-family: Montserrat;
+  font-size: 18px;
+}
+
+.filter-property-input {
+  font-family: Montserrat;
+  font-size: 16px;
+}
+
+@media screen and (min-width: 759px) {
+  .sections-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filters-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+/*
+X-Small	None	<576px
+Small	sm	≥576px
+Medium	md	≥768px
+Large	lg	≥992px
+Extra large	xl	≥1200px
+Extra extra large	xxl	≥1400px
+*/

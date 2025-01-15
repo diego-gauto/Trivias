@@ -87,27 +87,49 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       const product = localStorage.getItem('product');
       localStorage.removeItem('product');
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=${product || ''}`;
-    } else if (localStorage.getItem('month') === 'true') {
-      localStorage.removeItem('month')
-      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
-    } else if (localStorage.getItem('month_1') === 'true') {
-      localStorage.removeItem('month_1')
+      /*
+
+        type FrecuencyValues = 'cuatri' | 'month' | 'anual';
+
+        cuatrimestre
+        cuatrimestre_v1_1
+
+        mensual
+        mensual_v1_1
+        mensual_v1_2
+        mensual_v1_3
+
+        anual
+        anual_v1_1
+        anual_v1_2
+      */
+    } else if (localStorage.getItem('mensual') === 'true') {
+      localStorage.removeItem('mensual')
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=1`;
-    } else if (localStorage.getItem('month_2') === 'true') {
-      localStorage.removeItem('month_2')
+    } else if (localStorage.getItem('mensual_v1_1') === 'true') {
+      localStorage.removeItem('mensual_v1_1')
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=2`;
+    } else if (localStorage.getItem('mensual_v1_2') === 'true') {
+      localStorage.removeItem('mensual_v1_2')
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=3`;
+    } else if (localStorage.getItem('mensual_v1_3') === 'true') {
+      localStorage.removeItem('mensual_v1_3')
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=month&v=4`;
     } else if (localStorage.getItem('anual') === 'true') {
       localStorage.removeItem('anual');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=2`;
+    } else if (localStorage.getItem('anual_v1_1') === 'true') {
+      localStorage.removeItem('anual_v1_1');
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=3`;
-    } else if (localStorage.getItem('anual_1') === 'true') {
-      localStorage.removeItem('anual_1');
-      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=1`;
-    } else if (
-      localStorage.getItem('cuatri') === 'true') {
-      localStorage.removeItem('cuatri');
-      // window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
-      localStorage.setItem('window-location', JSON.stringify(window.location));
-      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatrimestral&v=3`;
+    } else if (localStorage.getItem('anual_v1_2') === 'true') {
+      localStorage.removeItem('anual_v1_2');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=anual&v=4`;
+    } else if (localStorage.getItem('cuatrimestre') === 'true') {
+      localStorage.removeItem('cuatrimestre');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatri&v=3`;
+    } else if (localStorage.getItem('cuatrimestre_v1_1') === 'true') {
+      localStorage.removeItem('cuatrimestre_v1_1');
+      window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=subscription&frequency=cuatri&v=4`;
     } else if (localStorage.getItem('nailMaster') === 'true') {
       localStorage.removeItem('nailMaster');
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=30`;

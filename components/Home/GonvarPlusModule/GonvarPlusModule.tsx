@@ -61,7 +61,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
       } else {
         router.push({
           pathname: PURCHASE_PATH,
-          query: { type: 'subscription', frequency: 'cuatrimestral', v: '3' },
+          query: { type: 'subscription', frequency: 'cuatrimestral', v: '4' },
         });
       }
     } else {
@@ -98,7 +98,7 @@ export const GonvarPlusModule = ({ loggedIn, user, courses }: Props) => {
             </p>
           </div>
           <h3 className='price'>
-            Sólo $1599 <span>MXN el cuatrimestre</span>
+            Sólo $2599 <span>MXN el cuatrimestre</span>
           </h3>
           <h3 className='price'><span>No incluye material</span></h3>
           {responsive1140 && (
