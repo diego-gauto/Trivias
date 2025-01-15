@@ -210,7 +210,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               pathname: PURCHASE_PATH,
               query: {
                 type: 'subscription',
-                frequency: 'cuatrimestral',
+                frequency: 'cuatri',
                 v: '4',
               },
             });
@@ -266,7 +266,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               pathname: PURCHASE_PATH,
               query: {
                 type: 'subscription',
-                frequency: 'cuatrimestral',
+                frequency: 'cuatri',
                 v: '4',
               },
             });
