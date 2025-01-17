@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoChevronDown } from 'react-icons/io5';
 import { updateUser, updateUserOfferReference } from '../api/users';
+import { redirectInfoToLesson } from './Functions';
 
 const ThankYouSubscriptionMonth = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -37,7 +38,19 @@ const ThankYouSubscriptionMonth = () => {
       userId: parseInt(userData.user_id),
     };
     updateUserOfferReference(body).then((res) => {
-      window.location.href = '/preview';
+      if (redirectInfoToLesson() === null) {
+        window.location.href = '/preview';
+      } else {
+        const lessonRedirectInfo = redirectInfoToLesson() || '';
+        const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
+          course_id: number;
+          season_id: number;
+          lesson_id: number;
+        };
+        localStorage.removeItem('lesson-redirect-info');
+        const url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+        window.location.href = `${window.location.origin}${url}`;
+      }
     });
   };
 

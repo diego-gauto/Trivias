@@ -9,6 +9,7 @@ import { SOCIALS_ARRAY } from '../../constants/arrays';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IoChevronDown } from 'react-icons/io5';
+import { redirectInfoToLesson } from './Functions';
 
 const ThankYouSubscriptionAnual = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -37,7 +38,19 @@ const ThankYouSubscriptionAnual = () => {
       userId: parseInt(userData.user_id),
     };
     updateUserOfferReference(body).then((res) => {
-      window.location.href = '/preview';
+      if (redirectInfoToLesson() === null) {
+        window.location.href = '/preview';
+      } else {
+        const lessonRedirectInfo = redirectInfoToLesson() || '';
+        const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
+          course_id: number;
+          season_id: number;
+          lesson_id: number;
+        };
+        localStorage.removeItem('lesson-redirect-info');
+        const url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+        window.location.href = `${window.location.origin}${url}`;
+      }
     });
   };
 
@@ -85,7 +98,11 @@ const ThankYouSubscriptionAnual = () => {
         </div>
         <div className='buttons'>
           <button className='top' disabled={!option} type='submit'>
-            Ir a tus cursos
+            {
+              redirectInfoToLesson() === null ?
+                'Ir a tus cursos'
+                : 'Ver tu curso pendiente'
+            }
           </button>
         </div>
       </form>

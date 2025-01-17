@@ -32,11 +32,7 @@ export const CourseProvider = ({ children }: any) => {
       return true;
     }
 
-    if (haveRecurrentSubscription && final_date < today - (TOLERANCE_DAYS * 24 * 60 * 60)) {
-      return false;
-    }
-
-    return final_date > today;
+    return final_date < today - (TOLERANCE_DAYS * 24 * 60 * 60);
   }
 
   const prepareLessonInfoToRedirect = () => {
@@ -70,7 +66,8 @@ export const CourseProvider = ({ children }: any) => {
         }
         if (user.role !== 'superAdmin') {
           if (type === 'Mensual' && !canShowLesson()) {
-            router.push({ pathname: '/preview' });
+            prepareLessonInfoToRedirect();
+            router.push({ pathname: '/planes' });
           }
           /*
           if (
