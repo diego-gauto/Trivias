@@ -288,17 +288,6 @@ const NavBar = () => {
         const withoutTolerance = final_date < today;
         const isSuperAdmin = role === 'superAdmin';
 
-        // TODO: El usuario tuvo que haber sido un usuario activo
-
-        /*
-        - Usuario tiene que tener un final_date menor que hoy (En cualquier caso)
-
-        -- El usuario no puede ser un superAdmin
-        -- La ruta en la que se encuentra el usuario no puede ser la de reintentar-pago
-        -- La cantidad de días donde al usuario se le va a mostrar este pop up no puede pasar los 90 dias
-        -- El precio que venia pagando el usuario no puede ser null
-        */
-
         console.log({
           final_date, level, role, method, type, diff
         });

@@ -51,6 +51,7 @@ export interface IUserInfo {
   offer_reference: string;
   is_canceled: number;
   admin_update_id: number | null;
+  femsa_customer_id: string | null;
 }
 
 export interface IProgress {
@@ -77,6 +78,21 @@ export interface IUserInfoResult extends IUserInfo {
   user_progress: IProgress[];
   user_history: IHistory[];
   user_certificates: any[];
-  roles: any[];
+  roles: Role[];
   photoURL?: string;
+}
+
+export interface Role {
+  id: number;
+  role: string;
+  source_table: string;
+  create?: string;
+  edit?: string;
+  delete?: string;
+  view: string;
+  user_id: number;
+  courses?: string;
+  request?: number;
+  report?: number;
+  download?: number;
 }
