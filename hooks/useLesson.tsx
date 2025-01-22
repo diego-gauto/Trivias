@@ -6,6 +6,7 @@ import { useAuth } from './useAuth';
 import { LESSON_PATH } from '../constants/paths';
 import { ICourseResponse, ILesson } from '../interfaces/ICourseNew';
 import { IUserInfoResult } from '../interfaces/IUser';
+import { getGenericQueryResponse } from '../components/api/admin';
 export const CourseContext = createContext<any>(null);
 
 export const useCourse = () => {
@@ -23,8 +24,7 @@ export const CourseProvider = ({ children }: any) => {
   let today = new Date().getTime() / 1000;
 
   const canShowLesson = () => {
-    const { final_date, method, level, role } = user;
-    const haveRecurrentSubscription = [1, 4, 7].includes(level) && method === 'conekta';
+    const { final_date, role } = user;
     const TOLERANCE_DAYS = 10;
     const isSuperAdmin = role === 'superAdmin';
 
@@ -32,7 +32,8 @@ export const CourseProvider = ({ children }: any) => {
       return true;
     }
 
-    return final_date < today - (TOLERANCE_DAYS * 24 * 60 * 60);
+    const canShowLesson = final_date > today - (TOLERANCE_DAYS * 24 * 60 * 60);;
+    return canShowLesson;
   }
 
   const prepareLessonInfoToRedirect = () => {

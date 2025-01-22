@@ -57,6 +57,7 @@ export const PurchaseNew2 = () => {
   const subscriptionType = type as 'subscription' | 'course';
   const context = useAuth();
   const user = context.user;
+  console.log({ user });
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>('card');
@@ -179,13 +180,14 @@ export const PurchaseNew2 = () => {
         }),
       );
       // Valores random de prueba
-      /*const pm = [{
+      const pm = [{
         "id": "src_gYwRtNpSjFqLmKtRw",
         "brand": "visa",
         "last4": "9999",
         "default": true
-      }];*/
-      setPaymentMethods(extractedProperties); // pm
+      }];
+      // setPaymentMethods(extractedProperties); // pm
+      setPaymentMethods(pm); // pm
     } catch (error) {
       console.log({ error });
     }
@@ -392,6 +394,37 @@ export const PurchaseNew2 = () => {
       console.log({ error });
     }
   };
+
+  const falsePay = async () => {
+    const final_date = getFinalDateByFrequency();
+    const today = Math.floor(new Date().getTime() / 1000);
+    const start_date = user.start_date === 0 ? today : user.start_date;
+    const plan_id = getPlanIdByFrecuency();
+
+    const membership = {
+      final_date,
+      method: 'conekta',
+      level: getUserLevel(),
+      payment_method: 'test_payment_method',
+      plan_id: plan_id,
+      plan_name: getPlanNameByFrecuency(subscriptionFrequency as FrecuencyValues),
+      start_date: start_date,
+      type: subscription.price,
+      userId: user.user_id,
+      is_canceled: false,
+    };
+    await updateMembership(membership);
+
+    let url = '/pagoexitoso';
+    if (subscriptionFrequency === 'month') {
+      url += 'mensualidad';
+    } else if (subscriptionFrequency === 'anual') {
+      url += 'anualidad';
+    } else if (subscriptionFrequency === 'cuatri') {
+      url += 'cuatrimestre';
+    }
+    window.location.href = url;
+  }
 
   const getDurationByFrecuency = (): 'month' | 'year' | 'cuatrimestral' => {
     if (subscriptionFrequency === 'month') {
@@ -803,6 +836,14 @@ export const PurchaseNew2 = () => {
                   }}
                 >
                   Confirmar compra
+                </button>
+                <button
+                  className={addPayment ? 'fade' : ''}
+                  onClick={(e) => {
+                    falsePay();
+                  }}
+                >
+                  Simular compra
                 </button>
               </>
             )}

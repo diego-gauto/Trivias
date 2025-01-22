@@ -21,10 +21,10 @@ import {
 } from './RoleEdit.styled';
 import {
   Admin,
-  AdminType,
   getGenericQueryResponse,
   updateAdminAccessApi,
 } from '../../../api/admin';
+import { AdminType } from './Constants';
 import { backendRoleEditMethod } from './Queries';
 
 type CheckBoxValues = {
@@ -178,6 +178,23 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         { active: false, task: 'Eliminar' },
       ],
     },
+    {
+      role: 'Subscripciones',
+      active: false,
+      name: 'subscriptions',
+      tasks: []
+    },
+    {
+      role: 'Active Memberships',
+      active: false,
+      name: 'active_memberships',
+      tasks: [
+        {
+          active: false,
+          task: 'Descargar'
+        }
+      ]
+    }
   ]);
   const [loading, setLoading] = useState(true);
   const [homeworksCourseIds, setHomeworksCourseIds] = useState<number[]>([]);
@@ -187,9 +204,13 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
   const [popUpForms, setPopUpForms] = useState<boolean>(false);
 
+
+
   useEffect(() => {
     const temp: AdminRole[] = [];
-    admin.adminTypes.forEach((element) => {
+    const adminTypesFull = [...admin.adminTypes];
+    console.log({ adminTypesFull });
+    adminTypesFull.forEach((element) => {
       const role = roles.find((role) => role.name === element.role);
       if (role === undefined) {
         return;
@@ -344,8 +365,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       roles: admin.adminTypes,
     };
 
-    console.log({ user });
-
     const queries = user.roles.map(role => {
       try {
         return backendRoleEditMethod(role);
@@ -357,7 +376,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     console.log({ queries });
     // anterior
     try {
-      await anterior(user);
+      await anterior(user as any);
     } catch (error) {
       console.error(error);
     }
@@ -490,7 +509,8 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
             <Info>Secciones a las que tiene acceso</Info>
             <SelectedRoleContain>
               {!loading &&
-                roles.map((role, indexR) => {
+                roles.map((role, indexR, roles) => {
+                  console.log({ roles });
                   return (
                     <div className='role-row' key={'role' + indexR}>
                       <RowContain>

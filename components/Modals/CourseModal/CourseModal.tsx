@@ -38,6 +38,7 @@ const CourseModal = (props: ICourseModal) => {
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const responsive990 = useMediaQuery({ query: '(max-width: 990px)' });
   const DEFAULT_PROFESSOR_IMAGE = '/images/teachers/iker.jpg';
   const router = useRouter();
@@ -121,6 +122,14 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
   }
+
+  const showLinkCopiedText = () => {
+    setIsLinkCopied(true);
+    setTimeout(() => {
+      setIsLinkCopied(false);
+    }, 5000);
+  }
+
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size='lg' centered>
@@ -377,6 +386,38 @@ const CourseModal = (props: ICourseModal) => {
               )}
               <div className='bottom'>
                 <p>{course.about}</p>
+                <button style={{
+                  display: 'flex',
+                  justifySelf: 'center',
+                  background: 'linear-gradient(135deg, #952ced 22%, #ca41d4 80%)',
+                  color: 'white',
+                  fontWeight: '500',
+                  borderRadius: '32px',
+                  padding: '8px 16px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  marginTop: '8px'
+                }}
+                  onClick={(e) => {
+                    showLinkCopiedText();
+                    const { origin } = window.location;
+                    const link = `${origin}/lesson?id=${course.id}&season=0&lesson=0`;
+                    // http://localhost:3000/lesson?id=37&season=0&lesson=0
+                    navigator.clipboard.writeText(link);
+                  }}
+                >
+                  Copiar enlace
+                </button>
+                <p style={{
+                  display: isLinkCopied ? 'flex' : 'none',
+                  justifySelf: 'center',
+                  color: 'black',
+                  fontWeight: '500',
+                  borderRadius: '32px',
+                  padding: '12px 12px',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}>¡Enlace copiado!</p>
               </div>
             </div>
           </CourseContain>
