@@ -30,6 +30,7 @@ import ModalMaterials from './Materials/ModalMaterials';
 import SelectModule4 from './Select/SelectModule';
 import { goToSuscription } from '../../../constants/redirects';
 import { useRouter } from 'next/router';
+import { FaRegCopy } from 'react-icons/fa';
 const gPlus = '/images/purchase/logo.png';
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
@@ -127,7 +128,7 @@ const CourseModal = (props: ICourseModal) => {
     setIsLinkCopied(true);
     setTimeout(() => {
       setIsLinkCopied(false);
-    }, 5000);
+    }, 10000);
   }
 
   return (
@@ -388,15 +389,15 @@ const CourseModal = (props: ICourseModal) => {
                 <p>{course.about}</p>
                 <button style={{
                   display: 'flex',
-                  justifySelf: 'center',
-                  background: 'linear-gradient(135deg, #952ced 22%, #ca41d4 80%)',
-                  color: 'white',
+                  justifySelf: 'flex-start',
+                  alignItems: 'center',
+                  color: '#3f1168',
                   fontWeight: '500',
                   borderRadius: '32px',
                   padding: '8px 16px',
                   border: 'none',
-                  cursor: 'pointer',
-                  marginTop: '8px'
+                  marginTop: '8px',
+                  background: 'transparent'
                 }}
                   onClick={(e) => {
                     showLinkCopiedText();
@@ -406,18 +407,17 @@ const CourseModal = (props: ICourseModal) => {
                     navigator.clipboard.writeText(link);
                   }}
                 >
-                  Copiar enlace
+                  <FaRegCopy />
+                  <div style={{
+                    paddingLeft: '8px'
+                  }}>
+                    {
+                      isLinkCopied ?
+                        '¡Enlace copiado!'
+                        : 'Compartir este curso'
+                    }
+                  </div>
                 </button>
-                <p style={{
-                  display: isLinkCopied ? 'flex' : 'none',
-                  justifySelf: 'center',
-                  color: 'black',
-                  fontWeight: '500',
-                  borderRadius: '32px',
-                  padding: '12px 12px',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}>¡Enlace copiado!</p>
               </div>
             </div>
           </CourseContain>
