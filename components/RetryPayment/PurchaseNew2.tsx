@@ -94,6 +94,35 @@ export const PurchaseNew2 = () => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
 
+  useEffect(() => {
+    const key = "lesson-redirect-info";
+
+    // Guardar la clave en el localStorage
+    // localStorage.setItem(key, "some_value");
+    // ->  Ya se llega al "/purshase" con esta ket seteada  <-
+
+    const handleRouteChange = (url: string) => {
+      // Si el usuario navega a la página de pago exitoso, no eliminamos la clave
+      // if (url !== "/success") {
+      if (!["/pagoexitosomensualidad",
+        "/pagoexitosocuatrimestre",
+        "/pagoexitosoanualidad",
+      ].includes(url)) {
+        localStorage.removeItem(key);
+      }
+    };
+
+    // Detectar cambios en la ruta
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Limpiar evento al desmontar el componente
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      // Limpieza adicional en caso de que el componente se desmonte sin redirigir
+      localStorage.removeItem(key);
+    };
+  }, [router]);
+
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
     let c: any = card;

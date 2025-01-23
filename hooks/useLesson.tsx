@@ -116,7 +116,7 @@ export const CourseProvider = ({ children }: any) => {
       reload();
     } else {
       prepareLessonInfoToRedirect();
-      router.push({ pathname: '/auth/login' });
+      router.push({ pathname: '/auth/register' });
     }
   }, []);
 
@@ -128,7 +128,7 @@ export const CourseProvider = ({ children }: any) => {
       }
     } else {
       prepareLessonInfoToRedirect();
-      router.push({ pathname: '/auth/login' });
+      router.push({ pathname: '/auth/register' });
     }
   }, [seasonId, lessonId]);
 
