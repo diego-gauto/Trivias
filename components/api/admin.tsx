@@ -15,7 +15,10 @@ type RoleValue =
   | 'forms'
   | 'forms_list'
   | 'tickets_list'
-  | 'memberships_list';
+  | 'memberships_list'
+  | 'distributors'
+  | 'subscriptions'
+  | 'active_memberships';
 
 export interface Admin {
   user_id: number;
