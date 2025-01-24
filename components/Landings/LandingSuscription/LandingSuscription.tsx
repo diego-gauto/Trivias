@@ -276,13 +276,13 @@ const LandingSuscription = (props: ILandingSuscription) => {
         console.log(2);
 
         if (type === 'mensual') {
-          localStorage.setItem('month', 'true');
+          localStorage.setItem('mensual_v1_3', 'true');
         }
         if (type === 'anual') {
-          localStorage.setItem('anual', 'true');
+          localStorage.setItem('anual_v1_2', 'true');
         }
         if (type === 'cuatrimestral') {
-          localStorage.setItem('cuatri', 'true');
+          localStorage.setItem('cuatrimestre_v1_1', 'true');
         }
         router.push(SIGNUP_PATH);
       }
