@@ -30,6 +30,7 @@ import ModalMaterials from './Materials/ModalMaterials';
 import SelectModule4 from './Select/SelectModule';
 import { goToSuscription } from '../../../constants/redirects';
 import { useRouter } from 'next/router';
+import { FaRegCopy } from 'react-icons/fa';
 const gPlus = '/images/purchase/logo.png';
 const CourseModal = (props: ICourseModal) => {
   const { show, setShow, course, user } = props;
@@ -38,6 +39,7 @@ const CourseModal = (props: ICourseModal) => {
   const [lessons, setLessons] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState<any>(true);
   const [seasons, setSeasons] = useState<any>([]);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const responsive990 = useMediaQuery({ query: '(max-width: 990px)' });
   const DEFAULT_PROFESSOR_IMAGE = '/images/teachers/iker.jpg';
   const router = useRouter();
@@ -121,6 +123,14 @@ const CourseModal = (props: ICourseModal) => {
       }
     }
   }
+
+  const showLinkCopiedText = () => {
+    setIsLinkCopied(true);
+    setTimeout(() => {
+      setIsLinkCopied(false);
+    }, 10000);
+  }
+
   return (
     <ModalContain>
       <ModalMod show={show} onHide={handleClose} size='lg' centered>
@@ -377,6 +387,37 @@ const CourseModal = (props: ICourseModal) => {
               )}
               <div className='bottom'>
                 <p>{course.about}</p>
+                <button style={{
+                  display: 'flex',
+                  justifySelf: 'flex-start',
+                  alignItems: 'center',
+                  color: '#3f1168',
+                  fontWeight: '500',
+                  borderRadius: '32px',
+                  padding: '8px 16px',
+                  border: 'none',
+                  marginTop: '8px',
+                  background: 'transparent'
+                }}
+                  onClick={(e) => {
+                    showLinkCopiedText();
+                    const { origin } = window.location;
+                    const link = `${origin}/lesson?id=${course.id}&season=0&lesson=0`;
+                    // http://localhost:3000/lesson?id=37&season=0&lesson=0
+                    navigator.clipboard.writeText(link);
+                  }}
+                >
+                  <FaRegCopy />
+                  <div style={{
+                    paddingLeft: '8px'
+                  }}>
+                    {
+                      isLinkCopied ?
+                        '¡Enlace copiado!'
+                        : 'Compartir este curso'
+                    }
+                  </div>
+                </button>
               </div>
             </div>
           </CourseContain>

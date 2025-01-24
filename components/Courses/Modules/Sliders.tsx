@@ -291,8 +291,7 @@ const Sliders = (props: ICourseData) => {
                       className='grey-field'
                       onClick={() => {
                         if (
-                          slideType === 'continue-watching' ||
-                          slideType === 'free-courses'
+                          slideType === 'continue-watching'
                         ) {
                           goTo(course);
                         }
@@ -302,7 +301,8 @@ const Sliders = (props: ICourseData) => {
                           slideType === 'structure-courses' ||
                           slideType === 'makeup-courses' ||
                           slideType === 'special-courses' ||
-                          slideType === 'new-courses'
+                          slideType === 'new-courses' ||
+                          slideType === 'free-courses'
                         ) {
                           openModal(course);
                         }

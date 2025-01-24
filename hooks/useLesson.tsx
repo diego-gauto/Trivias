@@ -5,8 +5,8 @@ import { lessonGuard } from '../containers/Profile/LessonNew/utils/functions';
 import { useAuth } from './useAuth';
 import { LESSON_PATH } from '../constants/paths';
 import { ICourseResponse, ILesson } from '../interfaces/ICourseNew';
-import lesson from '../pages/lesson';
 import { IUserInfoResult } from '../interfaces/IUser';
+import { getGenericQueryResponse } from '../components/api/admin';
 export const CourseContext = createContext<any>(null);
 
 export const useCourse = () => {
@@ -19,79 +19,116 @@ export const CourseProvider = ({ children }: any) => {
   const { id, season: seasonId, lesson: lessonId }: any = params.query;
   const [isLoading, setIsLoading] = useState(true);
   const [tempLesson, setTempLesson] = useState<ILesson | null>(null);
-  const context = useAuth();
+  const user: IUserInfoResult = useAuth().user;
   const [open, setOpen] = useState(false);
   let today = new Date().getTime() / 1000;
 
-  const reload = (changeLesson?: boolean) => {
-    let complete_nails = context.user!.user_courses.filter(
+  const canShowLesson = () => {
+    const { final_date, role } = user;
+    const TOLERANCE_DAYS = 10;
+    const isSuperAdmin = role === 'superAdmin';
+
+    if (isSuperAdmin) {
+      return true;
+    }
+
+    const canShowLesson = final_date > today - (TOLERANCE_DAYS * 24 * 60 * 60);;
+    return canShowLesson;
+  }
+
+  const prepareLessonInfoToRedirect = () => {
+    const data = {
+      course_id: parseInt(id),
+      season_id: parseInt(seasonId),
+      lesson_id: parseInt(lessonId)
+    };
+    const jsonString = JSON.stringify(data);
+    localStorage.setItem('lesson-redirect-info', jsonString);
+  }
+
+  const reload = async (changeLesson?: boolean) => {
+    let complete_nails = user.user_courses.filter(
       (val: any) => val.course_id === 57 && val.final_date > today,
     );
-    getCourseApi(id)
-      .then((res) => {
-        if (res !== undefined) {
-          console.log({ res });
-          let lesson = res.seasons[+seasonId]!.lessons[+lessonId];
-          if (lesson === undefined) {
-            lesson = res.seasons[0]!.lessons[0];
-            router.push({
-              pathname: 'lessonTemp',
-              query: { id: id, season: 0, lesson: 0 },
-            });
+    try {
+      const res = await getCourseApi(id);
+      if (res !== undefined) {
+        console.log({ res });
+        console.log({ user: user });
+        const { final_date, method, level } = user;
+        const { seasons, type } = res;
+        let lesson = seasons[+seasonId]!.lessons[+lessonId];
+        if (lesson === undefined) {
+          lesson = seasons[0]!.lessons[0];
+          router.push({
+            pathname: 'lessonTemp',
+            query: { id: id, season: 0, lesson: 0 },
+          });
+        }
+        if (user.role !== 'superAdmin') {
+          if (type === 'Mensual' && !canShowLesson()) {
+            prepareLessonInfoToRedirect();
+            router.push({ pathname: '/planes' });
           }
-          if (context.user!.role !== 'superAdmin') {
-            let diff = Math.round((today - context.user!.final_date) / 86400);
+          /*
+          if (
+            type === 'Mensual' &&
+            user.final_date < today &&
+            diff > 10 &&
+            complete_nails.length === 0
+          ) {
+            router.push({ pathname: '/preview' });
+          }
+            */
+          if (type === 'Producto') {
+            let user_course = user.user_courses.filter(
+              (x: any) => x.course_id === +id,
+            );
             if (
-              res.type === 'Mensual' &&
-              context.user!.final_date < today &&
-              diff > 6 &&
-              complete_nails.length === 0
+              (user_course.length > 0 && user_course[0].final_date < today) ||
+              user_course.length === 0
             ) {
               router.push({ pathname: '/preview' });
             }
-            if (res.type === 'Producto') {
-              let user_course = context.user!.user_courses.filter(
-                (x: any) => x.course_id === +id,
-              );
-              if (
-                (user_course.length > 0 && user_course[0].final_date < today) ||
-                user_course.length === 0
-              ) {
-                router.push({ pathname: '/preview' });
-              }
-            }
           }
-          setCourse(res);
-          if (!changeLesson) {
-            setTempLesson(lesson || null);
-          }
-          setIsLoading(false);
         }
-      })
-      .catch((reason) => {
-        if (reason instanceof Error) {
-          console.error(reason.message);
-          reason.stack
-            ? console.error(reason.stack)
-            : console.log(
-              'No stack error in line 51, useLesson.tsx > CourseProvider',
-            );
+        setCourse(res);
+        if (!changeLesson) {
+          setTempLesson(lesson || null);
         }
-      });
+        setIsLoading(false);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+        error.stack
+          ? console.error(error.stack)
+          : console.log(
+            'No stack error in line 51, useLesson.tsx > CourseProvider',
+          );
+      }
+    }
+
   };
 
   useEffect(() => {
-    if (lessonGuard(context.user)) {
+    if (user !== null) {
       reload();
+    } else {
+      prepareLessonInfoToRedirect();
+      router.push({ pathname: '/auth/register' });
     }
   }, []);
 
   useEffect(() => {
-    if (lessonGuard(context.user)) {
+    if (user !== null) {
       if (course !== null) {
         let data = course.seasons[+seasonId]!.lessons[+lessonId];
         setTempLesson(data || null);
       }
+    } else {
+      prepareLessonInfoToRedirect();
+      router.push({ pathname: '/auth/register' });
     }
   }, [seasonId, lessonId]);
 

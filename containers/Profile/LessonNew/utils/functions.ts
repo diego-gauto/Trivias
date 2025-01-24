@@ -11,7 +11,8 @@ export const lessonGuard = (user: IUserInfoResult | null) => {
   if (user !== null) {
     return true;
   } else {
-    router.push({ pathname: '/preview' });
+    console.log('No hay usuario para ver video');
+    // router.push({ pathname: '/preview' });
   }
   return false;
 };

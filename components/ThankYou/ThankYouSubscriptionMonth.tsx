@@ -9,6 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IoChevronDown } from 'react-icons/io5';
 import { updateUser, updateUserOfferReference } from '../api/users';
+import { redirectInfoToLesson } from './Functions';
+import { useRouter } from 'next/router';
 
 const ThankYouSubscriptionMonth = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -21,6 +23,8 @@ const ThankYouSubscriptionMonth = () => {
     option: yup.string().required('Debe seleccionar una opcion'),
   });
 
+  const router = useRouter();
+
   const {
     register,
     control,
@@ -31,13 +35,54 @@ const ThankYouSubscriptionMonth = () => {
     resolver: yupResolver(formSchema),
   });
 
+  useEffect(() => {
+    const key = "lesson-redirect-info";
+
+    // Guardar la clave en el localStorage
+    // localStorage.setItem(key, "some_value");
+    // ->  Ya se llega al "/purshase" con esta ket seteada  <-
+
+    const handleRouteChange = (url: string) => {
+      // Si el usuario navega a la página de pago exitoso, no eliminamos la clave
+      // if (url !== "/success") {
+      if (!["/pagoexitosomensualidad",
+        "/pagoexitosocuatrimestre",
+        "/pagoexitosoanualidad",
+      ].includes(url)) {
+        localStorage.removeItem(key);
+      }
+    };
+
+    // Detectar cambios en la ruta
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Limpiar evento al desmontar el componente
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      // Limpieza adicional en caso de que el componente se desmonte sin redirigir
+      localStorage.removeItem(key);
+    };
+  }, [router]);
+
   const onSubmit: SubmitHandler<FormValues> = async (formData) => {
     let body = {
       offer_reference: formData.option,
       userId: parseInt(userData.user_id),
     };
     updateUserOfferReference(body).then((res) => {
-      window.location.href = '/preview';
+      if (redirectInfoToLesson() === null) {
+        window.location.href = '/preview';
+      } else {
+        const lessonRedirectInfo = redirectInfoToLesson() || '';
+        const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
+          course_id: number;
+          season_id: number;
+          lesson_id: number;
+        };
+        localStorage.removeItem('lesson-redirect-info');
+        const url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+        window.location.href = `${window.location.origin}${url}`;
+      }
     });
   };
 
