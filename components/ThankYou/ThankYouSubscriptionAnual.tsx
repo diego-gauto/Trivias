@@ -10,10 +10,13 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IoChevronDown } from 'react-icons/io5';
 import { redirectInfoToLesson } from './Functions';
+import { useRouter } from 'next/router';
 
 const ThankYouSubscriptionAnual = () => {
   const [userData, setUserData] = useState<any>(null);
   const [option, setOption] = useState('');
+
+  const router = useRouter();
 
   type FormValues = {
     option: string;
@@ -21,6 +24,35 @@ const ThankYouSubscriptionAnual = () => {
   const formSchema = yup.object().shape({
     option: yup.string().required('Debe seleccionar una opcion'),
   });
+
+  useEffect(() => {
+    const key = "lesson-redirect-info";
+
+    // Guardar la clave en el localStorage
+    // localStorage.setItem(key, "some_value");
+    // ->  Ya se llega al "/purshase" con esta ket seteada  <-
+
+    const handleRouteChange = (url: string) => {
+      // Si el usuario navega a la página de pago exitoso, no eliminamos la clave
+      // if (url !== "/success") {
+      if (!["/pagoexitosomensualidad",
+        "/pagoexitosocuatrimestre",
+        "/pagoexitosoanualidad",
+      ].includes(url)) {
+        localStorage.removeItem(key);
+      }
+    };
+
+    // Detectar cambios en la ruta
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Limpiar evento al desmontar el componente
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      // Limpieza adicional en caso de que el componente se desmonte sin redirigir
+      localStorage.removeItem(key);
+    };
+  }, [router]);
 
   const {
     register,
