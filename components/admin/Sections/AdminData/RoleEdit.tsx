@@ -23,6 +23,7 @@ import {
   Admin,
   AdminType,
   getGenericQueryResponse,
+  postGenericQueryResponse,
   updateAdminAccessApi,
 } from '../../../api/admin';
 import { backendRoleEditMethod } from './Queries';
@@ -203,7 +204,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
   useEffect(() => {
     const result: AdminRole[] = roles.map((role, index) => {
-
       const adminType = admin.adminTypes.find((adminType) => {
         return adminType.role === role.name;
       })
@@ -239,8 +239,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
       const tasks = role.tasks.map(mapFunction);
       const active = adminType.view == 1 ? true : false;
-      // const courses = adminType.courses?.split(',').map((courseId) => parseInt(courseId));
-      // const comments = adminType.comments?.split(',').map((courseId) => parseInt(courseId));
       let homeworkCourseIds = undefined;
       let commentsCourseIds = undefined;
       let formsIds = undefined;
@@ -297,10 +295,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     setRoles(result);
     setLoading(false);
   }, []);
-
-  const changeValue = (value: number) => {
-    return value === 1;
-  };
 
   const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {
     const value = e.target.checked;
@@ -359,7 +353,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   }
 
   const updateAdminType = async () => {
-    // debugger;
     admin.adminTypes.forEach((element) => {
       const role = roles.find((role) => role.name === element.role);
       if (role === undefined) {
@@ -442,25 +435,32 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       roles: newRoles,
     };
 
-    console.log({ user });
-
     const queries = user.roles.map(role => {
       try {
         return backendRoleEditMethod(role);
       } catch (error) {
         return `Error con el role ${JSON.stringify(role)}`;
       }
-
     });
-    console.log({ queries });
-    // anterior
-    /*
+
     try {
-      await anterior(user as any);
+      const results: string[] = [];
+      const promises = queries.map(async (query) => {
+        try {
+          const response = await postGenericQueryResponse(query);
+          results.push(JSON.stringify(response, null, 2));
+        } catch (error) {
+          console.error(error);
+          if (error instanceof Error) {
+            results.push(JSON.stringify(error, null, 2));
+          }
+        }
+      });
+      await Promise.all(promises);
+      console.log({ results });
     } catch (error) {
       console.error(error);
-    }*/
-
+    }
   };
 
   const anterior = async (user: {
