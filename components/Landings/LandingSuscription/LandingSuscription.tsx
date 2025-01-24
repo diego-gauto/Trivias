@@ -275,14 +275,23 @@ const LandingSuscription = (props: ILandingSuscription) => {
       } else {
         console.log(2);
 
+        const keysToRemove = ['mensual_v1_3', 'anual_v1_2', 'cuatrimestre_v1_1'];
+
+        // Elimina cualquier clave existente antes de setear la nueva
+        keysToRemove.forEach((key) => {
+          if (localStorage.getItem(key)) {
+            localStorage.removeItem(key);
+          }
+        });
+
         if (type === 'mensual') {
-          localStorage.setItem('month', 'true');
+          localStorage.setItem('mensual_v1_3', 'true');
         }
         if (type === 'anual') {
-          localStorage.setItem('anual', 'true');
+          localStorage.setItem('anual_v1_2', 'true');
         }
         if (type === 'cuatrimestral') {
-          localStorage.setItem('cuatri', 'true');
+          localStorage.setItem('cuatrimestre_v1_1', 'true');
         }
         router.push(SIGNUP_PATH);
       }
