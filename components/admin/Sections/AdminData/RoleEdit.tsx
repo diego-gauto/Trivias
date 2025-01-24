@@ -203,7 +203,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
   useEffect(() => {
     const result: AdminRole[] = roles.map((role, index) => {
-      const adminType = admin.adminTypes.find((adminType) => adminType.role === role.role)
+
+      const adminType = admin.adminTypes.find((adminType) => {
+        return adminType.role === role.name;
+      })
 
       if (adminType === undefined) {
         return role;
@@ -215,17 +218,17 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       }) => {
         let active = false;
         if (task.task === 'Crear') {
-          active = adminType.create === 1;
+          active = adminType.create == 1;
         } else if (task.task === 'Editar') {
-          active = adminType.edit === 1;
+          active = adminType.edit == 1;
         } else if (task.task === 'Eliminar') {
-          active = adminType.delete === 1;
+          active = adminType.delete == 1;
         } else if (task.task === 'Solicitudes') {
-          active = adminType.request === 1;
+          active = adminType.request == 1;
         } else if (task.task === 'Generar Reporte') {
-          active = adminType.report === 1;
+          active = adminType.report == 1;
         } else if (task.task === 'Descargar') {
-          active = adminType.download === 1;
+          active = adminType.download == 1;
         }
         const result = {
           task: task.task,
@@ -235,7 +238,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       }
 
       const tasks = role.tasks.map(mapFunction);
-      const active = adminType.view === 1 ? true : false;
+      const active = adminType.view == 1 ? true : false;
       // const courses = adminType.courses?.split(',').map((courseId) => parseInt(courseId));
       // const comments = adminType.comments?.split(',').map((courseId) => parseInt(courseId));
       let homeworkCourseIds = undefined;
@@ -301,8 +304,16 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
   const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {
     const value = e.target.checked;
-    roles[indexRole]!.active = value;
-    setRoles(roles);
+    const newRoles = roles.map((role, index) => {
+      if (index !== indexRole) {
+        return role;
+      }
+      return {
+        ...role,
+        active: value,
+      }
+    });
+    setRoles(newRoles);
   };
 
   const handleChange = (
@@ -311,52 +322,41 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     indexTask: number,
   ) => {
     const value = e.target.checked;
-    roles[indexRole]!.tasks[indexTask]!.active = value;
-    console.log({ roles });
-    setRoles(roles);
+    const result = roles.map((role, index) => {
+      if (index !== indexRole) {
+        return role;
+      }
+      const newTasks = role.tasks.map((task, index) => {
+        if (index !== indexTask) {
+          return task;
+        }
+        return {
+          ...task,
+          active: value
+        }
+      });
+      return {
+        ...role,
+        tasks: newTasks
+      }
+    });
+
+    setRoles(result);
   };
 
-  const handleMultipleHomeworkIds = (courseId: number) => {
-    let temp = [...homeworksCourseIds];
-    if (homeworksCourseIds.includes(courseId)) {
-      const index = homeworksCourseIds.indexOf(courseId);
+  const handleMultipleIds = (id: number, array: number[], setState: (array: number[]) => void) => {
+    let result = [...array];
+    if (array.includes(id)) {
+      const index = array.indexOf(id);
       if (index > -1) {
-        temp.splice(index, 1);
-        setHomeworksCourseIds(temp);
+        result.splice(index, 1);
+        setState(result);
       }
     } else {
-      temp.push(courseId);
-      setHomeworksCourseIds(temp);
+      result.push(id);
+      setState(result);
     }
-  };
-
-  const handleMultipleCommentIds = (courseId: number) => {
-    let temp = [...commentsCourseIds];
-    if (commentsCourseIds.includes(courseId)) {
-      const index = commentsCourseIds.indexOf(courseId);
-      if (index > -1) {
-        temp.splice(index, 1);
-        setCommentsCourseIds(temp);
-      }
-    } else {
-      temp.push(courseId);
-      setCommentsCourseIds(temp);
-    }
-  };
-
-  const handleMultipleFormsIds = (formId: number) => {
-    let temp = [...formIds];
-    if (formIds.includes(formId)) {
-      const index = formIds.indexOf(formId);
-      if (index > -1) {
-        temp.splice(index, 1);
-        setFormIds(temp);
-      }
-    } else {
-      temp.push(formId);
-      setFormIds(temp);
-    }
-  };
+  }
 
   const updateAdminType = async () => {
     // debugger;
@@ -419,21 +419,21 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       return `admin_${roleName}`;
     }
 
-    const newRoles: BackendRoleStructure[] = roles.map((role) => {
+    const newRoles: BackendRoleStructure[] = roles.map(({ name, active, tasks, forms, courses }) => {
       return {
-        id: 0,
-        role: role.name,
-        source_table: getSourceTable(role.name),
+        id: 0, // no es necesario el id
+        role: name,
+        source_table: getSourceTable(name),
         user_id: admin.user_id,
-        view: role.active === true ? 1 : 0,
-        create: role.tasks.find(t => t.task === 'Crear')?.active === true ? 1 : 0,
-        edit: role.tasks.find(t => t.task === 'Editar')?.active === true ? 1 : 0,
-        delete: role.tasks.find(t => t.task === 'Eliminar')?.active === true ? 1 : 0,
-        report: role.tasks.find(t => t.task === 'Generar Reporte')?.active === true ? 1 : 0,
-        download: role.tasks.find(t => t.task === 'Descargar')?.active === true ? 1 : 0,
-        courses: role.courses?.join(','),
-        forms: role.forms?.join(','),
-        request: role.tasks.find(t => t.task === 'Solicitudes')?.active === true ? 1 : 0,
+        view: active === true ? 1 : 0,
+        create: tasks.find(t => t.task === 'Crear')?.active === true ? 1 : 0,
+        edit: tasks.find(t => t.task === 'Editar')?.active === true ? 1 : 0,
+        delete: tasks.find(t => t.task === 'Eliminar')?.active === true ? 1 : 0,
+        report: tasks.find(t => t.task === 'Generar Reporte')?.active === true ? 1 : 0,
+        download: tasks.find(t => t.task === 'Descargar')?.active === true ? 1 : 0,
+        courses: courses?.join(','),
+        forms: forms?.join(','),
+        request: tasks.find(t => t.task === 'Solicitudes')?.active === true ? 1 : 0,
       }
     });
 
@@ -454,11 +454,13 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     });
     console.log({ queries });
     // anterior
+    /*
     try {
       await anterior(user as any);
     } catch (error) {
       console.error(error);
-    }
+    }*/
+
   };
 
   const anterior = async (user: {
@@ -498,10 +500,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'courses' + index}>
                 <p>{course.title}</p>
                 <input
-                  defaultChecked={commentsCourseIds.includes(course.id)}
+                  checked={commentsCourseIds.includes(course.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleCommentIds(course.id);
+                    handleMultipleIds(course.id, commentsCourseIds, setCommentsCourseIds);
                   }}
                 />
               </div>
@@ -523,10 +525,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'courses' + index}>
                 <p>{course.title}</p>
                 <input
-                  defaultChecked={homeworksCourseIds.includes(course.id)}
+                  checked={homeworksCourseIds.includes(course.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleHomeworkIds(course.id);
+                    handleMultipleIds(course.id, homeworksCourseIds, setHomeworksCourseIds);
                   }}
                 />
               </div>
@@ -548,10 +550,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'form' + index}>
                 <p>{form.name}</p>
                 <input
-                  defaultChecked={formIds.includes(form.id)}
+                  checked={formIds.includes(form.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleFormsIds(form.id);
+                    handleMultipleIds(form.id, formIds, setFormIds);
                   }}
                 />
               </div>
@@ -596,7 +598,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
                         <input
                           type='checkbox'
                           name={role.name}
-                          defaultChecked={role.active}
+                          checked={role.active}
                           onChange={(e) => handleRole(e, indexR)}
                         />
                       </RowContain>
@@ -609,7 +611,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
                             <input
                               type='checkbox'
                               name={task.task}
-                              defaultChecked={task.active}
+                              checked={task.active}
                               onChange={(e) => handleChange(e, indexR, indexT)}
                             />
                             <li>{task.task}</li>
