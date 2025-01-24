@@ -57,6 +57,7 @@ export const PurchaseNew2 = () => {
   const subscriptionType = type as 'subscription' | 'course';
   const context = useAuth();
   const user = context.user;
+  console.log({ user });
   const [paymentMethods, setPaymentMethods] = useState<IPm[]>([]);
   const [addPayment, setAddPayment] = useState<boolean>(false);
   const [selectedButton, setSelectedButton] = useState<TPayOptionId>('card');
@@ -92,6 +93,35 @@ export const PurchaseNew2 = () => {
   useEffect(() => {
     window.Conekta.setPublicKey('key_U5yJatlpMvd1DhENgON5ZYx');
   }, []);
+
+  useEffect(() => {
+    const key = "lesson-redirect-info";
+
+    // Guardar la clave en el localStorage
+    // localStorage.setItem(key, "some_value");
+    // ->  Ya se llega al "/purshase" con esta ket seteada  <-
+
+    const handleRouteChange = (url: string) => {
+      // Si el usuario navega a la página de pago exitoso, no eliminamos la clave
+      // if (url !== "/success") {
+      if (!["/pagoexitosomensualidad",
+        "/pagoexitosocuatrimestre",
+        "/pagoexitosoanualidad",
+      ].includes(url)) {
+        localStorage.removeItem(key);
+      }
+    };
+
+    // Detectar cambios en la ruta
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // Limpiar evento al desmontar el componente
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      // Limpieza adicional en caso de que el componente se desmonte sin redirigir
+      localStorage.removeItem(key);
+    };
+  }, [router]);
 
   const addNewCard = async () => {
     setLoaderAdd(!loaderAdd);
@@ -179,13 +209,14 @@ export const PurchaseNew2 = () => {
         }),
       );
       // Valores random de prueba
-      /*const pm = [{
+      const pm = [{
         "id": "src_gYwRtNpSjFqLmKtRw",
         "brand": "visa",
         "last4": "9999",
         "default": true
-      }];*/
-      setPaymentMethods(extractedProperties); // pm
+      }];
+      // setPaymentMethods(extractedProperties); // pm
+      setPaymentMethods(pm); // pm
     } catch (error) {
       console.log({ error });
     }
@@ -392,6 +423,37 @@ export const PurchaseNew2 = () => {
       console.log({ error });
     }
   };
+
+  const falsePay = async () => {
+    const final_date = getFinalDateByFrequency();
+    const today = Math.floor(new Date().getTime() / 1000);
+    const start_date = user.start_date === 0 ? today : user.start_date;
+    const plan_id = getPlanIdByFrecuency();
+
+    const membership = {
+      final_date,
+      method: 'conekta',
+      level: getUserLevel(),
+      payment_method: 'test_payment_method',
+      plan_id: plan_id,
+      plan_name: getPlanNameByFrecuency(subscriptionFrequency as FrecuencyValues),
+      start_date: start_date,
+      type: subscription.price,
+      userId: user.user_id,
+      is_canceled: false,
+    };
+    await updateMembership(membership);
+
+    let url = '/pagoexitoso';
+    if (subscriptionFrequency === 'month') {
+      url += 'mensualidad';
+    } else if (subscriptionFrequency === 'anual') {
+      url += 'anualidad';
+    } else if (subscriptionFrequency === 'cuatri') {
+      url += 'cuatrimestre';
+    }
+    window.location.href = url;
+  }
 
   const getDurationByFrecuency = (): 'month' | 'year' | 'cuatrimestral' => {
     if (subscriptionFrequency === 'month') {
@@ -803,6 +865,14 @@ export const PurchaseNew2 = () => {
                   }}
                 >
                   Confirmar compra
+                </button>
+                <button
+                  className={addPayment ? 'fade' : ''}
+                  onClick={(e) => {
+                    falsePay();
+                  }}
+                >
+                  Simular compra
                 </button>
               </>
             )}

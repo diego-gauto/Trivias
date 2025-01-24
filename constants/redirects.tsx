@@ -52,7 +52,15 @@ export interface IUserInfo {
   admin_update_id: any
 }
 
-const purchaseValues = ['month', 'month_1', 'month_2', 'cuatri', 'anual', 'anual_2'];
+const purchaseValues = ['mensual',
+  'mensual_v1_1',
+  'mensual_v1_2',
+  'mensual_v1_3',
+  'anual',
+  'anual_v1_1',
+  'anual_v1_2',
+  'cuatrimestre',
+  'cuatrimestre_v1_1'];
 
 const haveAnyPurchaseValue = () => {
   for (const pv of purchaseValues) {
@@ -134,6 +142,20 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
     else if (localStorage.getItem('retryPayment') === 'true') {
       localStorage.removeItem('retryPayment');
       window.location.href = `${window.location.origin}${RETRY_PAYMENT_PATH}`;
+    } else if (localStorage.getItem('lesson-redirect-info')) {
+      const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
+      const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
+        course_id: number;
+        season_id: number;
+        lesson_id: number;
+      };
+      localStorage.removeItem('lesson-redirect-info');
+      // CURSOS NO FLEXIBLES
+      let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+      if ([30, 57].includes(course_id)) {
+        url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
+      }
+      window.location.href = `${window.location.origin}${url}`;
     }
     else {
       window.location.href = PREVIEW_PATH;

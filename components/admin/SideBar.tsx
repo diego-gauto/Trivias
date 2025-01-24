@@ -27,6 +27,8 @@ const SideBar = ({ show, onHide }: any) => {
   const [isTicketsList, setIsTicketsList] = useState<boolean>(false);
   const [isMembershipsList, setIsMembershipsList] = useState<boolean>(false);
   const [isComments, setIsComments] = useState<boolean>(false);
+  const [isSubscriptions, setIsSubscriptions] = useState<boolean>(false);
+  const [isActiveMemberships, setIsActiveMemberships] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [loading, setLoading] = useState(true);

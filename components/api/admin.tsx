@@ -15,7 +15,9 @@ type RoleValue =
   | 'forms'
   | 'forms_list'
   | 'tickets_list'
-  | 'memberships_list';
+  | 'memberships_list'
+  | 'subscriptions'
+  | 'active_memberships';
 
 export interface Admin {
   user_id: number;
@@ -35,15 +37,15 @@ export interface AdminType {
   id: number;
   role: RoleValue;
   source_table: string;
-  create?: number;
-  edit?: number;
-  delete?: number;
+  create?: 0 | 1;
+  edit?: 0 | 1;
+  delete?: 0 | 1;
   view: number;
   user_id: number;
   courses?: string;
-  request?: number;
-  report?: number;
-  download?: number;
+  request?: 0 | 1;
+  report?: 0 | 1;
+  download?: 0 | 1;
   forms?: string;
 }
 
