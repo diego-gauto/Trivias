@@ -275,6 +275,15 @@ const LandingSuscription = (props: ILandingSuscription) => {
       } else {
         console.log(2);
 
+        const keysToRemove = ['mensual_v1_3', 'anual_v1_2', 'cuatrimestre_v1_1'];
+
+        // Elimina cualquier clave existente antes de setear la nueva
+        keysToRemove.forEach((key) => {
+          if (localStorage.getItem(key)) {
+            localStorage.removeItem(key);
+          }
+        });
+
         if (type === 'mensual') {
           localStorage.setItem('mensual_v1_3', 'true');
         }
