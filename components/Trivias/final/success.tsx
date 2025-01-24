@@ -39,7 +39,7 @@ const Success = () => {
       <p className={red}>
         Costo total real: <span className={tachado}>$74,719.00 MXN</span>
       </p>
-      <p className={green}> Sólo $3,497.00 MXN</p>
+      <p className={green}> Sólo $5,697.00 MXN</p>
       <p className={acceso}>(Acceso por año con renovación automática)</p>
       <p className={recomendamos}>
         Te recomendamos tomar los siguientes cursos
@@ -50,7 +50,7 @@ const Success = () => {
         obtener tu descuento o haz click en Comenzar y suscríbete ahora.
       </p>
       <div className={buttonContainer}>
-        <button onClick={handleClick}>Comienza por $3,497 MXN/año</button>
+        <button onClick={handleClick}>Comienza por $5,697 MXN/año</button>
         <Link href={`/suscripcion-anual`}>
           <a>
             <button>Más información</button>
