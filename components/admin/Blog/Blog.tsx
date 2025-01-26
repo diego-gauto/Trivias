@@ -19,7 +19,6 @@ import {
 } from '../../../store/actions/FireBaseImages';
 import { getUserApi } from '../../api/users';
 import { formatBlogDate } from '../../../utils/functions';
-import { IUserInfoResult } from '../../../interfaces/IUser';
 import {
   UserLevelValue,
   Role,

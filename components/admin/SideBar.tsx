@@ -212,65 +212,6 @@ const SideBar = ({ show, onHide }: any) => {
     }, []);
   } catch (error) { }
 
-  /*
-  useEffect(() => {
-    if (userData !== null) {
-      console.log({ userData });
-      if (userData.role == 'admin') {
-        if (
-          router.pathname == '/admin/Courses' &&
-          userData.roles[0].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (router.pathname == '/admin/Pago' && userData.roles[6].view == 0) {
-          router.push({ pathname: '/' });
-        }
-        if (
-          router.pathname == '/admin/Coupons' &&
-          userData.roles[1].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (
-          router.pathname == '/admin/Landing' &&
-          userData.roles[5].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (
-          router.pathname == '/admin/Rewards' &&
-          userData.roles[3].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (router.pathname == '/admin/Users' && userData.roles[4].view == 0) {
-          router.push({ pathname: '/' });
-        }
-        if (router.pathname == '/admin/Blog' && userData.roles[2].view == 0) {
-          router.push({ pathname: '/' });
-        }
-        if (
-          router.pathname == '/admin/HomeWork' &&
-          userData.roles[7].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (
-          router.pathname == '/admin/Comments' &&
-          userData.roles[8].view == 0
-        ) {
-          router.push({ pathname: '/' });
-        }
-        if (router.pathname == '/admin/Sections') {
-          router.push({ pathname: '/' });
-        }
-      }
-      setLoading(false)
-    }
-  }, [userData]);
-  */
-
   useEffect(() => {
 
   }, []);

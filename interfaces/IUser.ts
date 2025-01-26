@@ -82,9 +82,28 @@ export interface IUserInfoResult extends IUserInfo {
   photoURL?: string;
 }
 
+type RoleValue =
+  | 'course'
+  | 'coupons'
+  | 'blogs'
+  | 'rewards'
+  | 'users'
+  | 'landing'
+  | 'payments'
+  | 'homeworks'
+  | 'comments'
+  | 'trivias'
+  | 'trivias_list'
+  | 'forms'
+  | 'forms_list'
+  | 'tickets_list'
+  | 'memberships_list'
+  | 'subscriptions'
+  | 'active_memberships';
+
 export interface Role {
   id: number;
-  role: string;
+  role: RoleValue;
   source_table: string;
   create?: string;
   edit?: string;
