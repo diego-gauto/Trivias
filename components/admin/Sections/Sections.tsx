@@ -13,6 +13,7 @@ import {
 } from './Sections.styled';
 import {
   Admin,
+  AdminType,
   getAdmins,
   getGenericQueryResponse,
   getUserByEmailApi,
@@ -114,7 +115,7 @@ const Sections = () => {
       const res = await getAdmins();
       const admins = res.data.admins;
       const getRolesWithDefaults = (
-        currentValues: any[],
+        currentValues: AdminType[],
         userId: number,
       ): any[] => {
         const dvRoles = defaultValues.map((dv) => dv.role);
