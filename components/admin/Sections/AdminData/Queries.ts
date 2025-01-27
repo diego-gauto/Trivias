@@ -30,6 +30,7 @@ export const backendRoleEditMethod = (admin: {
   tableSourceByAdminRole.set('forms_list', 'admin_forms_list');
   tableSourceByAdminRole.set('tickets_list', 'admin_tickets_list');
   tableSourceByAdminRole.set('memberships_list', 'admin_memberships_list');
+  tableSourceByAdminRole.set('distributors', 'admin_distributors');
   tableSourceByAdminRole.set('subscriptions', 'admin_subscriptions');
   tableSourceByAdminRole.set('active_memberships', 'admin_active_memberships');
 
@@ -115,6 +116,13 @@ export const backendRoleEditMethod = (admin: {
   tableColumnsByTableName.set('admin_memberships_list', [
     'view',
     'download',
+    'user_id',
+  ]);
+  tableColumnsByTableName.set('admin_distributors', [
+    'view',
+    'create',
+    'edit',
+    'delete',
     'user_id',
   ]);
   tableColumnsByTableName.set('admin_subscriptions', ['view', 'user_id']);

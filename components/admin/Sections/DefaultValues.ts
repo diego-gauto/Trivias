@@ -14,7 +14,9 @@ type RoleValue =
   | 'forms_list'
   | 'tickets_list'
   | 'memberships_list'
-  | 'distributors';
+  | 'distributors'
+  | 'subscriptions'
+  | 'active_memberships';
 
 interface AdminType {
   id: number;
@@ -188,5 +190,20 @@ export const defaultValues: AdminType[] = [
     create: 0,
     delete: 0,
     edit: 0,
+  },
+  {
+    id: 0,
+    role: 'subscriptions',
+    source_table: 'admin_subscriptions',
+    user_id: 0,
+    view: 0,
+  },
+  {
+    id: 0,
+    role: 'active_memberships',
+    source_table: 'admin_active_memberships',
+    user_id: 0,
+    view: 0,
+    download: 0,
   },
 ];

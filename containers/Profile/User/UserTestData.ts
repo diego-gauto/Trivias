@@ -39,4 +39,5 @@ export const user: IUserInfoResult = {
   user_history: [],
   user_certificates: [],
   roles: [],
+  femsa_customer_id: null,
 };

@@ -16,6 +16,7 @@ type RoleValue =
   | 'forms_list'
   | 'tickets_list'
   | 'memberships_list'
+  | 'distributors'
   | 'subscriptions'
   | 'active_memberships';
 

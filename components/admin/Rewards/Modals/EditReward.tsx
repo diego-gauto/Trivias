@@ -68,7 +68,8 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     if (userData === null) {
       return;
     }
-    if (userData.role === 'admin' && userData.roles[3].edit === 0) {
+    const role = userData.roles.find(r => r.role === 'rewards') || { view: 0 };
+    if (userData.role === 'admin' && role.view == 0) {
       alert('No tienes permisos para esta acción');
       return;
     }
@@ -106,7 +107,8 @@ const EditReward = ({ show, setShow, handleEvent, data }: any) => {
     if (userData === null) {
       return;
     }
-    if (userData.role === 'admin' && userData.roles[3].delete === 0) {
+    const role = userData.roles.find(r => r.role === 'rewards') || { delete: 0 };
+    if (userData.role === 'admin' && role.delete == 0) {
       alert('No tienes permisos para esta acción');
       return;
     }

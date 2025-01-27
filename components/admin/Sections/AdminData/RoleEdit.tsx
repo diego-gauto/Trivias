@@ -22,6 +22,7 @@ import {
 import {
   Admin,
   getGenericQueryResponse,
+  postGenericQueryResponse,
   updateAdminAccessApi,
 } from '../../../api/admin';
 import { AdminType } from './Constants';
@@ -36,7 +37,7 @@ type RoleProps = {
   admin: Admin;
   setShow: (open: boolean) => void;
   show: boolean;
-  refresh: any;
+  refresh: () => void;
   courses: { id: number; title: string; published: boolean }[];
   forms: { id: number; name: string; }[];
 };
@@ -54,8 +55,8 @@ interface AdminRole {
   active: boolean;
   name: string;
   tasks: { active: boolean; task: TaskValue }[];
-  courses?: string[];
-  forms?: string[]
+  courses?: number[];
+  forms?: number[]
 }
 
 const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) => {
@@ -182,19 +183,16 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       role: 'Subscripciones',
       active: false,
       name: 'subscriptions',
-      tasks: []
+      tasks: [],
     },
     {
-      role: 'Active Memberships',
+      role: 'Miembros activos',
       active: false,
       name: 'active_memberships',
       tasks: [
-        {
-          active: false,
-          task: 'Descargar'
-        }
-      ]
-    }
+        { active: false, task: 'Descargar' },
+      ],
+    },
   ]);
   const [loading, setLoading] = useState(true);
   const [homeworksCourseIds, setHomeworksCourseIds] = useState<number[]>([]);
@@ -207,66 +205,111 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
 
   useEffect(() => {
-    const temp: AdminRole[] = [];
-    const adminTypesFull = [...admin.adminTypes];
-    console.log({ adminTypesFull });
-    adminTypesFull.forEach((element) => {
-      const role = roles.find((role) => role.name === element.role);
-      if (role === undefined) {
-        return;
+    const result: AdminRole[] = roles.map((role, index) => {
+      const adminType = admin.adminTypes.find((adminType) => {
+        return adminType.role === role.name;
+      })
+
+      if (adminType === undefined) {
+        return role;
       }
 
-      role.active = changeValue(element.view ? 1 : 0);
-      role.tasks.forEach((task) => {
+      const mapFunction = (task: {
+        active: boolean;
+        task: TaskValue;
+      }) => {
+        let active = false;
         if (task.task === 'Crear') {
-          // element.create = task.active ? 1 : 0;
-          task.active = element.create === 1;
+          active = adminType.create == 1;
         } else if (task.task === 'Editar') {
-          // element.edit = task.active ? 1 : 0;
-          task.active = element.edit === 1;
+          active = adminType.edit == 1;
         } else if (task.task === 'Eliminar') {
-          // element.delete = task.active ? 1 : 0;
-          task.active = element.delete === 1;
+          active = adminType.delete == 1;
         } else if (task.task === 'Solicitudes') {
-          // element.request = task.active ? 1 : 0;
-          task.active = element.request === 1;
+          active = adminType.request == 1;
         } else if (task.task === 'Generar Reporte') {
-          // element.report = task.active ? 1 : 0;
-          task.active = element.report === 1;
+          active = adminType.report == 1;
         } else if (task.task === 'Descargar') {
-          // element.download = task.active ? 1 : 0;
-          task.active = element.download === 1;
+          active = adminType.download == 1;
         }
-      });
-
-      if (element.role === 'homeworks') {
-        const newValue = element.courses
-          ?.split(',')
-          .map((courseId) => parseInt(courseId));
-        setHomeworksCourseIds(newValue || []);
-      } else if (element.role === 'comments') {
-        const newValue = element.courses
-          ?.split(',')
-          .map((courseId) => parseInt(courseId));
-        setCommentsCourseIds(newValue || []);
-      } else if (element.role === 'forms') {
-        const newValue = element.forms?.split(',').map((formId) => parseInt(formId));
-        setFormIds(newValue || []);
+        const result = {
+          task: task.task,
+          active
+        }
+        return result;
       }
-      temp.push(role);
+
+      const tasks = role.tasks.map(mapFunction);
+      const active = adminType.view == 1 ? true : false;
+      let homeworkCourseIds = undefined;
+      let commentsCourseIds = undefined;
+      let formsIds = undefined;
+
+      if (adminType.role === 'homeworks') {
+        homeworkCourseIds = adminType.courses
+          ?.split(',')
+          .map((courseId) => parseInt(courseId));
+        setHomeworksCourseIds(homeworkCourseIds || []);
+      } else if (adminType.role === 'comments') {
+        commentsCourseIds = adminType.courses
+          ?.split(',')
+          .map((courseId) => parseInt(courseId));
+        setCommentsCourseIds(commentsCourseIds || []);
+      } else if (adminType.role === 'forms') {
+        formsIds = adminType.forms?.split(',').map((formId) => parseInt(formId));
+        setFormIds(formsIds || []);
+      }
+
+      const { name, role: roleName } = role;
+
+      let finalResult: AdminRole = {
+        active,
+        name,
+        role: roleName,
+        tasks
+      }
+
+      if (homeworkCourseIds !== undefined || commentsCourseIds !== undefined) {
+        if (homeworkCourseIds !== undefined) {
+          finalResult = {
+            ...finalResult,
+            courses: homeworkCourseIds
+          }
+        }
+        if (commentsCourseIds !== undefined) {
+          finalResult = {
+            ...finalResult,
+            courses: commentsCourseIds
+          }
+        }
+      }
+
+      if (formsIds !== undefined) {
+        finalResult = {
+          ...finalResult,
+          forms: formsIds
+        }
+      }
+
+      return finalResult;
     });
-    setRoles(temp);
+    console.log({ result });
+    setRoles(result);
     setLoading(false);
   }, []);
 
-  const changeValue = (value: number) => {
-    return value === 1;
-  };
-
   const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {
     const value = e.target.checked;
-    roles[indexRole]!.active = value;
-    setRoles(roles);
+    const newRoles = roles.map((role, index) => {
+      if (index !== indexRole) {
+        return role;
+      }
+      return {
+        ...role,
+        active: value,
+      }
+    });
+    setRoles(newRoles);
   };
 
   const handleChange = (
@@ -275,127 +318,112 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     indexTask: number,
   ) => {
     const value = e.target.checked;
-    roles[indexRole]!.tasks[indexTask]!.active = value;
-    console.log({ roles });
-    setRoles(roles);
-  };
-
-  const handleMultipleHomeworkIds = (courseId: number) => {
-    let temp = [...homeworksCourseIds];
-    if (homeworksCourseIds.includes(courseId)) {
-      const index = homeworksCourseIds.indexOf(courseId);
-      if (index > -1) {
-        temp.splice(index, 1);
-        setHomeworksCourseIds(temp);
+    const result = roles.map((role, index) => {
+      if (index !== indexRole) {
+        return role;
       }
-    } else {
-      temp.push(courseId);
-      setHomeworksCourseIds(temp);
-    }
-  };
-
-  const handleMultipleCommentIds = (courseId: number) => {
-    let temp = [...commentsCourseIds];
-    if (commentsCourseIds.includes(courseId)) {
-      const index = commentsCourseIds.indexOf(courseId);
-      if (index > -1) {
-        temp.splice(index, 1);
-        setCommentsCourseIds(temp);
-      }
-    } else {
-      temp.push(courseId);
-      setCommentsCourseIds(temp);
-    }
-  };
-
-  const handleMultipleFormsIds = (formId: number) => {
-    let temp = [...formIds];
-    if (formIds.includes(formId)) {
-      const index = formIds.indexOf(formId);
-      if (index > -1) {
-        temp.splice(index, 1);
-        setFormIds(temp);
-      }
-    } else {
-      temp.push(formId);
-      setFormIds(temp);
-    }
-  };
-
-  const updateAdminType = async () => {
-    // debugger;
-    admin.adminTypes.forEach((element) => {
-      const role = roles.find((role) => role.name === element.role);
-      if (role === undefined) {
-        return;
-      }
-      element.view = role.active ? 1 : 0;
-      role.tasks.forEach((task) => {
-        if (task.task === 'Crear') {
-          element.create = task.active ? 1 : 0;
-        } else if (task.task === 'Editar') {
-          element.edit = task.active ? 1 : 0;
-        } else if (task.task === 'Eliminar') {
-          element.delete = task.active ? 1 : 0;
-        } else if (task.task === 'Solicitudes') {
-          element.request = task.active ? 1 : 0;
-        } else if (task.task === 'Generar Reporte') {
-          element.report = task.active ? 1 : 0;
-        } else if (task.task === 'Descargar') {
-          element.download = task.active ? 1 : 0;
+      const newTasks = role.tasks.map((task, index) => {
+        if (index !== indexTask) {
+          return task;
+        }
+        return {
+          ...task,
+          active: value
         }
       });
-      if (element.role === 'homeworks') {
-        element.courses = homeworksCourseIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
-      } else if (element.role === 'comments') {
-        element.courses = commentsCourseIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
-      } else if (element.role === 'forms') {
-        element.forms = formIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
+      return {
+        ...role,
+        tasks: newTasks
       }
     });
 
-    let user = {
-      user_id: admin.user_id,
-      roles: admin.adminTypes,
-    };
+    setRoles(result);
+  };
 
-    const queries = user.roles.map(role => {
+  const handleMultipleIds = (id: number, array: number[], setState: (array: number[]) => void) => {
+    let result = [...array];
+    if (array.includes(id)) {
+      const index = array.indexOf(id);
+      if (index > -1) {
+        result.splice(index, 1);
+        setState(result);
+      }
+    } else {
+      result.push(id);
+      setState(result);
+    }
+  }
+
+  const updateAdminType = async () => {
+    interface BackendRoleStructure {
+      user_id: number;
+      id: number;
+      role: string;
+      source_table: string;
+      create?: number;
+      edit?: number;
+      delete?: number;
+      view: number;
+      courses?: string;
+      request?: number;
+      report?: number;
+      download?: number;
+      forms?: string;
+    }
+
+    const getSourceTable = (roleName: string) => {
+      if (roleName === 'course') {
+        return `admin_courses`;
+      }
+      return `admin_${roleName}`;
+    }
+
+    const newRoles: BackendRoleStructure[] = roles.map(({ name, active, tasks, forms, courses }) => {
+      return {
+        id: 0, // no es necesario el id
+        role: name,
+        source_table: getSourceTable(name),
+        user_id: admin.user_id,
+        view: active === true ? 1 : 0,
+        create: tasks.find(t => t.task === 'Crear')?.active === true ? 1 : 0,
+        edit: tasks.find(t => t.task === 'Editar')?.active === true ? 1 : 0,
+        delete: tasks.find(t => t.task === 'Eliminar')?.active === true ? 1 : 0,
+        report: tasks.find(t => t.task === 'Generar Reporte')?.active === true ? 1 : 0,
+        download: tasks.find(t => t.task === 'Descargar')?.active === true ? 1 : 0,
+        courses: courses?.join(','),
+        forms: forms?.join(','),
+        request: tasks.find(t => t.task === 'Solicitudes')?.active === true ? 1 : 0,
+      }
+    });
+
+    const queries = newRoles.map(role => {
       try {
         return backendRoleEditMethod(role);
       } catch (error) {
         return `Error con el role ${JSON.stringify(role)}`;
       }
-
     });
-    console.log({ queries });
-    // anterior
-    try {
-      await anterior(user as any);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const anterior = async (user: {
-    user_id: number;
-    roles: AdminType[];
-  }) => {
     try {
-      const res = await updateAdminAccessApi(user);
-      setShow(false);
-      refresh();
-      alert('Accesos actualizados');
+      const results: string[] = [];
+      const promises = queries.map(async (query) => {
+        try {
+          const response = await postGenericQueryResponse(query);
+          results.push(JSON.stringify(response, null, 2));
+        } catch (error) {
+          console.error(error);
+          if (error instanceof Error) {
+            results.push(JSON.stringify(error, null, 2));
+          }
+        }
+      });
+      await Promise.all(promises);
+      console.log({ results });
     } catch (error) {
       console.error(error);
-      alert('Error al intentar actualizar los permisos');
     }
-  }
+    refresh();
+  };
 
   const selectAllFormChecks = () => {
     const result = forms.map(({ id }) => id);
@@ -419,10 +447,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'courses' + index}>
                 <p>{course.title}</p>
                 <input
-                  defaultChecked={commentsCourseIds.includes(course.id)}
+                  checked={commentsCourseIds.includes(course.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleCommentIds(course.id);
+                    handleMultipleIds(course.id, commentsCourseIds, setCommentsCourseIds);
                   }}
                 />
               </div>
@@ -444,10 +472,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'courses' + index}>
                 <p>{course.title}</p>
                 <input
-                  defaultChecked={homeworksCourseIds.includes(course.id)}
+                  checked={homeworksCourseIds.includes(course.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleHomeworkIds(course.id);
+                    handleMultipleIds(course.id, homeworksCourseIds, setHomeworksCourseIds);
                   }}
                 />
               </div>
@@ -469,10 +497,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
               <div className='flex' key={'form' + index}>
                 <p>{form.name}</p>
                 <input
-                  defaultChecked={formIds.includes(form.id)}
+                  checked={formIds.includes(form.id)}
                   type='checkbox'
                   onChange={(e) => {
-                    handleMultipleFormsIds(form.id);
+                    handleMultipleIds(form.id, formIds, setFormIds);
                   }}
                 />
               </div>
@@ -518,7 +546,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
                         <input
                           type='checkbox'
                           name={role.name}
-                          defaultChecked={role.active}
+                          checked={role.active}
                           onChange={(e) => handleRole(e, indexR)}
                         />
                       </RowContain>
@@ -531,7 +559,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
                             <input
                               type='checkbox'
                               name={task.task}
-                              defaultChecked={task.active}
+                              checked={task.active}
                               onChange={(e) => handleChange(e, indexR, indexT)}
                             />
                             <li>{task.task}</li>
