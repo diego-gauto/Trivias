@@ -1,5 +1,5 @@
-import BeneficiosCard from './beneficiosCard';
-import styles from './beneficiosCardContainer.module.css';
+import BeneficiosCard from "./beneficiosCard";
+import styles from "./beneficiosCardContainer.module.css";
 
 export default function BeneficiosCardContainer() {
   const { cardContainer } = styles;
@@ -14,7 +14,7 @@ export default function BeneficiosCardContainer() {
     {
       img: '/images/trivias/Beneficios/envio.png',
       title: 'Envío gratis ',
-      description: 'en compras superiores a $1,000.00 MXN de productos Gonvar.',
+      description: 'en compras superiores a $2,000.00 MXN de productos Gonvar.',
       extra: '',
     },
     {

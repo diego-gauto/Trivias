@@ -265,7 +265,7 @@ const Anual = (props: IData) => {
           <div className='break tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='blue mb-0'>
-                Precio de Distribución con 20% de descuento
+                Precio de Producto con 20% de descuento
               </p>
               {views.get(5) ? (
                 <BsChevronUp className='tip-icon Back-blue' />
@@ -327,7 +327,7 @@ const Anual = (props: IData) => {
             {views.get(7) && (
               <div className='b-blue'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just'>
-                  <b>Obtén envíos gratis</b> en compras superiores a $1,000.00
+                  <b>Obtén envíos gratis</b> en compras superiores a $2,000.00
                   MXN.
                 </p>
               </div>
