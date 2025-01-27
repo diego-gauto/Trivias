@@ -264,7 +264,7 @@ const Mensual = (props: IData) => {
               <div className='b-p-pink'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just'>
                   <b>Obtén envíos gratis </b>
-                  en compras superiores a $1,000.00 MXN.
+                  en compras superiores a $2,000.00 MXN.
                 </p>
               </div>
             )}
