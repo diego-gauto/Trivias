@@ -37,7 +37,7 @@ type RoleProps = {
   admin: Admin;
   setShow: (open: boolean) => void;
   show: boolean;
-  refresh: any;
+  refresh: () => void;
   courses: { id: number; title: string; published: boolean }[];
   forms: { id: number; name: string; }[];
 };
@@ -355,42 +355,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   }
 
   const updateAdminType = async () => {
-    admin.adminTypes.forEach((element) => {
-      const role = roles.find((role) => role.name === element.role);
-      if (role === undefined) {
-        return;
-      }
-      element.view = role.active ? 1 : 0;
-      role.tasks.forEach((task) => {
-        if (task.task === 'Crear') {
-          element.create = task.active ? 1 : 0;
-        } else if (task.task === 'Editar') {
-          element.edit = task.active ? 1 : 0;
-        } else if (task.task === 'Eliminar') {
-          element.delete = task.active ? 1 : 0;
-        } else if (task.task === 'Solicitudes') {
-          element.request = task.active ? 1 : 0;
-        } else if (task.task === 'Generar Reporte') {
-          element.report = task.active ? 1 : 0;
-        } else if (task.task === 'Descargar') {
-          element.download = task.active ? 1 : 0;
-        }
-      });
-      if (element.role === 'homeworks') {
-        element.courses = homeworksCourseIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
-      } else if (element.role === 'comments') {
-        element.courses = commentsCourseIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
-      } else if (element.role === 'forms') {
-        element.forms = formIds
-          .filter((id) => !Number.isNaN(id))
-          .join(', ');
-      }
-    });
-
     interface BackendRoleStructure {
       user_id: number;
       id: number;
@@ -432,12 +396,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       }
     });
 
-    let user = {
-      user_id: admin.user_id,
-      roles: newRoles,
-    };
-
-    const queries = user.roles.map(role => {
+    const queries = newRoles.map(role => {
       try {
         return backendRoleEditMethod(role);
       } catch (error) {
@@ -463,22 +422,8 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     } catch (error) {
       console.error(error);
     }
+    refresh();
   };
-
-  const anterior = async (user: {
-    user_id: number;
-    roles: AdminType[];
-  }) => {
-    try {
-      const res = await updateAdminAccessApi(user);
-      setShow(false);
-      refresh();
-      alert('Accesos actualizados');
-    } catch (error) {
-      console.error(error);
-      alert('Error al intentar actualizar los permisos');
-    }
-  }
 
   const selectAllFormChecks = () => {
     const result = forms.map(({ id }) => id);
