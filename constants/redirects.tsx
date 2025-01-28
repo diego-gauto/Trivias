@@ -242,8 +242,7 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
         user.final_date,
         user.role,
         user.method as MembershipMethodValue,
-      ) &&
-      course.type === 'Mensual'
+      )
     ) {
       router.push({
         pathname: LESSON_PATH,
