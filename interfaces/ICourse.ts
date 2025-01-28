@@ -7,7 +7,7 @@ export interface ICourse {
   pay: boolean;
   material_route: string;
   data: any;
-  type: string;
+  type: 'Mensual' | 'Gratis';
   duration: number;
   professors: [IProfessors];
   image: string;
@@ -25,7 +25,7 @@ export interface ICourse {
   };
   // the course about
   title: string;
-  difficulty: string;
+  difficulty: 'Avanzado' | 'Fácil' | 'Intermedio' | 'Máster' | 'Muy Fácil';
   price: number;
   createdAt: any;
   lessons: any;
