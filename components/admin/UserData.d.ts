@@ -91,7 +91,9 @@ export type RoleValue =
   | 'forms_list'
   | 'tickets_list'
   | 'memberships_list'
-  | 'distributors';
+  | 'distributors'
+  | 'subscriptions'
+  | 'active_memberships';
 
 export interface Role {
   id: number;
