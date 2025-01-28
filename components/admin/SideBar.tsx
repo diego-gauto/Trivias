@@ -76,6 +76,11 @@ const SideBar = ({ show, onHide }: any) => {
             setIsTicketsList(true);
           if (role.role === 'memberships_list' && changeValue(role.view))
             setIsMembershipsList(true);
+          // setIsSubscriptions
+          if (role.role === 'subscriptions' && changeValue(role.view))
+            setIsSubscriptions(true);
+          if (role.role === 'active_memberships' && changeValue(role.view))
+            setIsActiveMemberships(true);
         });
         setUserData(userDataAuth.user);
         setLoading(false);
@@ -475,32 +480,38 @@ const SideBar = ({ show, onHide }: any) => {
             </ul>
           </>
         )}
-        {(isSuperAdmin || userData?.email === 'contacto@gonvar.io') && (
+        {(isSuperAdmin || (isSubscriptions || isActiveMemberships)) && (
           <>
             <Text>Statistics</Text>
             <ul>
-              <Link href='/admin/SuscriptionStats'>
-                <li
-                  style={{ color: index == 18 ? '#ffa500' : '#fff' }}
-                  onClick={() => {
-                    setIndex(18);
-                    onHide();
-                  }}
-                >
-                  Subscriptions
-                </li>
-              </Link>
-              <Link href='/admin/MembershipStats'>
-                <li
-                  style={{ color: index == 19 ? '#ffa500' : '#fff' }}
-                  onClick={() => {
-                    setIndex(19);
-                    onHide();
-                  }}
-                >
-                  Active Memberships
-                </li>
-              </Link>
+              {
+                (isSuperAdmin || isSubscriptions) &&
+                <Link href='/admin/SuscriptionStats'>
+                  <li
+                    style={{ color: index == 18 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(18);
+                      onHide();
+                    }}
+                  >
+                    Subscriptions
+                  </li>
+                </Link>
+              }
+              {
+                (isSuperAdmin || isActiveMemberships) &&
+                <Link href='/admin/MembershipStats'>
+                  <li
+                    style={{ color: index == 19 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(19);
+                      onHide();
+                    }}
+                  >
+                    Active Memberships
+                  </li>
+                </Link>
+              }
             </ul>
           </>
         )}
