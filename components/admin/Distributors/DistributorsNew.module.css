@@ -407,8 +407,8 @@
 
 .go-back {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   font-weight: bold;
   order: 1;
   color: #691aca;

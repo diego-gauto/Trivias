@@ -216,7 +216,7 @@ export const MainContainer = styled.div`
     color: #8a4bd7;
   }
 
-  .modal-backdrop {
+  .modal-backdrop-custom {
     position: fixed;
     top: 0;
     left: 0;
@@ -228,7 +228,7 @@ export const MainContainer = styled.div`
     justify-content: center;
   }
 
-  .modal-content {
+  .modal-content-custom {
     background-color: white;
     padding: 20px;
     border-radius: 16px;

@@ -1,3 +1,5 @@
+import { ModalContainer } from './Modal.styled';
+
 interface IModalProps {
   show: boolean,
   onClose: () => void,
@@ -8,14 +10,14 @@ export const Modal = ({ show, onClose, child }: IModalProps) => {
   if (!show) return null;
 
   const handleBackdropClick = (e: any) => {
-    if (e.target.className === 'modal-backdrop') {
+    if (e.target.className === 'modal-backdrop-custom') {
       onClose();
     }
   };
 
   return (
-    <div className="modal-backdrop" onClick={handleBackdropClick}>
-      <div className="modal-content">
+    <ModalContainer className="modal-backdrop-custom" onClick={handleBackdropClick}>
+      <div className="modal-content-custom">
         {
           /*
           <h2>Este es el Modal</h2>
@@ -27,6 +29,6 @@ export const Modal = ({ show, onClose, child }: IModalProps) => {
           child
         }
       </div>
-    </div>
+    </ModalContainer>
   );
 };
