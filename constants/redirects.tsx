@@ -236,13 +236,13 @@ export const goToCertificate = (course: any) => {
 export const goToSuscription = (user: IUser, course: ICourse) => {
   if (user) {
     // Falta considerar nivel 3 (Pausado, en este caso es necesario mandar a PROFILE_PATH)
-    if (
+    if (course.type === 'Gratis' || (
       haveAccess(
         user.level,
         user.final_date,
         user.role,
         user.method as MembershipMethodValue,
-      )
+      ) && course.type === 'Mensual')
     ) {
       router.push({
         pathname: LESSON_PATH,
