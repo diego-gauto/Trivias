@@ -1060,7 +1060,7 @@ const LandingSuscription = (props: ILandingSuscription) => {
               <img src={envio} className='me-3' />
               <h5>
                 <b className='p-pink'>Envío gratis</b> de productos en compras
-                superiores a $1,000.00 MXN
+                superiores a $2,000.00 MXN
               </h5>
             </div>
 

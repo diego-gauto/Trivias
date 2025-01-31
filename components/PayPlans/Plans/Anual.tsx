@@ -265,7 +265,7 @@ const Anual = (props: IData) => {
           <div className='break tip m-2' onClick={() => verQ(5)}>
             <div className='tip-q mb-1'>
               <p className='blue mb-0'>
-                Precio de Producto con 20% de descuento
+                Hasta 20% de descuento en productos
               </p>
               {views.get(5) ? (
                 <BsChevronUp className='tip-icon Back-blue' />
@@ -276,10 +276,8 @@ const Anual = (props: IData) => {
             {views.get(5) && (
               <div className='b-blue'>
                 <p className='mb-0 pt-2 animate__animated animate__fadeIn no-bold just'>
-                  <b>20% de descuento en todo el producto Gonvar.</b>
-                  <br />
-                  Sin compras mínimas. Compra con nosotros a un precio de
-                  distribución, ahorra o vende en tu localidad.
+                  Recibe <b>20% de descuento </b>
+                  en productos Gonvar mientras mantengas tu suscripción activa.
                 </p>
               </div>
             )}
