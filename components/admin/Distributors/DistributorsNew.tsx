@@ -1,23 +1,135 @@
 import styles from './DistributorsNew.module.css';
 import { IoMdAddCircleOutline, IoMdSearch } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from '../UsersNew/GenericModal';
+import { createANewDistributor, getAdminUserIdByEmail, getAllDistributorUserIds, getAllDistributorUsersArray, getAllDistributorUsersCount, getAllUsersArray, getAllUsersCount } from './Queries';
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import Pagination from '../../../components/Pagination/Pagination';
 
-interface IDistributor {
-  userId: number,
-  username: string,
-  email: string,
-  phonenumber: string,
-  originState: string,
+type MainSection = 'distributors' | 'common-users' | 'sells';
+
+type DistributorsSubSection = 'distributors-list' | 'distributor-details';
+
+type EntityParams = {
+  offset: number,
+  count: number,
 }
 
-type MainSection = 'distributors-list' | 'common-users' | 'sells';
-
 export const DistributorsNew = () => {
+  const [adminId, setAdminId] = useState<number>(0);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
-  const [mainSection, setMainSection] = useState<MainSection>('distributors-list');
+  const [distributorsParams, setDistributorsParams] = useState<EntityParams>({
+    offset: 0,
+    count: 0,
+  });
+  const [commonUsers, setCommonUsers] = useState<IUser[]>([]);
+  const [commonUsersParams, setCommonUsersParams] = useState<EntityParams>({
+    offset: 0,
+    count: 0,
+  });
+  const [distributorUserIds, setDistributorUserIds] = useState<IDistributorIdsWithUserId[]>([]);
+  const [selectedDistributorId, setSelectedDistributorId] = useState<number>(-1);
+  const [mainSection, setMainSection] = useState<MainSection>('distributors');
+  const [distributorsSubSection, setDistributorsSubSection] = useState<DistributorsSubSection>('distributors-list');
   const [showMakeDistributorModal, setShowMakeDistributorModal] = useState(false);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    refreshDistributorIds();
+    getAdminId();
+  }, []);
+
+  useEffect(() => {
+    try {
+      refreshDistributorsList();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [distributorsParams.offset]);
+
+  useEffect(() => {
+    try {
+      console.log('Esta cambiando el offset');
+      refreshNormalUsersList();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [commonUsersParams.offset]);
+
+  async function getAdminId() {
+    try {
+      const adminId = await getAdminUserIdByEmail(localStorage.getItem('email') || '');
+      setAdminId(adminId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function refreshDistributorsList() {
+    try {
+      const { offset } = distributorsParams;
+      const distributorsListCount = await getAllDistributorUsersCount(inputValue);
+      const distributorsList = await getAllDistributorUsersArray(offset, inputValue);
+      setDistributorsParams({
+        ...distributorsParams,
+        count: distributorsListCount
+      })
+      setDistributors(distributorsList);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function refreshNormalUsersList() {
+    try {
+      const { offset } = commonUsersParams;
+      const usersListCount = await getAllUsersCount(inputValue);
+      const usersList = await getAllUsersArray(offset, inputValue);
+      setCommonUsersParams({
+        ...commonUsersParams,
+        count: usersListCount
+      });
+      console.log({ usersList });
+      setCommonUsers(usersList);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function refreshDistributorIds() {
+    try {
+      const ids = await getAllDistributorUserIds();
+      setDistributorUserIds(ids);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const changePageDistributorList = (page: number) => {
+    setDistributorsParams({
+      ...distributorsParams,
+      offset: page * 100,
+    });
+  };
+
+  const changePageCommonUsersList = (page: number) => {
+    setCommonUsersParams({
+      ...commonUsersParams,
+      offset: page * 100,
+    });
+  };
+
+  async function tryToMakeUserDistributor(user_id: number) {
+    const canCreateDistributor = await createANewDistributor(user_id, adminId);
+    if (canCreateDistributor) {
+      setCanMakeUserADistributor(true);
+    } else {
+      setCanMakeUserADistributor(false);
+    }
+  }
 
   return <div className={styles['container']}>
     <div className={styles['data-container']}>
@@ -27,13 +139,33 @@ export const DistributorsNew = () => {
             className={styles['search-icon']}
             size={25}
             color='#858585' />
-          <input className={styles['search-distributor']} type="text" placeholder='Buscar' />
+          <input
+            className={styles['search-distributor']}
+            type="text"
+            placeholder='Buscar'
+            value={
+              inputValue
+            }
+            onChange={(e) => {
+              const { value } = e.target;
+              setInputValue(value);
+            }}
+          />
         </div>
         <div className={styles['search-bar-elements']}>
-          <div className={styles['search-bar-element']}>
+          <div
+            className={styles['search-bar-element']}
+            onClick={(e) => {
+              if (mainSection === 'distributors') {
+                refreshDistributorsList();
+              } else if (mainSection === 'common-users') {
+                refreshNormalUsersList();
+              }
+            }}
+          >
             <CiFilter
               size={25}
-            /> Filtrar
+            />Filtrar
           </div>
           <div className={styles['search-bar-element']}>
             <IoMdAddCircleOutline
@@ -44,9 +176,9 @@ export const DistributorsNew = () => {
       </div>
       <div className={styles['sections-container']}>
         <div
-          className={`${styles['section-title']} ${mainSection === 'distributors-list' ? styles['section-title--active'] : ''}`}
+          className={`${styles['section-title']} ${mainSection === 'distributors' ? styles['section-title--active'] : ''}`}
           onClick={(e) => {
-            setMainSection('distributors-list');
+            setMainSection('distributors');
           }}
         >
           Distribuidores
@@ -70,159 +202,243 @@ export const DistributorsNew = () => {
       </div>
       <div className={styles['content-section']}>
         {
-          mainSection === 'distributors-list' &&
+          (mainSection === 'distributors' && distributorsSubSection === 'distributors-list') &&
           <>
-            <h2 className={styles['content-title']}>Listado de distribuidores</h2>
+            <div className={styles['main-header-section']}>
+              <h2 className={styles['content-title']}>Listado de distribuidores</h2>
+              <div className={styles['pagination-section']}>
+                <Pagination
+                  /*
+                  <Pagination
+                    changePage={changePage}
+                    currentPage={userFilters.offset / 100}
+                    totalPage={Math.ceil(totalAssignments / 100)}
+                  />
+                  */
+                  changePage={changePageDistributorList}
+                  currentPage={distributorsParams.offset / 100}
+                  totalPage={Math.ceil(distributorsParams.count / 100)}
+                />
+              </div>
+            </div>
+            {
+              distributors.length > 0 &&
+              <div className={styles['table-content']}>
+                <table className={styles['gonvar-table']}>
+                  <thead className={styles['gonvar-table__thead']}>
+                    <tr className={styles['gonvar-table__row']}>
+                      <th className={styles['gonvar-table__th']}>Distribuidor</th>
+                      <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
+                      <th className={styles['gonvar-table__th']}>Número de celular</th>
+                      <th className={styles['gonvar-table__th']}>Estado de origen</th>
+                      <th className={styles['gonvar-table__th']}>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      distributors.map((d, i) => {
+                        return <tr
+                          className={styles['gonvar-table__row']}
+                          key={`distributor_${i}`}
+                        >
+                          <td className={styles['gonvar-table__data']}>
+                            {d.name}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {d.email}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {d.phone_number}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {d.origin_state}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            <button
+                              className={styles['gonvar-table__button']}
+                              onClick={(e) => {
+                                setDistributorsSubSection('distributor-details');
+                                setSelectedDistributorId(d.distributor_id);
+                              }}
+                            >
+                              Ver perfil
+                            </button>
+                          </td>
+                        </tr>
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+            {
+              distributors.length === 0 &&
+              <div className={styles['empty-container']}>
+                <div className={styles['empty-content']}>
+                  <p className={styles['empty-content-text']}>
+                    No se encuentran distribuidores con los parametros dados.
+                  </p>
+                </div>
+              </div>
+            }
+          </>
+        }
+        {
+          (mainSection === 'distributors' && distributorsSubSection === 'distributor-details') &&
+          <>
+            <div className={styles['go-back-container']}>
+              {/* GO BACK */}
+              <div
+                className={styles['go-back']}
+                onClick={(e) => {
+                  setDistributorsSubSection('distributors-list');
+                }}
+              >
+                <FaLongArrowAltLeft size={30} />
+                <span className={styles['']}>Atrás</span>
+              </div>
+            </div>
+            <h2 className={styles['content-title']}>Detalles</h2>
             <div>
 
-            </div>
-            <div className={styles['table-content']}>
-              <table className={styles['gonvar-table']}>
-                <thead className={styles['gonvar-table__thead']}>
-                  <tr className={styles['gonvar-table__row']}>
-                    <th className={styles['gonvar-table__th']}>Distribuidor</th>
-                    <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                    <th className={styles['gonvar-table__th']}>Número de celular</th>
-                    <th className={styles['gonvar-table__th']}>Pais</th>
-                    <th className={styles['gonvar-table__th']}>Estado de origen</th>
-                    <th className={styles['gonvar-table__th']}>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Diseño de uñas</td>
-                    <td className={styles['gonvar-table__data']}>disenos.a.la.medida@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 1819923</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Oaxaca</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                        onClick={(e) => {
-                          setShowMakeDistributorModal(true);
-                        }}
-                      >
-                        Ver perfil
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Estetica primavera</td>
-                    <td className={styles['gonvar-table__data']}>estetica.primavera.2023@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 2819923</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Sonora</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                        onClick={(e) => {
-                          setShowMakeDistributorModal(true);
-                        }}
-                      >
-                        Ver perfil
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Mary Cruz Nails</td>
-                    <td className={styles['gonvar-table__data']}>maria.alejandra54232@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 3817951</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Sonora</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                        onClick={(e) => {
-                          setShowMakeDistributorModal(true);
-                        }}
-                      >
-                        Ver perfil
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </>
         }
         {
-          mainSection === 'common-users' &&
+          (mainSection === 'common-users' && canMakeUserADistributor === null) &&
           <>
-            <h2 className={styles['content-title']}>Listado de usuarios comunes</h2>
-            <div>
-
+            <div className={styles['main-header-section']}>
+              <h2 className={styles['content-title']}>Listado de usuarios comunes</h2>
+              <div className={styles['pagination-section']}>
+                <Pagination
+                  changePage={changePageCommonUsersList}
+                  currentPage={commonUsersParams.offset / 100}
+                  totalPage={Math.ceil(commonUsersParams.count / 100)}
+                />
+              </div>
             </div>
-            <div className={styles['table-content']}>
-              <table className={styles['gonvar-table']}>
-                <thead className={styles['gonvar-table__thead']}>
-                  <tr className={styles['gonvar-table__row']}>
-                    <th className={styles['gonvar-table__th']}>Nombre</th>
-                    <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                    <th className={styles['gonvar-table__th']}>Número de celular</th>
-                    <th className={styles['gonvar-table__th']}>Pais</th>
-                    <th className={styles['gonvar-table__th']}>Estado de origen</th>
-                    <th className={styles['gonvar-table__th']}>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Alma Alejandra Valenzuela</td>
-                    <td className={styles['gonvar-table__data']}>alma.alejandra@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 1819923</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Oaxaca</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                        onClick={(e) => {
-                          setShowMakeDistributorModal(true);
-                        }}
-                      >
-                        Hacer distribuidor
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Cielo Vianey Enriquez</td>
-                    <td className={styles['gonvar-table__data']}>estetica.primavera.2023@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 812 2819923</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Nuevo León</td>
-                    <td className={styles['gonvar-table__data']}>
-                      Ya es distribuidor
-                    </td>
-                  </tr>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Maria Jose Félix</td>
-                    <td className={styles['gonvar-table__data']}>maria.jose.felix@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 3817951</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Sonora</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                      >
-                        Hacer distribuidor
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className={styles['gonvar-table__row']}>
-                    <td className={styles['gonvar-table__data']}>Almeida Rosas</td>
-                    <td className={styles['gonvar-table__data']}>almeida.rosas.1992@gmail.com</td>
-                    <td className={styles['gonvar-table__data']}>+52 642 3817951</td>
-                    <td className={styles['gonvar-table__data']}>México</td>
-                    <td className={styles['gonvar-table__data']}>Sonora</td>
-                    <td className={styles['gonvar-table__data']}>
-                      <button
-                        className={styles['gonvar-table__button']}
-                      >
-                        Hacer distribuidor
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            {
+              commonUsers.length > 0 &&
+              <div className={styles['table-content']}>
+                <table className={styles['gonvar-table']}>
+                  <thead className={styles['gonvar-table__thead']}>
+                    <tr className={styles['gonvar-table__row']}>
+                      <th className={styles['gonvar-table__th']}>Nombre</th>
+                      <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
+                      <th className={styles['gonvar-table__th']}>Número de celular</th>
+                      <th className={styles['gonvar-table__th']}>Pais</th>
+                      <th className={styles['gonvar-table__th']}>Estado de origen</th>
+                      <th className={styles['gonvar-table__th']}>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      commonUsers.map((cu, i) => {
+                        return <tr
+                          className={styles['gonvar-table__row']}
+                          key={`user_${i}`}
+                        >
+                          <td className={styles['gonvar-table__data']}>
+                            {cu.name}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {cu.email}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {cu.phone_number}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {cu.country}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {cu.origin_state}
+                          </td>
+                          <td className={styles['gonvar-table__data']}>
+                            {
+                              distributorUserIds.find(d => d.user_id === cu.user_id) === undefined &&
+                              <button
+                                className={styles['gonvar-table__button']}
+                                onClick={(e) => {
+                                  tryToMakeUserDistributor(cu.user_id);
+                                }}
+                              >
+                                Hacer distribuidor
+                              </button>
+                            }
+                            {
+                              distributorUserIds.find(d => d.user_id === cu.user_id) !== undefined &&
+                              <p style={{
+                                margin: '0',
+                                fontWeight: 'bold',
+                                border: '1px solid black',
+                                borderRadius: '12px',
+                                padding: '6px',
+                                userSelect: 'none',
+                                fontSize: '12px'
+                              }}>
+                                Es distribuidor
+                              </p>
+                            }
+                          </td>
+                        </tr>
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+            {
+              commonUsers.length === 0 &&
+              <div className={styles['empty-container']}>
+                <div className={styles['empty-content']}>
+                  <p className={styles['empty-content-text']}>
+                    No se encuentran usuarios con los parametros dados.
+                  </p>
+                </div>
+              </div>
+            }
+          </>
+        }
+        {
+          (mainSection === 'common-users' && canMakeUserADistributor !== null) &&
+          <div className={styles['result-petition-section']}>
+            <div className={styles['result-petition-container']}>
+              <div className={`${styles['result-petition-icon']} ${styles[`result-petition-icon--${canMakeUserADistributor ? 'approve' : 'not-approve'}`]}`}>
+                {
+                  canMakeUserADistributor === true ? '✔' : '!'
+                }
+              </div>
+              <h3 className={styles['result-petition-title']}>
+                {
+                  canMakeUserADistributor ?
+                    '¡Se ha asignado como distribudor con exito!'
+                    : '¡No se ha asignado como distribudor con exito!'
+                }
+              </h3>
+              <h4 className={styles['result-petition-subtitle']}>
+                {
+                  canMakeUserADistributor ?
+                    'Ahora el usuario puede distribuir productos'
+                    : 'Intente de nuevo esta acción, quizas tambien el usuario ya sea distribuidor'
+                }
+              </h4>
+              <div className={styles['result-petition-buttons']}>
+                <button
+                  className={styles['result-petition-button']}
+                  onClick={(e) => {
+                    setCanMakeUserADistributor(null);
+                    refreshDistributorIds();
+                  }}
+                >
+                  Regresar a usuarios
+                </button>
+              </div>
             </div>
+          </div>
+        }
+        {
+          (mainSection === 'common-users' && canMakeUserADistributor === false) &&
+          <>
           </>
         }
         {

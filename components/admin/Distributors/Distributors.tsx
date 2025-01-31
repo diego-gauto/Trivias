@@ -13,14 +13,12 @@ import {
 import {
   getGenericQueryResponse,
   updateUserRoleApi,
-  postGenericQueryResponse
 } from '../../api/admin';
 import { Button } from '../Courses/CourseMain.styled';
 import { IoClose } from 'react-icons/io5';
 import { DistributorModal } from './DistributorModal';
 import { GenericModal } from '../HomeWork/HomeWorkModal/GenericModal';
 import { GenerateCodesModal } from './GenerateCodesModal/GenerateCodesModalContent';
-import DStyles from './Distributors.module.css';
 
 interface IAdmin {
   admin_id: number
@@ -48,26 +46,10 @@ interface IUser {
   email: string
 }
 
-interface IDistributorFilters {
-  name: string,
-  email: string,
-  adminEmail: string,
-  sellsCount: number
-}
-
-const generateInitialFilters = (): IDistributorFilters => {
-  return {
-    email: '',
-    adminEmail: '',
-    name: '',
-    sellsCount: -1
-  }
-}
-
 const Distributors = () => {
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [selectedUserId, setSelectedUserId] = useState(-1);
+  const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
   const [newMember, setNewMember] = useState<boolean>(false);
   const [emailToFind, setEmailToFind] = useState<string>('');
   const [find, setFind] = useState<boolean>(false);
@@ -77,11 +59,10 @@ const Distributors = () => {
   const [admins, setAdmins] = useState<IAdmin[]>([]);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
   const [showGenerateCodesModal, setShowGenerateCodesModal] = useState(false);
-  const [filters, setFilters] = useState<IDistributorFilters>(generateInitialFilters());
 
-  const showViewUserModal = async (id: number): Promise<void> => {
-    // setModalVisible(true);
-    setSelectedUserId(id);
+  const showViewUserModal = async (index: number): Promise<void> => {
+    setModalVisible(true);
+    setSelectedUserIndex(index);
   };
 
   const getAllAdmins = async () => {
@@ -128,7 +109,7 @@ const Distributors = () => {
 
   const search = async () => {
     try {
-      const query = `SELECT id, concat(name, ' ', last_name) as name, email FROM users WHERE email = '${emailToFind}';`;
+      const query = `SELECT id, concat(name, ' ', last_name) AS name, email FROM users WHERE email = '${emailToFind}';`;
       const response = await getGenericQueryResponse(query);
       const data = response.data.data as IUser[];
       if (data.length > 0) {
@@ -143,29 +124,16 @@ const Distributors = () => {
     }
   };
 
-  const updateRole = async () => {
+  const updateRole = () => {
     if (user !== null) {
-      try {
-        const adminEmail = localStorage.getItem('email');
-        if (adminEmail === null) {
-          return;
-        }
-        const getUserAdminIdQuery = `select au.id as admin_id from users as u inner join admin_users as au on au.user_id = u.id where u.email like '${adminEmail}'`;
-        const responseUserAdminId = await getGenericQueryResponse(getUserAdminIdQuery);
-        const adminIds = responseUserAdminId.data.data as { admin_id: number }[];
-        if (!(adminIds.length > 0)) {
-          return;
-        }
-        const adminId = adminIds.map(a => a.admin_id);
-        const query = `insert into distributors (user_id, admin_user_id) values (${user.id}, ${adminId[0]});`;
-        const response = await postGenericQueryResponse(query);
-        getAllDistributorUsers();
+      let temp = {
+        userId: user.id,
+      };
+      updateUserRoleApi(temp).then(() => {
         setEmailToFind('');
         setFind(false);
         setNewMember(false);
-      } catch (error) {
-        console.error(error);
-      }
+      });
     }
   };
 
@@ -209,88 +177,6 @@ const Distributors = () => {
               Nuevo miembro
             </Button>
           </TitleContain>
-          <div className={DStyles['filters-section']}>
-            <div className={DStyles['filter-property']}>
-              <label className={DStyles['filter-property-header']} htmlFor="filter-name">Nombre</label>
-              <input className={DStyles['filter-property-value']} type="text" id="filter-name" />
-            </div>
-            <div className={DStyles['filter-property']}>
-              <label className={DStyles['filter-property-header']} htmlFor="filter-email">Correo</label>
-              <input className={DStyles['filter-property-value']} type="email" id="filter-email" />
-            </div>
-            <div className={DStyles['filter-property']}>
-              <label className={DStyles['filter-property-header']} htmlFor="filter-sells-count">Numero de compras</label>
-              <input className={DStyles['filter-property-value']} type="number" id="filter-sells-count" min={0} max={99999} />
-            </div>
-          </div>
-          <div className={`${DStyles['sections-container']}`}>
-            <div className={`${DStyles['distributors-scroll']}`}>
-              <h3 style={{ margin: '0' }}>Distribuidores</h3>
-              {
-                distributors.length > 0 &&
-                distributors.map((d, index) => {
-                  return <div
-                    className={DStyles['distributor-card-item']}
-                    key={`distributor_${d.distributor_id}_${index}`}
-                    onClick={(e) => {
-                      showViewUserModal(d.distributor_id);
-                    }}
-                  >
-                    <div className={DStyles['distributor-property-container']}>
-                      <h4 className={DStyles['distributor-header-property']}>Nombre</h4>
-                      <p className={DStyles['distributor-property-value']}>{d.name}</p>
-                    </div>
-                    <div className={DStyles['distributor-property-container']}>
-                      <h4 className={DStyles['distributor-header-property']}>Email</h4>
-                      <p className={DStyles['distributor-property-value']}>{d.email}</p>
-                    </div>
-                    <div className={DStyles['distributor-property-container']}>
-                      <h4 className={DStyles['distributor-header-property']}>Creado</h4>
-                      <p className={DStyles['distributor-property-value']}>{new Date(d.distributor_created_at * 1000).toJSON().slice(0, 10)}</p>
-                    </div>
-                    <div className={DStyles['distributor-property-container']}>
-                      <h4 className={DStyles['distributor-header-property']}>Numero de celular</h4>
-                      <p className={DStyles['distributor-property-value']}>{d.phone_number}</p>
-                    </div>
-                    <div className={DStyles['distributor-property-container']}>
-                      <h4 className={DStyles['distributor-header-property']}>Hecho distribuidor por</h4>
-                      {
-                        <>
-                          <p className={DStyles['distributor-property-value']}>{admins.find(ad => ad.admin_id === d.admin_user_id)?.name || '(Desconocido)'}</p>
-                          <p className={DStyles['distributor-property-value']}>{admins.find(ad => ad.admin_id === d.admin_user_id)?.email || '(Desconocido)'}</p>
-                        </>
-                      }
-                    </div>
-                  </div>
-                })
-              }
-            </div>
-            <div className={`${DStyles['distributors-scroll']}`}>
-              <h3 style={{ margin: '0' }}>Detalles</h3>
-              {
-                selectedUserId === -1 &&
-                <div>
-                  <p style={{
-                    fontWeight: '500',
-                    border: '1px solid black',
-                    padding: '16px',
-                    borderRadius: '32px',
-                    textAlign: 'center'
-                  }}>Seleccione un distribuidor para ver sus detalles</p>
-                </div>
-              }
-              {
-                selectedUserId !== -1 &&
-                <div>
-                  <div>
-                    <button>Crear codigos</button>
-                    <button>Crear codigos</button>
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
-
           <Table id='Users' style={{ display: 'inline-table', width: '100%' }}>
             <thead>
               <tr>
@@ -336,7 +222,7 @@ const Distributors = () => {
               setIsVisible={(isVisible => {
                 setModalVisible(isVisible);
               })}
-              distributor={distributors.find(d => d.distributor_id === selectedUserId)!}
+              distributor={distributors[selectedUserIndex]!}
               adminsList={admins}
               onClickGenerateCodes={() => {
                 console.log('Generar codigos de acceso');
@@ -354,7 +240,7 @@ const Distributors = () => {
           content={
             <GenerateCodesModal
               admin={admins.find(admin => admin.email === localStorage.getItem('email'))}
-              distributor={distributors.find(d => d.distributor_id === selectedUserId)}
+              distributor={distributors[selectedUserIndex]!}
             />}
           title='Generar códigos de acceso'
           onClose={() => {

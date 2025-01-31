@@ -1,0 +1,224 @@
+import { getGenericQueryResponse, postGenericQueryResponse } from "../../api/admin";
+
+export const getAdminUserIdByEmail = async (email: string) => {
+  try {
+    const query = `select au.id as admin_user_id 
+      from users as u 
+      inner join admin_users as au on au.user_id = u.id
+      where u.email like '${email}%';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { admin_user_id: number }[];
+    return data[0]?.admin_user_id || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+export const getAllAdmins = async (): Promise<IAdmin[]> => {
+  try {
+    const query = `select au.id as admin_id,
+        u.id as user_id,
+        concat(u.name, ' ', u.last_name) as name,
+        u.email, u.phone_number
+        from admin_users as au 
+        inner join users as u on u.id = au.user_id 
+        order by au.id;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IAdmin[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
+export const getAllDistributorUsersArray = async (offset: number, input: string): Promise<IDistributor[]> => {
+  try {
+    const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
+        u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
+        unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
+        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state
+        from distributors as d
+        inner join users as u on u.id = d.user_id
+        where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%'
+        order by d.distributor_id
+        limit 100 offset ${offset};`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IDistributor[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
+export const getAllDistributorUsersCount = async (input: string): Promise<number> => {
+  try {
+    const query = `select count(*) as count
+      from distributors as d
+      inner join users as u on u.id = d.user_id
+      where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { count: number }[];
+    return data[0]?.count || 0;
+  } catch (error) {
+    console.error(error);
+  }
+  return 0;
+}
+
+export const getAllUsersArray = async (offset: number, input: string): Promise<IUser[]> => {
+  try {
+    const query = `select id as user_id, concat(name, ' ', last_name) as name, 
+      phone_number, photo, unix_timestamp(created_at) as user_created_at, 
+      country, email, ifnull(origin_state, '') as origin_state
+      from users
+      where email like '${input}%' or concat(name, ' ', last_name) like '${input}%'
+      order by id
+      limit 100 offset ${offset};`;
+    console.log({ query });
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IUser[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
+export const getAllUsersCount = async (input: string): Promise<number> => {
+  try {
+    const query = `select count(*) as count
+      from users 
+      where email like '${input}%' or concat(name, ' ', last_name) like '${input}%';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { count: number }[];
+    return data[0]?.count || 0;
+  } catch (error) {
+    console.error(error);
+  }
+  return 0;
+}
+
+export const getAllDistributorUserIds = async (): Promise<IDistributorIdsWithUserId[]> => {
+  try {
+    const query = `select distributor_id, user_id from distributors;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IDistributorIdsWithUserId[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
+export const createANewDistributor = async (userId: number, adminUserId: number): Promise<boolean> => {
+  try {
+    const query = `insert into distributors (user_id, admin_user_id) values (${userId}, ${adminUserId});`;
+    const response = await postGenericQueryResponse(query);
+    console.log({ result: response.data.data });
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const getDistributorDetails = async () => {
+  try {
+    const query = `select * 
+      from codes as c
+      inner join code_sell_details as csd on c.code_sell_detail_id = csd.code_sell_detail_id
+      inner join code_sells as cs on cs.code_sell_id = csd.code_sell_id
+      where cs.distributor_id = 1;`;
+    const response = await getGenericQueryResponse(query);
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+}
+
+const getDistributorCodesById = async (userId: number): Promise<ICodeSell[]> => {
+  const getDistributorId = `select distributor_id from distributors where user_id = ${userId};`;
+  try {
+    const response1 = await getGenericQueryResponse(getDistributorId);
+    const distributorId = response1.data.data[0]['distributor_id'];
+
+    interface ICodeSellCode {
+      code_sell_id: number,
+      admin_id: number,
+      distributor_id: number,
+      created_sell_at: string,
+      code_sell_detail_id: number,
+      duration_type: 'M' | 'C' | 'A',
+      count: number,
+      amount: number,
+      code_id: number,
+      user_id: number | null,
+      code: string,
+      sell_at: string | null
+      username: string | null
+      email: string | null
+      phone_number: string | null
+    }
+
+    const getCodeSellsQuery = `select cs.code_sell_id, cs.admin_id, cs.distributor_id, cs.created_at as created_sell_at, 
+        csd.code_sell_detail_id, duration_type, \`count\`, amount, code_id, user_id, concat(u.name, ' ', u.last_name) as username, u.email, u.phone_number,code, sell_at 
+        from code_sells as cs
+        inner join code_sell_details as csd on cs.code_sell_id = csd.code_sell_id
+        inner join codes as c on c.code_sell_detail_id = csd.code_sell_detail_id
+        left join users as u on c.user_id = u.id
+        where cs.distributor_id = ${distributorId}
+        order by cs.created_at desc;`;
+
+    const getCodeSellsResponse = await getGenericQueryResponse(getCodeSellsQuery);
+    const rows = getCodeSellsResponse.data.data as ICodeSellCode[];
+
+    const codeSellIds = new Set([...rows.map(c => c.code_sell_id)]);
+    const result: ICodeSell[] = [];
+    for (const codeSellId of codeSellIds) {
+      const codesX = rows.filter(c => c.code_sell_id === codeSellId);
+      const codeSellDetailIds = new Set([...codesX.map(c => c.code_sell_detail_id)]);
+      let codeSellDetailsArray = [];
+      for (const codeSellDetailId of codeSellDetailIds) {
+        const codes = codesX.filter(c => c.code_sell_detail_id === codeSellDetailId);
+
+        const readyCodes = codes.map(c => {
+          const { code, sell_at, user_id, code_sell_detail_id, email, username } = c;
+          console.log({ sell_at });
+          return {
+            code,
+            sell_at: sell_at !== null ? parseInt(sell_at) : null,
+            user_id,
+            code_sell_detail_id,
+            username,
+            email
+          }
+        });
+        const { code_sell_detail_id, code_sell_id, amount, count, duration_type } = codes[0]!;
+        codeSellDetailsArray.push({
+          code_sell_id,
+          code_sell_detail_id,
+          amount,
+          count,
+          duration_type,
+          codes: readyCodes
+        });
+
+      }
+      const { created_sell_at, distributor_id, admin_id, code_sell_id } = codesX[0]!;
+      result.push({
+        distributor_id,
+        admin_id,
+        code_sell_id,
+        created_sell_at: parseInt(created_sell_at),
+        details: codeSellDetailsArray
+      });
+    }
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
