@@ -437,14 +437,24 @@ export const DistributorsNew = () => {
           </div>
         }
         {
-          (mainSection === 'common-users' && canMakeUserADistributor === false) &&
+          mainSection === 'sells' &&
           <>
+            <div className={styles['sells-section']}>
+              <h2 className={styles['content-title']}>Listado de ventas</h2>
+              <div className={styles['pagination-section']}>
+                <Pagination
+                  changePage={changePageCommonUsersList}
+                  currentPage={commonUsersParams.offset / 100}
+                  totalPage={Math.ceil(commonUsersParams.count / 100)}
+                />
+              </div>
+            </div>
           </>
         }
         {
           mainSection === 'sells' &&
           <div style={{
-            display: 'flex',
+            display: 'none',
             justifyContent: 'center',
             padding: '64px 16px',
             fontWeight: '600',
