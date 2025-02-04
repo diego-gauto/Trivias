@@ -222,3 +222,14 @@ const getDistributorCodesById = async (userId: number): Promise<ICodeSell[]> => 
   }
   return [];
 }
+export const getDistributorAccessHistoryById = async (distributorId: number) => {
+  try {
+    const query = ``;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as any[];
+    return data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
