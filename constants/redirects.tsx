@@ -72,7 +72,8 @@ const haveAnyPurchaseValue = () => {
 }
 
 export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
-  let today = new Date().getTime() / 1000;
+  let today = Math.floor(new Date().getTime() / 1000);
+  let tolerance = 10 * 24 * 60 * 60;
 
   if (type === 'login') {
     if (haveAnyPurchaseValue()) {
@@ -129,26 +130,8 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.getItem('plan') === 'true'
     ) {
       localStorage.removeItem('plan');
-      if (userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      if (userInfo.final_date < (today + tolerance) && userInfo.role !== 'superAdmin') {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
-      } else if (userInfo.final_date > today) {
-
-        if (localStorage.getItem('lesson-redirect-info')) {
-          const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-          const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
-            course_id: number;
-            season_id: number;
-            lesson_id: number;
-          };
-          localStorage.removeItem('lesson-redirect-info');
-          // CURSOS NO FLEXIBLES
-          let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-          if ([30, 57].includes(course_id)) {
-            url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
-          }
-          window.location.href = `${window.location.origin}${url}`;
-        }
-
       }
     } else if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
@@ -156,26 +139,28 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
     } else if (localStorage.getItem('rewards') === 'true') {
       localStorage.removeItem('rewards');
       window.location.href = `${window.location.origin}${REWARDS_PATH}`;
-    }
-    else if (localStorage.getItem('retryPayment') === 'true') {
+    } else if (localStorage.getItem('retryPayment') === 'true') {
       localStorage.removeItem('retryPayment');
       window.location.href = `${window.location.origin}${RETRY_PAYMENT_PATH}`;
     } else if (localStorage.getItem('lesson-redirect-info')) {
-      if (userInfo.final_date < today) {
+      const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
+      const { course_id, lesson_id, season_id, is_free, is_flexible } = JSON.parse(lessonRedirectInfo) as {
+        course_id: number;
+        season_id: number;
+        lesson_id: number;
+        is_free: boolean;
+        is_flexible: boolean;
+      };
+      localStorage.removeItem('lesson-redirect-info');
+      // CURSOS NO FLEXIBLES
+      let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+      if (!is_flexible) {
+        url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
+      }
+
+      if (userInfo.final_date < (today + tolerance) && !is_free) {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
       } else {
-        const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-        const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
-          course_id: number;
-          season_id: number;
-          lesson_id: number;
-        };
-        localStorage.removeItem('lesson-redirect-info');
-        // CURSOS NO FLEXIBLES
-        let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-        if ([30, 57].includes(course_id)) {
-          url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
-        }
         window.location.href = `${window.location.origin}${url}`;
       }
     }
@@ -231,7 +216,7 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.getItem('plan') === 'true'
     ) {
       localStorage.removeItem('plan');
-      if (userInfo.final_date < today && userInfo.role !== 'superAdmin') {
+      if (userInfo.final_date < (today + tolerance) && userInfo.role !== 'superAdmin') {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
       } else if (userInfo.final_date > today) {
 
@@ -259,21 +244,23 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.removeItem('rewards');
       window.location.href = `${window.location.origin}${REWARDS_PATH}`;
     } else if (localStorage.getItem('lesson-redirect-info')) {
-      if (userInfo.final_date < today) {
+      const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
+      const { course_id, lesson_id, season_id, is_free } = JSON.parse(lessonRedirectInfo) as {
+        course_id: number;
+        season_id: number;
+        lesson_id: number;
+        is_free: boolean;
+      };
+      localStorage.removeItem('lesson-redirect-info');
+      // CURSOS NO FLEXIBLES
+      let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+      if ([30, 57].includes(course_id)) {
+        url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
+      }
+
+      if (userInfo.final_date < (today + tolerance) && !is_free) {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
       } else {
-        const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-        const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
-          course_id: number;
-          season_id: number;
-          lesson_id: number;
-        };
-        localStorage.removeItem('lesson-redirect-info');
-        // CURSOS NO FLEXIBLES
-        let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-        if ([30, 57].includes(course_id)) {
-          url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
-        }
         window.location.href = `${window.location.origin}${url}`;
       }
     }
@@ -315,12 +302,10 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
       course_id: id,
       season_id: 0,
       lesson_id: 0,
+      is_free: course.type === 'Gratis' ? true : false
     }
     const jsonString = JSON.stringify(data);
     localStorage.setItem('lesson-redirect-info', jsonString);
-    if (course.type !== 'Gratis') {
-      localStorage.setItem('plan', 'true');
-    }
     router.push({ pathname: LOGIN_PATH });
   }
 };
