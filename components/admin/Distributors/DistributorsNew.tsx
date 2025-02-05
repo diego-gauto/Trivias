@@ -41,7 +41,7 @@ export const DistributorsNew = () => {
 
   const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
 
-  const [showAddDistributorButton, setShowAddDistributorButton] = useState(false);
+  const [showAddDistributorButton, setShowAddDistributorButton] = useState(true);
 
   useEffect(() => {
     refreshDistributorIds();
@@ -178,7 +178,13 @@ export const DistributorsNew = () => {
               </div>
               {
                 showAddDistributorButton &&
-                <div className={styles['search-bar-element']}>
+                <div
+                  className={styles['search-bar-element']}
+                  onClick={(e) => {
+                    setShowAddDistributorButton(false);
+                    setMainSection('common-users');
+                  }}
+                >
                   <IoMdAddCircleOutline
                     size={25}
                   /> Agregar distribuidor
@@ -229,38 +235,6 @@ export const DistributorsNew = () => {
           </>
         }
       </div>
-      {
-        selectedDistributor === null &&
-        <div className={styles['sections-container']}>
-          <div
-            className={`${styles['section-title']} ${mainSection === 'distributors' ? styles['section-title--active'] : ''}`}
-            onClick={(e) => {
-              setMainSection('distributors');
-              setShowAddDistributorButton(true);
-            }}
-          >
-            Distribuidores
-          </div>
-          <div
-            className={`${styles['section-title']} ${mainSection === 'common-users' ? styles['section-title--active'] : ''}`}
-            onClick={(e) => {
-              setMainSection('common-users');
-              setShowAddDistributorButton(false);
-            }}
-          >
-            Usuarios comunes
-          </div>
-          <div
-            className={`${styles['section-title']} ${mainSection === 'sells' ? styles['section-title--active'] : ''}`}
-            onClick={(e) => {
-              setMainSection('sells');
-              setShowAddDistributorButton(true);
-            }}
-          >
-            Ventas
-          </div>
-        </div>
-      }
       {
         selectedDistributor !== null &&
         <div className={styles['sections-container']}>
@@ -482,6 +456,20 @@ export const DistributorsNew = () => {
         {
           (mainSection === 'common-users' && canMakeUserADistributor === null) &&
           <>
+            <div className={styles['go-back-container']}>
+              {/* GO BACK */}
+              <div
+                className={styles['go-back']}
+                onClick={(e) => {
+                  // setDistributorsSubSection('distributors-list');
+                  setMainSection('distributors');
+                  setShowAddDistributorButton(true);
+                }}
+              >
+                <FaLongArrowAltLeft size={30} />
+                <span className={styles['']}>Atrás</span>
+              </div>
+            </div>
             <div className={styles['main-header-section']}>
               <h2 className={styles['content-title']}>Listado de usuarios comunes</h2>
               <div className={styles['pagination-section']}>
