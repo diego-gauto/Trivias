@@ -158,7 +158,7 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
         url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
       }
 
-      if (userInfo.final_date < (today + tolerance) && !is_free) {
+      if (userInfo.final_date < (today + tolerance) && !is_free && userInfo.role !== 'superAdmin') {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
       } else {
         window.location.href = `${window.location.origin}${url}`;
@@ -218,24 +218,6 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.removeItem('plan');
       if (userInfo.final_date < (today + tolerance) && userInfo.role !== 'superAdmin') {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
-      } else if (userInfo.final_date > today) {
-
-        if (localStorage.getItem('lesson-redirect-info')) {
-          const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-          const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
-            course_id: number;
-            season_id: number;
-            lesson_id: number;
-          };
-          localStorage.removeItem('lesson-redirect-info');
-          // CURSOS NO FLEXIBLES
-          let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-          if ([30, 57].includes(course_id)) {
-            url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
-          }
-          window.location.href = `${window.location.origin}${url}`;
-        }
-
       }
     } else if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
@@ -258,7 +240,7 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
         url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
       }
 
-      if (userInfo.final_date < (today + tolerance) && !is_free) {
+      if (userInfo.final_date < (today + tolerance) && !is_free && userInfo.role !== 'superAdmin') {
         window.location.href = `${window.location.origin}${PLAN_PATH}`;
       } else {
         window.location.href = `${window.location.origin}${url}`;
