@@ -8,6 +8,7 @@ import {
   PURCHASE_PATH,
   RETRY_PAYMENT_PATH,
   REWARDS_PATH,
+  SIGNUP_PATH
 } from './paths';
 import { IUser } from '../interfaces/IUserData';
 import { ICourse } from '../interfaces/ICourse';
@@ -227,16 +228,17 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       window.location.href = `${window.location.origin}${REWARDS_PATH}`;
     } else if (localStorage.getItem('lesson-redirect-info')) {
       const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-      const { course_id, lesson_id, season_id, is_free } = JSON.parse(lessonRedirectInfo) as {
+      const { course_id, lesson_id, season_id, is_free, is_flexible } = JSON.parse(lessonRedirectInfo) as {
         course_id: number;
         season_id: number;
         lesson_id: number;
         is_free: boolean;
+        is_flexible: boolean;
       };
       localStorage.removeItem('lesson-redirect-info');
       // CURSOS NO FLEXIBLES
       let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-      if ([30, 57].includes(course_id)) {
+      if (!is_flexible) {
         url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
       }
 
@@ -280,14 +282,16 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
     }
   } else {
     const { id } = course;
+    const is_flexible = (course as any).sequential === 1 ? false : true;
     const data = {
       course_id: id,
       season_id: 0,
       lesson_id: 0,
-      is_free: course.type === 'Gratis' ? true : false
+      is_free: course.type === 'Gratis' ? true : false,
+      is_flexible
     }
     const jsonString = JSON.stringify(data);
     localStorage.setItem('lesson-redirect-info', jsonString);
-    router.push({ pathname: LOGIN_PATH });
+    router.push({ pathname: SIGNUP_PATH });
   }
 };
