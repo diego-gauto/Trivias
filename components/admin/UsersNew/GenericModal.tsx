@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './GenericModal.module.css';
 
 interface IModalProps {
   show: boolean,
@@ -16,8 +17,8 @@ export const Modal = ({ show, onClose, child }: IModalProps) => {
   };
 
   return (
-    <div className="modal-backdrop" onClick={handleBackdropClick}>
-      <div className="modal-content">
+    <div className={styles['modal-backdrop']} onClick={handleBackdropClick}>
+      <div className={styles['modal-content']}>
         {
           /*
           <h2>Este es el Modal</h2>
