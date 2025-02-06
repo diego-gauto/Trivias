@@ -298,6 +298,18 @@ const LandingSuscription = (props: ILandingSuscription) => {
     }
   };
 
+  function getLastDayOfMonthByDate(date: Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    return new Date(year, month, 0).getDate();
+  }
+
+  const MONTHS = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+
   return (
     <SuscriptionContain id='main-container'>
       {/*
@@ -311,10 +323,11 @@ const LandingSuscription = (props: ILandingSuscription) => {
           <h4 style={{ margin: '0', fontSize: '16px' }}>
             <b>¡Inscríbete en línea hoy!</b>
             <br />
-            Desde el 01 de Enero al 31 de Enero
+            Desde el 1 de{' '}{MONTHS[new Date().getMonth()]}{' '}hasta el
+            {' '}{getLastDayOfMonthByDate(new Date())} de{' '}{MONTHS[new Date().getMonth()]}
           </h4>
           <Countdown
-            date={new Date(2025, 0, 31, 23, 59, 59)}
+            date={new Date(2025, 1, 28, 23, 59, 59)}
             renderer={(props) => (
               <div className='countdown' style={{ marginTop: '0' }}>
                 <h2 style={{ marginTop: '10px' }}>TIEMPO RESTANTE</h2>

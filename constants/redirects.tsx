@@ -8,6 +8,7 @@ import {
   PURCHASE_PATH,
   RETRY_PAYMENT_PATH,
   REWARDS_PATH,
+  SIGNUP_PATH
 } from './paths';
 import { IUser } from '../interfaces/IUserData';
 import { ICourse } from '../interfaces/ICourse';
@@ -72,7 +73,8 @@ const haveAnyPurchaseValue = () => {
 }
 
 export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
-  let today = new Date().getTime() / 1000;
+  let today = Math.floor(new Date().getTime() / 1000);
+  let tolerance = 10 * 24 * 60 * 60;
 
   if (type === 'login') {
     if (haveAnyPurchaseValue()) {
@@ -126,36 +128,42 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.removeItem('nailMaster');
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=30`;
     } else if (
-      localStorage.getItem('plan') === 'true' &&
-      userInfo.final_date < today &&
-      userInfo.role !== 'superAdmin'
+      localStorage.getItem('plan') === 'true'
     ) {
       localStorage.removeItem('plan');
-      window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      if (userInfo.final_date < (today + tolerance) && userInfo.role !== 'superAdmin') {
+        window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      }
     } else if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
       window.location.href = `${window.location.origin}${PROFILE_PATH}`;
     } else if (localStorage.getItem('rewards') === 'true') {
       localStorage.removeItem('rewards');
       window.location.href = `${window.location.origin}${REWARDS_PATH}`;
-    }
-    else if (localStorage.getItem('retryPayment') === 'true') {
+    } else if (localStorage.getItem('retryPayment') === 'true') {
       localStorage.removeItem('retryPayment');
       window.location.href = `${window.location.origin}${RETRY_PAYMENT_PATH}`;
     } else if (localStorage.getItem('lesson-redirect-info')) {
       const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
-      const { course_id, lesson_id, season_id } = JSON.parse(lessonRedirectInfo) as {
+      const { course_id, lesson_id, season_id, is_free, is_flexible } = JSON.parse(lessonRedirectInfo) as {
         course_id: number;
         season_id: number;
         lesson_id: number;
+        is_free: boolean;
+        is_flexible: boolean;
       };
       localStorage.removeItem('lesson-redirect-info');
       // CURSOS NO FLEXIBLES
       let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
-      if ([30, 57].includes(course_id)) {
+      if (!is_flexible) {
         url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
       }
-      window.location.href = `${window.location.origin}${url}`;
+
+      if (userInfo.final_date < (today + tolerance) && !is_free && userInfo.role !== 'superAdmin') {
+        window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      } else {
+        window.location.href = `${window.location.origin}${url}`;
+      }
     }
     else {
       window.location.href = PREVIEW_PATH;
@@ -206,18 +214,39 @@ export const authRedirect = (type: string, userInfo?: any/* IUserInfo */) => {
       localStorage.removeItem('nailMaster');
       window.location.href = `${window.location.origin}${PURCHASE_PATH}?type=course&id=30`;
     } else if (
-      localStorage.getItem('plan') === 'true' &&
-      userInfo.final_date < today &&
-      userInfo.role !== 'superAdmin'
+      localStorage.getItem('plan') === 'true'
     ) {
       localStorage.removeItem('plan');
-      window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      if (userInfo.final_date < (today + tolerance) && userInfo.role !== 'superAdmin') {
+        window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      }
     } else if (localStorage.getItem('login') === 'true') {
       localStorage.removeItem('login');
       window.location.href = `${window.location.origin}${PROFILE_PATH}`;
     } else if (localStorage.getItem('rewards') === 'true') {
       localStorage.removeItem('rewards');
       window.location.href = `${window.location.origin}${REWARDS_PATH}`;
+    } else if (localStorage.getItem('lesson-redirect-info')) {
+      const lessonRedirectInfo = localStorage.getItem('lesson-redirect-info') || '';
+      const { course_id, lesson_id, season_id, is_free, is_flexible } = JSON.parse(lessonRedirectInfo) as {
+        course_id: number;
+        season_id: number;
+        lesson_id: number;
+        is_free: boolean;
+        is_flexible: boolean;
+      };
+      localStorage.removeItem('lesson-redirect-info');
+      // CURSOS NO FLEXIBLES
+      let url = `/lesson?id=${course_id}&season=${season_id}&lesson=${lesson_id}`;
+      if (!is_flexible) {
+        url = `/lesson?id=${course_id}&season=${0}&lesson=${0}`;
+      }
+
+      if (userInfo.final_date < (today + tolerance) && !is_free && userInfo.role !== 'superAdmin') {
+        window.location.href = `${window.location.origin}${PLAN_PATH}`;
+      } else {
+        window.location.href = `${window.location.origin}${url}`;
+      }
     }
     else {
       window.location.href = PREVIEW_PATH;
@@ -252,9 +281,17 @@ export const goToSuscription = (user: IUser, course: ICourse) => {
       router.push(PLAN_PATH);
     }
   } else {
-    if (course.type === 'Mensual') {
-      localStorage.setItem('plan', `true`);
+    const { id } = course;
+    const is_flexible = (course as any).sequential === 1 ? false : true;
+    const data = {
+      course_id: id,
+      season_id: 0,
+      lesson_id: 0,
+      is_free: course.type === 'Gratis' ? true : false,
+      is_flexible
     }
-    router.push({ pathname: LOGIN_PATH });
+    const jsonString = JSON.stringify(data);
+    localStorage.setItem('lesson-redirect-info', jsonString);
+    router.push({ pathname: SIGNUP_PATH });
   }
 };

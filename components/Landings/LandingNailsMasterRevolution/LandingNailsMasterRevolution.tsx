@@ -243,6 +243,18 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
 
   useEffect(() => { }, [setver]);
 
+  function getLastDayOfMonthByDate(date: Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+
+    return new Date(year, month, 0).getDate();
+  }
+
+  const MONTHS = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+
   return (
     <>
       <Head>
@@ -256,14 +268,14 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
         <FirstSection>
           <div className='mt-3 fechas'>
             <h4>
-              <b>Actualización 2025</b>
+              <b>Actualización{' '}{new Date().getFullYear()}</b>
               <br />
               Inscripciones sólo desde el
               <br />
-              01 de Enero al 31 de Enero
+              1 de{' '}{MONTHS[new Date().getMonth()]}{' '}hasta el {getLastDayOfMonthByDate(new Date())} de{' '}{MONTHS[new Date().getMonth()]}
             </h4>
             <Countdown
-              date={new Date(2025, 0, 31, 23, 59, 59)}
+              date={new Date(2025, 1, 28, 23, 59, 59)}
               renderer={(props) => (
                 <div className='countdown'>
                   <h2>TIEMPO RESTANTE</h2>

@@ -127,6 +127,8 @@ export const PlanStyles = styled.div`
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
       border-radius: 14px;
       padding-bottom: 15px;
+      position: relative;
+      margin-bottom: 48px;
       .header {
         .top-tab {
           border-radius: 14px 14px 0px 0px;
@@ -244,6 +246,37 @@ export const PlanStyles = styled.div`
             border-top: 1px solid var(--purple-pink2);
           }
         }
+      }
+
+      .more-information-container {
+        display: flex;
+        justify-self: center;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin-bottom: 8px;
+      }
+
+      .more-information {
+        padding: 8px 16px;
+        border: 1px solid rgb(136, 37, 225);
+        cursor: pointer;
+        border-radius: 32px;
+        transition: background-color 0.25s;
+      }
+
+      .more-information:hover {
+        background-color: rgba(136, 37, 225, 0.25);
+      }
+
+      .more-information--white {
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        color: white;
+      }
+
+      .more-information--white:hover {
+        background-color: rgba(255, 255, 255, 0.25);
       }
     }
   }

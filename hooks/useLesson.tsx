@@ -40,7 +40,9 @@ export const CourseProvider = ({ children }: any) => {
     const data = {
       course_id: parseInt(id),
       season_id: parseInt(seasonId),
-      lesson_id: parseInt(lessonId)
+      lesson_id: parseInt(lessonId),
+      is_free: course?.type === 'Gratis' ? true : false,
+      is_flexible: course?.sequential === 1 ? true : false
     };
     const jsonString = JSON.stringify(data);
     localStorage.setItem('lesson-redirect-info', jsonString);
