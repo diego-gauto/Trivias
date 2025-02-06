@@ -372,8 +372,13 @@ const Anual = (props: IData) => {
               </div>
             )}
           </div>
-          <span className='text-center my-2'>
-            <i onClick={goToRoute}>Más información</i>
+        </div>
+        <div className="more-information-container">
+          <span
+            className='text-center my-2 more-information'
+            onClick={goToRoute}
+          >
+            Más información
           </span>
         </div>
       </div>

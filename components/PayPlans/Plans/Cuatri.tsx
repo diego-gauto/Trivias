@@ -355,8 +355,13 @@ const Cuatri = (props: IData) => {
               </div>
             )}
           </div>
-          <span className='text-center my-2 white'>
-            <i onClick={goToRoute}>Más información</i>
+        </div>
+        <div className="more-information-container">
+          <span
+            className='text-center my-2 more-information more-information--white'
+            onClick={goToRoute}
+          >
+            Más información
           </span>
         </div>
       </div>
