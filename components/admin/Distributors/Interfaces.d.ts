@@ -66,6 +66,13 @@ interface IDistributorIdsWithUserId {
   user_id: number;
 }
 
+interface IAccessHistory {
+  date: string;
+  accessCount: number;
+  amount: string;
+  adminEmail: string;
+}
+
 /*
 {
 "select distributor_id, user_id from distributors": [

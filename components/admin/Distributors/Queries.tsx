@@ -139,12 +139,8 @@ export const getDistributorDetails = async () => {
   return null;
 }
 
-const getDistributorCodesById = async (userId: number): Promise<ICodeSell[]> => {
-  const getDistributorId = `select distributor_id from distributors where user_id = ${userId};`;
+export const getDistributorCodesById = async (distributorId: number): Promise<ICodeSell[]> => {
   try {
-    const response1 = await getGenericQueryResponse(getDistributorId);
-    const distributorId = response1.data.data[0]['distributor_id'];
-
     interface ICodeSellCode {
       code_sell_id: number,
       admin_id: number,
@@ -186,7 +182,6 @@ const getDistributorCodesById = async (userId: number): Promise<ICodeSell[]> => 
 
         const readyCodes = codes.map(c => {
           const { code, sell_at, user_id, code_sell_detail_id, email, username } = c;
-          console.log({ sell_at });
           return {
             code,
             sell_at: sell_at !== null ? parseInt(sell_at) : null,
@@ -221,15 +216,4 @@ const getDistributorCodesById = async (userId: number): Promise<ICodeSell[]> => 
     console.error(error);
   }
   return [];
-}
-export const getDistributorAccessHistoryById = async (distributorId: number) => {
-  try {
-    const query = ``;
-    const response = await getGenericQueryResponse(query);
-    const data = response.data.data as any[];
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
 }

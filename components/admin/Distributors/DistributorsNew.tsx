@@ -2,8 +2,18 @@ import styles from './DistributorsNew.module.css';
 import { IoIosAddCircleOutline, IoMdAddCircleOutline, IoMdSearch } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
 import { useEffect, useState } from 'react';
-import { Modal } from '../UsersNew/GenericModal';
-import { createANewDistributor, getAdminUserIdByEmail, getAllDistributorUserIds, getAllDistributorUsersArray, getAllDistributorUsersCount, getAllUsersArray, getAllUsersCount } from './Queries';
+import { Modal } from '../../admin/DefaultComponents/Modal';
+import {
+  createANewDistributor,
+  getAdminUserIdByEmail,
+  getDistributorCodesById,
+  getAllDistributorUserIds,
+  getAllDistributorUsersArray,
+  getAllDistributorUsersCount,
+  getAllUsersArray,
+  getAllUsersCount,
+  getAllAdmins,
+} from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
 
@@ -22,6 +32,9 @@ export const DistributorsNew = () => {
   const [adminId, setAdminId] = useState<number>(0);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
   const [selectedDistributor, setSelectedDistributor] = useState<IDistributor | null>(null);
+  const [accessHistory, setAccessHistory] = useState<IAccessHistory[]>([]);
+  const [productHistory, setProductHistory] = useState<IAccessHistory[]>([]);
+  const [admins, setAdmins] = useState<IAdmin[]>([]);
   const [distributorsParams, setDistributorsParams] = useState<EntityParams>({
     offset: 0,
     count: 0,
@@ -36,7 +49,7 @@ export const DistributorsNew = () => {
   const [distributorsSubSection, setDistributorsSubSection] = useState<DistributorsSubSection>('distributors-list');
   const [distributorDetailsSection, setDistributorDetailsSection] = useState<DistributorDetailsSection>('product-history');
 
-  const [showMakeDistributorModal, setShowMakeDistributorModal] = useState(false);
+  const [showMakeDistributorModal, setShowMakeDistributorModal] = useState(true);
   const [inputValue, setInputValue] = useState<string>('');
 
   const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
@@ -46,6 +59,7 @@ export const DistributorsNew = () => {
   useEffect(() => {
     refreshDistributorIds();
     getAdminId();
+    refreshAdminList();
   }, []);
 
   useEffect(() => {
@@ -114,6 +128,15 @@ export const DistributorsNew = () => {
     }
   }
 
+  async function refreshAdminList() {
+    try {
+      const response = await getAllAdmins();
+      setAdmins(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const changePageDistributorList = (page: number) => {
     setDistributorsParams({
       ...distributorsParams,
@@ -134,6 +157,38 @@ export const DistributorsNew = () => {
       setCanMakeUserADistributor(true);
     } else {
       setCanMakeUserADistributor(false);
+    }
+  }
+
+  async function refreshAccessHistoryById(selectedDistributor: number) {
+    try {
+      const codeSells = await getDistributorCodesById(selectedDistributor);
+
+      const result: IAccessHistory[] = codeSells.map((cs, index) => {
+        const { admin_id, code_sell_id, created_sell_at, details, distributor_id } = cs;
+
+        const adminEmail = admins.find((admin) => admin.admin_id === admin_id)?.email || 'Desconocido';
+        const accessCount = details.reduce((pv, cv) => {
+          return pv + cv.count
+        }, 0);
+        const amountNumber = details.reduce((pv, cv) => {
+          return pv + (cv.amount * cv.amount)
+        }, 0);
+        const date = new Date(created_sell_at * 1000).toJSON().slice(0, 10);
+
+        const amount = Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amountNumber);
+
+        return {
+          adminEmail,
+          accessCount,
+          amount,
+          date
+        }
+      });
+      setAccessHistory(result);
+    } catch (error) {
+      console.error(error);
+      setAccessHistory([]);
     }
   }
 
@@ -316,6 +371,7 @@ export const DistributorsNew = () => {
                                 setDistributorsSubSection('distributor-details');
                                 setSelectedDistributor(d);
                                 setDistributorDetailsSection('product-history');
+                                refreshAccessHistoryById(d.distributor_id);
                               }}
                             >
                               Ver perfil
@@ -381,73 +437,63 @@ export const DistributorsNew = () => {
                 /* TODO: Colocar las ventas del usuario distribuidor  */
               }
               {
-
+                accessHistory.length > 0 &&
                 <div className={styles['table-content']}>
                   <table className={styles['gonvar-table']}>
                     <thead className={styles['gonvar-table__thead']}>
                       <tr className={styles['gonvar-table__row']}>
-                        <th className={styles['gonvar-table__th']}>Nombre</th>
-                        <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                        <th className={styles['gonvar-table__th']}>Número de celular</th>
-                        <th className={styles['gonvar-table__th']}>Pais</th>
-                        <th className={styles['gonvar-table__th']}>Estado de origen</th>
-                        <th className={styles['gonvar-table__th']}>Acciones</th>
+                        <th className={styles['gonvar-table__th']}>Fecha</th>
+                        <th className={styles['gonvar-table__th']}>Cantidad de accesos</th>
+                        <th className={styles['gonvar-table__th']}>Monto total</th>
+                        <th className={styles['gonvar-table__th']}>Vendedor</th>
+                        <th className={styles['gonvar-table__th']}>Admin responsable</th>
+                        <th className={styles['gonvar-table__th']}></th>
                       </tr>
                     </thead>
                     <tbody>
                       {
-                        commonUsers.map((cu, i) => {
+                        accessHistory.map((ah, i) => {
                           return <tr
                             className={styles['gonvar-table__row']}
                             key={`user_${i}`}
                           >
                             <td className={styles['gonvar-table__data']}>
-                              {cu.name}
+                              {ah.date}
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.email}
+                              {ah.accessCount}
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.phone_number}
+                              {ah.amount}
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.country}
+                              {ah.adminEmail}
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.origin_state}
-                            </td>
-                            <td className={styles['gonvar-table__data']}>
-                              {
-                                distributorUserIds.find(d => d.user_id === cu.user_id) === undefined &&
-                                <button
-                                  className={styles['gonvar-table__button']}
-                                  onClick={(e) => {
-                                    tryToMakeUserDistributor(cu.user_id);
-                                  }}
-                                >
-                                  Hacer distribuidor
-                                </button>
-                              }
-                              {
-                                distributorUserIds.find(d => d.user_id === cu.user_id) !== undefined &&
-                                <p style={{
-                                  margin: '0',
-                                  fontWeight: 'bold',
-                                  border: '1px solid black',
-                                  borderRadius: '12px',
-                                  padding: '6px',
-                                  userSelect: 'none',
-                                  fontSize: '12px'
-                                }}>
-                                  Es distribuidor
-                                </p>
-                              }
+                              <button
+                                className={styles['gonvar-table__button']}
+                                onClick={(e) => {
+
+                                }}
+                              >
+                                Ver factura
+                              </button>
                             </td>
                           </tr>
                         })
                       }
                     </tbody>
                   </table>
+                </div>
+              }
+              {
+                accessHistory.length === 0 &&
+                <div className={styles['empty-container']}>
+                  <div className={styles['empty-content']}>
+                    <p className={styles['empty-content-text']}>
+                      Este distribuidor no cuenta con un historial de accesos
+                    </p>
+                  </div>
                 </div>
               }
             </div>
@@ -461,7 +507,6 @@ export const DistributorsNew = () => {
               <div
                 className={styles['go-back']}
                 onClick={(e) => {
-                  // setDistributorsSubSection('distributors-list');
                   setMainSection('distributors');
                   setShowAddDistributorButton(true);
                 }}
