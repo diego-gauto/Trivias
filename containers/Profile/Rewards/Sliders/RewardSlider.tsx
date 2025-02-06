@@ -18,6 +18,21 @@ import { BackgroundSlide, SlideContainer } from "./RewardModuleSlider.styled";
 
 SwiperCore.use([Autoplay]);
 
+type ITextsType = 'Recompensas acumuladas'
+  | 'Recompensas por desbloquear'
+  | 'Beneficios Desbloqueados'
+  | 'Beneficios por desbloquear'
+  | 'Certificados Acumulados'
+  | 'Certificados por desbloquear';
+
+interface ITexts {
+  type: ITextsType | null
+  header: string
+  title: string
+  scoreText: string
+  bottomText: string
+}
+
 const RewardSlider = (props: reward_slider) => {
   let [counter, setCounter] = useState<any>(0);
   const {
@@ -38,9 +53,12 @@ const RewardSlider = (props: reward_slider) => {
   const [openRewardInfo, setOpenRewardInfo] = useState<any>();
   const [loader, setLoader] = useState<boolean>(false);
   let today = new Date().getTime() / 1000;
-  const [texts, setTexts] = useState<any>({
+  const [texts, setTexts] = useState<ITexts>({
+    type: null,
     header: '',
     title: '',
+    bottomText: '',
+    scoreText: '',
   });
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
@@ -64,6 +82,7 @@ const RewardSlider = (props: reward_slider) => {
         }
       });
       setTexts({
+        type: 'Recompensas acumuladas',
         header: 'Recompensas acumuladas',
         title: 'Recompensa desbloqueda',
         scoreText: 'desde los ',
@@ -81,6 +100,7 @@ const RewardSlider = (props: reward_slider) => {
       tempFilter.sort((a: any, b: any) => a.points - b.points);
       slides = tempFilter;
       setTexts({
+        type: 'Recompensas por desbloquear',
         header: 'Recompensas por desbloquear',
         title: 'Recompensa bloqueda',
         scoreText: 'hasta llegar a ',
@@ -112,6 +132,7 @@ const RewardSlider = (props: reward_slider) => {
         }
       });
       setTexts({
+        type: 'Beneficios Desbloqueados',
         header: 'Beneficios Desbloqueados',
         title: 'Beneficio desbloqueado',
         scoreText: 'por cumplir ',
@@ -136,6 +157,7 @@ const RewardSlider = (props: reward_slider) => {
       tempFilter.sort((a: any, b: any) => a.month - b.month);
       slides = tempFilter;
       setTexts({
+        type: 'Beneficios por desbloquear',
         header: 'Beneficios por desbloquear',
         title: 'Beneficio bloqueado',
         scoreText: 'hasta cumplir ',
@@ -146,6 +168,7 @@ const RewardSlider = (props: reward_slider) => {
       tempFilter = completeCertificates;
       slides = tempFilter;
       setTexts({
+        type: 'Certificados Acumulados',
         header: 'Certificados Acumulados',
         title: 'Curso completado',
         scoreText: 'Obtener Certificado',
@@ -156,6 +179,7 @@ const RewardSlider = (props: reward_slider) => {
       tempFilter = courses;
       slides = tempFilter;
       setTexts({
+        type: 'Certificados por desbloquear',
         header: 'Certificados por desbloquear',
         title: 'Certificado bloqueado',
         scoreText: 'hasta completar ',
@@ -234,6 +258,18 @@ const RewardSlider = (props: reward_slider) => {
   return (
     <BackgroundSlide type={type}>
       <h2>{texts.header}</h2>
+      {
+        texts.type === 'Recompensas acumuladas' &&
+        <h3 style={{
+          fontSize: '16px',
+          paddingLeft: '24px',
+          fontWeight: '500',
+          fontStyle: 'italic',
+          color: '#3f1168'
+        }}>Te envíaremos tu recompensa con una compra mínima de
+          {' '}<span style={{ fontWeight: 'bold' }}>$2000.00</span>
+        </h3>
+      }
       {slides.length > 0 ? (
         <div
           className={`scroll-container-${indexSlider} scroll`}
