@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalContainer = styled.div`
-  .modal-backdrop {
+  .modal-backdrop-custom {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@ export const ModalContainer = styled.div`
     justify-content: center;
   }
 
-  .modal-content {
+  .modal-content-custom {
     background-color: white;
     padding: 20px;
     border-radius: 16px;
