@@ -16,6 +16,7 @@ import {
 } from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
+import { InvoiceAccessModal } from './InvoiceAccessModal';
 
 type MainSection = 'distributors' | 'common-users' | 'sells';
 
@@ -28,11 +29,36 @@ type EntityParams = {
   count: number,
 }
 
+function createAccessInvoiceDefaultValue(distributorId: number, adminId: number): IAccessInvoice {
+  return {
+    distributorId,
+    adminId,
+    details: [
+      {
+        accessType: 'M',
+        count: 0,
+        price: 0
+      },
+      {
+        accessType: 'C',
+        count: 0,
+        price: 0
+      },
+      {
+        accessType: 'A',
+        count: 0,
+        price: 0
+      }
+    ]
+  }
+}
+
 export const DistributorsNew = () => {
   const [adminId, setAdminId] = useState<number>(0);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
   const [selectedDistributor, setSelectedDistributor] = useState<IDistributor | null>(null);
   const [accessHistory, setAccessHistory] = useState<IAccessHistory[]>([]);
+  const [selectedAccessInvoice, setSelectedAccessInvoice] = useState<ICodeSell | null>(null);
   const [productHistory, setProductHistory] = useState<IAccessHistory[]>([]);
   const [admins, setAdmins] = useState<IAdmin[]>([]);
   const [distributorsParams, setDistributorsParams] = useState<EntityParams>({
@@ -49,7 +75,10 @@ export const DistributorsNew = () => {
   const [distributorsSubSection, setDistributorsSubSection] = useState<DistributorsSubSection>('distributors-list');
   const [distributorDetailsSection, setDistributorDetailsSection] = useState<DistributorDetailsSection>('product-history');
 
-  const [showMakeDistributorModal, setShowMakeDistributorModal] = useState(true);
+  const [showAccessInvoiceModal, setShowAccessInvoiceModal] = useState(false);
+  const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
+  const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
+
   const [inputValue, setInputValue] = useState<string>('');
 
   const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
@@ -172,17 +201,21 @@ export const DistributorsNew = () => {
           return pv + cv.count
         }, 0);
         const amountNumber = details.reduce((pv, cv) => {
-          return pv + (cv.amount * cv.amount)
+          return pv + (cv.amount * cv.count)
         }, 0);
         const date = new Date(created_sell_at * 1000).toJSON().slice(0, 10);
 
         const amount = Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amountNumber);
+        const codeSellId = code_sell_id;
+        const data = cs;
 
         return {
+          codeSellId,
           adminEmail,
           accessCount,
           amount,
-          date
+          date,
+          data
         }
       });
       setAccessHistory(result);
@@ -279,6 +312,30 @@ export const DistributorsNew = () => {
                     }
                   </div>
                 </div>
+                <div className={styles['user-property']}>
+                  <div className={styles['user-property-header']}>Estado</div>
+                  <div className={styles['user-property-value']}>
+                    {
+                      selectedDistributor?.phone_number
+                    }
+                  </div>
+                </div>
+                <div className={styles['user-property']}>
+                  <div className={styles['user-property-header']}>Codigo postal</div>
+                  <div className={styles['user-property-value']}>
+                    {
+                      selectedDistributor?.phone_number
+                    }
+                  </div>
+                </div>
+                <div className={styles['user-property']}>
+                  <div className={styles['user-property-header']}>Codigo postal</div>
+                  <div className={styles['user-property-value']}>
+                    {
+                      selectedDistributor?.phone_number
+                    }
+                  </div>
+                </div>
                 {
                   /*
                   <div className={styles['user-property']}>
@@ -343,6 +400,7 @@ export const DistributorsNew = () => {
                         <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
                         <th className={styles['gonvar-table__th']}>Número de celular</th>
                         <th className={styles['gonvar-table__th']}>Estado de origen</th>
+                        <th className={styles['gonvar-table__th']}>Codigo postal</th>
                         <th className={styles['gonvar-table__th']}>Acciones</th>
                       </tr>
                     </thead>
@@ -422,12 +480,11 @@ export const DistributorsNew = () => {
                     Estos son los accesos comprados por el distribuidor
                   </h3>
                 </div>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
+                <div
                   className={styles['distributor-details-create-access-button']}
+                  onClick={(e) => {
+                    // TODO
+                  }}
                 >
                   <IoIosAddCircleOutline size={30} />
                   <span>Registrar accesos</span>
@@ -446,8 +503,7 @@ export const DistributorsNew = () => {
                           <th className={styles['gonvar-table__th']}>Fecha</th>
                           <th className={styles['gonvar-table__th']}>Cantidad de accesos</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
-                          <th className={styles['gonvar-table__th']}>Vendedor</th>
-                          <th className={styles['gonvar-table__th']}>Admin responsable</th>
+                          <th className={styles['gonvar-table__th']}>Responsable</th>
                           <th className={styles['gonvar-table__th']}></th>
                         </tr>
                       </thead>
@@ -474,7 +530,8 @@ export const DistributorsNew = () => {
                                 <button
                                   className={styles['gonvar-table__button']}
                                   onClick={(e) => {
-
+                                    setShowAccessInvoiceModal(true);
+                                    setSelectedAccessInvoice(ah.data);
                                   }}
                                 >
                                   Ver factura
@@ -517,7 +574,7 @@ export const DistributorsNew = () => {
                 </div>
               </div>
               <div className={styles['main-header-section']}>
-                <h2 className={styles['content-title']}>Listado de usuarios comunes</h2>
+                <h2 className={styles['content-title']}>Listado de usuarios</h2>
                 <div className={styles['pagination-section']}>
                   <Pagination
                     changePage={changePageCommonUsersList}
@@ -679,15 +736,45 @@ export const DistributorsNew = () => {
         </div>
       </div>
       {
-        showMakeDistributorModal &&
+        (showAccessInvoiceModal && selectedAccessInvoice !== null) &&
         <Modal
-          child={<>
-            <p>Hola</p>
-          </>}
-          show={showMakeDistributorModal}
+          child={
+            <InvoiceAccessModal
+              accessInvoiceRecord={selectedAccessInvoice}
+              onClose={() => {
+                setShowAccessInvoiceModal(false);
+              }}
+              onShare={() => {
+
+              }}
+            />
+          }
+          show={showAccessInvoiceModal}
           onClose={() => {
-            setShowMakeDistributorModal(false);
+            setShowAccessInvoiceModal(false);
           }}
+          compactSize={false}
+        />
+      }
+      {
+        (showCreateAccessInoviceModal && selectedAccessInvoice !== null) &&
+        <Modal
+          child={
+            <InvoiceAccessModal
+              accessInvoiceRecord={selectedAccessInvoice}
+              onClose={() => {
+                setShowCreateAccessInoviceModal(false);
+              }}
+              onShare={() => {
+
+              }}
+            />
+          }
+          show={showCreateAccessInoviceModal}
+          onClose={() => {
+            setShowCreateAccessInoviceModal(false);
+          }}
+          compactSize={false}
         />
       }
     </div>)

@@ -67,10 +67,24 @@ interface IDistributorIdsWithUserId {
 }
 
 interface IAccessHistory {
+  codeSellId: number;
   date: string;
   accessCount: number;
   amount: string;
   adminEmail: string;
+  data: ICodeSell;
+}
+
+interface IAccessInvoice {
+  distributorId: number;
+  adminId: number;
+  details: IAccessInvoiceDetails[];
+}
+
+interface IAccessInvoiceDetails {
+  accessType: 'M' | 'C' | 'A';
+  count: number;
+  price: number;
 }
 
 /*

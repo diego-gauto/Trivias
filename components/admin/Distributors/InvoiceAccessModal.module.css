@@ -1,0 +1,181 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  color: #6310C8;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.sections-header {
+  color: #6310C8;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: bold;
+  gap: 8px;
+}
+
+.access-type {
+  min-width: 100px;
+  align-self: center;
+  font-weight: bold;
+}
+
+.access-codes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 8px;
+}
+
+.access-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 32px;
+  font-weight: bold;
+}
+
+.access-code:hover {
+  background-color: rgba(99, 16, 200, 0.25);
+}
+
+.access-amount {
+  font-weight: 500;
+  margin: 0;
+  align-self: center;
+}
+
+.table-content {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  order: 2;
+}
+
+.gonvar-table {
+  width: 100%;
+  border-spacing: 10px;
+}
+
+.gonvar-table__thead {
+  color: #6310C8;
+}
+
+.gonvar-table__tbody {
+  color: black;
+}
+
+.gonvar-table__row {
+  padding: 10px;
+}
+
+.gonvar-table__row:not(:last-child) {
+  border-bottom: 2px solid rgb(230, 230, 230);
+}
+
+.gonvar-table__th {
+  padding-bottom: 10px;
+  padding-inline: 15px;
+  border-bottom: 2px solid lightgrey;
+  color: #691aca;
+}
+
+.gonvar-table__data {
+  padding: 10px 5px 0;
+  font-size: 14px;
+  color: black;
+}
+
+.gonvar-table__th,
+.gonvar-table__data {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  gap: 16px;
+}
+
+.price {
+  padding-left: 16px;
+  align-self: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: gray;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.button {
+  padding: 8px 24px;
+  border-radius: 32px;
+  transition: background-color 0.25s;
+  border: 1px solid #6310C8;
+  background-color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: rgba(99, 16, 200, 0.25);
+}
+
+.button--purple {
+  background-color: #6310C8;
+  color: white;
+}
+
+.button--purple:hover {
+  background-color: rgba(99, 16, 200, 0.75);
+}
+
+@media screen and (min-width: 576px) {
+
+}
+
+/*
+Breakpoint	Class infix	Dimensions
+X-Small	None	<576px
+Small	sm	≥576px
+Medium	md	≥768px
+Large	lg	≥992px
+Extra large	xl	≥1200px
+Extra extra large	xxl	≥1400px
+*/

@@ -3,10 +3,11 @@ import styles from './Modal.module.css';
 interface IModalProps {
   show: boolean,
   onClose: () => void,
-  child: JSX.Element
+  child: JSX.Element,
+  compactSize?: boolean,
 }
 
-export const Modal = ({ show, onClose, child }: IModalProps) => {
+export const Modal = ({ show, onClose, compactSize = true, child }: IModalProps) => {
   if (!show) return null;
 
   const handleBackdropClick = (e: any) => {
@@ -15,13 +16,13 @@ export const Modal = ({ show, onClose, child }: IModalProps) => {
       onClose();
     }
   };
-
+  // modal-content--compact-size
   return (
     <div
       className={styles['modal-backdrop']}
       onClick={handleBackdropClick}
     >
-      <div className={styles['modal-content']}>
+      <div className={`${styles['modal-content']} ${compactSize === false ? '' : styles['modal-content--compact-size']}`}>
         {
           child
         }
