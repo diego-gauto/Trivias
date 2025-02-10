@@ -13,10 +13,12 @@ import {
   getAllUsersArray,
   getAllUsersCount,
   getAllAdmins,
+  createCodesForDistributor,
 } from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
 import { InvoiceAccessModal } from './InvoiceAccessModal';
+import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
 
 type MainSection = 'distributors' | 'common-users' | 'sells';
 
@@ -77,6 +79,7 @@ export const DistributorsNew = () => {
 
   const [showAccessInvoiceModal, setShowAccessInvoiceModal] = useState(false);
   const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
+  const [showCreateAccessInoviceSuccessModal, setShowCreateAccessInoviceSuccessModal] = useState<boolean>(false);
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -424,6 +427,9 @@ export const DistributorsNew = () => {
                               {d.origin_state}
                             </td>
                             <td className={styles['gonvar-table__data']}>
+                              {d.postal_code}
+                            </td>
+                            <td className={styles['gonvar-table__data']}>
                               <button
                                 className={styles['gonvar-table__button']}
                                 onClick={(e) => {
@@ -484,6 +490,7 @@ export const DistributorsNew = () => {
                   className={styles['distributor-details-create-access-button']}
                   onClick={(e) => {
                     // TODO
+                    setShowCreateAccessInoviceModal(true);
                   }}
                 >
                   <IoIosAddCircleOutline size={30} />
@@ -757,15 +764,16 @@ export const DistributorsNew = () => {
         />
       }
       {
-        (showCreateAccessInoviceModal && selectedAccessInvoice !== null) &&
+        (showCreateAccessInoviceModal) &&
         <Modal
           child={
-            <InvoiceAccessModal
-              accessInvoiceRecord={selectedAccessInvoice}
+            <CreateInvoiceAccessModal
+              accessInvoice={newAccessInvoice}
+              modifyAccessInvoice={setNewAccessInvoice}
               onClose={() => {
                 setShowCreateAccessInoviceModal(false);
               }}
-              onShare={() => {
+              onCreate={(canCreate) => {
 
               }}
             />
@@ -776,6 +784,10 @@ export const DistributorsNew = () => {
           }}
           compactSize={false}
         />
+      }
+      {
+        /* SUCCESS MODAL */
+        /* ERROR MODAL */
       }
     </div>)
 }

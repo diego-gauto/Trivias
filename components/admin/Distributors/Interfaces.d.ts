@@ -22,6 +22,7 @@ interface IDistributor {
   country: string | null;
   email: string;
   origin_state: string;
+  postal_code: string | null;
 }
 
 interface IUser {
@@ -87,17 +88,16 @@ interface IAccessInvoiceDetails {
   price: number;
 }
 
-/*
-{
-"select distributor_id, user_id from distributors": [
-	{
-		"distributor_id" : 1,
-		"user_id" : 49519
-	},
-	{
-		"distributor_id" : 3,
-		"user_id" : 49678
-	}
-]}
+type SubscriptionValue = 'M' | 'C' | 'A';
 
-*/
+interface IDetail {
+  duration_type: SubscriptionValue;
+  count: number;
+  amount: number;
+}
+
+interface ICreateCodeSell {
+  admin_id: number;
+  distributor_id: number;
+  details: IDetail[];
+}

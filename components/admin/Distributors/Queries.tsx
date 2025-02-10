@@ -38,7 +38,8 @@ export const getAllDistributorUsersArray = async (offset: number, input: string)
     const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
         u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
         unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
-        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state
+        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state,
+        ifnull(d.postal_code, 'Desconocido') as postal_code
         from distributors as d
         inner join users as u on u.id = d.user_id
         where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%'
@@ -217,3 +218,157 @@ export const getDistributorCodesById = async (distributorId: number): Promise<IC
   }
   return [];
 }
+
+export async function createCodesForDistributor(accessCount: number): Promise<string[]> {
+  try {
+    const getAllCodesQuery = `select code from codes;`;
+    const getAllCodesResponse = await getGenericQueryResponse(getAllCodesQuery);
+    const allCodesArray = (getAllCodesResponse.data.data as { code: string }[]).map((e) => e.code);
+
+    const newCodes: string[] = [];
+
+    const generateUUIDShort = () => {
+      return generateUUID()
+        .split('-')
+        .filter((v, index) => [0, 1].includes(index))
+        .join('');
+    }
+
+    for (let index = 0; index < accessCount; index++) {
+      const value = generateUUIDShort();
+      newCodes.push(value);
+    }
+
+    const result = replaceDuplicatedItems(allCodesArray, newCodes, generateUUIDShort);
+    return result;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+function replaceDuplicatedItems(baseArray: string[], newArray: string[], generateNewValue: () => string) {
+  return newArray.map(element => {
+    if (baseArray.includes(element)) {
+      let newElement: string = '';
+      do {
+        newElement = generateNewValue();
+      } while (baseArray.includes(newElement) || newArray.includes(newElement));
+      return newElement;
+    }
+    return element;
+  });
+}
+
+const generateUUID = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID(); // Usa la API nativa si está disponible
+  }
+
+  // Fallback para navegadores antiguos
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+const createCodeSell = async (body: {
+  admin_id: number;
+  distributor_id: number;
+}) => {
+  const { admin_id, distributor_id } = body;
+  const query = `insert into code_sells (admin_id, distributor_id) values (${admin_id}, ${distributor_id});`;
+  try {
+    const result = await postGenericQueryResponse(query);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const addCodeSellDetail = async (
+  code_sell_id: number,
+  duration_type: 'M' | 'C' | 'A',
+  count: number,
+  amount: number,
+) => {
+  const query = `insert into code_sell_details (code_sell_id, duration_type, \`count\`, amount) 
+  values (${code_sell_id}, '${duration_type}', ${count}, ${amount});`;
+  try {
+    const result = await postGenericQueryResponse(query);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const addCode = async (data: { code_sell_detail_id: number; code: string }) => {
+  const { code_sell_detail_id, code } = data;
+  const query = `insert into codes (code_sell_detail_id, code) 
+    values (${code_sell_detail_id}, '${code}');`;
+  try {
+    const result = await postGenericQueryResponse(query);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boolean> => {
+  const { admin_id, details, distributor_id } = body;
+
+  try {
+    const createCodeSellResponse = await createCodeSell({
+      admin_id,
+      distributor_id,
+    });
+
+    const createCodeSellId = createCodeSellResponse.data.data.insertId;
+    type GeneratedCodeSellDetail = {
+      code_sell_detail_id: number
+      count: number
+    }
+
+    const generatedCodeSellsDetails: GeneratedCodeSellDetail[] = [];
+
+    for (const detail of details) {
+      const { duration_type, amount, count } = detail;
+      const addDetailResponse = await addCodeSellDetail(
+        createCodeSellId,
+        duration_type,
+        count,
+        amount,
+      );
+
+      const codeSellDetailId = addDetailResponse.data.data.insertId;
+      generatedCodeSellsDetails.push({
+        count,
+        code_sell_detail_id: codeSellDetailId,
+      });
+    }
+    generatedCodeSellsDetails.forEach(async (csd) => {
+      const { code_sell_detail_id, count } = csd;
+      const codes = await createCodesForDistributor(count);
+      codes.forEach(async (code) => {
+        addCode({
+          code_sell_detail_id,
+          code
+        });
+      });
+    });
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+const generateSequence = (n: number) =>
+  Array(n)
+    .fill(0)
+    .map((_, i) => i + 1);
