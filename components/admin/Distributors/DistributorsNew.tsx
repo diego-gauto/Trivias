@@ -491,6 +491,12 @@ export const DistributorsNew = () => {
                   onClick={(e) => {
                     // TODO
                     setShowCreateAccessInoviceModal(true);
+                    setNewAccessInvoice({
+                      ...newAccessInvoice,
+                      distributorId: selectedDistributor?.distributor_id || 0,
+                      adminId
+                    });
+                    console.log({ newAccessInvoice });
                   }}
                 >
                   <IoIosAddCircleOutline size={30} />
@@ -774,7 +780,14 @@ export const DistributorsNew = () => {
                 setShowCreateAccessInoviceModal(false);
               }}
               onCreate={(canCreate) => {
-
+                if (canCreate) {
+                  if (selectedDistributor !== null) {
+                    refreshAccessHistoryById(selectedDistributor.distributor_id);
+                  }
+                }
+                setShowCreateAccessInoviceModal(false);
+                // createAccessInvoiceDefaultValue
+                setNewAccessInvoice(createAccessInvoiceDefaultValue(0, 0));
               }}
             />
           }
@@ -784,10 +797,6 @@ export const DistributorsNew = () => {
           }}
           compactSize={false}
         />
-      }
-      {
-        /* SUCCESS MODAL */
-        /* ERROR MODAL */
       }
     </div>)
 }

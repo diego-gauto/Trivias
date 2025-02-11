@@ -29,6 +29,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isComments, setIsComments] = useState<boolean>(false);
   const [isSubscriptions, setIsSubscriptions] = useState<boolean>(false);
   const [isActiveMemberships, setIsActiveMemberships] = useState<boolean>(false);
+  const [isDistributors, setIsDistributors] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -81,6 +82,8 @@ const SideBar = ({ show, onHide }: any) => {
             setIsSubscriptions(true);
           if (role.role === 'active_memberships' && changeValue(role.view))
             setIsActiveMemberships(true);
+          if (role.role === 'distributors' && changeValue(role.view))
+            setIsDistributors(true);
         });
         setUserData(userDataAuth.user);
         setLoading(false);
@@ -466,20 +469,29 @@ const SideBar = ({ show, onHide }: any) => {
                   Team Members
                 </li>
               </Link>
-              <Link href='/admin/Distributors'>
-                <li
-                  style={{ color: index == 20 ? '#ffa500' : '#fff' }}
-                  onClick={() => {
-                    setIndex(20);
-                    onHide();
-                  }}
-                >
-                  Distributors
-                </li>
-              </Link>
             </ul>
           </>
         )}
+        {
+          (isSuperAdmin || isDistributors) && (
+            <>
+              <Text>Organization</Text>
+              <ul>
+                <Link href='/admin/Distributors'>
+                  <li
+                    style={{ color: index == 20 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(20);
+                      onHide();
+                    }}
+                  >
+                    Distributors
+                  </li>
+                </Link>
+              </ul>
+            </>
+          )
+        }
         {(isSuperAdmin || (isSubscriptions || isActiveMemberships)) && (
           <>
             <Text>Statistics</Text>

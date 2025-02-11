@@ -321,12 +321,14 @@ const addCode = async (data: { code_sell_detail_id: number; code: string }) => {
 export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boolean> => {
   const { admin_id, details, distributor_id } = body;
 
+  console.log({ body });
+
   try {
     const createCodeSellResponse = await createCodeSell({
       admin_id,
       distributor_id,
     });
-
+    console.log("Pudo crear la venta");
     const createCodeSellId = createCodeSellResponse.data.data.insertId;
     type GeneratedCodeSellDetail = {
       code_sell_detail_id: number
@@ -350,14 +352,16 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
         code_sell_detail_id: codeSellDetailId,
       });
     }
+    console.log("Pudo crear un detalle");
     generatedCodeSellsDetails.forEach(async (csd) => {
       const { code_sell_detail_id, count } = csd;
       const codes = await createCodesForDistributor(count);
       codes.forEach(async (code) => {
-        addCode({
+        await addCode({
           code_sell_detail_id,
           code
         });
+        console.log("Pudo crear un codigo");
       });
     });
 
