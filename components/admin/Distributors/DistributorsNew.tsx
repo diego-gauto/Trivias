@@ -14,11 +14,13 @@ import {
   getAllUsersCount,
   getAllAdmins,
   createCodesForDistributor,
+  getProductHistoryByDistributorId,
 } from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
 import { InvoiceAccessModal } from './InvoiceAccessModal';
 import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
+import { InvoiceProductModal } from './InvoiceProductModal';
 
 type MainSection = 'distributors' | 'common-users' | 'sells';
 
@@ -61,7 +63,9 @@ export const DistributorsNew = () => {
   const [selectedDistributor, setSelectedDistributor] = useState<IDistributor | null>(null);
   const [accessHistory, setAccessHistory] = useState<IAccessHistory[]>([]);
   const [selectedAccessInvoice, setSelectedAccessInvoice] = useState<ICodeSell | null>(null);
-  const [productHistory, setProductHistory] = useState<IAccessHistory[]>([]);
+  const [selectedProductInvoice, setSelectedProductInvoice] = useState<IProductSellHistory | null>(null);
+
+  const [productHistory, setProductHistory] = useState<IProductSellHistory[]>([]);
   const [admins, setAdmins] = useState<IAdmin[]>([]);
   const [distributorsParams, setDistributorsParams] = useState<EntityParams>({
     offset: 0,
@@ -78,8 +82,9 @@ export const DistributorsNew = () => {
   const [distributorDetailsSection, setDistributorDetailsSection] = useState<DistributorDetailsSection>('product-history');
 
   const [showAccessInvoiceModal, setShowAccessInvoiceModal] = useState(false);
+  const [showProductInvoiceModal, setShowProductInvoiceModal] = useState(false);
+
   const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
-  const [showCreateAccessInoviceSuccessModal, setShowCreateAccessInoviceSuccessModal] = useState<boolean>(false);
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -192,9 +197,9 @@ export const DistributorsNew = () => {
     }
   }
 
-  async function refreshAccessHistoryById(selectedDistributor: number) {
+  async function refreshAccessHistoryById(selectedDistributorId: number) {
     try {
-      const codeSells = await getDistributorCodesById(selectedDistributor);
+      const codeSells = await getDistributorCodesById(selectedDistributorId);
 
       const result: IAccessHistory[] = codeSells.map((cs, index) => {
         const { admin_id, code_sell_id, created_sell_at, details, distributor_id } = cs;
@@ -225,6 +230,16 @@ export const DistributorsNew = () => {
     } catch (error) {
       console.error(error);
       setAccessHistory([]);
+    }
+  }
+
+  async function refreshProductHistoryById(selectedDistributorId: number) {
+    try {
+      const response = await getProductHistoryByDistributorId(selectedDistributorId)
+      setProductHistory(response);
+    } catch (error) {
+      console.error(error);
+      setProductHistory([]);
     }
   }
 
@@ -327,26 +342,10 @@ export const DistributorsNew = () => {
                   <div className={styles['user-property-header']}>Codigo postal</div>
                   <div className={styles['user-property-value']}>
                     {
-                      selectedDistributor?.phone_number
+                      selectedDistributor?.postal_code
                     }
                   </div>
                 </div>
-                <div className={styles['user-property']}>
-                  <div className={styles['user-property-header']}>Codigo postal</div>
-                  <div className={styles['user-property-value']}>
-                    {
-                      selectedDistributor?.phone_number
-                    }
-                  </div>
-                </div>
-                {
-                  /*
-                  <div className={styles['user-property']}>
-                  <div className={`${styles['user-property-header']} ${styles['user-property-header--small-text']}`}>Fecha de creación</div>
-                  <div className={styles['user-property-value']}>{'getFormatedDate(new Date(userMainProperties.createdAt))'}</div>
-                </div>
-                  */
-                }
               </div>
             </>
           }
@@ -437,6 +436,7 @@ export const DistributorsNew = () => {
                                   setSelectedDistributor(d);
                                   setDistributorDetailsSection('product-history');
                                   refreshAccessHistoryById(d.distributor_id);
+                                  refreshProductHistoryById(d.distributor_id);
                                 }}
                               >
                                 Ver perfil
@@ -462,7 +462,127 @@ export const DistributorsNew = () => {
             </>
           }
           {
-            (mainSection === 'distributors' && distributorsSubSection === 'distributor-details') &&
+            (mainSection === 'distributors' &&
+              distributorsSubSection === 'distributor-details' &&
+              distributorDetailsSection === 'product-history'
+            ) &&
+            <>
+              <div className={styles['go-back-container']}>
+                {/* GO BACK */}
+                <div
+                  className={styles['go-back']}
+                  onClick={(e) => {
+                    setDistributorsSubSection('distributors-list');
+                    setSelectedDistributor(null);
+                  }}
+                >
+                  <FaLongArrowAltLeft size={30} />
+                  <span className={styles['']}>Atrás</span>
+                </div>
+              </div>
+              <div className={styles['distributor-details-header']}>
+                <div className={styles['distributor-details-titles-container']}>
+                  <h2 className={styles['distributor-details-title']}>
+                    Historial de productos
+                  </h2>
+                  <h3 className={styles['distributor-details-subtitle']}>
+                    Estos son los productos comprados por el distribuidor
+                  </h3>
+                </div>
+                <div
+                  className={styles['distributor-details-create-access-button']}
+                  onClick={(e) => {
+                    // TODO
+                    setShowCreateAccessInoviceModal(true);
+                    setNewAccessInvoice({
+                      ...newAccessInvoice,
+                      distributorId: selectedDistributor?.distributor_id || 0,
+                      adminId
+                    });
+                    console.log({ newAccessInvoice });
+                  }}
+                >
+                  <IoIosAddCircleOutline size={30} />
+                  <span>Registrar productos</span>
+                </div>
+              </div>
+              {
+                /*
+                TODO: Listar los productos comprados por el usuario
+                productHistory
+                */
+              }
+              <div className={styles['distributor-details-content']}>
+                {
+                  productHistory.length > 0 &&
+                  <div className={styles['table-content']}>
+                    <table className={styles['gonvar-table']}>
+                      <thead className={styles['gonvar-table__thead']}>
+                        <tr className={styles['gonvar-table__row']}>
+                          <th className={styles['gonvar-table__th']}>Fecha</th>
+                          <th className={styles['gonvar-table__th']}>Cantidad de productos</th>
+                          <th className={styles['gonvar-table__th']}>Monto total</th>
+                          <th className={styles['gonvar-table__th']}>Responsable</th>
+                          <th className={styles['gonvar-table__th']}></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          productHistory.map((ph, i) => {
+                            return <tr
+                              className={styles['gonvar-table__row']}
+                              key={`user_${i}`}
+                            >
+                              <td className={styles['gonvar-table__data']}>
+                                {ph.sell_at}
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {ph.product_count}
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(ph.product_total_amount)
+                                }
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {ph.seller_email}
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                <button
+                                  className={styles['gonvar-table__button']}
+                                  onClick={(e) => {
+                                    setShowProductInvoiceModal(true);
+                                    setSelectedProductInvoice(ph);
+                                  }}
+                                >
+                                  Ver factura
+                                </button>
+                              </td>
+                            </tr>
+                          })
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                }
+                {
+                  productHistory.length === 0 &&
+                  <div className={styles['empty-container']}>
+                    <div className={styles['empty-content']}>
+                      <p className={styles['empty-content-text']}>
+                        Este distribuidor no cuenta con un historial de productos
+                      </p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </>
+          }
+          {
+            (mainSection === 'distributors' &&
+              distributorsSubSection === 'distributor-details' &&
+              distributorDetailsSection === 'access-history'
+            ) &&
             <>
               <div className={styles['go-back-container']}>
                 {/* GO BACK */}
@@ -794,6 +914,27 @@ export const DistributorsNew = () => {
           show={showCreateAccessInoviceModal}
           onClose={() => {
             setShowCreateAccessInoviceModal(false);
+          }}
+          compactSize={false}
+        />
+      }
+      {
+        (showProductInvoiceModal && selectedProductInvoice !== null) &&
+        <Modal
+          child={
+            <InvoiceProductModal
+              productInvoiceRecord={selectedProductInvoice}
+              onClose={() => {
+                setShowProductInvoiceModal(false);
+              }}
+              onShare={() => {
+
+              }}
+            />
+          }
+          show={showProductInvoiceModal}
+          onClose={() => {
+            setShowProductInvoiceModal(false);
           }}
           compactSize={false}
         />

@@ -101,3 +101,35 @@ interface ICreateCodeSell {
   distributor_id: number;
   details: IDetail[];
 }
+
+interface IProductHistoryRecord {
+  seller_id: number
+  distributor_id: number
+  sell_at: string
+  product_sell_id: number
+  product_id: number
+  count: number
+  price: number
+  product_name: string
+  product_image: string
+  seller_email: string
+}
+
+interface IProductSellHistory {
+  seller_id: number
+  distributor_id: number
+  sell_at: string
+  seller_email: string
+  product_count: number
+  product_total_amount: number
+  products: IProductSell[]
+}
+
+interface IProductSell {
+  product_sell_id: number
+  product_id: number
+  count: number
+  price: number
+  product_name: string
+  product_image: string
+}

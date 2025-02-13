@@ -372,6 +372,66 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
   }
 };
 
+export const getProductHistoryByDistributorId = async (distributorId: number): Promise<IProductSellHistory[]> => {
+  try {
+    const query = `SELECT ps.seller_id, distributor_id, sell_at, p2.product_sell_id, 
+    p1.product_id, count, price, p1.name AS product_name, p1.image AS product_image, 
+    sv.email AS seller_email 
+    FROM product_sells AS ps 
+    INNER JOIN products_by_product_sell AS p2 ON p2.product_sell_id = ps.product_sell_id 
+    INNER JOIN products AS p1 ON p2.product_id = p1.product_id 
+    INNER JOIN sellers_view AS sv ON sv.seller_id = ps.seller_id
+    WHERE ps.distributor_id = ${distributorId};`;
+    const response = await getGenericQueryResponse(query);
+    const result = response.data.data as IProductHistoryRecord[];
+
+    const productSellIds = [...new Set(result.map(ps => ps.product_sell_id))]
+
+    const finalResult: IProductSellHistory[] =
+      productSellIds.map((psId) => {
+        const records = result.filter(ph => ph.product_sell_id === psId);
+        const { distributor_id, seller_email, sell_at, seller_id } = records[0]!;
+        const products: IProductSell[] = records.map((ph) => {
+          const { product_sell_id, product_id, product_name, product_image, price, count } = ph;
+
+          return {
+            product_sell_id,
+            product_id,
+            product_name,
+            product_image,
+            count,
+            price
+          }
+        });
+
+        const sellAtWithFormat = new Date(parseInt(sell_at) * 1000);
+
+        const productCount = products
+          .map(p => p.count)
+          .reduce((pv, cv) => { return pv + cv }, 0);
+
+        const productTotalAmount = products
+          .map((p) => { return { price: p.price, count: p.count } })
+          .reduce((pv, cv) => { return pv + (cv.price * cv.count) }, 0);
+
+        return {
+          distributor_id,
+          sell_at: sellAtWithFormat.toJSON().slice(0, 10),
+          seller_email,
+          seller_id,
+          products,
+          product_count: productCount,
+          product_total_amount: productTotalAmount
+        }
+      });
+
+    return finalResult;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 const generateSequence = (n: number) =>
   Array(n)
     .fill(0)

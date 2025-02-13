@@ -475,7 +475,7 @@ const SideBar = ({ show, onHide }: any) => {
         {
           (isSuperAdmin || isDistributors) && (
             <>
-              <Text>Organization</Text>
+              <Text>Distributors</Text>
               <ul>
                 <Link href='/admin/Distributors'>
                   <li
