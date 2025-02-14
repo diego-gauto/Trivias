@@ -21,6 +21,7 @@ import Pagination from '../../../components/Pagination/Pagination';
 import { InvoiceAccessModal } from './InvoiceAccessModal';
 import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
 import { InvoiceProductModal } from './InvoiceProductModal';
+import { CreateInvoiceProductModal } from './CreateInvoiceProductModal';
 
 type MainSection = 'distributors' | 'common-users' | 'sells';
 
@@ -57,6 +58,15 @@ function createAccessInvoiceDefaultValue(distributorId: number, adminId: number)
   }
 }
 
+function createProductInvoiceDefaultValue(distributorId: number, sellerId: number): IProductInvoice {
+  return {
+    distributorId,
+    sellerId,
+    products: [],
+    date: ''
+  }
+}
+
 export const DistributorsNew = () => {
   const [adminId, setAdminId] = useState<number>(0);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
@@ -85,7 +95,9 @@ export const DistributorsNew = () => {
   const [showProductInvoiceModal, setShowProductInvoiceModal] = useState(false);
 
   const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
+  const [showCreateProductInoviceModal, setShowCreateProductInoviceModal] = useState(false);
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
+  const [newProductInvoice, setNewProductInvoice] = useState<IProductInvoice>(createProductInvoiceDefaultValue(0, 0));
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -493,6 +505,8 @@ export const DistributorsNew = () => {
                   className={styles['distributor-details-create-access-button']}
                   onClick={(e) => {
                     // TODO
+                    setShowCreateProductInoviceModal(true);
+                    /*
                     setShowCreateAccessInoviceModal(true);
                     setNewAccessInvoice({
                       ...newAccessInvoice,
@@ -500,6 +514,7 @@ export const DistributorsNew = () => {
                       adminId
                     });
                     console.log({ newAccessInvoice });
+                    */
                   }}
                 >
                   <IoIosAddCircleOutline size={30} />
@@ -936,6 +951,32 @@ export const DistributorsNew = () => {
           onClose={() => {
             setShowProductInvoiceModal(false);
           }}
+          compactSize={false}
+        />
+      }
+      {
+        // newProductInvoice
+        // setNewProductInvoice
+      }
+      {
+        showCreateProductInoviceModal &&
+        <Modal
+          child={
+            <CreateInvoiceProductModal
+              onClose={() => {
+                setShowCreateProductInoviceModal(false)
+              }}
+              onCreate={(canCreate) => {
+                // Refrescar el historico de venta de productos
+              }}
+              productInvoice={newProductInvoice}
+              modifyProductInvoice={setNewProductInvoice}
+            />
+          }
+          onClose={() => {
+            setShowCreateProductInoviceModal(false);
+          }}
+          show={showCreateProductInoviceModal}
           compactSize={false}
         />
       }

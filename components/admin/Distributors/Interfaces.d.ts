@@ -88,6 +88,13 @@ interface IAccessInvoiceDetails {
   price: number;
 }
 
+interface IProductInvoice {
+  distributorId: number;
+  sellerId: number;
+  date: string;
+  products: { productId: number, count: number, price: number }[];
+}
+
 type SubscriptionValue = 'M' | 'C' | 'A';
 
 interface IDetail {

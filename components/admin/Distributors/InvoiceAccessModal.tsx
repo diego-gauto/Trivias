@@ -34,9 +34,9 @@ export const InvoiceAccessModal = ({
           <table className={s['gonvar-table']}>
             <thead className={s['gonvar-table__thead']}>
               <tr className={s['gonvar-table__row']}>
-                <th>Tipos de acceso</th>
-                <th>Código</th>
-                <th>Monto</th>
+                <th className={s['gonvar-table__th']}>Tipos de acceso</th>
+                <th className={s['gonvar-table__th']}>Código</th>
+                <th className={s['gonvar-table__th']}>Monto</th>
               </tr>
             </thead>
             <tbody>
@@ -52,16 +52,11 @@ export const InvoiceAccessModal = ({
                       key={`table-row-detail-${detailElement.duration_type}`}
                     >
                       <td className={s['access-type']}>
-                        Accesos de{' '}
                         {
                           detailElement.duration_type === 'M'
-                            ? '1 mes'
+                            ? 'Mensual'
                             : detailElement.duration_type === 'C'
-                              ? '4 meses' : '1 año'
-                        }
-                        :{' '}
-                        {
-                          detailElement.count
+                              ? 'Cuatrimestral' : 'Anual'
                         }
                       </td>
                       <td className={s['access-codes']}>
