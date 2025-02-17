@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { generateSellOfAccess } from './Queries';
+import { createProductInvoice, generateSellOfAccess, getSellersList } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 
@@ -56,16 +56,36 @@ export const CreateInvoiceProductModal = ({
 }: CreateInvoiceAccessModalProps) => {
 
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
-  const [codesRequestIsFinish, setCodesRequestIsFinish] = useState(false);
+  const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
+  const [sellers, setSellers] = useState<ISeller[]>([]);
 
   const { distributorId, sellerId, products, date } = productInvoice;
+
+  useEffect(() => {
+    const today = new Date().toJSON().slice(0, 10);
+    modifyProductInvoice({
+      ...productInvoice,
+      date: today
+    });
+    refreshSellersList();
+  }, []);
+
+  useEffect(() => {
+
+  }, [sellers])
 
   const isValidRequestValues = () => {
     const validProductsNumber = products.some((d) => d.count > 0);
     const validDate = date !== '';
-    return validDate && validProductsNumber;
+    const validSellerId = sellerId !== 0;
+    return validDate && validProductsNumber && validSellerId;
   };
+
+  const refreshSellersList = async () => {
+    const sellers = await getSellersList();
+    setSellers(sellers);
+  }
 
   const total = products.reduce((pv, cv) => {
     return pv + (cv.price * cv.count);
@@ -99,7 +119,7 @@ export const CreateInvoiceProductModal = ({
 
   return (
     <div className={s['main-container']}>
-      <div className={`${s['views']} ${codesRequestIsFinish ? s['transition-active'] : ''}`}>
+      <div className={`${s['views']} ${productsRequestIsFinish ? s['transition-active'] : ''}`}>
         <div className={s['container']}>
           <div className={s['header']}>
             <h2 className={s['title']}>Registrar compra de producto</h2>
@@ -144,8 +164,27 @@ export const CreateInvoiceProductModal = ({
                       borderRadius: '16px',
                       paddingLeft: '12px'
                     }}
+                    value={sellerId}
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      const selectedSellerId = parseInt(value) || 0;
+                      modifyProductInvoice({
+                        ...productInvoice,
+                        sellerId: selectedSellerId
+                      });
+                    }}
                   >
-                    <option value="">Leo</option>
+                    <option value="0" disabled>Escoge un vendedor</option>
+                    {
+                      sellers.map((s, index) => {
+                        const { email, seller_id } = s;
+                        return <option
+                          value={seller_id}
+                          key={`seller_${seller_id}`}
+                        >
+                          {email}</option>
+                      })
+                    }
                   </select>
                 </div>
               </div>
@@ -222,7 +261,15 @@ export const CreateInvoiceProductModal = ({
             }
             {
               products.length > 0 &&
-              <div className={s['table-content']}>
+              <div
+                className={s['table-content']}
+                style={{
+                  overflowY: 'scroll',
+                  maxHeight: '300px',
+                  marginBottom: '10px',
+                  paddingRight: '10px'
+                }}
+              >
                 <table className={s['gonvar-table']}>
                   <thead className={s['gonvar-table__thead']}>
                     <tr className={s['gonvar-table__row']}>
@@ -296,7 +343,6 @@ export const CreateInvoiceProductModal = ({
                                 <span>
                                   {
                                     products.find(cp => cp.productId === sp.productId)?.count
-                                    // details.find((detail) => detail.accessType === d.accessType)?.count
                                   }
                                 </span>
                                 <button
@@ -319,21 +365,6 @@ export const CreateInvoiceProductModal = ({
                                       ...productInvoice,
                                       products: newProducts
                                     });
-                                    /*
-                                    const { accessType } = d;
-                                    modifyAccessInvoice({
-                                      ...accessInvoice,
-                                      details: details.map(d => {
-                                        if (d.accessType !== accessType) {
-                                          return d;
-                                        }
-                                        return {
-                                          ...d,
-                                          count: d.count + 1
-                                        }
-                                      })
-                                    });
-                                    */
                                   }}
                                 >
                                   +
@@ -359,6 +390,7 @@ export const CreateInvoiceProductModal = ({
                                   placeholder='precio'
                                   type="number"
                                   value={`${sp.price}`}
+                                  min={0}
                                   onChange={(e) => {
                                     const { value } = e.target;
 
@@ -416,9 +448,27 @@ export const CreateInvoiceProductModal = ({
                 </table>
               </div>
             }
-
           </div>
-          <div className={s['footer']}>
+          <div
+            className={s['footer']}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              justifyContent: 'center',
+              alignContent: 'center'
+            }}
+          >
+            <p style={{
+              textAlign: 'end',
+              color: 'gray',
+              fontWeight: 'bold',
+              fontSize: '20px',
+              paddingRight: '24px',
+            }}>Total:{' '}
+              <span>
+                {
+                  Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(total).slice(1) + ' MXN'
+                }</span></p>
             <div className={s['buttons']}>
               <button
                 className={s['button']}
@@ -441,26 +491,9 @@ export const CreateInvoiceProductModal = ({
                   if (userUseRegisterButton) {
                     return;
                   }
-                  // TODO registrar venta de producto
-                  /*
-                  setUserUseRegisterButton(true);
-                  const detailsFiltered = products.filter((d) => d.count > 0);
-                  const requestBody: ICreateCodeSell = {
-                    admin_id: adminId,
-                    distributor_id: distributorId,
-                    details: detailsFiltered.map((d) => {
-                      return {
-                        amount: d.price,
-                        count: d.count,
-                        duration_type: d.accessType
-                      }
-                    })
-                  }
-                  const canCreateInvoice = await generateSellOfAccess(requestBody);
-                  console.log({ canCreateInvoice });
-                  setCodesRequestIsFinish(true);
+                  const canCreateInvoice = await createProductInvoice(productInvoice);
                   setHaveSuccessAtCreate(canCreateInvoice);
-                  */
+                  setProductsRequestIsFinish(true);
                 }}
               >
                 Registrar
@@ -479,13 +512,13 @@ export const CreateInvoiceProductModal = ({
               {
                 haveSuccessAtCreate ?
                   '¡Se ha registrado la factura con exito!'
-                  : '¡No se ha logrado crear los codigos de acceso!'
+                  : '¡No se ha logrado crear la factura de los productos!'
               }
             </h3>
             <h4 className={s['result-petition-subtitle']}>
               {
                 haveSuccessAtCreate ?
-                  'Ahora el distribuidor tiene una nueva factura'
+                  'Ahora el distribuidor tiene una nueva factura de productos'
                   : 'Intente de nuevo esta acción'
               }
             </h4>

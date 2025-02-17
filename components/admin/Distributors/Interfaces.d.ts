@@ -140,3 +140,18 @@ interface IProductSell {
   product_name: string
   product_image: string
 }
+
+interface ISeller {
+  seller_id: number
+  user_id: number
+  email: string
+  full_name: string
+  phone_number: string
+}
+
+interface IProduct {
+  product_id: number
+  product_name: string
+  default_price: number
+  image_url: string
+}

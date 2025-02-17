@@ -432,6 +432,50 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
   }
 }
 
+export const createProductInvoice = async (productInvoice: IProductInvoice): Promise<boolean> => {
+  try {
+    const { distributorId, sellerId, products, date } = productInvoice;
+    const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
+    const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime());
+
+    const createProductSellQuery = `INSERT INTO product_sells (seller_id, distributor_id, sell_at) 
+      VALUES (${sellerId}, ${distributorId}, ${sellAt})`;
+
+    const createProductSellResponse = await postGenericQueryResponse(createProductSellQuery);
+    const productSellId = createProductSellResponse.data.data.insertId;
+
+    let createProductsBySellQuery = 'INSERT INTO products_by_product_sell (product_sell_id, product_id, count, price) VALUES ';
+
+    const realProducts = products.filter(p => p.count > 0);
+
+    const values: string[] = [];
+    for (let index = 0; index < realProducts.length; index++) {
+      const product = realProducts[index]!;
+      const { productId, count, price } = product;
+      const record = `(${productSellId}, ${productId}, ${count}, ${price})`;
+      values.push(record);
+    }
+
+    createProductsBySellQuery += values.join(', ') + ';';
+    console.log({ createProductsBySellQuery });
+    await postGenericQueryResponse(createProductsBySellQuery);
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const getSellersList = async () => {
+  try {
+    const query = `SELECT seller_id, user_id, email, CONCAT(name, ' ', last_name) as full_name, phone_number FROM sellers_view;`;
+    const response = await getGenericQueryResponse(query);
+    return response.data.data as ISeller[];
+  } catch (error) {
+    return []
+  }
+}
+
 const generateSequence = (n: number) =>
   Array(n)
     .fill(0)
