@@ -65,6 +65,15 @@
   font-weight: bold;
 }
 
+.product {
+  min-width: 100px;
+  align-self: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+
 .count {
   display: flex;
   gap: 16px;

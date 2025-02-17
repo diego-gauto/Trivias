@@ -240,7 +240,7 @@ export const CreateInvoiceProductModal = ({
                             className={s['gonvar-table__row']}
                             key={`table-row-detail-${sp.productId}`}
                           >
-                            <td className={s['access-type']}>
+                            <td className={s['product']}>
                               <div className={s2['product-search-catalog-item-image-container']}>
                                 <Image
                                   src={PRODUCTS_LIST.find(p => p.product_id === sp.productId)?.image_url || ''}
