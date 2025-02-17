@@ -866,6 +866,8 @@ export const PurchaseNew2 = () => {
                 >
                   Confirmar compra
                 </button>
+                {
+                  /*
                 <button
                   className={addPayment ? 'fade' : ''}
                   onClick={(e) => {
@@ -874,6 +876,8 @@ export const PurchaseNew2 = () => {
                 >
                   Simular compra
                 </button>
+                    */
+                }
               </>
             )}
             {
