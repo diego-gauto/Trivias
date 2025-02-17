@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { CourseFormContain } from '../Courses/CourseMain.styled';
-import { ButtonNewCourse } from '../Courses/Form/CourseForm_Create.styled';
-import Delete from '../Courses/Form/Delete/Delete';
-import { AdminContain } from '../SideBar.styled';
+import React, { useEffect, useState } from "react";
+
+import { IoMdExit } from "react-icons/io";
+
+import { useRouter } from "next/router";
+
+import {
+  createMaterialApi,
+  deleteMaterialsApi,
+  getMaterialsApi,
+  updateMaterialApi,
+} from "../../api/materials";
 import {
   Button,
   ButtonContain,
+  CategoryContain,
   CatContain,
   CatData,
-  CategoryContain,
   CatText,
   CloseIcon,
   EditCat,
@@ -19,15 +26,11 @@ import {
   Label,
   Title,
   TitleContain,
-} from '../Category/Category.styled';
-import {
-  createMaterialApi,
-  deleteMaterialsApi,
-  getMaterialsApi,
-  updateMaterialApi,
-} from '../../api/materials';
-import { useRouter } from 'next/router';
-import { IoMdExit } from 'react-icons/io';
+} from "../Category/Category.styled";
+import { CourseFormContain } from "../Courses/CourseMain.styled";
+import { ButtonNewCourse } from "../Courses/Form/CourseForm_Create.styled";
+import Delete from "../Courses/Form/Delete/Delete";
+import { AdminContain } from "../SideBar.styled";
 
 const Materials = () => {
   const [newMaterial, setNewMaterial] = useState<boolean>(false);
@@ -37,6 +40,10 @@ const Materials = () => {
   const [material, setMaterial] = useState<any>({
     name: '',
   });
+  const [width, setWidth] = useState(
+    window.innerWidth <= 1300 ? "100%" : "calc(100% - 200px)"
+  );
+
   const returnToCourses = () => {
     router.push({
       pathname: '/admin/Courses',
@@ -75,10 +82,19 @@ const Materials = () => {
     getAllMaterials();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth <= 1300 ? "100%" : "calc(100% - 200px)");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <AdminContain>
       <IoMdExit className='icon-exit' onClick={returnToCourses} />
-      <CourseFormContain>
+      <CourseFormContain style={{ width }}>
         <CategoryContain>
           <TitleContain
             onClick={() => {
