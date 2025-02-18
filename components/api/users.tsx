@@ -112,7 +112,7 @@ export interface IUpdateMembershipData {
   user_id: number,
   type: string,
   days: number,
-  admin_update_id: number,
+  admin_update_id: number | null,
 }
 export const updateMembershipPlanApi = async (body: IUpdateMembershipData) => {
   return axios

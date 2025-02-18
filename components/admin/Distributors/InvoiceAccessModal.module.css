@@ -76,6 +76,11 @@
   align-self: center;
 }
 
+.user-email {
+  padding: 4px 10px;
+  margin: 0
+}
+
 .table-content {
   border-collapse: collapse;
   width: 100%;

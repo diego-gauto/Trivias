@@ -35,8 +35,10 @@ export const InvoiceAccessModal = ({
             <thead className={s['gonvar-table__thead']}>
               <tr className={s['gonvar-table__row']}>
                 <th className={s['gonvar-table__th']}>Tipos de acceso</th>
-                <th className={s['gonvar-table__th']}>Código</th>
+                <th className={s['gonvar-table__th']}>Cantidad</th>
                 <th className={s['gonvar-table__th']}>Monto</th>
+                <th className={s['gonvar-table__th']}>Código</th>
+                <th className={s['gonvar-table__th']}>Usuario</th>
               </tr>
             </thead>
             <tbody>
@@ -59,6 +61,16 @@ export const InvoiceAccessModal = ({
                               ? 'Cuatrimestral' : 'Anual'
                         }
                       </td>
+                      <td style={{ textAlign: 'center' }}>
+                        {
+                          detailElement.count
+                        }
+                      </td>
+                      <td className={s['access-amount']}>
+                        MXN{' '}{
+                          `${Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(detailElement.amount)}`.slice(1)
+                        }
+                      </td>
                       <td className={s['access-codes']}>
                         {
                           detailElement.codes.map((code, index) => {
@@ -75,9 +87,29 @@ export const InvoiceAccessModal = ({
                           })
                         }
                       </td>
-                      <td className={s['access-amount']}>
-                        MXN{' '}{
-                          `${Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(detailElement.amount)}`.slice(1)
+                      <td style={{
+                        padding: '16px 8px'
+                      }}>
+                        {
+                          detailElement.codes.map((code, index) => {
+                            return (
+                              <div
+                                style={{
+                                  fontWeight: 'bold',
+                                  textAlign: 'center',
+                                }}
+                                key={`code-${index}`}
+                                onClick={(e) => {
+                                  navigator.clipboard.writeText(code.code);
+                                }}
+                              >
+                                <p className={s['user-email']}>
+                                  {
+                                    (code.email === '' || code.email === null) ? 'Sin reclamar' : code.email
+                                  }
+                                </p>
+                              </div>)
+                          })
                         }
                       </td>
                     </tr>

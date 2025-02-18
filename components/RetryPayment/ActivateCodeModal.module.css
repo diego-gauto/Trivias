@@ -1,0 +1,187 @@
+.main-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.views {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  color: #6310C8;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.sections-header {
+  color: #6310C8;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: bold;
+  gap: 8px;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.button {
+  padding: 8px 24px;
+  border-radius: 32px;
+  transition: background-color 0.25s;
+  border: 1px solid #6310C8;
+  background-color: white;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: rgba(99, 16, 200, 0.25);
+}
+
+.button--purple {
+  background-color: #6310C8;
+  color: white;
+}
+
+.button--purple-disable {
+  background-color: #695681;
+  color: white;
+  cursor: default;
+  border: 1px solid #695681;
+}
+
+.button--purple-disable:hover {
+  background-color: #695681;
+  color: white;
+}
+
+.button--purple:hover {
+  background-color: rgba(99, 16, 200, 0.75);
+}
+
+.result-petition-section {
+  padding: 36px;
+  align-self: center;
+  justify-items: center;
+}
+
+.result-petition-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  gap: 16px;
+}
+
+.result-petition-icon {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  color: white;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.result-petition-icon--approve {
+  background-color: #0ead69;
+}
+
+.result-petition-icon--not-approve {
+  background-color: #ad1b0e;
+}
+
+.result-petition-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  color: #691aca;
+}
+
+.result-petition-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  color: #691aca;
+}
+
+.result-petition-button {
+  padding: 8px 24px;
+  background-color: #691aca;
+  color: white;
+  border-radius: 32px;
+  border: none;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1s;
+}
+
+.result-petition-button:hover {
+  background-color: rgba(105, 26, 202, 0.75);
+}
+
+@media screen and (min-width: 576px) {
+
+}
+
+/*
+Breakpoint	Class infix	Dimensions
+X-Small	None	<576px
+Small	sm	≥576px
+Medium	md	≥768px
+Large	lg	≥992px
+Extra large	xl	≥1200px
+Extra extra large	xxl	≥1400px
+*/
