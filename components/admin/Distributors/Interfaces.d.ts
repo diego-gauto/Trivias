@@ -162,12 +162,9 @@ interface IAdminDistributorsRole {
   view: 0 | 1
   create: 0 | 1
   edit: 0 | 1
-  delete: 0 | 1
   download: 0 | 1
   abm_products: 0 | 1
   abm_sellers: 0 | 1
-  view_access_invoices: 0 | 1
   create_access_invoices: 0 | 1
-  view_products_invoices: 0 | 1
   create_products_invoices: 0 | 1
 }

@@ -3,8 +3,11 @@ import { getGenericQueryResponse } from "../../api/admin";
 export const getDistributorsAdminAccess = async (userId: number): Promise<AdminRole> => {
   try {
     const query = `SELECT * FROM admin_distributors WHERE user_id = ${userId};`;
+
     const response = await getGenericQueryResponse(query);
-    const result = response.data.data as IAdminDistributorRole[];
+    const result = response.data.data;
+
+    console.log({ result });
 
     if (result.length === 0) {
       throw new Error('No existe');
@@ -12,52 +15,40 @@ export const getDistributorsAdminAccess = async (userId: number): Promise<AdminR
 
     const element = result[0]!;
 
-    const { abm_products, abm_sellers, create, create_access_invoices, create_products_invoices, delete: remove, download, edit, user_id, view, view_access_invoices, view_products_invoices } = element;
+    const { abm_products, abm_sellers, create, create_access_invoices, create_products_invoices, download, edit, user_id, view, } = element;
 
     return {
-      active: view === 1,
+      active: view.data == 1,
       name: "distributors",
       role: 'Distribuidoras',
       tasks: [
         {
-          active: create === 1,
+          active: create.data == 1,
           task: 'Crear'
         },
         {
           task: 'Editar',
-          active: edit === 1,
+          active: edit.data == 1,
         },
         {
           task: 'Descargar',
-          active: download === 1,
-        },
-        {
-          task: 'Eliminar',
-          active: remove === 1,
+          active: download.data == 1,
         },
         {
           task: 'ABM Productos',
-          active: abm_products === 1,
+          active: abm_products.data == 1,
         },
         {
           task: 'ABM Vendedores',
-          active: abm_sellers === 1,
-        },
-        {
-          task: 'Ver factura de accesos',
-          active: view_access_invoices === 1,
-        },
-        {
-          task: 'Ver factura de productos',
-          active: view_products_invoices === 1,
+          active: abm_sellers.data == 1,
         },
         {
           task: 'Generar factura de accesos',
-          active: create_access_invoices === 1,
+          active: create_access_invoices.data == 1,
         },
         {
           task: 'Generar factura de productos',
-          active: create_products_invoices === 1,
+          active: create_products_invoices.data == 1,
         },
       ],
     }

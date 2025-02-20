@@ -1,18 +1,4 @@
-export const backendRoleEditMethod = (admin: {
-  user_id: any;
-  id: number;
-  role: string;
-  source_table: string;
-  create?: number;
-  edit?: number;
-  delete?: number;
-  view: number;
-  courses?: string;
-  request?: number;
-  report?: number;
-  download?: number;
-  forms?: string;
-}) => {
+export const backendRoleEditMethod = (admin: BackendRoleStructure) => {
   let query: string = '';
   const tableSourceByAdminRole = new Map<string, string>();
   tableSourceByAdminRole.set('course', 'admin_courses');
@@ -122,14 +108,11 @@ export const backendRoleEditMethod = (admin: {
     'view',
     'create',
     'edit',
-    'delete',
     'user_id',
     'download',
     'abm_products',
     'abm_sellers',
-    'view_access_invoices',
     'create_access_invoices',
-    'view_products_invoices',
     'create_products_invoices',
   ]);
   tableColumnsByTableName.set('admin_subscriptions', ['view', 'user_id']);

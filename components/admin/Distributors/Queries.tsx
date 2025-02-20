@@ -509,7 +509,6 @@ export const getUserAccessRoles = async (userId: number): Promise<IAdminDistribu
       user_id: userId,
       admin_distributor_id: 0,
       create: 0,
-      delete: 0,
       download: 0,
       edit: 0,
       view: 0,
@@ -517,8 +516,6 @@ export const getUserAccessRoles = async (userId: number): Promise<IAdminDistribu
       abm_sellers: 0,
       create_access_invoices: 0,
       create_products_invoices: 0,
-      view_access_invoices: 0,
-      view_products_invoices: 0
     };
   }
 }

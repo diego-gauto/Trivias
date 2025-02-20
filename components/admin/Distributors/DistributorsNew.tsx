@@ -83,8 +83,6 @@ function createAdminDistributorsRole(): IAdminDistributorsRole {
     abm_sellers: 0,
     create_access_invoices: 0,
     create_products_invoices: 0,
-    view_access_invoices: 0,
-    view_products_invoices: 0,
   }
 }
 

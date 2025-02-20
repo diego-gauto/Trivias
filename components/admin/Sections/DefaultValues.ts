@@ -33,9 +33,7 @@ interface AdminType {
   download?: number;
   abm_products?: number;
   abm_sellers?: number;
-  view_access_invoices?: number;
   create_access_invoices?: number;
-  view_products_invoices?: number;
   create_products_invoices?: number;
 }
 
@@ -194,15 +192,12 @@ export const defaultValues: AdminType[] = [
     user_id: 0,
     view: 0,
     create: 0,
-    delete: 0,
     edit: 0,
     download: 0,
     abm_products: 0,
     abm_sellers: 0,
     create_access_invoices: 0,
     create_products_invoices: 0,
-    view_access_invoices: 0,
-    view_products_invoices: 0,
   },
   {
     id: 0,
