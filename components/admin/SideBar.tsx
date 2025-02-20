@@ -217,6 +217,20 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(20);
       }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'asd'
+      ) {
+        setIndex(21);
+      }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'asda'
+      ) {
+        setIndex(22);
+      }
     }, []);
   } catch (error) { }
 
@@ -486,6 +500,28 @@ const SideBar = ({ show, onHide }: any) => {
                     }}
                   >
                     Distributors
+                  </li>
+                </Link>
+                <Link href='/admin/DistributorProducts'>
+                  <li
+                    style={{ color: index == 21 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(21);
+                      onHide();
+                    }}
+                  >
+                    Products
+                  </li>
+                </Link>
+                <Link href='/admin/DistributorSellers'>
+                  <li
+                    style={{ color: index == 22 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(22);
+                      onHide();
+                    }}
+                  >
+                    Sellers
                   </li>
                 </Link>
               </ul>

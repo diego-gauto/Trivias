@@ -90,6 +90,10 @@ const NavBar = () => {
   const modalNotificationsRef = useRef<any>(null);
   const [firstTime, setFirstTime] = useState(true);
 
+  if (userData) {
+    console.log({ userData });
+  }
+
   const handleClickOutside = (event: MouseEvent) => {
     if (event === null) {
       return;
@@ -372,6 +376,9 @@ const NavBar = () => {
             }
             if (role.role === 'homeworks') {
               route = 'HomeWork';
+            }
+            if (role.role === 'comments') {
+              route = 'Comments';
             }
             if (role.role === 'comments') {
               route = 'Comments';

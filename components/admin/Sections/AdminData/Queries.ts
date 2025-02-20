@@ -124,6 +124,13 @@ export const backendRoleEditMethod = (admin: {
     'edit',
     'delete',
     'user_id',
+    'download',
+    'abm_products',
+    'abm_sellers',
+    'view_access_invoices',
+    'create_access_invoices',
+    'view_products_invoices',
+    'create_products_invoices',
   ]);
   tableColumnsByTableName.set('admin_subscriptions', ['view', 'user_id']);
   tableColumnsByTableName.set('admin_active_memberships', [

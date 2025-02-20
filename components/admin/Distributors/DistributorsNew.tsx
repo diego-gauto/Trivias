@@ -15,6 +15,9 @@ import {
   getAllAdmins,
   createCodesForDistributor,
   getProductHistoryByDistributorId,
+  getUserAccessRoles,
+  getNormalUserIdByEmail,
+  getIsSuperAdmin,
 } from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
@@ -67,6 +70,24 @@ function createProductInvoiceDefaultValue(distributorId: number, sellerId: numbe
   }
 }
 
+function createAdminDistributorsRole(): IAdminDistributorsRole {
+  return {
+    user_id: 0,
+    admin_distributor_id: 0,
+    create: 0,
+    delete: 0,
+    download: 0,
+    edit: 0,
+    view: 0,
+    abm_products: 0,
+    abm_sellers: 0,
+    create_access_invoices: 0,
+    create_products_invoices: 0,
+    view_access_invoices: 0,
+    view_products_invoices: 0,
+  }
+}
+
 export const DistributorsNew = () => {
   const [adminId, setAdminId] = useState<number>(0);
   const [distributors, setDistributors] = useState<IDistributor[]>([]);
@@ -105,10 +126,14 @@ export const DistributorsNew = () => {
 
   const [showAddDistributorButton, setShowAddDistributorButton] = useState(true);
 
+  const [adminAccess, setAdminAccess] = useState<IAdminDistributorsRole>(createAdminDistributorsRole());
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
   useEffect(() => {
     refreshDistributorIds();
     getAdminId();
     refreshAdminList();
+    getUserAccessRoleByDB();
   }, []);
 
   useEffect(() => {
@@ -127,6 +152,18 @@ export const DistributorsNew = () => {
       console.error(error);
     }
   }, [commonUsersParams.offset]);
+
+  async function getUserAccessRoleByDB() {
+    try {
+      const userId = await getNormalUserIdByEmail(localStorage.getItem('email') || '');
+      const roleAccess = await getUserAccessRoles(userId);
+      const isSuperAdmin = await getIsSuperAdmin(localStorage.getItem('email') || '');
+      setAdminAccess(roleAccess);
+      setIsSuperAdmin(isSuperAdmin);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async function getAdminId() {
     try {
@@ -161,7 +198,6 @@ export const DistributorsNew = () => {
         ...commonUsersParams,
         count: usersListCount
       });
-      console.log({ usersList });
       setCommonUsers(usersList);
     } catch (error) {
       console.error(error);
@@ -296,7 +332,8 @@ export const DistributorsNew = () => {
                   />Filtrar
                 </div>
                 {
-                  showAddDistributorButton &&
+                  (showAddDistributorButton
+                    && (adminAccess.create === 1 || isSuperAdmin)) &&
                   <div
                     className={styles['search-bar-element']}
                     onClick={(e) => {
@@ -501,25 +538,28 @@ export const DistributorsNew = () => {
                     Estos son los productos comprados por el distribuidor
                   </h3>
                 </div>
-                <div
-                  className={styles['distributor-details-create-access-button']}
-                  onClick={(e) => {
-                    // TODO
-                    setShowCreateProductInoviceModal(true);
-                    /*
-                    setShowCreateAccessInoviceModal(true);
-                    setNewAccessInvoice({
-                      ...newAccessInvoice,
-                      distributorId: selectedDistributor?.distributor_id || 0,
-                      adminId
-                    });
-                    console.log({ newAccessInvoice });
-                    */
-                  }}
-                >
-                  <IoIosAddCircleOutline size={30} />
-                  <span>Registrar productos</span>
-                </div>
+                {
+                  (isSuperAdmin || adminAccess.create === 1) &&
+                  <div
+                    className={styles['distributor-details-create-access-button']}
+                    onClick={(e) => {
+                      // TODO
+                      setShowCreateProductInoviceModal(true);
+                      /*
+                      setShowCreateAccessInoviceModal(true);
+                      setNewAccessInvoice({
+                        ...newAccessInvoice,
+                        distributorId: selectedDistributor?.distributor_id || 0,
+                        adminId
+                      });
+                      console.log({ newAccessInvoice });
+                      */
+                    }}
+                  >
+                    <IoIosAddCircleOutline size={30} />
+                    <span>Registrar productos</span>
+                  </div>
+                }
               </div>
               {
                 /*
@@ -538,7 +578,10 @@ export const DistributorsNew = () => {
                           <th className={styles['gonvar-table__th']}>Cantidad de productos</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
                           <th className={styles['gonvar-table__th']}>Responsable</th>
-                          <th className={styles['gonvar-table__th']}></th>
+                          {
+                            (isSuperAdmin || adminAccess.view === 1) &&
+                            <th className={styles['gonvar-table__th']}></th>
+                          }
                         </tr>
                       </thead>
                       <tbody>
@@ -562,17 +605,20 @@ export const DistributorsNew = () => {
                               <td className={styles['gonvar-table__data']}>
                                 {ph.seller_email}
                               </td>
-                              <td className={styles['gonvar-table__data']}>
-                                <button
-                                  className={styles['gonvar-table__button']}
-                                  onClick={(e) => {
-                                    setShowProductInvoiceModal(true);
-                                    setSelectedProductInvoice(ph);
-                                  }}
-                                >
-                                  Ver factura
-                                </button>
-                              </td>
+                              {
+                                (isSuperAdmin || adminAccess.view === 1) &&
+                                <td className={styles['gonvar-table__data']}>
+                                  <button
+                                    className={styles['gonvar-table__button']}
+                                    onClick={(e) => {
+                                      setShowProductInvoiceModal(true);
+                                      setSelectedProductInvoice(ph);
+                                    }}
+                                  >
+                                    Ver factura
+                                  </button>
+                                </td>
+                              }
                             </tr>
                           })
                         }
@@ -621,22 +667,23 @@ export const DistributorsNew = () => {
                     Estos son los accesos comprados por el distribuidor
                   </h3>
                 </div>
-                <div
-                  className={styles['distributor-details-create-access-button']}
-                  onClick={(e) => {
-                    // TODO
-                    setShowCreateAccessInoviceModal(true);
-                    setNewAccessInvoice({
-                      ...newAccessInvoice,
-                      distributorId: selectedDistributor?.distributor_id || 0,
-                      adminId
-                    });
-                    console.log({ newAccessInvoice });
-                  }}
-                >
-                  <IoIosAddCircleOutline size={30} />
-                  <span>Registrar accesos</span>
-                </div>
+                {
+                  (isSuperAdmin || adminAccess.create === 1) &&
+                  <div
+                    className={styles['distributor-details-create-access-button']}
+                    onClick={(e) => {
+                      setShowCreateAccessInoviceModal(true);
+                      setNewAccessInvoice({
+                        ...newAccessInvoice,
+                        distributorId: selectedDistributor?.distributor_id || 0,
+                        adminId
+                      });
+                    }}
+                  >
+                    <IoIosAddCircleOutline size={30} />
+                    <span>Registrar accesos</span>
+                  </div>
+                }
               </div>
               <div className={styles['distributor-details-content']}>
                 {
@@ -769,6 +816,7 @@ export const DistributorsNew = () => {
                             </td>
                             <td className={styles['gonvar-table__data']}>
                               {
+                                (isSuperAdmin || adminAccess.create === 1) &&
                                 distributorUserIds.find(d => d.user_id === cu.user_id) === undefined &&
                                 <button
                                   className={styles['gonvar-table__button']}

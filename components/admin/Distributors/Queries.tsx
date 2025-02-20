@@ -15,6 +15,18 @@ export const getAdminUserIdByEmail = async (email: string) => {
   }
 }
 
+export const getNormalUserIdByEmail = async (email: string) => {
+  try {
+    const query = `SELECT u.id AS user_id FROM users AS u where u.email LIKE '${email}%';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { user_id: number }[];
+    return data[0]?.user_id || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
 export const getAllAdmins = async (): Promise<IAdmin[]> => {
   try {
     const query = `select au.id as admin_id,
@@ -468,7 +480,7 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
 
 export const getSellersList = async () => {
   try {
-    const query = `SELECT seller_id, user_id, email, CONCAT(name, ' ', last_name) as full_name, phone_number FROM sellers_view;`;
+    const query = `SELECT seller_id, user_id, email, CONCAT(name, ' ', last_name) AS full_name, phone_number FROM sellers_view;`;
     const response = await getGenericQueryResponse(query);
     return response.data.data as ISeller[];
   } catch (error) {
@@ -480,3 +492,49 @@ const generateSequence = (n: number) =>
   Array(n)
     .fill(0)
     .map((_, i) => i + 1);
+
+export const getUserAccessRoles = async (userId: number): Promise<IAdminDistributorsRole> => {
+  try {
+    const query = `SELECT * FROM admin_distributors AS ad WHERE ad.user_id = ${userId};`;
+    const response = await getGenericQueryResponse(query);
+
+    if (response.data.data.length === 0) {
+      throw new Error('No existe este usuario en la tabla de "admin_distributors".');
+    }
+    const data = response.data.data[0] as IAdminDistributorsRole;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return {
+      user_id: userId,
+      admin_distributor_id: 0,
+      create: 0,
+      delete: 0,
+      download: 0,
+      edit: 0,
+      view: 0,
+      abm_products: 0,
+      abm_sellers: 0,
+      create_access_invoices: 0,
+      create_products_invoices: 0,
+      view_access_invoices: 0,
+      view_products_invoices: 0
+    };
+  }
+}
+
+export const getIsSuperAdmin = async (email: string) => {
+  try {
+    const query = `SELECT u.role FROM users AS u WHERE u.email LIKE '${email}';`;
+    const response = await getGenericQueryResponse(query);
+    console.log({ query });
+    const data = response.data.data[0] as { role: string } | undefined;
+    if (data === undefined) {
+      return false;
+    }
+    return data.role === 'superAdmin';
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}

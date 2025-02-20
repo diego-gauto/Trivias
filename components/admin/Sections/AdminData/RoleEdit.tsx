@@ -27,6 +27,7 @@ import {
 } from '../../../api/admin';
 import { AdminType } from './Constants';
 import { backendRoleEditMethod } from './Queries';
+import { getDistributorsAdminAccess } from '../Queries';
 
 type CheckBoxValues = {
   name: string;
@@ -41,23 +42,6 @@ type RoleProps = {
   courses: { id: number; title: string; published: boolean }[];
   forms: { id: number; name: string; }[];
 };
-
-type TaskValue =
-  | 'Crear'
-  | 'Editar'
-  | 'Eliminar'
-  | 'Solicitudes'
-  | 'Generar Reporte'
-  | 'Descargar';
-
-interface AdminRole {
-  role: string;
-  active: boolean;
-  name: string;
-  tasks: { active: boolean; task: TaskValue }[];
-  courses?: number[];
-  forms?: number[]
-}
 
 const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) => {
   const handleClose = () => setShow(false);
@@ -177,6 +161,13 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         { active: false, task: 'Crear' },
         { active: false, task: 'Editar' },
         { active: false, task: 'Eliminar' },
+        { active: false, task: 'Descargar' },
+        { active: false, task: 'ABM Vendedores' },
+        { active: false, task: 'ABM Productos' },
+        { active: false, task: 'Generar factura de accesos' },
+        { active: false, task: 'Generar factura de productos' },
+        { active: false, task: 'Ver factura de accesos' },
+        { active: false, task: 'Ver factura de productos' },
       ],
     },
     {
@@ -202,7 +193,20 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
   const [popUpForms, setPopUpForms] = useState<boolean>(false);
 
-
+  // TODO: Inyectar los permisos que faltan
+  async function getDistributorAccess(): Promise<AdminRole[]> {
+    try {
+      const roleDistributors: AdminRole = await getDistributorsAdminAccess(admin.user_id);
+      setRoles([
+        ...roles,
+        roleDistributors
+      ]);
+      return [];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
 
   useEffect(() => {
     const result: AdminRole[] = roles.map((role, index) => {
