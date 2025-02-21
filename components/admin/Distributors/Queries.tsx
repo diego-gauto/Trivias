@@ -66,6 +66,25 @@ export const getAllDistributorUsersArray = async (offset: number, input: string)
   return [];
 }
 
+export const getDistributorById = async (id: number): Promise<IDistributor | null> => {
+  try {
+    const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
+        u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
+        unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
+        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state,
+        ifnull(d.postal_code, 'Desconocido') as postal_code
+        from distributors as d
+        inner join users as u on u.id = d.user_id
+        where d.distributor_id = ${id};`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IDistributor[];
+    return data[0] || null;
+  } catch (error) {
+    console.error(error);
+  }
+  return null;
+}
+
 export const getAllDistributorUsersCount = async (input: string): Promise<number> => {
   try {
     const query = `select count(*) as count
@@ -150,6 +169,24 @@ export const getDistributorDetails = async () => {
     console.error(error);
   }
   return null;
+}
+
+// SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id  WHERE u.email LIKE 'centro%';
+
+export const getDistributorIdByEmail = async (email: string) => {
+  try {
+    const query = `SELECT d.distributor_id 
+    FROM distributors AS d 
+    INNER JOIN users AS u ON u.id = d.user_id 
+    WHERE u.email LIKE '${email}';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { distributor_id: number }[];
+
+    return data[0]?.distributor_id || 0;
+  } catch (error) {
+    console.error(error);
+  }
+  return 0;
 }
 
 export const getDistributorCodesById = async (distributorId: number): Promise<ICodeSell[]> => {

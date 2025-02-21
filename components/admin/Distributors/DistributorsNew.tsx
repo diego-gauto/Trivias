@@ -75,7 +75,6 @@ function createAdminDistributorsRole(): IAdminDistributorsRole {
     user_id: 0,
     admin_distributor_id: 0,
     create: 0,
-    delete: 0,
     download: 0,
     edit: 0,
     view: 0,
@@ -575,7 +574,7 @@ export const DistributorsNew = () => {
                           <th className={styles['gonvar-table__th']}>Fecha</th>
                           <th className={styles['gonvar-table__th']}>Cantidad de productos</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
-                          <th className={styles['gonvar-table__th']}>Responsable</th>
+                          <th className={styles['gonvar-table__th']}>Vendedor</th>
                           {
                             (isSuperAdmin || adminAccess.view === 1) &&
                             <th className={styles['gonvar-table__th']}></th>
