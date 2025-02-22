@@ -596,6 +596,7 @@ export const createSeller = async (seller: IProduct): Promise<boolean> => {
 
 export const getSellersList = async () => {
   try {
+    // TODO: Sustituir la query de los vendedores
     const query = `SELECT seller_id, user_id, email, CONCAT(name, ' ', last_name) AS full_name, phone_number FROM sellers_view;`;
     const response = await getGenericQueryResponse(query);
     return response.data.data as ISeller[];

@@ -33,12 +33,13 @@ function createAdminDistributorsRole(): IAdminDistributorsRole {
 }
 
 export const DistributorsSellers = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [newProduct, setNewProduct] = useState<IProduct>({
-    product_id: 0,
-    product_name: '',
-    image_url: '',
-    default_price: 0
+  const [sellers, setSellers] = useState<ISeller[]>([]);
+  const [newSeller, setNewSeller] = useState<ISeller>({
+    user_id: 0,
+    seller_id: 0,
+    email: '',
+    full_name: '',
+    phone_number: '',
   });
 
   const [productsParams, setProductsParams] = useState<EntityParams>({
@@ -86,7 +87,7 @@ export const DistributorsSellers = () => {
         ...productsParams,
         count: productsCount
       })
-      setProducts(productsList);
+      setSellers(productsList);
     } catch (error) {
       console.error(error);
     }
@@ -141,7 +142,7 @@ export const DistributorsSellers = () => {
             </div>
           </div>
           {
-            products.length > 0 &&
+            sellers.length > 0 &&
             <div className={styles['table-content']}>
               <table className={styles['gonvar-table']}>
                 <thead className={styles['gonvar-table__thead']}>
@@ -155,24 +156,28 @@ export const DistributorsSellers = () => {
                 </thead>
                 <tbody>
                   {
-                    products.map((p, i) => {
+                    sellers.map((p, i) => {
                       return <tr
                         className={styles['gonvar-table__row']}
                         key={`distributor_${i}`}
                       >
                         <td className={styles['gonvar-table__data']}>
-                          {p.product_name}
+                          {p.full_name}
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          {
-                            Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(p.default_price)
-                          }
+                          {p.email}
+                        </td>
+                        <td className={styles['gonvar-table__data']}>
+                          {p.phone_number}
+                        </td>
+                        <td className={styles['gonvar-table__data']}>
+                          {p.}
                         </td>
                         <td className={styles['gonvar-table__data']}>
                           <button
                             className={styles['gonvar-table__button']}
                             onClick={(e) => {
-                              setNewProduct(p);
+                              setNewSeller(p);
                             }}
                           >
                             Visualizar
@@ -186,7 +191,7 @@ export const DistributorsSellers = () => {
             </div>
           }
           {
-            products.length === 0 &&
+            sellers.length === 0 &&
             <div className={styles['empty-container']}>
               <div className={styles['empty-content']}>
                 <p className={styles['empty-content-text']}>
@@ -207,7 +212,7 @@ export const DistributorsSellers = () => {
               }}
               onCreate={(canCreate) => {
                 if (canCreate) {
-                  setNewProduct({
+                  setNewSeller({
                     product_name: '',
                     image_url: '',
                     default_price: 0,
@@ -216,8 +221,8 @@ export const DistributorsSellers = () => {
                   refreshProductsList();
                 }
               }}
-              newProduct={newProduct}
-              modifyNewProduct={setNewProduct}
+              newProduct={newSeller}
+              modifyNewProduct={setNewSeller}
             />
           }
           onClose={() => {
