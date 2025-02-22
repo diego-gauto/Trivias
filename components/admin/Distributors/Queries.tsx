@@ -66,6 +66,34 @@ export const getAllDistributorUsersArray = async (offset: number, input: string)
   return [];
 }
 
+export const getAllProductsArray = async (offset: number, input: string): Promise<IProduct[]> => {
+  try {
+    const query = `SELECT * FROM products 
+      WHERE name LIKE '%${input}%' 
+      ORDER BY product_id
+      LIMIT 100 offset ${offset};`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as {
+      product_id: number
+      name: string
+      image: string
+      default_price: number
+    }[];
+    return data.map((p) => {
+      const { product_id, name, image, default_price } = p;
+      return {
+        product_id,
+        product_name: name,
+        image_url: image,
+        default_price
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
 export const getDistributorById = async (id: number): Promise<IDistributor | null> => {
   try {
     const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
@@ -91,6 +119,18 @@ export const getAllDistributorUsersCount = async (input: string): Promise<number
       from distributors as d
       inner join users as u on u.id = d.user_id
       where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%';`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { count: number }[];
+    return data[0]?.count || 0;
+  } catch (error) {
+    console.error(error);
+  }
+  return 0;
+}
+
+export const getAllProductsCount = async (input: string): Promise<number> => {
+  try {
+    const query = `SELECT COUNT(*) AS count FROM products WHERE name LIKE '%${input}%';`;
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as { count: number }[];
     return data[0]?.count || 0;
@@ -508,6 +548,45 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
     createProductsBySellQuery += values.join(', ') + ';';
     console.log({ createProductsBySellQuery });
     await postGenericQueryResponse(createProductsBySellQuery);
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const createProduct = async (productInvoice: IProduct): Promise<boolean> => {
+  try {
+    const { product_name, default_price, image_url } = productInvoice;
+
+    const imageUrlToDB = image_url === '' ? 'null' : `'${image_url}'`;
+
+    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${product_name}', ${imageUrlToDB}, ${default_price});`;
+
+    const createProductResponse = await postGenericQueryResponse(createProductQuery);
+    const productId = createProductResponse.data.data.insertId;
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+// INSERT INTO sellers (name, last_name, email, phone_number, origin_state, postal_code) 
+// VALUES ('name', 'last_name', 'email', 'phone_number', 'origin_state', 'postal_code');
+
+export const createSeller = async (seller: IProduct): Promise<boolean> => {
+  try {
+    const { product_name, default_price, image_url } = seller;
+
+    const imageUrlToDB = image_url === '' ? 'null' : `'${image_url}'`;
+
+    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${product_name}', ${imageUrlToDB}, ${default_price});`;
+
+    const createProductResponse = await postGenericQueryResponse(createProductQuery);
+    const productId = createProductResponse.data.data.insertId;
+
     return true;
   } catch (error) {
     console.error(error);

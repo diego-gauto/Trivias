@@ -147,6 +147,7 @@ interface ISeller {
   email: string
   full_name: string
   phone_number: string
+  postal_code: string
 }
 
 interface IProduct {
