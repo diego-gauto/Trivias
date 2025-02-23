@@ -143,10 +143,11 @@ interface IProductSell {
 
 interface ISeller {
   seller_id: number
-  user_id: number
+  name: string
+  last_name: string
   email: string
-  full_name: string
   phone_number: string
+  photo_url: string
   postal_code: string
 }
 

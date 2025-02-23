@@ -197,22 +197,6 @@ export const createANewDistributor = async (userId: number, adminUserId: number)
   }
 }
 
-export const getDistributorDetails = async () => {
-  try {
-    const query = `select * 
-      from codes as c
-      inner join code_sell_details as csd on c.code_sell_detail_id = csd.code_sell_detail_id
-      inner join code_sells as cs on cs.code_sell_id = csd.code_sell_id
-      where cs.distributor_id = 1;`;
-    const response = await getGenericQueryResponse(query);
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
-}
-
-// SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id  WHERE u.email LIKE 'centro%';
-
 export const getDistributorIdByEmail = async (email: string) => {
   try {
     const query = `SELECT d.distributor_id 
@@ -573,19 +557,25 @@ export const createProduct = async (productInvoice: IProduct): Promise<boolean> 
   }
 }
 
-// INSERT INTO sellers (name, last_name, email, phone_number, origin_state, postal_code) 
-// VALUES ('name', 'last_name', 'email', 'phone_number', 'origin_state', 'postal_code');
+export const createSeller = async (seller: ISeller): Promise<boolean> => {
+  /*
+  SELECT * FROM sellers AS s 
+  WHERE CONCAT(s.name, ' ', s.last_name) LIKE '%'
+  OR s.email LIKE '%';
 
-export const createSeller = async (seller: IProduct): Promise<boolean> => {
+  UPDATE sellers SET postal_code = '85821' WHERE seller_id = 1;
+  */
   try {
-    const { product_name, default_price, image_url } = seller;
+    const { name, last_name, email, phone_number, photo_url, postal_code } = seller;
 
-    const imageUrlToDB = image_url === '' ? 'null' : `'${image_url}'`;
+    const imageUrlToDB = photo_url === '' ? 'null' : `'${photo_url}'`;
+    const postalCode = postal_code === '' ? 'null' : `'${postal_code}'`;
 
-    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${product_name}', ${imageUrlToDB}, ${default_price});`;
+    const createSellerQuery = `INSERT INTO sellers (name, last_name, email, phone_number, photo_url, postal_code) 
+    VALUES ('${name}', '${last_name}', '${email}', '${phone_number}', ${imageUrlToDB}, '${postalCode}');`;
 
-    const createProductResponse = await postGenericQueryResponse(createProductQuery);
-    const productId = createProductResponse.data.data.insertId;
+    const createSellerResponse = await postGenericQueryResponse(createSellerQuery);
+    const sellerId = createSellerResponse.data.data.insertId;
 
     return true;
   } catch (error) {
@@ -594,12 +584,43 @@ export const createSeller = async (seller: IProduct): Promise<boolean> => {
   }
 }
 
-export const getSellersList = async () => {
+export const getAllSellers = async () => {
   try {
-    // TODO: Sustituir la query de los vendedores
-    const query = `SELECT seller_id, user_id, email, CONCAT(name, ' ', last_name) AS full_name, phone_number FROM sellers_view;`;
+    const query = `SELECT seller_id, email FROM sellers;`;
+    const response = await getGenericQueryResponse(query);
+    return response.data.data as { email: string, seller_id: number }[];
+  } catch (error) {
+    return []
+  }
+}
+
+export const getSellersList = async (offset: number, input: string) => {
+  try {
+    const query = `SELECT * FROM sellers AS s 
+      WHERE CONCAT(s.name, ' ', s.last_name) LIKE '%${input}%'
+      OR s.email LIKE '%${input}%'
+      order by seller_id
+      limit 100 offset ${offset};`;
     const response = await getGenericQueryResponse(query);
     return response.data.data as ISeller[];
+  } catch (error) {
+    return []
+  }
+}
+
+/*
+const query = `select count(*) as count
+      from users 
+      where email like '${input}%' or concat(name, ' ', last_name) like '${input}%';`;
+*/
+export const getSellersCount = async (offset: number, input: string) => {
+  try {
+    const query = `SELECT COUNT(*) AS count FROM sellers AS s 
+      WHERE CONCAT(s.name, ' ', s.last_name) LIKE '%${input}%'
+      OR s.email LIKE '%${input}%'`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { count: number }[];
+    return data[0]?.count || 0;
   } catch (error) {
     return []
   }

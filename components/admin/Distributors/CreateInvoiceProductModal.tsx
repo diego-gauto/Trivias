@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { createProductInvoice, generateSellOfAccess, getSellersList } from './Queries';
+import { createProductInvoice, generateSellOfAccess, getAllSellers, getSellersList } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 
@@ -58,7 +58,7 @@ export const CreateInvoiceProductModal = ({
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
-  const [sellers, setSellers] = useState<ISeller[]>([]);
+  const [sellers, setSellers] = useState<{ email: string; seller_id: number; }[]>([]);
 
   const { distributorId, sellerId, products, date } = productInvoice;
 
@@ -83,7 +83,7 @@ export const CreateInvoiceProductModal = ({
   };
 
   const refreshSellersList = async () => {
-    const sellers = await getSellersList();
+    const sellers = await getAllSellers();
     setSellers(sellers);
   }
 
@@ -426,6 +426,7 @@ export const CreateInvoiceProductModal = ({
                                   alignItems: 'center',
                                   borderRadius: '16px',
                                   padding: '4px',
+                                  gap: '8px'
                                 }}
                                 onClick={(e) => {
                                   console.log({
@@ -437,7 +438,13 @@ export const CreateInvoiceProductModal = ({
                               >
                                 <IoIosRemoveCircleOutline
                                   size={25}
-                                />
+                                />{' '}
+                                <p
+                                  style={{
+                                    margin: '0',
+                                    fontWeight: '500'
+                                  }}
+                                >Remover</p>
                               </div>
                             </td>
                           </tr>
