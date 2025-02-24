@@ -11,6 +11,7 @@ import {
 } from './Queries';
 import Pagination from '../../../components/Pagination/Pagination';
 import { CreateProductModalContent } from './CreateProductModalContent';
+import { ProductModalContent } from './ProductModal';
 
 type EntityParams = {
   offset: number,
@@ -36,8 +37,8 @@ export const DistributorsProducts = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [newProduct, setNewProduct] = useState<IProduct>({
     product_id: 0,
-    product_name: '',
-    image_url: '',
+    name: '',
+    image: '',
     default_price: 0
   });
 
@@ -47,6 +48,8 @@ export const DistributorsProducts = () => {
   });
 
   const [showCreateProduct, setShowCreateProduct] = useState(false);
+  const [showProduct, setShowProduct] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -159,7 +162,9 @@ export const DistributorsProducts = () => {
                         key={`distributor_${i}`}
                       >
                         <td className={styles['gonvar-table__data']}>
-                          {p.product_name}
+                          {
+                            p.name
+                          }
                         </td>
                         <td className={styles['gonvar-table__data']}>
                           {
@@ -171,6 +176,7 @@ export const DistributorsProducts = () => {
                             className={styles['gonvar-table__button']}
                             onClick={(e) => {
                               setNewProduct(p);
+
                             }}
                           >
                             Visualizar
@@ -206,8 +212,8 @@ export const DistributorsProducts = () => {
               onCreate={(canCreate) => {
                 if (canCreate) {
                   setNewProduct({
-                    product_name: '',
-                    image_url: '',
+                    name: '',
+                    image: '',
                     default_price: 0,
                     product_id: 0
                   });
@@ -222,6 +228,24 @@ export const DistributorsProducts = () => {
             setShowCreateProduct(false);
           }}
           show={showCreateProduct}
+          compactSize={true}
+        />
+      }
+      {
+        (showProduct && selectedProduct !== null) &&
+        <Modal
+          child={
+            <ProductModalContent
+              onClose={() => {
+                setShowCreateProduct(false)
+              }}
+              product={selectedProduct}
+            />
+          }
+          onClose={() => {
+            setShowProduct(false);
+          }}
+          show={showProduct}
           compactSize={true}
         />
       }

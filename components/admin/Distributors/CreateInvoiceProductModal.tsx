@@ -6,40 +6,7 @@ import s2 from './CreateInvoiceProductModal.module.css';
 import { createProductInvoice, generateSellOfAccess, getAllSellers, getSellersList } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-
-type Product = {
-  product_id: number,
-  product_name: string,
-  default_price: number,
-  image_url: string,
-}
-
-const PRODUCTS_LIST: Product[] = [
-  {
-    product_id: 1,
-    product_name: 'pintura purpura',
-    default_price: 100,
-    image_url: '/images/profile/default_img.png'
-  },
-  {
-    product_id: 2,
-    product_name: 'pintura negra',
-    default_price: 100,
-    image_url: '/images/profile/default_img.png'
-  },
-  {
-    product_id: 3,
-    product_name: 'pintura roja',
-    default_price: 100,
-    image_url: '/images/profile/default_img.png'
-  },
-  {
-    product_id: 4,
-    product_name: 'pintura azul',
-    default_price: 100,
-    image_url: '/images/profile/default_img.png'
-  }
-]
+import { Product } from '../Landing/ProductsSection/IProductsSection';
 
 type CreateInvoiceAccessModalProps = {
   productInvoice: IProductInvoice
@@ -59,8 +26,10 @@ export const CreateInvoiceProductModal = ({
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
   const [sellers, setSellers] = useState<{ email: string; seller_id: number; }[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  const { distributorId, sellerId, products, date } = productInvoice;
+
+  const { distributorId, sellerId, products: invoiceProducts, date } = productInvoice;
 
   useEffect(() => {
     const today = new Date().toJSON().slice(0, 10);
@@ -71,12 +40,8 @@ export const CreateInvoiceProductModal = ({
     refreshSellersList();
   }, []);
 
-  useEffect(() => {
-
-  }, [sellers])
-
   const isValidRequestValues = () => {
-    const validProductsNumber = products.some((d) => d.count > 0);
+    const validProductsNumber = invoiceProducts.some((d) => d.count > 0);
     const validDate = date !== '';
     const validSellerId = sellerId !== 0;
     return validDate && validProductsNumber && validSellerId;
@@ -87,21 +52,21 @@ export const CreateInvoiceProductModal = ({
     setSellers(sellers);
   }
 
-  const total = products.reduce((pv, cv) => {
+  const total = invoiceProducts.reduce((pv, cv) => {
     return pv + (cv.price * cv.count);
   }, 0);
 
-  function getEnableToAddProducts(): Product[] {
-    const selectedProducIds = products.map(p => p.productId);
-    return PRODUCTS_LIST.filter(p => !selectedProducIds.includes(p.product_id));
+  function getEnableToAddProducts(): IProduct[] {
+    const selectedProducIds = invoiceProducts.map(p => p.productId);
+    return products.filter(p => !selectedProducIds.includes(p.product_id));
   }
 
   const enabledToAddProducts = getEnableToAddProducts();
 
-  function addProductToSelectedProductList(product: Product) {
+  function addProductToSelectedProductList(product: IProduct) {
     modifyProductInvoice({
       ...productInvoice,
-      products: [...products, {
+      products: [...invoiceProducts, {
         count: 0,
         productId: product.product_id,
         price: product.default_price
@@ -110,7 +75,7 @@ export const CreateInvoiceProductModal = ({
   }
 
   function removeProductToSelectedProductList(productId: number) {
-    const newSelectedProducts = products.filter(sp => sp.productId !== productId);
+    const newSelectedProducts = invoiceProducts.filter(sp => sp.productId !== productId);
     modifyProductInvoice({
       ...productInvoice,
       products: newSelectedProducts
@@ -198,7 +163,7 @@ export const CreateInvoiceProductModal = ({
                 </h3>
                 <div className={s2['product-search-catalog']}>
                   {
-                    (PRODUCTS_LIST.length === 0 && enabledToAddProducts.length === 0) &&
+                    (products.length === 0 && enabledToAddProducts.length === 0) &&
                     <div>
                       <div>
                         No existen productos para vender.
@@ -215,16 +180,21 @@ export const CreateInvoiceProductModal = ({
                             className={s2['product-search-catalog-item']}
                           >
                             <div className={s2['product-search-catalog-item-image-container']}>
-                              <Image
-                                src={p.image_url}
-                                width={100}
-                                height={100}
-                              />
+                              {
+                                p.image !== null &&
+                                <Image
+                                  src={p.image}
+                                  width={100}
+                                  height={100}
+                                />
+                              }
                             </div>
                             <div className={s2['']}>
                               <p
                                 className={s2['product-search-catalog-item-text']}
-                              >{p.product_name}</p>
+                              >{
+                                  p.name
+                                }</p>
                               <button
                                 className={s2['button']}
                                 onClick={(e) => {
@@ -252,7 +222,7 @@ export const CreateInvoiceProductModal = ({
             }
             <hr />
             {
-              products.length === 0 &&
+              invoiceProducts.length === 0 &&
               <div>
                 <div>
                   Seleccione un producto
@@ -260,7 +230,7 @@ export const CreateInvoiceProductModal = ({
               </div>
             }
             {
-              products.length > 0 &&
+              invoiceProducts.length > 0 &&
               <div
                 className={s['table-content']}
                 style={{
@@ -281,7 +251,7 @@ export const CreateInvoiceProductModal = ({
                   </thead>
                   <tbody>
                     {
-                      products.map((sp, index, array) => {
+                      invoiceProducts.map((sp, index, array) => {
                         return (
                           <tr
                             className={s['gonvar-table__row']}
@@ -289,11 +259,14 @@ export const CreateInvoiceProductModal = ({
                           >
                             <td className={s['product']}>
                               <div className={s2['product-search-catalog-item-image-container']}>
-                                <Image
-                                  src={PRODUCTS_LIST.find(p => p.product_id === sp.productId)?.image_url || ''}
-                                  width={80}
-                                  height={80}
-                                />
+                                {
+                                  products.find(p => p.product_id === sp.productId)?.image !== null &&
+                                  <Image
+                                    src={products.find(p => p.product_id === sp.productId)?.image || ''}
+                                    width={80}
+                                    height={80}
+                                  />
+                                }
                               </div>
                               <p style={{
                                 margin: '0',
@@ -301,7 +274,7 @@ export const CreateInvoiceProductModal = ({
                                 marginTop: '8px'
                               }}>
                                 {
-                                  PRODUCTS_LIST.find(p => p.product_id === sp.productId)?.product_name
+                                  products.find(p => p.product_id === sp.productId)?.name
                                 }
                               </p>
                             </td>
@@ -319,7 +292,7 @@ export const CreateInvoiceProductModal = ({
                                       return;
                                     }
 
-                                    const newProducts = products.map(p => {
+                                    const newProducts = invoiceProducts.map(p => {
                                       if (p.productId !== sp.productId) {
                                         return p;
                                       }
@@ -342,7 +315,7 @@ export const CreateInvoiceProductModal = ({
                                 </button>
                                 <span>
                                   {
-                                    products.find(cp => cp.productId === sp.productId)?.count
+                                    invoiceProducts.find(cp => cp.productId === sp.productId)?.count
                                   }
                                 </span>
                                 <button
@@ -351,7 +324,7 @@ export const CreateInvoiceProductModal = ({
                                     if (userUseRegisterButton) {
                                       return;
                                     }
-                                    const newProducts = products.map(p => {
+                                    const newProducts = invoiceProducts.map(p => {
                                       if (p.productId !== sp.productId) {
                                         return p;
                                       }
@@ -394,7 +367,7 @@ export const CreateInvoiceProductModal = ({
                                   onChange={(e) => {
                                     const { value } = e.target;
 
-                                    const newProductsList = products.map(p => {
+                                    const newProductsList = invoiceProducts.map(p => {
                                       if (p.productId !== sp.productId) {
                                         return p;
                                       }

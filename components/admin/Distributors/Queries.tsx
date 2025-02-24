@@ -73,18 +73,13 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
       ORDER BY product_id
       LIMIT 100 offset ${offset};`;
     const response = await getGenericQueryResponse(query);
-    const data = response.data.data as {
-      product_id: number
-      name: string
-      image: string
-      default_price: number
-    }[];
+    const data = response.data.data as IProduct[];
     return data.map((p) => {
       const { product_id, name, image, default_price } = p;
       return {
         product_id,
-        product_name: name,
-        image_url: image,
+        name,
+        image,
         default_price
       }
     });
@@ -541,11 +536,11 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
 
 export const createProduct = async (productInvoice: IProduct): Promise<boolean> => {
   try {
-    const { product_name, default_price, image_url } = productInvoice;
+    const { name, default_price, image } = productInvoice;
 
-    const imageUrlToDB = image_url === '' ? 'null' : `'${image_url}'`;
+    const imageUrlToDB = image === '' ? 'null' : `'${image}'`;
 
-    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${product_name}', ${imageUrlToDB}, ${default_price});`;
+    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${name}', ${imageUrlToDB}, ${default_price});`;
 
     const createProductResponse = await postGenericQueryResponse(createProductQuery);
     const productId = createProductResponse.data.data.insertId;
@@ -572,7 +567,7 @@ export const createSeller = async (seller: ISeller): Promise<boolean> => {
     const postalCode = postal_code === '' ? 'null' : `'${postal_code}'`;
 
     const createSellerQuery = `INSERT INTO sellers (name, last_name, email, phone_number, photo_url, postal_code) 
-    VALUES ('${name}', '${last_name}', '${email}', '${phone_number}', ${imageUrlToDB}, '${postalCode}');`;
+    VALUES ('${name}', '${last_name}', '${email}', '${phone_number}', ${imageUrlToDB}, ${postalCode});`;
 
     const createSellerResponse = await postGenericQueryResponse(createSellerQuery);
     const sellerId = createSellerResponse.data.data.insertId;
@@ -613,7 +608,7 @@ const query = `select count(*) as count
       from users 
       where email like '${input}%' or concat(name, ' ', last_name) like '${input}%';`;
 */
-export const getSellersCount = async (offset: number, input: string) => {
+export const getSellersCount = async (input: string) => {
   try {
     const query = `SELECT COUNT(*) AS count FROM sellers AS s 
       WHERE CONCAT(s.name, ' ', s.last_name) LIKE '%${input}%'
@@ -622,7 +617,7 @@ export const getSellersCount = async (offset: number, input: string) => {
     const data = response.data.data as { count: number }[];
     return data[0]?.count || 0;
   } catch (error) {
-    return []
+    return 0;
   }
 }
 

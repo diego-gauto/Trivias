@@ -147,15 +147,15 @@ interface ISeller {
   last_name: string
   email: string
   phone_number: string
-  photo_url: string
-  postal_code: string
+  photo_url: string | null
+  postal_code: string | null
 }
 
 interface IProduct {
   product_id: number
-  product_name: string
+  name: string
+  image: string | null
   default_price: number
-  image_url: string
 }
 
 interface IAdminDistributorsRole {

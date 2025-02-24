@@ -6,11 +6,12 @@ import {
   getUserAccessRoles,
   getNormalUserIdByEmail,
   getIsSuperAdmin,
-  getAllProductsCount,
-  getAllProductsArray,
+  getSellersCount,
+  getSellersList,
 } from './Queries';
 import Pagination from '../../../components/Pagination/Pagination';
 import { CreateProductModalContent } from './CreateProductModalContent';
+import { CreateSellerModalContent } from './CreateSellerModal';
 
 type EntityParams = {
   offset: number,
@@ -35,19 +36,21 @@ function createAdminDistributorsRole(): IAdminDistributorsRole {
 export const DistributorsSellers = () => {
   const [sellers, setSellers] = useState<ISeller[]>([]);
   const [newSeller, setNewSeller] = useState<ISeller>({
-    user_id: 0,
     seller_id: 0,
     email: '',
-    full_name: '',
+    name: '',
+    last_name: '',
+    photo_url: '',
+    postal_code: '',
     phone_number: '',
   });
 
-  const [productsParams, setProductsParams] = useState<EntityParams>({
+  const [sellersParams, setSellersParams] = useState<EntityParams>({
     offset: 0,
     count: 0,
   });
 
-  const [showCreateProduct, setShowCreateProduct] = useState(false);
+  const [showCreateSeller, setShowCreateSeller] = useState(false);
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -60,11 +63,11 @@ export const DistributorsSellers = () => {
 
   useEffect(() => {
     try {
-      refreshProductsList();
+      refreshSellersList();
     } catch (error) {
       console.error(error);
     }
-  }, [productsParams.offset]);
+  }, [sellersParams.offset]);
 
   async function getUserAccessRoleByDB() {
     try {
@@ -78,24 +81,24 @@ export const DistributorsSellers = () => {
     }
   }
 
-  async function refreshProductsList() {
+  async function refreshSellersList() {
     try {
-      const { offset } = productsParams;
-      const productsCount = await getAllProductsCount(inputValue);
-      const productsList = await getAllProductsArray(offset, inputValue);
-      setProductsParams({
-        ...productsParams,
-        count: productsCount
-      })
-      setSellers(productsList);
+      const { offset } = sellersParams;
+      const sellersCount = await getSellersCount(inputValue);
+      const sellersList = await getSellersList(offset, inputValue);
+      setSellersParams({
+        ...sellersParams,
+        count: sellersCount
+      });
+      setSellers(sellersList);
     } catch (error) {
       console.error(error);
     }
   }
 
-  const changePageProductsList = (page: number) => {
-    setProductsParams({
-      ...productsParams,
+  const changePageSellersList = (page: number) => {
+    setSellersParams({
+      ...sellersParams,
       offset: page * 100,
     });
   };
@@ -108,9 +111,9 @@ export const DistributorsSellers = () => {
             <h2 className={styles['content-title']}>Listado de vendedores</h2>
             <div className={styles['pagination-section']}>
               <Pagination
-                changePage={changePageProductsList}
-                currentPage={productsParams.offset / 100}
-                totalPage={Math.ceil(productsParams.count / 100)}
+                changePage={changePageSellersList}
+                currentPage={sellersParams.offset / 100}
+                totalPage={Math.ceil(sellersParams.count / 100)}
               />
             </div>
           </div>
@@ -131,7 +134,7 @@ export const DistributorsSellers = () => {
             }}
               className='button'
               onClick={(e) => {
-                setShowCreateProduct(true);
+                setShowCreateSeller(true);
               }}
             >
               <IoIosAddCircleOutline
@@ -156,28 +159,37 @@ export const DistributorsSellers = () => {
                 </thead>
                 <tbody>
                   {
-                    sellers.map((p, i) => {
+                    sellers.map((seller, i) => {
+                      const { name, last_name, email, phone_number, postal_code } = seller;
                       return <tr
                         className={styles['gonvar-table__row']}
                         key={`distributor_${i}`}
                       >
                         <td className={styles['gonvar-table__data']}>
-                          {p.full_name}
+                          {
+                            name + ' ' + last_name
+                          }
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          {p.email}
+                          {
+                            email
+                          }
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          {p.phone_number}
+                          {
+                            phone_number
+                          }
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          {p.}
+                          {
+                            postal_code !== null ? postal_code : 'Desconocido'
+                          }
                         </td>
                         <td className={styles['gonvar-table__data']}>
                           <button
                             className={styles['gonvar-table__button']}
                             onClick={(e) => {
-                              setNewSeller(p);
+                              setNewSeller(seller);
                             }}
                           >
                             Visualizar
@@ -203,32 +215,35 @@ export const DistributorsSellers = () => {
         </div>
       </div>
       {
-        showCreateProduct &&
+        showCreateSeller &&
         <Modal
           child={
-            <CreateProductModalContent
+            <CreateSellerModalContent
               onClose={() => {
-                setShowCreateProduct(false)
+                setShowCreateSeller(false);
               }}
               onCreate={(canCreate) => {
                 if (canCreate) {
                   setNewSeller({
-                    product_name: '',
-                    image_url: '',
-                    default_price: 0,
-                    product_id: 0
+                    seller_id: 0,
+                    email: '',
+                    phone_number: '',
+                    last_name: '',
+                    name: '',
+                    photo_url: '',
+                    postal_code: ''
                   });
-                  refreshProductsList();
+                  refreshSellersList();
                 }
               }}
-              newProduct={newSeller}
-              modifyNewProduct={setNewSeller}
+              newSeller={newSeller}
+              modifyNewSeller={setNewSeller}
             />
           }
           onClose={() => {
-            setShowCreateProduct(false);
+            setShowCreateSeller(false);
           }}
-          show={showCreateProduct}
+          show={showCreateSeller}
           compactSize={true}
         />
       }
