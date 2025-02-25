@@ -39,7 +39,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [loading, setLoading] = useState(true);
 
   const changeValue = (value: string) => {
-    return value === '1';
+    return `${value}` === '1';
   };
 
   try {
