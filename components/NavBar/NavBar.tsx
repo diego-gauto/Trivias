@@ -324,11 +324,10 @@ const NavBar = () => {
     if (userData.role === 'superAdmin' ||
       (userData.roles.length > 0 && userData.role === 'admin')
     ) {
-      // router.push('/admin/Courses');
       const roles = userData.roles.map(r => {
         return {
           source_table: r.source_table,
-          view: r.view === '1'
+          view: `${r.view}` === '1'
         }
       }).filter(r => r.view === true)
         .map(r => {
@@ -346,35 +345,44 @@ const NavBar = () => {
       let route: string = '/';
       userData.roles.forEach((role) => {
         if (counter === 0) {
-          console.log({ role });
-          if (role.view !== '0') {
+          if (role.view == '1') {
             counter++;
             if (role.role === 'course') {
               route = 'Courses';
-            }
-            if (role.role === 'coupons') {
+            } else if (role.role === 'coupons') {
               route = 'Coupons';
-            }
-            if (role.role === 'blogs') {
+            } else if (role.role === 'blogs') {
               route = 'Blog';
-            }
-            if (role.role === 'rewards') {
+            } else if (role.role === 'rewards') {
               route = 'Rewards';
-            }
-            if (role.role === 'users') {
+            } else if (role.role === 'users') {
               route = 'Users';
-            }
-            if (role.role === 'landing') {
+            } else if (role.role === 'landing') {
               route = 'Landing';
-            }
-            if (role.role === 'payments') {
+            } else if (role.role === 'payments') {
               route = 'Pago';
-            }
-            if (role.role === 'homeworks') {
+            } else if (role.role === 'homeworks') {
               route = 'HomeWork';
-            }
-            if (role.role === 'comments') {
+            } else if (role.role === 'comments') {
               route = 'Comments';
+            } else if (role.role === 'distributors') {
+              route = 'Distributors';
+            } else if (role.role === 'active_memberships') {
+              route = 'MembershipStats';
+            } else if (role.role === 'memberships_list') {
+              route = 'Memberships';
+            } else if (role.role === 'forms') {
+              route = 'Forms';
+            } else if (role.role === 'forms_list') {
+              route = 'Forms';
+            } else if (role.role === 'subscriptions') {
+              route = 'SuscriptionStats';
+            } else if (role.role === 'tickets_list') {
+              route = 'Tickets';
+            } else if (role.role === 'trivias') {
+              route = 'Trivias';
+            } else if (role.role === 'trivias_list') {
+              route = 'Trivias';
             }
           }
         }
