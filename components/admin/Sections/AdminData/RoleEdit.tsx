@@ -190,30 +190,13 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
   const [popUpForms, setPopUpForms] = useState<boolean>(false);
 
-  // TODO: Inyectar los permisos que faltan
-  async function getDistributorAccess(newRoles: AdminRole[]): Promise<void> {
-    try {
-      const roleDistributors: AdminRole = await getDistributorsAdminAccess(admin.user_id);
-      console.log({ roleDistributors });
-      setRoles([
-        ...newRoles.map(r => {
-          if (r.name === 'distributors') {
-            return roleDistributors;
-          }
-          return r;
-        }),
-      ]);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
+    console.log({ adminTypes: admin.adminTypes });
+
     const result: AdminRole[] = roles.map((role, index) => {
       const adminType = admin.adminTypes.find((adminType) => {
         return adminType.role === role.name;
-      })
+      });
 
       if (adminType === undefined) {
         return role;
@@ -306,7 +289,8 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
       return finalResult;
     });
-    getDistributorAccess(result);
+    setRoles(result);
+    setLoading(false);
   }, []);
 
   const handleRole = (e: { target: CheckBoxValues }, indexRole: number) => {

@@ -53,7 +53,6 @@ const SideBar = ({ show, onHide }: any) => {
         if (user.roles.length === 0 && user.role !== 'superAdmin') {
           router.push({ pathname: '/' });
         }
-        console.log({ roles: user.roles });
         user.roles.forEach((role) => {
           if (role.role === 'course' && changeValue(role.view))
             setIsCourses(true);
