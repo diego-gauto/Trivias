@@ -86,8 +86,15 @@ const SideBar = ({ show, onHide }: any) => {
             setIsSubscriptions(true);
           if (role.role === 'active_memberships' && changeValue(role.view))
             setIsActiveMemberships(true);
-          if (role.role === 'distributors' && changeValue(role.view))
+          if (role.role === 'distributors' && changeValue(role.view)) {
             setIsDistributors(true);
+            if (`${role.abm_products}` === '1') {
+              setIsDistributorABMProducts(true);
+            }
+            if (`${role.abm_sellers}` === '1') {
+              setIsDistributorABMSellers(true);
+            }
+          }
         });
         setUserData(userDataAuth.user);
         setLoading(false);
@@ -252,30 +259,6 @@ const SideBar = ({ show, onHide }: any) => {
       const data = response.data.data as { distributor_id: number }[];
       if (data.length > 0) {
         setIsDistributorUser(true);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  }
-
-  const checkIfIsDistributorABMRoles = async () => {
-    try {
-      setLoading(true);
-      const email = localStorage.getItem('email') || '';
-      const query = `SELECT abm_products = 1 AS abm_products, abm_sellers = 1 AS abm_sellers 
-        FROM admin_distributors AS ad 
-        INNER JOIN users AS u ON u.id = ad.user_id 
-        WHERE u.email LIKE '${email}';`;
-      console.log({ query });
-      const response = await getGenericQueryResponse(query);
-      const data = response.data.data as { abm_products: '0' | '1', abm_sellers: '0' | '1' }[];
-      if (data.length > 0) {
-        const element = data[0];
-        if (element !== undefined) {
-          setIsDistributorABMProducts(element.abm_products === '1');
-          setIsDistributorABMSellers(element.abm_sellers === '1');
-        }
       }
     } catch (error) {
       console.error(error);
@@ -547,28 +530,34 @@ const SideBar = ({ show, onHide }: any) => {
                     Distributors
                   </li>
                 </Link>
-                <Link href='/admin/DistributorProducts'>
-                  <li
-                    style={{ color: index == 21 ? '#ffa500' : '#fff' }}
-                    onClick={() => {
-                      setIndex(21);
-                      onHide();
-                    }}
-                  >
-                    Products
-                  </li>
-                </Link>
-                <Link href='/admin/DistributorSellers'>
-                  <li
-                    style={{ color: index == 22 ? '#ffa500' : '#fff' }}
-                    onClick={() => {
-                      setIndex(22);
-                      onHide();
-                    }}
-                  >
-                    Sellers
-                  </li>
-                </Link>
+                {
+                  isDistributorABMProducts &&
+                  <Link href='/admin/DistributorProducts'>
+                    <li
+                      style={{ color: index == 21 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(21);
+                        onHide();
+                      }}
+                    >
+                      Products
+                    </li>
+                  </Link>
+                }
+                {
+                  isDistributorABMSellers &&
+                  <Link href='/admin/DistributorSellers'>
+                    <li
+                      style={{ color: index == 22 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(22);
+                        onHide();
+                      }}
+                    >
+                      Sellers
+                    </li>
+                  </Link>
+                }
                 {
                   (isDistributorUser) &&
                   <Link href='/admin/DistributorDetails'>
