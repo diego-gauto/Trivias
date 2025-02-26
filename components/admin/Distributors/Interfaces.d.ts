@@ -13,6 +13,7 @@ interface IAdmin {
 
 interface IDistributor {
   distributor_id: number;
+  user_id: number;
   name: string;
   phone_number: string;
   photo: string;

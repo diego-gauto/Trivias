@@ -25,6 +25,7 @@ import { InvoiceAccessModal } from './InvoiceAccessModal';
 import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
 import { InvoiceProductModal } from './InvoiceProductModal';
 import { CreateInvoiceProductModal } from './CreateInvoiceProductModal';
+import { UpdateDistributorModal } from './UpdateDistributorModal';
 
 type MainSection = 'distributors' | 'common-users' | 'sells';
 
@@ -111,7 +112,7 @@ export const DistributorsNew = () => {
 
   const [showAccessInvoiceModal, setShowAccessInvoiceModal] = useState(false);
   const [showProductInvoiceModal, setShowProductInvoiceModal] = useState(false);
-
+  const [showUpdateDistributorModal, setShowUpdateDistributorModal] = useState(false);
   const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
   const [showCreateProductInoviceModal, setShowCreateProductInoviceModal] = useState(false);
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
@@ -463,30 +464,57 @@ export const DistributorsNew = () => {
                               {d.name}
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {d.email}
+                              {
+                                d.email === '' ? 'Desconocido' : d.email
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {d.phone_number}
+                              {
+                                d.phone_number === '' ? 'Desconocido' : d.phone_number
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {d.origin_state}
+                              {
+                                d.origin_state === '' ? 'Desconocido' : d.origin_state
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {d.postal_code}
+                              {
+                                d.postal_code === '' ? 'Desconocido' : d.postal_code
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              <button
-                                className={styles['gonvar-table__button']}
-                                onClick={(e) => {
-                                  setDistributorsSubSection('distributor-details');
-                                  setSelectedDistributor(d);
-                                  setDistributorDetailsSection('product-history');
-                                  refreshAccessHistoryById(d.distributor_id);
-                                  refreshProductHistoryById(d.distributor_id);
-                                }}
-                              >
-                                Ver perfil
-                              </button>
+                              {
+                                // TODO
+                              }
+                              <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr',
+                                gap: '8px'
+                              }}>
+                                <button
+                                  className={styles['gonvar-table__button']}
+                                  onClick={(e) => {
+                                    setDistributorsSubSection('distributor-details');
+                                    setSelectedDistributor(d);
+                                    setDistributorDetailsSection('product-history');
+                                    refreshAccessHistoryById(d.distributor_id);
+                                    refreshProductHistoryById(d.distributor_id);
+                                  }}
+                                >
+                                  Ver perfil
+                                </button>
+                                <button
+                                  className={styles['gonvar-table__button']}
+                                  onClick={(e) => {
+                                    setSelectedDistributor(d);
+                                    setShowUpdateDistributorModal(true);
+                                  }}
+                                >
+                                  Actualizar
+                                </button>
+                              </div>
+
                             </td>
                           </tr>
                         })
@@ -1000,10 +1028,6 @@ export const DistributorsNew = () => {
         />
       }
       {
-        // newProductInvoice
-        // setNewProductInvoice
-      }
-      {
         showCreateProductInoviceModal &&
         <Modal
           child={
@@ -1023,6 +1047,26 @@ export const DistributorsNew = () => {
           }}
           show={showCreateProductInoviceModal}
           compactSize={false}
+        />
+      }
+      {
+        (showUpdateDistributorModal && selectedDistributor !== null) &&
+        <Modal
+          child={<UpdateDistributorModal
+            distributor={selectedDistributor}
+            modifyDistributor={setSelectedDistributor}
+            onClose={() => {
+              setShowUpdateDistributorModal(false);
+              setSelectedDistributor(null);
+            }}
+            onUpdate={(success) => {
+              if (success) {
+                refreshDistributorsList();
+              }
+            }}
+          />}
+          show={showUpdateDistributorModal}
+          compactSize={true}
         />
       }
     </div>)

@@ -50,8 +50,8 @@ export const getAllDistributorUsersArray = async (offset: number, input: string)
     const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
         u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
         unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
-        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state,
-        ifnull(d.postal_code, 'Desconocido') as postal_code
+        u.country, ifnull(u.email, '') as email, ifnull(u.origin_state, '') as origin_state,
+        ifnull(d.postal_code, '') as postal_code, u.id as user_id
         from distributors as d
         inner join users as u on u.id = d.user_id
         where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%'
@@ -94,8 +94,8 @@ export const getDistributorById = async (id: number): Promise<IDistributor | nul
     const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
         u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
         unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
-        u.country, u.email, ifnull(u.origin_state, 'Desconocido') as origin_state,
-        ifnull(d.postal_code, 'Desconocido') as postal_code
+        u.country, ifnull(u.email, '') as email, ifnull(u.origin_state, '') as origin_state,
+        ifnull(d.postal_code, '') as postal_code
         from distributors as d
         inner join users as u on u.id = d.user_id
         where d.distributor_id = ${id};`;
@@ -603,6 +603,35 @@ export const updateSeller = async (seller: ISeller): Promise<boolean> => {
     const updateSellerResponse = await postGenericQueryResponse(createSellerQuery);
     const sellerId = updateSellerResponse.data.data.insertId;
     console.log({ updateSellerResponse: updateSellerResponse.data });
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const updateDistributor = async (distributor: IDistributor): Promise<boolean> => {
+  try {
+    const { distributor_id, postal_code, user_id, email, phone_number, origin_state } = distributor;
+
+    const updateDistributorQuery = `UPDATE distributors SET 
+    postal_code = '${postal_code}'
+    WHERE distributor_id = ${distributor_id};`;
+
+    const updateDistributorResponse = await postGenericQueryResponse(updateDistributorQuery);
+    const distributorId = updateDistributorResponse.data.data.insertId;
+
+    console.log({ updateDistributorResponse });
+
+    const updateUserQuery = `UPDATE users SET
+    email = '${email}',
+    phone_number = '${phone_number}',
+    origin_state = '${origin_state}'
+    WHERE id = ${user_id}`;
+    const updateUserResponse = await postGenericQueryResponse(updateUserQuery);
+
+    console.log({ updateUserResponse });
 
     return true;
   } catch (error) {
