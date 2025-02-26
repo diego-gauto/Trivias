@@ -2,12 +2,12 @@ import styles from './Modal.module.css';
 
 interface IModalProps {
   show: boolean,
-  onClose: () => void,
+  onClose?: () => void,
   child: JSX.Element,
   compactSize?: boolean,
 }
 
-export const Modal = ({ show, onClose, compactSize = true, child }: IModalProps) => {
+export const Modal = ({ show, onClose = () => { }, compactSize = true, child }: IModalProps) => {
   if (!show) return null;
 
   const handleBackdropClick = (e: any) => {

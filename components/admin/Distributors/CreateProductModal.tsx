@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
-import s2 from './CreateInvoiceProductModal.module.css';
-import { IoIosRemoveCircleOutline } from 'react-icons/io';
-import { date } from 'yup';
-import { createProduct, createProductInvoice } from './Queries';
-import Image from 'next/image';
+import { createProduct } from './Queries';
 
-interface CreateProductModalContentProps {
+interface ICreateProductModalProps {
   newProduct: IProduct
   modifyNewProduct: (newProduct: IProduct) => void
   onCreate: (success: boolean) => void
   onClose: () => void
 }
 
-export const CreateProductModalContent = ({
+export const CreateProductModal = ({
   onCreate,
   onClose,
   newProduct,
   modifyNewProduct
-}: CreateProductModalContentProps) => {
+}: ICreateProductModalProps) => {
 
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
@@ -38,9 +34,6 @@ export const CreateProductModalContent = ({
           <h3 className={s['subtitle']}>Ingrese los datos del producto</h3>
         </div>
         <div className={s['body']}>
-          {
-            // Aquí va todo
-          }
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">Nombre</label>
             <input

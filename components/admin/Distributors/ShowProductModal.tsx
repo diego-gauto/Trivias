@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 
-interface ProductModalContentProps {
+interface IShowProductModalProps {
   product: IProduct
   onClose: () => void
 }
 
-export const ProductModalContent = ({
+export const ShowProductModal = ({
   onClose,
   product,
-}: ProductModalContentProps) => {
+}: IShowProductModalProps) => {
 
   const { name, image, default_price } = product;
 
   return <div className={s['main-container']}>
-    <div className={s['container']}>
+    <div
+      className={s['container']}
+      style={{ width: '100%' }}
+    >
       <div className={s['header']}>
-        <h2 className={s['title']}>Crear producto</h2>
-        <h3 className={s['subtitle']}>Ingrese los datos del producto</h3>
+        <h2 className={s['title']}>Visualizar producto</h2>
+        <h3 className={s['subtitle']}>Confirme que los datos sean correctos</h3>
       </div>
       <div className={s['body']}>
         <div className="mb-3">
@@ -26,7 +29,7 @@ export const ProductModalContent = ({
             type="text"
             className="form-control"
             id="nombre"
-            placeholder="Ingrese el nombre"
+            placeholder="(El producto no tiene nombre)"
             value={name}
             disabled
           />
@@ -37,7 +40,7 @@ export const ProductModalContent = ({
             type="text"
             className="form-control"
             id="url"
-            placeholder="Ingrese la URL"
+            placeholder="(El producto no tiene imagen)"
             value={image || ''}
             disabled
           />
@@ -48,22 +51,20 @@ export const ProductModalContent = ({
             type="number"
             className="form-control"
             id="precio"
-            placeholder="Ingrese el precio"
+            placeholder="(Sin especificar)"
             value={`${default_price}`}
             disabled
           />
         </div>
       </div>
-      <div className={s['buttons']}>
-        <button
-          className={s['button']}
-          onClick={(e) => {
-            onClose();
-          }}
-        >
-          Cerrar
-        </button>
-      </div>
+      <button
+        className={s['button']}
+        onClick={(e) => {
+          onClose();
+        }}
+      >
+        Cerrar
+      </button>
     </div>
   </div>
 }

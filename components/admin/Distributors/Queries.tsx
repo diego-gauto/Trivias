@@ -534,16 +534,34 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
   }
 }
 
-export const createProduct = async (productInvoice: IProduct): Promise<boolean> => {
+export const createProduct = async (product: IProduct): Promise<boolean> => {
   try {
-    const { name, default_price, image } = productInvoice;
+    const { name, default_price, image } = product;
 
-    const imageUrlToDB = image === '' ? 'null' : `'${image}'`;
-
-    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${name}', ${imageUrlToDB}, ${default_price});`;
+    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${name}', '${image}', ${default_price});`;
 
     const createProductResponse = await postGenericQueryResponse(createProductQuery);
     const productId = createProductResponse.data.data.insertId;
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const updateProduct = async (product: IProduct): Promise<boolean> => {
+  try {
+    const { product_id, name, default_price, image } = product;
+
+    const updateProductQuery = `UPDATE products SET
+    name = '${name}',
+    default_price = ${default_price},
+    image = '${image}'
+    WHERE product_id = ${product_id};`;
+
+    const updateProductResponse = await postGenericQueryResponse(updateProductQuery);
+    const productId = updateProductResponse.data.data.insertId;
 
     return true;
   } catch (error) {

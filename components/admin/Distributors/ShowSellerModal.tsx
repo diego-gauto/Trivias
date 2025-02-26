@@ -15,7 +15,8 @@ export const ShowSellerModalContent = ({
   return <div className={s['main-container']}>
     <div
       className={s['container']}
-      style={{ width: '100%' }}>
+      style={{ width: '100%' }}
+    >
       <div className={s['header']}>
         <h2 className={s['title']}>Datos del vendedor</h2>
         <h3 className={s['subtitle']}>Aquí los detalles del vendedor</h3>

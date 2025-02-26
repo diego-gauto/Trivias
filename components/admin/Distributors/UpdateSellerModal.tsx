@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
-import s2 from './CreateInvoiceProductModal.module.css';
-import { IoIosRemoveCircleOutline } from 'react-icons/io';
-import { createProduct, createProductInvoice, updateSeller } from './Queries';
-import Image from 'next/image';
+import { updateSeller } from './Queries';
 
 interface IUpdateSellerModalContentProps {
   seller: ISeller

@@ -10,8 +10,9 @@ import {
   getAllProductsArray,
 } from './Queries';
 import Pagination from '../../../components/Pagination/Pagination';
-import { CreateProductModalContent } from './CreateProductModalContent';
-import { ProductModalContent } from './ProductModal';
+import { CreateProductModal } from './CreateProductModal';
+import { ShowProductModal } from './ShowProductModal';
+import { UpdateProductModal } from './UpdateProductModal';
 
 type EntityParams = {
   offset: number,
@@ -48,7 +49,8 @@ export const DistributorsProducts = () => {
   });
 
   const [showCreateProduct, setShowCreateProduct] = useState(false);
-  const [showProduct, setShowProduct] = useState(false);
+  const [showUpdateProduct, setShowUpdateProduct] = useState(false);
+  const [showPreviewProduct, setShowPreviewProduct] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   const [inputValue, setInputValue] = useState<string>('');
@@ -172,15 +174,30 @@ export const DistributorsProducts = () => {
                           }
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          <button
-                            className={styles['gonvar-table__button']}
-                            onClick={(e) => {
-                              setNewProduct(p);
-
-                            }}
-                          >
-                            Visualizar
-                          </button>
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '8px'
+                          }}>
+                            <button
+                              className={styles['gonvar-table__button']}
+                              onClick={(e) => {
+                                setSelectedProduct(p);
+                                setShowPreviewProduct(true);
+                              }}
+                            >
+                              Visualizar
+                            </button>
+                            <button
+                              className={styles['gonvar-table__button']}
+                              onClick={(e) => {
+                                setSelectedProduct(p);
+                                setShowUpdateProduct(true);
+                              }}
+                            >
+                              Modificar
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     })
@@ -205,7 +222,7 @@ export const DistributorsProducts = () => {
         showCreateProduct &&
         <Modal
           child={
-            <CreateProductModalContent
+            <CreateProductModal
               onClose={() => {
                 setShowCreateProduct(false)
               }}
@@ -224,28 +241,45 @@ export const DistributorsProducts = () => {
               modifyNewProduct={setNewProduct}
             />
           }
-          onClose={() => {
-            setShowCreateProduct(false);
-          }}
           show={showCreateProduct}
           compactSize={true}
         />
       }
       {
-        (showProduct && selectedProduct !== null) &&
+        (showPreviewProduct && selectedProduct !== null) &&
         <Modal
           child={
-            <ProductModalContent
+            <ShowProductModal
               onClose={() => {
-                setShowCreateProduct(false)
+                setShowPreviewProduct(false);
               }}
               product={selectedProduct}
             />
           }
           onClose={() => {
-            setShowProduct(false);
+            setShowPreviewProduct(false);
           }}
-          show={showProduct}
+          show={showPreviewProduct}
+          compactSize={true}
+        />
+      }
+      {
+        (showUpdateProduct && selectedProduct !== null) &&
+        <Modal
+          child={<UpdateProductModal
+            modifyProduct={setSelectedProduct}
+            onClose={() => {
+              setShowUpdateProduct(false);
+            }}
+            onUpdate={(success) => {
+              if (success) {
+                refreshProductsList();
+                setSelectedProduct(null);
+              }
+            }}
+            product={selectedProduct}
+          />}
+          show={showUpdateProduct}
           compactSize={true}
         />
       }
