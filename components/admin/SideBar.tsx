@@ -531,7 +531,7 @@ const SideBar = ({ show, onHide }: any) => {
                   </li>
                 </Link>
                 {
-                  isDistributorABMProducts &&
+                  (isDistributorABMProducts || isSuperAdmin) &&
                   <Link href='/admin/DistributorProducts'>
                     <li
                       style={{ color: index == 21 ? '#ffa500' : '#fff' }}
@@ -545,7 +545,7 @@ const SideBar = ({ show, onHide }: any) => {
                   </Link>
                 }
                 {
-                  isDistributorABMSellers &&
+                  (isDistributorABMSellers || isSuperAdmin) &&
                   <Link href='/admin/DistributorSellers'>
                     <li
                       style={{ color: index == 22 ? '#ffa500' : '#fff' }}

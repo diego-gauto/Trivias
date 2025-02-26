@@ -553,24 +553,38 @@ export const createProduct = async (productInvoice: IProduct): Promise<boolean> 
 }
 
 export const createSeller = async (seller: ISeller): Promise<boolean> => {
-  /*
-  SELECT * FROM sellers AS s 
-  WHERE CONCAT(s.name, ' ', s.last_name) LIKE '%'
-  OR s.email LIKE '%';
-
-  UPDATE sellers SET postal_code = '85821' WHERE seller_id = 1;
-  */
   try {
     const { name, last_name, email, phone_number, photo_url, postal_code } = seller;
 
-    const imageUrlToDB = photo_url === '' ? 'null' : `'${photo_url}'`;
-    const postalCode = postal_code === '' ? 'null' : `'${postal_code}'`;
-
     const createSellerQuery = `INSERT INTO sellers (name, last_name, email, phone_number, photo_url, postal_code) 
-    VALUES ('${name}', '${last_name}', '${email}', '${phone_number}', ${imageUrlToDB}, ${postalCode});`;
+    VALUES ('${name}', '${last_name}', '${email}', '${phone_number}', '${photo_url}', '${postal_code}');`;
 
     const createSellerResponse = await postGenericQueryResponse(createSellerQuery);
     const sellerId = createSellerResponse.data.data.insertId;
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export const updateSeller = async (seller: ISeller): Promise<boolean> => {
+  try {
+    const { seller_id, name, last_name, email, phone_number, photo_url, postal_code } = seller;
+
+    const createSellerQuery = `UPDATE sellers SET 
+    name = '${name}',
+    last_name = '${last_name}',
+    email = '${email}',
+    phone_number = '${phone_number}',
+    photo_url = '${photo_url}',
+    postal_code = '${postal_code}'
+    WHERE seller_id = ${seller_id};`;
+
+    const updateSellerResponse = await postGenericQueryResponse(createSellerQuery);
+    const sellerId = updateSellerResponse.data.data.insertId;
+    console.log({ updateSellerResponse: updateSellerResponse.data });
 
     return true;
   } catch (error) {

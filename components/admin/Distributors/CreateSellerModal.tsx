@@ -37,7 +37,7 @@ export const CreateSellerModalContent = ({
           <h2 className={s['title']}>Dar de alta a vendedor</h2>
           <h3 className={s['subtitle']}>Ingrese los datos del vendedor</h3>
         </div>
-        <div className={s['body']}>
+        <div className={`${s['body']} ${s['body--scroll']}`}>
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">Nombre</label>
             <input

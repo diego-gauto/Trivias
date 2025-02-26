@@ -46,6 +46,13 @@
   flex-direction: column;
 }
 
+.body--scroll {
+  overflow-y: scroll;
+  height: 340px;
+  padding-right: 8px;
+  margin-bottom: 8px;
+}
+
 .sections-header {
   color: #6310C8;
   display: grid;
@@ -279,9 +286,7 @@
   background-color: rgba(105, 26, 202, 0.75);
 }
 
-@media screen and (min-width: 576px) {
-
-}
+@media screen and (min-width: 576px) {}
 
 /*
 Breakpoint	Class infix	Dimensions

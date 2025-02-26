@@ -2,23 +2,26 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 import { IoIosRemoveCircleOutline } from 'react-icons/io';
-import { date } from 'yup';
-import { createProduct, createProductInvoice, createSeller } from './Queries';
+import { createProduct, createProductInvoice, updateSeller } from './Queries';
 import Image from 'next/image';
 
-interface ICreateSellerModalContentProps {
+interface IUpdateSellerModalContentProps {
   seller: ISeller
+  modifySeller: (seller: ISeller) => void
+  onUpdate: (success: boolean) => void
   onClose: () => void
 }
 
-export const ShowSellerModalContent = ({
+export const UpdateSellerModalContent = ({
+  onUpdate,
   onClose,
   seller,
-}: ICreateSellerModalContentProps) => {
+  modifySeller,
+}: IUpdateSellerModalContentProps) => {
 
-  const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
+  const [userUseUpdateButton, setUserUseUpdateButton] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
-  const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
+  const [productsRequestIsFinish, setSellerRequestIsFinish] = useState(false);
 
   const { seller_id, name, last_name, email, phone_number, photo_url, postal_code } = seller;
 
@@ -30,10 +33,10 @@ export const ShowSellerModalContent = ({
     <div className={`${s['views']} ${productsRequestIsFinish ? s['transition-active'] : ''}`}>
       <div className={s['container']}>
         <div className={s['header']}>
-          <h2 className={s['title']}>Dar de alta a vendedor</h2>
-          <h3 className={s['subtitle']}>Ingrese los datos del vendedor</h3>
+          <h2 className={s['title']}>Actualizar vendedor</h2>
+          <h3 className={s['subtitle']}>Ingrese los nuevos datos</h3>
         </div>
-        <div className={s['body']}>
+        <div className={`${s['body']} ${s['body--scroll']}`}>
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">Nombre</label>
             <input
@@ -42,7 +45,13 @@ export const ShowSellerModalContent = ({
               id="nombre"
               placeholder="Ingrese el nombre"
               value={name}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  name: value
+                });
+              }}
             />
           </div>
           <div className="mb-3">
@@ -53,7 +62,13 @@ export const ShowSellerModalContent = ({
               id="apellidos"
               placeholder="Ingrese sus apellidos"
               value={last_name}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  last_name: value
+                });
+              }}
             />
           </div>
           <div className="mb-3">
@@ -64,7 +79,13 @@ export const ShowSellerModalContent = ({
               id="email"
               placeholder="Ingrese su correo eléctronico"
               value={email}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  email: value
+                });
+              }}
             />
           </div>
           <div className="mb-3">
@@ -75,7 +96,13 @@ export const ShowSellerModalContent = ({
               id="phone_number"
               placeholder="Ingrese su número de celular"
               value={phone_number}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  phone_number: value
+                });
+              }}
             />
           </div>
           <div className="mb-3">
@@ -86,7 +113,13 @@ export const ShowSellerModalContent = ({
               id="photo_url"
               placeholder="Ingrese su url de la imagen de perfil"
               value={photo_url || ''}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  photo_url: value
+                });
+              }}
             />
           </div>
           <div className="mb-3">
@@ -97,7 +130,13 @@ export const ShowSellerModalContent = ({
               id="postal_code"
               placeholder="Ingrese su código postal"
               value={postal_code || ''}
-              disabled
+              onChange={(e) => {
+                const { value } = e.target;
+                modifySeller({
+                  ...seller,
+                  postal_code: value
+                });
+              }}
             />
           </div>
         </div>
@@ -106,31 +145,63 @@ export const ShowSellerModalContent = ({
             className={s['button']}
             onClick={(e) => {
               onClose();
-              setUserUseRegisterButton(false);
+              setUserUseUpdateButton(false);
             }}
           >
             Cerrar
           </button>
           <div
-            className={`${s['button']} ${(!isValidRequestValues() || userUseRegisterButton === true)
+            className={`${s['button']} ${(!isValidRequestValues() || userUseUpdateButton === true)
               ? s['button--purple-disable']
               : s['button--purple']}`
             }
             onClick={async (e) => {
-              /*
               if (!isValidRequestValues()) {
                 return;
               }
-              if (userUseRegisterButton) {
+              if (userUseUpdateButton) {
                 return;
               }
-              const canCreateInvoice = await createSeller(seller);
-              setHaveSuccessAtCreate(canCreateInvoice);
-              setProductsRequestIsFinish(true);
-              */
+              const canUpdateSeller = await updateSeller(seller);
+              setHaveSuccessAtCreate(canUpdateSeller);
+              setSellerRequestIsFinish(true);
             }}
           >
-            Acción
+            Actualizar
+          </div>
+        </div>
+      </div>
+      <div className={s['result-petition-section']}>
+        <div className={s['result-petition-container']}>
+          <div className={`${s['result-petition-icon']} ${s[`result-petition-icon--${haveSuccessAtCreate ? 'approve' : 'not-approve'}`]}`}>
+            {
+              haveSuccessAtCreate === true ? '✔' : '!'
+            }
+          </div>
+          <h3 className={s['result-petition-title']}>
+            {
+              haveSuccessAtCreate ?
+                '¡Se ha actualizado el vendedor con exito!'
+                : '¡No se ha logrado actualizar el vendedor!'
+            }
+          </h3>
+          <h4 className={s['result-petition-subtitle']}>
+            {
+              haveSuccessAtCreate ?
+                'Ahora el vendedor esta actualizado'
+                : 'Intente de nuevo esta acción'
+            }
+          </h4>
+          <div className={s['result-petition-buttons']}>
+            <button
+              className={s['result-petition-button']}
+              onClick={(e) => {
+                onUpdate(haveSuccessAtCreate);
+                onClose();
+              }}
+            >
+              Regresar
+            </button>
           </div>
         </div>
       </div>

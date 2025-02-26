@@ -147,8 +147,8 @@ interface ISeller {
   last_name: string
   email: string
   phone_number: string
-  photo_url: string | null
-  postal_code: string | null
+  photo_url: string
+  postal_code: string
 }
 
 interface IProduct {

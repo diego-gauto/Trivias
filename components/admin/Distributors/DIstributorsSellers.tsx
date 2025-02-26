@@ -1,7 +1,7 @@
 import styles from './DistributorsNew.module.css';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useEffect, useState } from 'react';
-import { Modal } from '../../admin/DefaultComponents/Modal';
+import { Modal } from '../DefaultComponents/Modal';
 import {
   getUserAccessRoles,
   getNormalUserIdByEmail,
@@ -9,9 +9,10 @@ import {
   getSellersCount,
   getSellersList,
 } from './Queries';
-import Pagination from '../../../components/Pagination/Pagination';
-import { CreateProductModalContent } from './CreateProductModalContent';
+import Pagination from '../../Pagination/Pagination';
 import { CreateSellerModalContent } from './CreateSellerModal';
+import { UpdateSellerModalContent } from './UpdateSellerModal';
+import { ShowSellerModalContent } from './ShowSellerModal';
 
 type EntityParams = {
   offset: number,
@@ -45,12 +46,16 @@ export const DistributorsSellers = () => {
     phone_number: '',
   });
 
+  const [selectedSeller, setSelectedSeller] = useState<ISeller | null>(null);
+
   const [sellersParams, setSellersParams] = useState<EntityParams>({
     offset: 0,
     count: 0,
   });
 
   const [showCreateSeller, setShowCreateSeller] = useState(false);
+  const [showUpdateSeller, setShowUpdateSeller] = useState(false);
+  const [showPreviewSeller, setShowPreviewSeller] = useState(false);
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -177,23 +182,40 @@ export const DistributorsSellers = () => {
                         </td>
                         <td className={styles['gonvar-table__data']}>
                           {
-                            phone_number
+                            phone_number !== '' ? phone_number : 'Desconocido'
                           }
                         </td>
                         <td className={styles['gonvar-table__data']}>
                           {
-                            postal_code !== null ? postal_code : 'Desconocido'
+                            postal_code !== '' ? postal_code : 'Desconocido'
                           }
                         </td>
                         <td className={styles['gonvar-table__data']}>
-                          <button
-                            className={styles['gonvar-table__button']}
-                            onClick={(e) => {
-                              setNewSeller(seller);
-                            }}
-                          >
-                            Visualizar
-                          </button>
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '8px'
+                          }}>
+                            <button
+                              className={styles['gonvar-table__button']}
+                              onClick={(e) => {
+                                setSelectedSeller(seller);
+                                setShowPreviewSeller(true);
+                              }}
+                            >
+                              Visualizar
+                            </button>
+                            <button
+                              className={styles['gonvar-table__button']}
+                              onClick={(e) => {
+                                setSelectedSeller(seller);
+                                setShowUpdateSeller(true);
+                                console.log("Se establecio todo lo necesario!");
+                              }}
+                            >
+                              Editar
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     })
@@ -241,9 +263,52 @@ export const DistributorsSellers = () => {
             />
           }
           onClose={() => {
-            setShowCreateSeller(false);
+            // setShowCreateSeller(false);
           }}
           show={showCreateSeller}
+          compactSize={true}
+        />
+      }
+      {
+        (showUpdateSeller && selectedSeller !== null) &&
+        <Modal
+          child={
+            <UpdateSellerModalContent
+              onClose={() => {
+                setShowUpdateSeller(false);
+              }}
+              onUpdate={(canUpdate) => {
+                if (canUpdate) {
+                  setSelectedSeller(null);
+                  refreshSellersList();
+                }
+              }}
+              seller={selectedSeller}
+              modifySeller={setSelectedSeller}
+            />
+          }
+          onClose={() => {
+            // setShowUpdateSeller(false);
+          }}
+          show={showUpdateSeller}
+          compactSize={true}
+        />
+      }
+      {
+        (showPreviewSeller && selectedSeller !== null) &&
+        <Modal
+          child={
+            <ShowSellerModalContent
+              onClose={() => {
+                setShowPreviewSeller(false);
+              }}
+              seller={selectedSeller}
+            />
+          }
+          onClose={() => {
+            setShowPreviewSeller(false);
+          }}
+          show={showPreviewSeller}
           compactSize={true}
         />
       }
