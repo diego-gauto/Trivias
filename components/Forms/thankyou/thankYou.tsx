@@ -288,9 +288,9 @@ const ThankYouForm = () => {
           ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
         </p>
         <p className={paragraph}>
-          Cuentas con 1 minuto para unirte a la academia con beca del 75%
-          y pagar <strong>sólo 3,497 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
-          Recibe Gratis 600-800 pesos en producto de la marca <strong>al unirte ahora.</strong>
+          Cuentas con 1 minuto para unirte a la academia con beca del 25%
+          y pagar <strong>sólo 5,697 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
+          Recibe Gratis el Kit de producto para iniciar tu curso <strong>Nails Master Revolution</strong> con un valor de 3,100 MXN <strong>al unirte ahora.</strong>
         </p>
         <div
           className={`${linkButton} ${allCenter}`}
