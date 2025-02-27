@@ -186,7 +186,7 @@ const ThankYouForm = () => {
         });
       }
     } else {
-      localStorage.setItem('anual', 'true');
+      localStorage.setItem('anual_v1_2', 'true');
       router.push(SIGNUP_PATH);
     }
   };
