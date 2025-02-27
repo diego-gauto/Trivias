@@ -367,12 +367,13 @@ const ThankYouForm = () => {
             >
               <img src={watsapOut} className={watsapLogo} />
               <p className='my-1'>
-                <b>Gonvar</b>
+                <b>Enviar mensaje</b>
               </p>
             </div>
           </div>
 
           <p>
+            Whatsapp: <b>+52 55 3893 3134</b><br />
             📞 <b>+1 656-218-5379</b><br />
             📞 <b>+1 334-560-1678</b><br />
             📞 <b>55 38 933 134</b><br />
