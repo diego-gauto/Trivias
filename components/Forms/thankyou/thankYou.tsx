@@ -60,7 +60,8 @@ const ThankYouForm = () => {
     watsapLogo,
     whatsappContainer,
     linkButton,
-    contact
+    contact,
+    step,
   } = styles;
 
   const router = useRouter();
@@ -120,8 +121,18 @@ const ThankYouForm = () => {
     return groupCode.length === 22;
   };
 
-  const redirectToWhatsAppChat = () => {
+  const redirectToWhatsAppGroup = () => {
     const link = form?.redirect.link;
+    if (link) {
+      window.open(link, '_blank');
+    } else {
+      // Manejar el caso en el que link es undefined
+      console.error('El enlace de redirección es indefinido');
+    }
+  };
+
+  const redirectToWhatsAppChat = () => {
+    const link = 'https://wa.me/525538933134';
     if (link) {
       window.open(link, '_blank');
     } else {
@@ -288,6 +299,8 @@ const ThankYouForm = () => {
           ¡Apresúrate! Paga en línea ahora mismo, haciendo click en el botón Comenzar ahora.
         </p>
         <p className={paragraph}>
+          <b className={step}>1er Paso</b>
+          <br />
           Cuentas con 1 minuto para unirte a la academia con beca del 25%
           y pagar <strong>sólo 5,697 MXN por 1 año</strong> de aprendizaje con <strong>certificados incluidos. </strong>
           Recibe Gratis el Kit de producto para iniciar tu curso <strong>Nails Master Revolution</strong> con un valor de 3,100 MXN <strong>al unirte ahora.</strong>
@@ -308,13 +321,13 @@ const ThankYouForm = () => {
         {isLinkToWhatsappGroup(form?.redirect.link) && (
           <div className={whatsappContainer}>
             <p className={paragraph}>
-              <b>2do Paso</b>
+              <b className={step}>2do Paso</b>
               <br />
               Únete al grupo de whatsapp ahora
             </p>
             <div
               className={`${watsapButton} ${allCenter}`}
-              onClick={() => redirectToWhatsAppChat()}
+              onClick={() => redirectToWhatsAppGroup()}
             >
               <img src={watsapOut} className={watsapLogo} />
               <p className='my-1'>
@@ -325,7 +338,7 @@ const ThankYouForm = () => {
         )}
         <>
           <p className={paragraph}>
-            <b>{isLinkToWhatsappGroup(form?.redirect.link) ? "3er" : "2do"} Paso</b>
+            <b className={step}>{isLinkToWhatsappGroup(form?.redirect.link) ? "3er" : "2do"} Paso</b>
             <br />
             Revisa todo lo que incluye la carrera de uñas a la que te deseas inscribir
           </p>
@@ -339,13 +352,31 @@ const ThankYouForm = () => {
             <b>Conoce Gonvar+</b>
           </p>
         </div>
+        <p className={paragraph}>
+          <b className={step}>{isLinkToWhatsappGroup(form?.redirect.link) ? "4to" : "3er"} Paso</b>
+          <br />
+          Recuerda que nuestros medios de contacto oficiales son:
+        </p>
+
         <div className={contact}>
-          <p>Recuerda que nuestros medios de contacto oficiales son:</p>
+
+          <div className={whatsappContainer}>
+            <div
+              className={`${watsapButton} ${allCenter}`}
+              onClick={() => redirectToWhatsAppChat()}
+            >
+              <img src={watsapOut} className={watsapLogo} />
+              <p className='my-1'>
+                <b>Gonvar</b>
+              </p>
+            </div>
+          </div>
+
           <p>
-            Whatsapp: <b>+52 55 3893 3134</b><br />
             📞 <b>+1 656-218-5379</b><br />
             📞 <b>+1 334-560-1678</b><br />
             📞 <b>55 38 933 134</b><br />
+            <br />
             Soporte Correo: <b>soporte@gonvar.io</b>
           </p>
         </div>
