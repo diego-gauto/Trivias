@@ -102,6 +102,7 @@ export interface IUpdateMembershipData {
   type: string,
   days: number,
   admin_update_id: number | null,
+  method?: string;
 }
 export const updateMembershipPlanApi = async (body: IUpdateMembershipData) => {
   return axios

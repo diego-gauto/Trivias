@@ -103,6 +103,7 @@ async function activeSubscriptionByDistributorsCode(userId: number, subscription
       type: `0`,
       current_start_date: start_date,
       admin_update_id: null,
+      method: 'dist'
     };
 
     console.log({ body });
