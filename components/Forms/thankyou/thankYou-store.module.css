@@ -131,10 +131,10 @@
 
 .linkButton {
   cursor: pointer;
-  width: 150px;
+  width: 180px;
   height: 30px;
   border: none;
-  padding: 0px 10px 0 10px;
+  padding: 15px 10px 0 25px;
 
   border-radius: 50px;
   font-size: 15px;
