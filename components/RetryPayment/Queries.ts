@@ -43,7 +43,14 @@ export async function validateCode(code: string, userId: number): Promise<ICodeR
     const updateCodeResponse = await updateCodeInfo(searchedCode.code_id, userId);
     console.log(updateCodeResponse);
 
-    const activeSubscriptionResponse = await activeSubscription(userId, searchedCode.duration_type);
+    console.log({
+      data: {
+        searchedCode,
+        userId
+      }
+    });
+
+    const activeSubscriptionResponse = await activeSubscriptionByDistributorsCode(userId, searchedCode.duration_type);
     console.log({ activeSubscriptionResponse });
 
     return {
@@ -64,7 +71,11 @@ export async function validateCode(code: string, userId: number): Promise<ICodeR
 
 async function updateCodeInfo(codeId: number, userId: number): Promise<any> {
   try {
-    const query = `update codes set user_id = ${userId} where code_id = ${codeId};`;
+    const sellAt = Math.floor(new Date().getTime() / 1000);
+    const query = `UPDATE codes SET 
+    user_id = ${userId},
+    sell_at = ${sellAt}
+    WHERE code_id = ${codeId};`;
     console.log({ query });
     const response = await postGenericQueryResponse(query);
     return response;
@@ -74,30 +85,24 @@ async function updateCodeInfo(codeId: number, userId: number): Promise<any> {
   }
 }
 
-async function activeSubscription(userId: number, subscriptionType: 'C' | 'A' | 'M') {
+async function activeSubscriptionByDistributorsCode(userId: number, subscriptionType: 'C' | 'A' | 'M') {
   const level = subscriptionType === 'M' ? 6 : (subscriptionType === 'A' ? 5 : 8);
   const days = subscriptionType === 'M' ? 30 : (subscriptionType === 'A' ? 365 : 120);
 
   try {
-
-    const today = new Date();
-    today.setDate(today.getDate() + days);
-
-    const finalDate = Math.floor(today.getTime() / 1000);
-
     const currentMembership = await getCurrentMembershipData(userId) as IMembershipData;
 
-    const { level: currentLevel, start_date } = currentMembership;
+    const { level: currentLevel, start_date, final_date } = currentMembership;
 
     const body = {
-      current_final_date: finalDate,
+      current_final_date: final_date,
       level,
       current_level: currentLevel,
       user_id: userId,
       days,
       type: `0`,
       current_start_date: start_date,
-      admin_update_id: null
+      admin_update_id: null,
     };
 
     console.log({ body });
