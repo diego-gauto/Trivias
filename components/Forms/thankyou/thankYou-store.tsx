@@ -9,6 +9,8 @@ type ThankYouFormStoreProps = {
   type: TypeValue
 }
 
+const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
+
 const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
   const {
     container,
@@ -19,7 +21,10 @@ const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
     imgContainer,
     contact,
     linkButton,
-    allCenter
+    allCenter,
+    whatsappContainer,
+    watsapButton,
+    watsapLogo,
   } = styles;
 
   const redirectToStore = () => {
@@ -35,6 +40,16 @@ const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
   const redirectToGoogleDrive = () => {
     // https://bit.ly/3XGu3AV
     const link = "https://drive.google.com/file/d/1F3bbY8Uwje3Uf8EtCydDh24lHH5BChrY/view?usp=sharing";
+    if (link) {
+      window.open(link, '_blank');
+    } else {
+      // Manejar el caso en el que link es undefined
+      console.error('El enlace de redirección es indefinido');
+    }
+  };
+
+  const redirectToWhatsAppChat = () => {
+    const link = 'https://wa.me/525538933134';
     if (link) {
       window.open(link, '_blank');
     } else {
@@ -79,12 +94,24 @@ const ThankYouFormStore = ({ type }: ThankYouFormStoreProps) => {
         </div>
 
         <div className={contact}>
-          <p>Recuerda que nuestros medios de contacto oficiales son:</p>
+
+          <div className={whatsappContainer}>
+            <div
+              className={`${watsapButton} ${allCenter}`}
+              onClick={() => redirectToWhatsAppChat()}
+            >
+              <img src={watsapOut} className={watsapLogo} />
+              <p className='my-1'>
+                <b>Gonvar</b>
+              </p>
+            </div>
+          </div>
+
           <p>
-            Whatsapp: <b>+52 55 3893 3134</b><br />
             📞 <b>+1 656-218-5379</b><br />
             📞 <b>+1 334-560-1678</b><br />
             📞 <b>55 38 933 134</b><br />
+            <br />
             Soporte Correo: <b>soporte@gonvar.io</b>
           </p>
         </div>
