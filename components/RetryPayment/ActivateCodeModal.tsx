@@ -35,14 +35,22 @@ export const ActivateCodeModal = ({
         {
           codeRequestResult === 'available' ?
             'Ahora cuenta con una suscripción ' + suscriptionTypeText
-            : 'Código inexistente'
+            : codeRequestResult === 'not-available' ?
+              'Código ya utilizado' : 'Código inexistente'
         }
         {
-          codeRequestResult !== 'available' &&
+          codeRequestResult === 'not-exist' &&
           <p style={{
             fontSize: '16px',
             paddingTop: '8px'
           }}>Por favor, revisa tu codigo y vuelve a intentarlo</p>
+        }
+        {
+          codeRequestResult === 'not-available' &&
+          <p style={{
+            fontSize: '16px',
+            paddingTop: '8px',
+          }}>Consulta con tu proveedor</p>
         }
       </h4>
       <div className={s['result-petition-buttons']}>

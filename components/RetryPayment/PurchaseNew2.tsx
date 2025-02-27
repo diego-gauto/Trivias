@@ -1387,9 +1387,6 @@ export const PurchaseNew2 = () => {
                 setResultOfActivationCode(null);
               }}
             />}
-            onClose={() => {
-              // No hacer nada para que pulse el botón de "Ir a los cursos"
-            }}
             show={resultOfActivationCode !== null}
             compactSize={false}
           />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import { updateDistributor, updateSeller } from './Queries';
+import { statesOfMexicoArray } from '../../../components/Modals/ComeFromModal/Ladas';
 
 interface IUpdateDistributorModalProps {
   distributor: IDistributor
@@ -49,13 +50,7 @@ export const UpdateDistributorModal = ({
               id="email"
               placeholder="Ingrese su correo eléctronico"
               value={email}
-              onChange={(e) => {
-                const { value } = e.target;
-                modifyDistributor({
-                  ...distributor,
-                  email: value
-                });
-              }}
+              disabled
             />
           </div>
           <div className="mb-3">
@@ -77,12 +72,9 @@ export const UpdateDistributorModal = ({
           </div>
           <div className="mb-3">
             <label htmlFor="origin_state" className="form-label">Estado de origen</label>
-            <input
-              type="text"
-              className="form-control"
+            <select
               id="origin_state"
-              placeholder="Ingrese su estado de origen"
-              value={`${origin_state}`}
+              className="form-control"
               onChange={(e) => {
                 const { value } = e.target;
                 modifyDistributor({
@@ -90,7 +82,22 @@ export const UpdateDistributorModal = ({
                   origin_state: value
                 });
               }}
-            />
+              value={origin_state}
+            >
+              {
+                statesOfMexicoArray.map((s, index) => {
+                  if ((origin_state === '' || origin_state == null) && index === 0) {
+                    modifyDistributor({
+                      ...distributor,
+                      origin_state: s
+                    });
+                  }
+                  return <option value={s}>
+                    {s}
+                  </option>
+                })
+              }
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="postal_code" className="form-label">Código postal</label>
