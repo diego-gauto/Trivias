@@ -118,6 +118,9 @@ const Sections = () => {
         currentValues: AdminType[],
         userId: number,
       ): any[] => {
+        if (currentValues.find((cv) => cv.role === 'distributors')) {
+
+        }
         const dvRoles = defaultValues.map((dv) => dv.role);
         const cvRoles = currentValues.map((cv) => cv.role);
         const result = dvRoles.map((dvRole, dvIndex) => {
@@ -141,7 +144,6 @@ const Sections = () => {
           adminTypes: getRolesWithDefaults(admin.adminTypes, admin.user_id),
         };
       });
-
       setUsers(newAdmins);
     } catch (error) {
       console.error(error);

@@ -92,17 +92,6 @@ export const updateMembershipDaysApi = async (user: IUpdateMembershipDaysApi) =>
       return error;
     });
 };
-/*
-export interface IUpdateMembershipPlanApi {
-  id: number,
-  start_date: number,
-  user_final_date: number,
-  level: number,
-  type: number,
-  admin_update_id: number,
-  days: number
-}
-*/
 
 export interface IUpdateMembershipData {
   current_final_date: number,
@@ -112,7 +101,8 @@ export interface IUpdateMembershipData {
   user_id: number,
   type: string,
   days: number,
-  admin_update_id: number,
+  admin_update_id: number | null,
+  method?: string;
 }
 export const updateMembershipPlanApi = async (body: IUpdateMembershipData) => {
   return axios

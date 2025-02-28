@@ -1,5 +1,5 @@
 // import Distributors from '../../components/admin/Distributors/Distributors';
-import { DistributorsNew } from '../../components/admin/Distributors/DistributorsNew';
+import { DistributorsNew } from '../../components/admin/Distributors/DistributorProfile';
 import { MainContain } from '../../screens/Styles.styled';
 
 const DistributorsView = () => {

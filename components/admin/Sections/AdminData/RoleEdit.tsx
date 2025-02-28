@@ -27,6 +27,7 @@ import {
 } from '../../../api/admin';
 import { AdminType } from './Constants';
 import { backendRoleEditMethod } from './Queries';
+import { getDistributorsAdminAccess } from '../Queries';
 
 type CheckBoxValues = {
   name: string;
@@ -41,23 +42,6 @@ type RoleProps = {
   courses: { id: number; title: string; published: boolean }[];
   forms: { id: number; name: string; }[];
 };
-
-type TaskValue =
-  | 'Crear'
-  | 'Editar'
-  | 'Eliminar'
-  | 'Solicitudes'
-  | 'Generar Reporte'
-  | 'Descargar';
-
-interface AdminRole {
-  role: string;
-  active: boolean;
-  name: string;
-  tasks: { active: boolean; task: TaskValue }[];
-  courses?: number[];
-  forms?: number[]
-}
 
 const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) => {
   const handleClose = () => setShow(false);
@@ -176,7 +160,11 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       tasks: [
         { active: false, task: 'Crear' },
         { active: false, task: 'Editar' },
-        { active: false, task: 'Eliminar' },
+        { active: false, task: 'Descargar' },
+        { active: false, task: 'ABM Vendedores' },
+        { active: false, task: 'ABM Productos' },
+        { active: false, task: 'Generar factura de accesos' },
+        { active: false, task: 'Generar factura de productos' },
       ],
     },
     {
@@ -202,13 +190,13 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   const [popUpHomerworks, setPopUpHomerworks] = useState<boolean>(false);
   const [popUpForms, setPopUpForms] = useState<boolean>(false);
 
-
-
   useEffect(() => {
+    console.log({ adminTypes: admin.adminTypes });
+
     const result: AdminRole[] = roles.map((role, index) => {
       const adminType = admin.adminTypes.find((adminType) => {
         return adminType.role === role.name;
-      })
+      });
 
       if (adminType === undefined) {
         return role;
@@ -231,6 +219,14 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
           active = adminType.report == 1;
         } else if (task.task === 'Descargar') {
           active = adminType.download == 1;
+        } else if (task.task === 'ABM Productos') {
+          active = adminType.abm_products == 1;
+        } else if (task.task === 'ABM Vendedores') {
+          active = adminType.abm_sellers == 1;
+        } else if (task.task === 'Generar factura de accesos') {
+          active = adminType.create_access_invoices == 1;
+        } else if (task.task === 'Generar factura de productos') {
+          active = adminType.create_products_invoices == 1;
         }
         const result = {
           task: task.task,
@@ -293,7 +289,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
       return finalResult;
     });
-    console.log({ result });
     setRoles(result);
     setLoading(false);
   }, []);
@@ -355,28 +350,14 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
   }
 
   const updateAdminType = async () => {
-    interface BackendRoleStructure {
-      user_id: number;
-      id: number;
-      role: string;
-      source_table: string;
-      create?: number;
-      edit?: number;
-      delete?: number;
-      view: number;
-      courses?: string;
-      request?: number;
-      report?: number;
-      download?: number;
-      forms?: string;
-    }
-
     const getSourceTable = (roleName: string) => {
       if (roleName === 'course') {
         return `admin_courses`;
       }
       return `admin_${roleName}`;
     }
+
+    console.log({ rolesToUpdate: roles });
 
     const newRoles: BackendRoleStructure[] = roles.map(({ name, active, tasks, forms, courses }) => {
       return {
@@ -393,6 +374,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         courses: courses?.join(','),
         forms: forms?.join(','),
         request: tasks.find(t => t.task === 'Solicitudes')?.active === true ? 1 : 0,
+        abm_products: tasks.find(t => t.task === 'ABM Productos')?.active === true ? 1 : 0,
+        abm_sellers: tasks.find(t => t.task === 'ABM Vendedores')?.active === true ? 1 : 0,
+        create_access_invoices: tasks.find(t => t.task === 'Generar factura de accesos')?.active === true ? 1 : 0,
+        create_products_invoices: tasks.find(t => t.task === 'Generar factura de productos')?.active === true ? 1 : 0,
       }
     });
 
@@ -429,6 +414,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
     const result = forms.map(({ id }) => id);
     setFormIds(result);
     console.log({ result });
+  }
+
+  if (!loading) {
+    console.log({ roles });
   }
 
   return (
@@ -538,7 +527,6 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
             <SelectedRoleContain>
               {!loading &&
                 roles.map((role, indexR, roles) => {
-                  console.log({ roles });
                   return (
                     <div className='role-row' key={'role' + indexR}>
                       <RowContain>
