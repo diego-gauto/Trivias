@@ -99,6 +99,11 @@ const ThankYouForm = () => {
     '28',
     '29',
     '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
