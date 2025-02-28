@@ -91,6 +91,11 @@ const Formularios = () => {
     '28',
     '29',
     '30',
+    '31',
+    '32',
+    '33',
+    '34',
+    '35',
   ]; // Arreglo de IDs válidos
   const specialFormIds = ['10', '11', '12', undefined];
 
@@ -369,7 +374,7 @@ const Formularios = () => {
   };
 
   const getLinkByFormId = (formId: string) => {
-    if (['17', '19'].includes(formId)) {
+    if (['17', '19', '27'].includes(formId)) {
       return 'forms/thankyoupage-dist';
     }
     if (formId === '22') {
