@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { createProductInvoice, generateSellOfAccess, getAllSellers, getSellersList } from './Queries';
+import { createProductInvoice, getAllSellers, getProducts } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { Product } from '../Landing/ProductsSection/IProductsSection';
 
 type CreateInvoiceAccessModalProps = {
   productInvoice: IProductInvoice
@@ -28,22 +27,26 @@ export const CreateInvoiceProductModal = ({
   const [sellers, setSellers] = useState<{ email: string; seller_id: number; }[]>([]);
   const [products, setProducts] = useState<IProduct[]>([]);
 
-
   const { distributorId, sellerId, products: invoiceProducts, date } = productInvoice;
+
+  console.log({ productInvoice });
 
   useEffect(() => {
     const today = new Date().toJSON().slice(0, 10);
     modifyProductInvoice({
       ...productInvoice,
-      date: today
+      date: today,
+      distributorId
     });
     refreshSellersList();
+    refreshListOfProducts();
   }, []);
 
   const isValidRequestValues = () => {
     const validProductsNumber = invoiceProducts.some((d) => d.count > 0);
     const validDate = date !== '';
     const validSellerId = sellerId !== 0;
+    console.log({ date });
     return validDate && validProductsNumber && validSellerId;
   };
 
@@ -80,6 +83,15 @@ export const CreateInvoiceProductModal = ({
       ...productInvoice,
       products: newSelectedProducts
     });
+  }
+
+  async function refreshListOfProducts() {
+    try {
+      const products = await getProducts();
+      setProducts(products);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -181,7 +193,7 @@ export const CreateInvoiceProductModal = ({
                           >
                             <div className={s2['product-search-catalog-item-image-container']}>
                               {
-                                p.image !== null &&
+                                (p.image) &&
                                 <Image
                                   src={p.image}
                                   width={100}
@@ -189,7 +201,7 @@ export const CreateInvoiceProductModal = ({
                                 />
                               }
                             </div>
-                            <div className={s2['']}>
+                            <div className={s2['button-container']}>
                               <p
                                 className={s2['product-search-catalog-item-text']}
                               >{
@@ -252,6 +264,12 @@ export const CreateInvoiceProductModal = ({
                   <tbody>
                     {
                       invoiceProducts.map((sp, index, array) => {
+                        const currentProduct = products.find(p => p.product_id === sp.productId);
+                        if (currentProduct === undefined) {
+                          return <></>;
+                        }
+                        const { product_id, name, image, default_price } = currentProduct;
+                        const { count, price } = sp;
                         return (
                           <tr
                             className={s['gonvar-table__row']}
@@ -260,9 +278,9 @@ export const CreateInvoiceProductModal = ({
                             <td className={s['product']}>
                               <div className={s2['product-search-catalog-item-image-container']}>
                                 {
-                                  products.find(p => p.product_id === sp.productId)?.image !== null &&
+                                  image.length > 0 &&
                                   <Image
-                                    src={products.find(p => p.product_id === sp.productId)?.image || ''}
+                                    src={image}
                                     width={80}
                                     height={80}
                                   />
@@ -274,7 +292,7 @@ export const CreateInvoiceProductModal = ({
                                 marginTop: '8px'
                               }}>
                                 {
-                                  products.find(p => p.product_id === sp.productId)?.name
+                                  name
                                 }
                               </p>
                             </td>
@@ -315,7 +333,7 @@ export const CreateInvoiceProductModal = ({
                                 </button>
                                 <span>
                                   {
-                                    invoiceProducts.find(cp => cp.productId === sp.productId)?.count
+                                    count
                                   }
                                 </span>
                                 <button
@@ -362,7 +380,7 @@ export const CreateInvoiceProductModal = ({
                                   }}
                                   placeholder='precio'
                                   type="number"
-                                  value={`${sp.price}`}
+                                  value={`${price}`}
                                   min={0}
                                   onChange={(e) => {
                                     const { value } = e.target;
@@ -507,6 +525,7 @@ export const CreateInvoiceProductModal = ({
                 className={s['result-petition-button']}
                 onClick={(e) => {
                   onCreate(haveSuccessAtCreate);
+                  onClose();
                 }}
               >
                 Regresar

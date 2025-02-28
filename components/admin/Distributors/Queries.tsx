@@ -89,6 +89,18 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
   return [];
 }
 
+export const getProducts = async (): Promise<IProduct[]> => {
+  try {
+    const query = `SELECT * FROM products;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IProduct[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
+}
+
 export const getDistributorById = async (id: number): Promise<IDistributor | null> => {
   try {
     const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
@@ -442,16 +454,19 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
 
 export const getProductHistoryByDistributorId = async (distributorId: number): Promise<IProductSellHistory[]> => {
   try {
-    const query = `SELECT ps.seller_id, distributor_id, sell_at, p2.product_sell_id, 
+    // CAST(columna_bigint AS SIGNED) AS columna_int
+    const query = `SELECT ps.seller_id, distributor_id, CAST(sell_at AS SIGNED) AS sell_at, p2.product_sell_id, 
     p1.product_id, count, price, p1.name AS product_name, p1.image AS product_image, 
-    sv.email AS seller_email 
+    s.email AS seller_email 
     FROM product_sells AS ps 
     INNER JOIN products_by_product_sell AS p2 ON p2.product_sell_id = ps.product_sell_id 
     INNER JOIN products AS p1 ON p2.product_id = p1.product_id 
-    INNER JOIN sellers_view AS sv ON sv.seller_id = ps.seller_id
+    INNER JOIN sellers AS s ON s.seller_id = ps.seller_id
     WHERE ps.distributor_id = ${distributorId};`;
     const response = await getGenericQueryResponse(query);
     const result = response.data.data as IProductHistoryRecord[];
+
+    console.log({ result });
 
     const productSellIds = [...new Set(result.map(ps => ps.product_sell_id))]
 
@@ -473,6 +488,8 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
         });
 
         const sellAtWithFormat = new Date(parseInt(sell_at) * 1000);
+
+        console.log({ sellAtWithFormat });
 
         const productCount = products
           .map(p => p.count)
@@ -506,8 +523,12 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
     const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
     const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime());
 
+    console.log({ datevalues: date.split("-").map((value) => parseInt(value) || 1) });
+
     const createProductSellQuery = `INSERT INTO product_sells (seller_id, distributor_id, sell_at) 
       VALUES (${sellerId}, ${distributorId}, ${sellAt})`;
+
+    console.log({ createProductSellQuery });
 
     const createProductSellResponse = await postGenericQueryResponse(createProductSellQuery);
     const productSellId = createProductSellResponse.data.data.insertId;
@@ -664,11 +685,6 @@ export const getSellersList = async (offset: number, input: string) => {
   }
 }
 
-/*
-const query = `select count(*) as count
-      from users 
-      where email like '${input}%' or concat(name, ' ', last_name) like '${input}%';`;
-*/
 export const getSellersCount = async (input: string) => {
   try {
     const query = `SELECT COUNT(*) AS count FROM sellers AS s 

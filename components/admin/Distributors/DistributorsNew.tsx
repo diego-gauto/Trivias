@@ -484,9 +484,6 @@ export const DistributorsNew = () => {
                               }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {
-                                // TODO
-                              }
                               <div style={{
                                 display: 'grid',
                                 gridTemplateColumns: '1fr 1fr',
@@ -568,17 +565,8 @@ export const DistributorsNew = () => {
                   <div
                     className={styles['distributor-details-create-access-button']}
                     onClick={(e) => {
-                      // TODO
                       setShowCreateProductInoviceModal(true);
-                      /*
-                      setShowCreateAccessInoviceModal(true);
-                      setNewAccessInvoice({
-                        ...newAccessInvoice,
-                        distributorId: selectedDistributor?.distributor_id || 0,
-                        adminId
-                      });
-                      console.log({ newAccessInvoice });
-                      */
+                      // TODO: actualizar el id del distributor
                     }}
                   >
                     <IoIosAddCircleOutline size={30} />
@@ -586,12 +574,6 @@ export const DistributorsNew = () => {
                   </div>
                 }
               </div>
-              {
-                /*
-                TODO: Listar los productos comprados por el usuario
-                productHistory
-                */
-              }
               <div className={styles['distributor-details-content']}>
                 {
                   productHistory.length > 0 &&
@@ -1028,17 +1010,22 @@ export const DistributorsNew = () => {
         />
       }
       {
-        showCreateProductInoviceModal &&
+        (showCreateProductInoviceModal && selectedDistributor !== null) &&
         <Modal
           child={
             <CreateInvoiceProductModal
               onClose={() => {
-                setShowCreateProductInoviceModal(false)
+                setShowCreateProductInoviceModal(false);
               }}
               onCreate={(canCreate) => {
-                // Refrescar el historico de venta de productos
+                if (canCreate) {
+                  refreshAccessHistoryById(selectedDistributor.distributor_id);
+                }
               }}
-              productInvoice={newProductInvoice}
+              productInvoice={{
+                ...newProductInvoice,
+                distributorId: selectedDistributor.distributor_id
+              }}
               modifyProductInvoice={setNewProductInvoice}
             />
           }

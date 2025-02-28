@@ -155,7 +155,7 @@ interface ISeller {
 interface IProduct {
   product_id: number
   name: string
-  image: string | null
+  image: string
   default_price: number
 }
 

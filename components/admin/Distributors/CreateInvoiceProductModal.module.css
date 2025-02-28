@@ -4,9 +4,7 @@
   gap: 8px;
 }
 
-.product-sell-data-item {
-
-}
+.product-sell-data-item {}
 
 .product-sell-data-label {
   white-space: nowrap;
@@ -18,9 +16,7 @@
   font-weight: 500;
 }
 
-.product-search-container {
-
-}
+.product-search-container {}
 
 .product-search-title {
   font-size: 18px;
@@ -41,7 +37,7 @@
 
 .product-search-catalog-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 8px;
   justify-content: center;
   align-content: center;
@@ -54,7 +50,7 @@
   gap: 8px;
 }
 
-.product-search-catalog-item-image-container{
+.product-search-catalog-item-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,15 +58,24 @@
 
 .product-search-catalog-item-text {
   margin: 0;
+  text-align: center;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .button {
-  width: 100%;
+  width: fit-content;
   border-radius: 16px;
   border: 1px solid gray;
   cursor: pointer;
   background-color: white;
   transition: background-color 0.25s;
+  padding: 4px 16px;
 }
 
 .button-circle {
@@ -85,6 +90,17 @@
   background-color: rgba(198, 16, 16, 0.25);
 }
 
-.products-container {
+.products-container {}
 
+
+@media screen and (min-width: 768px) {
+  .product-search-catalog-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .product-search-catalog-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

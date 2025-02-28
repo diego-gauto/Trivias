@@ -99,8 +99,12 @@ export const InvoiceProductModal = ({
             </thead>
             <tbody>
               {
-                products.map((p) => {
-                  return (<tr className={s['gonvar-table__row']}>
+                products.map((p, index) => {
+                  const { product_id, product_name, product_image, price, count } = p;
+                  return (<tr
+                    className={s['gonvar-table__row']}
+                    key={`product_${p.product_id}`}
+                  >
                     <td className={s['product-item']}>
                       <div
                         className={s['product-item-container']}
@@ -112,25 +116,34 @@ export const InvoiceProductModal = ({
                           paddingTop: '8px'
                         }}
                       >
-                        <Image
-                          src={'/images/profile/default_img.png'}
-                          width={50}
-                          height={50}
-                        />
+                        {
+                          product_image === '' ?
+                            <Image
+                              src={'/images/profile/default_img.png'}
+                              width={50}
+                              height={50}
+                            />
+                            :
+                            <Image
+                              src={product_image}
+                              width={50}
+                              height={50}
+                            />
+                        }
                         <p style={{
                           margin: '0'
-                        }}>{p.product_name}</p>
+                        }}>{product_name}</p>
                       </div>
                     </td>
                     <td style={{
                       textAlign: 'center'
                     }}>
-                      {p.price}
+                      {price}
                     </td>
                     <td style={{
                       textAlign: 'center'
                     }}>
-                      {p.count}
+                      {count}
                     </td>
                   </tr>)
                 })
