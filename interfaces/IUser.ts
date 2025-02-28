@@ -114,4 +114,8 @@ export interface Role {
   request?: number;
   report?: number;
   download?: number;
+  abm_products?: number;
+  abm_sellers?: number;
+  create_access_invoices?: number;
+  create_products_invoices?: number;
 }

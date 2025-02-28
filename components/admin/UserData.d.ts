@@ -92,8 +92,8 @@ export type RoleValue =
   | 'tickets_list'
   | 'memberships_list'
   | 'distributors'
-  | 'subscriptions'
-  | 'active_memberships';
+  | 'active_memberships'
+  | 'subscriptions';
 
 export interface Role {
   id: number;
@@ -108,4 +108,8 @@ export interface Role {
   request?: number;
   report?: number;
   download: number | null;
+  abm_products?: number;
+  abm_sellers?: number;
+  create_access_invoices?: number;
+  create_products_invoices?: number;
 }

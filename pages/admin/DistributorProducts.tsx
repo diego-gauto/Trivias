@@ -1,11 +1,11 @@
 // import Distributors from '../../components/admin/Distributors/Distributors';
-import { DistributorsNew } from '../../components/admin/Distributors/DistributorsNew';
+import { DistributorsProducts } from '../../components/admin/Distributors/DistributorsProducts';
 import { MainContain } from '../../screens/Styles.styled';
 
 const DistributorsView = () => {
   return (
     <MainContain>
-      <DistributorsNew />
+      <DistributorsProducts />
     </MainContain>
   );
 };

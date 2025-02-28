@@ -9,6 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
 import { Container, Text } from "./SideBar.styled";
 import { IUserData } from './UserData';
+import { getGenericQueryResponse } from "../api/admin";
 
 const SideBar = ({ show, onHide }: any) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
@@ -29,6 +30,10 @@ const SideBar = ({ show, onHide }: any) => {
   const [isComments, setIsComments] = useState<boolean>(false);
   const [isSubscriptions, setIsSubscriptions] = useState<boolean>(false);
   const [isActiveMemberships, setIsActiveMemberships] = useState<boolean>(false);
+  const [isDistributors, setIsDistributors] = useState<boolean>(false);
+  const [isDistributorABMSellers, setIsDistributorABMSellers] = useState(false);
+  const [isDistributorABMProducts, setIsDistributorABMProducts] = useState(false);
+  const [isDistributorUser, setIsDistributorUser] = useState(false);
   const [index, setIndex] = useState(0);
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -81,6 +86,15 @@ const SideBar = ({ show, onHide }: any) => {
             setIsSubscriptions(true);
           if (role.role === 'active_memberships' && changeValue(role.view))
             setIsActiveMemberships(true);
+          if (role.role === 'distributors' && changeValue(role.view)) {
+            setIsDistributors(true);
+            if (`${role.abm_products}` === '1') {
+              setIsDistributorABMProducts(true);
+            }
+            if (`${role.abm_sellers}` === '1') {
+              setIsDistributorABMSellers(true);
+            }
+          }
         });
         setUserData(userDataAuth.user);
         setLoading(false);
@@ -214,12 +228,43 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(20);
       }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'DistributorProducts'
+      ) {
+        setIndex(21);
+      }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'DistributorSellers'
+      ) {
+        setIndex(22);
+      }
     }, []);
   } catch (error) { }
 
   useEffect(() => {
-
+    checkIfIsDistributor();
   }, []);
+
+  const checkIfIsDistributor = async () => {
+    try {
+      setLoading(true);
+      const email = localStorage.getItem('email') || '';
+      const query = `SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id  WHERE u.email LIKE '${email}';`;
+      console.log({ query });
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as { distributor_id: number }[];
+      if (data.length > 0) {
+        setIsDistributorUser(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  }
 
   if (loading) {
     return (
@@ -466,20 +511,71 @@ const SideBar = ({ show, onHide }: any) => {
                   Team Members
                 </li>
               </Link>
-              <Link href='/admin/Distributors'>
-                <li
-                  style={{ color: index == 20 ? '#ffa500' : '#fff' }}
-                  onClick={() => {
-                    setIndex(20);
-                    onHide();
-                  }}
-                >
-                  Distributors
-                </li>
-              </Link>
             </ul>
           </>
         )}
+        {
+          (isSuperAdmin || isDistributors || isDistributorUser) && (
+            <>
+              <Text>Distributors</Text>
+              <ul>
+                <Link href='/admin/Distributors'>
+                  <li
+                    style={{ color: index == 20 ? '#ffa500' : '#fff' }}
+                    onClick={() => {
+                      setIndex(20);
+                      onHide();
+                    }}
+                  >
+                    Distributors
+                  </li>
+                </Link>
+                {
+                  (isDistributorABMProducts || isSuperAdmin) &&
+                  <Link href='/admin/DistributorProducts'>
+                    <li
+                      style={{ color: index == 21 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(21);
+                        onHide();
+                      }}
+                    >
+                      Products
+                    </li>
+                  </Link>
+                }
+                {
+                  (isDistributorABMSellers || isSuperAdmin) &&
+                  <Link href='/admin/DistributorSellers'>
+                    <li
+                      style={{ color: index == 22 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(22);
+                        onHide();
+                      }}
+                    >
+                      Sellers
+                    </li>
+                  </Link>
+                }
+                {
+                  (isDistributorUser) &&
+                  <Link href='/admin/DistributorDetails'>
+                    <li
+                      style={{ color: index == 23 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(23);
+                        onHide();
+                      }}
+                    >
+                      History details
+                    </li>
+                  </Link>
+                }
+              </ul>
+            </>
+          )
+        }
         {(isSuperAdmin || (isSubscriptions || isActiveMemberships)) && (
           <>
             <Text>Statistics</Text>

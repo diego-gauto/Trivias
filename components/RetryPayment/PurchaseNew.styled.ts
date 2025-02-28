@@ -421,6 +421,8 @@ export const PurchaseNewContainer = styled.div`
     padding-inline: 20px;
     padding-block: 20px;
     width: 100%;
+    gap: 16px;
+    flex-direction: column;
     .box {
       width: 100%;
       max-width: 450px;
@@ -578,6 +580,47 @@ export const PurchaseNewContainer = styled.div`
           max-height: 100%;
         }
       }
+    }
+    .code-input { 
+      border-radius: 20px;
+      padding: 20px;
+      background-color: #942ced4d;
+      width: 100%;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      .label {
+        font-size: 14px;
+        text-align: center;
+        margin: 0;
+      }
+      .form-container {
+        display: grid;
+        grid-template-columns: 1fr 41px;
+        padding: 0 8px;
+        gap: 8px;
+      }
+      .form-input-text {
+        border: none;
+        justify-self: center;
+        min-width: 190px;
+        width: 100%;
+      }
+      .send-button {
+        background-color:rgb(148, 44, 237);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .send-button:hover {
+        background-color: rgba(148, 44, 237, 0.75);
+      }
+
     }
   }
   .white-space {
@@ -775,6 +818,7 @@ export const PurchaseNewContainer = styled.div`
     }
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
+      align-items: center;
     }
   }
 

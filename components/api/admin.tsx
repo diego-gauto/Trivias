@@ -48,6 +48,10 @@ export interface AdminType {
   report?: 0 | 1;
   download?: 0 | 1;
   forms?: string;
+  abm_products?: number
+  abm_sellers?: number
+  create_access_invoices?: 0 | 1
+  create_products_invoices?: 0 | 1
 }
 
 export const getAdmins = async () => {

@@ -33,6 +33,12 @@ import { getSubscription } from "./PurchaseNewFunctions";
 import { FemsaCreateOrderResponse } from "./FemsaOxxo";
 import { createFemsaOxxoCustomer } from "../api/auth";
 
+// import { Modal } from '../../admin/DefaultComponents/Modal';
+import { Modal } from '../admin/DefaultComponents/Modal';
+import { ActivateCodeModal } from './ActivateCodeModal';
+import { MdNavigateNext } from "react-icons/md";
+import { validateCode } from "./Queries";
+
 declare let window: any;
 
 interface ICardUser {
@@ -82,6 +88,10 @@ export const PurchaseNew2 = () => {
   const [paypal, setPaypal] = useState(false);
   const [coupons, setCoupons] = useState<any>([]);
   const [terms, setTerms] = useState(false);
+
+  const [activationCode, setActivationCode] = useState('');
+  const [resultOfActivationCode, setResultOfActivationCode] = useState<ICodeResponse | null>(null);
+  const [isActivationButtonUsed, setIsActivationButtonUsed] = useState(false);
 
   const courseId = new URLSearchParams(window.location.search);
   let idC = courseId.get('id');
@@ -763,6 +773,17 @@ export const PurchaseNew2 = () => {
     return <div />;
   }
 
+  function formatString(input: string): string {
+    // Eliminar espacios previos y convertir a mayúsculas
+    const cleanedInput = input.replace(/\s+/g, '').toUpperCase().slice(0, 12);
+
+    // Dividir en bloques de 4 caracteres
+    const chunks = cleanedInput.match(/.{1,4}/g) || [];
+
+    // Unir los bloques con espacios
+    return chunks.join(' ');
+  }
+
   return (
     <>
       <PurchaseNewContainer>
@@ -866,18 +887,6 @@ export const PurchaseNew2 = () => {
                 >
                   Confirmar compra
                 </button>
-                {
-                  /*
-                <button
-                  className={addPayment ? 'fade' : ''}
-                  onClick={(e) => {
-                    falsePay();
-                  }}
-                >
-                  Simular compra
-                </button>
-                    */
-                }
               </>
             )}
             {
@@ -1324,7 +1333,64 @@ export const PurchaseNew2 = () => {
             <div className='bg'></div>
             <img className="image" src="/images/purchase/neworange.png" alt="" />
           </div>
+          <div className="code-input">
+            <h4 className="label">Si cuentas con un codigo, introducelo aquí</h4>
+            <div className="form-container">
+              <input
+                type="text"
+                value={formatString(activationCode)}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  setActivationCode(value);
+                }}
+                maxLength={14}
+                className="form-input-text"
+              />
+              <div
+                className="send-button"
+                onClick={async (e) => {
+                  if (isActivationButtonUsed) {
+                    console.log('El botón no puede ser pulsado 2 veces al mismo tiempo');
+                    return;
+                  }
+
+                  setIsActivationButtonUsed(true);
+                  const code = [...activationCode.toLowerCase()].filter(c => c !== ' ').join('');
+                  const userId = user.user_id;
+
+                  const result = await validateCode(code, userId);
+                  setResultOfActivationCode(result);
+                  setIsActivationButtonUsed(false);
+                }}
+              >
+                <MdNavigateNext
+                  size={25}
+                  color="white"
+                />
+              </div>
+            </div>
+
+          </div>
         </div>
+        {
+          resultOfActivationCode !== null &&
+          <Modal
+            child={<ActivateCodeModal
+              codeRequestResult={resultOfActivationCode.status}
+              suscriptionType={
+                resultOfActivationCode.subscriptionType
+              }
+              onClose={() => {
+                if (resultOfActivationCode.status === 'available') {
+                  window.location.href = '/preview';
+                }
+                setResultOfActivationCode(null);
+              }}
+            />}
+            show={resultOfActivationCode !== null}
+            compactSize={false}
+          />
+        }
       </PurchaseNewContainer>
     </>
   );
