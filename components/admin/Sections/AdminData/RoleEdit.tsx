@@ -237,22 +237,30 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
       const tasks = role.tasks.map(mapFunction);
       const active = adminType.view == 1 ? true : false;
-      let homeworkCourseIds = undefined;
-      let commentsCourseIds = undefined;
-      let formsIds = undefined;
+      let homeworkCourseIds: number[] = [];
+      let commentsCourseIds: number[] = [];
+      let formsIds: number[] = [];
 
       if (adminType.role === 'homeworks') {
-        homeworkCourseIds = adminType.courses
-          ?.split(',')
-          .map((courseId) => parseInt(courseId));
+        const coursesIdList = adminType.courses || '';
+        homeworkCourseIds = coursesIdList
+          .split(',')
+          .map((courseId) => parseInt(courseId))
+          .filter(formId => !isNaN(formId));
         setHomeworksCourseIds(homeworkCourseIds || []);
       } else if (adminType.role === 'comments') {
-        commentsCourseIds = adminType.courses
-          ?.split(',')
-          .map((courseId) => parseInt(courseId));
+        const coursesIdList = adminType.courses || '';
+        commentsCourseIds = coursesIdList
+          .split(',')
+          .map((courseId) => parseInt(courseId))
+          .filter(formId => !isNaN(formId));
         setCommentsCourseIds(commentsCourseIds || []);
       } else if (adminType.role === 'forms') {
-        formsIds = adminType.forms?.split(',').map((formId) => parseInt(formId));
+        const formsIdList = adminType.forms || '';
+        formsIds = formsIdList
+          .split(',')
+          .map((formId) => parseInt(formId))
+          .filter(formId => !isNaN(formId));
         setFormIds(formsIds || []);
       }
 
@@ -337,6 +345,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
 
   const handleMultipleIds = (id: number, array: number[], setState: (array: number[]) => void) => {
     let result = [...array];
+    console.log({});
     if (array.includes(id)) {
       const index = array.indexOf(id);
       if (index > -1) {
@@ -345,6 +354,9 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       }
     } else {
       result.push(id);
+      console.log({
+        newIds: result
+      });
       setState(result);
     }
   }
@@ -372,7 +384,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         report: tasks.find(t => t.task === 'Generar Reporte')?.active === true ? 1 : 0,
         download: tasks.find(t => t.task === 'Descargar')?.active === true ? 1 : 0,
         courses: courses?.join(','),
-        forms: forms?.join(','),
+        forms: formIds.join(','),
         request: tasks.find(t => t.task === 'Solicitudes')?.active === true ? 1 : 0,
         abm_products: tasks.find(t => t.task === 'ABM Productos')?.active === true ? 1 : 0,
         abm_sellers: tasks.find(t => t.task === 'ABM Vendedores')?.active === true ? 1 : 0,
@@ -381,7 +393,27 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
       }
     });
 
-    const queries = newRoles.map(role => {
+    const finalRoles = newRoles.map((r) => {
+      if (r.role === 'forms') {
+        return {
+          ...r,
+          forms: formIds.join(',')
+        }
+      } else if (r.role === 'homeworks') {
+        return {
+          ...r,
+          courses: homeworksCourseIds.join(',')
+        }
+      } else if (r.role === 'comments') {
+        return {
+          ...r,
+          courses: commentsCourseIds.join(',')
+        }
+      }
+      return r;
+    })
+
+    const queries = finalRoles.map(role => {
       try {
         return backendRoleEditMethod(role);
       } catch (error) {
@@ -489,6 +521,10 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
                   checked={formIds.includes(form.id)}
                   type='checkbox'
                   onChange={(e) => {
+                    console.log({
+                      id: form.id,
+                      formIds
+                    });
                     handleMultipleIds(form.id, formIds, setFormIds);
                   }}
                 />
