@@ -1,6 +1,8 @@
 // import { useState } from "react";
 
 // import { Background, LoaderContain, LoaderImage } from "../../../screens/Login.styled";
+import { useEffect } from "react";
+
 import styles from "./thankYou-dist.module.css";
 
 const watsapOut = '/images/landing_suscription/whatsapp_outline.png';
@@ -23,15 +25,16 @@ const ThankYouFormDist = () => {
     allCenter,
   } = styles;
 
-  // if (loading) {
-  //   return (
-  //     <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
-  //       <LoaderImage>
-  //         <LoaderContain />
-  //       </LoaderImage>
-  //     </Background>
-  //   );
-  // }
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      const eventKey = "thankYouDistEvent_fired"; // Clave única en sessionStorage
+
+      if (!sessionStorage.getItem(eventKey)) {
+        (window as any).fbq("trackCustom", "FormularioDistEnviado"); // Nombre real del evento
+        sessionStorage.setItem(eventKey, "true"); // Evita que se vuelva a disparar en esta sesión
+      }
+    }
+  }, []);
 
   const redirectToWhatsAppChat = () => {
     const link = 'https://wa.me/525538933134';
