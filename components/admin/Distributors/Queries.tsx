@@ -521,7 +521,7 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
   try {
     const { distributorId, sellerId, products, date } = productInvoice;
     const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
-    const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime());
+    const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime() / 1000);
 
     console.log({ datevalues: date.split("-").map((value) => parseInt(value) || 1) });
 
