@@ -33,9 +33,8 @@ const SideBar = ({ show, onHide }: any) => {
   const [isDistributors, setIsDistributors] = useState<boolean>(false);
   const [isDistributorABMSellers, setIsDistributorABMSellers] = useState(false);
   const [isDistributorABMProducts, setIsDistributorABMProducts] = useState(false);
-  const [isDistributorUser, setIsDistributorUser] = useState(false);
+  const [isDistributorUser, setIsDistributorUser] = useState(true);
   const [index, setIndex] = useState(0);
-  const [userData, setUserData] = useState<IUserData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const changeValue = (value: string) => {
@@ -47,10 +46,10 @@ const SideBar = ({ show, onHide }: any) => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         let user: IUserData = userDataAuth.user;
-        if (user.role === 'user') {
+        if (user.role === 'user' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
-        if (user.roles.length === 0 && user.role !== 'superAdmin') {
+        if (/* user.roles.length === 0 &&  */user.role !== 'superAdmin' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
         user.roles.forEach((role) => {
@@ -96,7 +95,6 @@ const SideBar = ({ show, onHide }: any) => {
             }
           }
         });
-        setUserData(userDataAuth.user);
         setLoading(false);
         if (userDataAuth.user.role === 'superAdmin') {
           setIsSuperAdmin(true);
@@ -241,6 +239,13 @@ const SideBar = ({ show, onHide }: any) => {
         ) == 'DistributorSellers'
       ) {
         setIndex(22);
+      }
+      if (
+        window.location.pathname.substring(
+          window.location.pathname.lastIndexOf('/') + 1,
+        ) == 'DistributorDetails'
+      ) {
+        setIndex(23);
       }
     }, []);
   } catch (error) { }
@@ -517,19 +522,28 @@ const SideBar = ({ show, onHide }: any) => {
         {
           (isSuperAdmin || isDistributors || isDistributorUser) && (
             <>
-              <Text>Distributors</Text>
+              <Text>
+                {
+                  isDistributorUser && (!isDistributors && !isSuperAdmin) ?
+                    'Mi perfil'
+                    : 'Distributors'
+                }
+              </Text>
               <ul>
-                <Link href='/admin/Distributors'>
-                  <li
-                    style={{ color: index == 20 ? '#ffa500' : '#fff' }}
-                    onClick={() => {
-                      setIndex(20);
-                      onHide();
-                    }}
-                  >
-                    Distributors
-                  </li>
-                </Link>
+                {
+                  isDistributors &&
+                  <Link href='/admin/Distributors'>
+                    <li
+                      style={{ color: index == 20 ? '#ffa500' : '#fff' }}
+                      onClick={() => {
+                        setIndex(20);
+                        onHide();
+                      }}
+                    >
+                      Distributors
+                    </li>
+                  </Link>
+                }
                 {
                   (isDistributorABMProducts || isSuperAdmin) &&
                   <Link href='/admin/DistributorProducts'>
@@ -568,7 +582,11 @@ const SideBar = ({ show, onHide }: any) => {
                         onHide();
                       }}
                     >
-                      History details
+                      {
+                        isDistributorUser && (!isDistributors && !isSuperAdmin) ?
+                          'Detalles'
+                          : 'History details'
+                      }
                     </li>
                   </Link>
                 }

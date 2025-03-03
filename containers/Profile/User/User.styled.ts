@@ -733,7 +733,7 @@ export const ProfileMainContainer = styled.div<{
       flex-direction: column;
       gap: 20px;
       background-color: ${(props) =>
-        props.startEdit == false ? '#dad3e5' : '#e4b6e8'};
+    props.startEdit == false ? '#dad3e5' : '#e4b6e8'};
       padding-top: 160px;
       padding-inline: 40px;
       padding-bottom: 40px;
@@ -835,7 +835,7 @@ export const ProfileMainContainer = styled.div<{
         min-width: 45%;
       }
       border-radius: ${(props) =>
-        props.password == false ? '0 0 20px 20px' : '0 0 0 0'};
+    props.password == false ? '0 0 20px 20px' : '0 0 0 0'};
       p {
         margin: 0;
       }
@@ -1235,6 +1235,34 @@ export const PictureContain = styled.div<{
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
+  .change-image {
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 0px 16px;
+    border: 1px solid black;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    text-align: center;
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  .edit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    cursor: pointer;
+  }
   .circle-level {
     position: absolute;
     top: 50%;
@@ -1263,18 +1291,18 @@ export const PictureContain = styled.div<{
       stroke-width: 20px;
       stroke-dasharray: 755;
       ${(props) =>
-        props.reward == 0 &&
-        css<{ progress: number }>`
+    props.reward == 0 &&
+    css<{ progress: number }>`
           stroke-dashoffset: ${(props) => props.progress};
         `}
       ${(props) =>
-        props.reward == 1 &&
-        css<{ timeProgress: number }>`
+    props.reward == 1 &&
+    css<{ timeProgress: number }>`
           stroke-dashoffset: ${(props) => props.timeProgress};
         `}
         ${(props) =>
-        props.reward == 2 &&
-        css<{ certificateProgress: number }>`
+    props.reward == 2 &&
+    css<{ certificateProgress: number }>`
           stroke-dashoffset: ${(props) => props.certificateProgress};
         `}
       stroke-linecap: round;
@@ -1310,14 +1338,8 @@ export const PictureContain = styled.div<{
         display: none;
       }
     }
-    .edit {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      cursor: pointer;
-      .edit-icon {
+
+    .edit-icon {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1337,15 +1359,15 @@ export const PictureContain = styled.div<{
         background-color: #dad3e5;
         border-radius: 100px;
         box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
-        p {
-          font-size: 10px;
+        .p {
+          font-size: 20px;
           margin: 0;
           white-space: nowrap;
           color: #3f1168;
           font-weight: 600;
         }
       }
-    }
+
     .circle-level {
       position: absolute;
       top: 50%;
@@ -1374,18 +1396,18 @@ export const PictureContain = styled.div<{
         stroke-width: 20px;
         stroke-dasharray: 755;
         ${(props) =>
-          props.reward == 0 &&
-          css<{ progress: number }>`
+    props.reward == 0 &&
+    css<{ progress: number }>`
             stroke-dashoffset: ${(props) => props.progress};
           `}
         ${(props) =>
-          props.reward == 1 &&
-          css<{ timeProgress: number }>`
+    props.reward == 1 &&
+    css<{ timeProgress: number }>`
             stroke-dashoffset: ${(props) => props.timeProgress};
           `}
         ${(props) =>
-          props.reward == 2 &&
-          css<{ certificateProgress: number }>`
+    props.reward == 2 &&
+    css<{ certificateProgress: number }>`
             stroke-dashoffset: ${(props) => props.certificateProgress};
           `}
       stroke-linecap: round;
@@ -1431,6 +1453,7 @@ export const ProfileIcon = styled.img<{ edit: any }>`
   border-radius: 50%;
   width: 100%;
   height: auto;
+  /*
   ${(props) =>
     props.edit == true &&
     css`
@@ -1439,6 +1462,7 @@ export const ProfileIcon = styled.img<{ edit: any }>`
       filter: invert(27%) sepia(64%) saturate(2944%) hue-rotate(259deg)
         brightness(90%) contrast(90%);
     `}
+  */
 `;
 export const RewardContainer = styled.div<{ reward: any }>`
   display: flex;
@@ -1477,8 +1501,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
     .reward-containers {
       border-radius: 20px;
       ${(props) =>
-        props.reward == 0 &&
-        css`
+    props.reward == 0 &&
+    css`
           background: linear-gradient(
             135deg,
             #9a2fea 10%,
@@ -1487,13 +1511,13 @@ export const RewardContainer = styled.div<{ reward: any }>`
           );
         `}
       ${(props) =>
-        props.reward == 1 &&
-        css`
+    props.reward == 1 &&
+    css`
           background: linear-gradient(135deg, #9a2fea 10%, #1beb00 100%);
         `}
       ${(props) =>
-        props.reward == 2 &&
-        css`
+    props.reward == 2 &&
+    css`
           background: linear-gradient(60deg, #8f0bee 10%, #059cfe 100%);
         `}
       .extra-info {
@@ -1546,24 +1570,24 @@ export const RewardContainer = styled.div<{ reward: any }>`
           height: 42px;
           width: 24px;
           ${(props) =>
-            props.reward == 0 &&
-            css`
+    props.reward == 0 &&
+    css`
               top: -9px;
               right: 7px;
               transform: rotate(90deg);
               box-shadow: 0 -25px 0 0 #de94e1;
             `}
           ${(props) =>
-            props.reward == 1 &&
-            css`
+    props.reward == 1 &&
+    css`
               bottom: -42px;
               left: 0;
               transform: rotate(0deg);
               box-shadow: 0 -25px 0 0 #e6c4ea;
             `}
           ${(props) =>
-            props.reward == 2 &&
-            css`
+    props.reward == 2 &&
+    css`
               top: 144px;
               left: 0;
               box-shadow: 0 -25px 0 0 #e6c4ea;
@@ -1583,8 +1607,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
         }
 
         ${(props) =>
-          props.reward == 1 &&
-          css`
+    props.reward == 1 &&
+    css`
             .time-container::before {
               content: '';
               position: absolute;
@@ -1619,8 +1643,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
           height: 44px;
           width: 24px;
           ${(props) =>
-            props.reward == 0 &&
-            css`
+    props.reward == 0 &&
+    css`
               top: 144px;
               right: 0px;
               transform: rotate(180deg) scaleY(-1);
@@ -1639,16 +1663,16 @@ export const RewardContainer = styled.div<{ reward: any }>`
               }
             `}
           ${(props) =>
-            props.reward == 1 &&
-            css`
+    props.reward == 1 &&
+    css`
               bottom: -44px;
               right: 0;
               transform: rotate(180deg) scaleY(-1);
               box-shadow: 0 -25px 0 0 #e6c4ea;
             `}
           ${(props) =>
-            props.reward == 2 &&
-            css`
+    props.reward == 2 &&
+    css`
               top: -10px;
               left: 10px;
               transform: rotate(90deg) scaleY(-1);
@@ -1669,18 +1693,18 @@ export const RewardContainer = styled.div<{ reward: any }>`
             gap: 10px;
           }
           ${(props) =>
-            props.reward == 0 &&
-            css`
+    props.reward == 0 &&
+    css`
               border-radius: 20px 20px 0 0;
             `}
           ${(props) =>
-            props.reward == 1 &&
-            css`
+    props.reward == 1 &&
+    css`
               border-radius: 0 0 20px 0;
             `}
           ${(props) =>
-            props.reward != 0 &&
-            css`
+    props.reward != 0 &&
+    css`
               background-color: #e6c4ea;
             `}
           .first-word {
@@ -1705,8 +1729,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
               line-height: 14px;
             }
             ${(props) =>
-              props.reward == 0 &&
-              css`
+    props.reward == 0 &&
+    css`
                 color: white;
               `}
           }
@@ -1718,8 +1742,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
               font-size: 30px;
             }
             ${(props) =>
-              props.reward == 0 &&
-              css`
+    props.reward == 0 &&
+    css`
                 color: white;
               `}
           }
@@ -1742,18 +1766,18 @@ export const RewardContainer = styled.div<{ reward: any }>`
             gap: 10px;
           }
           ${(props) =>
-            props.reward != 1 &&
-            css`
+    props.reward != 1 &&
+    css`
               background-color: #de94e1;
             `}
           ${(props) =>
-            props.reward == 0 &&
-            css`
+    props.reward == 0 &&
+    css`
               border-radius: 0 0 0 20px;
             `}
           ${(props) =>
-            props.reward == 2 &&
-            css`
+    props.reward == 2 &&
+    css`
               border-radius: 0 0 20px 0;
             `}
           .first-word {
@@ -1778,8 +1802,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
               line-height: 14px;
             }
             ${(props) =>
-              props.reward == 1 &&
-              css`
+    props.reward == 1 &&
+    css`
                 color: white;
               `}
           }
@@ -1787,8 +1811,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
             color: #942cec;
             font-size: 36px;
             ${(props) =>
-              props.reward == 1 &&
-              css`
+    props.reward == 1 &&
+    css`
                 color: white;
               `}
             @media (max-width: 1200px) {
@@ -1820,13 +1844,13 @@ export const RewardContainer = styled.div<{ reward: any }>`
           height: 108px;
         }
         ${(props) =>
-          props.reward != 2 &&
-          css`
+    props.reward != 2 &&
+    css`
             background-color: #e6c4ea;
           `}
         ${(props) =>
-          props.reward == 1 &&
-          css`
+    props.reward == 1 &&
+    css`
             border-radius: 0 0 0 20px;
           `}
         .first-word {
@@ -1851,8 +1875,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
             line-height: 14px;
           }
           ${(props) =>
-            props.reward == 2 &&
-            css`
+    props.reward == 2 &&
+    css`
               color: white;
             `}
         }
@@ -1860,8 +1884,8 @@ export const RewardContainer = styled.div<{ reward: any }>`
           color: #942cec;
           font-size: 36px;
           ${(props) =>
-            props.reward == 2 &&
-            css`
+    props.reward == 2 &&
+    css`
               color: white;
             `}
           @media (max-width: 1200px) {
@@ -2254,8 +2278,8 @@ export const HistoryContainer = styled.div<{ addPayment: any }>`
     margin-top: auto;
     gap: 10px;
     ${(props) =>
-      props.addPayment == true &&
-      css`
+    props.addPayment == true &&
+    css`
         margin-top: 20px;
       `}
     .option-dot {
@@ -2314,7 +2338,7 @@ export const PaymentMethodContainer = styled.div<{ add: any }>`
     background-color: #d2aff0;
     padding: 30px;
     border-radius: ${(props) =>
-      props.add == false ? '20px' : '20px 20px 0 0'};
+    props.add == false ? '20px' : '20px 20px 0 0'};
     font-family: 'Montserrat', sans-serif;
     @media (max-width: 1260px) {
       padding: 20px;
