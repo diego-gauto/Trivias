@@ -5,7 +5,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdEdit, MdModeEditOutline } from "react-icons/md";
 
 import { getAuth } from "firebase/auth";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { format, parsePhoneNumberFromString } from "libphonenumber-js";
 
 import { googleLogout } from "@react-oauth/google";
 
@@ -365,6 +365,32 @@ const UserInfo = ({
             <div className='crown'>
               <img src={crownImage} />
             </div>
+            {<div style={{
+              width: '200px',
+              height: '200px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <img
+                src={`${startEdit == true && image !== ''
+                  ? image
+                  : userData
+                    ? userData.photo
+                    : DEFAULT_USER_IMG
+                  }`}
+                alt="Profile Image"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
+              />
+            </div>}
+            {/*
             <ProfileIcon
               onClick={changeImage}
               edit={startEdit}
@@ -375,7 +401,7 @@ const UserInfo = ({
                     ? userData.photo
                     : DEFAULT_USER_IMG
               }
-            ></ProfileIcon>
+            ></ProfileIcon>*/}
             <input
               className='picture'
               type='file'
@@ -386,7 +412,10 @@ const UserInfo = ({
               }}
             />
             {startEdit && (
-              <div className='edit' onClick={changeImage}>
+              <div
+                className='change-image'
+                onClick={changeImage}
+              >
                 <div className='edit-icon'>
                   <MdEdit />
                   {/* <div className="background2" /> */}
@@ -436,7 +465,32 @@ const UserInfo = ({
               timeProgress={timeProgress}
               certificateProgress={certificateProgress}
             >
-              <ProfileIcon
+              {<div style={{
+                width: '200px',
+                height: '200px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <img
+                  src={`${startEdit == true && image !== ''
+                    ? image
+                    : userData
+                      ? userData.photo
+                      : DEFAULT_USER_IMG
+                    }`}
+                  alt="Profile Image"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              </div>}
+              {/*<ProfileIcon
                 onClick={changeImage}
                 edit={startEdit}
                 src={
@@ -446,15 +500,17 @@ const UserInfo = ({
                       ? userData.photo
                       : DEFAULT_USER_IMG
                 }
-              ></ProfileIcon>
+              ></ProfileIcon>*/}
               {startEdit && (
-                <div className='edit' onClick={changeImage}>
+                <div className='change-image' onClick={changeImage}>
                   <div className='edit-icon'>
-                    <MdEdit />
+                    <MdEdit
+                      size={30}
+                    />
                     {/* <div className="background2" /> */}
                   </div>
                   <div className='message'>
-                    <p>Cambiar imagen</p>
+                    <p className='p'>Cambiar imagen</p>
                   </div>
                 </div>
               )}

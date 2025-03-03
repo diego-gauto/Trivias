@@ -52,6 +52,7 @@ import { NotificationContainer } from './Notifications/Notifications.styled';
 import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
 import { IUserData } from '../admin/UserData';
 import { getFirstLinkToAdmin } from './NavBarConstants';
+import { getGenericQueryResponse } from '../api/admin';
 
 interface NotificationByUser {
   notification_id: number;
@@ -76,6 +77,7 @@ interface NotificationByUser {
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isDistributor, setIsDistributor] = useState(false);
   const [hamburger, setHamburger] = useState(false);
   const [ingresarOptionsMenuIsOpen, setIngresarOpetionsMenuIsOpen] =
     useState(false);
@@ -243,6 +245,19 @@ const NavBar = () => {
     setIngresarOpetionsMenuIsOpen(false);
     setNewHamburgerMenuIsOpen(false);
   };
+
+  async function checkIfIsDistributor(user_id: number) {
+    try {
+      const query = `SELECT COUNT(*) AS count FROM distributors AS d WHERE d.user_id = ${user_id};`;
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as { count: number }[];
+      return (data[0]?.count || 0) > 0;
+    } catch (error) {
+      console.error(error);
+    }
+    return false;
+  }
+
   try {
     var userDataAuth: any = useAuth();
 
@@ -280,7 +295,7 @@ const NavBar = () => {
             });
           }
         }
-        const { final_date, level, role, method, type } = userDataAuth.user;
+        const { final_date, level, role, method, type, roles } = userDataAuth.user;
         let diff = Math.round((today - final_date) / 86400);
         const haveNoRecurrentSubscription = [0, 5, 6, 8].includes(level);
         const haveRecurrentSubscription = [1, 4, 7].includes(level) && method === 'conekta';
@@ -289,7 +304,7 @@ const NavBar = () => {
         const isSuperAdmin = role === 'superAdmin';
 
         console.log({
-          final_date, level, role, method, type, diff
+          final_date, level, role, method, type, diff, roles
         });
 
         if (final_date < today) {
@@ -310,6 +325,11 @@ const NavBar = () => {
         if (role === 'admin' || role === 'superAdmin') {
           setIsAdmin(true);
         }
+        checkIfIsDistributor(userDataAuth.user.user_id)
+          .then((value) => {
+            setIsDistributor(value);
+          })
+
         setLoggedIn(true);
       } else {
         if (pathname === '/thankyou') {
@@ -391,6 +411,10 @@ const NavBar = () => {
         router.push('/admin/' + route);
       }
     }
+    if (isDistributor) {
+      router.push('/admin/DistributorDetails');
+    }
+
   };
   const updateNotificationStatus = () => {
     let data = {
@@ -528,7 +552,7 @@ const NavBar = () => {
         >
           Tienda
         </NavText>
-        {loggedIn && isAdmin && (
+        {loggedIn && (isAdmin || isDistributor) && (
           <NavText
             pathname={pathname}
             color={color}
@@ -620,7 +644,13 @@ const NavBar = () => {
             <Link href={PROFILE_PATH}>
               <UserImage>
                 {userData && userData.photo ? (
-                  <img src={userData.photo} />
+                  <img
+                    src={userData.photo}
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                    }}
+                  />
                 ) : (
                   <img src={DEFAULT_USER_IMG} />
                 )}
@@ -802,7 +832,13 @@ const NavBar = () => {
                   }}
                 >
                   {userData && userData.photo ? (
-                    <img src={userData.photo} />
+                    <img
+                      src={userData.photo}
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                      }}
+                    />
                   ) : (
                     <img src={DEFAULT_USER_IMG} />
                   )}
@@ -829,7 +865,7 @@ const NavBar = () => {
                     Mi Perfil
                   </HBList>
                 </Link>
-                {loggedIn && isAdmin && (
+                {loggedIn && (isAdmin || isDistributor) && (
                   <a>
                     <HBList
                       onClick={sendAdminTo}

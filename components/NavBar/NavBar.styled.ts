@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const NavContainer = styled('div')<{ pathname: any; color: any }>`
+export const NavContainer = styled('div') <{ pathname: any; color: any }>`
   z-index: 10;
   display: flex;
   width: 100%;
@@ -71,7 +71,7 @@ export const LogoContain = styled.div`
     display: none;
   }
 `;
-export const NavText = styled('a')<{ pathname: any; color: any }>`
+export const NavText = styled('a') <{ pathname: any; color: any }>`
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -117,7 +117,7 @@ export const HamburgerMenu = styled.img`
   height: 37px;
 `;
 
-export const FloatingMenu = styled('ul')<{ isOpen: boolean }>`
+export const FloatingMenu = styled('ul') <{ isOpen: boolean }>`
   max-height: 0;
   padding: 0;
   transition: 0.05s linear;
@@ -140,7 +140,7 @@ export const FloatingMenu = styled('ul')<{ isOpen: boolean }>`
   top: 65px;
 `;
 
-export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
+export const IngresarOptionsList = styled(FloatingMenu) <{ isOpen: boolean }>`
   width: 130px;
   ${(props) =>
     props.isOpen &&
@@ -149,7 +149,7 @@ export const IngresarOptionsList = styled(FloatingMenu)<{ isOpen: boolean }>`
     `}
 `;
 
-export const HamburgerMenuOptionsList = styled(FloatingMenu)<{
+export const HamburgerMenuOptionsList = styled(FloatingMenu) <{
   isOpen: boolean;
 }>`
   width: 100px;
@@ -173,7 +173,7 @@ export const FloatingMenuItem = styled.li`
   }
 `;
 
-export const ShopDeco = styled('div')<{ color: any }>`
+export const ShopDeco = styled('div') <{ color: any }>`
   color: white;
   border: 1px solid #3f1168;
   border-radius: 100px;
@@ -250,8 +250,8 @@ export const UserContain = styled.div<{ color: any }>`
       font-size: 26px;
       color: #3f1168;
       ${(props) =>
-        props.color === 1 &&
-        css`
+    props.color === 1 &&
+    css`
           color: #dad3e5;
           @media (max-width: 1023px) {
             color: #3f1168;
@@ -297,8 +297,8 @@ export const UserContain = styled.div<{ color: any }>`
       right: 50%;
       transform: translate(50%, -50%);
       ${(props) =>
-        props.color == 1 &&
-        css`
+    props.color == 1 &&
+    css`
           background-color: #3f1168;
           @media (max-width: 1023px) {
             background-color: #dad3e5;
