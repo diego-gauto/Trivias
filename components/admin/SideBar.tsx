@@ -33,7 +33,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isDistributors, setIsDistributors] = useState<boolean>(false);
   const [isDistributorABMSellers, setIsDistributorABMSellers] = useState(false);
   const [isDistributorABMProducts, setIsDistributorABMProducts] = useState(false);
-  const [isDistributorUser, setIsDistributorUser] = useState(true);
+  const [isDistributorUser, setIsDistributorUser] = useState(false);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -258,7 +258,7 @@ const SideBar = ({ show, onHide }: any) => {
     try {
       setLoading(true);
       const email = localStorage.getItem('email') || '';
-      const query = `SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id  WHERE u.email LIKE '${email}';`;
+      const query = `SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id WHERE u.email LIKE '${email}';`;
       console.log({ query });
       const response = await getGenericQueryResponse(query);
       const data = response.data.data as { distributor_id: number }[];
