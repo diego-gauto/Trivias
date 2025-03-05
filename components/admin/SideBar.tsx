@@ -531,7 +531,7 @@ const SideBar = ({ show, onHide }: any) => {
               </Text>
               <ul>
                 {
-                  isDistributors &&
+                  (isDistributors || isSuperAdmin) &&
                   <Link href='/admin/Distributors'>
                     <li
                       style={{ color: index == 20 ? '#ffa500' : '#fff' }}
