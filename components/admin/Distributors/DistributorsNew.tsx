@@ -27,7 +27,7 @@ import { InvoiceProductModal } from './InvoiceProductModal';
 import { CreateInvoiceProductModal } from './CreateInvoiceProductModal';
 import { UpdateDistributorModal } from './UpdateDistributorModal';
 
-type MainSection = 'distributors' | 'common-users' | 'sells';
+type MainSection = 'distributors' | 'common-users';
 
 type DistributorsSubSection = 'distributors-list' | 'distributor-details';
 
@@ -37,6 +37,8 @@ type EntityParams = {
   offset: number,
   count: number,
 }
+
+
 
 function createAccessInvoiceDefaultValue(distributorId: number, adminId: number): IAccessInvoice {
   return {
@@ -119,7 +121,7 @@ export const DistributorsNew = () => {
   const [newProductInvoice, setNewProductInvoice] = useState<IProductInvoice>(createProductInvoiceDefaultValue(0, 0));
 
   const [inputValue, setInputValue] = useState<string>('');
-
+  const [debouncedInputValue, setDebouncedInputValue] = useState<string>('');
   const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
 
   const [showAddDistributorButton, setShowAddDistributorButton] = useState(true);
@@ -150,6 +152,31 @@ export const DistributorsNew = () => {
       console.error(error);
     }
   }, [commonUsersParams.offset]);
+
+
+  useEffect(() => {
+    // Establecer un temporizador de 1 segundo antes de actualizar `debouncedInputValue`
+    const handler = setTimeout(() => {
+      setDebouncedInputValue(inputValue);
+    }, 1000);
+
+    // Limpiar el temporizador si el usuario sigue escribiendo
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue]);
+
+  useEffect(() => {
+    try {
+      if (mainSection === 'distributors') {
+        refreshDistributorsList();
+      } else if (mainSection === 'common-users') {
+        refreshNormalUsersList();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [debouncedInputValue]);
 
   async function getUserAccessRoleByDB() {
     try {
@@ -235,9 +262,12 @@ export const DistributorsNew = () => {
   };
 
   async function tryToMakeUserDistributor(user_id: number) {
+    // Actualizar el listado de distribuidores
     const canCreateDistributor = await createANewDistributor(user_id, adminId);
     if (canCreateDistributor) {
       setCanMakeUserADistributor(true);
+      refreshDistributorIds();
+      refreshDistributorsList();
     } else {
       setCanMakeUserADistributor(false);
     }
@@ -311,6 +341,7 @@ export const DistributorsNew = () => {
                   onChange={(e) => {
                     const { value } = e.target;
                     setInputValue(value);
+                    // TODO: Agregar el filtrado con lag
                   }}
                 />
               </div>
@@ -318,11 +349,13 @@ export const DistributorsNew = () => {
                 <div
                   className={styles['search-bar-element']}
                   onClick={(e) => {
+                    /*
                     if (mainSection === 'distributors') {
                       refreshDistributorsList();
                     } else if (mainSection === 'common-users') {
                       refreshNormalUsersList();
                     }
+                      */
                   }}
                 >
                   <CiFilter
@@ -902,37 +935,6 @@ export const DistributorsNew = () => {
                     Regresar a usuarios
                   </button>
                 </div>
-              </div>
-            </div>
-          }
-          {
-            mainSection === 'sells' &&
-            <>
-              <div className={styles['sells-section']}>
-                <h2 className={styles['content-title']}>Listado de ventas</h2>
-                <div className={styles['pagination-section']}>
-                  <Pagination
-                    changePage={changePageCommonUsersList}
-                    currentPage={commonUsersParams.offset / 100}
-                    totalPage={Math.ceil(commonUsersParams.count / 100)}
-                  />
-                </div>
-              </div>
-            </>
-          }
-          {
-            mainSection === 'sells' &&
-            <div style={{
-              display: 'none',
-              justifyContent: 'center',
-              padding: '64px 16px',
-              fontWeight: '600',
-              backgroundColor: 'rgb(230, 230, 230)',
-              borderRadius: '32px'
-            }}>
-              <div style={{
-              }}>
-                Pendiente
               </div>
             </div>
           }
