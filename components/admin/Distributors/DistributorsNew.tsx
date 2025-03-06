@@ -129,6 +129,8 @@ export const DistributorsNew = () => {
   const [adminAccess, setAdminAccess] = useState<IAdminDistributorsRole>(createAdminDistributorsRole());
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
+  const [isFilterParamsActivated, setIsFilterParamsActivated] = useState(false);
+
   useEffect(() => {
     refreshDistributorIds();
     getAdminId();
@@ -152,7 +154,6 @@ export const DistributorsNew = () => {
       console.error(error);
     }
   }, [commonUsersParams.offset]);
-
 
   useEffect(() => {
     // Establecer un temporizador de 1 segundo antes de actualizar `debouncedInputValue`
@@ -349,13 +350,19 @@ export const DistributorsNew = () => {
                 <div
                   className={styles['search-bar-element']}
                   onClick={(e) => {
-                    /*
-                    if (mainSection === 'distributors') {
+                    // TODO: Sustituir comportamiento del filtrado
+
+                    /*if (mainSection === 'distributors') {
                       refreshDistributorsList();
                     } else if (mainSection === 'common-users') {
                       refreshNormalUsersList();
+                    }*/
+                    setIsFilterParamsActivated(!isFilterParamsActivated);
+                    if (isFilterParamsActivated === false) {
+
+                    } else {
+
                     }
-                      */
                   }}
                 >
                   <CiFilter
@@ -430,6 +437,129 @@ export const DistributorsNew = () => {
             </>
           }
         </div>
+        {
+          (isFilterParamsActivated && mainSection === 'distributors') &&
+          <div className={styles['filters-params']}>
+            <div className={styles['pair-params-container']}>
+              <div className="mb-3">
+                <label htmlFor="codigoPostal" className="form-label">Código Postal</label>
+                <select
+                  className="form-select"
+                  id="codigoPostal"
+                >
+                  <option selected>Seleccione un código postal</option>
+                  <option value="12345">12345</option>
+                  <option value="67890">67890</option>
+                  <option value="54321">54321</option>
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="estado" className="form-label">Estado</label>
+                <select className="form-select" id="estado">
+                  <option selected>Seleccione un estado</option>
+                  <option value="CDMX">Ciudad de México</option>
+                  <option value="Jalisco">Jalisco</option>
+                  <option value="Nuevo Leon">Nuevo León</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={styles['pair-params-container']} >
+              <div className="mb-3">
+                <label htmlFor="precioMin" className="form-label">Monto mínimo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMin"
+                  placeholder="Ingrese el monto mínimo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="precioMax" className="form-label">Monto máximo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMax"
+                  placeholder="Ingrese el monto máximo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+            </div>
+          </div>
+        }
+        {
+          (isFilterParamsActivated && mainSection === 'common-users') &&
+          <div className={styles['filters-params']}>
+            <div className={styles['pair-params-container']}>
+              <div className="mb-3">
+                <label htmlFor="numeroCelular" className="form-label">Número de celular</label>
+                <input
+                  type="tel"
+                  id="numeroCelular"
+
+                />
+                <select
+                  className="form-select"
+                  id="codigoPostal"
+                >
+                  <option selected>Seleccione un código postal</option>
+                  <option value="12345">12345</option>
+                  <option value="67890">67890</option>
+                  <option value="54321">54321</option>
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="estado" className="form-label">Estado</label>
+                <select className="form-select" id="estado">
+                  <option selected>Seleccione un estado</option>
+                  <option value="CDMX">Ciudad de México</option>
+                  <option value="Jalisco">Jalisco</option>
+                  <option value="Nuevo Leon">Nuevo León</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={styles['pair-params-container']} >
+              <div className="mb-3">
+                <label htmlFor="precioMin" className="form-label">Monto mínimo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMin"
+                  placeholder="Ingrese el monto mínimo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="precioMax" className="form-label">Monto máximo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMax"
+                  placeholder="Ingrese el monto máximo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+            </div>
+          </div>
+        }
         {
           selectedDistributor !== null &&
           <div className={styles['sections-container']}>
