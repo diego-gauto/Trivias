@@ -7,9 +7,9 @@ import router from "next/router";
 
 import { useAuth } from "../../hooks/useAuth";
 import { Background, LoaderContain, LoaderImage } from "../../screens/Login.styled";
-import { Container, Text } from "./SideBar.styled";
-import { IUserData } from './UserData';
 import { getGenericQueryResponse } from "../api/admin";
+import { Container, Text } from "./SideBar.styled";
+import { IUserData } from "./UserData";
 
 const SideBar = ({ show, onHide }: any) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const SideBar = ({ show, onHide }: any) => {
         if (user.role === 'user' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
-        if (/* user.roles.length === 0 &&  */user.role !== 'superAdmin' && !isDistributorUser) {
+        if (user.roles.length === 0 && user.role !== 'superAdmin' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
         user.roles.forEach((role) => {
