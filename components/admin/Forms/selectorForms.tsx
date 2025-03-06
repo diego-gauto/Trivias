@@ -77,7 +77,7 @@ const SelectorForms = () => {
         canView: role?.view === 1,
         canEdit: role?.edit === 1,
         canCreate: role?.create === 1,
-        formIdList: role?.forms ? role.forms.split(', ').map(id => parseInt(id)) : []
+        formIdList: role?.forms ? role.forms.split(',').map(id => parseInt(id)) : []
       });
       // Role level
       const userLevelQuery = generateUserRolesLevelQuery(userId);

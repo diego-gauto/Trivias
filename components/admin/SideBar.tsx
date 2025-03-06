@@ -49,7 +49,7 @@ const SideBar = ({ show, onHide }: any) => {
         if (user.role === 'user' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
-        if (user.roles.length === 0 && user.role !== 'superAdmin' && !isDistributorUser) {
+        if (user.role === 'admin' && user.roles.length === 0) {
           router.push({ pathname: '/' });
         }
         user.roles.forEach((role) => {
