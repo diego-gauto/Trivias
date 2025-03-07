@@ -92,7 +92,10 @@ export const UpdateDistributorModal = ({
                       origin_state: s
                     });
                   }
-                  return <option value={s}>
+                  return <option
+                    value={s}
+                    key={`origin_state_${s}`}
+                  >
                     {s}
                   </option>
                 })
