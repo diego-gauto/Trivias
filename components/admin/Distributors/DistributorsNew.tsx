@@ -702,10 +702,10 @@ export const DistributorsNew = () => {
                     <thead className={styles['gonvar-table__thead']}>
                       <tr className={styles['gonvar-table__row']}>
                         <th className={styles['gonvar-table__th']}>Distribuidor</th>
-                        <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                        <th className={styles['gonvar-table__th']}>Número de celular</th>
-                        <th className={styles['gonvar-table__th']}>Estado de origen</th>
-                        <th className={styles['gonvar-table__th']}>Codigo postal</th>
+                        <th className={styles['gonvar-table__th']}>Email</th>
+                        <th className={styles['gonvar-table__th']}>Celular</th>
+                        <th className={styles['gonvar-table__th']}>Estado</th>
+                        <th className={styles['gonvar-table__th']}>CP</th>
                         <th className={styles['gonvar-table__th']}>Inversión</th>
                         <th className={styles['gonvar-table__th']}>Acciones</th>
                       </tr>
@@ -761,7 +761,7 @@ export const DistributorsNew = () => {
                                     refreshProductHistoryById(d.distributor_id);
                                   }}
                                 >
-                                  Ver perfil
+                                  Ver
                                 </button>
                                 <button
                                   className={styles['gonvar-table__button']}
@@ -770,7 +770,7 @@ export const DistributorsNew = () => {
                                     setShowUpdateDistributorModal(true);
                                   }}
                                 >
-                                  Actualizar
+                                  Editar
                                 </button>
                               </div>
 
@@ -1054,10 +1054,10 @@ export const DistributorsNew = () => {
                     <thead className={styles['gonvar-table__thead']}>
                       <tr className={styles['gonvar-table__row']}>
                         <th className={styles['gonvar-table__th']}>Nombre</th>
-                        <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                        <th className={styles['gonvar-table__th']}>Número de celular</th>
+                        <th className={styles['gonvar-table__th']}>Email</th>
+                        <th className={styles['gonvar-table__th']}>Celular</th>
                         <th className={styles['gonvar-table__th']}>Pais</th>
-                        <th className={styles['gonvar-table__th']}>Estado de origen</th>
+                        <th className={styles['gonvar-table__th']}>Estado</th>
                         <th className={styles['gonvar-table__th']}>Acciones</th>
                       </tr>
                     </thead>
@@ -1069,10 +1069,18 @@ export const DistributorsNew = () => {
                             key={`user_${i}`}
                           >
                             <td className={styles['gonvar-table__data']}>
-                              {cu.name}
+                              {
+                                cu.name.length > 15 ?
+                                  `${cu.name.slice(0, 15)}...`
+                                  : cu.name
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.email}
+                              {
+                                cu.email.length > 15 ?
+                                  `${cu.email.slice(0, 15)}...`
+                                  : cu.email
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
                               {cu.phone_number}
@@ -1093,7 +1101,7 @@ export const DistributorsNew = () => {
                                     tryToMakeUserDistributor(cu.user_id);
                                   }}
                                 >
-                                  Hacer distribuidor
+                                  Asignar
                                 </button>
                               }
                               {
@@ -1107,7 +1115,7 @@ export const DistributorsNew = () => {
                                   userSelect: 'none',
                                   fontSize: '12px'
                                 }}>
-                                  Es distribuidor
+                                  Listo
                                 </p>
                               }
                             </td>
@@ -1280,6 +1288,7 @@ export const DistributorsNew = () => {
             onUpdate={(success) => {
               if (success) {
                 refreshDistributorsList();
+                refreshPostalCodesFromDistributors();
               }
             }}
           />}

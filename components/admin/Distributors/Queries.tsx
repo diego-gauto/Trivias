@@ -170,7 +170,6 @@ export const getDistributorById = async (id: number): Promise<IDistributor | nul
   return null;
 }
 
-// TODO: cambiar los where del count
 export const getAllDistributorUsersCount = async (input: string, params: IDistributorFilterParams): Promise<number> => {
   try {
     const query = `select count(*) as count
