@@ -45,19 +45,69 @@ export const getAllAdmins = async (): Promise<IAdmin[]> => {
   return [];
 }
 
-export const getAllDistributorUsersArray = async (offset: number, input: string): Promise<IDistributor[]> => {
+const getWhereConditionsForDistributorsQuery = (input: string, params: IDistributorFilterParams) => {
+  const { postal_code, origin_state, minAmount, maxAmount } = params;
+  let amountRangeConditions: string[] = [];
+
+  if (minAmount !== '') {
+    amountRangeConditions.push(`COALESCE(t1.total_amount, 0) > ${minAmount}`);
+  }
+  if (maxAmount !== '') {
+    amountRangeConditions.push(`COALESCE(t1.total_amount, 0) < ${maxAmount}`);
+  }
+
+  const amountCondition = amountRangeConditions.length > 0 ? `(${amountRangeConditions.join(' OR ')})` : '';
+  const allConditions: string[] = [];
+
+  if (postal_code !== '') {
+    allConditions.push(`d.postal_code = '${postal_code}'`);
+  }
+  if (origin_state !== '') {
+    allConditions.push(`u.origin_state = '${origin_state}'`);
+  }
+
+  if (amountCondition !== '') {
+    allConditions.push(amountCondition);
+  }
+
+  if (input !== '') {
+    allConditions.push(`(u.email LIKE '${input}%' OR CONCAT(u.name, ' ', u.last_name) LIKE '${input}%')`);
+  }
+
+  return allConditions.length === 0 ? '' : `WHERE ${allConditions.join('\n AND ')}`;
+}
+
+export const getAllDistributorUsersArray = async (offset: number, input: string, params: IDistributorFilterParams): Promise<IDistributor[]> => {
   try {
-    const query = `select d.distributor_id, concat(u.name, ' ', u.last_name) as name, 
-        u.phone_number, u.photo, unix_timestamp(u.created_at) as user_created_at, 
-        unix_timestamp(d.created_at) as distributor_created_at, d.admin_user_id, 
-        u.country, ifnull(u.email, '') as email, ifnull(u.origin_state, '') as origin_state,
-        ifnull(d.postal_code, '') as postal_code, u.id as user_id
-        from distributors as d
-        inner join users as u on u.id = d.user_id
-        where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%'
-        order by d.distributor_id
-        limit 100 offset ${offset};`;
-    const response = await getGenericQueryResponse(query);
+    const query2 = `SELECT 
+          d.distributor_id, 
+          CONCAT(u.name, ' ', u.last_name) AS name, 
+          u.phone_number, 
+          u.photo, 
+          UNIX_TIMESTAMP(u.created_at) AS user_created_at, 
+          UNIX_TIMESTAMP(d.created_at) AS distributor_created_at, 
+          d.admin_user_id, 
+          u.country, 
+          IFNULL(u.email, '') AS email, 
+          IFNULL(u.origin_state, '') AS origin_state, 
+          IFNULL(d.postal_code, '') AS postal_code, 
+          u.id AS user_id,
+          COALESCE(t1.total_amount, 0) AS total_sales
+      FROM distributors AS d
+      INNER JOIN users AS u ON u.id = d.user_id
+      LEFT JOIN (
+          -- Subconsulta que calcula el total de ventas por distribuidor
+          SELECT cs.distributor_id, SUM(csd.amount * csd.count) AS total_amount
+          FROM code_sells AS cs
+          INNER JOIN code_sell_details AS csd ON csd.code_sell_id = cs.code_sell_id
+          WHERE csd.count > 0
+          GROUP BY cs.distributor_id
+      ) AS t1 ON d.distributor_id = t1.distributor_id
+      ${getWhereConditionsForDistributorsQuery(input, params)}
+      ORDER BY d.distributor_id
+      LIMIT 100 OFFSET ${offset};`;
+    console.log({ query2 });
+    const response = await getGenericQueryResponse(query2);
     const data = response.data.data as IDistributor[];
     return data;
   } catch (error) {
@@ -120,12 +170,13 @@ export const getDistributorById = async (id: number): Promise<IDistributor | nul
   return null;
 }
 
-export const getAllDistributorUsersCount = async (input: string): Promise<number> => {
+export const getAllDistributorUsersCount = async (input: string, params: IDistributorFilterParams): Promise<number> => {
   try {
     const query = `select count(*) as count
       from distributors as d
       inner join users as u on u.id = d.user_id
-      where u.email like '${input}%' or concat(u.name, ' ', u.last_name) like '${input}%';`;
+      ${getWhereConditionsForDistributorsQuery(input, params)};`;
+    console.log({ query });
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as { count: number }[];
     return data[0]?.count || 0;
@@ -156,7 +207,6 @@ export const getAllUsersArray = async (offset: number, input: string): Promise<I
       where email like '${input}%' or concat(name, ' ', last_name) like '${input}%'
       order by id
       limit 100 offset ${offset};`;
-    console.log({ query });
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as IUser[];
     return data;
@@ -454,7 +504,6 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
 
 export const getProductHistoryByDistributorId = async (distributorId: number): Promise<IProductSellHistory[]> => {
   try {
-    // CAST(columna_bigint AS SIGNED) AS columna_int
     const query = `SELECT ps.seller_id, distributor_id, CAST(sell_at AS SIGNED) AS sell_at, p2.product_sell_id, 
     p1.product_id, count, price, p1.name AS product_name, p1.image AS product_image, 
     s.email AS seller_email 
@@ -465,8 +514,6 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
     WHERE ps.distributor_id = ${distributorId};`;
     const response = await getGenericQueryResponse(query);
     const result = response.data.data as IProductHistoryRecord[];
-
-    console.log({ result });
 
     const productSellIds = [...new Set(result.map(ps => ps.product_sell_id))]
 
@@ -488,8 +535,6 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
         });
 
         const sellAtWithFormat = new Date(parseInt(sell_at) * 1000);
-
-        console.log({ sellAtWithFormat });
 
         const productCount = products
           .map(p => p.count)
@@ -522,13 +567,8 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
     const { distributorId, sellerId, products, date } = productInvoice;
     const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
     const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime() / 1000);
-
-    console.log({ datevalues: date.split("-").map((value) => parseInt(value) || 1) });
-
     const createProductSellQuery = `INSERT INTO product_sells (seller_id, distributor_id, sell_at) 
       VALUES (${sellerId}, ${distributorId}, ${sellAt})`;
-
-    console.log({ createProductSellQuery });
 
     const createProductSellResponse = await postGenericQueryResponse(createProductSellQuery);
     const productSellId = createProductSellResponse.data.data.insertId;
@@ -546,7 +586,6 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
     }
 
     createProductsBySellQuery += values.join(', ') + ';';
-    console.log({ createProductsBySellQuery });
     await postGenericQueryResponse(createProductsBySellQuery);
     return true;
   } catch (error) {
@@ -734,7 +773,6 @@ export const getIsSuperAdmin = async (email: string) => {
   try {
     const query = `SELECT u.role FROM users AS u WHERE u.email LIKE '${email}';`;
     const response = await getGenericQueryResponse(query);
-    console.log({ query });
     const data = response.data.data[0] as { role: string } | undefined;
     if (data === undefined) {
       return false;
@@ -744,4 +782,16 @@ export const getIsSuperAdmin = async (email: string) => {
     console.error(error);
     return false;
   }
+}
+
+export const getAllPostalCodesFromDistributors = async () => {
+  try {
+    const query = `SELECT DISTINCT postal_code FROM distributors;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as { postal_code: string }[];
+    return data.map(row => row.postal_code).filter(ps => ps !== '');
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
 }
