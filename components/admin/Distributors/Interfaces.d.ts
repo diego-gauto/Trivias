@@ -24,6 +24,7 @@ interface IDistributor {
   email: string;
   origin_state: string;
   postal_code: string | null;
+  total_sales: number;
 }
 
 interface IUser {
@@ -170,4 +171,10 @@ interface IAdminDistributorsRole {
   abm_sellers: 0 | 1
   create_access_invoices: 0 | 1
   create_products_invoices: 0 | 1
+}
+interface IDistributorFilterParams {
+  postal_code: string,
+  origin_state: string,
+  minAmount: string,
+  maxAmount: string,
 }

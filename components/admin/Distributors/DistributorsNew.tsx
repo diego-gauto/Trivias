@@ -13,11 +13,11 @@ import {
   getAllUsersArray,
   getAllUsersCount,
   getAllAdmins,
-  createCodesForDistributor,
   getProductHistoryByDistributorId,
   getUserAccessRoles,
   getNormalUserIdByEmail,
   getIsSuperAdmin,
+  getAllPostalCodesFromDistributors
 } from './Queries';
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import Pagination from '../../../components/Pagination/Pagination';
@@ -26,6 +26,7 @@ import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
 import { InvoiceProductModal } from './InvoiceProductModal';
 import { CreateInvoiceProductModal } from './CreateInvoiceProductModal';
 import { UpdateDistributorModal } from './UpdateDistributorModal';
+import { ORIGIN_STATES } from './Constants';
 
 type MainSection = 'distributors' | 'common-users';
 
@@ -122,6 +123,8 @@ export const DistributorsNew = () => {
 
   const [inputValue, setInputValue] = useState<string>('');
   const [debouncedInputValue, setDebouncedInputValue] = useState<string>('');
+  const [debouncedMinAmount, setDebouncedMinAmount] = useState<string>('');
+  const [debouncedMaxAmount, setDebouncedMaxAmount] = useState<string>('');
   const [canMakeUserADistributor, setCanMakeUserADistributor] = useState<boolean | null>(null);
 
   const [showAddDistributorButton, setShowAddDistributorButton] = useState(true);
@@ -129,11 +132,22 @@ export const DistributorsNew = () => {
   const [adminAccess, setAdminAccess] = useState<IAdminDistributorsRole>(createAdminDistributorsRole());
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
+  const [isFilterParamsActivated, setIsFilterParamsActivated] = useState(false);
+  const [distributorFilterParams, setDistributorFilterParams] = useState<IDistributorFilterParams>({
+    postal_code: '',
+    origin_state: '',
+    minAmount: '',
+    maxAmount: ''
+  });
+
+  const [postalCodes, setPostalCodes] = useState<string[]>([]);
+
   useEffect(() => {
     refreshDistributorIds();
     getAdminId();
     refreshAdminList();
     getUserAccessRoleByDB();
+    refreshPostalCodesFromDistributors();
   }, []);
 
   useEffect(() => {
@@ -153,7 +167,6 @@ export const DistributorsNew = () => {
     }
   }, [commonUsersParams.offset]);
 
-
   useEffect(() => {
     // Establecer un temporizador de 1 segundo antes de actualizar `debouncedInputValue`
     const handler = setTimeout(() => {
@@ -167,6 +180,26 @@ export const DistributorsNew = () => {
   }, [inputValue]);
 
   useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedMinAmount(distributorFilterParams.minAmount);
+    }, 1000);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [distributorFilterParams.minAmount]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedMaxAmount(distributorFilterParams.maxAmount);
+    }, 1000);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [distributorFilterParams.maxAmount]);
+
+  useEffect(() => {
     try {
       if (mainSection === 'distributors') {
         refreshDistributorsList();
@@ -176,7 +209,21 @@ export const DistributorsNew = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [debouncedInputValue]);
+  }, [debouncedInputValue, debouncedMinAmount, debouncedMaxAmount]);
+
+  useEffect(() => {
+    refreshDistributorsList();
+  }, [distributorFilterParams.postal_code, distributorFilterParams.origin_state]);
+
+
+  async function refreshPostalCodesFromDistributors() {
+    try {
+      const postalCodes = await getAllPostalCodesFromDistributors();
+      setPostalCodes(postalCodes);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async function getUserAccessRoleByDB() {
     try {
@@ -202,8 +249,17 @@ export const DistributorsNew = () => {
   async function refreshDistributorsList() {
     try {
       const { offset } = distributorsParams;
-      const distributorsListCount = await getAllDistributorUsersCount(inputValue);
-      const distributorsList = await getAllDistributorUsersArray(offset, inputValue);
+      const distributorsListCount = await getAllDistributorUsersCount(inputValue, {
+        ...distributorFilterParams,
+        maxAmount: debouncedMaxAmount,
+        minAmount: debouncedMinAmount,
+      });
+
+      const distributorsList = await getAllDistributorUsersArray(offset, inputValue, {
+        ...distributorFilterParams,
+        maxAmount: debouncedMaxAmount,
+        minAmount: debouncedMinAmount,
+      });
       setDistributorsParams({
         ...distributorsParams,
         count: distributorsListCount
@@ -341,7 +397,6 @@ export const DistributorsNew = () => {
                   onChange={(e) => {
                     const { value } = e.target;
                     setInputValue(value);
-                    // TODO: Agregar el filtrado con lag
                   }}
                 />
               </div>
@@ -349,13 +404,7 @@ export const DistributorsNew = () => {
                 <div
                   className={styles['search-bar-element']}
                   onClick={(e) => {
-                    /*
-                    if (mainSection === 'distributors') {
-                      refreshDistributorsList();
-                    } else if (mainSection === 'common-users') {
-                      refreshNormalUsersList();
-                    }
-                      */
+                    setIsFilterParamsActivated(!isFilterParamsActivated);
                   }}
                 >
                   <CiFilter
@@ -431,6 +480,180 @@ export const DistributorsNew = () => {
           }
         </div>
         {
+          (isFilterParamsActivated && mainSection === 'distributors') &&
+          <div className={styles['filters-params']}>
+            <div className={styles['pair-params-container']}>
+              <div className="mb-3">
+                <label htmlFor="codigoPostal" className="form-label">Código Postal</label>
+                <select
+                  className="form-select"
+                  id="codigoPostal"
+                  value={distributorFilterParams.postal_code}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setDistributorFilterParams({
+                      ...distributorFilterParams,
+                      postal_code: value
+                    })
+                  }}
+                >
+                  <option value={''}>(Sin especificar)</option>
+                  {
+                    postalCodes.map((pc) => {
+                      return <option
+                        value={pc}
+                        key={`postal_code_${pc}`}
+                      >
+                        {
+                          pc
+                        }
+                      </option>
+                    })
+                  }
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="estado" className="form-label">Estado</label>
+                <select
+                  className="form-select"
+                  id="estado"
+                  value={distributorFilterParams.origin_state}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setDistributorFilterParams({
+                      ...distributorFilterParams,
+                      origin_state: value
+                    })
+                  }}
+                >
+                  <option value={''}>(Sin especificar)</option>
+                  {
+                    ORIGIN_STATES.map((os) => {
+                      return <option
+                        value={os}
+                        key={`origin_state_${os}`}
+                      >
+                        {
+                          os
+                        }
+                      </option>
+                    })
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div className={styles['pair-params-container']} >
+              <div className="mb-3">
+                <label htmlFor="precioMin" className="form-label">Monto mínimo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMin"
+                  placeholder="Ingrese el monto mínimo"
+                  value={distributorFilterParams.minAmount}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setDistributorFilterParams({
+                      ...distributorFilterParams,
+                      minAmount: value
+                    })
+                  }}
+                  min={0}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="precioMax" className="form-label">Monto máximo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMax"
+                  placeholder="Ingrese el monto máximo"
+                  value={distributorFilterParams.maxAmount}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setDistributorFilterParams({
+                      ...distributorFilterParams,
+                      maxAmount: value
+                    })
+                  }}
+                  min={0}
+                />
+              </div>
+            </div>
+          </div>
+        }
+        {
+          (isFilterParamsActivated && mainSection === 'common-users') &&
+          <div className={styles['filters-params']}>
+            {
+              /*
+              <div className={styles['pair-params-container']}>
+              <div className="mb-3">
+                <label htmlFor="numeroCelular" className="form-label">Número de celular</label>
+                <input
+                  type="tel"
+                  id="numeroCelular"
+
+                />
+                <select
+                  className="form-select"
+                  id="codigoPostal"
+                >
+                  <option selected>Seleccione un código postal</option>
+                  <option value="12345">12345</option>
+                  <option value="67890">67890</option>
+                  <option value="54321">54321</option>
+                </select>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="estado" className="form-label">Estado</label>
+                <select className="form-select" id="estado">
+                  <option selected>Seleccione un estado</option>
+                  <option value="CDMX">Ciudad de México</option>
+                  <option value="Jalisco">Jalisco</option>
+                  <option value="Nuevo Leon">Nuevo León</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={styles['pair-params-container']} >
+              <div className="mb-3">
+                <label htmlFor="precioMin" className="form-label">Monto mínimo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMin"
+                  placeholder="Ingrese el monto mínimo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="precioMax" className="form-label">Monto máximo</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="precioMax"
+                  placeholder="Ingrese el monto máximo"
+                  onInput={(e) => {
+                    // oninput="formatearMoneda(this)" 
+                  }}
+                  min={0}
+                />
+              </div>
+            </div>
+              */
+            }
+          </div>
+        }
+        {
           selectedDistributor !== null &&
           <div className={styles['sections-container']}>
             <div
@@ -479,10 +702,11 @@ export const DistributorsNew = () => {
                     <thead className={styles['gonvar-table__thead']}>
                       <tr className={styles['gonvar-table__row']}>
                         <th className={styles['gonvar-table__th']}>Distribuidor</th>
-                        <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                        <th className={styles['gonvar-table__th']}>Número de celular</th>
-                        <th className={styles['gonvar-table__th']}>Estado de origen</th>
-                        <th className={styles['gonvar-table__th']}>Codigo postal</th>
+                        <th className={styles['gonvar-table__th']}>Email</th>
+                        <th className={styles['gonvar-table__th']}>Celular</th>
+                        <th className={styles['gonvar-table__th']}>Estado</th>
+                        <th className={styles['gonvar-table__th']}>CP</th>
+                        <th className={styles['gonvar-table__th']}>Inversión</th>
                         <th className={styles['gonvar-table__th']}>Acciones</th>
                       </tr>
                     </thead>
@@ -517,6 +741,11 @@ export const DistributorsNew = () => {
                               }
                             </td>
                             <td className={styles['gonvar-table__data']}>
+                              {
+                                d.total_sales
+                              }
+                            </td>
+                            <td className={styles['gonvar-table__data']}>
                               <div style={{
                                 display: 'grid',
                                 gridTemplateColumns: '1fr 1fr',
@@ -532,7 +761,7 @@ export const DistributorsNew = () => {
                                     refreshProductHistoryById(d.distributor_id);
                                   }}
                                 >
-                                  Ver perfil
+                                  Ver
                                 </button>
                                 <button
                                   className={styles['gonvar-table__button']}
@@ -541,7 +770,7 @@ export const DistributorsNew = () => {
                                     setShowUpdateDistributorModal(true);
                                   }}
                                 >
-                                  Actualizar
+                                  Editar
                                 </button>
                               </div>
 
@@ -825,10 +1054,10 @@ export const DistributorsNew = () => {
                     <thead className={styles['gonvar-table__thead']}>
                       <tr className={styles['gonvar-table__row']}>
                         <th className={styles['gonvar-table__th']}>Nombre</th>
-                        <th className={styles['gonvar-table__th']}>Correo eléctronico</th>
-                        <th className={styles['gonvar-table__th']}>Número de celular</th>
+                        <th className={styles['gonvar-table__th']}>Email</th>
+                        <th className={styles['gonvar-table__th']}>Celular</th>
                         <th className={styles['gonvar-table__th']}>Pais</th>
-                        <th className={styles['gonvar-table__th']}>Estado de origen</th>
+                        <th className={styles['gonvar-table__th']}>Estado</th>
                         <th className={styles['gonvar-table__th']}>Acciones</th>
                       </tr>
                     </thead>
@@ -840,10 +1069,18 @@ export const DistributorsNew = () => {
                             key={`user_${i}`}
                           >
                             <td className={styles['gonvar-table__data']}>
-                              {cu.name}
+                              {
+                                cu.name.length > 15 ?
+                                  `${cu.name.slice(0, 15)}...`
+                                  : cu.name
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
-                              {cu.email}
+                              {
+                                cu.email.length > 15 ?
+                                  `${cu.email.slice(0, 15)}...`
+                                  : cu.email
+                              }
                             </td>
                             <td className={styles['gonvar-table__data']}>
                               {cu.phone_number}
@@ -864,7 +1101,7 @@ export const DistributorsNew = () => {
                                     tryToMakeUserDistributor(cu.user_id);
                                   }}
                                 >
-                                  Hacer distribuidor
+                                  Asignar
                                 </button>
                               }
                               {
@@ -878,7 +1115,7 @@ export const DistributorsNew = () => {
                                   userSelect: 'none',
                                   fontSize: '12px'
                                 }}>
-                                  Es distribuidor
+                                  Listo
                                 </p>
                               }
                             </td>
@@ -1051,6 +1288,7 @@ export const DistributorsNew = () => {
             onUpdate={(success) => {
               if (success) {
                 refreshDistributorsList();
+                refreshPostalCodesFromDistributors();
               }
             }}
           />}

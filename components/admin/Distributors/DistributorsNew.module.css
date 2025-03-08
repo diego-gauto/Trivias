@@ -809,6 +809,21 @@
 
 .distributor-details-content {}
 
+.filters-params {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 16px;
+  background-color: white;
+  border-radius: 16px;
+  gap: 8px;
+}
+
+.pair-params-container {
+  display: grid;
+  grid-template-columns: 1f;
+  gap: 8px;
+}
+
 @media screen and (min-width: 576px) {
   .sections-container {
     display: grid;
@@ -858,6 +873,15 @@
   .distributor-code-sells-container {
     grid-template-columns: 1fr 1fr;
   }
+
+  .filters-params {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pair-params-container {
+    grid-template-columns: 1f 1fr;
+  }
+
 }
 
 @media screen and (min-width: 992px) {
