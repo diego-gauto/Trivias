@@ -12,6 +12,7 @@ export const PurchaseNewContainer = styled.div`
   padding-inline: 15px;
   background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
   min-height: 82vh;
+  padding-bottom: 332px;
   .actives {
     cursor: pointer;
     transition: 0.3s ease all;
