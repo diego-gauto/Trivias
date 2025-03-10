@@ -33,7 +33,7 @@ const SideBar = ({ show, onHide }: any) => {
   const [isDistributors, setIsDistributors] = useState<boolean>(false);
   const [isDistributorABMSellers, setIsDistributorABMSellers] = useState(false);
   const [isDistributorABMProducts, setIsDistributorABMProducts] = useState(false);
-  const [isDistributorUser, setIsDistributorUser] = useState(false);
+  const [isDistributorUser, setIsDistributorUser] = useState<boolean | null>(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -44,12 +44,12 @@ const SideBar = ({ show, onHide }: any) => {
   try {
     var userDataAuth = useAuth();
     useEffect(() => {
-      if (userDataAuth.user !== null) {
+      if (userDataAuth.user !== null && isDistributorUser !== null) {
         let user: IUserData = userDataAuth.user;
         if (user.role === 'user' && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
-        if (user.role === 'admin' && user.roles.length === 0) {
+        if (user.role === 'admin' && user.roles.length === 0 && !isDistributorUser) {
           router.push({ pathname: '/' });
         }
         user.roles.forEach((role) => {
@@ -247,7 +247,7 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(23);
       }
-    }, []);
+    }, [isDistributorUser]);
   } catch (error) { }
 
   useEffect(() => {
