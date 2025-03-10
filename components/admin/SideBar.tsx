@@ -36,21 +36,21 @@ const SideBar = ({ show, onHide }: any) => {
   const [isDistributorUser, setIsDistributorUser] = useState<boolean | null>(null);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const userDataAuth = useAuth();
+
+  const { user } = userDataAuth;
 
   const changeValue = (value: string) => {
     return `${value}` === '1';
   };
 
   try {
-    var userDataAuth = useAuth();
     useEffect(() => {
-      if (userDataAuth.user !== null && isDistributorUser !== null) {
+      if (userDataAuth.user !== null) {
         let user: IUserData = userDataAuth.user;
-        if (user.role === 'user' && !isDistributorUser) {
-          router.push({ pathname: '/' });
-        }
-        if (user.role === 'admin' && user.roles.length === 0 && !isDistributorUser) {
-          router.push({ pathname: '/' });
+        checkIfIsDistributor();
+        if (userDataAuth.user.role === 'superAdmin') {
+          setIsSuperAdmin(true);
         }
         user.roles.forEach((role) => {
           if (role.role === 'course' && changeValue(role.view))
@@ -96,9 +96,7 @@ const SideBar = ({ show, onHide }: any) => {
           }
         });
         setLoading(false);
-        if (userDataAuth.user.role === 'superAdmin') {
-          setIsSuperAdmin(true);
-        }
+        console.log({ user: userDataAuth.user });
       }
       if (
         window.location.pathname.substring(
@@ -247,28 +245,42 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(23);
       }
-    }, [isDistributorUser]);
+    }, []);
   } catch (error) { }
 
   useEffect(() => {
-    checkIfIsDistributor();
-  }, []);
+    try {
+      if ((user !== null || user !== undefined)) {
+        checkIfIsDistributor().then(isDistributorUser => {
+          console.log({ isDistributorUser });
+          if (!isDistributorUser) {
+            if (user.role === 'user') {
+              router.push({ pathname: '/' });
+            }
+            if (user.role === 'admin' && user.roles.length === 0) {
+              router.push({ pathname: '/' });
+            }
+          }
+        });
+      }
+      console.log({ isDistributorUser });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [user]);
 
   const checkIfIsDistributor = async () => {
     try {
-      setLoading(true);
       const email = localStorage.getItem('email') || '';
       const query = `SELECT d.distributor_id FROM distributors AS d INNER JOIN users AS u ON u.id = d.user_id WHERE u.email LIKE '${email}';`;
       console.log({ query });
       const response = await getGenericQueryResponse(query);
       const data = response.data.data as { distributor_id: number }[];
-      if (data.length > 0) {
-        setIsDistributorUser(true);
-      }
+      return data.length > 0;
     } catch (error) {
       console.error(error);
     }
-    setLoading(false);
+    return false;
   }
 
   if (loading) {
@@ -280,6 +292,8 @@ const SideBar = ({ show, onHide }: any) => {
       </Background>
     );
   }
+
+  console.log({ isSuperAdmin });
 
   return (
     <Container show={show}>
