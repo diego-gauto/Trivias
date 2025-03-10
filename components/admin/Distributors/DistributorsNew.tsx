@@ -1187,7 +1187,13 @@ export const DistributorsNew = () => {
                 setShowAccessInvoiceModal(false);
               }}
               onShare={() => {
-
+                const codes = selectedAccessInvoice.details.map(d => {
+                  const { duration_type, codes } = d;
+                  const duration = duration_type === 'M' ? 'Mensuales' : duration_type === 'A' ? 'Anuales' : 'Cuatrimestrales';
+                  const codeList = codes.map(c => c.code.toUpperCase());
+                  return `${duration}\n${codeList.join('\n')}`;
+                }).join('\n');
+                navigator.clipboard.writeText(codes);
               }}
             />
           }
