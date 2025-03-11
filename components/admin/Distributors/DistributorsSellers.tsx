@@ -1,18 +1,20 @@
-import styles from './DistributorsNew.module.css';
+import { useEffect, useState } from "react";
+
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useEffect, useState } from 'react';
-import { Modal } from '../DefaultComponents/Modal';
+
+import Pagination from "../../Pagination/Pagination";
+import { Modal } from "../DefaultComponents/Modal";
+import { CreateSellerModalContent } from "./CreateSellerModal";
+import styles from "./DistributorsNew.module.css";
 import {
-  getUserAccessRoles,
-  getNormalUserIdByEmail,
   getIsSuperAdmin,
+  getNormalUserIdByEmail,
   getSellersCount,
   getSellersList,
-} from './Queries';
-import Pagination from '../../Pagination/Pagination';
-import { CreateSellerModalContent } from './CreateSellerModal';
-import { UpdateSellerModalContent } from './UpdateSellerModal';
-import { ShowSellerModalContent } from './ShowSellerModal';
+  getUserAccessRoles,
+} from "./Queries";
+import { ShowSellerModalContent } from "./ShowSellerModal";
+import { UpdateSellerModalContent } from "./UpdateSellerModal";
 
 type EntityParams = {
   offset: number,
@@ -34,7 +36,7 @@ function createAdminDistributorsRole(): IAdminDistributorsRole {
   }
 }
 
-export const DistributorsSellers = () => {
+const DistributorsSellers = () => {
   const [sellers, setSellers] = useState<ISeller[]>([]);
   const [newSeller, setNewSeller] = useState<ISeller>({
     seller_id: 0,
@@ -314,3 +316,5 @@ export const DistributorsSellers = () => {
       }
     </div>)
 }
+
+export default DistributorsSellers;
