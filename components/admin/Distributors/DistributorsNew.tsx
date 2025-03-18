@@ -70,7 +70,9 @@ function createProductInvoiceDefaultValue(distributorId: number, sellerId: numbe
     distributorId,
     sellerId,
     products: [],
-    date: ''
+    date: '',
+    is_confirmed: false,
+    send_cost: 0
   }
 }
 
@@ -657,20 +659,20 @@ export const DistributorsNew = () => {
           selectedDistributor !== null &&
           <div className={styles['sections-container']}>
             <div
-              className={`${styles['section-title']} ${distributorDetailsSection === 'product-history' ? styles['section-title--active'] : ''}`}
-              onClick={(e) => {
-                setDistributorDetailsSection('product-history');
-              }}
-            >
-              Historial de producto
-            </div>
-            <div
               className={`${styles['section-title']} ${distributorDetailsSection === 'access-history' ? styles['section-title--active'] : ''}`}
               onClick={(e) => {
                 setDistributorDetailsSection('access-history');
               }}
             >
-              Historial de acceso
+              Accesos
+            </div>
+            <div
+              className={`${styles['section-title']} ${distributorDetailsSection === 'product-history' ? styles['section-title--active'] : ''}`}
+              onClick={(e) => {
+                setDistributorDetailsSection('product-history');
+              }}
+            >
+              Presupuestos
             </div>
           </div>
         }
@@ -816,10 +818,10 @@ export const DistributorsNew = () => {
               <div className={styles['distributor-details-header']}>
                 <div className={styles['distributor-details-titles-container']}>
                   <h2 className={styles['distributor-details-title']}>
-                    Historial de productos
+                    Presupuestos
                   </h2>
                   <h3 className={styles['distributor-details-subtitle']}>
-                    Estos son los productos comprados por el distribuidor
+                    Estos son los presupuestos del distribuidor
                   </h3>
                 </div>
                 {
@@ -832,7 +834,7 @@ export const DistributorsNew = () => {
                     }}
                   >
                     <IoIosAddCircleOutline size={30} />
-                    <span>Registrar productos</span>
+                    <span>Registrar presupuesto</span>
                   </div>
                 }
               </div>
@@ -900,7 +902,7 @@ export const DistributorsNew = () => {
                   <div className={styles['empty-container']}>
                     <div className={styles['empty-content']}>
                       <p className={styles['empty-content-text']}>
-                        Este distribuidor no cuenta con un historial de productos
+                        Este distribuidor no cuenta con un historial de presupuestos
                       </p>
                     </div>
                   </div>
@@ -930,7 +932,7 @@ export const DistributorsNew = () => {
               <div className={styles['distributor-details-header']}>
                 <div className={styles['distributor-details-titles-container']}>
                   <h2 className={styles['distributor-details-title']}>
-                    Historial de acceso
+                    Accesos
                   </h2>
                   <h3 className={styles['distributor-details-subtitle']}>
                     Estos son los accesos comprados por el distribuidor

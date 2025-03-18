@@ -125,11 +125,10 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as IProduct[];
     return data.map((p) => {
-      const { product_id, name, image, default_price } = p;
+      const { product_id, name, default_price } = p;
       return {
         product_id,
         name,
-        image,
         default_price
       }
     });
@@ -139,9 +138,9 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
   return [];
 }
 
-export const getProducts = async (): Promise<IProduct[]> => {
+export const getProducts = async (name: string): Promise<IProduct[]> => {
   try {
-    const query = `SELECT * FROM products;`;
+    const query = `SELECT * FROM products WHERE name LIKE '${name}%';`;
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as IProduct[];
     return data;
@@ -184,6 +183,18 @@ export const getAllDistributorUsersCount = async (input: string, params: IDistri
     console.error(error);
   }
   return 0;
+}
+
+export const getAllProducts = async (): Promise<IProduct[]> => {
+  try {
+    const query = `SELECT * FROM products;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IProduct[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
 }
 
 export const getAllProductsCount = async (input: string): Promise<number> => {
@@ -562,6 +573,14 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
   }
 }
 
+const checkIfProductInoviceExist = () => {
+  try {
+    // Comprobar si existe
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const createProductInvoice = async (productInvoice: IProductInvoice): Promise<boolean> => {
   try {
     const { distributorId, sellerId, products, date } = productInvoice;
@@ -596,9 +615,9 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
 
 export const createProduct = async (product: IProduct): Promise<boolean> => {
   try {
-    const { name, default_price, image } = product;
+    const { name, default_price } = product;
 
-    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${name}', '${image}', ${default_price});`;
+    const createProductQuery = `INSERT INTO products (name, default_price) VALUES ('${name}', ${default_price});`;
 
     const createProductResponse = await postGenericQueryResponse(createProductQuery);
     const productId = createProductResponse.data.data.insertId;
@@ -612,12 +631,11 @@ export const createProduct = async (product: IProduct): Promise<boolean> => {
 
 export const updateProduct = async (product: IProduct): Promise<boolean> => {
   try {
-    const { product_id, name, default_price, image } = product;
+    const { product_id, name, default_price } = product;
 
     const updateProductQuery = `UPDATE products SET
     name = '${name}',
     default_price = ${default_price},
-    image = '${image}'
     WHERE product_id = ${product_id};`;
 
     const updateProductResponse = await postGenericQueryResponse(updateProductQuery);

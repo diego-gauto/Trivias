@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { createProductInvoice, getAllSellers, getProducts } from './Queries';
+import { createProductInvoice, getAllProducts, getAllSellers, getProducts } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { getGenericQueryResponse } from '../../api/admin';
 
 type CreateInvoiceAccessModalProps = {
   productInvoice: IProductInvoice
@@ -24,12 +25,15 @@ export const CreateInvoiceProductModal = ({
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
-  const [sellers, setSellers] = useState<{ email: string; seller_id: number; }[]>([]);
+  const [username, setUsername] = useState<string>('');
+  const [userId, setUserId] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [searchedProducts, setSearchedProducts] = useState<IProduct[]>([]);
 
-  const { distributorId, sellerId, products: invoiceProducts, date } = productInvoice;
+  const { distributorId, sellerId, products: invoiceProducts, is_confirmed, send_cost, date } = productInvoice;
 
-  console.log({ productInvoice });
+  const [productName, setProductName] = useState('');
+  const [productNameDebounced, setProductNameDebounced] = useState('');
 
   useEffect(() => {
     const today = new Date().toJSON().slice(0, 10);
@@ -38,30 +42,70 @@ export const CreateInvoiceProductModal = ({
       date: today,
       distributorId
     });
-    refreshSellersList();
+    getUserData();
     refreshListOfProducts();
+    loadAllProducts();
   }, []);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setProductNameDebounced(productName);
+    }, 1000);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [productName]);
+
+  useEffect(() => {
+    try {
+      refreshListOfProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [productNameDebounced]);
 
   const isValidRequestValues = () => {
     const validProductsNumber = invoiceProducts.some((d) => d.count > 0);
     const validDate = date !== '';
     const validSellerId = sellerId !== 0;
-    console.log({ date });
+    console.log({ validProductsNumber });
+    console.log({ validDate });
+    console.log({ validSellerId });
     return validDate && validProductsNumber && validSellerId;
   };
 
-  const refreshSellersList = async () => {
-    const sellers = await getAllSellers();
-    setSellers(sellers);
+  async function getUserData() {
+    try {
+      const email = localStorage.getItem('email') || '';
+      if (email === '') {
+        return;
+      }
+      const query = `SELECT CONCAT(name, ' ', last_name) AS name, id AS user_id FROM users WHERE email LIKE '${email}'`;
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as { name: string, user_id: number }[];
+      if (data.length > 0) {
+        const name = data[0]?.name || '';
+        setUsername(name);
+        const id = data[0]?.user_id || 0;
+        setUserId(id);
+        modifyProductInvoice({
+          ...productInvoice,
+          sellerId: id
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const total = invoiceProducts.reduce((pv, cv) => {
     return pv + (cv.price * cv.count);
-  }, 0);
+  }, 0) + send_cost;
 
   function getEnableToAddProducts(): IProduct[] {
     const selectedProducIds = invoiceProducts.map(p => p.productId);
-    return products.filter(p => !selectedProducIds.includes(p.product_id));
+    return searchedProducts.filter(p => !selectedProducIds.includes(p.product_id));
   }
 
   const enabledToAddProducts = getEnableToAddProducts();
@@ -85,10 +129,19 @@ export const CreateInvoiceProductModal = ({
     });
   }
 
+  async function loadAllProducts() {
+    try {
+      const products = await getAllProducts();
+      setProducts(products);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function refreshListOfProducts() {
     try {
-      const products = await getProducts();
-      setProducts(products);
+      const products = await getProducts(productName);
+      setSearchedProducts(products);
     } catch (error) {
       console.error(error);
     }
@@ -99,8 +152,8 @@ export const CreateInvoiceProductModal = ({
       <div className={`${s['views']} ${productsRequestIsFinish ? s['transition-active'] : ''}`}>
         <div className={s['container']}>
           <div className={s['header']}>
-            <h2 className={s['title']}>Registrar compra de producto</h2>
-            <h3 className={s['subtitle']}>Estos son los detalles de la venta</h3>
+            <h2 className={s['title']}>Registrar presupuesto</h2>
+            <h3 className={s['subtitle']}>Estos son los detalles del presupuesto</h3>
           </div>
           <div className={s['body']}>
             <div className={s2['product-sell-data-container']}>
@@ -131,48 +184,102 @@ export const CreateInvoiceProductModal = ({
               </div>
               <div className={s2['product-sell-data-item']}>
                 <div className={s2['product-sell-data-label']}>
-                  Vendedor
+                  Responsable
                 </div>
                 <div className={s2['product-sell-data-value']}>
-                  <select
+                  <label
+                    htmlFor=""
+                    style={{
+                      padding: '8px 2px 4px'
+                    }}>
+                    {
+                      username
+                    }
+                  </label>
+                </div>
+              </div>
+              <div className={s2['product-sell-data-item']}>
+                <div className={s2['product-sell-data-label']}>
+                  Costo de envio
+                </div>
+                <div className={s2['product-sell-data-value']}>
+                  <input
+                    type="number"
                     style={{
                       width: '100%',
                       padding: '4px',
                       borderRadius: '16px',
                       paddingLeft: '12px'
                     }}
-                    value={sellerId}
+                    value={send_cost}
                     onChange={(e) => {
                       const { value } = e.target;
-                      const selectedSellerId = parseInt(value) || 0;
+
                       modifyProductInvoice({
                         ...productInvoice,
-                        sellerId: selectedSellerId
+                        send_cost: value === '' ? 0 : parseFloat(value)
                       });
                     }}
+                  />
+                </div>
+              </div>
+              <div className={s2['product-sell-data-item']}>
+                <div className={s2['product-sell-data-label']}>
+                  Estado
+                </div>
+                <div className={s2['product-sell-data-value']}>
+                  <label
+                    htmlFor="is_confirmed"
+                    style={{
+                      paddingRight: '8px',
+                      paddingTop: '4px',
+                      userSelect: 'none'
+                    }}
                   >
-                    <option value="0" disabled>Escoge un vendedor</option>
-                    {
-                      sellers.map((s, index) => {
-                        const { email, seller_id } = s;
-                        return <option
-                          value={seller_id}
-                          key={`seller_${seller_id}`}
-                        >
-                          {email}</option>
-                      })
-                    }
-                  </select>
+                    Confirmado
+                  </label>
+                  <input
+                    type="checkbox"
+                    className='form-check-input'
+                    checked={is_confirmed}
+                    id='is_confirmed'
+                    style={{
+                      width: '24px',
+                      height: '24px'
+                    }}
+                    onChange={(e) => {
+                      const { checked } = e.target;
+                      modifyProductInvoice({
+                        ...productInvoice,
+                        is_confirmed: checked
+                      });
+                    }}
+                  />
                 </div>
               </div>
             </div>
             <hr />
+            <h3 className={s2['product-search-title']}>
+              Busca un producto
+            </h3>
+            <div>
+              <input
+                type="text"
+                value={productName}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  setProductName(value);
+                }}
+                className='form-control'
+                style={{
+                  marginBlock: '8px'
+                }}
+                placeholder='Ingrese el nombre del producto'
+              />
+            </div>
             {
               enabledToAddProducts.length > 0 &&
               <div className={s2['product-search-container']}>
-                <h3 className={s2['product-search-title']}>
-                  Busca un producto
-                </h3>
                 <div className={s2['product-search-catalog']}>
                   {
                     (products.length === 0 && enabledToAddProducts.length === 0) &&
@@ -184,40 +291,49 @@ export const CreateInvoiceProductModal = ({
                   }
                   {
                     enabledToAddProducts.length > 0 &&
-                    <div className={s2['product-search-catalog-container']}>
-                      {
-                        enabledToAddProducts.map((p, index) => {
-                          return (<div
-                            key={`product-item-${p.product_id + '' + index}`}
-                            className={s2['product-search-catalog-item']}
-                          >
-                            <div className={s2['product-search-catalog-item-image-container']}>
-                              {
-                                (p.image) &&
-                                <Image
-                                  src={p.image}
-                                  width={100}
-                                  height={100}
-                                />
-                              }
-                            </div>
-                            <div className={s2['button-container']}>
-                              <p
-                                className={s2['product-search-catalog-item-text']}
-                              >{
+                    <table style={{
+                      width: '100%'
+                    }}>
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Precio</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          enabledToAddProducts.map(p => {
+                            return <tr>
+                              <td>
+                                {
                                   p.name
-                                }</p>
-                              <button
-                                className={s2['button']}
-                                onClick={(e) => {
-                                  addProductToSelectedProductList(p);
-                                }}
-                              >Agregar</button>
-                            </div>
-                          </div>);
-                        })
-                      }
-                    </div>
+                                }
+                              </td>
+                              <td>
+                                {
+                                  p.default_price
+                                }
+                              </td>
+                              <td>
+                                <div>
+                                  <button
+                                    className={s['button']}
+                                    onClick={(e) => {
+                                      addProductToSelectedProductList(p);
+                                    }}
+                                  >
+                                    Agregar
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          })
+                        }
+                        <tr><td></td></tr>
+                        <tr><td></td></tr>
+                      </tbody>
+                    </table>
                   }
                 </div>
               </div>
@@ -268,7 +384,7 @@ export const CreateInvoiceProductModal = ({
                         if (currentProduct === undefined) {
                           return <></>;
                         }
-                        const { product_id, name, image, default_price } = currentProduct;
+                        const { product_id, name, default_price } = currentProduct;
                         const { count, price } = sp;
                         return (
                           <tr
@@ -276,16 +392,6 @@ export const CreateInvoiceProductModal = ({
                             key={`table-row-detail-${sp.productId}`}
                           >
                             <td className={s['product']}>
-                              <div className={s2['product-search-catalog-item-image-container']}>
-                                {
-                                  image.length > 0 &&
-                                  <Image
-                                    src={image}
-                                    width={80}
-                                    height={80}
-                                  />
-                                }
-                              </div>
                               <p style={{
                                 margin: '0',
                                 textAlign: 'center',
@@ -303,7 +409,34 @@ export const CreateInvoiceProductModal = ({
                                 alignItems: 'center',
                                 gap: '8px'
                               }}>
-                                <button
+                                <input
+                                  type="number"
+                                  className='form-control'
+                                  style={{
+                                    width: '50%',
+                                    borderRadius: '24px'
+                                  }}
+                                  value={`${count}`}
+                                  onChange={(e) => {
+                                    const { value } = e.target;
+                                    modifyProductInvoice({
+                                      ...productInvoice,
+                                      products: productInvoice.products.map(p => {
+                                        if (p.productId !== sp.productId) {
+                                          return p;
+                                        }
+                                        return {
+                                          ...p,
+                                          count: value === '' ? 0 : parseInt(value)
+                                        }
+                                      })
+                                    })
+                                  }}
+                                  min={0}
+                                />
+                                {
+                                  /*
+                                  <button
                                   className={s['count-button']}
                                   onClick={(e) => {
                                     if (userUseRegisterButton) {
@@ -360,6 +493,8 @@ export const CreateInvoiceProductModal = ({
                                 >
                                   +
                                 </button>
+                                  */
+                                }
                               </div>
                             </td>
                             <td>
@@ -420,9 +555,6 @@ export const CreateInvoiceProductModal = ({
                                   gap: '8px'
                                 }}
                                 onClick={(e) => {
-                                  console.log({
-                                    sp
-                                  });
                                   // TODO
                                   removeProductToSelectedProductList(sp.productId);
                                 }}

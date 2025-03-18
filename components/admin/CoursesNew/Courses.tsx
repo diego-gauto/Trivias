@@ -142,6 +142,7 @@ const Courses = () => {
       const userRolesResponse = await getGenericQueryResponse(userRolesQuery);
       const userRoles = userRolesResponse.data.data as Role[];
       const role = userRoles.find((role) => role.role === 'course');
+      console.log({ role });
       setUserAccess({
         canView: role?.view === 1,
         canEdit: role?.edit === 1,

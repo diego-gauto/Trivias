@@ -94,6 +94,8 @@ interface IProductInvoice {
   distributorId: number;
   sellerId: number;
   date: string;
+  send_cost: number;
+  is_confirmed: boolean;
   products: { productId: number, count: number, price: number }[];
 }
 
@@ -156,7 +158,6 @@ interface ISeller {
 interface IProduct {
   product_id: number
   name: string
-  image: string
   default_price: number
 }
 
