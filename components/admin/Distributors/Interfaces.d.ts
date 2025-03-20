@@ -91,11 +91,13 @@ interface IAccessInvoiceDetails {
 }
 
 interface IProductInvoice {
+  product_sell_id: number;
   distributorId: number;
   sellerId: number;
   date: string;
   send_cost: number;
   is_confirmed: boolean;
+  discount: number;
   products: { productId: number, count: number, price: number }[];
 }
 
@@ -114,6 +116,7 @@ interface ICreateCodeSell {
 }
 
 interface IProductHistoryRecord {
+  product_sell_id: number
   seller_id: number
   distributor_id: number
   sell_at: string
@@ -124,9 +127,13 @@ interface IProductHistoryRecord {
   product_name: string
   product_image: string
   seller_email: string
+  is_confirmed: 0 | 1
+  send_cost: number
+  discount: number
 }
 
 interface IProductSellHistory {
+  product_sell_id: number
   seller_id: number
   distributor_id: number
   sell_at: string
@@ -134,6 +141,9 @@ interface IProductSellHistory {
   product_count: number
   product_total_amount: number
   products: IProductSell[]
+  is_confirmed: boolean
+  send_cost: number
+  discount: number
 }
 
 interface IProductSell {
@@ -142,7 +152,6 @@ interface IProductSell {
   count: number
   price: number
   product_name: string
-  product_image: string
 }
 
 interface ISeller {

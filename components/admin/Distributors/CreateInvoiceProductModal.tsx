@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { createProductInvoice, getAllProducts, getAllSellers, getProducts } from './Queries';
+import { createProductInvoice, getAllProducts, getAllSellers, getProducts, updateProductInvoice } from './Queries';
 import Image from 'next/image';
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { getGenericQueryResponse } from '../../api/admin';
@@ -13,24 +13,25 @@ type CreateInvoiceAccessModalProps = {
   modifyProductInvoice: (productInvoice: IProductInvoice) => void
   onClose: () => void
   onCreate: (canCreate: boolean) => void
+  productInvoiceOption: 'create' | 'update'
 }
 
 export const CreateInvoiceProductModal = ({
   productInvoice,
   onClose,
   onCreate,
-  modifyProductInvoice
+  modifyProductInvoice,
+  productInvoiceOption,
 }: CreateInvoiceAccessModalProps) => {
 
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
-  const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
+  const [haveSuccessAtFinish, setHaveSuccessAtFinish] = useState(false);
   const [username, setUsername] = useState<string>('');
-  const [userId, setUserId] = useState(0);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [searchedProducts, setSearchedProducts] = useState<IProduct[]>([]);
 
-  const { distributorId, sellerId, products: invoiceProducts, is_confirmed, send_cost, date } = productInvoice;
+  const { distributorId, sellerId, products: invoiceProducts, is_confirmed, send_cost, date, discount } = productInvoice;
 
   const [productName, setProductName] = useState('');
   const [productNameDebounced, setProductNameDebounced] = useState('');
@@ -69,9 +70,6 @@ export const CreateInvoiceProductModal = ({
     const validProductsNumber = invoiceProducts.some((d) => d.count > 0);
     const validDate = date !== '';
     const validSellerId = sellerId !== 0;
-    console.log({ validProductsNumber });
-    console.log({ validDate });
-    console.log({ validSellerId });
     return validDate && validProductsNumber && validSellerId;
   };
 
@@ -88,7 +86,6 @@ export const CreateInvoiceProductModal = ({
         const name = data[0]?.name || '';
         setUsername(name);
         const id = data[0]?.user_id || 0;
-        setUserId(id);
         modifyProductInvoice({
           ...productInvoice,
           sellerId: id
@@ -99,9 +96,9 @@ export const CreateInvoiceProductModal = ({
     }
   }
 
-  const total = invoiceProducts.reduce((pv, cv) => {
+  const total = (invoiceProducts.reduce((pv, cv) => {
     return pv + (cv.price * cv.count);
-  }, 0) + send_cost;
+  }, 0) * (1 - (discount / 100))) + send_cost; // + send_cost
 
   function getEnableToAddProducts(): IProduct[] {
     const selectedProducIds = invoiceProducts.map(p => p.productId);
@@ -146,6 +143,19 @@ export const CreateInvoiceProductModal = ({
       console.error(error);
     }
   }
+
+  const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value === "" ? 0 : Number(e.target.value);
+
+    if (newValue !== 0 && (newValue < 0 || newValue > 100)) {
+      return;
+    }
+
+    modifyProductInvoice({
+      ...productInvoice,
+      discount: newValue
+    });
+  };
 
   return (
     <div className={s['main-container']}>
@@ -200,27 +210,26 @@ export const CreateInvoiceProductModal = ({
               </div>
               <div className={s2['product-sell-data-item']}>
                 <div className={s2['product-sell-data-label']}>
-                  Costo de envio
+                  Descuento
                 </div>
                 <div className={s2['product-sell-data-value']}>
                   <input
                     type="number"
                     style={{
-                      width: '100%',
+                      width: 'calc(100% - 120px)',
                       padding: '4px',
                       borderRadius: '16px',
                       paddingLeft: '12px'
                     }}
-                    value={send_cost}
-                    onChange={(e) => {
-                      const { value } = e.target;
-
-                      modifyProductInvoice({
-                        ...productInvoice,
-                        send_cost: value === '' ? 0 : parseFloat(value)
-                      });
-                    }}
+                    value={`${discount}`}
+                    onChange={handleDiscountChange}
+                    min={0}
+                    max={100}
+                    maxLength={3}
                   />
+                  <span style={{
+                    paddingLeft: '15px'
+                  }} >Por ciento</span>
                 </div>
               </div>
               <div className={s2['product-sell-data-item']}>
@@ -249,6 +258,7 @@ export const CreateInvoiceProductModal = ({
                     }}
                     onChange={(e) => {
                       const { checked } = e.target;
+                      console.log({ is_confirmed });
                       modifyProductInvoice({
                         ...productInvoice,
                         is_confirmed: checked
@@ -303,8 +313,10 @@ export const CreateInvoiceProductModal = ({
                       </thead>
                       <tbody>
                         {
-                          enabledToAddProducts.map(p => {
-                            return <tr>
+                          enabledToAddProducts.map((p, index) => {
+                            return <tr
+                              key={`enabled-to-add-product-${p.product_id}-${index}`}
+                            >
                               <td>
                                 {
                                   p.name
@@ -316,22 +328,19 @@ export const CreateInvoiceProductModal = ({
                                 }
                               </td>
                               <td>
-                                <div>
-                                  <button
-                                    className={s['button']}
-                                    onClick={(e) => {
-                                      addProductToSelectedProductList(p);
-                                    }}
-                                  >
-                                    Agregar
-                                  </button>
-                                </div>
+                                <button
+                                  // button--small
+                                  className={`${s['button']} ${s['button--small']}`}
+                                  onClick={(e) => {
+                                    addProductToSelectedProductList(p);
+                                  }}
+                                >
+                                  Agregar
+                                </button>
                               </td>
                             </tr>
                           })
                         }
-                        <tr><td></td></tr>
-                        <tr><td></td></tr>
                       </tbody>
                     </table>
                   }
@@ -395,14 +404,18 @@ export const CreateInvoiceProductModal = ({
                               <p style={{
                                 margin: '0',
                                 textAlign: 'center',
-                                marginTop: '8px'
                               }}>
                                 {
                                   name
                                 }
                               </p>
                             </td>
-                            <td className={`${s['gonvar-table__data']}`}>
+                            <td
+                              className={`${s['gonvar-table__data']}`}
+                              style={{
+                                padding: '0px 5px'
+                              }}
+                            >
                               <div style={{
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -414,7 +427,8 @@ export const CreateInvoiceProductModal = ({
                                   className='form-control'
                                   style={{
                                     width: '50%',
-                                    borderRadius: '24px'
+                                    borderRadius: '24px',
+                                    padding: '0px 8px'
                                   }}
                                   value={`${count}`}
                                   onChange={(e) => {
@@ -434,67 +448,6 @@ export const CreateInvoiceProductModal = ({
                                   }}
                                   min={0}
                                 />
-                                {
-                                  /*
-                                  <button
-                                  className={s['count-button']}
-                                  onClick={(e) => {
-                                    if (userUseRegisterButton) {
-                                      return;
-                                    }
-
-                                    const newProducts = invoiceProducts.map(p => {
-                                      if (p.productId !== sp.productId) {
-                                        return p;
-                                      }
-                                      if (p.count === 0) {
-                                        return p;
-                                      }
-                                      return {
-                                        ...p,
-                                        count: p.count - 1
-                                      }
-                                    });
-
-                                    modifyProductInvoice({
-                                      ...productInvoice,
-                                      products: newProducts
-                                    });
-                                  }}
-                                >
-                                  -
-                                </button>
-                                <span>
-                                  {
-                                    count
-                                  }
-                                </span>
-                                <button
-                                  className={s['count-button']}
-                                  onClick={(e) => {
-                                    if (userUseRegisterButton) {
-                                      return;
-                                    }
-                                    const newProducts = invoiceProducts.map(p => {
-                                      if (p.productId !== sp.productId) {
-                                        return p;
-                                      }
-                                      return {
-                                        ...p,
-                                        count: p.count + 1
-                                      }
-                                    });
-
-                                    modifyProductInvoice({
-                                      ...productInvoice,
-                                      products: newProducts
-                                    });
-                                  }}
-                                >
-                                  +
-                                </button>
-                                  */
-                                }
                               </div>
                             </td>
                             <td>
@@ -510,8 +463,7 @@ export const CreateInvoiceProductModal = ({
                                     width: '90px',
                                     border: '1px solid gray',
                                     borderRadius: '16px',
-                                    padding: '4px',
-                                    paddingLeft: '14px'
+                                    padding: '0px 14px'
                                   }}
                                   placeholder='precio'
                                   type="number"
@@ -533,7 +485,7 @@ export const CreateInvoiceProductModal = ({
                                     modifyProductInvoice({
                                       ...productInvoice,
                                       products: newProductsList
-                                    })
+                                    });
                                   }}
                                 />
                                 <span
@@ -545,17 +497,16 @@ export const CreateInvoiceProductModal = ({
                             </td>
                             <td>
                               <div
-                                className={`${s2['button']} ${s2['button--red']} ${s2['button-circle']}`}
+                                className={`${s2['button']} ${s['button--small']} ${s2['button--red']} ${s2['button-circle']}`}
                                 style={{
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                   borderRadius: '16px',
-                                  padding: '4px',
+                                  padding: '0px',
                                   gap: '8px'
                                 }}
                                 onClick={(e) => {
-                                  // TODO
                                   removeProductToSelectedProductList(sp.productId);
                                 }}
                               >
@@ -565,7 +516,7 @@ export const CreateInvoiceProductModal = ({
                                 <p
                                   style={{
                                     margin: '0',
-                                    fontWeight: '500'
+                                    fontWeight: '500',
                                   }}
                                 >Remover</p>
                               </div>
@@ -579,6 +530,43 @@ export const CreateInvoiceProductModal = ({
               </div>
             }
           </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+
+          }}>
+            {
+              // TODO
+            }
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Costo de envio
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <input
+                  type="number"
+                  style={{
+                    width: '100%',
+                    padding: '4px',
+                    borderRadius: '16px',
+                    paddingLeft: '12px'
+                  }}
+                  value={`${send_cost}`}
+                  onChange={(e) => {
+                    const { value } = e.target;
+
+                    modifyProductInvoice({
+                      ...productInvoice,
+                      send_cost: value === '' ? 0 : parseFloat(value)
+                    });
+                  }}
+                  min={0}
+                  max={100}
+                  maxLength={3}
+                />
+              </div>
+            </div>
+          </div>
           <div
             className={s['footer']}
             style={{
@@ -589,11 +577,13 @@ export const CreateInvoiceProductModal = ({
             }}
           >
             <p style={{
-              textAlign: 'end',
+              textAlign: 'center',
               color: 'gray',
               fontWeight: 'bold',
               fontSize: '20px',
               paddingRight: '24px',
+              margin: '0',
+              paddingTop: '6px'
             }}>Total:{' '}
               <span>
                 {
@@ -621,33 +611,40 @@ export const CreateInvoiceProductModal = ({
                   if (userUseRegisterButton) {
                     return;
                   }
-                  const canCreateInvoice = await createProductInvoice(productInvoice);
-                  setHaveSuccessAtCreate(canCreateInvoice);
+                  let result = false;
+                  if (productInvoiceOption === 'create') {
+                    result = await createProductInvoice(productInvoice);
+                  } else {
+                    result = await updateProductInvoice(productInvoice);
+                  }
+                  setHaveSuccessAtFinish(result);
                   setProductsRequestIsFinish(true);
                 }}
               >
-                Registrar
+                {
+                  productInvoiceOption === 'create' ? 'Crear' : 'Actualizar'
+                }
               </div>
             </div>
           </div>
         </div>
         <div className={s['result-petition-section']}>
           <div className={s['result-petition-container']}>
-            <div className={`${s['result-petition-icon']} ${s[`result-petition-icon--${haveSuccessAtCreate ? 'approve' : 'not-approve'}`]}`}>
+            <div className={`${s['result-petition-icon']} ${s[`result-petition-icon--${haveSuccessAtFinish ? 'approve' : 'not-approve'}`]}`}>
               {
-                haveSuccessAtCreate === true ? '✔' : '!'
+                haveSuccessAtFinish === true ? '✔' : '!'
               }
             </div>
             <h3 className={s['result-petition-title']}>
               {
-                haveSuccessAtCreate ?
+                haveSuccessAtFinish ?
                   '¡Se ha registrado la factura con exito!'
                   : '¡No se ha logrado crear la factura de los productos!'
               }
             </h3>
             <h4 className={s['result-petition-subtitle']}>
               {
-                haveSuccessAtCreate ?
+                haveSuccessAtFinish ?
                   'Ahora el distribuidor tiene una nueva factura de productos'
                   : 'Intente de nuevo esta acción'
               }
@@ -656,7 +653,7 @@ export const CreateInvoiceProductModal = ({
               <button
                 className={s['result-petition-button']}
                 onClick={(e) => {
-                  onCreate(haveSuccessAtCreate);
+                  onCreate(haveSuccessAtFinish);
                   onClose();
                 }}
               >
