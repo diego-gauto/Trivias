@@ -275,7 +275,7 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               1 de{' '}{MONTHS[new Date().getMonth()]}{' '}hasta el {getLastDayOfMonthByDate(new Date())} de{' '}{MONTHS[new Date().getMonth()]}
             </h4>
             <Countdown
-              date={new Date(2025, 1, 28, 23, 59, 59)}
+              date={new Date(2025, 2, 31, 23, 59, 59)}
               renderer={(props) => (
                 <div className='countdown'>
                   <h2>TIEMPO RESTANTE</h2>
