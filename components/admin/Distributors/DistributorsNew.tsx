@@ -123,7 +123,6 @@ export const DistributorsNew = () => {
   const [productInvoiceOption, setProductInvoiceOption] = useState<'create' | 'update'>('create');
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
   const [newProductInvoice, setNewProductInvoice] = useState<IProductInvoice>(createProductInvoiceDefaultValue(0, 0));
-  const [editedProductInvoice, setEditedProductInvoice] = useState<IProductInvoice | null>(null);
 
   const [inputValue, setInputValue] = useState<string>('');
   const [debouncedInputValue, setDebouncedInputValue] = useState<string>('');
@@ -685,13 +684,6 @@ export const DistributorsNew = () => {
                 <h2 className={styles['content-title']}>Listado de distribuidores</h2>
                 <div className={styles['pagination-section']}>
                   <Pagination
-                    /*
-                    <Pagination
-                      changePage={changePage}
-                      currentPage={userFilters.offset / 100}
-                      totalPage={Math.ceil(totalAssignments / 100)}
-                    />
-                    */
                     changePage={changePageDistributorList}
                     currentPage={distributorsParams.offset / 100}
                     totalPage={Math.ceil(distributorsParams.count / 100)}
@@ -759,7 +751,7 @@ export const DistributorsNew = () => {
                                   onClick={(e) => {
                                     setDistributorsSubSection('distributor-details');
                                     setSelectedDistributor(d);
-                                    setDistributorDetailsSection('product-history');
+                                    setDistributorDetailsSection('access-history');
                                     refreshAccessHistoryById(d.distributor_id);
                                     refreshProductHistoryById(d.distributor_id);
                                   }}
@@ -850,7 +842,7 @@ export const DistributorsNew = () => {
                           <th className={styles['gonvar-table__th']}>N°</th>
                           <th className={styles['gonvar-table__th']}>Fecha</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
-                          <th className={styles['gonvar-table__th']}>Vendedor</th>
+                          <th className={styles['gonvar-table__th']}>Responsable</th>
                           <th className={styles['gonvar-table__th']}>Envio</th>
                           <th className={styles['gonvar-table__th']}>Descuento</th>
                           <th className={styles['gonvar-table__th']}>Confirmado</th>
@@ -868,7 +860,9 @@ export const DistributorsNew = () => {
                               key={`user_${i}`}
                             >
                               <td className={styles['gonvar-table__data']}>
-                                {ph.product_sell_id}
+                                {
+                                  `${ph.product_sell_id}`.padStart(6, '0')
+                                }
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 {ph.sell_at}
@@ -930,7 +924,7 @@ export const DistributorsNew = () => {
                                           }),
                                           sellerId: ph.seller_id,
                                           send_cost: ph.send_cost,
-                                          discount: 0
+                                          discount: ph.discount
                                         })
                                       }}
                                       style={{
@@ -1299,9 +1293,6 @@ export const DistributorsNew = () => {
             />
           }
           show={showProductInvoiceModal}
-          onClose={() => {
-            setShowProductInvoiceModal(false);
-          }}
           compactSize={false}
         />
       }

@@ -208,30 +208,7 @@ export const CreateInvoiceProductModal = ({
                   </label>
                 </div>
               </div>
-              <div className={s2['product-sell-data-item']}>
-                <div className={s2['product-sell-data-label']}>
-                  Descuento
-                </div>
-                <div className={s2['product-sell-data-value']}>
-                  <input
-                    type="number"
-                    style={{
-                      width: 'calc(100% - 120px)',
-                      padding: '4px',
-                      borderRadius: '16px',
-                      paddingLeft: '12px'
-                    }}
-                    value={`${discount}`}
-                    onChange={handleDiscountChange}
-                    min={0}
-                    max={100}
-                    maxLength={3}
-                  />
-                  <span style={{
-                    paddingLeft: '15px'
-                  }} >Por ciento</span>
-                </div>
-              </div>
+
               <div className={s2['product-sell-data-item']}>
                 <div className={s2['product-sell-data-label']}>
                   Estado
@@ -533,11 +510,36 @@ export const CreateInvoiceProductModal = ({
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-
+            gap: '8px',
+            paddingBottom: '16px'
           }}>
             {
               // TODO
             }
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Descuento
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <input
+                  type="number"
+                  style={{
+                    width: 'calc(100% - 120px)',
+                    padding: '4px',
+                    borderRadius: '16px',
+                    paddingLeft: '12px'
+                  }}
+                  value={`${discount}`}
+                  onChange={handleDiscountChange}
+                  min={0}
+                  max={100}
+                  maxLength={3}
+                />
+                <span style={{
+                  paddingLeft: '15px'
+                }} >Por ciento</span>
+              </div>
+            </div>
             <div className={s2['product-sell-data-item']}>
               <div className={s2['product-sell-data-label']}>
                 Costo de envio
