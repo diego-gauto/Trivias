@@ -39,7 +39,6 @@ export const DistributorsProducts = () => {
   const [newProduct, setNewProduct] = useState<IProduct>({
     product_id: 0,
     name: '',
-    image: '',
     default_price: 0
   });
 
@@ -90,7 +89,7 @@ export const DistributorsProducts = () => {
       setProductsParams({
         ...productsParams,
         count: productsCount
-      })
+      });
       setProducts(productsList);
     } catch (error) {
       console.error(error);
@@ -230,7 +229,6 @@ export const DistributorsProducts = () => {
                 if (canCreate) {
                   setNewProduct({
                     name: '',
-                    image: '',
                     default_price: 0,
                     product_id: 0
                   });

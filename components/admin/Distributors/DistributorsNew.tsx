@@ -39,8 +39,6 @@ type EntityParams = {
   count: number,
 }
 
-
-
 function createAccessInvoiceDefaultValue(distributorId: number, adminId: number): IAccessInvoice {
   return {
     distributorId,
@@ -67,10 +65,14 @@ function createAccessInvoiceDefaultValue(distributorId: number, adminId: number)
 
 function createProductInvoiceDefaultValue(distributorId: number, sellerId: number): IProductInvoice {
   return {
+    product_sell_id: 0,
     distributorId,
     sellerId,
     products: [],
-    date: ''
+    date: '',
+    is_confirmed: false,
+    send_cost: 0,
+    discount: 0
   }
 }
 
@@ -111,13 +113,14 @@ export const DistributorsNew = () => {
   const [distributorUserIds, setDistributorUserIds] = useState<IDistributorIdsWithUserId[]>([]);
   const [mainSection, setMainSection] = useState<MainSection>('distributors');
   const [distributorsSubSection, setDistributorsSubSection] = useState<DistributorsSubSection>('distributors-list');
-  const [distributorDetailsSection, setDistributorDetailsSection] = useState<DistributorDetailsSection>('product-history');
+  const [distributorDetailsSection, setDistributorDetailsSection] = useState<DistributorDetailsSection>('access-history');
 
   const [showAccessInvoiceModal, setShowAccessInvoiceModal] = useState(false);
   const [showProductInvoiceModal, setShowProductInvoiceModal] = useState(false);
   const [showUpdateDistributorModal, setShowUpdateDistributorModal] = useState(false);
   const [showCreateAccessInoviceModal, setShowCreateAccessInoviceModal] = useState(false);
   const [showCreateProductInoviceModal, setShowCreateProductInoviceModal] = useState(false);
+  const [productInvoiceOption, setProductInvoiceOption] = useState<'create' | 'update'>('create');
   const [newAccessInvoice, setNewAccessInvoice] = useState<IAccessInvoice>(createAccessInvoiceDefaultValue(0, 0));
   const [newProductInvoice, setNewProductInvoice] = useState<IProductInvoice>(createProductInvoiceDefaultValue(0, 0));
 
@@ -160,7 +163,6 @@ export const DistributorsNew = () => {
 
   useEffect(() => {
     try {
-      console.log('Esta cambiando el offset');
       refreshNormalUsersList();
     } catch (error) {
       console.error(error);
@@ -367,7 +369,7 @@ export const DistributorsNew = () => {
 
   async function refreshProductHistoryById(selectedDistributorId: number) {
     try {
-      const response = await getProductHistoryByDistributorId(selectedDistributorId)
+      const response = await getProductHistoryByDistributorId(selectedDistributorId);
       setProductHistory(response);
     } catch (error) {
       console.error(error);
@@ -657,20 +659,20 @@ export const DistributorsNew = () => {
           selectedDistributor !== null &&
           <div className={styles['sections-container']}>
             <div
-              className={`${styles['section-title']} ${distributorDetailsSection === 'product-history' ? styles['section-title--active'] : ''}`}
-              onClick={(e) => {
-                setDistributorDetailsSection('product-history');
-              }}
-            >
-              Historial de producto
-            </div>
-            <div
               className={`${styles['section-title']} ${distributorDetailsSection === 'access-history' ? styles['section-title--active'] : ''}`}
               onClick={(e) => {
                 setDistributorDetailsSection('access-history');
               }}
             >
-              Historial de acceso
+              Accesos
+            </div>
+            <div
+              className={`${styles['section-title']} ${distributorDetailsSection === 'product-history' ? styles['section-title--active'] : ''}`}
+              onClick={(e) => {
+                setDistributorDetailsSection('product-history');
+              }}
+            >
+              Presupuestos
             </div>
           </div>
         }
@@ -682,13 +684,6 @@ export const DistributorsNew = () => {
                 <h2 className={styles['content-title']}>Listado de distribuidores</h2>
                 <div className={styles['pagination-section']}>
                   <Pagination
-                    /*
-                    <Pagination
-                      changePage={changePage}
-                      currentPage={userFilters.offset / 100}
-                      totalPage={Math.ceil(totalAssignments / 100)}
-                    />
-                    */
                     changePage={changePageDistributorList}
                     currentPage={distributorsParams.offset / 100}
                     totalPage={Math.ceil(distributorsParams.count / 100)}
@@ -756,7 +751,7 @@ export const DistributorsNew = () => {
                                   onClick={(e) => {
                                     setDistributorsSubSection('distributor-details');
                                     setSelectedDistributor(d);
-                                    setDistributorDetailsSection('product-history');
+                                    setDistributorDetailsSection('access-history');
                                     refreshAccessHistoryById(d.distributor_id);
                                     refreshProductHistoryById(d.distributor_id);
                                   }}
@@ -816,10 +811,10 @@ export const DistributorsNew = () => {
               <div className={styles['distributor-details-header']}>
                 <div className={styles['distributor-details-titles-container']}>
                   <h2 className={styles['distributor-details-title']}>
-                    Historial de productos
+                    Presupuestos
                   </h2>
                   <h3 className={styles['distributor-details-subtitle']}>
-                    Estos son los productos comprados por el distribuidor
+                    Estos son los presupuestos del distribuidor
                   </h3>
                 </div>
                 {
@@ -828,11 +823,12 @@ export const DistributorsNew = () => {
                     className={styles['distributor-details-create-access-button']}
                     onClick={(e) => {
                       setShowCreateProductInoviceModal(true);
-                      // TODO: actualizar el id del distributor
+                      setProductInvoiceOption('create');
+                      setNewProductInvoice(createProductInvoiceDefaultValue(0, 0));
                     }}
                   >
                     <IoIosAddCircleOutline size={30} />
-                    <span>Registrar productos</span>
+                    <span>Registrar presupuesto</span>
                   </div>
                 }
               </div>
@@ -843,10 +839,13 @@ export const DistributorsNew = () => {
                     <table className={styles['gonvar-table']}>
                       <thead className={styles['gonvar-table__thead']}>
                         <tr className={styles['gonvar-table__row']}>
+                          <th className={styles['gonvar-table__th']}>N°</th>
                           <th className={styles['gonvar-table__th']}>Fecha</th>
-                          <th className={styles['gonvar-table__th']}>Cantidad de productos</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
-                          <th className={styles['gonvar-table__th']}>Vendedor</th>
+                          <th className={styles['gonvar-table__th']}>Responsable</th>
+                          <th className={styles['gonvar-table__th']}>Envio</th>
+                          <th className={styles['gonvar-table__th']}>Descuento</th>
+                          <th className={styles['gonvar-table__th']}>Confirmado</th>
                           {
                             (isSuperAdmin || adminAccess.view === 1) &&
                             <th className={styles['gonvar-table__th']}></th>
@@ -861,10 +860,12 @@ export const DistributorsNew = () => {
                               key={`user_${i}`}
                             >
                               <td className={styles['gonvar-table__data']}>
-                                {ph.sell_at}
+                                {
+                                  `${ph.product_sell_id}`.padStart(6, '0')
+                                }
                               </td>
                               <td className={styles['gonvar-table__data']}>
-                                {ph.product_count}
+                                {ph.sell_at}
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 {
@@ -873,6 +874,21 @@ export const DistributorsNew = () => {
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 {ph.seller_email}
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(ph.send_cost)
+                                }
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  `${ph.discount}%`
+                                }
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  ph.is_confirmed ? 'Si' : 'No'
+                                }
                               </td>
                               {
                                 (isSuperAdmin || adminAccess.view === 1) &&
@@ -884,8 +900,40 @@ export const DistributorsNew = () => {
                                       setSelectedProductInvoice(ph);
                                     }}
                                   >
-                                    Ver factura
+                                    Ver
                                   </button>
+                                  {
+                                    !ph.is_confirmed &&
+                                    <button
+                                      className={styles['gonvar-table__button']}
+                                      onClick={(e) => {
+                                        setSelectedProductInvoice(ph);
+                                        setProductInvoiceOption('update');
+                                        setShowCreateProductInoviceModal(true);
+                                        setNewProductInvoice({
+                                          date: ph.sell_at,
+                                          distributorId: ph.distributor_id,
+                                          is_confirmed: ph.is_confirmed,
+                                          product_sell_id: ph.product_sell_id,
+                                          products: ph.products.map(p => {
+                                            return {
+                                              count: p.count,
+                                              price: p.price,
+                                              productId: p.product_id
+                                            }
+                                          }),
+                                          sellerId: ph.seller_id,
+                                          send_cost: ph.send_cost,
+                                          discount: ph.discount
+                                        })
+                                      }}
+                                      style={{
+                                        marginLeft: '8px'
+                                      }}
+                                    >
+                                      Editar
+                                    </button>
+                                  }
                                 </td>
                               }
                             </tr>
@@ -900,7 +948,7 @@ export const DistributorsNew = () => {
                   <div className={styles['empty-container']}>
                     <div className={styles['empty-content']}>
                       <p className={styles['empty-content-text']}>
-                        Este distribuidor no cuenta con un historial de productos
+                        Este distribuidor no cuenta con un historial de presupuestos
                       </p>
                     </div>
                   </div>
@@ -930,7 +978,7 @@ export const DistributorsNew = () => {
               <div className={styles['distributor-details-header']}>
                 <div className={styles['distributor-details-titles-container']}>
                   <h2 className={styles['distributor-details-title']}>
-                    Historial de acceso
+                    Accesos
                   </h2>
                   <h3 className={styles['distributor-details-subtitle']}>
                     Estos son los accesos comprados por el distribuidor
@@ -955,9 +1003,6 @@ export const DistributorsNew = () => {
                 }
               </div>
               <div className={styles['distributor-details-content']}>
-                {
-                  /* TODO: Colocar las ventas del usuario distribuidor  */
-                }
                 {
                   accessHistory.length > 0 &&
                   <div className={styles['table-content']}>
@@ -1248,9 +1293,6 @@ export const DistributorsNew = () => {
             />
           }
           show={showProductInvoiceModal}
-          onClose={() => {
-            setShowProductInvoiceModal(false);
-          }}
           compactSize={false}
         />
       }
@@ -1264,19 +1306,19 @@ export const DistributorsNew = () => {
               }}
               onCreate={(canCreate) => {
                 if (canCreate) {
-                  refreshAccessHistoryById(selectedDistributor.distributor_id);
+                  refreshProductHistoryById(selectedDistributor.distributor_id);
                 }
               }}
-              productInvoice={{
-                ...newProductInvoice,
-                distributorId: selectedDistributor.distributor_id
-              }}
+              productInvoice={
+                {
+                  ...newProductInvoice,
+                  distributorId: selectedDistributor.distributor_id
+                }
+              }
               modifyProductInvoice={setNewProductInvoice}
+              productInvoiceOption={productInvoiceOption}
             />
           }
-          onClose={() => {
-            setShowCreateProductInoviceModal(false);
-          }}
           show={showCreateProductInoviceModal}
           compactSize={false}
         />
