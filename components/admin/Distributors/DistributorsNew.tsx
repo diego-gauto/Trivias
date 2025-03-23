@@ -1319,9 +1319,6 @@ export const DistributorsNew = () => {
               productInvoiceOption={productInvoiceOption}
             />
           }
-          onClose={() => {
-            setShowCreateProductInoviceModal(false);
-          }}
           show={showCreateProductInoviceModal}
           compactSize={false}
         />
