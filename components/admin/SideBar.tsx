@@ -31,7 +31,6 @@ const SideBar = ({ show, onHide }: any) => {
   const [isSubscriptions, setIsSubscriptions] = useState<boolean>(false);
   const [isActiveMemberships, setIsActiveMemberships] = useState<boolean>(false);
   const [isDistributors, setIsDistributors] = useState<boolean>(false);
-  const [isDistributorABMSellers, setIsDistributorABMSellers] = useState(false);
   const [isDistributorABMProducts, setIsDistributorABMProducts] = useState(false);
   const [isDistributorUser, setIsDistributorUser] = useState<boolean | null>(null);
   const [index, setIndex] = useState(0);
@@ -48,7 +47,9 @@ const SideBar = ({ show, onHide }: any) => {
     useEffect(() => {
       if (userDataAuth.user !== null) {
         let user: IUserData = userDataAuth.user;
-        checkIfIsDistributor();
+        checkIfIsDistributor().then(res => {
+          setIsDistributorUser(res);
+        });
         if (userDataAuth.user.role === 'superAdmin') {
           setIsSuperAdmin(true);
         }
@@ -80,7 +81,6 @@ const SideBar = ({ show, onHide }: any) => {
             setIsTicketsList(true);
           if (role.role === 'memberships_list' && changeValue(role.view))
             setIsMembershipsList(true);
-          // setIsSubscriptions
           if (role.role === 'subscriptions' && changeValue(role.view))
             setIsSubscriptions(true);
           if (role.role === 'active_memberships' && changeValue(role.view))
@@ -90,13 +90,9 @@ const SideBar = ({ show, onHide }: any) => {
             if (`${role.abm_products}` === '1') {
               setIsDistributorABMProducts(true);
             }
-            if (`${role.abm_sellers}` === '1') {
-              setIsDistributorABMSellers(true);
-            }
           }
         });
         setLoading(false);
-        console.log({ user: userDataAuth.user });
       }
       if (
         window.location.pathname.substring(
@@ -245,14 +241,13 @@ const SideBar = ({ show, onHide }: any) => {
       ) {
         setIndex(23);
       }
-    }, []);
+    }, [index]);
   } catch (error) { }
 
   useEffect(() => {
     try {
       if ((user !== null || user !== undefined)) {
         checkIfIsDistributor().then(isDistributorUser => {
-          console.log({ isDistributorUser });
           if (!isDistributorUser) {
             if (user.role === 'user') {
               router.push({ pathname: '/' });
@@ -263,7 +258,6 @@ const SideBar = ({ show, onHide }: any) => {
           }
         });
       }
-      console.log({ isDistributorUser });
     } catch (error) {
       console.error(error);
     }
@@ -573,21 +567,7 @@ const SideBar = ({ show, onHide }: any) => {
                   </Link>
                 }
                 {
-                  (isDistributorABMSellers || isSuperAdmin) &&
-                  <Link href='/admin/DistributorSellers'>
-                    <li
-                      style={{ color: index == 22 ? '#ffa500' : '#fff' }}
-                      onClick={() => {
-                        setIndex(22);
-                        onHide();
-                      }}
-                    >
-                      Sellers
-                    </li>
-                  </Link>
-                }
-                {
-                  (isDistributorUser) &&
+                  (isDistributorUser || isSuperAdmin) &&
                   <Link href='/admin/DistributorDetails'>
                     <li
                       style={{ color: index == 23 ? '#ffa500' : '#fff' }}
