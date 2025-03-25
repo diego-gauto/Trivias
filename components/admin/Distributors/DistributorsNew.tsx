@@ -737,7 +737,7 @@ export const DistributorsNew = () => {
                             </td>
                             <td className={styles['gonvar-table__data']}>
                               {
-                                d.total_sales
+                                Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(d.total_sales + d.total_product_sales)
                               }
                             </td>
                             <td className={styles['gonvar-table__data']}>

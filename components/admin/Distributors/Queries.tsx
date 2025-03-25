@@ -80,29 +80,45 @@ const getWhereConditionsForDistributorsQuery = (input: string, params: IDistribu
 export const getAllDistributorUsersArray = async (offset: number, input: string, params: IDistributorFilterParams): Promise<IDistributor[]> => {
   try {
     const query2 = `SELECT 
-          d.distributor_id, 
-          CONCAT(u.name, ' ', u.last_name) AS name, 
-          u.phone_number, 
-          u.photo, 
-          UNIX_TIMESTAMP(u.created_at) AS user_created_at, 
-          UNIX_TIMESTAMP(d.created_at) AS distributor_created_at, 
-          d.admin_user_id, 
-          u.country, 
-          IFNULL(u.email, '') AS email, 
-          IFNULL(u.origin_state, '') AS origin_state, 
-          IFNULL(d.postal_code, '') AS postal_code, 
-          u.id AS user_id,
-          COALESCE(t1.total_amount, 0) AS total_sales
+        d.distributor_id, 
+        CONCAT(u.name, ' ', u.last_name) AS name, 
+        u.phone_number, 
+        u.photo, 
+        UNIX_TIMESTAMP(u.created_at) AS user_created_at, 
+        UNIX_TIMESTAMP(d.created_at) AS distributor_created_at, 
+        d.admin_user_id, 
+        u.country, 
+        IFNULL(u.email, '') AS email, 
+        IFNULL(u.origin_state, '') AS origin_state, 
+        IFNULL(d.postal_code, '') AS postal_code, 
+        u.id AS user_id,
+        COALESCE(t1.total_amount, 0) AS total_sales,
+        COALESCE(t2.total, 0) AS total_product_sales
       FROM distributors AS d
       INNER JOIN users AS u ON u.id = d.user_id
       LEFT JOIN (
-          -- Subconsulta que calcula el total de ventas por distribuidor
+          -- Subconsulta para total de ventas por distribuidor en code_sells
           SELECT cs.distributor_id, SUM(csd.amount * csd.count) AS total_amount
           FROM code_sells AS cs
           INNER JOIN code_sell_details AS csd ON csd.code_sell_id = cs.code_sell_id
           WHERE csd.count > 0
           GROUP BY cs.distributor_id
       ) AS t1 ON d.distributor_id = t1.distributor_id
+      LEFT JOIN (
+          -- Subconsulta para total de ventas confirmadas en product_sells
+          SELECT t1.distributor_id, SUM(t1.total) AS total
+          FROM (
+              SELECT d.distributor_id, ps.product_sell_id, ps.is_confirmed, ps.discount, ps.send_cost, 
+                    SUM(pbps.count * pbps.price) AS subtotal, 
+                    (SUM(pbps.count * pbps.price) * (1 - ps.discount / 100)) + ps.send_cost AS total
+              FROM product_sells AS ps
+              INNER JOIN distributors AS d ON d.distributor_id = ps.distributor_id
+              INNER JOIN products_by_product_sell AS pbps ON ps.product_sell_id = pbps.product_sell_id
+              GROUP BY d.distributor_id, ps.product_sell_id, ps.is_confirmed
+          ) AS t1
+          WHERE t1.is_confirmed = 1
+          GROUP BY t1.distributor_id
+      ) AS t2 ON d.distributor_id = t2.distributor_id
       ${getWhereConditionsForDistributorsQuery(input, params)}
       ORDER BY d.distributor_id
       LIMIT 100 OFFSET ${offset};`;

@@ -208,7 +208,7 @@ export const DistributorsNew = () => {
               <div className={styles['distributor-details-header']}>
                 <div className={styles['distributor-details-titles-container']}>
                   <h2 className={styles['distributor-details-title']}>
-                    Presupuestoss
+                    Presupuestos
                   </h2>
                   <h3 className={styles['distributor-details-subtitle']}>
                     Estos son los productos comprados por ti

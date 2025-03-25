@@ -23,7 +23,7 @@ export const CreateProductModal = ({
   const { name, default_price } = newProduct;
 
   const isValidRequestValues = () => {
-    return name.length > 0 && default_price > 0;
+    return (name.length > 0 && name.length < 60) && default_price > 0;
   };
 
   return <div className={s['main-container']}>

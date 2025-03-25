@@ -24,7 +24,7 @@ export const UpdateProductModal = ({
   const { name, default_price } = product;
 
   const isValidRequestValues = () => {
-    return name.length > 0 && default_price > 0;
+    return (name.length > 0 && name.length < 60) && default_price > 0;
   };
 
   return <div className={s['main-container']}>

@@ -25,6 +25,7 @@ interface IDistributor {
   origin_state: string;
   postal_code: string | null;
   total_sales: number;
+  total_product_sales: number;
 }
 
 interface IUser {
