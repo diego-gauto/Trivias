@@ -222,10 +222,13 @@ export const DistributorsNew = () => {
                     <table className={styles['gonvar-table']}>
                       <thead className={styles['gonvar-table__thead']}>
                         <tr className={styles['gonvar-table__row']}>
+                          <th className={styles['gonvar-table__th']}>N°</th>
                           <th className={styles['gonvar-table__th']}>Fecha</th>
-                          <th className={styles['gonvar-table__th']}>Cantidad de productos</th>
                           <th className={styles['gonvar-table__th']}>Monto total</th>
-                          <th className={styles['gonvar-table__th']}>Vendedor</th>
+                          <th className={styles['gonvar-table__th']}>Responsable</th>
+                          <th className={styles['gonvar-table__th']}>Envio</th>
+                          <th className={styles['gonvar-table__th']}>Descuento</th>
+                          <th className={styles['gonvar-table__th']}>Confirmado</th>
                           <th className={styles['gonvar-table__th']}></th>
                         </tr>
                       </thead>
@@ -237,10 +240,12 @@ export const DistributorsNew = () => {
                               key={`user_${i}`}
                             >
                               <td className={styles['gonvar-table__data']}>
-                                {ph.sell_at}
+                                {
+                                  `${ph.product_sell_id}`.padStart(6, '0')
+                                }
                               </td>
                               <td className={styles['gonvar-table__data']}>
-                                {ph.product_count}
+                                {ph.sell_at}
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 {
@@ -249,6 +254,21 @@ export const DistributorsNew = () => {
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 {ph.seller_email}
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(ph.send_cost)
+                                }
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  `${ph.discount}%`
+                                }
+                              </td>
+                              <td className={styles['gonvar-table__data']}>
+                                {
+                                  ph.is_confirmed ? 'Si' : 'No'
+                                }
                               </td>
                               <td className={styles['gonvar-table__data']}>
                                 <button
