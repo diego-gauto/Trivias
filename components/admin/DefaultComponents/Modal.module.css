@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro transparente */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo negro transparente */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,4 +23,23 @@
 
 .modal-content--compact-size {
   width: 380px;
+}
+
+.exit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid #6310c8;
+  ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color ease-in 0.2s;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.exit-button:hover {
+  background-color: rgba(99, 16, 200, 0.25);
 }

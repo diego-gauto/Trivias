@@ -1,4 +1,5 @@
 import styles from './Modal.module.css';
+import { RxCross1 } from "react-icons/rx";
 
 interface IModalProps {
   show: boolean,
@@ -16,13 +17,30 @@ export const Modal = ({ show, onClose = () => { }, compactSize = true, child }: 
       onClose();
     }
   };
-  // modal-content--compact-size
+
   return (
     <div
       className={styles['modal-backdrop']}
       onClick={handleBackdropClick}
     >
-      <div className={`${styles['modal-content']} ${compactSize === false ? '' : styles['modal-content--compact-size']}`}>
+      <div
+        className={`${styles['modal-content']} ${compactSize === false ? '' : styles['modal-content--compact-size']}`}
+        style={{
+          position: 'relative',
+        }}
+      >
+        <div style={{
+          position: 'absolute',
+          top: '15px',
+          right: '15px',
+        }}>
+          <div className={styles['exit-button']}>
+            <RxCross1
+              size={25}
+              color='#6310c8'
+            />
+          </div>
+        </div>
         {
           child
         }

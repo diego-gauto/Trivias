@@ -591,67 +591,7 @@ export const DistributorsNew = () => {
           (isFilterParamsActivated && mainSection === 'common-users') &&
           <div className={styles['filters-params']}>
             {
-              /*
-              <div className={styles['pair-params-container']}>
-              <div className="mb-3">
-                <label htmlFor="numeroCelular" className="form-label">Número de celular</label>
-                <input
-                  type="tel"
-                  id="numeroCelular"
-
-                />
-                <select
-                  className="form-select"
-                  id="codigoPostal"
-                >
-                  <option selected>Seleccione un código postal</option>
-                  <option value="12345">12345</option>
-                  <option value="67890">67890</option>
-                  <option value="54321">54321</option>
-                </select>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="estado" className="form-label">Estado</label>
-                <select className="form-select" id="estado">
-                  <option selected>Seleccione un estado</option>
-                  <option value="CDMX">Ciudad de México</option>
-                  <option value="Jalisco">Jalisco</option>
-                  <option value="Nuevo Leon">Nuevo León</option>
-                </select>
-              </div>
-            </div>
-
-            <div className={styles['pair-params-container']} >
-              <div className="mb-3">
-                <label htmlFor="precioMin" className="form-label">Monto mínimo</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="precioMin"
-                  placeholder="Ingrese el monto mínimo"
-                  onInput={(e) => {
-                    // oninput="formatearMoneda(this)" 
-                  }}
-                  min={0}
-                />
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="precioMax" className="form-label">Monto máximo</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="precioMax"
-                  placeholder="Ingrese el monto máximo"
-                  onInput={(e) => {
-                    // oninput="formatearMoneda(this)" 
-                  }}
-                  min={0}
-                />
-              </div>
-            </div>
-              */
+              // Aquí pueden ir filtros para buscar usuarios
             }
           </div>
         }
@@ -1294,6 +1234,9 @@ export const DistributorsNew = () => {
           }
           show={showProductInvoiceModal}
           compactSize={false}
+          onClose={() => {
+            setShowProductInvoiceModal(false);
+          }}
         />
       }
       {
@@ -1321,6 +1264,9 @@ export const DistributorsNew = () => {
           }
           show={showCreateProductInoviceModal}
           compactSize={false}
+          onClose={() => {
+            setShowCreateProductInoviceModal(false);
+          }}
         />
       }
       {
@@ -1342,6 +1288,10 @@ export const DistributorsNew = () => {
           />}
           show={showUpdateDistributorModal}
           compactSize={true}
+          onClose={() => {
+            setShowUpdateDistributorModal(false);
+            setSelectedDistributor(null);
+          }}
         />
       }
     </div>)

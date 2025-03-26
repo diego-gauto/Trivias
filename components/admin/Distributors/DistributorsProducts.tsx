@@ -223,7 +223,7 @@ export const DistributorsProducts = () => {
           child={
             <CreateProductModal
               onClose={() => {
-                setShowCreateProduct(false)
+                setShowCreateProduct(false);
               }}
               onCreate={(canCreate) => {
                 if (canCreate) {
@@ -241,6 +241,9 @@ export const DistributorsProducts = () => {
           }
           show={showCreateProduct}
           compactSize={true}
+          onClose={() => {
+            setShowCreateProduct(false);
+          }}
         />
       }
       {
@@ -278,6 +281,9 @@ export const DistributorsProducts = () => {
             product={selectedProduct}
           />}
           show={showUpdateProduct}
+          onClose={() => {
+            setShowUpdateProduct(false);
+          }}
           compactSize={true}
         />
       }
