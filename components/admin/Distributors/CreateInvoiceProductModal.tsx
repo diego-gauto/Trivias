@@ -5,7 +5,7 @@ import s2 from './CreateInvoiceProductModal.module.css';
 
 import { createProductInvoice, getAllProducts, getAllSellers, getProducts, updateProductInvoice } from './Queries';
 import Image from 'next/image';
-import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { IoIosArrowDropdown, IoIosArrowDropup, IoIosRemoveCircleOutline } from "react-icons/io";
 import { getGenericQueryResponse } from '../../api/admin';
 
 type CreateInvoiceAccessModalProps = {
@@ -35,6 +35,8 @@ export const CreateInvoiceProductModal = ({
 
   const [productName, setProductName] = useState('');
   const [productNameDebounced, setProductNameDebounced] = useState('');
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const today = new Date().toJSON().slice(0, 10);
@@ -208,48 +210,43 @@ export const CreateInvoiceProductModal = ({
                   </label>
                 </div>
               </div>
-
-              <div className={s2['product-sell-data-item']}>
-                <div className={s2['product-sell-data-label']}>
-                  Estado
-                </div>
-                <div className={s2['product-sell-data-value']}>
-                  <label
-                    htmlFor="is_confirmed"
-                    style={{
-                      paddingRight: '8px',
-                      paddingTop: '4px',
-                      userSelect: 'none'
-                    }}
-                  >
-                    Confirmado
-                  </label>
-                  <input
-                    type="checkbox"
-                    className='form-check-input'
-                    checked={is_confirmed}
-                    id='is_confirmed'
-                    style={{
-                      width: '24px',
-                      height: '24px'
-                    }}
-                    onChange={(e) => {
-                      const { checked } = e.target;
-                      console.log({ is_confirmed });
-                      modifyProductInvoice({
-                        ...productInvoice,
-                        is_confirmed: checked
-                      });
-                    }}
-                  />
-                </div>
-              </div>
             </div>
-            <hr />
-            <h3 className={s2['product-search-title']}>
-              Busca un producto
-            </h3>
-            <div>
+            <hr
+              style={{
+                margin: '10px'
+              }}
+            />
+            <div className={`${s['content-collapse']} ${isCollapsed ? s['open'] : ''}`} >
+              <div className={s['collapse-row']}>
+                <div
+                  className={s['collapse-circle']}
+                  onClick={(e) => {
+                    setIsCollapsed(!isCollapsed);
+                  }}
+                >
+                  {
+                    isCollapsed &&
+                    <IoIosArrowDropup
+                      size={35}
+                      color='#6310C8'
+                    />
+                  }
+                  {
+                    !isCollapsed &&
+                    <IoIosArrowDropdown
+                      size={35}
+                      color='#6310C8'
+                    />
+                  }
+                </div>
+                <h3 className={s2['product-search-title']}
+                  style={{
+                    margin: '0',
+                  }}
+                >
+                  Busca un producto
+                </h3>
+              </div>
               <input
                 type="text"
                 value={productName}
@@ -259,84 +256,89 @@ export const CreateInvoiceProductModal = ({
                 }}
                 className='form-control'
                 style={{
-                  marginBlock: '8px'
+                  marginBlock: '8px',
+                  marginTop: '24px'
                 }}
                 placeholder='Ingrese el nombre del producto'
               />
-            </div>
-            {
-              enabledToAddProducts.length > 0 &&
-              <div className={s2['product-search-container']}>
-                <div className={s2['product-search-catalog']}>
-                  {
-                    (products.length === 0 && enabledToAddProducts.length === 0) &&
-                    <div>
+              {
+                enabledToAddProducts.length > 0 &&
+                <div className={s2['product-search-container']}>
+                  <div className={s2['product-search-catalog']}>
+                    {
+                      (products.length === 0 && enabledToAddProducts.length === 0) &&
                       <div>
-                        No existen productos para vender.
+                        <div>
+                          No existen productos para vender.
+                        </div>
                       </div>
-                    </div>
-                  }
-                  {
-                    enabledToAddProducts.length > 0 &&
-                    <table style={{
-                      width: '100%'
-                    }}>
-                      <thead>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Precio</th>
-                          <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          enabledToAddProducts.map((p, index) => {
-                            return <tr
-                              key={`enabled-to-add-product-${p.product_id}-${index}`}
-                            >
-                              <td>
-                                {
-                                  p.name
-                                }
-                              </td>
-                              <td>
-                                {
-                                  p.default_price
-                                }
-                              </td>
-                              <td>
-                                <button
-                                  // button--small
-                                  className={`${s['button']} ${s['button--small']}`}
-                                  onClick={(e) => {
-                                    if (invoiceProducts.length < 21) {
-                                      addProductToSelectedProductList(p);
-                                    }
-                                  }}
-                                >
-                                  Agregar
-                                </button>
-                              </td>
-                            </tr>
-                          })
-                        }
-                      </tbody>
-                    </table>
-                  }
+                    }
+                    {
+                      enabledToAddProducts.length > 0 &&
+                      <table style={{
+                        width: '100%'
+                      }}>
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            enabledToAddProducts.map((p, index) => {
+                              return <tr
+                                key={`enabled-to-add-product-${p.product_id}-${index}`}
+                              >
+                                <td>
+                                  {
+                                    p.name
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    p.default_price
+                                  }
+                                </td>
+                                <td>
+                                  <button
+                                    // button--small
+                                    className={`${s['button']} ${s['button--small']}`}
+                                    onClick={(e) => {
+                                      if (invoiceProducts.length < 21) {
+                                        addProductToSelectedProductList(p);
+                                      }
+                                    }}
+                                  >
+                                    Agregar
+                                  </button>
+                                </td>
+                              </tr>
+                            })
+                          }
+                        </tbody>
+                      </table>
+                    }
+                  </div>
                 </div>
-              </div>
-            }
-            {
-              enabledToAddProducts.length === 0 &&
-              <p style={{
-                padding: '16px',
-                border: '1px solid gray',
-                borderRadius: '12px',
-                textAlign: 'center',
-                margin: '0'
-              }}>No hay más productos por buscar</p>
-            }
-            <hr />
+              }
+              {
+                enabledToAddProducts.length === 0 &&
+                <p style={{
+                  padding: '16px',
+                  border: '1px solid gray',
+                  borderRadius: '12px',
+                  textAlign: 'center',
+                  margin: '0'
+                }}>No hay más productos por buscar</p>
+              }
+            </div>
+            <hr
+              style={{
+                margin: '10px'
+              }}
+            />
             {
               invoiceProducts.length === 0 &&
               <div>
@@ -351,7 +353,7 @@ export const CreateInvoiceProductModal = ({
                 className={s['table-content']}
                 style={{
                   overflowY: 'scroll',
-                  maxHeight: '300px',
+                  maxHeight: '180px',
                   marginBottom: '10px',
                   paddingRight: '10px'
                 }}
@@ -383,6 +385,7 @@ export const CreateInvoiceProductModal = ({
                               <p style={{
                                 margin: '0',
                                 textAlign: 'center',
+                                fontSize: '14px'
                               }}>
                                 {
                                   name
@@ -496,6 +499,7 @@ export const CreateInvoiceProductModal = ({
                                   style={{
                                     margin: '0',
                                     fontWeight: '500',
+                                    fontSize: '14px'
                                   }}
                                 >Remover</p>
                               </div>
@@ -511,13 +515,10 @@ export const CreateInvoiceProductModal = ({
           </div>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1fr 1fr 1fr',
             gap: '8px',
             paddingBottom: '16px'
           }}>
-            {
-              // TODO
-            }
             <div className={s2['product-sell-data-item']}>
               <div className={s2['product-sell-data-label']}>
                 Descuento
@@ -526,7 +527,7 @@ export const CreateInvoiceProductModal = ({
                 <input
                   type="number"
                   style={{
-                    width: 'calc(100% - 120px)',
+                    width: 'calc(100% - 40px)',
                     padding: '4px',
                     borderRadius: '16px',
                     paddingLeft: '12px'
@@ -539,7 +540,7 @@ export const CreateInvoiceProductModal = ({
                 />
                 <span style={{
                   paddingLeft: '15px'
-                }} >Por ciento</span>
+                }} >%</span>
               </div>
             </div>
             <div className={s2['product-sell-data-item']}>
@@ -567,6 +568,41 @@ export const CreateInvoiceProductModal = ({
                   min={0}
                   max={100}
                   maxLength={3}
+                />
+              </div>
+            </div>
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Estado
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <label
+                  htmlFor="is_confirmed"
+                  style={{
+                    paddingRight: '8px',
+                    paddingTop: '4px',
+                    userSelect: 'none'
+                  }}
+                >
+                  Confirmado
+                </label>
+                <input
+                  type="checkbox"
+                  className='form-check-input'
+                  checked={is_confirmed}
+                  id='is_confirmed'
+                  style={{
+                    width: '24px',
+                    height: '24px'
+                  }}
+                  onChange={(e) => {
+                    const { checked } = e.target;
+                    console.log({ is_confirmed });
+                    modifyProductInvoice({
+                      ...productInvoice,
+                      is_confirmed: checked
+                    });
+                  }}
                 />
               </div>
             </div>
