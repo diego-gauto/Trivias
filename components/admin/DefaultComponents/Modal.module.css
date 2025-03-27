@@ -31,13 +31,14 @@
   border-radius: 50%;
   background-color: white;
   border: 3px solid #6310c8;
-  ;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-color ease-in 0.2s;
   cursor: pointer;
   padding: 6px;
+  position: relative;
+  z-index: 10;
 }
 
 .exit-button:hover {

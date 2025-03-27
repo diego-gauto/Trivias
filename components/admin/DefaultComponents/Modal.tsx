@@ -33,7 +33,11 @@ export const Modal = ({ show, onClose = () => { }, compactSize = true, child }: 
           position: 'absolute',
           top: '15px',
           right: '15px',
-        }}>
+        }}
+          onClick={(e) => {
+            onClose();
+          }}
+        >
           <div className={styles['exit-button']}>
             <RxCross1
               size={25}
