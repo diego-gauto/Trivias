@@ -11,7 +11,7 @@ export const ShowProductModal = ({
   product,
 }: IShowProductModalProps) => {
 
-  const { name, image, default_price } = product;
+  const { name, default_price } = product;
 
   return <div className={s['main-container']}>
     <div
@@ -31,17 +31,6 @@ export const ShowProductModal = ({
             id="nombre"
             placeholder="(El producto no tiene nombre)"
             value={name}
-            disabled
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="url" className="form-label">URL</label>
-          <input
-            type="text"
-            className="form-control"
-            id="url"
-            placeholder="(El producto no tiene imagen)"
-            value={image || ''}
             disabled
           />
         </div>

@@ -152,7 +152,7 @@
 }
 
 .gonvar-table__th {
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   padding-inline: 15px;
   border-bottom: 2px solid lightgrey;
   color: #691aca;
@@ -192,6 +192,10 @@
   font-size: 14px;
   cursor: pointer;
   text-align: center;
+}
+
+.button--small {
+  padding: 0px 24px;
 }
 
 .button:hover {
@@ -284,6 +288,31 @@
 
 .result-petition-button:hover {
   background-color: rgba(105, 26, 202, 0.75);
+}
+
+.content-collapse {
+  max-height: 35px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  position: relative;
+}
+
+.open {
+  max-height: 200px;
+  /* Ajusta este valor según el contenido */
+}
+
+.collapse-circle {
+  background-color: white;
+  transition: background-color ease-in 02.s;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.collapse-circle:hover {
+  background-color: rgba(99, 16, 200, 0.25);
 }
 
 @media screen and (min-width: 576px) {}

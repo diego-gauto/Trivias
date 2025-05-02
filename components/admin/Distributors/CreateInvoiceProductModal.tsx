@@ -3,33 +3,40 @@ import { useEffect, useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import s2 from './CreateInvoiceProductModal.module.css';
 
-import { createProductInvoice, getAllSellers, getProducts } from './Queries';
+import { createProductInvoice, getAllProducts, getAllSellers, getProducts, updateProductInvoice } from './Queries';
 import Image from 'next/image';
-import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { IoIosArrowDropdown, IoIosArrowDropup, IoIosRemoveCircleOutline } from "react-icons/io";
+import { getGenericQueryResponse } from '../../api/admin';
 
 type CreateInvoiceAccessModalProps = {
   productInvoice: IProductInvoice
   modifyProductInvoice: (productInvoice: IProductInvoice) => void
   onClose: () => void
   onCreate: (canCreate: boolean) => void
+  productInvoiceOption: 'create' | 'update'
 }
 
 export const CreateInvoiceProductModal = ({
   productInvoice,
   onClose,
   onCreate,
-  modifyProductInvoice
+  modifyProductInvoice,
+  productInvoiceOption,
 }: CreateInvoiceAccessModalProps) => {
 
   const [userUseRegisterButton, setUserUseRegisterButton] = useState(false);
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
-  const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
-  const [sellers, setSellers] = useState<{ email: string; seller_id: number; }[]>([]);
+  const [haveSuccessAtFinish, setHaveSuccessAtFinish] = useState(false);
+  const [username, setUsername] = useState<string>('');
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [searchedProducts, setSearchedProducts] = useState<IProduct[]>([]);
 
-  const { distributorId, sellerId, products: invoiceProducts, date } = productInvoice;
+  const { distributorId, sellerId, products: invoiceProducts, is_confirmed, send_cost, date, discount } = productInvoice;
 
-  console.log({ productInvoice });
+  const [productName, setProductName] = useState('');
+  const [productNameDebounced, setProductNameDebounced] = useState('');
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     const today = new Date().toJSON().slice(0, 10);
@@ -38,30 +45,66 @@ export const CreateInvoiceProductModal = ({
       date: today,
       distributorId
     });
-    refreshSellersList();
+    getUserData();
     refreshListOfProducts();
+    loadAllProducts();
   }, []);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setProductNameDebounced(productName);
+    }, 1000);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [productName]);
+
+  useEffect(() => {
+    try {
+      refreshListOfProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [productNameDebounced]);
 
   const isValidRequestValues = () => {
     const validProductsNumber = invoiceProducts.some((d) => d.count > 0);
     const validDate = date !== '';
     const validSellerId = sellerId !== 0;
-    console.log({ date });
     return validDate && validProductsNumber && validSellerId;
   };
 
-  const refreshSellersList = async () => {
-    const sellers = await getAllSellers();
-    setSellers(sellers);
+  async function getUserData() {
+    try {
+      const email = localStorage.getItem('email') || '';
+      if (email === '') {
+        return;
+      }
+      const query = `SELECT CONCAT(name, ' ', last_name) AS name, id AS user_id FROM users WHERE email LIKE '${email}'`;
+      const response = await getGenericQueryResponse(query);
+      const data = response.data.data as { name: string, user_id: number }[];
+      if (data.length > 0) {
+        const name = data[0]?.name || '';
+        setUsername(name);
+        const id = data[0]?.user_id || 0;
+        modifyProductInvoice({
+          ...productInvoice,
+          sellerId: id
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  const total = invoiceProducts.reduce((pv, cv) => {
+  const total = (invoiceProducts.reduce((pv, cv) => {
     return pv + (cv.price * cv.count);
-  }, 0);
+  }, 0) * (1 - (discount / 100))) + send_cost; // + send_cost
 
   function getEnableToAddProducts(): IProduct[] {
     const selectedProducIds = invoiceProducts.map(p => p.productId);
-    return products.filter(p => !selectedProducIds.includes(p.product_id));
+    return searchedProducts.filter(p => !selectedProducIds.includes(p.product_id));
   }
 
   const enabledToAddProducts = getEnableToAddProducts();
@@ -85,22 +128,44 @@ export const CreateInvoiceProductModal = ({
     });
   }
 
-  async function refreshListOfProducts() {
+  async function loadAllProducts() {
     try {
-      const products = await getProducts();
+      const products = await getAllProducts();
       setProducts(products);
     } catch (error) {
       console.error(error);
     }
   }
 
+  async function refreshListOfProducts() {
+    try {
+      const products = await getProducts(productName);
+      setSearchedProducts(products);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value === "" ? 0 : Number(e.target.value);
+
+    if (newValue !== 0 && (newValue < 0 || newValue > 100)) {
+      return;
+    }
+
+    modifyProductInvoice({
+      ...productInvoice,
+      discount: newValue
+    });
+  };
+
   return (
     <div className={s['main-container']}>
       <div className={`${s['views']} ${productsRequestIsFinish ? s['transition-active'] : ''}`}>
         <div className={s['container']}>
           <div className={s['header']}>
-            <h2 className={s['title']}>Registrar compra de producto</h2>
-            <h3 className={s['subtitle']}>Estos son los detalles de la venta</h3>
+            <h2 className={s['title']}>Registrar presupuesto</h2>
+            <h3 className={s['subtitle']}>Estos son los detalles del presupuesto</h3>
           </div>
           <div className={s['body']}>
             <div className={s2['product-sell-data-container']}>
@@ -131,108 +196,149 @@ export const CreateInvoiceProductModal = ({
               </div>
               <div className={s2['product-sell-data-item']}>
                 <div className={s2['product-sell-data-label']}>
-                  Vendedor
+                  Responsable
                 </div>
                 <div className={s2['product-sell-data-value']}>
-                  <select
+                  <label
+                    htmlFor=""
                     style={{
-                      width: '100%',
-                      padding: '4px',
-                      borderRadius: '16px',
-                      paddingLeft: '12px'
-                    }}
-                    value={sellerId}
-                    onChange={(e) => {
-                      const { value } = e.target;
-                      const selectedSellerId = parseInt(value) || 0;
-                      modifyProductInvoice({
-                        ...productInvoice,
-                        sellerId: selectedSellerId
-                      });
-                    }}
-                  >
-                    <option value="0" disabled>Escoge un vendedor</option>
+                      padding: '8px 2px 4px'
+                    }}>
                     {
-                      sellers.map((s, index) => {
-                        const { email, seller_id } = s;
-                        return <option
-                          value={seller_id}
-                          key={`seller_${seller_id}`}
-                        >
-                          {email}</option>
-                      })
+                      username
                     }
-                  </select>
+                  </label>
                 </div>
               </div>
             </div>
-            <hr />
-            {
-              enabledToAddProducts.length > 0 &&
-              <div className={s2['product-search-container']}>
-                <h3 className={s2['product-search-title']}>
-                  Busca un producto
-                </h3>
-                <div className={s2['product-search-catalog']}>
+            <hr
+              style={{
+                margin: '10px'
+              }}
+            />
+            <div className={`${s['content-collapse']} ${isCollapsed ? s['open'] : ''}`} >
+              <div className={s['collapse-row']}>
+                <div
+                  className={s['collapse-circle']}
+                  onClick={(e) => {
+                    setIsCollapsed(!isCollapsed);
+                  }}
+                >
                   {
-                    (products.length === 0 && enabledToAddProducts.length === 0) &&
-                    <div>
-                      <div>
-                        No existen productos para vender.
-                      </div>
-                    </div>
+                    isCollapsed &&
+                    <IoIosArrowDropup
+                      size={35}
+                      color='#6310C8'
+                    />
                   }
                   {
-                    enabledToAddProducts.length > 0 &&
-                    <div className={s2['product-search-catalog-container']}>
-                      {
-                        enabledToAddProducts.map((p, index) => {
-                          return (<div
-                            key={`product-item-${p.product_id + '' + index}`}
-                            className={s2['product-search-catalog-item']}
-                          >
-                            <div className={s2['product-search-catalog-item-image-container']}>
-                              {
-                                (p.image) &&
-                                <Image
-                                  src={p.image}
-                                  width={100}
-                                  height={100}
-                                />
-                              }
-                            </div>
-                            <div className={s2['button-container']}>
-                              <p
-                                className={s2['product-search-catalog-item-text']}
-                              >{
-                                  p.name
-                                }</p>
-                              <button
-                                className={s2['button']}
-                                onClick={(e) => {
-                                  addProductToSelectedProductList(p);
-                                }}
-                              >Agregar</button>
-                            </div>
-                          </div>);
-                        })
-                      }
-                    </div>
+                    !isCollapsed &&
+                    <IoIosArrowDropdown
+                      size={35}
+                      color='#6310C8'
+                    />
                   }
                 </div>
+                <h3 className={s2['product-search-title']}
+                  style={{
+                    margin: '0',
+                  }}
+                >
+                  Busca un producto
+                </h3>
               </div>
-            }
-            {
-              enabledToAddProducts.length === 0 &&
-              <p style={{
-                padding: '16px',
-                border: '1px solid gray',
-                borderRadius: '12px',
-                textAlign: 'center',
-                margin: '0'
-              }}>No hay más productos por buscar</p>
-            }
-            <hr />
+              <input
+                type="text"
+                value={productName}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  setProductName(value);
+                }}
+                className='form-control'
+                style={{
+                  marginBlock: '8px',
+                  marginTop: '24px'
+                }}
+                placeholder='Ingrese el nombre del producto'
+              />
+              {
+                enabledToAddProducts.length > 0 &&
+                <div className={s2['product-search-container']}>
+                  <div className={s2['product-search-catalog']}>
+                    {
+                      (products.length === 0 && enabledToAddProducts.length === 0) &&
+                      <div>
+                        <div>
+                          No existen productos para vender.
+                        </div>
+                      </div>
+                    }
+                    {
+                      enabledToAddProducts.length > 0 &&
+                      <table style={{
+                        width: '100%'
+                      }}>
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            enabledToAddProducts.map((p, index) => {
+                              return <tr
+                                key={`enabled-to-add-product-${p.product_id}-${index}`}
+                              >
+                                <td>
+                                  {
+                                    p.name
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    p.default_price
+                                  }
+                                </td>
+                                <td>
+                                  <button
+                                    // button--small
+                                    className={`${s['button']} ${s['button--small']}`}
+                                    onClick={(e) => {
+                                      if (invoiceProducts.length < 21) {
+                                        addProductToSelectedProductList(p);
+                                      }
+                                    }}
+                                  >
+                                    Agregar
+                                  </button>
+                                </td>
+                              </tr>
+                            })
+                          }
+                        </tbody>
+                      </table>
+                    }
+                  </div>
+                </div>
+              }
+              {
+                enabledToAddProducts.length === 0 &&
+                <p style={{
+                  padding: '16px',
+                  border: '1px solid gray',
+                  borderRadius: '12px',
+                  textAlign: 'center',
+                  margin: '0'
+                }}>No hay más productos por buscar</p>
+              }
+            </div>
+            <hr
+              style={{
+                margin: '10px'
+              }}
+            />
             {
               invoiceProducts.length === 0 &&
               <div>
@@ -247,7 +353,7 @@ export const CreateInvoiceProductModal = ({
                 className={s['table-content']}
                 style={{
                   overflowY: 'scroll',
-                  maxHeight: '300px',
+                  maxHeight: '180px',
                   marginBottom: '10px',
                   paddingRight: '10px'
                 }}
@@ -268,7 +374,7 @@ export const CreateInvoiceProductModal = ({
                         if (currentProduct === undefined) {
                           return <></>;
                         }
-                        const { product_id, name, image, default_price } = currentProduct;
+                        const { product_id, name, default_price } = currentProduct;
                         const { count, price } = sp;
                         return (
                           <tr
@@ -276,90 +382,54 @@ export const CreateInvoiceProductModal = ({
                             key={`table-row-detail-${sp.productId}`}
                           >
                             <td className={s['product']}>
-                              <div className={s2['product-search-catalog-item-image-container']}>
-                                {
-                                  image.length > 0 &&
-                                  <Image
-                                    src={image}
-                                    width={80}
-                                    height={80}
-                                  />
-                                }
-                              </div>
                               <p style={{
                                 margin: '0',
                                 textAlign: 'center',
-                                marginTop: '8px'
+                                fontSize: '14px'
                               }}>
                                 {
                                   name
                                 }
                               </p>
                             </td>
-                            <td className={`${s['gonvar-table__data']}`}>
+                            <td
+                              className={`${s['gonvar-table__data']}`}
+                              style={{
+                                padding: '0px 5px'
+                              }}
+                            >
                               <div style={{
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 gap: '8px'
                               }}>
-                                <button
-                                  className={s['count-button']}
-                                  onClick={(e) => {
-                                    if (userUseRegisterButton) {
-                                      return;
-                                    }
-
-                                    const newProducts = invoiceProducts.map(p => {
-                                      if (p.productId !== sp.productId) {
-                                        return p;
-                                      }
-                                      if (p.count === 0) {
-                                        return p;
-                                      }
-                                      return {
-                                        ...p,
-                                        count: p.count - 1
-                                      }
-                                    });
-
+                                <input
+                                  type="number"
+                                  className='form-control'
+                                  style={{
+                                    width: '50%',
+                                    borderRadius: '24px',
+                                    padding: '0px 8px'
+                                  }}
+                                  value={`${count}`}
+                                  onChange={(e) => {
+                                    const { value } = e.target;
                                     modifyProductInvoice({
                                       ...productInvoice,
-                                      products: newProducts
-                                    });
+                                      products: productInvoice.products.map(p => {
+                                        if (p.productId !== sp.productId) {
+                                          return p;
+                                        }
+                                        return {
+                                          ...p,
+                                          count: value === '' ? 0 : parseInt(value)
+                                        }
+                                      })
+                                    })
                                   }}
-                                >
-                                  -
-                                </button>
-                                <span>
-                                  {
-                                    count
-                                  }
-                                </span>
-                                <button
-                                  className={s['count-button']}
-                                  onClick={(e) => {
-                                    if (userUseRegisterButton) {
-                                      return;
-                                    }
-                                    const newProducts = invoiceProducts.map(p => {
-                                      if (p.productId !== sp.productId) {
-                                        return p;
-                                      }
-                                      return {
-                                        ...p,
-                                        count: p.count + 1
-                                      }
-                                    });
-
-                                    modifyProductInvoice({
-                                      ...productInvoice,
-                                      products: newProducts
-                                    });
-                                  }}
-                                >
-                                  +
-                                </button>
+                                  min={0}
+                                />
                               </div>
                             </td>
                             <td>
@@ -375,8 +445,7 @@ export const CreateInvoiceProductModal = ({
                                     width: '90px',
                                     border: '1px solid gray',
                                     borderRadius: '16px',
-                                    padding: '4px',
-                                    paddingLeft: '14px'
+                                    padding: '0px 14px'
                                   }}
                                   placeholder='precio'
                                   type="number"
@@ -398,7 +467,7 @@ export const CreateInvoiceProductModal = ({
                                     modifyProductInvoice({
                                       ...productInvoice,
                                       products: newProductsList
-                                    })
+                                    });
                                   }}
                                 />
                                 <span
@@ -410,20 +479,16 @@ export const CreateInvoiceProductModal = ({
                             </td>
                             <td>
                               <div
-                                className={`${s2['button']} ${s2['button--red']} ${s2['button-circle']}`}
+                                className={`${s2['button']} ${s['button--small']} ${s2['button--red']} ${s2['button-circle']}`}
                                 style={{
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                   borderRadius: '16px',
-                                  padding: '4px',
+                                  padding: '0px',
                                   gap: '8px'
                                 }}
                                 onClick={(e) => {
-                                  console.log({
-                                    sp
-                                  });
-                                  // TODO
                                   removeProductToSelectedProductList(sp.productId);
                                 }}
                               >
@@ -433,7 +498,8 @@ export const CreateInvoiceProductModal = ({
                                 <p
                                   style={{
                                     margin: '0',
-                                    fontWeight: '500'
+                                    fontWeight: '500',
+                                    fontSize: '14px'
                                   }}
                                 >Remover</p>
                               </div>
@@ -447,6 +513,100 @@ export const CreateInvoiceProductModal = ({
               </div>
             }
           </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gap: '8px',
+            paddingBottom: '16px'
+          }}>
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Descuento
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <input
+                  type="number"
+                  style={{
+                    width: 'calc(100% - 40px)',
+                    padding: '4px',
+                    borderRadius: '16px',
+                    paddingLeft: '12px'
+                  }}
+                  value={`${discount}`}
+                  onChange={handleDiscountChange}
+                  min={0}
+                  max={100}
+                  maxLength={3}
+                />
+                <span style={{
+                  paddingLeft: '15px'
+                }} >%</span>
+              </div>
+            </div>
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Costo de envio
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <input
+                  type="number"
+                  style={{
+                    width: '100%',
+                    padding: '4px',
+                    borderRadius: '16px',
+                    paddingLeft: '12px'
+                  }}
+                  value={`${send_cost}`}
+                  onChange={(e) => {
+                    const { value } = e.target;
+
+                    modifyProductInvoice({
+                      ...productInvoice,
+                      send_cost: value === '' ? 0 : parseFloat(value)
+                    });
+                  }}
+                  min={0}
+                  max={100}
+                  maxLength={3}
+                />
+              </div>
+            </div>
+            <div className={s2['product-sell-data-item']}>
+              <div className={s2['product-sell-data-label']}>
+                Estado
+              </div>
+              <div className={s2['product-sell-data-value']}>
+                <label
+                  htmlFor="is_confirmed"
+                  style={{
+                    paddingRight: '8px',
+                    paddingTop: '4px',
+                    userSelect: 'none'
+                  }}
+                >
+                  Confirmado
+                </label>
+                <input
+                  type="checkbox"
+                  className='form-check-input'
+                  checked={is_confirmed}
+                  id='is_confirmed'
+                  style={{
+                    width: '24px',
+                    height: '24px'
+                  }}
+                  onChange={(e) => {
+                    const { checked } = e.target;
+                    console.log({ is_confirmed });
+                    modifyProductInvoice({
+                      ...productInvoice,
+                      is_confirmed: checked
+                    });
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <div
             className={s['footer']}
             style={{
@@ -457,11 +617,13 @@ export const CreateInvoiceProductModal = ({
             }}
           >
             <p style={{
-              textAlign: 'end',
+              textAlign: 'center',
               color: 'gray',
               fontWeight: 'bold',
               fontSize: '20px',
               paddingRight: '24px',
+              margin: '0',
+              paddingTop: '6px'
             }}>Total:{' '}
               <span>
                 {
@@ -489,33 +651,40 @@ export const CreateInvoiceProductModal = ({
                   if (userUseRegisterButton) {
                     return;
                   }
-                  const canCreateInvoice = await createProductInvoice(productInvoice);
-                  setHaveSuccessAtCreate(canCreateInvoice);
+                  let result = false;
+                  if (productInvoiceOption === 'create') {
+                    result = await createProductInvoice(productInvoice);
+                  } else {
+                    result = await updateProductInvoice(productInvoice);
+                  }
+                  setHaveSuccessAtFinish(result);
                   setProductsRequestIsFinish(true);
                 }}
               >
-                Registrar
+                {
+                  productInvoiceOption === 'create' ? 'Crear' : 'Actualizar'
+                }
               </div>
             </div>
           </div>
         </div>
         <div className={s['result-petition-section']}>
           <div className={s['result-petition-container']}>
-            <div className={`${s['result-petition-icon']} ${s[`result-petition-icon--${haveSuccessAtCreate ? 'approve' : 'not-approve'}`]}`}>
+            <div className={`${s['result-petition-icon']} ${s[`result-petition-icon--${haveSuccessAtFinish ? 'approve' : 'not-approve'}`]}`}>
               {
-                haveSuccessAtCreate === true ? '✔' : '!'
+                haveSuccessAtFinish === true ? '✔' : '!'
               }
             </div>
             <h3 className={s['result-petition-title']}>
               {
-                haveSuccessAtCreate ?
+                haveSuccessAtFinish ?
                   '¡Se ha registrado la factura con exito!'
                   : '¡No se ha logrado crear la factura de los productos!'
               }
             </h3>
             <h4 className={s['result-petition-subtitle']}>
               {
-                haveSuccessAtCreate ?
+                haveSuccessAtFinish ?
                   'Ahora el distribuidor tiene una nueva factura de productos'
                   : 'Intente de nuevo esta acción'
               }
@@ -524,7 +693,7 @@ export const CreateInvoiceProductModal = ({
               <button
                 className={s['result-petition-button']}
                 onClick={(e) => {
-                  onCreate(haveSuccessAtCreate);
+                  onCreate(haveSuccessAtFinish);
                   onClose();
                 }}
               >

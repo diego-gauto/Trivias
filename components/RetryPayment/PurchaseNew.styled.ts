@@ -8,11 +8,10 @@ export const PurchaseNewContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  padding-block: 30px;
+  padding-block: 120px;
   padding-inline: 15px;
   background: linear-gradient(135deg, #e0d9ea 0%, #f1ebfa 100%);
   min-height: 82vh;
-  padding-bottom: 332px;
   .actives {
     cursor: pointer;
     transition: 0.3s ease all;
@@ -424,15 +423,11 @@ export const PurchaseNewContainer = styled.div`
     width: 100%;
     gap: 16px;
     flex-direction: column;
+    border-radius: 20px;
     .box {
       width: 100%;
       max-width: 450px;
-      /* max-width: 295px; */
       position: relative;
-      /*
-      top: 95px;
-      right: 20px;
-      */
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -585,7 +580,7 @@ export const PurchaseNewContainer = styled.div`
     .code-input { 
       border-radius: 20px;
       padding: 20px;
-      background-color: #942ced4d;
+      background-color: #D4B0F5;
       width: 100%;
       max-width: 450px;
       display: flex;
@@ -829,6 +824,9 @@ export const PurchaseNewContainer = styled.div`
     grid-template-columns: 3fr 2fr;
     justify-content: center;
     position: relative;
+    z-index: 10;
+    background-color: #E9E3F3;
+
     .complete-contain {
       order: 1; /* Cambia el orden de la primera tarjeta */
       align-self: center; /* Centra verticalmente */
@@ -836,9 +834,6 @@ export const PurchaseNewContainer = styled.div`
     }
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
-      position: fixed; /* Fija la posición */
-      top: 20%;
-      left: 62%;
       max-width: 295px;
     }
   }
@@ -850,14 +845,11 @@ export const PurchaseNewContainer = styled.div`
     .complete-contain {
       order: 1; /* Cambia el orden de la primera tarjeta */
       align-self: center; /* Centra verticalmente */
-      margin-right: 200px;
+      
     }
     .right-section {
       order: 2; /* Cambia el orden de la segunda tarjeta */
-      position: fixed; /* Fija la posición */
       max-width: 432px;
-      top: 15%;
-      left: 67%;
     }
     .info {
       grid-template-columns: 3fr 2fr;

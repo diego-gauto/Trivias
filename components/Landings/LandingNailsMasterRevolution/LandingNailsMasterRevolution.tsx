@@ -243,6 +243,14 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
 
   useEffect(() => { }, [setver]);
 
+  function getLastMomentOfCurrentMonth(): Date {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const firstDayNextMonth = new Date(year, month + 1, 1);
+    return new Date(firstDayNextMonth.getTime() - 1000);
+  }
+
   function getLastDayOfMonthByDate(date: Date) {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -275,7 +283,8 @@ const LandingNailsMasterRevolution = (props: ILandingNailsRevolution) => {
               1 de{' '}{MONTHS[new Date().getMonth()]}{' '}hasta el {getLastDayOfMonthByDate(new Date())} de{' '}{MONTHS[new Date().getMonth()]}
             </h4>
             <Countdown
-              date={new Date(2025, 2, 31, 23, 59, 59)}
+              // date={new Date(2025, 2, 31, 23, 59, 59)}
+              date={getLastMomentOfCurrentMonth()}
               renderer={(props) => (
                 <div className='countdown'>
                   <h2>TIEMPO RESTANTE</h2>

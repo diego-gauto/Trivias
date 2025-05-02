@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import s from './CreateInvoiceAccessModal.module.css';
 import { createProduct, updateProduct } from './Queries';
+import image from 'next/image';
 
 interface IUpdateProductModalProps {
   product: IProduct
@@ -20,10 +21,10 @@ export const UpdateProductModal = ({
   const [haveSuccessAtUpdate, setHaveSuccessAtUpdate] = useState(false);
   const [productRequestIsFinish, setProductRequestIsFinish] = useState(false);
 
-  const { name, image, default_price } = product;
+  const { name, default_price } = product;
 
   const isValidRequestValues = () => {
-    return name.length > 0 && default_price > 0;
+    return (name.length > 0 && name.length < 60) && default_price > 0;
   };
 
   return <div className={s['main-container']}>
@@ -47,23 +48,6 @@ export const UpdateProductModal = ({
                 modifyProduct({
                   ...product,
                   name: value
-                });
-              }}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="url" className="form-label">URL</label>
-            <input
-              type="text"
-              className="form-control"
-              id="url"
-              placeholder="Ingrese la URL"
-              value={image || ''}
-              onChange={(e) => {
-                const { value } = e.target;
-                modifyProduct({
-                  ...product,
-                  image: value
                 });
               }}
             />

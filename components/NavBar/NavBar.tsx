@@ -411,7 +411,7 @@ const NavBar = () => {
         router.push('/admin/' + route);
       }
     }
-    if (isDistributor) {
+    if (isDistributor && userData.role !== 'superAdmin') {
       router.push('/admin/DistributorDetails');
     }
 

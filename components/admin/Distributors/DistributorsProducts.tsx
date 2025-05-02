@@ -39,7 +39,6 @@ export const DistributorsProducts = () => {
   const [newProduct, setNewProduct] = useState<IProduct>({
     product_id: 0,
     name: '',
-    image: '',
     default_price: 0
   });
 
@@ -90,7 +89,7 @@ export const DistributorsProducts = () => {
       setProductsParams({
         ...productsParams,
         count: productsCount
-      })
+      });
       setProducts(productsList);
     } catch (error) {
       console.error(error);
@@ -224,13 +223,12 @@ export const DistributorsProducts = () => {
           child={
             <CreateProductModal
               onClose={() => {
-                setShowCreateProduct(false)
+                setShowCreateProduct(false);
               }}
               onCreate={(canCreate) => {
                 if (canCreate) {
                   setNewProduct({
                     name: '',
-                    image: '',
                     default_price: 0,
                     product_id: 0
                   });
@@ -243,6 +241,9 @@ export const DistributorsProducts = () => {
           }
           show={showCreateProduct}
           compactSize={true}
+          onClose={() => {
+            setShowCreateProduct(false);
+          }}
         />
       }
       {
@@ -280,6 +281,9 @@ export const DistributorsProducts = () => {
             product={selectedProduct}
           />}
           show={showUpdateProduct}
+          onClose={() => {
+            setShowUpdateProduct(false);
+          }}
           compactSize={true}
         />
       }

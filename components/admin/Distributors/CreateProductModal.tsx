@@ -20,10 +20,10 @@ export const CreateProductModal = ({
   const [haveSuccessAtCreate, setHaveSuccessAtCreate] = useState(false);
   const [productsRequestIsFinish, setProductsRequestIsFinish] = useState(false);
 
-  const { name, image, default_price } = newProduct;
+  const { name, default_price } = newProduct;
 
   const isValidRequestValues = () => {
-    return name.length > 0 && default_price > 0;
+    return (name.length > 0 && name.length < 60) && default_price > 0;
   };
 
   return <div className={s['main-container']}>
@@ -47,23 +47,6 @@ export const CreateProductModal = ({
                 modifyNewProduct({
                   ...newProduct,
                   name: value
-                });
-              }}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="url" className="form-label">URL</label>
-            <input
-              type="text"
-              className="form-control"
-              id="url"
-              placeholder="Ingrese la URL"
-              value={image || ''}
-              onChange={(e) => {
-                const { value } = e.target;
-                modifyNewProduct({
-                  ...newProduct,
-                  image: value
                 });
               }}
             />

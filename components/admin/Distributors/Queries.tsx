@@ -80,33 +80,48 @@ const getWhereConditionsForDistributorsQuery = (input: string, params: IDistribu
 export const getAllDistributorUsersArray = async (offset: number, input: string, params: IDistributorFilterParams): Promise<IDistributor[]> => {
   try {
     const query2 = `SELECT 
-          d.distributor_id, 
-          CONCAT(u.name, ' ', u.last_name) AS name, 
-          u.phone_number, 
-          u.photo, 
-          UNIX_TIMESTAMP(u.created_at) AS user_created_at, 
-          UNIX_TIMESTAMP(d.created_at) AS distributor_created_at, 
-          d.admin_user_id, 
-          u.country, 
-          IFNULL(u.email, '') AS email, 
-          IFNULL(u.origin_state, '') AS origin_state, 
-          IFNULL(d.postal_code, '') AS postal_code, 
-          u.id AS user_id,
-          COALESCE(t1.total_amount, 0) AS total_sales
+        d.distributor_id, 
+        CONCAT(u.name, ' ', u.last_name) AS name, 
+        u.phone_number, 
+        u.photo, 
+        UNIX_TIMESTAMP(u.created_at) AS user_created_at, 
+        UNIX_TIMESTAMP(d.created_at) AS distributor_created_at, 
+        d.admin_user_id, 
+        u.country, 
+        IFNULL(u.email, '') AS email, 
+        IFNULL(u.origin_state, '') AS origin_state, 
+        IFNULL(d.postal_code, '') AS postal_code, 
+        u.id AS user_id,
+        COALESCE(t1.total_amount, 0) AS total_sales,
+        COALESCE(t2.total, 0) AS total_product_sales
       FROM distributors AS d
       INNER JOIN users AS u ON u.id = d.user_id
       LEFT JOIN (
-          -- Subconsulta que calcula el total de ventas por distribuidor
+          -- Subconsulta para total de ventas por distribuidor en code_sells
           SELECT cs.distributor_id, SUM(csd.amount * csd.count) AS total_amount
           FROM code_sells AS cs
           INNER JOIN code_sell_details AS csd ON csd.code_sell_id = cs.code_sell_id
           WHERE csd.count > 0
           GROUP BY cs.distributor_id
       ) AS t1 ON d.distributor_id = t1.distributor_id
+      LEFT JOIN (
+          -- Subconsulta para total de ventas confirmadas en product_sells
+          SELECT t1.distributor_id, SUM(t1.total) AS total
+          FROM (
+              SELECT d.distributor_id, ps.product_sell_id, ps.is_confirmed, ps.discount, ps.send_cost, 
+                    SUM(pbps.count * pbps.price) AS subtotal, 
+                    (SUM(pbps.count * pbps.price) * (1 - ps.discount / 100)) + ps.send_cost AS total
+              FROM product_sells AS ps
+              INNER JOIN distributors AS d ON d.distributor_id = ps.distributor_id
+              INNER JOIN products_by_product_sell AS pbps ON ps.product_sell_id = pbps.product_sell_id
+              GROUP BY d.distributor_id, ps.product_sell_id, ps.is_confirmed
+          ) AS t1
+          WHERE t1.is_confirmed = 1
+          GROUP BY t1.distributor_id
+      ) AS t2 ON d.distributor_id = t2.distributor_id
       ${getWhereConditionsForDistributorsQuery(input, params)}
       ORDER BY d.distributor_id
       LIMIT 100 OFFSET ${offset};`;
-    console.log({ query2 });
     const response = await getGenericQueryResponse(query2);
     const data = response.data.data as IDistributor[];
     return data;
@@ -125,11 +140,10 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as IProduct[];
     return data.map((p) => {
-      const { product_id, name, image, default_price } = p;
+      const { product_id, name, default_price } = p;
       return {
         product_id,
         name,
-        image,
         default_price
       }
     });
@@ -139,9 +153,9 @@ export const getAllProductsArray = async (offset: number, input: string): Promis
   return [];
 }
 
-export const getProducts = async (): Promise<IProduct[]> => {
+export const getProducts = async (name: string): Promise<IProduct[]> => {
   try {
-    const query = `SELECT * FROM products;`;
+    const query = `SELECT * FROM products WHERE name LIKE '${name}%';`;
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as IProduct[];
     return data;
@@ -176,7 +190,6 @@ export const getAllDistributorUsersCount = async (input: string, params: IDistri
       from distributors as d
       inner join users as u on u.id = d.user_id
       ${getWhereConditionsForDistributorsQuery(input, params)};`;
-    console.log({ query });
     const response = await getGenericQueryResponse(query);
     const data = response.data.data as { count: number }[];
     return data[0]?.count || 0;
@@ -184,6 +197,18 @@ export const getAllDistributorUsersCount = async (input: string, params: IDistri
     console.error(error);
   }
   return 0;
+}
+
+export const getAllProducts = async (): Promise<IProduct[]> => {
+  try {
+    const query = `SELECT * FROM products;`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data as IProduct[];
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+  return [];
 }
 
 export const getAllProductsCount = async (input: string): Promise<number> => {
@@ -246,7 +271,6 @@ export const createANewDistributor = async (userId: number, adminUserId: number)
   try {
     const query = `insert into distributors (user_id, admin_user_id) values (${userId}, ${adminUserId});`;
     const response = await postGenericQueryResponse(query);
-    console.log({ result: response.data.data });
     return true;
   } catch (error) {
     console.error(error);
@@ -451,14 +475,11 @@ const addCode = async (data: { code_sell_detail_id: number; code: string }) => {
 export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boolean> => {
   const { admin_id, details, distributor_id } = body;
 
-  console.log({ body });
-
   try {
     const createCodeSellResponse = await createCodeSell({
       admin_id,
       distributor_id,
     });
-    console.log("Pudo crear la venta");
     const createCodeSellId = createCodeSellResponse.data.data.insertId;
     type GeneratedCodeSellDetail = {
       code_sell_detail_id: number
@@ -482,7 +503,6 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
         code_sell_detail_id: codeSellDetailId,
       });
     }
-    console.log("Pudo crear un detalle");
     generatedCodeSellsDetails.forEach(async (csd) => {
       const { code_sell_detail_id, count } = csd;
       const codes = await createCodesForDistributor(count);
@@ -491,7 +511,6 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
           code_sell_detail_id,
           code
         });
-        console.log("Pudo crear un codigo");
       });
     });
 
@@ -504,31 +523,31 @@ export const generateSellOfAccess = async (body: ICreateCodeSell): Promise<boole
 
 export const getProductHistoryByDistributorId = async (distributorId: number): Promise<IProductSellHistory[]> => {
   try {
-    const query = `SELECT ps.seller_id, distributor_id, CAST(sell_at AS SIGNED) AS sell_at, p2.product_sell_id, 
-    p1.product_id, count, price, p1.name AS product_name, p1.image AS product_image, 
-    s.email AS seller_email 
+    const query = `SELECT ps.product_sell_id, ps.seller_id, distributor_id, CAST(sell_at AS SIGNED) AS sell_at, p2.product_sell_id, 
+    p1.product_id, count, price, p1.name AS product_name, u.email AS seller_email, ps.send_cost, ps.is_confirmed, ps.discount
     FROM product_sells AS ps 
     INNER JOIN products_by_product_sell AS p2 ON p2.product_sell_id = ps.product_sell_id 
     INNER JOIN products AS p1 ON p2.product_id = p1.product_id 
-    INNER JOIN sellers AS s ON s.seller_id = ps.seller_id
+    INNER JOIN users AS u ON u.id = ps.seller_id
     WHERE ps.distributor_id = ${distributorId};`;
     const response = await getGenericQueryResponse(query);
     const result = response.data.data as IProductHistoryRecord[];
+
+    console.log({ result });
 
     const productSellIds = [...new Set(result.map(ps => ps.product_sell_id))]
 
     const finalResult: IProductSellHistory[] =
       productSellIds.map((psId) => {
         const records = result.filter(ph => ph.product_sell_id === psId);
-        const { distributor_id, seller_email, sell_at, seller_id } = records[0]!;
+        const { product_sell_id, distributor_id, seller_email, sell_at, seller_id, is_confirmed, send_cost, discount } = records[0]!;
         const products: IProductSell[] = records.map((ph) => {
-          const { product_sell_id, product_id, product_name, product_image, price, count } = ph;
+          const { product_sell_id, product_id, product_name, price, count } = ph;
 
           return {
             product_sell_id,
             product_id,
             product_name,
-            product_image,
             count,
             price
           }
@@ -540,20 +559,37 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
           .map(p => p.count)
           .reduce((pv, cv) => { return pv + cv }, 0);
 
-        const productTotalAmount = products
+        // TODO: Calculo
+        const productTotalAmount = (products
           .map((p) => { return { price: p.price, count: p.count } })
-          .reduce((pv, cv) => { return pv + (cv.price * cv.count) }, 0);
+          .reduce((pv, cv) => { return pv + (cv.price * cv.count) }, 0))
+          * (1 - (discount / 100))
+          + send_cost;
+
+        /*
+        const total = (invoiceProducts.reduce((pv, cv) => {
+            return pv + (cv.price * cv.count);
+          }, 0) * (1 - (discount / 100))) + send_cost; // + send_cost
+        */
+
+        console.log({ is_confirmed });
 
         return {
+          product_sell_id,
           distributor_id,
           sell_at: sellAtWithFormat.toJSON().slice(0, 10),
           seller_email,
           seller_id,
           products,
           product_count: productCount,
-          product_total_amount: productTotalAmount
+          product_total_amount: productTotalAmount,
+          is_confirmed: `${is_confirmed}` === '1',
+          send_cost,
+          discount
         }
       });
+
+    console.log({ finalResult });
 
     return finalResult;
   } catch (error) {
@@ -562,13 +598,71 @@ export const getProductHistoryByDistributorId = async (distributorId: number): P
   }
 }
 
-export const createProductInvoice = async (productInvoice: IProductInvoice): Promise<boolean> => {
+const checkIfProductInoviceExist = async (id: number) => {
   try {
-    const { distributorId, sellerId, products, date } = productInvoice;
+    // Comprobar si existe
+    const query = `SELECT COUNT(*) AS count FROM product_sells WHERE product_sell_id = ${id};`;
+    const response = await getGenericQueryResponse(query);
+    const data = response.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const updateProductInvoice = async (productInvoice: IProductInvoice): Promise<boolean> => {
+  try {
+    const { distributorId, sellerId, products, date, is_confirmed, send_cost, product_sell_id, discount } = productInvoice;
     const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
     const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime() / 1000);
-    const createProductSellQuery = `INSERT INTO product_sells (seller_id, distributor_id, sell_at) 
-      VALUES (${sellerId}, ${distributorId}, ${sellAt})`;
+    const updateQuery = `UPDATE product_sells 
+      SET seller_id = ${sellerId}, 
+      distributor_id = ${distributorId}, 
+      sell_at = ${sellAt}, 
+      send_cost = ${send_cost},
+      is_confirmed = ${is_confirmed},
+      discount = ${discount}
+      WHERE product_sell_id = ${product_sell_id};`;
+
+    const updateResponse = await postGenericQueryResponse(updateQuery);
+    console.log({ updateResponse });
+
+    // Actualizar listado de productos
+    const removeQuery = `DELETE FROM products_by_product_sell WHERE product_sell_id = ${product_sell_id};`;
+    const deleteResponse = await postGenericQueryResponse(removeQuery);
+
+    let insertQuery = 'INSERT INTO products_by_product_sell (product_sell_id, product_id, count, price) VALUES ';
+
+    const realProducts = products.filter(p => p.count > 0);
+
+    const values: string[] = [];
+    for (let index = 0; index < realProducts.length; index++) {
+      const product = realProducts[index]!;
+      const { productId, count, price } = product;
+      const record = `(${product_sell_id}, ${productId}, ${count}, ${price})`;
+      values.push(record);
+    }
+
+    insertQuery += values.join(', ') + ';';
+
+    const insertResponse = await postGenericQueryResponse(insertQuery);
+    console.log({ insertResponse });
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+  return false;
+}
+
+export const createProductInvoice = async (productInvoice: IProductInvoice): Promise<boolean> => {
+  try {
+    console.log({ productInvoice });
+    const { distributorId, sellerId, products, date, is_confirmed, send_cost, discount } = productInvoice;
+    const [year, month, day] = date.split("-").map((value) => parseInt(value) || 1);
+    const sellAt = Math.floor(new Date(year!, month! - 1, day!).getTime() / 1000);
+    const createProductSellQuery = `INSERT INTO product_sells 
+      (seller_id, distributor_id, sell_at, is_confirmed, send_cost, discount) 
+      VALUES (${sellerId}, ${distributorId}, ${sellAt}, ${is_confirmed}, ${send_cost}, ${discount})`;
 
     const createProductSellResponse = await postGenericQueryResponse(createProductSellQuery);
     const productSellId = createProductSellResponse.data.data.insertId;
@@ -586,7 +680,8 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
     }
 
     createProductsBySellQuery += values.join(', ') + ';';
-    await postGenericQueryResponse(createProductsBySellQuery);
+    const addProductsOfSellResponse = await postGenericQueryResponse(createProductsBySellQuery);
+    console.log({ addProductsOfSellResponse });
     return true;
   } catch (error) {
     console.error(error);
@@ -596,9 +691,9 @@ export const createProductInvoice = async (productInvoice: IProductInvoice): Pro
 
 export const createProduct = async (product: IProduct): Promise<boolean> => {
   try {
-    const { name, default_price, image } = product;
+    const { name, default_price } = product;
 
-    const createProductQuery = `INSERT INTO products (name, image, default_price) VALUES ('${name}', '${image}', ${default_price});`;
+    const createProductQuery = `INSERT INTO products (name, default_price) VALUES ('${name}', ${default_price});`;
 
     const createProductResponse = await postGenericQueryResponse(createProductQuery);
     const productId = createProductResponse.data.data.insertId;
@@ -612,12 +707,11 @@ export const createProduct = async (product: IProduct): Promise<boolean> => {
 
 export const updateProduct = async (product: IProduct): Promise<boolean> => {
   try {
-    const { product_id, name, default_price, image } = product;
+    const { product_id, name, default_price } = product;
 
     const updateProductQuery = `UPDATE products SET
     name = '${name}',
     default_price = ${default_price},
-    image = '${image}'
     WHERE product_id = ${product_id};`;
 
     const updateProductResponse = await postGenericQueryResponse(updateProductQuery);
@@ -662,8 +756,6 @@ export const updateSeller = async (seller: ISeller): Promise<boolean> => {
 
     const updateSellerResponse = await postGenericQueryResponse(createSellerQuery);
     const sellerId = updateSellerResponse.data.data.insertId;
-    console.log({ updateSellerResponse: updateSellerResponse.data });
-
     return true;
   } catch (error) {
     console.error(error);
@@ -682,16 +774,12 @@ export const updateDistributor = async (distributor: IDistributor): Promise<bool
     const updateDistributorResponse = await postGenericQueryResponse(updateDistributorQuery);
     const distributorId = updateDistributorResponse.data.data.insertId;
 
-    console.log({ updateDistributorResponse });
-
     const updateUserQuery = `UPDATE users SET
     email = '${email}',
     phone_number = '${phone_number}',
     origin_state = '${origin_state}'
     WHERE id = ${user_id}`;
     const updateUserResponse = await postGenericQueryResponse(updateUserQuery);
-
-    console.log({ updateUserResponse });
 
     return true;
   } catch (error) {
