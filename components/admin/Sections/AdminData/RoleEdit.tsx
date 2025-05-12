@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Modal } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
 
-import _ from 'lodash';
-import {
-  ButtonRoleContain,
-  CloseIcon,
-  UpdateButton,
-} from './AdminDataUpdate.styled';
+
+
+import { postGenericQueryResponse, Admin } from "../../../api/admin";
+import { ButtonRoleContain, CloseIcon, UpdateButton } from "./AdminDataUpdate.styled";
+import { backendRoleEditMethod } from "./Queries";
 import {
   Info,
   ModalContain,
@@ -18,16 +17,7 @@ import {
   SelectedRoleContain,
   Title,
   TitleContain,
-} from './RoleEdit.styled';
-import {
-  Admin,
-  getGenericQueryResponse,
-  postGenericQueryResponse,
-  updateAdminAccessApi,
-} from '../../../api/admin';
-import { AdminType } from './Constants';
-import { backendRoleEditMethod } from './Queries';
-import { getDistributorsAdminAccess } from '../Queries';
+} from "./RoleEdit.styled";
 
 type CheckBoxValues = {
   name: string;
@@ -164,7 +154,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         { active: false, task: 'ABM Vendedores' },
         { active: false, task: 'ABM Productos' },
         { active: false, task: 'Generar factura de accesos' },
-        { active: false, task: 'Generar factura de productos' },
+        { active: false, task: 'Generar presupuesto' },
       ],
     },
     {
@@ -225,7 +215,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
           active = adminType.abm_sellers == 1;
         } else if (task.task === 'Generar factura de accesos') {
           active = adminType.create_access_invoices == 1;
-        } else if (task.task === 'Generar factura de productos') {
+        } else if (task.task === 'Generar presupuesto') {
           active = adminType.create_products_invoices == 1;
         }
         const result = {
@@ -389,7 +379,7 @@ const RoleEdit = ({ show, setShow, admin, refresh, courses, forms }: RoleProps) 
         abm_products: tasks.find(t => t.task === 'ABM Productos')?.active === true ? 1 : 0,
         abm_sellers: tasks.find(t => t.task === 'ABM Vendedores')?.active === true ? 1 : 0,
         create_access_invoices: tasks.find(t => t.task === 'Generar factura de accesos')?.active === true ? 1 : 0,
-        create_products_invoices: tasks.find(t => t.task === 'Generar factura de productos')?.active === true ? 1 : 0,
+        create_products_invoices: tasks.find(t => t.task === 'Generar presupuesto')?.active === true ? 1 : 0,
       }
     });
 

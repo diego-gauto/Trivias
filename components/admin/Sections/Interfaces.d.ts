@@ -7,7 +7,7 @@ type TaskValue =
   | 'Descargar'
   | 'ABM Productos'
   | 'ABM Vendedores'
-  | 'Generar factura de productos'
+  | 'Generar presupuesto'
   | 'Generar factura de accesos'
   | 'Ver factura de productos'
   | 'Ver factura de accesos'
