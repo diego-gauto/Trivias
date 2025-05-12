@@ -47,7 +47,7 @@ export const getDistributorsAdminAccess = async (userId: number): Promise<AdminR
           active: create_access_invoices.data == 1,
         },
         {
-          task: 'Generar factura de productos',
+          task: 'Generar presupuesto',
           active: create_products_invoices.data == 1,
         },
       ],
@@ -96,7 +96,7 @@ export const getDistributorsAdminAccess = async (userId: number): Promise<AdminR
           active: false,
         },
         {
-          task: 'Generar factura de productos',
+          task: 'Generar presupuesto',
           active: false,
         },
       ],
