@@ -1,32 +1,34 @@
-import styles from './DistributorsNew.module.css';
-import { IoIosAddCircleOutline, IoMdAddCircleOutline, IoMdSearch } from "react-icons/io";
+import { useEffect, useState } from "react";
+
 import { CiFilter } from "react-icons/ci";
-import { useEffect, useState } from 'react';
-import { Modal } from '../../admin/DefaultComponents/Modal';
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import { IoIosAddCircleOutline, IoMdAddCircleOutline, IoMdSearch } from "react-icons/io";
+
+import Pagination from "../../../components/Pagination/Pagination";
+import { Modal } from "../../admin/DefaultComponents/Modal";
+import { ORIGIN_STATES } from "./Constants";
+import { CreateInvoiceAccessModal } from "./CreateInvoiceAccessModal";
+import { CreateInvoiceProductModal } from "./CreateInvoiceProductModal";
+import styles from "./DistributorsNew.module.css";
+import { InvoiceAccessModal } from "./InvoiceAccessModal";
+import { InvoiceProductModal } from "./InvoiceProductModal";
 import {
   createANewDistributor,
   getAdminUserIdByEmail,
-  getDistributorCodesById,
-  getAllDistributorUserIds,
+  getAllAdmins,
   getAllDistributorUsersArray,
   getAllDistributorUsersCount,
+  getAllDistributorUserIds,
+  getAllPostalCodesFromDistributors,
   getAllUsersArray,
   getAllUsersCount,
-  getAllAdmins,
+  getDistributorCodesById,
+  getIsSuperAdmin,
+  getNormalUserIdByEmail,
   getProductHistoryByDistributorId,
   getUserAccessRoles,
-  getNormalUserIdByEmail,
-  getIsSuperAdmin,
-  getAllPostalCodesFromDistributors
-} from './Queries';
-import { FaLongArrowAltLeft } from "react-icons/fa";
-import Pagination from '../../../components/Pagination/Pagination';
-import { InvoiceAccessModal } from './InvoiceAccessModal';
-import { CreateInvoiceAccessModal } from './CreateInvoiceAccessModal';
-import { InvoiceProductModal } from './InvoiceProductModal';
-import { CreateInvoiceProductModal } from './CreateInvoiceProductModal';
-import { UpdateDistributorModal } from './UpdateDistributorModal';
-import { ORIGIN_STATES } from './Constants';
+} from "./Queries";
+import { UpdateDistributorModal } from "./UpdateDistributorModal";
 
 type MainSection = 'distributors' | 'common-users';
 
@@ -698,15 +700,19 @@ export const DistributorsNew = () => {
                                 >
                                   Ver
                                 </button>
-                                <button
-                                  className={styles['gonvar-table__button']}
-                                  onClick={(e) => {
-                                    setSelectedDistributor(d);
-                                    setShowUpdateDistributorModal(true);
-                                  }}
-                                >
-                                  Editar
-                                </button>
+                                {
+                                  (isSuperAdmin || adminAccess.edit === 1) && (
+                                    <button
+                                      className={styles['gonvar-table__button']}
+                                      onClick={(e) => {
+                                        setSelectedDistributor(d);
+                                        setShowUpdateDistributorModal(true);
+                                      }}
+                                    >
+                                      Editar
+                                    </button>
+                                  )
+                                }
                               </div>
 
                             </td>
@@ -758,7 +764,7 @@ export const DistributorsNew = () => {
                   </h3>
                 </div>
                 {
-                  (isSuperAdmin || adminAccess.create === 1) &&
+                  (isSuperAdmin || adminAccess.create_products_invoices === 1) &&
                   <div
                     className={styles['distributor-details-create-access-button']}
                     onClick={(e) => {
@@ -925,7 +931,7 @@ export const DistributorsNew = () => {
                   </h3>
                 </div>
                 {
-                  (isSuperAdmin || adminAccess.create === 1) &&
+                  (isSuperAdmin || adminAccess.create_access_invoices === 1) &&
                   <div
                     className={styles['distributor-details-create-access-button']}
                     onClick={(e) => {
@@ -976,15 +982,17 @@ export const DistributorsNew = () => {
                                 {ah.adminEmail}
                               </td>
                               <td className={styles['gonvar-table__data']}>
-                                <button
-                                  className={styles['gonvar-table__button']}
-                                  onClick={(e) => {
-                                    setShowAccessInvoiceModal(true);
-                                    setSelectedAccessInvoice(ah.data);
-                                  }}
-                                >
-                                  Ver factura
-                                </button>
+                                {
+                                  (isSuperAdmin || adminAccess.create_access_invoices === 1) &&
+                                  <button
+                                    className={styles['gonvar-table__button']}
+                                    onClick={(e) => {
+                                      setShowAccessInvoiceModal(true);
+                                      setSelectedAccessInvoice(ah.data);
+                                    }}
+                                  >
+                                    Ver factura
+                                  </button>}
                               </td>
                             </tr>
                           })
