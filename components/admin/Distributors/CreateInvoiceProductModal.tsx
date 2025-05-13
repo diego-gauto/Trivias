@@ -1,12 +1,12 @@
 
-import { useEffect, useState } from 'react';
-import s from './CreateInvoiceAccessModal.module.css';
-import s2 from './CreateInvoiceProductModal.module.css';
+import { useEffect, useState } from "react";
 
-import { createProductInvoice, getAllProducts, getAllSellers, getProducts, updateProductInvoice } from './Queries';
-import Image from 'next/image';
 import { IoIosArrowDropdown, IoIosArrowDropup, IoIosRemoveCircleOutline } from "react-icons/io";
-import { getGenericQueryResponse } from '../../api/admin';
+
+import { getGenericQueryResponse } from "../../api/admin";
+import s from "./CreateInvoiceAccessModal.module.css";
+import s2 from "./CreateInvoiceProductModal.module.css";
+import { createProductInvoice, getAllProducts, getProducts, updateProductInvoice } from "./Queries";
 
 type CreateInvoiceAccessModalProps = {
   productInvoice: IProductInvoice
@@ -165,7 +165,7 @@ export const CreateInvoiceProductModal = ({
         <div className={s['container']}>
           <div className={s['header']}>
             <h2 className={s['title']}>Registrar presupuesto</h2>
-            <h3 className={s['subtitle']}>Estos son los detalles del presupuesto</h3>
+            {/* <h3 className={s['subtitle']}>Estos son los detalles del presupuesto</h3> */}
           </div>
           <div className={s['body']}>
             <div className={s2['product-sell-data-container']}>
@@ -216,7 +216,9 @@ export const CreateInvoiceProductModal = ({
                 margin: '10px'
               }}
             />
-            <div className={`${s['content-collapse']} ${isCollapsed ? s['open'] : ''}`} >
+            <div className={`${s['content-collapse']} ${isCollapsed ? s['open'] : ''}`} style={{
+              maxHeight: '260px',
+            }}>
               <div className={s['collapse-row']}>
                 <div
                   className={s['collapse-circle']}
@@ -276,7 +278,7 @@ export const CreateInvoiceProductModal = ({
                     {
                       enabledToAddProducts.length > 0 &&
                       <table style={{
-                        width: '100%'
+                        width: '100%',
                       }}>
                         <thead>
                           <tr>
@@ -353,7 +355,7 @@ export const CreateInvoiceProductModal = ({
                 className={s['table-content']}
                 style={{
                   overflowY: 'scroll',
-                  maxHeight: '180px',
+                  maxHeight: '140px',
                   marginBottom: '10px',
                   paddingRight: '10px'
                 }}
