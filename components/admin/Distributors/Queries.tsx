@@ -711,7 +711,7 @@ export const updateProduct = async (product: IProduct): Promise<boolean> => {
 
     const updateProductQuery = `UPDATE products SET
     name = '${name}',
-    default_price = ${default_price},
+    default_price = ${default_price}
     WHERE product_id = ${product_id};`;
 
     const updateProductResponse = await postGenericQueryResponse(updateProductQuery);
