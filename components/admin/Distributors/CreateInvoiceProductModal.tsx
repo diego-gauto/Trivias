@@ -107,7 +107,19 @@ export const CreateInvoiceProductModal = ({
     return searchedProducts.filter(p => !selectedProducIds.includes(p.product_id));
   }
 
-  const enabledToAddProducts = getEnableToAddProducts();
+  const enabledToAddProducts = getEnableToAddProducts().sort((a, b) => {
+    return a.name.toLocaleLowerCase().localeCompare(b.name.toLocaleLowerCase());
+  });
+
+  const nameMap = new Map<number, string>(
+    products.map(p => [p.product_id, p.name])
+  );
+
+  const sortedInvoiceProducts = [...invoiceProducts].sort((a, b) => {
+    const nameA = nameMap.get(a.productId)?.toLocaleLowerCase() ?? "";
+    const nameB = nameMap.get(b.productId)?.toLocaleLowerCase() ?? "";
+    return nameA.localeCompare(nameB);
+  });
 
   function addProductToSelectedProductList(product: IProduct) {
     modifyProductInvoice({
@@ -217,7 +229,7 @@ export const CreateInvoiceProductModal = ({
               }}
             />
             <div className={`${s['content-collapse']} ${isCollapsed ? s['open'] : ''}`} style={{
-              maxHeight: '260px',
+              // maxHeight: '260px',
             }}>
               <div className={s['collapse-row']}>
                 <div
@@ -371,7 +383,7 @@ export const CreateInvoiceProductModal = ({
                   </thead>
                   <tbody>
                     {
-                      invoiceProducts.map((sp, index, array) => {
+                      sortedInvoiceProducts.map((sp, index, array) => {
                         const currentProduct = products.find(p => p.product_id === sp.productId);
                         if (currentProduct === undefined) {
                           return <></>;
