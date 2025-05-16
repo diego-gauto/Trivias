@@ -51,7 +51,7 @@
 .access-codes {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
   padding: 16px 8px;
 }
 
@@ -60,13 +60,25 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
+  padding: 4.2px 10px;
+  cursor: pointer;
+  border-radius: 32px;
+  font-weight: bold;
+}
+
+.access-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   padding: 4px 10px;
   cursor: pointer;
   border-radius: 32px;
   font-weight: bold;
 }
 
-.access-code:hover {
+.access-code:hover,
+.access-user:hover {
   background-color: rgba(99, 16, 200, 0.25);
 }
 
@@ -83,8 +95,8 @@
 
 .table-content {
   border-collapse: collapse;
-  width: 100%;
-  overflow-x: auto;
+  max-height: 400px;
+  overflow: auto;
   order: 2;
 }
 
@@ -172,9 +184,7 @@
   background-color: rgba(99, 16, 200, 0.75);
 }
 
-@media screen and (min-width: 576px) {
-
-}
+@media screen and (min-width: 576px) {}
 
 /*
 Breakpoint	Class infix	Dimensions
