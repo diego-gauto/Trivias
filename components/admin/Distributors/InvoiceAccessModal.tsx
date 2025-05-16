@@ -1,5 +1,6 @@
-import s from './InvoiceAccessModal.module.css';
 import { FaRegCopy } from "react-icons/fa";
+
+import s from "./InvoiceAccessModal.module.css";
 
 type InvoiceAccessModalProps = {
   accessInvoiceRecord: ICodeSell
@@ -94,10 +95,7 @@ export const InvoiceAccessModal = ({
                           detailElement.codes.map((code, index) => {
                             return (
                               <div
-                                style={{
-                                  fontWeight: 'bold',
-                                  textAlign: 'center',
-                                }}
+                                className={s['access-user']}
                                 key={`code-${index}`}
                                 onClick={(e) => {
                                   navigator.clipboard.writeText(code.code);
