@@ -320,9 +320,9 @@ export const CreateInvoiceProductModal = ({
                                     // button--small
                                     className={`${s['button']} ${s['button--small']}`}
                                     onClick={(e) => {
-                                      if (invoiceProducts.length < 21) {
-                                        addProductToSelectedProductList(p);
-                                      }
+                                      // if (invoiceProducts.length < 21) {
+                                      addProductToSelectedProductList(p);
+                                      // }
                                     }}
                                   >
                                     Agregar
