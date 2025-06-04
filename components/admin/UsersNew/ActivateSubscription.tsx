@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { ActivateSubscriptionModal as Container } from './Modals.styled';
-import { getGenericQueryResponse } from '../../api/admin';
-import { IUpdateMembershipData, updateMembershipPlanApi } from '../../api/users';
+import React, { useState } from "react";
+
+import { getGenericQueryResponse } from "../../api/admin";
+import { updateMembershipPlanApi, IUpdateMembershipData } from "../../api/users";
+import { ActivateSubscriptionModal as Container } from "./Modals.styled";
 
 type ISubscriptionOption = 'month' | 'cuatri' | 'annual';
 
@@ -30,7 +31,7 @@ export const ActivateSubscriptionModal = ({
   const generatePricesByOption = () => {
     const pricesMounth = [749, 459, 249, 149, 0];
     const pricesCuatri = [2599, 2000, 1599, 999, 0];
-    const pricesAnnual = [5697, 3497, 1599, 0];
+    const pricesAnnual = [5697, 3497, 2500, 1599, 0];
 
     let prices: number[] = [];
     if (subscription === 'month') {
