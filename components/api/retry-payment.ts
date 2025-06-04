@@ -66,6 +66,8 @@ export const getPriceToPay = (level: number, type: number) => {
     }
   }
 
+  if (level === 0) return 2599; // cuatrimestre
+
   const CORRECT_PRICES = [149, 249, 459, 759, 1599, 2599, 3497, 5697];
 
   if (!CORRECT_PRICES.includes(type)) {
