@@ -12,13 +12,9 @@ import { LoaderContainSpinner } from "../../containers/Profile/Purchase/Purchase
 import { useAuth } from "../../hooks/useAuth";
 import { getGenericQueryResponse } from "../api/admin";
 import { createFemsaOxxoCustomer } from "../api/auth";
-import {
-  conektaOxxoApi,
-  conektaSpeiApi,
-  conektaSubscriptionApi,
-  femsaOxxoApi,
-} from "../api/checkout";
+import { conektaSpeiApi, conektaSubscriptionApi, femsaOxxoApi } from "../api/checkout";
 import { detachPaymentMethodConekta, setDefaultPaymentMethodConekta } from "../api/profile";
+import { getPriceToPay } from "../api/retry-payment";
 import { conektaPm, updateMembership } from "../api/users";
 import { haveAccess } from "../GlobalFunctions";
 import { Month, PayOptions, PayOptionsForMonthSuscription, Year } from "./constants";
@@ -231,6 +227,7 @@ export const RetryPayment = () => {
     conektaSubscriptionApi(data).then(async (res) => {
       if (res?.data.data.status === 'active') {
         const sub = res.data.data;
+        const type = getPriceToPay(user.level, user.type);
         const membership = {
           final_date: sub.billing_cycle_end,
           method: 'conekta',
@@ -239,7 +236,7 @@ export const RetryPayment = () => {
           plan_id: sub.id,
           plan_name: 'Gonvar Plus',
           start_date: sub.billing_cycle_start,
-          type: user.type,
+          type: type,
           userId: user.user_id,
         };
         await updateMembership(membership);

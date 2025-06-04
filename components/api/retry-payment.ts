@@ -34,6 +34,7 @@ export const getPlanId = (level: number, type: number) => {
   // ANUALES
   if ([4, 5].includes(level) && type === 1599) plan_id = 'anual';
   if ([4, 5].includes(level) && type === 3497) plan_id = 'anual_v1_1';
+  if ([4, 5].includes(level) && type === 2500) plan_id = 'anual_v1_2';
   if ([4, 5].includes(level) && type === 5697) plan_id = 'anual_v1_2';
   // MENSUALES
   if ([1, 6].includes(level) && type === 149) plan_id = 'mensual';
@@ -65,13 +66,13 @@ export const getPriceToPay = (level: number, type: number) => {
     }
   }
 
-  const CORRECT_PRICES = [149, 249, 459, 759, 1599, 3497, 5697];
+  if (level === 0) return 2599; // cuatrimestre
+
+  const CORRECT_PRICES = [149, 249, 459, 749, 1599, 2599, 3497, 5697];
 
   if (!CORRECT_PRICES.includes(type)) {
-    console.error(
-      'Cuenta con un precio que no es correcto, contacte con soporte tecnico: ' +
-        type,
-    );
+    if ([999, 2000].includes(type) && level === 8) return 2599; // cuatrimestre
+    if ([2500].includes(type) && level === 5) return 5697; // anual
     return 2599;
   }
 
