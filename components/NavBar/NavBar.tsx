@@ -511,7 +511,7 @@ const NavBar = () => {
                 : { fontWeight: '' }
             }
           >
-            Trivia
+            Trivias
           </NavText>
         </Link>
         <Link href={PLAN_PATH}>
