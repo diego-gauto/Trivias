@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import { useFacebook } from 'react-facebook';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { googleLogout } from '@react-oauth/google';
+import { useFacebook } from "react-facebook";
+import { SlBell } from "react-icons/sl";
+
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { googleLogout } from "@react-oauth/google";
 
 import {
   BLOGS_PATH,
@@ -15,14 +18,14 @@ import {
   REWARDS_PATH,
   SIGNUP_PAST_USER_PATH,
   SIGNUP_PATH,
-} from '../../constants/paths';
-import { useAuth } from '../../hooks/useAuth';
-import { conektaCustomer } from '../api/auth';
-import {
-  getNotifications,
-  updateAllNotificationStatusApi,
-} from '../api/notifications';
-import { customerOrders, updateMembership } from '../api/profile';
+} from "../../constants/paths";
+import { useAuth } from "../../hooks/useAuth";
+import { IUserData } from "../admin/UserData";
+import { getGenericQueryResponse } from "../api/admin";
+import { conektaCustomer } from "../api/auth";
+import { getNotifications, updateAllNotificationStatusApi } from "../api/notifications";
+import { updateMembership } from "../api/profile";
+import { RetryPayModal } from "../Modals/RetryPayModal/RetryPayModal";
 import {
   FloatingMenuItem,
   HamburgerContain,
@@ -45,14 +48,10 @@ import {
   TagsResp,
   UserContain,
   UserImage,
-} from './NavBar.styled';
-import { SlBell } from 'react-icons/sl';
-import Notifications from './Notifications/Notifications';
-import { NotificationContainer } from './Notifications/Notifications.styled';
-import { RetryPayModal } from '../Modals/RetryPayModal/RetryPayModal';
-import { IUserData } from '../admin/UserData';
-import { getFirstLinkToAdmin } from './NavBarConstants';
-import { getGenericQueryResponse } from '../api/admin';
+} from "./NavBar.styled";
+import { getFirstLinkToAdmin } from "./NavBarConstants";
+import Notifications from "./Notifications/Notifications";
+import { NotificationContainer } from "./Notifications/Notifications.styled";
 
 interface NotificationByUser {
   notification_id: number;
@@ -512,7 +511,7 @@ const NavBar = () => {
                 : { fontWeight: '' }
             }
           >
-            Trivias
+            Trivia
           </NavText>
         </Link>
         <Link href={PLAN_PATH}>
