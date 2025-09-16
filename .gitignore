@@ -37,3 +37,5 @@ yarn-error.log*
 .vercel
 
 .codegpt
+# Local Netlify folder
+.netlify
