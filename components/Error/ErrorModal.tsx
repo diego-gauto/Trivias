@@ -1,6 +1,6 @@
 import React from 'react';
 import { ErrorContainer, ModalContainer } from './ErrorModal.styled';
-import { PurpleButton } from '../courses/Courses.styled';
+import { PurpleButton } from '../Courses/Courses.styled';
 
 const ErrorModal = ({ setShow, show, error, user }: any) => {
   const handleClose = () => setShow(false);
