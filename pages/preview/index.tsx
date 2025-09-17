@@ -1,4 +1,4 @@
-import Courses from '../../components/Courses/Courses';
+import Courses from '../../components/courses/Courses';
 import { MainContain } from '../../screens/Styles.styled';
 
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';

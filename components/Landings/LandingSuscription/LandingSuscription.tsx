@@ -20,7 +20,7 @@ import { downloadFileWithStoragePath } from "../../../store/actions/LandingActio
 import { getLandingReviewApi } from "../../api/admin";
 import { getAllCourseDataApi } from "../../api/lessons";
 import { getUserApi } from "../../api/users";
-import { ICourse } from "../../Courses/Modules/ISliders";
+import { ICourse } from "../../courses/Modules/ISliders";
 import { SlideModule_1 } from "../../Home/Module5_1/SlideModule_1/SlideModule_1";
 import { RewardComponent } from "../Components/Reward";
 import { SuscriptionContain } from "./LandingSuscription.styled";
