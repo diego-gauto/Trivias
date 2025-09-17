@@ -1,17 +1,19 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Head from 'next/head';
+import { FacebookProvider } from "react-facebook";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import Head from "next/head";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
+import Layout from "../components/Layout";
+import { AdminsContext } from "../hooks/AdminContext";
+import { AuthProvider } from "../hooks/useAuth";
+import { CanonicalURL } from "../utils/functions";
+import "./styles.css";
+
 import type { AppProps } from 'next/app';
 
-import Layout from '../components/Layout';
-import './styles.css';
-
-import { AuthProvider } from '../hooks/useAuth';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { FacebookProvider } from 'react-facebook';
-import { CanonicalURL } from '../utils/functions';
-import { AdminsContext } from '../hooks/AdminContext';
-
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 function MaintenanceScreen() {
   return (
