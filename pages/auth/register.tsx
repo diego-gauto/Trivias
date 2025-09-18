@@ -173,6 +173,7 @@ const Register = () => {
     };
     if (isValidPhoneNumber(phoneInput)) {
       newUser(user).then(async (res) => {
+
         if (res?.msg === 'Este usuario ya existe!') {
           setErrorMsg('Este usuario ya existe!');
           setAuthLoader(false);
@@ -182,6 +183,7 @@ const Register = () => {
           user.userId = res.userId.insertId;
           conektaCustomer(user).then(() => {
             localStorage.setItem('email', user.email);
+            localStorage.setItem('access_token', res.access_token);
             localStorage.setItem('method', 'mail');
             window.location.href = PLAN_PATH;
             authRedirect('register');
@@ -190,7 +192,7 @@ const Register = () => {
       });
     } else {
       setErrorPhone(true);
-      setErrorPhoneMsg('Número de teléfono Invalido');
+      setErrorPhoneMsg('Número de teléfono Inválido');
       setAuthLoader(false);
     }
   };

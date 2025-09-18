@@ -42,6 +42,7 @@ import ModalForgot from './Modals/ModalForgot';
 import { IUser } from '../../interfaces/IUserData';
 import ComeFromModal from '../../components/Modals/ComeFromModal/ComeFromModal';
 import { authRedirect } from '../../constants/redirects';
+import { redirect } from 'next/dist/server/api-utils';
 
 const formSchema = yup.object().shape({
   pastUSerScreen: yup.boolean(),
@@ -165,8 +166,7 @@ const Login = () => {
           return;
         }
         if (
-          res[0].password === signUpData.credentials.password &&
-          res[0].provider === 'web'
+          res[0].ok
         ) {
           let body = {
             phone_number: res[0].phone_number,
@@ -199,12 +199,15 @@ const Login = () => {
             authRedirect('login', res[0]);
           }
         }
-        if (res[0].password !== signUpData.credentials.password) {
+        if (
+          !res[0].ok
+        ) {
           setErrorMsg('La contraseña es incorrecta!');
           setError(true);
           setAuthLoader(false);
           setShow(true);
         }
+
         if (res[0].provider !== 'web') {
           setErrorMsg(
             `El correo existe con otra cuenta! Su cuenta esta registrada con ${res[0].provider}`,
@@ -222,7 +225,8 @@ const Login = () => {
       }
     });
   };
-  const onSubmit2: SubmitHandler<FormValues> = async (formData) => {
+  const onSubmit2: SubmitHandler<FormValues> = async (formData, e) => {
+    e?.preventDefault();
     setIsLoading(true);
     let past_user = {
       password: formData.password,
@@ -230,19 +234,24 @@ const Login = () => {
       userId: pastUser.id,
       id: pastUser.id,
     };
-    updateSignIn(past_user);
-    updatePastUser(past_user).then((res) => {
-      localStorage.setItem('email', pastUser.email);
-      window.location.href = PREVIEW_PATH;
-      authRedirect('login', res[0]);
-    });
+    await updateSignIn(past_user);
+    const userData = await updatePastUser(past_user);
+
+    if (!userData.email || !userData.access_token) {
+      window.location.href = '/auth/login'
+    }
+    localStorage.setItem('email', userData.email);
+    localStorage.setItem('access_token', userData.access_token);
+
+    window.location.href = PREVIEW_PATH;
+    authRedirect('login', userData);
   };
   const updateSignIn = async (user: any) => {
     let userData = {
       userId: user.id,
       last_sign_in: new Date(),
     };
-    await updateLastSignIn(userData).then((res) => { });
+    await updateLastSignIn(userData);
   };
   const [showForgot, setShowForgot] = useState(false);
 
