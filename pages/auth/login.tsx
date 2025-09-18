@@ -217,31 +217,50 @@ const Login = () => {
           setShow(true);
         }
       }
-      if (res.msg === 'Este usuario no existe!') {
+      if (res.response.data.msg === 'Credenciales inválidas') {
+        setErrorMsg('Tu contraseña es incorrecta!');
+        setError(true);
+        setAuthLoader(false);
+        setShow(true);
+        return;
+      }
+      if (res.response.data.msg === 'Ayúdanos a colocar una nueva contraseña') {
+        setPastUser('si');
+        setPastUserScreen(true);
+        setAuthLoader(false);
+        setErrorMsg('Las contraseñas se reinician por periodos para maximizar la seguridad ayúdanos con una nueva');
+        return
+      }
+      if (res.response.data.msg === 'Verifica tu email') {
         setErrorMsg('El usuario ingresado no existe o ha sido eliminado');
         setError(true);
         setAuthLoader(false);
         setShow(true);
+        return
       }
     });
   };
   const onSubmit2: SubmitHandler<FormValues> = async (formData, e) => {
     e?.preventDefault();
+    console.log(formData)
     setIsLoading(true);
     let past_user = {
       password: formData.password,
       provider: 'web',
       userId: pastUser.id,
       id: pastUser.id,
+      email: formData.email
     };
-    await updateSignIn(past_user);
     const userData = await updatePastUser(past_user);
+    console.log('user data: ' + userData)
 
     if (!userData.email || !userData.access_token) {
       window.location.href = '/auth/login'
+      return;
     }
     localStorage.setItem('email', userData.email);
     localStorage.setItem('access_token', userData.access_token);
+    await updateSignIn(past_user);
 
     window.location.href = PREVIEW_PATH;
     authRedirect('login', userData);
@@ -555,10 +574,13 @@ const Login = () => {
                   <div className='line'></div>
                   <p className='first-paragraph'>
                     Vemos que ya eres parte de <br />
-                    la comunidad de Gonvar.
+                    la comunidad de Gonvar. <br />
+                    Solicitamos que nos ayudes<br />
+                    con una nueva contraseña.
                   </p>
                   <p className='second-paragraph'>
                     Para acceder a tu contenido debes crear una contraseña.
+                    Esto se hace periodicamente como medida de seguridad.
                     <span>
                       &nbsp; Puedes usar la misma de antes
                       <br /> o pensar en una nueva.
