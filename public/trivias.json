@@ -1,0 +1,41 @@
+
+[
+  {
+    "imgSelector": "/images/trivias/selector.png",
+    "color": "#FFC700",
+    "trans": "translate-x-0",
+    "title": "Trivia de Conocimiento General",
+    "questions": [
+      {
+        "id": 1,
+        "question": "¿Cuál es la capital de Francia?",
+        "imgQuestion": "/images/trivias/question1.png",
+        "answers": [
+          { "text": "Londres", "correct": false },
+          { "text": "Madrid", "correct": false },
+          { "text": "París", "correct": true },
+          { "text": "Berlín", "correct": false }
+        ]
+      },
+      {
+        "id": 2,
+        "question": "¿Cuál es el río más largo del mundo?",
+        "imgQuestion": "/images/trivias/question2.png",
+        "answers": [
+          { "text": "Nilo", "correct": true },
+          { "text": "Amazonas", "correct": false },
+          { "text": "Yangtsé", "correct": false },
+          { "text": "Misisipi", "correct": false }
+        ]
+      }
+    ],
+    "result": [
+      {
+        "title": "¡Felicidades!",
+        "body": "Has completado la trivia con éxito.",
+        "img": "/images/trivias/result.png",
+        "idTemplateBrevo": 123
+      }
+    ]
+  }
+]

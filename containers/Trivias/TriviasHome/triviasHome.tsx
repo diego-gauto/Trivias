@@ -1,16 +1,12 @@
+
+"use client";
+"use client";
 import { useEffect, useState } from 'react';
 
-import { getAllTriviasApi } from '../../../components/api/trivias';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../screens/Login.styled';
 import TriviaSelector from '../TriviaSelector/triviaSelector';
 import styles from './triviasHome.module.css';
 
 interface Trivia {
-  id: number;
   img: string;
   title: string;
   color: string;
@@ -24,8 +20,15 @@ const TriviaHome = () => {
   useEffect(() => {
     const fetchTrivias = async () => {
       try {
-        const triviasData = await getAllTriviasApi();
-        setTrivias(triviasData);
+        const response = await fetch('/trivias.json');
+        const triviasData = await response.json();
+        const formattedTrivias = triviasData.map((trivia: any) => ({
+          img: trivia.imgSelector,
+          title: trivia.title,
+          color: trivia.color,
+          trans: trivia.trans,
+        }));
+        setTrivias(formattedTrivias);
         setLoading(false);
       } catch (error) {
         console.error('Error al obtener las trivias:', error);
@@ -36,13 +39,7 @@ const TriviaHome = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Background style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    );
+    return <div>Loading...</div>;
   }
 
   return (

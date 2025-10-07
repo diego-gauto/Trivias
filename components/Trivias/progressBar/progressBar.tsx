@@ -6,12 +6,7 @@ const ProgressBar = ({ value }: any) => {
   return (
     <div
       className={progressBar}
-      style={{
-        borderRadius: '20px',
-        height: '11px',
-        width: `${value * 20}%`,
-        backgroundColor: '#9B2FEB',
-      }}
+      data-value={value}
     ></div>
   );
 };

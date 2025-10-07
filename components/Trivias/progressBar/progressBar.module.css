@@ -2,3 +2,15 @@
   width: 350px;
   height: 35px;
 }
+
+.progressBar {
+  border-radius: 20px;
+  height: 11px;
+  background-color: #9B2FEB;
+}
+
+.progressBar[data-value="1"] { width: 20%; }
+.progressBar[data-value="2"] { width: 40%; }
+.progressBar[data-value="3"] { width: 60%; }
+.progressBar[data-value="4"] { width: 80%; }
+.progressBar[data-value="5"] { width: 100%; }

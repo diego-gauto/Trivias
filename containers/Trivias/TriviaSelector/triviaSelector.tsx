@@ -2,10 +2,15 @@ import Card from '../../../components/Trivias/card/Card';
 // import "./triviaSelector.css";
 import styles from './triviaSelector.module.css';
 
-const TriviaSelector = (trivias: { trivias: any[] }) => {
+interface TriviaSelectorProps {
+  trivias: any[];
+  setQuestionNumber?: (num: number) => void;
+}
+
+const TriviaSelector = ({ trivias, setQuestionNumber }: TriviaSelectorProps) => {
   return (
     <div className={styles.triviaSelectorContainer}>
-      {trivias.trivias.map((trivia, index) => (
+      {trivias.map((trivia, index) => (
         <Card triviaInfo={trivia} triviaId={index} key={index} />
       ))}
     </div>

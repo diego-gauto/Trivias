@@ -131,3 +131,28 @@
     bottom: 35px;
   }
 }
+
+/* Colores dinámicos para cardImageUnder */
+.cardImageUnder[data-color="red"] {
+  background-color: #ff0000;
+}
+
+.cardImageUnder[data-color="blue"] {
+  background-color: #0000ff;
+}
+
+.cardImageUnder[data-color="green"] {
+  background-color: #00ff00;
+}
+
+.cardImageUnder[data-color="yellow"] {
+  background-color: #ffff00;
+}
+
+.cardImageUnder[data-color="purple"] {
+  background-color: #800080;
+}
+
+.cardImageUnder[data-color="orange"] {
+  background-color: #ffa500;
+}

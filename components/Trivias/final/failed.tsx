@@ -1,18 +1,12 @@
-import router from 'next/router';
-
 import SliderCourses from '../../../components/Trivias/sliderCourses/sliderCourses';
-import { PURCHASE_PATH } from '../../../constants/paths';
 import styles from './failed.module.css';
+import router from 'next/router';
 
 const Failed = () => {
   const { failedContainer, recuerda, comienza, centrado, width80 } = styles;
 
   const handleClick = () => {
-    localStorage.setItem('plan', 'true');
-    router.push({
-      pathname: PURCHASE_PATH,
-      query: { type: 'subscription', frequency: 'anual', v: '4' },
-    });
+    router.push('/trivias');
   };
 
   return (
@@ -27,7 +21,7 @@ const Failed = () => {
       </p>
       <p className={comienza}>¡Comienza tu carrera de Nails Artist hoy!</p>
       <div className={centrado}>
-        <button onClick={handleClick}>Comenzar</button>
+        <button onClick={handleClick}>Volver a las trivias</button>
       </div>
     </div>
   );
