@@ -6,3 +6,59 @@
 .subtitleMargin {
   margin-top: 2rem;
 }
+
+/* Layout for trivia page: trivia content left, image right on desktop */
+.app {
+  padding: 20px 28px;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trivia {
+  flex: 1 1 auto;
+  min-width: 300px;
+  /* small left padding to visually match page gutters */
+  padding-left: 8px;
+}
+
+.publicity {
+  flex: 0 0 380px;
+  max-width: 380px;
+}
+
+.publicity img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Rounded corners for the publicity image and container */
+.publicity {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.publicity img {
+  border-radius: 16px;
+}
+
+@media screen and (max-width: 785px) {
+  .main {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .publicity {
+    width: 100%;
+    max-width: none;
+  }
+}

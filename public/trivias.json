@@ -1,40 +1,322 @@
-
 [
   {
-    "imgSelector": "/images/trivias/selector.png",
-    "color": "#FFC700",
-    "trans": "translate-x-0",
-    "title": "Trivia de Conocimiento General",
+    "id": 0,
+    "imgSelector": "/images/trivias/mujer1.svg",
+    "imgTrivia": "/images/trivias/Trivia00/T00-Portada.png",
+    "color": "#C57DFF",
+    "trans": "#9115f7",
+    "title": "¿Qué tipo de maquilladora soy?",
     "questions": [
       {
         "id": 1,
-        "question": "¿Cuál es la capital de Francia?",
-        "imgQuestion": "/images/trivias/question1.png",
+        "imgQuestion": "/images/trivias/Trivia00/T00Q1.jpg",
+        "question": "Es una característica del monómero con MMA.",
         "answers": [
-          { "text": "Londres", "correct": false },
-          { "text": "Madrid", "correct": false },
-          { "text": "París", "correct": true },
-          { "text": "Berlín", "correct": false }
+          { "text": "Tiene bajo olor", "correct": false },
+          {
+            "text": "Es un monómero dental de alto riesgo para la salud cuando se usa para aplicación de uñas",
+            "correct": true
+          },
+          { "text": "Ideal para uñas acrilicas", "correct": false },
+          { "text": "Es un monómero seguro", "correct": false }
         ]
       },
       {
         "id": 2,
-        "question": "¿Cuál es el río más largo del mundo?",
-        "imgQuestion": "/images/trivias/question2.png",
+        "imgQuestion": "/images/trivias/Trivia00/T00Q2.jpg",
+        "question": "¿Con qué gramaje de lima es correcto preparar la uña natural?",
         "answers": [
-          { "text": "Nilo", "correct": true },
-          { "text": "Amazonas", "correct": false },
-          { "text": "Yangtsé", "correct": false },
-          { "text": "Misisipi", "correct": false }
+          { "text": "100/100", "correct": false },
+          { "text": "80/80", "correct": false },
+          { "text": "150/150", "correct": false },
+          { "text": "180 0 220", "correct": true }
+        ]
+      },
+      {
+        "id": 3,
+        "imgQuestion": "/images/trivias/Trivia00/T00Q3.jpg",
+        "question": "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+        "answers": [
+          { "text": "a 45 grados", "correct": true },
+          { "text": "a 90 grados", "correct": false },
+          { "text": "a 120 grados", "correct": false },
+          { "text": "a 180 grados", "correct": false }
+        ]
+      },
+      {
+        "id": 4,
+        "imgQuestion": "/images/trivias/Trivia00/T00Q4.jpg",
+        "question": "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+        "answers": [
+          { "text": "El tip", "correct": false },
+          { "text": "El molde", "correct": false },
+          { "text": "El ápice o apex", "correct": true },
+          { "text": "La zona de cutícula", "correct": false }
+        ]
+      },
+      {
+        "id": 5,
+        "imgQuestion": "/images/trivias/Trivia00/T00Q5.jpg",
+        "question": "¿En cuántas fases se divide  una aplicación de uñas?",
+        "answers": [
+          { "text": "Pegado del tip, limado, abrillantado", "correct": false },
+          {
+            "text": "Colocación del molde, limado , abrillantado",
+            "correct": false
+          },
+          {
+            "text": "Aplicación de producto, limado, abrillantado",
+            "correct": false
+          },
+          {
+            "text": "preparación de la uña natural, aplicación del producto, limado, finalizado",
+            "correct": true
+          }
         ]
       }
     ],
     "result": [
       {
-        "title": "¡Felicidades!",
-        "body": "Has completado la trivia con éxito.",
-        "img": "/images/trivias/result.png",
-        "idTemplateBrevo": 123
+        "title": "¡Toda una profesional!",
+        "body": "Se nota tu experiencia a kilómetros. Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante donde la capacitación y actualizaciones sobre las nuevas tendencias harán que tu crecimiento profesional no se detenga.",
+        "img": "/images/trivias/Trivia00/T00R1.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "¡A un paso del éxito!",
+        "body": "Se notan tus ganas de crecer en este mágico mundo de las uñas. En esta apasionante profesión jamás dejamos de aprender, hay cientos de técnicas y diseños de tendencia para las cuales debemos estar preparadas.",
+        "img": "/images/trivias/Trivia00/T00R2.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "Una principiante muy  aesthetic",
+        "body": "¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación. Recuerda, cada pincelada cuenta.",
+        "img": "/images/trivias/Trivia00/T00R3.jpg",
+        "idTemplateBrevo": 7
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "imgSelector": "/images/trivias/mujer2-removebg-preview.png",
+    "imgTrivia": "/images/trivias/Trivia01/T01-Portada.png",
+    "color": "#ffcb7d",
+    "trans": "#ffb800",
+    "title": "Gonvar te dice tu futuro en el mundo de las uñas",
+    "questions": [
+      {
+        "id": 1,
+        "imgQuestion": "/images/trivias/Trivia01/T01Q1.jpg",
+        "question": "Actualmente ¿has tomado o estás  tomando alguna capacitación en uñas?",
+        "answers": [
+          {
+            "text": "Nunca  he tomado un curso, pero deseo aprender",
+            "correct": false
+          },
+          { "text": "Si, tomé alguno pero no me funcionó", "correct": false },
+          {
+            "text": "Actualmente estoy cursando un entrenamiento básico acrilicas",
+            "correct": false
+          },
+          {
+            "text": "Ya realizo aplicaciones y me  actualizo con cursos constantemente",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "imgQuestion": "/images/trivias/Trivia01/T01Q2.jpg",
+        "question": "Cuando elijo mis capacitaciones me dejo llevar por:",
+        "answers": [
+          { "text": "El costo, siempre busco lo más barato", "correct": false },
+          {
+            "text": "El instructor, elijo  siempre a alguien reconocido",
+            "correct": false
+          },
+          { "text": "No me gustan los cursos  en línea", "correct": false },
+          { "text": "Elijo mis cursos  de acuerdo al tema", "correct": true }
+        ]
+      },
+      {
+        "id": 3,
+        "imgQuestion": "/images/trivias/Trivia01/T01Q3.jpg",
+        "question": "Si  no obtengo resultados en los primeros intentos yo:",
+        "answers": [
+          {
+            "text": "Lo intento pero solo 3 veces y lo dejo por la paz",
+            "correct": false
+          },
+          {
+            "text": "Me frustro un poco, pero lo sigo intentando",
+            "correct": false
+          },
+          {
+            "text": "Analizo mis áreas de oportunidad, me doy un descanso y regreso con más fuerza",
+            "correct": true
+          },
+          {
+            "text": "Me desanimo completamente y pienso que las uñas no es lo mio",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "imgQuestion": "/images/trivias/Trivia01/T01Q4.jpg",
+        "question": "Cuando termino algún curso yo:",
+        "answers": [
+          {
+            "text": "Sigo practicando y repasando para seguir mejorando",
+            "correct": true
+          },
+          { "text": "Cuelgo mi reconocimiento en la pared", "correct": false },
+          {
+            "text": "Nunca  vuelvo  a hacer una práctica  porque mis clientas no me lo piden",
+            "correct": false
+          },
+          { "text": "Siempre quiero tomar otro  y otro más", "correct": false }
+        ]
+      },
+      {
+        "id": 5,
+        "imgQuestion": "/images/trivias/Trivia01/T01Q5.jpg",
+        "question": "Mi  mayor interés en el mundo de  las uñas es :",
+        "answers": [
+          {
+            "text": "Solo aplicarme a mí misma y a familiares cercanos",
+            "correct": false
+          },
+          {
+            "text": "Autoemplearme y trabajar desde mi casa",
+            "correct": false
+          },
+          {
+            "text": "Abrir un local dedicado a la aplicación y servicios de belleza",
+            "correct": false
+          },
+          {
+            "text": "Abrir una academia y preparar a más personas en temas de belleza",
+            "correct": true
+          }
+        ]
+      }
+    ],
+    "result": [
+      {
+        "title": "La perseverancia te  llevará  al éxito",
+        "body": "Eres una persona increíblemente talentosa y dedicada en el mundo de las uñas. Tu arduo trabajo y pasión han formado el camino hacia un futuro verdaderamente prometedor.",
+        "img": "/images/trivias/Trivia01/T01R1.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "Tu esfuerzo será recompensado muy pronto",
+        "body": "Has trabajado incansablemente, y tus esfuerzos no pasarán desapercibidos. El mundo de las uñas espera ansioso tu llegada.",
+        "img": "/images/trivias/Trivia01/T01R2.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "Tus manos tienen el poder de pintar un camino lleno de éxito",
+        "body": "Querida mujer, tu determinación y valentía son inquebrantables. Con estudio, trabajo arduo y una pasión inagotable, el éxito en el mundo de las uñas está a punto de abrazarte.",
+        "img": "/images/trivias/Trivia01/T01R3.jpg",
+        "idTemplateBrevo": 7
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "imgSelector": "/images/trivias/mujer3.svg",
+    "imgTrivia": "/images/trivias/Trivia02/T02-Portada.png",
+    "color": "#7dffa2",
+    "trans": "#00c620",
+    "title": "¿Qué nivel de manicurista eres?",
+    "questions": [
+      {
+        "id": 1,
+        "imgQuestion": "/images/trivias/Trivia02/T02Q1.jpg",
+        "question": "Es una característica del monómero con MMA.",
+        "answers": [
+          { "text": "Tiene bajo olor", "correct": false },
+          {
+            "text": "Es un monómero dental de alto riesgo para la salud cuando se usa para aplicación de uñas",
+            "correct": true
+          },
+          { "text": "Ideal para uñas acrilicas", "correct": false },
+          { "text": "Es un monómero seguro", "correct": false }
+        ]
+      },
+      {
+        "id": 2,
+        "imgQuestion": "/images/trivias/Trivia02/T02Q2.jpg",
+        "question": "¿Con qué gramaje de lima es correcto preparar la uña natural?",
+        "answers": [
+          { "text": "100/100", "correct": false },
+          { "text": "80/80", "correct": false },
+          { "text": "150/150", "correct": false },
+          { "text": "180 0 220", "correct": true }
+        ]
+      },
+      {
+        "id": 3,
+        "imgQuestion": "/images/trivias/Trivia02/T02Q3.jpg",
+        "question": "¿Cuál es la posición correcta del pincel para sellar el acrílico en la zona de cutícula?",
+        "answers": [
+          { "text": "a 45 grados", "correct": true },
+          { "text": "a 90 grados", "correct": false },
+          { "text": "a 120 grados", "correct": false },
+          { "text": "a 180 grados", "correct": false }
+        ]
+      },
+      {
+        "id": 4,
+        "imgQuestion": "/images/trivias/Trivia02/T02Q4.jpg",
+        "question": "¿Que parte de la uña artificial es la encargada de  brindar soporte a la estructura?",
+        "answers": [
+          { "text": "El tip", "correct": false },
+          { "text": "El molde", "correct": false },
+          { "text": "El ápice o apex", "correct": true },
+          { "text": "La zona de cutícula", "correct": false }
+        ]
+      },
+      {
+        "id": 5,
+        "imgQuestion": "/images/trivias/Trivia02/T02Q5.jpg",
+        "question": "¿En cuántas fases se divide  una aplicación de uñas?",
+        "answers": [
+          { "text": "Pegado del tip, limado, abrillantado", "correct": false },
+          {
+            "text": "Colocación del molde, limado , abrillantado",
+            "correct": false
+          },
+          {
+            "text": "Aplicación de producto, limado, abrillantado",
+            "correct": false
+          },
+          {
+            "text": "preparación de la uña natural, aplicación del producto, limado, finalizado",
+            "correct": true
+          }
+        ]
+      }
+    ],
+    "result": [
+      {
+        "title": "¡Toda una profesional!",
+        "body": "Se nota tu experiencia a kilómetros. Siéntete afortunada de poder vivir de hacer lo que más te gusta pero no olvides que el mundo de las uñas está en un cambio constante.",
+        "img": "/images/trivias/Trivia02/T02R1.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "¡A un paso del éxito!",
+        "body": "Se notan tus ganas de crecer en este mágico mundo de las uñas. En esta apasionante profesión jamás dejamos de aprender.",
+        "img": "/images/trivias/Trivia02/T02R2.jpg",
+        "idTemplateBrevo": 7
+      },
+      {
+        "title": "Una principiante muy  aesthetic",
+        "body": "¡Felicidades, valiente principiante en el arte de las uñas! Has dado el primer paso hacia un viaje lleno de creatividad y transformación.",
+        "img": "/images/trivias/Trivia02/T02R3.jpg",
+        "idTemplateBrevo": 7
       }
     ]
   }

@@ -69,7 +69,7 @@ export default function Trivia({
       <div className={trivia_title}>{triviaTitle}</div>
       <div className={progressBarContainer}>
         {' '}
-        <ProgressBar value={questionNumber - 1} />
+        <ProgressBar value={questionNumber} />
       </div>
       <div className={pregunta}>Pregunta {questionNumber}/5</div>
       <div className={styles.question}>{questionTrivia?.question}</div>

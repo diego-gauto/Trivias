@@ -23,7 +23,8 @@ const TriviaHome = () => {
         const response = await fetch('/trivias.json');
         const triviasData = await response.json();
         const formattedTrivias = triviasData.map((trivia: any) => ({
-          img: trivia.imgSelector,
+          id: trivia.id,
+          imgSelector: trivia.imgSelector,
           title: trivia.title,
           color: trivia.color,
           trans: trivia.trans,

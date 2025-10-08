@@ -9,18 +9,21 @@ export default function Card(props: any) {
   //   navigate(`/trivias/${props.triviaInfo.id}`);
   // };
 
+  const triviaId = props.triviaInfo?.id ?? props.triviaId;
+
   return (
-    <Link href={`/trivias/${props.triviaInfo.id}`} className={styles.link}>
-      <div className={styles.cardContainer}>
-        <div 
-          className={styles.cardImageUnder} 
+    <Link href={`/trivias/${triviaId}`} className={styles.card_link}>
+      <div className={styles.cardContainer} data-id={triviaId}>
+        <div
+          className={styles.cardImageUnder}
           data-color={props.triviaInfo?.color}
         ></div>
-        <div 
+        <div
           className={styles.cardImageAbove}
+          data-trans={props.triviaInfo?.trans}
         ></div>
         <Image
-          src={props.triviaInfo?.img}
+          src={props.triviaInfo?.imgSelector}
           alt={'imagen'}
           fill
           className={styles.cardImage}

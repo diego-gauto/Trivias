@@ -39,7 +39,8 @@ export default function TriviaPage() {
         if (triviasData && triviasData.length > 0) {
           setTrivia(triviasData[0]);
         }
-        setTrivias([]);
+        // Poner los datos completos en el selector para que las cards reciban triviaInfo.correctamente
+        setTrivias(triviasData);
         setQuestionNumber(1);
         setCorrect(0);
         setLoading(false);
