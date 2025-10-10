@@ -20,7 +20,8 @@ export default function FormPage() {
   const br = searchParams?.get('br');
 
   const [userData, setUserData] = useState<any>(null);
-  const [userDataLoaded, setUserDataLoaded] = useState(false);
+  // removed userDataLoaded: this trivia app is isolated and does not fetch
+  // logged-in user data from the platform.
   const [isChecked, setIsChecked] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -169,9 +170,7 @@ export default function FormPage() {
       }
     });
   };
-  useEffect(() => {
-    // Si necesitas obtener datos de usuario, usa getAllUsersApi o implementa una función específica aquí
-  }, []);
+  // No user prefill behavior for the isolated trivia app.
   return (
     <>
       <style jsx global>{`
@@ -204,11 +203,10 @@ export default function FormPage() {
             <div>
               <InputNombre
                 label={'Nombre'}
-                placeholder={userDataLoaded ? userData.name : 'Carla'}
+                placeholder={'Carla'}
                 onChange={handleNombreChange}
                 onBlur={handleNombreBlur}
                 value={formik.values.nombre}
-                disabled={userDataLoaded}
               />
               {formik.touched.nombre && formik.errors.nombre && (
                 <div className={errorMessageNombre}>{formik.errors.nombre}</div>
@@ -217,11 +215,10 @@ export default function FormPage() {
             <div>
               <InputNombre
                 label={'Apellido'}
-                placeholder={userDataLoaded ? userData.last_name : 'Flores'}
+                placeholder={'Flores'}
                 onChange={handleApellidoChange}
                 onBlur={handleApellidoBlur}
                 value={formik.values.apellido}
-                disabled={userDataLoaded}
               />
               {formik.touched.apellido && formik.errors.apellido && (
                 <div className={errorMessageApellido}>{formik.errors.apellido}</div>
@@ -230,11 +227,10 @@ export default function FormPage() {
             <div>
               <InputMail
                 label={'Correo Electrónico'}
-                placeholder={userDataLoaded ? userData.email : 'carlaflores@gmail.com'}
+                placeholder={'carlaflores@gmail.com'}
                 onChange={handleMailChange}
                 onBlur={handleMailBlur}
                 value={formik.values.correo}
-                disabled={userDataLoaded}
               />
               {formik.touched.correo && formik.errors.correo && (
                 <div className={errorMessageMail}>{formik.errors.correo}</div>

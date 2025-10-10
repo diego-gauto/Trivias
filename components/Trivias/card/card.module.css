@@ -16,23 +16,22 @@
 
 .cardContainer {
   position: relative;
+  max-width: 298px;
+  /* preserve original pixel width when possible */
   width: 298px;
   height: 340px;
   cursor: pointer;
   margin: 0 2px 80px 2px;
-  /* allow the image to overflow above the colored backgrounds */
   overflow: visible;
 }
 
 .cardImage {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 298px;
-  height: 340px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   z-index: 2;
-  justify-content: center;
   border-radius: 20px;
 }
 
@@ -40,8 +39,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 298px;
-  height: 318px;
+  width: 100%;
+  height: 92%;
   background-color: #ffcb7d;
   border-radius: 20px;
   z-index: 1;
@@ -51,8 +50,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 298px;
-  height: 289px;
+  width: 100%;
+  height: 86%;
   background: linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #ffb800 100%);
   border-radius: 0px 0px 20px 20px;
   z-index: 3;
@@ -76,81 +75,12 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 785px) {
-  .cardContainer {
-    width: 200px;
-    height: 230px;
-  }
+/* Removed @media (max-width: 785px) — handled by container/grid reflow instead.
+   Keep more specific small-breakpoint rules (500px, 350px) below. */
 
-  .cardImageUnder {
-    width: 200px;
-    height: 213px;
-    border-radius: 20px;
-  }
-
-  .cardImageAbove {
-    width: 200px;
-    height: 194px;
-    border-radius: 0px 0px 20px 20px;
-  }
-
-  .cardText {
-    font-size: 17px;
-    bottom: 65px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .cardContainer {
-    width: 160px;
-    height: 222px;
-  }
-
-  .cardImageUnder {
-    width: 160px;
-    height: 170px;
-    border-radius: 16px;
-  }
-
-  .cardImageAbove {
-    width: 160px;
-    height: 155px;
-    border-radius: 0px 0px 16px 16px;
-  }
-
-  .cardText {
-    font-size: 12px;
-    bottom: 40px;
-  }
-
-  .link {
-    height: 240px;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .cardContainer {
-    width: 144px;
-    height: 200px;
-  }
-
-  .cardImageUnder {
-    width: 144px;
-    height: 153px;
-    border-radius: 14px;
-  }
-
-  .cardImageAbove {
-    width: 144px;
-    height: 140px;
-    border-radius: 0px 0px 14px 14px;
-  }
-
-  .cardText {
-    font-size: 11px;
-    bottom: 35px;
-  }
-}
+/* Removed small-breakpoint shrink rules for 500px and 350px to avoid forced
+   card shrinking. Cards are now constrained by the container grid (min 300px).
+   We intentionally don't support layouts narrower than 300px. */
 
 /* Ajuste específico para la imagen del centro (id=1) */
 .cardContainer[data-id="1"] .cardImage {

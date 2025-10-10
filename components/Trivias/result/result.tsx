@@ -18,9 +18,9 @@ const Result = (props: any) => {
   const { title, body, img, idTemplateBrevo } = props.resultInfo;
   const { resultContainer, resultado, resultText, resultImg, share } = styles;
 
-  const {
-    query: { triviaId },
-  } = useRouter();
+  // const {
+  //   query: { triviaId },
+  // } = useRouter();
 
   const result = props.result;
   console.log(result);

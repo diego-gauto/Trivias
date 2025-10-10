@@ -1,0 +1,190 @@
+.finalContainer {
+  min-height: 100vh;
+  /* fill the viewport */
+  display: flex;
+  background-color: #ece7f2;
+  align-items: stretch;
+  /* ensure children fill vertically */
+}
+
+.final {
+  width: 57%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* center vertically */
+  align-items: flex-start;
+  padding-left: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: relative;
+  /* allow absolute positioning of .finalVolver */
+}
+
+.finalVolver {
+  display: flex;
+  cursor: pointer;
+  position: absolute;
+  /* place near top of the .final column */
+  top: 12px;
+  /* small gap from top */
+  left: 5%;
+  /* align with the main content padding on desktop */
+  height: 48px;
+  /* ensure clickable area has enough height */
+  align-items: center;
+  /* vertically center inner content */
+  padding-left: 16px;
+  /* shift arrow slightly right to align with content */
+}
+
+.finalVolver div {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
+  color: #520795;
+  padding: 0 0 0 8px;
+  /* remove top padding so text is vertically centered */
+}
+
+.finalVolver img {
+  padding: 0;
+  /* remove top padding so icon aligns with text */
+  display: block;
+}
+
+.finalTextos {
+  /* margin-top: 5%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.finalTextos h1 {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 51px;
+  line-height: 62px;
+  color: #992eea;
+  width: 80%;
+}
+
+.finalTextos h3 {
+  height: 56px;
+  width: 80%;
+  margin-top: 10px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 28px;
+
+  color: #520795;
+}
+
+.finalTextos span {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 28px;
+  color: #d24dd3;
+}
+
+.finalImg {
+  width: 43%;
+  background-image: url('/images/trivias/revisa-email.jpg');
+  background-size: cover;
+  /* cover the full area */
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 0;
+  /* remove extra padding so image fills height */
+  text-align: end;
+  min-height: 100vh;
+  /* match viewport height */
+  align-self: stretch;
+  position: relative;
+  /* for absolute logo inside */
+}
+
+.finalImg img {
+  position: absolute;
+  top: 24px;
+  /* distance from top edge */
+  right: 24px;
+  /* distance from right edge */
+  width: 140px;
+  /* adjust size as needed */
+  height: auto;
+  z-index: 10;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1014px) {
+  .finalImg {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .finalContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .final {
+    width: auto;
+    padding: 64px 3% 0 3%;
+    /* push content further down to avoid overlap with the absolute 'Volver' */
+  }
+
+  .finalVolver {
+    left: 3%;
+    /* slightly less offset on small screens to match content padding */
+    padding-left: 12px;
+    /* slightly smaller shift on mobile */
+  }
+
+  .finalImg {
+    display: none;
+  }
+
+  .finalTextos {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    /* height: 40%; */
+    background-color: #ece7f2;
+    border-radius: 20px;
+    padding-top: 88px;
+    /* create extra space so the 'Volver' link doesn't overlap the text */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+  }
+
+  .finalTextos h1 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 4.5vh;
+  }
+
+  .finalTextos h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5vh;
+  }
+}

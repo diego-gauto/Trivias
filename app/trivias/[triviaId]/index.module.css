@@ -7,6 +7,21 @@
   margin-top: 2rem;
 }
 
+/* Subtitle used for the 'Más cuestionarios' heading below the Banner.
+   Center it, give it breathing room and a size slightly smaller than the
+   main trivia title. Use clamp so it scales gently across viewports. */
+.subtitle {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  /* exact requested size */
+  font-size: 28px;
+  line-height: 1.2;
+  color: #520795;
+  margin: 1.25rem auto 1.25rem auto;
+  max-width: 1200px;
+}
+
 /* Layout for trivia page: trivia content left, image right on desktop */
 .app {
   padding: 20px 28px;
@@ -19,25 +34,51 @@
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  /* allow children to wrap when viewport is too narrow so the layout
+     doesn't reserve vertical space that pushes Banner down */
+  flex-wrap: wrap;
+  /* ensure the main area fills the viewport so the Banner sits just
+     after the fold and will appear when scrolling */
+  min-height: 100vh;
 }
 
 .trivia {
-  flex: 1 1 auto;
-  min-width: 300px;
-  /* small left padding to visually match page gutters */
-  padding-left: 8px;
+  /* let the trivia column grow and shrink naturally */
+  flex: 1 1 0;
+  min-width: 260px;
+  padding-left: 2px;
+  /* ensure the trivia column's top aligns with publicity column */
+  align-self: flex-start;
 }
 
 .publicity {
-  flex: 0 0 380px;
-  max-width: 380px;
+  /* allow the publicity column to shrink before forcing wrap */
+  flex: 0 1 520px;
+  max-width: 520px;
+  /* ensure the publicity column has enough vertical space to show
+     the full images without forcing them to shrink too much */
+  align-self: flex-start;
+  /* small top offset so image top aligns with the title baseline in .trivia */
+  margin-top: 6px;
+  /* make sure the rounded corners are visible and the element is on its own layer */
+  position: relative;
+  z-index: 1;
+  /* clip-path provides a reliable rounded mask even if the inner img
+     uses object-fit and leaves transparent/empty areas */
+  -webkit-clip-path: inset(0 round 16px);
+  clip-path: inset(0 round 16px);
 }
 
 .publicity img {
-  width: 100%;
+  /* Make the image slightly shorter than the viewport so the blue
+    Banner that follows is hidden below the fold and starts to appear
+    when the user scrolls. Keep aspect ratio. */
+  max-height: calc(100vh - 80px);
+  width: auto;
+  max-width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
+  margin: 0 auto;
 }
 
 /* Rounded corners for the publicity image and container */
@@ -48,17 +89,42 @@
 }
 
 .publicity img {
+  /* Restore the approved full radius so the image corners match the container */
   border-radius: 16px;
+  position: relative;
+  z-index: 2;
 }
 
-@media screen and (max-width: 785px) {
+/* Removed @media (max-width: 785px). The .main container already wraps (flex-wrap)
+   and the .publicity column will naturally take full width when it can't fit. */
+
+/* Force stacking (trivia above, publicity below) and center the publicity
+   image when viewport is 1000px or narrower. */
+@media screen and (max-width: 1000px) {
   .main {
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    gap: 16px;
   }
 
   .publicity {
     width: 100%;
-    max-width: none;
+    max-width: 520px;
   }
+
+  .publicity img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Make the trivia selector area align visually with the cards on the home
+   page by using the same lateral spacing and max-width. */
+.triviaSelectorContainer {
+  margin: 0 2% 0 2%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }

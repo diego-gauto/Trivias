@@ -28,12 +28,13 @@ const Banner = () => {
         <div className={subtitulo}>
           Diferentes niveles de dificultad e instructores internacionales
         </div>
-      </div>
-      <Link href={'/planes'}>
         <div className={comenzar}>
-          <button className={buttonComenzar}>Comenzar ahora</button>
+          {/* External link to Gonvar site - opens in a new tab */}
+          <a href={'https://www.gonvar.io'} target="_blank" rel="noopener noreferrer" className={buttonComenzar}>
+            Comenzar ahora
+          </a>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

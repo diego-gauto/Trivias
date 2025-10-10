@@ -34,7 +34,7 @@
   top: 161px; */
   margin: 0.8% 0 5% 0;
 
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
@@ -47,15 +47,17 @@
 .triviaSelectorContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0 3% 0 3%;
+  justify-content: flex-start;
+  gap: 16px;
+  margin: 0 2% 0 2%;
 }
 
 @media screen and (min-width: 634px) {
-  .triviaSelectorContainer > div {
-    flex: 1 0 calc(25% - 20px); /* Añade un margen de 10px a cada lado */
+  .triviaSelectorContainer>div {
+    flex: 1 0 calc(25% - 12px);
   }
 }
+
 /* .bottom {
   height: 80%;
 }

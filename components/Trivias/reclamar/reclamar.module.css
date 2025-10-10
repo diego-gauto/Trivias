@@ -25,6 +25,7 @@
   width: 217px;
   margin-right: 10px;
 }
+
 .reclamarRedes {
   width: 50%;
 }
@@ -32,6 +33,7 @@
 .reclamarRedes h3 {
   width: 100%;
 }
+
 .iconos {
   padding-top: 15px;
 }
@@ -69,42 +71,4 @@
   width: 100%;
 }
 
-@media screen and (max-width: 785px) {
-  .reclamarContainer {
-    flex-direction: column-reverse;
-  }
-
-  .reclamarPremio {
-    padding: 0;
-    margin: 5% 0 0 0;
-    width: 100%;
-  }
-
-  .reclamarRedes {
-    width: 100%;
-    margin: 1% 0 0 0;
-  }
-
-  .reclamarPremio button {
-    /* font-family: "Montserrat";
-    border-radius: 100px;
-    background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
-    color: #ede7f2;
-    border: 0;
-    padding: 15px 25px;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 2%;
-    cursor: pointer;
-  
-    position: relative; */
-    width: 90%;
-    /* height: 54px; */
-  }
-
-  .link {
-    display: flex;
-    width: 100%;
-    text-decoration: none;
-  }
-}
+/* Removed @media (max-width: 785px). Layout should adapt using container-level rules and smaller breakpoints. */

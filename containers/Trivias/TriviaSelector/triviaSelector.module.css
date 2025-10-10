@@ -1,12 +1,42 @@
 .triviaSelectorContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
   min-height: 400px;
+  justify-content: center;
+  /* center the row of cards */
+  align-items: flex-start;
+  margin: 0 auto;
+  /* ensure container is centered */
+  padding: 0;
+  /* remove any internal padding that could offset children */
 }
 
-@media screen and (max-width: 314px) {
+.triviaSelectorContainer>.card_link,
+.triviaSelectorContainer>div {
+  flex: 0 1 298px;
+}
+
+@media screen and (max-width: 400px) {
   .triviaSelectorContainer {
-    justify-content: center;
+    gap: 12px;
+    padding: 0 4%;
+  }
+
+  .triviaSelectorContainer>.card_link,
+  .triviaSelectorContainer>div {
+    flex: 0 1 260px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .triviaSelectorContainer {
+    gap: 10px;
+    padding: 0 6%;
+  }
+
+  .triviaSelectorContainer>.card_link,
+  .triviaSelectorContainer>div {
+    flex: 0 1 240px;
   }
 }

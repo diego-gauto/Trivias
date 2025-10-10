@@ -37,9 +37,13 @@ export default function TriviaPage() {
         const response = await fetch('/trivias.json');
         const triviasData = await response.json();
         if (triviasData && triviasData.length > 0) {
-          setTrivia(triviasData[0]);
+          // select trivia by route param if available
+          const found = !Number.isNaN(triviaIdNumber)
+            ? triviasData.find((t: any) => Number(t.id) === triviaIdNumber)
+            : undefined;
+          setTrivia(found ?? triviasData[0]);
         }
-        // Poner los datos completos en el selector para que las cards reciban triviaInfo.correctamente
+        // Provide the full list for the selector
         setTrivias(triviasData);
         setQuestionNumber(1);
         setCorrect(0);

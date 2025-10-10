@@ -1,5 +1,7 @@
+"use client";
+
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 
 import styles from './reclamar.module.css';
 
@@ -14,9 +16,8 @@ const {
 } = styles;
 
 const Reclamar = ({ result, idTemplateBrevo }: any) => {
-  const {
-    query: { triviaId },
-  } = useRouter();
+  const params = useParams();
+  const triviaId = params?.triviaId as string | undefined;
   console.log(result);
   console.log(idTemplateBrevo);
 
@@ -35,43 +36,32 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
   };
 
   // function handleFacebookShare() {
-
-  //   window.fbAsyncInit = function () {
-  //     window.FB.init({
-  //       appId: "1293630141585988",
-  //       autoLogAppEvents: true,
-  //       xfbml: true,
-  //       version: "v13.0",
-  //     });
-  //   };
-
-  //   (function (d, s, id) {
-  //     var js: any,
-  //       fjs: any = d.getElementsByTagName(s)[0];
-  //     if (d.getElementById(id)) return;
-  //     js = d.createElement(s);
-  //     js.id = id;
-  //     js.src =
-  //       "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1293630141585988&autoLogAppEvents=1";
-  //     fjs.parentNode.insertBefore(js, fjs);
-  //   })(document, "script", "facebook-jssdk");
-
-  //   window.setTimeout(function () {
-  //     window.FB.ui(
-  //       {
-  //         method: "share",
-  //         href: "https://www.gonvar.io/",
-  //       },
-  //       function (response: any) {
-  //         if (response && response.post_id) {
-  //           alert("Post was published.");
-  //         } else {
-  //           alert("Post was not published.");
-  //         }
-  //       }
-  //     );
-  //   }, 1000);
-  // }
+  // Example of a safe loader for third-party SDKs (disabled by default).
+  // Use loadFbSdk() if you need to dynamically inject the Facebook SDK.
+  /*
+  function loadFbSdk() {
+    const id = 'facebook-jssdk';
+    if (document.getElementById(id)) return;
+    const fjs = document.getElementsByTagName('script')[0];
+    if (!fjs) return;
+    const js = document.createElement('script');
+    js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1293630141585988&autoLogAppEvents=1';
+    js.onload = () => {
+      try {
+        // initialize FB SDK safely
+        // @ts-ignore
+        if (window.FB) {
+          // @ts-ignore
+          window.FB.init({ appId: '1293630141585988', xfbml: true, version: 'v13.0' });
+        }
+      } catch (e) {
+        console.warn('FB init failed', e);
+      }
+    };
+    fjs.parentNode?.insertBefore(js, fjs);
+  }
+  */
 
   function handleMessengerShare() {
     const url = 'https://gonvar.io/trivias'; // URL de la página que deseas compartir
@@ -123,10 +113,11 @@ const Reclamar = ({ result, idTemplateBrevo }: any) => {
           <h3>Reclamá tu regalo :</h3>
           <Link
             href={`/trivias/${triviaId}/send/${result}?br=${idTemplateBrevo}`}
+            className={link}
           >
-            <a className={link}>
-              <button className={button}>Ver regalo</button>
-            </a>
+            <button className={button} aria-label="Ver regalo">
+              Ver regalo
+            </button>
           </Link>
         </div>
       </div>

@@ -51,18 +51,29 @@ const TriviaHome = () => {
           padding: 0px;
         }
       `}</style>
-      <img
-        className={styles.premio}
-        src='/images/trivias/Icono de premio.svg'
-        alt=''
-      />
-      <h1 className={styles.title}>¡Comienza a jugar!</h1>
-      <h3 className={styles.subtitle}>
-        ¡Elige tu trivia favorita y gana un premio!
-      </h3>
+      <div className={styles.contentWrap}>
+        {/* Mobile-only trophy placed before the title; visible only on small screens via CSS */}
+        <img
+          className={styles.premioMobile}
+          src='/images/trivias/Icono de premio.svg'
+          alt='premio'
+        />
+        <h1 className={styles.title}>¡Comienza a jugar!</h1>
+        <h3 className={styles.subtitle}>
+          ¡Elige tu trivia favorita y gana un{' '}
+          <span className={styles.premioInline}>
+            premio!
+            <img
+              className={styles.premio}
+              src='/images/trivias/Icono de premio.svg'
+              alt=''
+            />
+          </span>
+        </h3>
 
-      <div className={styles.card_container}>
-        <TriviaSelector trivias={trivias} />
+        <div className={styles.card_container}>
+          <TriviaSelector trivias={trivias} />
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,10 @@
 
 .home {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
   /* display:flex;
   flex-direction: column; */
   /* margin: 0;
@@ -9,10 +13,60 @@
 }
 
 .card_container {
+  /* Restored previous stable flex layout: cards in a row, wrap to next line
+     when necessary, and keep their designed width (298px). */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0 3% 2% 3%;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto 2% auto;
+  padding: 0 2%;
+}
+
+.contentWrap {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.card_container>.card_link,
+.card_container>div {
+  flex: 0 1 298px;
+}
+
+/* Allow gradual shrinking so cards keep margin from viewport edges
+   — start shrinking at 400px and allow more at 340px. */
+@media screen and (max-width: 400px) {
+  .card_container {
+    gap: 12px;
+    padding: 0 4%;
+    justify-content: center;
+    /* center the row when columns don't fill the width */
+  }
+
+  .card_container>.card_link,
+  .card_container>div {
+    flex: 0 1 260px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .card_container {
+    gap: 10px;
+    padding: 0 6%;
+    justify-content: center;
+    /* ensure centered single/partial columns */
+  }
+
+  .card_container>.card_link,
+  .card_container>div {
+    flex: 0 1 240px;
+    /* minimum width we allow before single-column */
+  }
 }
 
 /* .card_container > div {
@@ -37,6 +91,10 @@
   text-align: center;
 
   color: #992eea;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 2%;
 }
 
 .subtitle {
@@ -45,7 +103,11 @@
   height: 34px;
   left: 290px;
   top: 161px; */
-  margin: 0.8% 0 2% 0;
+  margin: 0.8% auto 2% auto;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 2%;
 
   font-family: 'Montserrat';
   font-style: normal;
@@ -58,40 +120,54 @@
 }
 
 .premio {
-  position: relative;
-  top: 120px;
-  right: -73%;
   width: 60px;
+  height: auto;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.premioInline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  /* keep text and icon together */
+}
+
+/* Mobile: show a dedicated trophy image above the title, and hide the inline trophy
+   inside the subtitle to avoid duplication. */
+.premioMobile {
+  display: none;
+}
+
+@media screen and (max-width: 641px) {
+  .premioMobile {
+    display: block;
+    width: 72px;
+    height: auto;
+    margin: 8px auto 4px auto;
+  }
+
+  /* Hide the inline trophy in the subtitle on small screens to avoid duplicate visuals */
+  .premioInline .premio {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 634px) {
-  .card_container > div {
-    flex: 1 0 calc(25% - 20px); /* Añade un margen de 10px a cada lado */
+  .card_container>div {
+    /* make cards slightly wider so they appear closer together visually */
+    flex: 1 0 calc(25% - 12px);
   }
 }
 
-@media screen and (max-width: 785px) {
-  .title {
-    margin-top: 6%;
-    font-size: 35px;
-  }
+/* Responsive fluid typography: title/subtitle scale smoothly */
+.title {
+  font-size: clamp(28px, 4vw, 49px);
+  line-height: 1.2;
+}
 
-  .subtitle {
-    font-size: 20px;
-  }
-
-  .premio {
-    position: relative;
-    display: flex;
-    top: 20px;
-    right: -42%;
-    justify-content: center;
-  }
-
-  /* .premio{
-    position:relative;
-    left: 45%;
-    top: 2rem;
-    width: 5rem;
-  } */
+.subtitle {
+  font-size: clamp(16px, 2.2vw, 28px);
 }

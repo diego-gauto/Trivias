@@ -2,18 +2,26 @@
   display: flex;
   width: 100%;
   /* height: 356px; */
-  background: radial-gradient(
-    69.38% 184.45% at 77.58% 61.8%,
-    #2f0a46 0%,
-    #0a101f 100%
-  );
+  background: radial-gradient(69.38% 184.45% at 77.58% 61.8%,
+      #2f0a46 0%,
+      #0a101f 100%);
+  /* small gap from previous section */
+  margin-top: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  padding-bottom: 24px;
+  /* ensure button doesn't touch bottom */
 }
 
 .texto {
-  width: 60%;
+  width: 72%;
+  /* give title more horizontal room */
   display: flex;
   flex-direction: column;
-  margin-left: 90px;
+  margin-left: 6%;
+  padding-right: 2%;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .logo {
@@ -47,65 +55,95 @@
 }
 
 .comenzar {
-  width: 40%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  /* align left */
+  /* allow the button inside to keep its natural width */
+  width: auto;
+  min-width: 0;
 }
 
 .buttonComenzar {
-  width: 344.72px;
-  height: 74px;
-  border: 0;
-  cursor: pointer;
   font-family: 'Montserrat';
   border-radius: 100px;
   background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
-  /* identical to box height */
-  color: #ffffff;
+  color: #ede7f2;
+  border: 0;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 20px 0 12px 0;
+  /* add bottom breathing room */
+  cursor: pointer;
+  width: 305px;
+  height: 54px;
+  text-decoration: none !important;
+  box-shadow: none;
+  outline: none;
 }
 
-@media screen and (max-width: 785px) {
+/* Center the link text vertically and horizontally */
+.buttonComenzar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Ensure the link/button text has no underline */
+.comenzar a,
+.buttonComenzar,
+.comenzar {
+  text-decoration: none;
+}
+
+/* Remove potential bottom border or hairline coming from rendering */
+.buttonComenzar::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/* Removed @media (max-width: 785px). Layout will adapt via container rules and smaller breakpoints if needed. */
+
+@media screen and (max-width: 900px) {
   .banner {
     flex-direction: column;
-    /* height: 400px; */
+    align-items: flex-start;
+    padding: 24px 4%;
   }
 
   .texto {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    justify-content: center;
-  }
-
-  .titulo {
-    font-size: 23px;
-    line-height: 30px;
-  }
-
-  .subtitulo {
-    font-size: 20px;
-    line-height: 25px;
-    padding-top: 2%;
+    width: 100%;
+    margin-left: 0;
+    padding-right: 0;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .comenzar {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5%;
+    justify-content: flex-start;
+    margin-top: 12px;
+    padding-left: 4%;
   }
 
   .buttonComenzar {
-    width: 80%;
-    height: 60px;
-    margin-bottom: 3%;
-    /* identical to box height */
+    width: 90%;
+    max-width: 360px;
+    margin-left: 0;
   }
+}
+
+/* Hover behavior: match the trivia page's primary button hover (scale + darker background)
+   Keep the text color unchanged to avoid default link-blue behavior. */
+.buttonComenzar:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+  color: #ede7f2;
+  /* ensure text stays the same */
 }

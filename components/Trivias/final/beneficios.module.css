@@ -23,16 +23,13 @@
   position: relative;
   display: flex;
   align-items: center;
+}
 
-  .titulo {
-  }
-
-  .img {
-    width: 200px;
-    height: 100%;
-    position: relative;
-    top: -5px;
-  }
+.beneficiosContainer .containerTitle .img {
+  width: 200px;
+  height: 100%;
+  position: relative;
+  top: -5px;
 }
 
 .beneficiosContainer p {
@@ -57,9 +54,11 @@
 .beneficiosContainer .buttonContainer {
   text-decoration: none;
   display: flex;
-  justify-content: space-between;
-  width: 80%;
-  padding-left: 5%;
+  justify-content: center;
+  /* always center the button horizontally */
+  width: 100%;
+  padding: 20px 0;
+  /* give vertical spacing */
 }
 
 .beneficiosContainer button {
@@ -85,6 +84,32 @@
   background-color: #5000b5;
 }
 
+/* Link styled as a button (used in JS/TSX with next/link) */
+.beneficiosContainer .buttonLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat';
+  border-radius: 100px;
+  background: linear-gradient(135deg, #952ced 0%, #ca41d4 100%);
+  color: #ede7f2;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 10% 0;
+  cursor: pointer;
+  width: 229px;
+  height: 40px;
+  text-decoration: none;
+}
+
+.beneficiosContainer .buttonLink:hover {
+  transform: scale(1.03);
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+  background-color: #5000b5;
+}
+
 @media screen and (max-width: 934px) {
   .beneficiosContainer {
     padding-top: 35px;
@@ -95,14 +120,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
 
-    .titulo {
-      max-width: 90%;
-    }
+  .beneficiosContainer .containerTitle .titulo {
+    max-width: 90%;
+  }
 
-    .img {
-      top: -60px;
-    }
+  .beneficiosContainer .containerTitle .img {
+    top: -60px;
   }
 }
 
@@ -119,10 +144,8 @@
 }
 
 @media screen and (max-width: 491px) {
-  .beneficiosContainer .containerTitle {
-    .titulo {
-      font-size: 35px;
-      line-height: 40px;
-    }
+  .beneficiosContainer .containerTitle .titulo {
+    font-size: 35px;
+    line-height: 40px;
   }
 }

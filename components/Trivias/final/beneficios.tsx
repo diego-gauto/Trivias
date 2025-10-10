@@ -20,11 +20,11 @@ const Beneficios = () => {
         <img className={img} src='/images/trivias/logoGonvar+.png' alt='' />
       </div>
       <BeneficiosCardContainer></BeneficiosCardContainer>
-      <Link href={`/suscripcion-anual`}>
-        <a>
-          <button>Más información</button>
-        </a>
-      </Link>
+      <div className={buttonContainer}>
+        <Link href={'/suscripcion-anual'} className={styles.buttonLink}>
+          Más información
+        </Link>
+      </div>
     </div>
   );
 };
