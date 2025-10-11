@@ -19,7 +19,6 @@ export const userTrivia = async (user: any) => {
 export const emailTrivia = async (user: any) => {
   // Use internal serverless endpoint to send email (this will use nodemailer)
   try {
-    // Usa únicamente la variable pública del entorno para el frontend
     const token = process.env.NEXT_PUBLIC_SEND_EMAILS_TOKEN || '';
     const res = await axios.post('/api/sendEmail', user, {
       headers: {
@@ -29,5 +28,6 @@ export const emailTrivia = async (user: any) => {
     return res;
   } catch (error) {
     console.log('Internal sendEmail failed, falling back to external API', error);
+    return null;
   }
 };
