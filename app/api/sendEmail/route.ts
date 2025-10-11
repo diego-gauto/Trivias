@@ -1,7 +1,18 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 
+// Ensure this route uses Node runtime (nodemailer requires Node APIs)
+export const runtime = 'nodejs';
+
 export async function POST(req: Request) {
+  // Simple token-based protection: client must send header 'x-send-email-token'
+  const provided = req.headers.get('x-send-email-token');
+  const expected = process.env.SEND_EMAILS_TOKEN;
+
+  if (expected && provided !== expected) {
+    console.warn('Unauthorized sendEmail call: invalid token');
+    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const body = await req.json();
     const { to, username, subject, idTemplateBrevo } = body || {};

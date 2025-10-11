@@ -1,16 +1,6 @@
 import axios from 'axios';
 
-export const getAllUsersApi = async () => {
-  return axios
-    .get('https://gonvar.inowu.dev/userTrivia')
-    .then((res) => {
-      return res.data.data;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error;
-    });
-};
+// The function getAllUsersApi has been removed as it is not used in the project.
 
 export const userTrivia = async (user: any) => {
   // Simulated behavior for isolated trivia front:
@@ -29,17 +19,15 @@ export const userTrivia = async (user: any) => {
 export const emailTrivia = async (user: any) => {
   // Use internal serverless endpoint to send email (this will use nodemailer)
   try {
-    const res = await axios.post('/api/sendEmail', user);
+    // Usa únicamente la variable pública del entorno para el frontend
+    const token = process.env.NEXT_PUBLIC_SEND_EMAILS_TOKEN || '';
+    const res = await axios.post('/api/sendEmail', user, {
+      headers: {
+        'x-send-email-token': token || ''
+      }
+    });
     return res;
   } catch (error) {
     console.log('Internal sendEmail failed, falling back to external API', error);
-    // Fallback to external endpoint if needed
-    try {
-      const res2 = await axios.post('https://gonvar.inowu.dev/email', user);
-      return res2;
-    } catch (err2) {
-      console.log('External email send also failed', err2);
-      return err2;
-    }
   }
 };

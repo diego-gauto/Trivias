@@ -6,11 +6,7 @@ import Trivia from '../../../components/Trivias/trivia/trivia';
 import Result from '../../../components/Trivias/result/result';
 import Banner from '../../../components/Trivias/banner/banner';
 import TriviaSelector from '../../../containers/Trivias/TriviaSelector/triviaSelector';
-import {
-  Background,
-  LoaderContain,
-  LoaderImage,
-} from '../../../components/Loader.styled';
+import Loader from '../../../components/Loader';
 import styles from './index.module.css';
 
 export default function TriviaPage() {
@@ -62,13 +58,7 @@ export default function TriviaPage() {
   }, [questionNumber]);
 
   if (loading) {
-    return (
-      <Background className={styles.backgroundCenter}>
-        <LoaderImage>
-          <LoaderContain />
-        </LoaderImage>
-      </Background>
-    );
+    return <Loader />;
   }
 
   return (
